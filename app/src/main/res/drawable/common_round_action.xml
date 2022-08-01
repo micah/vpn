@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#808080">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="360dp" />
+            <solid android:color="?colorPrimaryVariant">
+
+            </solid>
+            // Add your desired padding
+            <padding
+                android:bottom="18dp"
+                android:left="18dp"
+                android:right="18dp"
+                android:top="18dp">
+
+            </padding>
+        </shape>
+    </item>
+</ripple>
+
