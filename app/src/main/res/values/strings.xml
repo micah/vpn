@@ -6,5 +6,6 @@
     <string name="fragConnect_explore_pri">Explore. Privately.</string>
     <string name="fragConnect_you_re_read">You\'re ready for the world\'s most private browsing experience.</string>
     <string name="fragConnect_connect">Connect</string>
+    <string name="frag_connect_guide_slide_index">Guide Slide # %1$d</string>
 
 </resources>

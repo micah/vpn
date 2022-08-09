@@ -7,14 +7,7 @@
             <solid android:color="?colorPrimaryVariant">
 
             </solid>
-            // Add your desired padding
-            <padding
-                android:bottom="28dp"
-                android:left="28dp"
-                android:right="28dp"
-                android:top="28dp">
 
-            </padding>
         </shape>
 
     </item>
