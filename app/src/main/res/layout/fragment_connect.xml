@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.torwitharti.ui.home.ConnectFragmentModel" />
+            type="com.example.torwitharti.ui.home.ConnectFragmentViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -18,61 +18,19 @@
         android:padding="16dp"
         tools:context=".ui.home.ConnectFragment">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_explore"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/fragConnect_explore_pri"
-            android:textAppearance="@style/title_in_fragment"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/fragConnect_you_re_read"
-            android:textAppearance="@style/subtitle_in_fragment"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_2_guide"
+        <FrameLayout
+            android:id="@+id/fl_scene_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
-            android:visibility="@{viewModel.showGuideTour?View.VISIBLE:View.GONE}"
-            app:layout_constraintBottom_toTopOf="@+id/vp2_indicator"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/vp2_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:tabBackground="@drawable/tab_pager_selector"
-            app:tabGravity="center"
-            android:padding="0dp"
-            app:tabPadding="0dp"
-            app:tabIndicatorHeight="0dp"
-            app:tabMode="fixed"
-            />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                layout="@layout/fragment_scene_initial_state"
+                app:viewModel="@{viewModel}" />
+        </FrameLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"

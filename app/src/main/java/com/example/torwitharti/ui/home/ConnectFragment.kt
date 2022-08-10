@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.*
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.torwitharti.databinding.FragmentConnectBinding
 import com.example.torwitharti.databinding.FragmentGuideFrameVp2Binding
+import com.example.torwitharti.databinding.FragmentSceneGuideStateBinding
+import com.example.torwitharti.databinding.FragmentSceneInitialStateBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 const val argShowActionCommands = "arg_show_action_commands"
@@ -25,20 +29,55 @@ class ConnectFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val connectFragmentModel =
-            ViewModelProvider(this)[ConnectFragmentModel::class.java]
+        val connectFragmentViewModel =
+            ViewModelProvider(this)[ConnectFragmentViewModel::class.java]
 
         binding = FragmentConnectBinding.inflate(inflater, container, false)
-        binding.viewModel = connectFragmentModel
-        connectFragmentModel.showGuideTour.observe(viewLifecycleOwner) { initViewPager() }
+        binding.viewModel = connectFragmentViewModel
+
+        connectFragmentViewModel.showGuideTour.observe(viewLifecycleOwner) { show ->
+            if (show) {
+                initViewPager()
+            } else {
+                hideGuide()
+            }
+        }
 
         return binding.root
     }
 
     private fun initViewPager() {
-        binding.vp2Guide.adapter = GuideFrameVP2Adapter(this)
-        TabLayoutMediator(binding.vp2Indicator, binding.vp2Guide) { _, _ -> }.attach()
-        binding.vp2Guide.setPageTransformer(DepthPageTransformer())
+        val guideStateBinding =
+            FragmentSceneGuideStateBinding.inflate(layoutInflater, binding.flSceneContainer, false)
+
+        val guideScene: Scene = Scene(binding.flSceneContainer, guideStateBinding.root)
+        val changeBoundTransition = ChangeBounds()
+        changeBoundTransition.addListener(object : TransitionListenerAdapter() {
+            override fun onTransitionEnd(transition: Transition) {
+                super.onTransitionEnd(transition)
+                guideStateBinding.vp2Guide.adapter = GuideFrameVP2Adapter(this@ConnectFragment)
+                TabLayoutMediator(
+                    guideStateBinding.vp2Indicator,
+                    guideStateBinding.vp2Guide
+                ) { _, _ -> }.attach()
+                guideStateBinding.vp2Guide.setPageTransformer(DepthPageTransformer())
+
+            }
+        })
+        TransitionManager.go(guideScene, changeBoundTransition)
+
+    }
+
+    private fun hideGuide() {
+        val initialStateBinding =
+            FragmentSceneInitialStateBinding.inflate(
+                layoutInflater,
+                binding.flSceneContainer,
+                false
+            )
+
+        val guideScene: Scene = Scene(binding.flSceneContainer, initialStateBinding.root)
+        TransitionManager.go(guideScene, ChangeBounds())
 
     }
 
@@ -97,10 +136,7 @@ class ConnectFragment : Fragment() {
             }
         }
     }
-
-
 }
-
 
 class GuideFrameVP2Fragment : Fragment() {
 
@@ -109,12 +145,16 @@ class GuideFrameVP2Fragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val viewBinding = FragmentGuideFrameVp2Binding.inflate(inflater, container, false)
+        val connectFragmentViewModel by viewModels<ConnectFragmentViewModel>({ requireParentFragment() })
+
         val viewModel = ViewModelProvider(this)[GuideFrameVP2ViewModel::class.java]
-        viewBinding.viewModel = viewModel
         viewModel.setArgs(arguments)
+        viewModel.setConnectFragmentViewModel(connectFragmentViewModel)
+        val viewBinding = FragmentGuideFrameVp2Binding.inflate(inflater, container, false)
+        viewBinding.viewModel = viewModel
 
         return viewBinding.root
+
 
     }
 
