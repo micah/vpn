@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.TorWithArti" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/figma_bg</item>
+        <item name="colorPrimaryVariant">@color/figma_gray</item>
+        <item name="colorOnPrimary">@color/figma_text</item>
+        <!-- Secondary brand color(same as primary in our case). -->
+        <item name="colorSecondary">@color/figma_bg</item>
+        <item name="colorSecondaryVariant">@color/figma_gray</item>
+        <item name="colorOnSecondary">@color/figma_text</item>
+
+        <!-- Status bar color. -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/colorIconPrimary</item>
+
+        <!-- Customize your theme here. -->
+    </style>
+</resources>

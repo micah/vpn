@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="figma_gray">#14000000</color>
+    <color name="figma_bg">#FFE5E5E5</color>
+    <color name="figma_text">#FF000000</color>
+
+    <color name="figma_gray_inverted">#EB000000</color>
+    <color name="figma_bg_inverted">#FF1a1a1a</color>
+    <color name="figma_text_inverted">#FFFFFFFF</color>
+
+    <color name="colorIconPrimary">#FFFFFF</color>
+    <color name="colorIconSecondary">#000000</color>
+    <color name="colorSubtitle">#0C0C0D</color>
+
+    <color name="colorProgress1">#14000000</color>
+    <color name="colorProgress2">#0A000000</color>
+</resources>
