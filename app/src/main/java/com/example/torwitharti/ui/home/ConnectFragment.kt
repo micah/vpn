@@ -46,11 +46,14 @@ class ConnectFragment : Fragment() {
             }
         }
 
+        connectFragmentViewModel.switchToConnectingScene.observe(viewLifecycleOwner) { show ->
+            showConnectingScene(
+                show
+            )
+        }
         connectFragmentViewModel.onAppsPressed.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_connectFragment_to_appRoutingFragment)
         }
-
-        connectFragmentViewModel.switchToConnectingScene.observe(viewLifecycleOwner) { show -> showConnectiveScene(show) }
 
         connectFragmentViewModel.switchToConnectedScene.observe(viewLifecycleOwner) { show -> showConnectedScene(show) }
         return binding.root
@@ -97,7 +100,7 @@ class ConnectFragment : Fragment() {
 
     }
 
-    private fun showConnectiveScene(show: Boolean) {
+    private fun showConnectingScene(show: Boolean) {
         if (show) {
 
             val connectingStateBinding =
@@ -110,24 +113,28 @@ class ConnectFragment : Fragment() {
 
             val connectingScene: Scene =
                 Scene(binding.flSceneContainer, connectingStateBinding.root)
-            val changeBoundTransition = ChangeBounds()
-            TransitionManager.go(connectingScene, changeBoundTransition)
 
-            val animatedDrawable =
-                (connectingStateBinding.imageView.drawable as AnimatedVectorDrawable)
+            with(AutoTransition()) {
+                removeTarget(connectingStateBinding.imageView)
+                removeTarget(connectingStateBinding.includeActions.imageView2)
+                removeTarget(connectingStateBinding.includeActions.imageView3)
+                //connectingScene.setExitAction {  }
+                TransitionManager.go(connectingScene, this)
+            }
 
-            animatedDrawable.registerAnimationCallback(object : Animatable2.AnimationCallback() {
-                override fun onAnimationEnd(drawable: Drawable?) {
-                    connectingStateBinding.imageView.post { animatedDrawable.start() }
-                }
-            })
-
-            animatedDrawable.start()
-
+            with(connectingStateBinding.imageView.drawable as AnimatedVectorDrawable) {
+                //if below listener shows red squiggly line below it is because of a bug in Android studio.
+                registerAnimationCallback(object : Animatable2.AnimationCallback() {
+                    override fun onAnimationEnd(drawable: Drawable?) {
+                        connectingStateBinding.imageView.post { start() }
+                    }
+                })
+                start()
+            }
         }
     }
 
-    private fun showConnectedScene(show: Boolean){
+    private fun showConnectedScene(show: Boolean) {
 
     }
 

@@ -51,6 +51,7 @@
             app:trackThickness="12dp" />
 
         <include
+            android:id="@+id/include_actions"
             layout="@layout/include_fragment_connect_actions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
