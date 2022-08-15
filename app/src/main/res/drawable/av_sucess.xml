@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="34dp"
+            android:height="34dp"
+            android:viewportWidth="34"
+            android:viewportHeight="34">
+
+            <group
+                android:name="rotation"
+                android:pivotX="17"
+                android:pivotY="17"
+                android:rotation="0.0">
+                <path
+                    android:name="path"
+                    android:fillColor="#000000"
+                    android:pathData="M17,0.333C7.8,0.333 0.333,7.8 0.333,17C0.333,26.2 7.8,33.667 17,33.667C26.2,33.667 33.667,26.2 33.667,17C33.667,7.8 26.2,0.333 17,0.333ZM12.483,24.15L6.5,18.167C5.85,17.517 5.85,16.467 6.5,15.817C7.15,15.167 8.2,15.167 8.85,15.817L13.667,20.617L25.133,9.15C25.783,8.5 26.833,8.5 27.483,9.15C28.133,9.8 28.133,10.85 27.483,11.5L14.833,24.15C14.2,24.8 13.133,24.8 12.483,24.15Z" />
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="path"
+        android:animation="@animator/success_morph">
+    </target>
+    <target
+        android:name="rotation"
+        android:animation="@animator/success_rotate">
+    </target>
+</animated-vector>

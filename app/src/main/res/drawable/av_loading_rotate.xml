@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_spinner">
+    <target
+        android:name="d270"
+        android:animation="@animator/rotation_270_315" />
+
+    <target
+        android:name="d315"
+        android:animation="@animator/rotation_315_360" />
+
+    <target
+        android:name="d0"
+        android:animation="@animator/rotation_0_45" />
+
+    <target
+        android:name="d45"
+        android:animation="@animator/rotation_45_90" />
+
+    <target
+        android:name="d90"
+        android:animation="@animator/rotation_90_135" />
+
+    <target
+        android:name="d135"
+        android:animation="@animator/rotation_135_180" />
+
+
+    <target
+        android:name="d180"
+        android:animation="@animator/rotation_180_225" />
+
+
+    <target
+        android:name="d225"
+        android:animation="@animator/rotation_225_270" />
+
+
+</animated-vector>

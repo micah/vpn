@@ -1,5 +1,8 @@
 package com.example.torwitharti.ui.home
 
+import android.graphics.drawable.Animatable2
+import android.graphics.drawable.AnimatedVectorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.transition.*
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.example.torwitharti.databinding.FragmentConnectBinding
-import com.example.torwitharti.databinding.FragmentGuideFrameVp2Binding
-import com.example.torwitharti.databinding.FragmentSceneGuideStateBinding
-import com.example.torwitharti.databinding.FragmentSceneInitialStateBinding
+import com.example.torwitharti.databinding.*
 import com.google.android.material.tabs.TabLayoutMediator
 
 const val argShowActionCommands = "arg_show_action_commands"
@@ -23,33 +23,41 @@ class ConnectFragment : Fragment() {
     private lateinit var binding: FragmentConnectBinding
     private val minScale = 0.75f
     private val totalGuideSliders = 5
+    private lateinit var connectFragmentViewModel: ConnectFragmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val connectFragmentViewModel =
-            ViewModelProvider(this)[ConnectFragmentViewModel::class.java]
+
+        connectFragmentViewModel = ViewModelProvider(this)[ConnectFragmentViewModel::class.java]
 
         binding = FragmentConnectBinding.inflate(inflater, container, false)
         binding.viewModel = connectFragmentViewModel
 
         connectFragmentViewModel.showGuideTour.observe(viewLifecycleOwner) { show ->
             if (show) {
-                initViewPager()
+                showGuide()
             } else {
                 hideGuide()
             }
         }
 
+        connectFragmentViewModel.switchToConnectingScene.observe(viewLifecycleOwner) { show -> showConnectiveScene(show) }
+
+        connectFragmentViewModel.switchToConnectedScene.observe(viewLifecycleOwner) { show -> showConnectedScene(show) }
         return binding.root
     }
 
-    private fun initViewPager() {
+    private fun showGuide() {
         val guideStateBinding =
-            FragmentSceneGuideStateBinding.inflate(layoutInflater, binding.flSceneContainer, false)
-
+            FragmentConnectSceneGuideStateBinding.inflate(
+                layoutInflater,
+                binding.flSceneContainer,
+                false
+            )
+        guideStateBinding.viewModel = connectFragmentViewModel
         val guideScene: Scene = Scene(binding.flSceneContainer, guideStateBinding.root)
         val changeBoundTransition = ChangeBounds()
         changeBoundTransition.addListener(object : TransitionListenerAdapter() {
@@ -70,14 +78,50 @@ class ConnectFragment : Fragment() {
 
     private fun hideGuide() {
         val initialStateBinding =
-            FragmentSceneInitialStateBinding.inflate(
+            FragmentConnectSceneInitialStateBinding.inflate(
                 layoutInflater,
                 binding.flSceneContainer,
                 false
             )
 
+
+        initialStateBinding.viewModel = connectFragmentViewModel
         val guideScene: Scene = Scene(binding.flSceneContainer, initialStateBinding.root)
         TransitionManager.go(guideScene, ChangeBounds())
+
+    }
+
+    private fun showConnectiveScene(show: Boolean) {
+        if (show) {
+
+            val connectingStateBinding =
+                FragmentConnectSceneConnectingStateBinding.inflate(
+                    layoutInflater,
+                    binding.flSceneContainer,
+                    false
+                )
+            connectingStateBinding.viewModel = connectFragmentViewModel
+
+            val connectingScene: Scene =
+                Scene(binding.flSceneContainer, connectingStateBinding.root)
+            val changeBoundTransition = ChangeBounds()
+            TransitionManager.go(connectingScene, changeBoundTransition)
+
+            val animatedDrawable =
+                (connectingStateBinding.imageView.drawable as AnimatedVectorDrawable)
+
+            animatedDrawable.registerAnimationCallback(object : Animatable2.AnimationCallback() {
+                override fun onAnimationEnd(drawable: Drawable?) {
+                    connectingStateBinding.imageView.post { animatedDrawable.start() }
+                }
+            })
+
+            animatedDrawable.start()
+
+        }
+    }
+
+    private fun showConnectedScene(show: Boolean){
 
     }
 
@@ -138,6 +182,9 @@ class ConnectFragment : Fragment() {
     }
 }
 
+/**
+ * Connect fragment slider items
+ */
 class GuideFrameVP2Fragment : Fragment() {
 
     override fun onCreateView(

@@ -11,4 +11,7 @@
     <color name="colorIconPrimary">#FFFFFF</color>
     <color name="colorIconSecondary">#000000</color>
     <color name="colorSubtitle">#0C0C0D</color>
+
+    <color name="colorProgress1">#14000000</color>
+    <color name="colorProgress2">#0A000000</color>
 </resources>

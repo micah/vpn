@@ -22,29 +22,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
-            android:src="@drawable/ic_explore"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/av_loading_rotate" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/fragConnect_explore_pri"
+            android:text="@string/frag_connect_connecting_to_network"
             android:textAppearance="@style/title_in_fragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            android:text="@string/fragConnect_you_re_read"
-            android:textAppearance="@style/subtitle_in_fragment"
+            android:progress="50"
+            app:indicatorColor="@color/colorProgress1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:trackColor="@color/colorProgress2"
+            app:trackCornerRadius="16dp"
+            app:trackThickness="12dp" />
+
+        <include
+            layout="@layout/include_fragment_connect_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:viewModel="@{viewModel}" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
