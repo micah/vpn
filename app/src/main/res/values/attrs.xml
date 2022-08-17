@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="AppItemView">
+        <attr name="text" format="string" />
+        <attr name="drawable" format="color|reference" />
+    </declare-styleable>
+</resources>

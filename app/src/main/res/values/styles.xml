@@ -94,6 +94,13 @@
         <item name="android:textColor">?colorOnPrimary</item>
     </style>
 
+    <style name="paragraph_title" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="subtitle_in_fragment" parent="TextAppearance.MaterialComponents.Subtitle1">
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">3sp</item>

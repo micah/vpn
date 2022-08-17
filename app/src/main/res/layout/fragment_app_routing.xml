@@ -1,17 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.torwitharti.ui.settings.AppRoutingViewModel" />
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin"
         tools:context=".ui.settings.AppRoutingFragment">
 
         <TextView
-            android:id="@+id/dummy"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello" />
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/title_in_fragment"
+            android:text="@string/app_routing" />
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:paddingTop="@dimen/default_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/subtitle_in_fragment"
+            android:text="@string/lorem_ipsum_medium" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/common_rounded_square_action"
+            android:layout_marginTop="@dimen/default_padding"
+            android:layout_marginBottom="15dp"
+            android:padding="@dimen/switch_padding"
+            android:text="@string/app_routing_protect_all"
+            android:textAppearance="@style/button_text_in_fragment"
+            />
+
+
+        <TextView
+            android:id="@+id/tvAppsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/compact_padding"
+            android:textAppearance="@style/paragraph_title"
+            android:text="@string/app_routing_tor_apps" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTorApps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:listitem="@layout/app_item_view"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:reverseLayout="true"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>
