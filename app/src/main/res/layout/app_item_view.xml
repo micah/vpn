@@ -7,7 +7,6 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        xmlns:tools="http://schemas.android.com/tools"
-       android:background="@color/cardview_light_background"
        android:padding="@dimen/compact_padding">
 
       <androidx.appcompat.widget.AppCompatImageView
@@ -15,6 +14,7 @@
           android:layout_width="56dp"
           android:layout_height="56dp"
           tools:src="@drawable/ic_dummy_app"
+
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
@@ -24,11 +24,10 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:gravity="center_horizontal"
-          android:maxLines="2"
-          tools:text = "app"
+          android:maxLines="3"
+          tools:text = "an app with a quite long title"
           app:layout_constraintTop_toBottomOf="@id/ivAppImage"
-          app:layout_constraintStart_toStartOf="@id/ivAppImage"
-          app:layout_constraintEnd_toEndOf="@id/ivAppImage"
+          app:layout_constraintWidth_max="72dp"
           />
 
    </androidx.constraintlayout.widget.ConstraintLayout>
