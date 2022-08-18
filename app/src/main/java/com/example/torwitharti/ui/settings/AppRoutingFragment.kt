@@ -32,7 +32,7 @@ class AppRoutingFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         torAppsAdapter = TorAppsAdapter(viewModel.getAppList())
-        binding.rvTorApps.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvTorApps.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvTorApps.adapter = torAppsAdapter
         viewModel.isLoading().observe(viewLifecycleOwner) { isLoading: Boolean ->
             Log.d(TAG, "isLoading: $isLoading")

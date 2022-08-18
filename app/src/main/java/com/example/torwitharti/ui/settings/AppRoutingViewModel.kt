@@ -19,7 +19,7 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
     private val appManager: AppManager
 
     init {
-        appManager = AppManager()
+        appManager = AppManager(application)
         loadApps()
     }
 

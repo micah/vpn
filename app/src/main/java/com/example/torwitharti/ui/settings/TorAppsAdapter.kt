@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.torwitharti.databinding.AppItemViewBinding
 
-class TorAppsAdapter(val list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var items: List<AppItemModel> = list
 
@@ -37,8 +37,8 @@ class TorAppsAdapter(val list: List<AppItemModel>) : RecyclerView.Adapter<Recycl
 
         fun bind(appItem: AppItemModel, pos: Int) {
             this.pos = pos
-           // binding.ivAppImage.setImageDrawable(appItem.drawable)
-            binding.tvAppTitle.setText(appItem.name)
+            binding.ivAppImage.setImageDrawable(appItem.icon)
+            binding.tvAppTitle.text = appItem.name
         }
 
         override fun onClick(v: View) {

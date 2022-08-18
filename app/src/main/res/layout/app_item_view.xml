@@ -12,10 +12,9 @@
 
       <androidx.appcompat.widget.AppCompatImageView
           android:id="@+id/ivAppImage"
-          style="@style/Widget.Theme.TorWithArti.AppListItem"
           android:layout_width="56dp"
           android:layout_height="56dp"
-          tools:src="@drawable/common_round_action"
+          tools:src="@drawable/ic_dummy_app"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
