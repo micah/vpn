@@ -28,6 +28,7 @@ class AppManager(context: Context) {
     fun queryInstalledApps() : List<AppItemModel> {
         val installedPackages = pm.getInstalledApplications(PackageManager.GET_META_DATA)
         val installedBrowsers = getInstalledBrowserPackages()
+        val protectedApps = preferenceHelper.protectedApps?.toSet()
         var androidSystemUid = 0
         val apps = mutableListOf<AppItemModel>()
 
@@ -35,7 +36,7 @@ class AppManager(context: Context) {
         try {
             val system = pm.getApplicationInfo("android", PackageManager.GET_META_DATA)
             androidSystemUid = system.uid
-            createAppItemModel(system)?.also {
+            createAppItemModel(system, protectedApps = protectedApps)?.also {
                 apps.add(it)
             }
         } catch (e: PackageManager.NameNotFoundException) {
@@ -43,7 +44,7 @@ class AppManager(context: Context) {
 
         for (appInfo in installedPackages) {
             if (pm.checkPermission(INTERNET, appInfo.packageName) == PERMISSION_GRANTED && appInfo.uid != androidSystemUid) {
-                createAppItemModel(appInfo, installedBrowsers)?.also {
+                createAppItemModel(appInfo, installedBrowsers, protectedApps)?.also {
                     apps.add(it)
                 }
             }
@@ -52,7 +53,11 @@ class AppManager(context: Context) {
         return apps.sortedBy { it.name }
     }
 
-    private fun createAppItemModel(applicationInfo: ApplicationInfo, browserPackages: List<String> = listOf()): AppItemModel? {
+    private fun createAppItemModel(
+        applicationInfo: ApplicationInfo,
+        browserPackages: List<String> = listOf(),
+        protectedApps: Set<String>? = setOf()
+    ): AppItemModel? {
         var appName = applicationInfo.loadLabel(pm) as? String
         if (TextUtils.isEmpty(appName))
             appName = applicationInfo.packageName
@@ -66,7 +71,7 @@ class AppManager(context: Context) {
                 packageName,
                 appUID,
                 appIcon,
-                false,
+                protectedApps?.contains(packageName) ?:run { false } ,
                 browserPackages.contains(packageName),
                 false)
         }

@@ -7,9 +7,9 @@ import java.util.prefs.Preferences
 
 private const val TOR_VPN_SP: String = "tor-vpn"
 
-class PreferenceHelper(private val application: Application) {
+class PreferenceHelper(context: Context) {
     private val sharedPreference =
-        application.getSharedPreferences(TOR_VPN_SP, Context.MODE_PRIVATE)
+        context.applicationContext.getSharedPreferences(TOR_VPN_SP, Context.MODE_PRIVATE)
 
     /**
      * Whether guide in the connect screen need to be shown.
@@ -20,5 +20,8 @@ class PreferenceHelper(private val application: Application) {
         get() = sharedPreference.getBoolean("should_show_guide", true)
         set(value) = sharedPreference.edit().putBoolean("should_show_guide", value).apply()
 
+    var protectedApps
+        get() = sharedPreference.getStringSet("protected_apps", mutableSetOf<String>())
+        set(value) = sharedPreference.edit().putStringSet("protected_apps", value).apply()
 }
 
