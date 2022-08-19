@@ -20,6 +20,10 @@ class PreferenceHelper(context: Context) {
         get() = sharedPreference.getBoolean("should_show_guide", true)
         set(value) = sharedPreference.edit().putBoolean("should_show_guide", value).apply()
 
+    var protectAllApps
+        get() = sharedPreference.getBoolean("protect_all_apps", true)
+        set(value) = sharedPreference.edit().putBoolean("protect_all_apps", value).apply()
+
     var protectedApps
         get() = sharedPreference.getStringSet("protected_apps", mutableSetOf<String>())
         set(value) = sharedPreference.edit().putStringSet("protected_apps", value).apply()
