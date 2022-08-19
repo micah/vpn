@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.torwitharti.R
 import com.example.torwitharti.utils.DummyConnectionState
 import com.example.torwitharti.utils.PreferenceHelper
+import kotlinx.coroutines.delay
 
 
 /**
@@ -26,6 +27,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     private val _mainActionButtonTitle = MutableLiveData<String>()
     private val _switchToIdleScene = MutableLiveData<Boolean>()
     private val _switchToConnectedScene = MutableLiveData<Boolean>()
+    private val _connectingProgress = MutableLiveData<Int>()
     private val _onAppsPressed = MutableLiveData<Unit>()
 
 
@@ -33,7 +35,8 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     val switchToConnectingScene: LiveData<Boolean> = _switchToConnectingScene
     val mainActionButtonTitle: LiveData<String> = _mainActionButtonTitle
     val switchToIdleScene: LiveData<Boolean> = _switchToIdleScene
-    val switchToConnectedScene: LiveData<Boolean> = _switchToIdleScene
+    val switchToConnectedScene: LiveData<Boolean> = _switchToConnectedScene
+    val connectingProgress: LiveData<Int> = _connectingProgress
     val onAppsPressed: LiveData<Unit> = _onAppsPressed
 
 
@@ -85,26 +88,38 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         changeActionButtonTitle()
         _switchToConnectingScene.value = true
 
+
         //TODO dummy success trigger
         Handler(Looper.getMainLooper()).postDelayed({
-            connectionState = DummyConnectionState.CONNECTING
-            changeActionButtonTitle()
-            _switchToConnectingScene.value = false
-            _switchToConnectedScene.value = true
-        }, 3000)
+            if (connectionState == DummyConnectionState.CONNECTING) {
+
+                connectionState = DummyConnectionState.CONNECTED
+                changeActionButtonTitle()
+                _switchToConnectingScene.value = false
+                _switchToConnectedScene.value = true
+            }
+        }, 1000)
+    }
+
+    val r = Runnable {
+        _connectingProgress.value = (connectingProgress.value ?: 0) + 20
     }
 
     private fun attemptDisconnect() {
-
+        connectionState = DummyConnectionState.IDLE
+        changeActionButtonTitle()
+        _switchToIdleScene.value = true
+        _switchToConnectedScene.value = false
     }
 
     private fun attemptCancelConnect() {
         connectionState = DummyConnectionState.IDLE
         changeActionButtonTitle()
+        _switchToConnectingScene.value = false
         _switchToIdleScene.value = true
     }
 
-    private fun changeActionButtonTitle(){
+    private fun changeActionButtonTitle() {
         when (connectionState) {
             DummyConnectionState.IDLE -> _mainActionButtonTitle.value =
                 getApplication<Application>().getString(R.string.frag_connect_connect)

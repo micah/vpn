@@ -1,6 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.torwitharti.ui.home.ConnectFragmentViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.ConnectFragment">
+
+
+        <ImageView
+            android:id="@+id/iv_connect_status_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="144dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/av_success" />
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/holo_blue_bright"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_connect_status_icon"
+            app:layout_constraintEnd_toEndOf="@+id/iv_connect_status_icon"
+            app:layout_constraintStart_toStartOf="@+id/iv_connect_status_icon"
+            app:layout_constraintTop_toTopOf="@+id/iv_connect_status_icon" />
+
+        <TextView
+            android:id="@+id/tv_connect_status_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/frag_connect_connected"
+            android:textAppearance="@style/title_in_fragment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_connect_status_icon" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_connecting"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            tools:progress="50"
+            android:progress="@{viewModel.connectingProgress}"
+            app:indicatorColor="@color/colorProgress1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_connect_status_title"
+            app:trackColor="@color/colorProgress2"
+            app:trackCornerRadius="16dp"
+            app:trackThickness="12dp" />
+
+        <include
+            android:id="@+id/include_actions"
+            layout="@layout/include_fragment_connect_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:viewModel="@{viewModel}" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_connected"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:constraint_referenced_ids="iv_connect_status_icon,tv_connect_status_title,progress_connecting"
+            tools:layout_editor_absoluteX="411dp"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_graph_frame"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rounded_fragment_connect_connected_bg"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/include_actions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/textView7"
+                style="@style/label_text_in_fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:drawablePadding="8dp"
+                android:text="2.12mb"
+                app:drawableLeftCompat="@drawable/ic_arrow_up"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView8"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView8"
+                style="@style/label_text_in_fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:text="197kb"
+                app:drawableLeftCompat="@drawable/ic_arrow_down"
+                app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView7"
+                app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

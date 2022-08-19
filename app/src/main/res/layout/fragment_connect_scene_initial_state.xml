@@ -15,39 +15,41 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="16dp"
         tools:context=".ui.home.ConnectFragment">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_connect_status_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="128dp"
             android:src="@drawable/ic_explore"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_connect_status_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/frag_connect_explore_pri"
             android:textAppearance="@style/title_in_fragment"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_connect_status_icon" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_connect_status_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/frag_connect_you_re_read"
             android:textAppearance="@style/subtitle_in_fragment"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_connect_status_title" />
 
 
         <include
+            android:id="@+id/include_actions"
             layout="@layout/include_fragment_connect_actions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

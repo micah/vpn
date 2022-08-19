@@ -1,11 +1,9 @@
 package com.example.torwitharti.ui.home
 
-import android.graphics.drawable.Animatable2
-import android.graphics.drawable.AnimatedVectorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +14,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.torwitharti.R
 import com.example.torwitharti.databinding.*
+import com.example.torwitharti.utils.*
 import com.google.android.material.tabs.TabLayoutMediator
 
 const val argShowActionCommands = "arg_show_action_commands"
@@ -38,6 +37,8 @@ class ConnectFragment : Fragment() {
         binding = FragmentConnectBinding.inflate(inflater, container, false)
         binding.viewModel = connectFragmentViewModel
 
+        connectFragmentViewModel.switchToIdleScene.observe(viewLifecycleOwner) { show -> showIdleScene(show) }
+
         connectFragmentViewModel.showGuideTour.observe(viewLifecycleOwner) { show ->
             if (show) {
                 showGuide()
@@ -59,6 +60,11 @@ class ConnectFragment : Fragment() {
         return binding.root
     }
 
+    /*
+    * Scene transitions
+    *
+    * ************
+     */
     private fun showGuide() {
         val guideStateBinding =
             FragmentConnectSceneGuideStateBinding.inflate(
@@ -111,33 +117,129 @@ class ConnectFragment : Fragment() {
                 )
             connectingStateBinding.viewModel = connectFragmentViewModel
 
-            val connectingScene: Scene =
-                Scene(binding.flSceneContainer, connectingStateBinding.root)
+            val connectingScene = Scene(binding.flSceneContainer, connectingStateBinding.root)
+            val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
 
             with(AutoTransition()) {
-                removeTarget(connectingStateBinding.imageView)
-                removeTarget(connectingStateBinding.includeActions.imageView2)
-                removeTarget(connectingStateBinding.includeActions.imageView3)
-                //connectingScene.setExitAction {  }
+                addTarget(R.id.tv_connect_status_title)
+                addTarget(R.id.progress_connecting)
+                addTarget(R.id.iv_connect_status_icon)
+
+                connectingScene.setEnterAction {
+                    connectingStateBinding.includeActions.ivApps
+                        .animate()
+                        .alpha(0.4f)
+                        .duration = medAnimationDuration.toLong()
+
+                    connectingStateBinding.includeActions.ivGlobe
+                        .animate()
+                        .alpha(0.4f)
+                        .duration =
+                        medAnimationDuration.toLong()
+                }
+
                 TransitionManager.go(connectingScene, this)
             }
 
-            with(connectingStateBinding.imageView.drawable as AnimatedVectorDrawable) {
-                //if below listener shows red squiggly line below it is because of a bug in Android studio.
-                registerAnimationCallback(object : Animatable2.AnimationCallback() {
-                    override fun onAnimationEnd(drawable: Drawable?) {
-                        connectingStateBinding.imageView.post { start() }
-                    }
-                })
-                start()
-            }
+            repeatVectorAnimation(connectingStateBinding.ivConnectStatusIcon.drawable, lifecycle)
+
         }
     }
 
     private fun showConnectedScene(show: Boolean) {
+        if (show) {
+            val connectedStateBinding =
+                FragmentConnectSceneConnectedStateBinding.inflate(
+                    layoutInflater,
+                    binding.flSceneContainer,
+                    false
+                )
+            connectedStateBinding.viewModel = connectFragmentViewModel
+
+            val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
+            val connectedScene = Scene(binding.flSceneContainer, connectedStateBinding.root)
+
+            with(AutoTransition()) {
+                addTarget(R.id.tv_connect_status_title)
+                addTarget(R.id.progress_connecting)
+                addTarget(R.id.iv_connect_status_icon)
+
+                connectedScene.setEnterAction {
+                    connectedStateBinding.includeActions.ivApps.alpha = 0.4f
+                    connectedStateBinding.includeActions.ivGlobe.alpha = 0.4f
+                    connectedStateBinding.includeActions.ivApps.animate().alpha(1f).duration =
+                        medAnimationDuration.toLong()
+                    connectedStateBinding.includeActions.ivGlobe.animate().alpha(1f).duration =
+                        medAnimationDuration.toLong()
+                }
+
+                TransitionManager.go(connectedScene, this)
+            }
+
+            startVectorAnimationWithEndCallback(connectedStateBinding.ivConnectStatusIcon.drawable, lifecycle) {
+                with(connectedStateBinding.ivConnectStatusIcon) {
+                    val concealCenter = center()
+                    val concealAnim = ViewAnimationUtils.createCircularReveal(
+                        connectedStateBinding.ivConnectStatusIcon,
+                        concealCenter.x,
+                        concealCenter.y,
+                        connectedStateBinding.ivConnectStatusIcon.width.toFloat(),
+                        0f
+                    )
+
+                    val revealCenter = centerInParent()
+                    val revealAnim = ViewAnimationUtils.createCircularReveal(
+                        connectedStateBinding.clGraphFrame, revealCenter.x, revealCenter.y, 0f,
+                        (connectedStateBinding.root.height).toFloat()
+                    )
+
+                    concealAnim.animateWithEndCallback(lifecycle) {
+                        connectedStateBinding.groupConnected.visibility = View.GONE
+                        connectedStateBinding.clGraphFrame.visibility = View.VISIBLE
+                        revealAnim.start()
+                    }
+
+                }
+            }
+        }
+    }
+
+    private fun showIdleScene(show: Boolean) {
+        if (show) {
+            val initialStateBinding =
+                FragmentConnectSceneInitialStateBinding.inflate(
+                    layoutInflater,
+                    binding.flSceneContainer,
+                    false
+                )
+            initialStateBinding.viewModel = connectFragmentViewModel
+
+            val idleScene = Scene(binding.flSceneContainer, initialStateBinding.root)
+
+            with(AutoTransition()) {
+                addTarget(R.id.tv_connect_status_title)
+                addTarget(R.id.progress_connecting)
+                addTarget(R.id.iv_connect_status_icon)
+
+                idleScene.setEnterAction {
+                    val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
+                    initialStateBinding.includeActions.ivApps.alpha = 0.4f
+                    initialStateBinding.includeActions.ivGlobe.alpha = 0.4f
+                    initialStateBinding.includeActions.ivApps.animate().alpha(1f).duration =
+                        medAnimationDuration.toLong()
+                    initialStateBinding.includeActions.ivGlobe.animate().alpha(1f).duration =
+                        medAnimationDuration.toLong()
+                }
+
+                TransitionManager.go(idleScene, this)
+            }
+        }
 
     }
 
+    /**
+     * Guide Fragment adapter
+     */
     private inner class GuideFrameVP2Adapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
         override fun getItemCount(): Int = totalGuideSliders
@@ -153,6 +255,9 @@ class ConnectFragment : Fragment() {
         }
     }
 
+    /**
+     * VP2 slide animation
+     */
     private inner class DepthPageTransformer : ViewPager2.PageTransformer {
 
         override fun transformPage(view: View, position: Float) {

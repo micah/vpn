@@ -20,11 +20,10 @@
             </group>
         </vector>
     </aapt:attr>
-    <target android:name="path"
-        android:animation="@animator/success_morph">
-    </target>
+    <target
+        android:name="path"
+        android:animation="@animator/success_morph" />
     <target
         android:name="rotation"
-        android:animation="@animator/success_rotate">
-    </target>
+        android:animation="@animator/success_rotate" />
 </animated-vector>
