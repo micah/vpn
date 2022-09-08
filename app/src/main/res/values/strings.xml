@@ -13,6 +13,8 @@
     <string name="app_routing">App Routing</string>
     <string name="app_routing_protect_all">Protect all my apps</string>
     <string name="app_routing_tor_apps">Tor powered apps</string>
+    <string name="app_routing_browsers">Browsers</string>
+    <string name="app_routing_other_apps">Other apps</string>
     <string name="lorem_ipsum_medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…</string>
 
 </resources>

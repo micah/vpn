@@ -1,20 +1,20 @@
 package com.example.torwitharti.ui.settings
 
 import android.app.Application
-import android.util.Pair
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.torwitharti.utils.AppManager
-import com.example.torwitharti.utils.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class AppRoutingViewModel(application: Application) : AndroidViewModel(application) {
+    private val torAppList: MutableLiveData<List<AppItemModel>> = MutableLiveData<List<AppItemModel>>()
     private val appList: MutableLiveData<List<AppItemModel>> = MutableLiveData<List<AppItemModel>>()
-    private val isLoading = MutableLiveData<Boolean>()
+    private val isLoadingAppList = MutableLiveData<Boolean>()
+    private val isLoadingTorAppsList = MutableLiveData<Boolean>()
 
     private val appManager: AppManager
 
@@ -24,14 +24,32 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun loadApps() {
-        isLoading.postValue(true)
+        isLoadingAppList.postValue(true)
         viewModelScope.launch(Dispatchers.Default) {
             val apps = appManager.queryInstalledApps()
             withContext(Dispatchers.Main) {
                 appList.postValue(apps)
-                isLoading.postValue(false)
+                isLoadingAppList.postValue(false)
             }
         }
+    }
+
+    fun onItemModelChanged(pos: Int, model: AppItemModel) {
+        persistProtectedApp(model)
+
+        var mutableList = getAppList().toMutableList()
+        mutableList[pos] = model
+        appList.postValue(mutableList)
+    }
+
+    private fun persistProtectedApp(model: AppItemModel) {
+        var protectedApps = appManager.preferenceHelper.protectedApps?.toMutableSet()
+        if (model.isRoutingEnabled == true) {
+            protectedApps?.add(model.appId)
+        } else {
+            protectedApps?.remove(model.appId)
+        }
+        appManager.preferenceHelper.protectedApps = protectedApps
     }
 
     fun getObservableAppList(): LiveData<List<AppItemModel>> {
@@ -46,7 +64,7 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun isLoading(): LiveData<Boolean> {
-        return isLoading
+        return isLoadingAppList
     }
 
 }

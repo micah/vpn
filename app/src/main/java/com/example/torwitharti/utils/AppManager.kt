@@ -11,52 +11,84 @@ import android.net.Uri
 import android.os.Build
 import android.text.TextUtils
 import androidx.annotation.WorkerThread
+import com.example.torwitharti.R
 import com.example.torwitharti.ui.settings.AppItemModel
+import com.example.torwitharti.ui.settings.AppListAdapter.Companion.CELL
+import com.example.torwitharti.ui.settings.AppListAdapter.Companion.HEADER_VIEW
+import com.example.torwitharti.ui.settings.AppListAdapter.Companion.HORIZONTAL_RECYCLER_VIEW
 
 
 class AppManager(context: Context) {
     private val context: Context
-    private val preferenceHelper: PreferenceHelper
+    val preferenceHelper: PreferenceHelper
     private val pm: PackageManager
+    //TODO: discuss how / if we want to keep a list of apps using netcipher/tor
+    private val torPoweredAppPackageNames: List<String> = listOf("org.torproject.android","org.torproject.torbrowser","org.onionshare.android", "org.fdroid.fdroid", "com.google.android.youtube")
+
     init {
         this.context = context
         this.preferenceHelper = PreferenceHelper(context)
         this.pm = context.packageManager
     }
 
+
     @WorkerThread
     fun queryInstalledApps() : List<AppItemModel> {
         val installedPackages = pm.getInstalledApplications(PackageManager.GET_META_DATA)
-        val installedBrowsers = getInstalledBrowserPackages()
+        val installedBrowserPackageNames = getInstalledBrowserPackages()
+        var installedBrowsersApps = mutableListOf<AppItemModel>()
+        var installedTorApps = mutableListOf<AppItemModel>()
         val protectedApps = preferenceHelper.protectedApps?.toSet()
         var androidSystemUid = 0
-        val apps = mutableListOf<AppItemModel>()
+        val installedOtherApps = mutableListOf<AppItemModel>()
 
         // only Add apps using which are allowed to use internet
         try {
             val system = pm.getApplicationInfo("android", PackageManager.GET_META_DATA)
             androidSystemUid = system.uid
             createAppItemModel(system, protectedApps = protectedApps)?.also {
-                apps.add(it)
+                installedOtherApps.add(it)
             }
         } catch (e: PackageManager.NameNotFoundException) {
         }
 
         for (appInfo in installedPackages) {
-            if (pm.checkPermission(INTERNET, appInfo.packageName) == PERMISSION_GRANTED && appInfo.uid != androidSystemUid) {
-                createAppItemModel(appInfo, installedBrowsers, protectedApps)?.also {
-                    apps.add(it)
+            if (pm.checkPermission(INTERNET, appInfo.packageName) == PERMISSION_GRANTED &&
+                appInfo.uid != androidSystemUid) {
+                createAppItemModel(appInfo, installedBrowserPackageNames, torPoweredAppPackageNames, protectedApps)?.also {
+                    if (it.hasTorSupport == true) {
+                        installedTorApps.add(it)
+                    } else if (it.isBrowserApp == true) {
+                        installedBrowsersApps.add(it)
+                    } else {
+                        installedOtherApps.add(it)
+                    }
                 }
             }
         }
 
-        return apps.sortedBy { it.name }
+        val sortedTorApps = installedTorApps.sorted()
+        val sortedBrowsers = installedBrowsersApps.sorted()
+        val sortedOtherApps = installedOtherApps.sorted()
+        var resultList = mutableListOf<AppItemModel>()
+        if (sortedTorApps.isNotEmpty()) {
+            resultList.add(AppItemModel(HEADER_VIEW, context.getString(R.string.app_routing_tor_apps)))
+            resultList.add(AppItemModel(HORIZONTAL_RECYCLER_VIEW, appList = sortedTorApps))
+        }
+        if (sortedBrowsers.isNotEmpty()) {
+            resultList.add(AppItemModel(HEADER_VIEW, context.getString(R.string.app_routing_browsers)))
+            resultList.addAll(sortedBrowsers)
+            resultList.add(AppItemModel(HEADER_VIEW, context.getString(R.string.app_routing_other_apps)))
+        }
+        resultList.addAll(sortedOtherApps)
+        return resultList
     }
 
     private fun createAppItemModel(
         applicationInfo: ApplicationInfo,
         browserPackages: List<String> = listOf(),
-        protectedApps: Set<String>? = setOf()
+        torPackages: List<String> = listOf(),
+        protectedApps: Set<String>? = setOf(),
     ): AppItemModel? {
         var appName = applicationInfo.loadLabel(pm) as? String
         if (TextUtils.isEmpty(appName))
@@ -67,13 +99,14 @@ class AppManager(context: Context) {
             val appUID = applicationInfo.uid
             val packageName = applicationInfo.packageName
             return AppItemModel(
+                CELL,
                 it,
                 packageName,
                 appUID,
                 appIcon,
                 protectedApps?.contains(packageName) ?:run { false } ,
                 browserPackages.contains(packageName),
-                false)
+                torPackages.contains(packageName))
         }
 
         return null

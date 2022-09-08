@@ -38,7 +38,7 @@ class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerVi
         fun bind(appItem: AppItemModel, pos: Int) {
             this.pos = pos
             binding.ivAppImage.setImageDrawable(appItem.icon)
-            binding.tvAppTitle.text = appItem.name
+            binding.tvAppTitle.text = appItem.text
         }
 
         override fun onClick(v: View) {

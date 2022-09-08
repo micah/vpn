@@ -19,7 +19,7 @@ class AppRoutingFragment : Fragment() {
 
     private val TAG = AppRoutingFragment.javaClass.simpleName
     private lateinit var viewModel: AppRoutingViewModel
-    private lateinit var torAppsAdapter: TorAppsAdapter
+    private lateinit var appListAdapter: AppListAdapter
     private var _binding: FragmentAppRoutingBinding? = null
     private val binding get() = _binding!!
     private lateinit var preferenceHelper: PreferenceHelper
@@ -42,20 +42,21 @@ class AppRoutingFragment : Fragment() {
             }
         }
 
-        // setup horizontal list
-        torAppsAdapter = TorAppsAdapter(viewModel.getAppList())
-        binding.rvTorApps.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvTorApps.adapter = torAppsAdapter
-        viewModel.isLoading().observe(viewLifecycleOwner) { isLoading: Boolean ->
-            Log.d(TAG, "isLoading: $isLoading")
-        }
-        viewModel.getObservableAppList().observe(viewLifecycleOwner, torAppsAdapter::update)
+        // setup vertical list
+        appListAdapter = AppListAdapter(viewModel.getAppList(),
+            TorAppsAdapter(viewModel.getAppList()),
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false))
+        appListAdapter.onItemModelChanged = viewModel::onItemModelChanged
+        binding.rvAppList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvAppList.adapter = appListAdapter
+        viewModel.getObservableAppList().observe(viewLifecycleOwner, appListAdapter::update)
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        appListAdapter.onItemModelChanged = null
     }
 
 }
