@@ -4,22 +4,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.torwitharti.databinding.AppRoutingTableHeaderBinding
 import com.example.torwitharti.databinding.AppSwitchItemViewBinding
 import com.example.torwitharti.databinding.AppTitleViewBinding
 import com.example.torwitharti.databinding.HorizontalRecyclerViewItemBinding
+import com.example.torwitharti.utils.PreferenceHelper
 
 class AppListAdapter(list: List<AppItemModel>,
                      var torAppsAdapter: TorAppsAdapter,
-                     var torAppsLayoutManager: LinearLayoutManager
+                     var torAppsLayoutManager: LinearLayoutManager,
+                     var preferenceHelper: PreferenceHelper
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
-        const val HEADER_VIEW = 0
+        const val SECTION_HEADER_VIEW = 0
         const val CELL = 1
         const val HORIZONTAL_RECYCLER_VIEW = 2
+        const val TABLE_HEADER_VIEW = 3
     }
 
     var items: MutableList<AppItemModel> = list.toMutableList()
@@ -29,6 +32,7 @@ class AppListAdapter(list: List<AppItemModel>,
         val viewHolder: RecyclerView.ViewHolder = when (viewType) {
             CELL -> AppListItemViewHolder(AppSwitchItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             HORIZONTAL_RECYCLER_VIEW -> HorizontalRecyclerViewItemViewHolder(HorizontalRecyclerViewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            TABLE_HEADER_VIEW -> TableHeaderViewHolder(AppRoutingTableHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             else -> AppListTitleViewHolder(AppTitleViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         }
         return viewHolder
@@ -36,9 +40,10 @@ class AppListAdapter(list: List<AppItemModel>,
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(items[position].viewType) {
-            HEADER_VIEW -> (holder as AppListTitleViewHolder).bind(items[position])
+            SECTION_HEADER_VIEW -> (holder as AppListTitleViewHolder).bind(items[position])
             HORIZONTAL_RECYCLER_VIEW -> (holder as HorizontalRecyclerViewItemViewHolder).bind(items[position], torAppsAdapter, torAppsLayoutManager)
             CELL -> (holder as AppListItemViewHolder).bind(items[position], position)
+            TABLE_HEADER_VIEW -> (holder as TableHeaderViewHolder).bind(preferenceHelper)
         }
     }
 
@@ -51,37 +56,23 @@ class AppListAdapter(list: List<AppItemModel>,
     }
 
     fun update(list: List<AppItemModel>) {
-        items = list.toMutableList()
+        var mutableList = list.toMutableList()
+        mutableList.add(0, AppItemModel(TABLE_HEADER_VIEW))
+        items = mutableList
         notifyDataSetChanged()
     }
 
-    fun updateItem(pos: Int, model: AppItemModel) {
-        items.set(pos, model)
-        notifyItemChanged(pos)
-    }
-
-    internal class AppListTitleViewHolder(binding: AppTitleViewBinding) :
+    internal class AppListTitleViewHolder(val binding: AppTitleViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val binding: AppTitleViewBinding
-
-        init {
-            this.binding = binding
-        }
-
         fun bind(appItem: AppItemModel) {
             binding.tvTitle.text = appItem.text
         }
     }
 
-    inner class AppListItemViewHolder(binding: AppSwitchItemViewBinding) :
+    inner class AppListItemViewHolder(val binding: AppSwitchItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val TAG = "AppListItemViewHolder";
-        val binding: AppSwitchItemViewBinding
         private var pos = -1
-
-        init {
-            this.binding = binding
-        }
 
         fun bind(appItem: AppItemModel, pos: Int) {
             this.pos = pos
@@ -91,32 +82,37 @@ class AppListAdapter(list: List<AppItemModel>,
             binding.tvTitle.setOnClickListener(View.OnClickListener {
                 Log.d(TAG, "TODO: open detail screen for " + binding.tvTitle.text)
             })
-            binding.smItemSwitch.setOnCheckedChangeListener(
-                CompoundButton.OnCheckedChangeListener { switchBtn, isChecked ->
-                    if (switchBtn.isPressed) {
-                        val itemModel = items[pos]
-                        itemModel.isRoutingEnabled = isChecked
-                        onItemModelChanged?.invoke(pos, itemModel)
-                    }
+            binding.smItemSwitch.setOnCheckedChangeListener { switchBtn, isChecked ->
+                if (switchBtn.isPressed) {
+                    val itemModel = items[pos]
+                    itemModel.isRoutingEnabled = isChecked
+                    // pos - 1: the first item is the header view, which is manually added only here in AppListAdapter
+                    onItemModelChanged?.invoke(pos - 1, itemModel)
                 }
-            )
+            }
+            binding.smItemSwitch.isEnabled = appItem.protectAllApps == false
         }
     }
 
-    internal class HorizontalRecyclerViewItemViewHolder(binding: HorizontalRecyclerViewItemBinding) :
+    internal class HorizontalRecyclerViewItemViewHolder(val binding: HorizontalRecyclerViewItemBinding) :
             RecyclerView.ViewHolder(binding.root) {
-        private val TAG = "HorizontalRecyclerViewItemViewHolder";
-        val binding: HorizontalRecyclerViewItemBinding
-        init {
-            this.binding = binding
-        }
-
         fun bind(appItem: AppItemModel, adapter: TorAppsAdapter, layoutManager: LinearLayoutManager) {
             binding.rvTorApps.adapter = adapter
             binding.rvTorApps.layoutManager = layoutManager
             appItem.appList.also {
                 if (it != null) {
                     adapter.update(it)
+                }
+            }
+        }
+    }
+
+    internal class TableHeaderViewHolder(val binding: AppRoutingTableHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(preferenceHelper: PreferenceHelper) {
+            binding.smProtectAllApps.isChecked = preferenceHelper.protectAllApps
+            binding.smProtectAllApps.setOnCheckedChangeListener { switchBtn, isChecked ->
+                if (switchBtn.isPressed) {
+                    preferenceHelper.protectAllApps = isChecked
                 }
             }
         }

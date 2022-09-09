@@ -14,7 +14,7 @@ import androidx.annotation.WorkerThread
 import com.example.torwitharti.R
 import com.example.torwitharti.ui.settings.AppItemModel
 import com.example.torwitharti.ui.settings.AppListAdapter.Companion.CELL
-import com.example.torwitharti.ui.settings.AppListAdapter.Companion.HEADER_VIEW
+import com.example.torwitharti.ui.settings.AppListAdapter.Companion.SECTION_HEADER_VIEW
 import com.example.torwitharti.ui.settings.AppListAdapter.Companion.HORIZONTAL_RECYCLER_VIEW
 
 
@@ -36,26 +36,27 @@ class AppManager(context: Context) {
     fun queryInstalledApps() : List<AppItemModel> {
         val installedPackages = pm.getInstalledApplications(PackageManager.GET_META_DATA)
         val installedBrowserPackageNames = getInstalledBrowserPackages()
-        var installedBrowsersApps = mutableListOf<AppItemModel>()
-        var installedTorApps = mutableListOf<AppItemModel>()
+        val installedBrowsersApps = mutableListOf<AppItemModel>()
+        val installedTorApps = mutableListOf<AppItemModel>()
         val protectedApps = preferenceHelper.protectedApps?.toSet()
+        val protectAllApps = preferenceHelper.protectAllApps
         var androidSystemUid = 0
         val installedOtherApps = mutableListOf<AppItemModel>()
 
-        // only Add apps using which are allowed to use internet
         try {
             val system = pm.getApplicationInfo("android", PackageManager.GET_META_DATA)
             androidSystemUid = system.uid
-            createAppItemModel(system, protectedApps = protectedApps)?.also {
+            createAppItemModel(system, protectedApps = protectedApps, protectAllApps = protectAllApps)?.also {
                 installedOtherApps.add(it)
             }
         } catch (e: PackageManager.NameNotFoundException) {
         }
 
         for (appInfo in installedPackages) {
+            // only add apps which are allowed to use internet
             if (pm.checkPermission(INTERNET, appInfo.packageName) == PERMISSION_GRANTED &&
                 appInfo.uid != androidSystemUid) {
-                createAppItemModel(appInfo, installedBrowserPackageNames, torPoweredAppPackageNames, protectedApps)?.also {
+                createAppItemModel(appInfo, installedBrowserPackageNames, torPoweredAppPackageNames, protectedApps, protectAllApps)?.also {
                     if (it.hasTorSupport == true) {
                         installedTorApps.add(it)
                     } else if (it.isBrowserApp == true) {
@@ -70,15 +71,15 @@ class AppManager(context: Context) {
         val sortedTorApps = installedTorApps.sorted()
         val sortedBrowsers = installedBrowsersApps.sorted()
         val sortedOtherApps = installedOtherApps.sorted()
-        var resultList = mutableListOf<AppItemModel>()
+        val resultList = mutableListOf<AppItemModel>()
         if (sortedTorApps.isNotEmpty()) {
-            resultList.add(AppItemModel(HEADER_VIEW, context.getString(R.string.app_routing_tor_apps)))
+            resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_tor_apps)))
             resultList.add(AppItemModel(HORIZONTAL_RECYCLER_VIEW, appList = sortedTorApps))
         }
         if (sortedBrowsers.isNotEmpty()) {
-            resultList.add(AppItemModel(HEADER_VIEW, context.getString(R.string.app_routing_browsers)))
+            resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_browsers)))
             resultList.addAll(sortedBrowsers)
-            resultList.add(AppItemModel(HEADER_VIEW, context.getString(R.string.app_routing_other_apps)))
+            resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_other_apps)))
         }
         resultList.addAll(sortedOtherApps)
         return resultList
@@ -89,6 +90,7 @@ class AppManager(context: Context) {
         browserPackages: List<String> = listOf(),
         torPackages: List<String> = listOf(),
         protectedApps: Set<String>? = setOf(),
+        protectAllApps: Boolean
     ): AppItemModel? {
         var appName = applicationInfo.loadLabel(pm) as? String
         if (TextUtils.isEmpty(appName))
@@ -104,7 +106,8 @@ class AppManager(context: Context) {
                 packageName,
                 appUID,
                 appIcon,
-                protectedApps?.contains(packageName) ?:run { false } ,
+                protectedApps?.contains(packageName) ?:run { false },
+                protectAllApps,
                 browserPackages.contains(packageName),
                 torPackages.contains(packageName))
         }

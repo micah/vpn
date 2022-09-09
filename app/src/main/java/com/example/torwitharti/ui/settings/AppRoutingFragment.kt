@@ -1,7 +1,7 @@
 package com.example.torwitharti.ui.settings
 
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.torwitharti.databinding.FragmentAppRoutingBinding
 import com.example.torwitharti.utils.PreferenceHelper
+import com.example.torwitharti.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
 
-class AppRoutingFragment : Fragment() {
+class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     companion object {
         fun newInstance() = AppRoutingFragment()
@@ -33,19 +34,13 @@ class AppRoutingFragment : Fragment() {
         _binding = FragmentAppRoutingBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
-        // setup Protect all my apps switch
-        binding.smProtectAllApps.isChecked = preferenceHelper.protectAllApps
-        binding.smProtectAllApps.setOnCheckedChangeListener { compoundButton, state ->
-            if (compoundButton.isPressed) {
-                preferenceHelper.protectAllApps = state
-            }
-        }
+        preferenceHelper.registerListener(this)
 
         // setup vertical list
         appListAdapter = AppListAdapter(viewModel.getAppList(),
             TorAppsAdapter(viewModel.getAppList()),
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false))
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+            preferenceHelper)
         appListAdapter.onItemModelChanged = viewModel::onItemModelChanged
         binding.rvAppList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvAppList.adapter = appListAdapter
@@ -57,6 +52,13 @@ class AppRoutingFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         appListAdapter.onItemModelChanged = null
+        preferenceHelper.unregisterListener(this)
+    }
+
+    override fun onSharedPreferenceChanged(prefs: SharedPreferences?, key: String?) {
+        if (key?.equals(PROTECT_ALL_APPS) == true) {
+            viewModel.onProtectedAppsPrefsChanged(preferenceHelper.protectAllApps)
+        }
     }
 
 }

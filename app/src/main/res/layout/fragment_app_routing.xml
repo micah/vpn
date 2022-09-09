@@ -13,35 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin"
+        android:paddingHorizontal="@dimen/activity_horizontal_margin"
         tools:context=".ui.settings.AppRoutingFragment">
-
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/title_in_fragment"
-            android:text="@string/app_routing" />
-
-        <TextView
-            android:id="@+id/tvSubtitle"
-            android:paddingTop="@dimen/default_padding"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/subtitle_in_fragment"
-            android:text="@string/lorem_ipsum_medium" />
-
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/smProtectAllApps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/common_rounded_square_action"
-            android:layout_marginTop="@dimen/default_padding"
-            android:layout_marginBottom="15dp"
-            android:padding="@dimen/switch_padding"
-            android:text="@string/app_routing_protect_all"
-            android:textAppearance="@style/button_text_in_fragment"
-            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvAppList"
