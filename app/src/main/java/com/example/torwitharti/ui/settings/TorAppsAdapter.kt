@@ -30,9 +30,8 @@ class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerVi
     }
 
 
-    internal class AppListViewHolder(binding: AppItemViewBinding) :
+    internal class AppListViewHolder(val binding: AppItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val binding: AppItemViewBinding
         private var pos = -1
 
         fun bind(appItem: AppItemModel, pos: Int) {
@@ -42,11 +41,6 @@ class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerVi
             binding.root.setOnClickListener {
                 Log.d("TorAppsAdapter", "TODO: open  detail screen for "  + appItem.text)
             }
-        }
-
-        init {
-            this.binding = binding
-
         }
     }
 }
