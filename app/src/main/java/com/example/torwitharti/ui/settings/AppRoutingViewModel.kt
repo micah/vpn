@@ -15,6 +15,7 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
 
     init {
         appManager = AppManager(application)
+        appList.postValue(mutableListOf())
         loadApps()
     }
 
