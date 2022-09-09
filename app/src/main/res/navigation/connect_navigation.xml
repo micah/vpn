@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/appRoutingFragment"
-        android:name="com.example.torwitharti.ui.settings.AppRoutingFragment"
+        android:name="com.example.torwitharti.ui.approuting.AppRoutingFragment"
         android:label="AppRoutingFragment"
-        tools:layout="@layout/fragment_app_routing"/>
+        tools:layout="@layout/fragment_app_routing" />
 </navigation>

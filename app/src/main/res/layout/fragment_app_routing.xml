@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.torwitharti.ui.settings.AppRoutingViewModel" />
+            type="com.example.torwitharti.ui.approuting.AppRoutingViewModel" />
         <import type="android.view.View" />
     </data>
 
@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/activity_horizontal_margin"
-        tools:context=".ui.settings.AppRoutingFragment">
+        tools:context=".ui.approuting.AppRoutingFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvAppList"

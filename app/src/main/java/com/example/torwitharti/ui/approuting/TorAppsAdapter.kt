@@ -1,8 +1,7 @@
-package com.example.torwitharti.ui.settings
+package com.example.torwitharti.ui.approuting
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.torwitharti.databinding.AppItemViewBinding

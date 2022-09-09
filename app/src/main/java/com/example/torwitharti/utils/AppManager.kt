@@ -12,10 +12,10 @@ import android.os.Build
 import android.text.TextUtils
 import androidx.annotation.WorkerThread
 import com.example.torwitharti.R
-import com.example.torwitharti.ui.settings.AppItemModel
-import com.example.torwitharti.ui.settings.AppListAdapter.Companion.CELL
-import com.example.torwitharti.ui.settings.AppListAdapter.Companion.SECTION_HEADER_VIEW
-import com.example.torwitharti.ui.settings.AppListAdapter.Companion.HORIZONTAL_RECYCLER_VIEW
+import com.example.torwitharti.ui.approuting.AppItemModel
+import com.example.torwitharti.ui.approuting.AppListAdapter.Companion.CELL
+import com.example.torwitharti.ui.approuting.AppListAdapter.Companion.SECTION_HEADER_VIEW
+import com.example.torwitharti.ui.approuting.AppListAdapter.Companion.HORIZONTAL_RECYCLER_VIEW
 
 
 class AppManager(context: Context) {
