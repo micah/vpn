@@ -1,10 +1,11 @@
-package com.example.torwitharti.ui.approuting
+package com.example.torwitharti.ui.approuting.data
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.torwitharti.databinding.AppItemViewBinding
+import com.example.torwitharti.ui.approuting.model.AppItemModel
 
 class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

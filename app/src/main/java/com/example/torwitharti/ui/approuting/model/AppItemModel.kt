@@ -1,4 +1,4 @@
-package com.example.torwitharti.ui.approuting
+package com.example.torwitharti.ui.approuting.model
 
 import android.graphics.drawable.Drawable
 

@@ -1,8 +1,8 @@
-package com.example.torwitharti.ui.approuting
+package com.example.torwitharti.ui.approuting.model
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.torwitharti.utils.AppManager
+import com.example.torwitharti.ui.approuting.data.AppManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

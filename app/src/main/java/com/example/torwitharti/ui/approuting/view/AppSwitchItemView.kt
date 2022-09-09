@@ -1,4 +1,4 @@
-package com.example.torwitharti.ui.approuting
+package com.example.torwitharti.ui.approuting.view
 
 import android.content.Context
 import android.util.AttributeSet

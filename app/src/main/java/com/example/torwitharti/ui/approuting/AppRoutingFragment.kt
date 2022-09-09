@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.torwitharti.databinding.FragmentAppRoutingBinding
+import com.example.torwitharti.ui.approuting.data.AppListAdapter
+import com.example.torwitharti.ui.approuting.data.TorAppsAdapter
+import com.example.torwitharti.ui.approuting.model.AppRoutingViewModel
 import com.example.torwitharti.utils.PreferenceHelper
 import com.example.torwitharti.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
 

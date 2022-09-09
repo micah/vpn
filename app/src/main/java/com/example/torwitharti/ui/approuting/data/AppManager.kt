@@ -1,4 +1,4 @@
-package com.example.torwitharti.utils
+package com.example.torwitharti.ui.approuting.data
 
 import android.Manifest.permission.INTERNET
 import android.content.Context
@@ -12,10 +12,11 @@ import android.os.Build
 import android.text.TextUtils
 import androidx.annotation.WorkerThread
 import com.example.torwitharti.R
-import com.example.torwitharti.ui.approuting.AppItemModel
-import com.example.torwitharti.ui.approuting.AppListAdapter.Companion.CELL
-import com.example.torwitharti.ui.approuting.AppListAdapter.Companion.SECTION_HEADER_VIEW
-import com.example.torwitharti.ui.approuting.AppListAdapter.Companion.HORIZONTAL_RECYCLER_VIEW
+import com.example.torwitharti.ui.approuting.model.AppItemModel
+import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.CELL
+import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.SECTION_HEADER_VIEW
+import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.HORIZONTAL_RECYCLER_VIEW
+import com.example.torwitharti.utils.PreferenceHelper
 
 
 class AppManager(context: Context) {

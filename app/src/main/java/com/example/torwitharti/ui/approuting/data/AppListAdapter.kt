@@ -1,4 +1,4 @@
-package com.example.torwitharti.ui.approuting
+package com.example.torwitharti.ui.approuting.data
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import com.example.torwitharti.databinding.AppRoutingTableHeaderBinding
 import com.example.torwitharti.databinding.AppSwitchItemViewBinding
 import com.example.torwitharti.databinding.AppTitleViewBinding
 import com.example.torwitharti.databinding.HorizontalRecyclerViewItemBinding
+import com.example.torwitharti.ui.approuting.model.AppItemModel
 import com.example.torwitharti.utils.PreferenceHelper
 
 class AppListAdapter(list: List<AppItemModel>,
