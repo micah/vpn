@@ -31,7 +31,7 @@ class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerVi
 
 
     internal class AppListViewHolder(binding: AppItemViewBinding) :
-        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        RecyclerView.ViewHolder(binding.root) {
         private val binding: AppItemViewBinding
         private var pos = -1
 
@@ -39,10 +39,9 @@ class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerVi
             this.pos = pos
             binding.ivAppImage.setImageDrawable(appItem.icon)
             binding.tvAppTitle.text = appItem.text
-        }
-
-        override fun onClick(v: View) {
-            Log.d("TorAppsAdapter", "view tapped $v" )
+            binding.root.setOnClickListener {
+                Log.d("TorAppsAdapter", "TODO: open  detail screen for "  + appItem.text)
+            }
         }
 
         init {
