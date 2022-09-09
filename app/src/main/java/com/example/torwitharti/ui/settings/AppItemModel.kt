@@ -51,6 +51,6 @@ class AppItemModel (viewType: Int,
     }
 
     override fun compareTo(other: AppItemModel): Int {
-        return compareValuesBy(this, other, { it.isRoutingEnabled }, { it.text })
+        return compareValuesBy(this, other, { it.isRoutingEnabled == false }, { it.text })
     }
 }
