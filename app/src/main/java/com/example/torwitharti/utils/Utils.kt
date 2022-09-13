@@ -2,22 +2,23 @@ package com.example.torwitharti.utils
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
+import android.widget.TextView
 import androidx.lifecycle.Lifecycle
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
+
 
 /**
  * this can be an extension function but bifurcation between AnimatedVectorDrawableCompat and AnimatedVectorDrawable needs to be done manually.
  */
 fun repeatVectorAnimation(drawable: Drawable, lifecycle: Lifecycle) {
     fun startIfResumed() {
-        if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
-            (drawable as Animatable).start()
-        }
+        startVectorAnimationWithEndCallback(drawable, lifecycle) { startIfResumed() }
     }
-    startVectorAnimationWithEndCallback(drawable, lifecycle) { startIfResumed() }
+    startIfResumed()
 }
 
 /**
@@ -39,9 +40,9 @@ fun startVectorAnimationWithEndCallback(drawable: Drawable, lifecycle: Lifecycle
 /**
  * Wrapper around animator listener
  */
-fun startRevealWithEndCallback(animator: Animator, onAnimationEnd: () -> Unit){
-    with(animator){
-        addListener(object :AnimatorListenerAdapter(){
+fun startRevealWithEndCallback(animator: Animator, onAnimationEnd: () -> Unit) {
+    with(animator) {
+        addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
                 onAnimationEnd()
             }
@@ -51,3 +52,21 @@ fun startRevealWithEndCallback(animator: Animator, onAnimationEnd: () -> Unit){
     }
 }
 
+fun animateTextSizeChange(textView: TextView, startSize: Float, endSize: Float, lifecycle: Lifecycle, endCallback: () -> Unit) {
+    val animationDuration: Long = 6000 // Animation duration in ms
+
+    val animator = ValueAnimator.ofFloat(startSize, endSize)
+    animator.duration = animationDuration
+
+    animator.addUpdateListener { valueAnimator ->
+        textView.textSize = (valueAnimator.animatedValue as Float)
+    }
+
+    animator.addListener(object : AnimatorListenerAdapter() {
+        override fun onAnimationEnd(animation: Animator?) {
+            endCallback()
+        }
+    })
+
+    animator.start()
+}

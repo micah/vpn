@@ -14,4 +14,7 @@
 
     <color name="colorProgress1">#14000000</color>
     <color name="colorProgress2">#0A000000</color>
+
+
+    <color name="colorInfoErrorCollapsedSubtitle">#66000000</color>
 </resources>

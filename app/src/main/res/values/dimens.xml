@@ -4,6 +4,9 @@
     <dimen name="activity_vertical_margin">24dp</dimen>
     <dimen name="indicator_size">3dp</dimen>
     <dimen name="selected_indicator_size">4dp</dimen>
+    <dimen name="connect_error_collapsed_bf_radius">28dp</dimen>
+    <dimen name="connect_error_collapsed_title_size">14sp</dimen>
+    <dimen name="connect_error_expanded_title_size">24sp</dimen>
     <dimen name="default_padding">16dp</dimen>
     <dimen name="compact_padding">8dp</dimen>
     <dimen name="switch_padding">20dp</dimen>

@@ -57,6 +57,12 @@ class ConnectFragment : Fragment() {
         }
 
         connectFragmentViewModel.switchToConnectedScene.observe(viewLifecycleOwner) { show -> showConnectedScene(show) }
+
+        connectFragmentViewModel.switchToErrorScene.observe(viewLifecycleOwner) { show -> showCollapsedErrorInConnectScreen(show) }
+
+        connectFragmentViewModel.switchToErrorSceneExpanded.observe(viewLifecycleOwner) { show -> showExpandedErrorInConnectScreen2(show) }
+
+
         return binding.root
     }
 
@@ -108,7 +114,6 @@ class ConnectFragment : Fragment() {
 
     private fun showConnectingScene(show: Boolean) {
         if (show) {
-
             val connectingStateBinding =
                 FragmentConnectSceneConnectingStateBinding.inflate(
                     layoutInflater,
@@ -235,6 +240,94 @@ class ConnectFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun showCollapsedErrorInConnectScreen(show: Boolean) {
+        if (show) {
+            val errorStateBinding =
+                FragmentConnectSceneErrorBinding.inflate(
+                    layoutInflater,
+                    binding.flSceneContainer,
+                    false
+                )
+            errorStateBinding.viewModel = connectFragmentViewModel
+
+            val collapsedErrorScene = Scene(binding.flSceneContainer, errorStateBinding.root)
+            val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
+            val floaterCornerRad = resources.getDimension(R.dimen.connect_error_collapsed_bf_radius)
+
+            with(AutoTransition()) {
+                addTarget(R.id.tv_connect_status_title)
+                addTarget(R.id.progress_connecting)
+                addTarget(R.id.iv_connect_status_icon)
+
+                TransitionManager.go(collapsedErrorScene, this)
+
+                //errorStateBinding.imageView.animate().translationZ(0f).setStartDelay(3000).start()
+                //errorStateBinding.clErrorCollapsed.animate().translationZ(0f).setStartDelay(3000).start()
+
+            }
+        }
+    }
+
+    private fun showExpandedErrorInConnectScreen(show: Boolean) {
+        if (show) {
+            val expandedErrorStateBinding =
+                FragmentConnectErrorExpandedBinding.inflate(
+                    layoutInflater,
+                    binding.flSceneContainer,
+                    false
+                )
+            expandedErrorStateBinding.viewModel = connectFragmentViewModel
+
+            val connectingScene = Scene(binding.flSceneContainer, expandedErrorStateBinding.root)
+            val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
+            val floaterCornerRad = resources.getDimension(R.dimen.connect_error_collapsed_bf_radius)
+
+            with(ChangeBounds()) {
+                TransitionManager.go(connectingScene, this)
+
+                //errorStateBinding.imageView.animate().translationZ(0f).setStartDelay(3000).start()
+                //errorStateBinding.clErrorCollapsed.animate().translationZ(0f).setStartDelay(3000).start()
+                val startSize = resources.getDimension(R.dimen.connect_error_collapsed_title_size)
+                val endSize = resources.getDimension(R.dimen.connect_error_expanded_title_size)
+                animateTextSizeChange(
+                    expandedErrorStateBinding.tvConnectStatusTitle, startSize, endSize, lifecycle
+                ) {
+
+                }
+            }
+        }
+    }
+
+    private fun showExpandedErrorInConnectScreen2(show: Boolean) {
+        if (show) {
+            val expandedErrorStateBinding =
+                FragmentConnectErrorExpandedBinding.inflate(
+                    layoutInflater,
+                    binding.flSceneContainer,
+                    false
+                )
+            expandedErrorStateBinding.viewModel = connectFragmentViewModel
+
+            val connectingScene = Scene(binding.flSceneContainer, expandedErrorStateBinding.root)
+            val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
+            val floaterCornerRad = resources.getDimension(R.dimen.connect_error_collapsed_bf_radius)
+
+            with(ChangeBounds()) {
+                TransitionManager.go(connectingScene, this)
+
+                //errorStateBinding.imageView.animate().translationZ(0f).setStartDelay(3000).start()
+                //errorStateBinding.clErrorCollapsed.animate().translationZ(0f).setStartDelay(3000).start()
+                val startSize = resources.getDimension(R.dimen.connect_error_collapsed_title_size)
+                val endSize = resources.getDimension(R.dimen.connect_error_expanded_title_size)
+                animateTextSizeChange(
+                    expandedErrorStateBinding.tvConnectStatusTitle, startSize, endSize, lifecycle
+                ) {
+
+                }
+            }
+        }
     }
 
     /**

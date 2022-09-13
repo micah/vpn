@@ -11,6 +11,16 @@
     <string name="frag_connect_guide_slide_index">Guide Slide # %1$d</string>
     <string name="frag_connect_connecting_to_network">Connecting to the\nTor Network…</string>
     <string name="frag_connect_connected">Connected\n</string>
+    <string name="frag_connect_not_connected">Not connected</string>
+    <string name="frag_connect_cannot_connected">Can\'t connect to Tor</string>
+    <string name="frag_connect_try_bridge">Try a bridge instead</string>
+    <string name="frag_connect_error_content">Trying a bridge could help unblock the Internet in places experiencing censorship.</string>
+    <string name="frag_connect_error_content2">Unblock the Internet in…</string>
+    <string name="frag_connect_error_share_location">Share my location</string>
+    <string name="frag_connect_error_allow_once">Allow once</string>
+    <string name="frag_connect_error_not_now">Not now</string>
+    <string name="frag_connect_error_try_a_bridge">Try a bridge</string>
+
     <string name="app_routing">App Routing</string>
     <string name="app_routing_protect_all">Protect all my apps</string>
     <string name="app_routing_tor_apps">Tor powered apps</string>

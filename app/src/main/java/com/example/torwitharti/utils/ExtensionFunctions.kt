@@ -3,7 +3,9 @@ package com.example.torwitharti.utils
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.graphics.Point
+import android.graphics.Rect
 import android.view.View
+import androidx.annotation.FloatRange
 import androidx.lifecycle.Lifecycle
 
 
@@ -30,4 +32,20 @@ fun Animator.animateWithEndCallback(lifecycle: Lifecycle, onAnimationEnd: () -> 
     })
 
     start()
+}
+
+/**
+ * scale for outline
+ * source : https://github.com/rock3r/uplift
+ */
+fun Rect.scale(
+    @FloatRange(from = -1.0, to = 1.0) scaleX: Float,
+    @FloatRange(from = -1.0, to = 1.0) scaleY: Float
+) {
+    val newWidth = width() * scaleX
+    val newHeight = height() * scaleY
+    val deltaX = (width() - newWidth) / 2
+    val deltaY = (height() - newHeight) / 2
+
+    set((left + deltaX).toInt(), (top + deltaY).toInt(), (right - deltaX).toInt(), (bottom - deltaY).toInt())
 }
