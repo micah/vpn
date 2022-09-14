@@ -4,7 +4,9 @@ import android.app.Application
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.EventLog
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.torwitharti.R
@@ -24,12 +26,16 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     private val _mainActionButtonTitle = MutableLiveData<String>()
     private val _switchToIdleScene = MutableLiveData<Boolean>()
     private val _switchToConnectedScene = MutableLiveData<Boolean>()
+    private val _onAppsPressed = MutableLiveData<Unit>()
+
 
     val showGuideTour: LiveData<Boolean> = _showGuideTour
     val switchToConnectingScene: LiveData<Boolean> = _switchToConnectingScene
     val mainActionButtonTitle: LiveData<String> = _mainActionButtonTitle
     val switchToIdleScene: LiveData<Boolean> = _switchToIdleScene
     val switchToConnectedScene: LiveData<Boolean> = _switchToIdleScene
+    val onAppsPressed: LiveData<Unit> = _onAppsPressed
+
 
     /*
     * dummy flags
@@ -57,11 +63,10 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     }
 
     fun globPressed() {
-
     }
 
     fun appsPressed() {
-
+        _onAppsPressed.postValue(Unit)
     }
 
 

@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.transition.*
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.example.torwitharti.R
 import com.example.torwitharti.databinding.*
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -42,6 +44,10 @@ class ConnectFragment : Fragment() {
             } else {
                 hideGuide()
             }
+        }
+
+        connectFragmentViewModel.onAppsPressed.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_connectFragment_to_appRoutingFragment)
         }
 
         connectFragmentViewModel.switchToConnectingScene.observe(viewLifecycleOwner) { show -> showConnectiveScene(show) }

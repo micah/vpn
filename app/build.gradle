@@ -32,6 +32,12 @@ android {
     buildFeatures {
         dataBinding true
     }
+
+    task wrapper(type: Wrapper){
+        gradleVersion = '7.2'
+    }
+
+    tasks.register("prepareKotlinBuildScriptModel"){}
 }
 
 dependencies {

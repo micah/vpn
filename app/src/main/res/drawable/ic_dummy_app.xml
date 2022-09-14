@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="#808080">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="360dp" />
-            <solid android:color="?colorPrimaryVariant">
+            <!-- TODO: figure out why referencing colorPrimary doesn't work here -->
+            <solid android:color="#14000000">
 
             </solid>
             <padding
@@ -16,5 +16,4 @@
             </padding>
         </shape>
     </item>
-</ripple>
-
+</selector>
