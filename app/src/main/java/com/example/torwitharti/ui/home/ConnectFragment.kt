@@ -4,7 +4,6 @@ import android.graphics.drawable.Animatable2
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.transition.*
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.example.torwitharti.R
 import com.example.torwitharti.databinding.*
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -47,8 +47,7 @@ class ConnectFragment : Fragment() {
         }
 
         connectFragmentViewModel.onAppsPressed.observe(viewLifecycleOwner) {
-            Log.d("ConnectFragment", "TODO: navigate to appRoutingFragment")
-            //findNavController().navigate(R.id.action_connectFragment_to_appRoutingFragment)
+            findNavController().navigate(R.id.action_connectFragment_to_appRoutingFragment)
         }
 
         connectFragmentViewModel.switchToConnectingScene.observe(viewLifecycleOwner) { show -> showConnectiveScene(show) }
