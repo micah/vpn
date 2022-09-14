@@ -4,15 +4,12 @@ import android.app.Application
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.EventLog
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.torwitharti.R
 import com.example.torwitharti.utils.DummyConnectionState
 import com.example.torwitharti.utils.PreferenceHelper
-import kotlinx.coroutines.delay
 
 
 /**
@@ -119,11 +116,6 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
             }
         }, 2000)
     }
-
-    //TODO dummy progress updater
-/*    val r = Runnable {
-        _connectingProgress.value = (connectingProgress.value ?: 0) + 20
-    }*/
 
     private fun attemptDisconnect() {
         connectionState = DummyConnectionState.IDLE
