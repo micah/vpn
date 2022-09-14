@@ -24,3 +24,4 @@ local.properties
 /app/src/test/java/com/example/torwitharti/ExampleUnitTest.kt
 /.idea/codeStyles/Project.xml
 /app/src/main/res/layout/test.xml
+/app/src/main/res/xml/test_scene.xml
