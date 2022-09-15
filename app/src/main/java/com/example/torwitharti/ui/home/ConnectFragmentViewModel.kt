@@ -4,9 +4,7 @@ import android.app.Application
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.EventLog
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.torwitharti.R
@@ -26,6 +24,9 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     private val _mainActionButtonTitle = MutableLiveData<String>()
     private val _switchToIdleScene = MutableLiveData<Boolean>()
     private val _switchToConnectedScene = MutableLiveData<Boolean>()
+    private val _connectingProgress = MutableLiveData<Int>()
+    private val _switchToErrorScene = MutableLiveData<Boolean>()
+    private val _switchToErrorSceneExpanded = MutableLiveData<Boolean>()
     private val _onAppsPressed = MutableLiveData<Unit>()
 
 
@@ -33,7 +34,10 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     val switchToConnectingScene: LiveData<Boolean> = _switchToConnectingScene
     val mainActionButtonTitle: LiveData<String> = _mainActionButtonTitle
     val switchToIdleScene: LiveData<Boolean> = _switchToIdleScene
-    val switchToConnectedScene: LiveData<Boolean> = _switchToIdleScene
+    val switchToConnectedScene: LiveData<Boolean> = _switchToConnectedScene
+    val connectingProgress: LiveData<Int> = _connectingProgress
+    val switchToErrorScene: LiveData<Boolean> = _switchToErrorScene
+    val switchToErrorSceneExpanded: LiveData<Boolean> = _switchToErrorSceneExpanded
     val onAppsPressed: LiveData<Unit> = _onAppsPressed
 
 
@@ -57,7 +61,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
             DummyConnectionState.IDLE -> attemptConnect()
             DummyConnectionState.CONNECTING -> attemptCancelConnect()
             DummyConnectionState.CONNECTED -> attemptDisconnect()
-            DummyConnectionState.CONNECTION_FAILED -> {}
+            DummyConnectionState.CONNECTION_FAILED -> attemptConnect()
             DummyConnectionState.DISCONNECTED -> {}
         }
     }
@@ -67,6 +71,20 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     fun appsPressed() {
         _onAppsPressed.postValue(Unit)
+    }
+
+    fun collapsedErrorClicked(){
+        if (connectionState == DummyConnectionState.CONNECTION_FAILED) {
+            _switchToErrorScene.value = false
+            _switchToErrorSceneExpanded.value = true
+        }
+    }
+
+    fun notNowInExpandedErrorClicked(){
+        if (connectionState == DummyConnectionState.CONNECTION_FAILED) {
+            _switchToErrorSceneExpanded.value = false
+            _switchToErrorScene.value = true
+        }
     }
 
 
@@ -85,26 +103,35 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         changeActionButtonTitle()
         _switchToConnectingScene.value = true
 
+
         //TODO dummy success trigger
         Handler(Looper.getMainLooper()).postDelayed({
-            connectionState = DummyConnectionState.CONNECTING
-            changeActionButtonTitle()
-            _switchToConnectingScene.value = false
-            _switchToConnectedScene.value = true
-        }, 3000)
+            if (connectionState == DummyConnectionState.CONNECTING) {
+
+                connectionState = DummyConnectionState.CONNECTED
+                changeActionButtonTitle()
+                _switchToConnectingScene.value = false
+                _switchToConnectedScene.value = true
+                //_switchToErrorScene.value = true
+            }
+        }, 2000)
     }
 
     private fun attemptDisconnect() {
-
+        connectionState = DummyConnectionState.IDLE
+        changeActionButtonTitle()
+        _switchToIdleScene.value = true
+        _switchToConnectedScene.value = false
     }
 
     private fun attemptCancelConnect() {
         connectionState = DummyConnectionState.IDLE
         changeActionButtonTitle()
+        _switchToConnectingScene.value = false
         _switchToIdleScene.value = true
     }
 
-    private fun changeActionButtonTitle(){
+    private fun changeActionButtonTitle() {
         when (connectionState) {
             DummyConnectionState.IDLE -> _mainActionButtonTitle.value =
                 getApplication<Application>().getString(R.string.frag_connect_connect)
@@ -115,7 +142,10 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
             DummyConnectionState.CONNECTED -> _mainActionButtonTitle.value =
                 getApplication<Application>().getString(R.string.frag_connect_disconnect)
 
-            DummyConnectionState.CONNECTION_FAILED -> {}
+            DummyConnectionState.CONNECTION_FAILED -> {
+                _mainActionButtonTitle.value =
+                    getApplication<Application>().getString(R.string.frag_connect_connect)
+            }
             DummyConnectionState.DISCONNECTED -> {}
         }
     }

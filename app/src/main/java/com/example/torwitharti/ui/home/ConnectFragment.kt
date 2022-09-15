@@ -1,11 +1,9 @@
 package com.example.torwitharti.ui.home
 
-import android.graphics.drawable.Animatable2
-import android.graphics.drawable.AnimatedVectorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +14,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.torwitharti.R
 import com.example.torwitharti.databinding.*
+import com.example.torwitharti.utils.*
 import com.google.android.material.tabs.TabLayoutMediator
 
 const val argShowActionCommands = "arg_show_action_commands"
@@ -38,6 +37,8 @@ class ConnectFragment : Fragment() {
         binding = FragmentConnectBinding.inflate(inflater, container, false)
         binding.viewModel = connectFragmentViewModel
 
+        connectFragmentViewModel.switchToIdleScene.observe(viewLifecycleOwner) { show -> showIdleScene(show) }
+
         connectFragmentViewModel.showGuideTour.observe(viewLifecycleOwner) { show ->
             if (show) {
                 showGuide()
@@ -46,16 +47,30 @@ class ConnectFragment : Fragment() {
             }
         }
 
+        connectFragmentViewModel.switchToConnectingScene.observe(viewLifecycleOwner) { show ->
+            showConnectingScene(
+                show
+            )
+        }
         connectFragmentViewModel.onAppsPressed.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_connectFragment_to_appRoutingFragment)
         }
 
-        connectFragmentViewModel.switchToConnectingScene.observe(viewLifecycleOwner) { show -> showConnectiveScene(show) }
-
         connectFragmentViewModel.switchToConnectedScene.observe(viewLifecycleOwner) { show -> showConnectedScene(show) }
+
+        connectFragmentViewModel.switchToErrorScene.observe(viewLifecycleOwner) { show -> showCollapsedErrorInConnectScreen(show) }
+
+        connectFragmentViewModel.switchToErrorSceneExpanded.observe(viewLifecycleOwner) { show -> showExpandedErrorInConnectScreen2(show) }
+
+
         return binding.root
     }
 
+    /*
+    * Scene transitions
+    *
+    * ************
+     */
     private fun showGuide() {
         val guideStateBinding =
             FragmentConnectSceneGuideStateBinding.inflate(
@@ -97,9 +112,8 @@ class ConnectFragment : Fragment() {
 
     }
 
-    private fun showConnectiveScene(show: Boolean) {
+    private fun showConnectingScene(show: Boolean) {
         if (show) {
-
             val connectingStateBinding =
                 FragmentConnectSceneConnectingStateBinding.inflate(
                     layoutInflater,
@@ -108,29 +122,217 @@ class ConnectFragment : Fragment() {
                 )
             connectingStateBinding.viewModel = connectFragmentViewModel
 
-            val connectingScene: Scene =
-                Scene(binding.flSceneContainer, connectingStateBinding.root)
-            val changeBoundTransition = ChangeBounds()
-            TransitionManager.go(connectingScene, changeBoundTransition)
+            val connectingScene = Scene(binding.flSceneContainer, connectingStateBinding.root)
+            val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
 
-            val animatedDrawable =
-                (connectingStateBinding.imageView.drawable as AnimatedVectorDrawable)
+            with(AutoTransition()) {
+                addTarget(R.id.tv_connect_status_title)
+                addTarget(R.id.progress_connecting)
+                addTarget(R.id.iv_connect_status_icon)
 
-            animatedDrawable.registerAnimationCallback(object : Animatable2.AnimationCallback() {
-                override fun onAnimationEnd(drawable: Drawable?) {
-                    connectingStateBinding.imageView.post { animatedDrawable.start() }
+                connectingScene.setEnterAction {
+                    connectingStateBinding.includeActions.ivApps
+                        .animate()
+                        .alpha(0.4f)
+                        .duration = medAnimationDuration.toLong()
+
+                    connectingStateBinding.includeActions.ivGlobe
+                        .animate()
+                        .alpha(0.4f)
+                        .duration =
+                        medAnimationDuration.toLong()
                 }
-            })
 
-            animatedDrawable.start()
+                TransitionManager.go(connectingScene, this)
+            }
+
+            repeatVectorAnimation(connectingStateBinding.ivConnectStatusIcon.drawable, lifecycle)
 
         }
     }
 
-    private fun showConnectedScene(show: Boolean){
+    private fun showConnectedScene(show: Boolean) {
+        if (show) {
+            val connectedStateBinding =
+                FragmentConnectSceneConnectedStateBinding.inflate(
+                    layoutInflater,
+                    binding.flSceneContainer,
+                    false
+                )
+            connectedStateBinding.viewModel = connectFragmentViewModel
+
+            val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
+            val connectedScene = Scene(binding.flSceneContainer, connectedStateBinding.root)
+
+            with(AutoTransition()) {
+                addTarget(R.id.tv_connect_status_title)
+                addTarget(R.id.progress_connecting)
+                addTarget(R.id.iv_connect_status_icon)
+
+                connectedScene.setEnterAction {
+                    connectedStateBinding.includeActions.ivApps.alpha = 0.4f
+                    connectedStateBinding.includeActions.ivGlobe.alpha = 0.4f
+                    connectedStateBinding.includeActions.ivApps.animate().alpha(1f).duration =
+                        medAnimationDuration.toLong()
+                    connectedStateBinding.includeActions.ivGlobe.animate().alpha(1f).duration =
+                        medAnimationDuration.toLong()
+                }
+
+                TransitionManager.go(connectedScene, this)
+            }
+
+            startVectorAnimationWithEndCallback(connectedStateBinding.ivConnectStatusIcon.drawable, lifecycle) {
+                with(connectedStateBinding.ivConnectStatusIcon) {
+                    val concealCenter = center()
+                    val concealAnim = ViewAnimationUtils.createCircularReveal(
+                        connectedStateBinding.ivConnectStatusIcon,
+                        concealCenter.x,
+                        concealCenter.y,
+                        connectedStateBinding.ivConnectStatusIcon.width.toFloat(),
+                        0f
+                    )
+
+                    val revealCenter = centerInParent()
+                    val revealAnim = ViewAnimationUtils.createCircularReveal(
+                        connectedStateBinding.clGraphFrame, revealCenter.x, revealCenter.y, 0f,
+                        (connectedStateBinding.root.height).toFloat()
+                    )
+
+                    concealAnim.animateWithEndCallback(lifecycle) {
+                        connectedStateBinding.groupConnected.visibility = View.GONE
+                        connectedStateBinding.clGraphFrame.visibility = View.VISIBLE
+                        revealAnim.start()
+                    }
+
+                }
+            }
+        }
+    }
+
+    private fun showIdleScene(show: Boolean) {
+        if (show) {
+            val initialStateBinding =
+                FragmentConnectSceneInitialStateBinding.inflate(
+                    layoutInflater,
+                    binding.flSceneContainer,
+                    false
+                )
+            initialStateBinding.viewModel = connectFragmentViewModel
+
+            val idleScene = Scene(binding.flSceneContainer, initialStateBinding.root)
+
+            with(AutoTransition()) {
+                addTarget(R.id.tv_connect_status_title)
+                addTarget(R.id.progress_connecting)
+                addTarget(R.id.iv_connect_status_icon)
+
+                idleScene.setEnterAction {
+                    val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
+                    initialStateBinding.includeActions.ivApps.alpha = 0.4f
+                    initialStateBinding.includeActions.ivGlobe.alpha = 0.4f
+                    initialStateBinding.includeActions.ivApps.animate().alpha(1f).duration =
+                        medAnimationDuration.toLong()
+                    initialStateBinding.includeActions.ivGlobe.animate().alpha(1f).duration =
+                        medAnimationDuration.toLong()
+                }
+
+                TransitionManager.go(idleScene, this)
+            }
+        }
 
     }
 
+    private fun showCollapsedErrorInConnectScreen(show: Boolean) {
+        if (show) {
+            val errorStateBinding =
+                FragmentConnectSceneErrorBinding.inflate(
+                    layoutInflater,
+                    binding.flSceneContainer,
+                    false
+                )
+            errorStateBinding.viewModel = connectFragmentViewModel
+
+            val collapsedErrorScene = Scene(binding.flSceneContainer, errorStateBinding.root)
+            val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
+            val floaterCornerRad = resources.getDimension(R.dimen.connect_error_collapsed_bf_radius)
+
+            with(AutoTransition()) {
+                addTarget(R.id.tv_connect_status_title)
+                addTarget(R.id.progress_connecting)
+                addTarget(R.id.iv_connect_status_icon)
+
+                TransitionManager.go(collapsedErrorScene, this)
+
+                //errorStateBinding.imageView.animate().translationZ(0f).setStartDelay(3000).start()
+                //errorStateBinding.clErrorCollapsed.animate().translationZ(0f).setStartDelay(3000).start()
+
+            }
+        }
+    }
+
+    private fun showExpandedErrorInConnectScreen(show: Boolean) {
+        if (show) {
+            val expandedErrorStateBinding =
+                FragmentConnectErrorExpandedBinding.inflate(
+                    layoutInflater,
+                    binding.flSceneContainer,
+                    false
+                )
+            expandedErrorStateBinding.viewModel = connectFragmentViewModel
+
+            val connectingScene = Scene(binding.flSceneContainer, expandedErrorStateBinding.root)
+            val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
+            val floaterCornerRad = resources.getDimension(R.dimen.connect_error_collapsed_bf_radius)
+
+            with(ChangeBounds()) {
+                TransitionManager.go(connectingScene, this)
+
+                //errorStateBinding.imageView.animate().translationZ(0f).setStartDelay(3000).start()
+                //errorStateBinding.clErrorCollapsed.animate().translationZ(0f).setStartDelay(3000).start()
+                val startSize = resources.getDimension(R.dimen.connect_error_collapsed_title_size)
+                val endSize = resources.getDimension(R.dimen.connect_error_expanded_title_size)
+                animateTextSizeChange(
+                    expandedErrorStateBinding.tvConnectStatusTitle, startSize, endSize, lifecycle
+                ) {
+
+                }
+            }
+        }
+    }
+
+    private fun showExpandedErrorInConnectScreen2(show: Boolean) {
+        if (show) {
+            val expandedErrorStateBinding =
+                FragmentConnectErrorExpandedBinding.inflate(
+                    layoutInflater,
+                    binding.flSceneContainer,
+                    false
+                )
+            expandedErrorStateBinding.viewModel = connectFragmentViewModel
+
+            val connectingScene = Scene(binding.flSceneContainer, expandedErrorStateBinding.root)
+            val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
+            val floaterCornerRad = resources.getDimension(R.dimen.connect_error_collapsed_bf_radius)
+
+            with(ChangeBounds()) {
+                TransitionManager.go(connectingScene, this)
+
+                //errorStateBinding.imageView.animate().translationZ(0f).setStartDelay(3000).start()
+                //errorStateBinding.clErrorCollapsed.animate().translationZ(0f).setStartDelay(3000).start()
+                val startSize = resources.getDimension(R.dimen.connect_error_collapsed_title_size)
+                val endSize = resources.getDimension(R.dimen.connect_error_expanded_title_size)
+                animateTextSizeChange(
+                    expandedErrorStateBinding.tvConnectStatusTitle, startSize, endSize, lifecycle
+                ) {
+
+                }
+            }
+        }
+    }
+
+    /**
+     * Guide Fragment adapter
+     */
     private inner class GuideFrameVP2Adapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
         override fun getItemCount(): Int = totalGuideSliders
@@ -146,6 +348,9 @@ class ConnectFragment : Fragment() {
         }
     }
 
+    /**
+     * VP2 slide animation
+     */
     private inner class DepthPageTransformer : ViewPager2.PageTransformer {
 
         override fun transformPage(view: View, position: Float) {

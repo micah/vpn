@@ -111,6 +111,12 @@
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">0sp</item>
         <item name="android:textColor">?colorOnPrimary</item>
+    </style>
+
+    <style name="label_text_in_fragment" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+        <item name="android:textColor">?colorOnPrimary</item>
 
     </style>
 
@@ -124,14 +130,77 @@
     <style name="action_button1" parent="Widget.MaterialComponents.TextView">
         <item name="android:background">@drawable/common_rounded_square_action</item>
         <item name="android:textAppearance">@style/button_text_in_fragment</item>
-        <item name="android:padding">28dp</item>
-        <item name="android:minEms">5</item>
+        <item name="android:paddingTop">28dp</item>
+        <item name="android:paddingBottom">28dp</item>
+        <item name="android:minEms">7</item>
         <item name="android:gravity">center</item>
     </style>
 
 
     <style name="action_button2" parent="Widget.MaterialComponents.TextView">
         <item name="android:background">@drawable/common_rounded_square_action</item>
+        <item name="android:textAppearance">@style/button_text_in_fragment</item>
+        <item name="android:minEms">7</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingStart">28dp</item>
+        <item name="android:paddingEnd">28dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="info_error_dialog_collapsed_title" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">@dimen/connect_error_collapsed_title_size</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textColor">@color/colorIconSecondary</item>
+    </style>
+
+
+    <style name="info_error_dialog_collapsed_subtitle" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textColor">@color/colorInfoErrorCollapsedSubtitle</item>
+    </style>
+
+    <style name="info_error_dialog_expanded_title" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+    </style>
+
+
+    <style name="info_error_dialog_expanded_info1" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textColor">@color/colorSubtitle</item>
+    </style>
+
+    <style name="info_error_dialog_expanded_info2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textColor">@color/colorIconSecondary</item>
+    </style>
+
+
+
+    <style name="info_error_dialog_expanded_location_title"  parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+        <item name="android:textColor">@color/colorIconSecondary</item>
+
+    </style>
+
+
+    <style name="info_error_dialog_expanded_location_subtitle"  parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+        <item name="android:textColor">@color/colorInfoErrorCollapsedSubtitle</item>
+
+    </style>
+
+
+
+    <style name="action_button3" parent="Widget.MaterialComponents.TextView">
+        <item name="android:background">@drawable/common_rounded_square_action_white</item>
         <item name="android:textAppearance">@style/button_text_in_fragment</item>
         <item name="android:minEms">7</item>
         <item name="android:paddingTop">16dp</item>
