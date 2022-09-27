@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.torwitharti.ui.home.ConnectFragmentViewModel" />
+            type="com.example.torwitharti.ui.home.model.ConnectFragmentViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -19,7 +19,7 @@
         android:clipToPadding="false"
         android:padding="16dp"
         app:layoutDescription="@xml/fragment_connect_scene_error_xml_constraintlayout_scene"
-        app:showPaths="true"
+        app:showPaths="false"
         tools:context=".ui.home.ConnectFragment">
 
         <View
@@ -41,8 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:elevation="0dp"
-            android:src="@drawable/ic_error_collapsed"
-            app:altSrc="@drawable/ic_not_connected"
+            android:src="@drawable/ll_connect_error_collapsed_icon"
             app:layout_constraintBottom_toBottomOf="@+id/view_collapse_bg"
             app:layout_constraintStart_toStartOf="@+id/view_collapse_bg"
             app:layout_constraintTop_toTopOf="@+id/view_collapse_bg" />
@@ -132,4 +131,5 @@
 </layout>
 
     <!--android:visibility="@{viewModel.isErrorExpanded? View.GONE:View.VISIBLE}"
-                -->
+                --><!--
+    app:altSrc="@drawable/ic_not_connected"-->

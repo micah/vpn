@@ -28,4 +28,15 @@
     <string name="app_routing_other_apps">Other apps</string>
     <string name="lorem_ipsum_medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…</string>
 
+    <string name="frag_report_title">Connection report</string>
+    <string name="frag_report_sub_title">Suspendisse lacinia commodo tellus sit amet sollicitudin.</string>
+
+    <string name="frag_report_sub_title">Suspendisse lacinia commodo tellus sit amet sollicitudin.</string>
+    <string name="frag_report_success">Successfully connected</string>
+    <string name="frag_report_obfs_snowflake_fail">Could not connect</string>
+    <string name="frag_report_snowflake">SnowFlake</string>
+    <string name="frag_report_direct_conn">Direct connection</string>
+    <string name="frag_report_tor_fail">Tor Network blocked</string>
+    <string name="frag_report_obfs4">obfs4</string>
+
 </resources>

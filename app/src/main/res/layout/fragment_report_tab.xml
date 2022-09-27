@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.torwitharti.ui.home.model.ReportTabViewModel" />
+
+        <import type="com.example.torwitharti.ui.home.model.ConnectedWith" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_snowflake_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_step_info"
+            app:layout_constraintStart_toEndOf="@+id/tv_time_duration"
+            app:layout_constraintTop_toTopOf="@+id/tv_step_title"
+            app:srcCompat="@{viewModel.connectedWith == ConnectedWith.SNOWFLAKE ? `@drawable/ic_success_small` : `@drawable/ic_connection_failed_small`}"
+            tools:srcCompat="@drawable/ic_success_small" />
+
+        <TextView
+            android:id="@+id/tv_time_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{viewModel.connectedTimingSnowFlake}"
+            android:textAppearance="@style/report_step_duration"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_snowflake_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_snowflake_icon"
+            tools:text="4m 47s" />
+
+        <TextView
+            android:id="@+id/tv_step_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/frag_report_snowflake"
+            android:textAppearance="@style/list_item_style"
+            app:layout_constraintStart_toEndOf="@+id/iv_snowflake_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_step_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.connectedWith == ConnectedWith.SNOWFLAKE ? `@string/frag_report_success`:`@string/frag_report_obfs_snowflake_fail`}"
+            android:textAppearance="@style/report_step_info"
+            app:layout_constraintStart_toStartOf="@+id/tv_step_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_step_title"
+            tools:text="@string/frag_report_success" />
+
+        <View
+            android:id="@+id/v_divider_1"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/dotted_line"
+            android:rotation="90"
+            app:layout_constraintEnd_toEndOf="@+id/iv_snowflake_icon"
+            app:layout_constraintStart_toStartOf="@+id/iv_snowflake_icon"
+            app:layout_constraintTop_toBottomOf="@+id/iv_snowflake_icon" />
+
+        <View
+            android:id="@+id/v_divider_2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/dotted_line"
+            android:rotation="90"
+            app:layout_constraintEnd_toEndOf="@+id/iv_obfs4_icon"
+            app:layout_constraintStart_toStartOf="@+id/iv_obfs4_icon"
+            app:layout_constraintTop_toBottomOf="@+id/iv_obfs4_icon" />
+
+        <TextView
+            android:id="@+id/tv_duration_obfs4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{viewModel.connectedTimingObfs4}"
+            android:textAppearance="@style/report_step_duration"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_obfs4_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_obfs4_icon"
+            tools:text="4m 47s" />
+
+        <TextView
+            android:id="@+id/tv_title_obfs4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/frag_report_obfs4"
+            android:textAppearance="@style/list_item_style"
+            app:layout_constraintStart_toEndOf="@+id/iv_obfs4_icon"
+            app:layout_constraintTop_toBottomOf="@+id/v_divider_1" />
+
+        <TextView
+            android:id="@+id/tv_info_obfs4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.connectedWith == ConnectedWith.SNOWFLAKE ? `@string/frag_report_success`:`@string/frag_report_obfs_snowflake_fail`}"
+            android:textAppearance="@style/report_step_info"
+            app:layout_constraintStart_toStartOf="@+id/tv_title_obfs4"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_obfs4"
+            tools:text="@string/frag_report_obfs_snowflake_fail" />
+
+        <TextView
+            android:id="@+id/tv_duration_direct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{viewModel.connectedTimingDirect}"
+            android:textAppearance="@style/report_step_duration"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_direct_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_direct_icon"
+            tools:text="4m 47s" />
+
+        <TextView
+            android:id="@+id/tv_duration_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/frag_report_direct_conn"
+            android:textAppearance="@style/list_item_style"
+            app:layout_constraintStart_toEndOf="@+id/iv_direct_icon"
+            app:layout_constraintTop_toBottomOf="@+id/v_divider_2" />
+
+        <TextView
+            android:id="@+id/tv_direct_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@{viewModel.connectedWith == ConnectedWith.DIRECT ? `@string/frag_report_success`:`@string/frag_report_tor_fail`}"
+            android:textAppearance="@style/report_step_info"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_duration_info"
+            app:layout_constraintTop_toBottomOf="@+id/tv_duration_info"
+            tools:text="@string/frag_report_tor_fail" />
+
+        <ImageView
+            android:id="@+id/iv_obfs4_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_info_obfs4"
+            app:layout_constraintStart_toEndOf="@+id/tv_duration_obfs4"
+            app:layout_constraintTop_toTopOf="@+id/tv_title_obfs4"
+            app:srcCompat="@{viewModel.connectedWith == ConnectedWith.OBFS4 ? `@drawable/ic_success_small` : `@drawable/ic_connection_failed_small`}"
+            tools:srcCompat="@drawable/ic_connection_failed_small" />
+
+        <ImageView
+            android:id="@+id/iv_direct_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_direct_info"
+            app:layout_constraintStart_toEndOf="@+id/tv_duration_direct"
+            app:layout_constraintTop_toTopOf="@+id/tv_duration_info"
+            app:srcCompat="@{viewModel.connectedWith == ConnectedWith.DIRECT ? `@drawable/ic_success_small` : `@drawable/ic_connection_failed_small`}"
+            tools:srcCompat="@drawable/ic_connection_failed_small" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_snowflake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="iv_snowflake_icon,tv_time_duration,tv_step_title,tv_step_info,v_divider_1"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_obfs4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="v_divider_2,tv_duration_obfs4,tv_title_obfs4,tv_info_obfs4,iv_obfs4_icon"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

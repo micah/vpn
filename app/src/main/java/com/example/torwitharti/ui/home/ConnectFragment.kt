@@ -14,11 +14,13 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.torwitharti.R
 import com.example.torwitharti.databinding.*
+import com.example.torwitharti.ui.home.model.ConnectFragmentViewModel
+import com.example.torwitharti.ui.home.model.GuideFrameVP2ViewModel
 import com.example.torwitharti.utils.*
 import com.google.android.material.tabs.TabLayoutMediator
 
 const val argShowActionCommands = "arg_show_action_commands"
-const val argIndex = "arg_index"
+ const val argIndex = "arg_index"
 
 class ConnectFragment : Fragment() {
     private lateinit var binding: FragmentConnectBinding

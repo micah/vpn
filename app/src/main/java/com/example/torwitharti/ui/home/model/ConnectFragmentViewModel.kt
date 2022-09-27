@@ -1,4 +1,4 @@
-package com.example.torwitharti.ui.home
+package com.example.torwitharti.ui.home.model
 
 import android.app.Application
 import android.os.Bundle
@@ -8,6 +8,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.torwitharti.R
+import com.example.torwitharti.ui.home.argIndex
+import com.example.torwitharti.ui.home.argShowActionCommands
 import com.example.torwitharti.utils.DummyConnectionState
 import com.example.torwitharti.utils.PreferenceHelper
 
@@ -108,11 +110,11 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         Handler(Looper.getMainLooper()).postDelayed({
             if (connectionState == DummyConnectionState.CONNECTING) {
 
-                connectionState = DummyConnectionState.CONNECTED
+                connectionState = DummyConnectionState.CONNECTION_FAILED
                 changeActionButtonTitle()
                 _switchToConnectingScene.value = false
-                _switchToConnectedScene.value = true
-                //_switchToErrorScene.value = true
+                //_switchToConnectedScene.value = true
+                _switchToErrorScene.value = true
             }
         }, 2000)
     }
