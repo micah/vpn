@@ -63,6 +63,7 @@ before_script:
 lintDebug:
   interruptible: true
   stage: build
+  when: always
   script:
     - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
 
@@ -71,14 +72,17 @@ assembleDebug:
   interruptible: true
   stage: build
   script:
-    - ./gradlew assembleDebug
+    - ./gradlew clean assembleDebug --stacktrace >> build.log 2>&1
+  when: always
   artifacts:
     paths:
       - app/build/outputs/
+      - build.log
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)
 debugTests:
   interruptible: true
   stage: test
+  when: always
   script:
     - ./gradlew -Pci --console=plain :app:testDebug
