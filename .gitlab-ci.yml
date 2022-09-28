@@ -9,7 +9,15 @@
 
 image: openjdk:8-jdk
 
+stages:
+  - build_image
+  - build
+  - test
+
 variables:
+  # When using dind, it's wise to use the overlayfs driver for
+  # improved performance.
+  DOCKER_DRIVER: overlay
 
   # ANDROID_COMPILE_SDK is the version of Android you're compiling with.
   # It should match compileSdkVersion.
@@ -58,6 +66,22 @@ before_script:
   # Not necessary, but just for surity
   - chmod +x ./gradlew
 
+build-docker-image:
+  stage: build_image
+  image: docker
+  services:
+    - docker:dind
+  rules:
+    # only this will build periodically
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  script:
+    - echo "${CI_REGISTRY} | ${CI_REGISTRY_IMAGE} | ${IMAGE_TAG}"
+    - echo $CI_REGISTRY_PASSWORD | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+
 # Basic android and gradle stuff
 # Check linting
 lintDebug:
@@ -72,7 +96,7 @@ assembleDebug:
   interruptible: true
   stage: build
   script:
-    - ./gradlew clean assembleDebug --stacktrace >> build.log 2>&1
+    - ./gradlew clean assembleDebug --stacktrace
   when: always
   artifacts:
     paths:
