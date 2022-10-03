@@ -1,0 +1,54 @@
+stages:
+  - build_image
+  - build
+  - test
+
+variables:
+  # When using dind, it's wise to use the overlayfs driver for
+  # improved performance.
+  DOCKER_DRIVER: overlay
+
+build-docker-image:
+  image: 0xacab.org:4567/leap/docker/debian:bullseye_amd64
+  stage: build_image
+  services:
+    - docker:dind
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:main
+  script:
+    - echo $CI_BUILD_TOKEN | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+  when: manual
+
+# Basic android and gradle stuff
+# Check linting
+lintDebug:
+  image : "registry.0xacab.org/leap/tor/tor-vpn:main"
+  interruptible: true
+  stage: test
+  when: always
+  script:
+    - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
+
+# Make Project
+assembleDebug:
+  image : "registry.0xacab.org/leap/tor/tor-vpn:main"
+  interruptible: true
+  stage: build
+  script:
+    - ./gradlew clean assembleDebug --stacktrace
+  when: always
+  artifacts:
+    paths:
+      - app/build/outputs/
+      - build.log
+
+# Run all tests, if any fails, interrupt the pipeline(fail it)
+debugTests:
+  image : "registry.0xacab.org/leap/tor/tor-vpn:main"
+  interruptible: true
+  stage: test
+  when: always
+  script:
+    - ./gradlew -Pci --console=plain :app:testDebug

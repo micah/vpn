@@ -27,6 +27,8 @@
           android:maxLines="3"
           tools:text = "an app with a quite long title"
           app:layout_constraintTop_toBottomOf="@id/ivAppImage"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintWidth_max="72dp"
           />
 
