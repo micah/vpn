@@ -20,7 +20,7 @@ import com.example.torwitharti.utils.*
 import com.google.android.material.tabs.TabLayoutMediator
 
 const val argShowActionCommands = "arg_show_action_commands"
- const val argIndex = "arg_index"
+const val argIndex = "arg_index"
 
 class ConnectFragment : Fragment() {
     private lateinit var binding: FragmentConnectBinding
@@ -54,6 +54,7 @@ class ConnectFragment : Fragment() {
                 show
             )
         }
+
         connectFragmentViewModel.onAppsPressed.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_connectFragment_to_appRoutingFragment)
         }
@@ -64,6 +65,7 @@ class ConnectFragment : Fragment() {
 
         connectFragmentViewModel.switchToErrorSceneExpanded.observe(viewLifecycleOwner) { show -> showExpandedErrorInConnectScreen2(show) }
 
+        connectFragmentViewModel.switchToReportFrag.observe(viewLifecycleOwner) { findNavController().navigate(R.id.action_connectFragment_to_reportFragment) }
 
         return binding.root
     }

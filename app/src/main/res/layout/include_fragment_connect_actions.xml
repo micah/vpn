@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.torwitharti.ui.home.ConnectFragmentViewModel" />
+            type="com.example.torwitharti.ui.home.model.ConnectFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,8 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/common_round_action"
-            android:clickable="@{viewModel.switchToConnectingScene}"
-            android:focusable="@{viewModel.switchToConnectingScene}"
             android:onClick="@{()->viewModel.globPressed()}"
             android:src="@drawable/ic_globe"
             app:layout_constraintBottom_toBottomOf="parent"

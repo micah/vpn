@@ -30,6 +30,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     private val _switchToErrorScene = MutableLiveData<Boolean>()
     private val _switchToErrorSceneExpanded = MutableLiveData<Boolean>()
     private val _onAppsPressed = MutableLiveData<Unit>()
+    private val _switchToReportFrag = MutableLiveData<Unit>()
 
 
     val showGuideTour: LiveData<Boolean> = _showGuideTour
@@ -41,6 +42,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     val switchToErrorScene: LiveData<Boolean> = _switchToErrorScene
     val switchToErrorSceneExpanded: LiveData<Boolean> = _switchToErrorSceneExpanded
     val onAppsPressed: LiveData<Unit> = _onAppsPressed
+    val switchToReportFrag: LiveData<Unit> = _switchToReportFrag
 
 
     /*
@@ -69,6 +71,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     }
 
     fun globPressed() {
+        _switchToReportFrag.postValue(Unit)
     }
 
     fun appsPressed() {

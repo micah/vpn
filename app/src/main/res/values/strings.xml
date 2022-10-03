@@ -30,13 +30,17 @@
 
     <string name="frag_report_title">Connection report</string>
     <string name="frag_report_sub_title">Suspendisse lacinia commodo tellus sit amet sollicitudin.</string>
-
-    <string name="frag_report_sub_title">Suspendisse lacinia commodo tellus sit amet sollicitudin.</string>
     <string name="frag_report_success">Successfully connected</string>
     <string name="frag_report_obfs_snowflake_fail">Could not connect</string>
     <string name="frag_report_snowflake">SnowFlake</string>
     <string name="frag_report_direct_conn">Direct connection</string>
     <string name="frag_report_tor_fail">Tor Network blocked</string>
     <string name="frag_report_obfs4">obfs4</string>
+    <string name="frag_report_tab1">Report</string>
+    <string name="frag_report_tab2">Logs</string>
+    <string name="frag_report_config_button">Configure connection</string>
+    <string name="frag_report_connection_timeline">Connection timeline</string>
+    <string name="frag_report_tor_logs">Tor logs</string>
+    <string name="frag_report_copy_logs">Copy logs</string>
 
 </resources>

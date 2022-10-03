@@ -13,10 +13,19 @@
         <action
             android:id="@+id/action_connectFragment_to_appRoutingFragment"
             app:destination="@id/appRoutingFragment" />
+        <action
+            android:id="@+id/action_connectFragment_to_reportFragment"
+            app:destination="@id/reportFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/appRoutingFragment"
         android:name="com.example.torwitharti.ui.approuting.AppRoutingFragment"
         android:label="AppRoutingFragment"
         tools:layout="@layout/fragment_app_routing" />
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.example.torwitharti.ui.home.ReportFragment"
+        android:label="ReportFragment" />
 </navigation>

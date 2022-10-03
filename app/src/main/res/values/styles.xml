@@ -228,5 +228,11 @@
         <item name="android:textColor">?colorOnPrimary</item>
     </style>
 
+    <style name="report_tab_header" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+    </style>
+
 
 </resources>
