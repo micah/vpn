@@ -5,12 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 
 class ReportFragmentViewModel(application: Application) : AndroidViewModel(application) {
-    val connectedWith = MutableLiveData<ConnectedWith>()
+    val connectedWith = MutableLiveData<TransportType>()
     val connectedTimingDirect = MutableLiveData<String>()
     val connectedTimingObfs4 = MutableLiveData<String>()
     val connectedTimingSnowFlake = MutableLiveData<String>()
 
-    fun setReportParams(cw: ConnectedWith, directDuration: Long, obfs4Duration: Long, snowflakeDuration: Long){
+    fun setReportParams(cw: TransportType, directDuration: Long, obfs4Duration: Long, snowflakeDuration: Long){
         connectedWith.value = cw
         connectedTimingDirect.value = millisToHR(directDuration)
         connectedTimingObfs4.value = millisToHR(obfs4Duration)
@@ -28,6 +28,6 @@ class ReportFragmentViewModel(application: Application) : AndroidViewModel(appli
 
 }
 
-enum class ConnectedWith {
+enum class TransportType {
     DIRECT, OBFS4, SNOWFLAKE
 }
