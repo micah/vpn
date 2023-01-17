@@ -15,6 +15,7 @@ import com.example.torwitharti.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +25,12 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-       // val appBarConfiguration = AppBarConfiguration(setOf(
+        // val appBarConfiguration = AppBarConfiguration(setOf(
         //        R.id.navigation_connect, R.id.navigation_dashboard, R.id.navigation_notifications))
-       // setupActionBarWithNavController(navController, appBarConfiguration)
+        // setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         val appBarConfiguration = AppBarConfiguration(
@@ -42,5 +43,11 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { controller: NavController, destination: NavDestination, bundle: Bundle? ->
             navView.isVisible = appBarConfiguration.topLevelDestinations.contains(destination.id)
         }
+
+        //setupActionBarWithNavController(navController)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

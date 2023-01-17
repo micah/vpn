@@ -12,6 +12,9 @@ import com.example.torwitharti.ui.home.argIndex
 import com.example.torwitharti.ui.home.argShowActionCommands
 import com.example.torwitharti.utils.DummyConnectionState
 import com.example.torwitharti.utils.PreferenceHelper
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 
 
 /**
@@ -29,8 +32,14 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     private val _connectingProgress = MutableLiveData<Int>()
     private val _switchToErrorScene = MutableLiveData<Boolean>()
     private val _switchToErrorSceneExpanded = MutableLiveData<Boolean>()
-    private val _onAppsPressed = MutableLiveData<Unit>()
-    private val _switchToReportFrag = MutableLiveData<Unit>()
+//    private val _onAppsPressed = MutableLiveData<Unit>()
+//    private val _switchToReportFrag = MutableLiveData<Unit>()
+
+    private val _onAppsPressed =
+        MutableStateFlow(NavigateFromConnectUiState(isSafeToNavigate = false))
+
+    private val _switchToReportFrag =
+        MutableStateFlow(NavigateFromConnectUiState(isSafeToNavigate = false))
 
 
     val showGuideTour: LiveData<Boolean> = _showGuideTour
@@ -41,9 +50,11 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     val connectingProgress: LiveData<Int> = _connectingProgress
     val switchToErrorScene: LiveData<Boolean> = _switchToErrorScene
     val switchToErrorSceneExpanded: LiveData<Boolean> = _switchToErrorSceneExpanded
-    val onAppsPressed: LiveData<Unit> = _onAppsPressed
-    val switchToReportFrag: LiveData<Unit> = _switchToReportFrag
+//    val onAppsPressed: LiveData<Unit> = _onAppsPressed
+//    val switchToReportFrag: LiveData<Unit> = _switchToReportFrag
 
+    val onAppsPressed: StateFlow<NavigateFromConnectUiState> = _onAppsPressed
+    val switchToReportFrag: StateFlow<NavigateFromConnectUiState> = _switchToReportFrag
 
     /*
     * dummy flags
@@ -71,21 +82,22 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     }
 
     fun globPressed() {
-        _switchToReportFrag.postValue(Unit)
+        _switchToReportFrag.update { it.copy(isSafeToNavigate = true) }
     }
 
     fun appsPressed() {
-        _onAppsPressed.postValue(Unit)
+        //  some validation on when the navigation should be possible
+        _onAppsPressed.update { it.copy(isSafeToNavigate = true) }
     }
 
-    fun collapsedErrorClicked(){
+    fun collapsedErrorClicked() {
         if (connectionState == DummyConnectionState.CONNECTION_FAILED) {
             _switchToErrorScene.value = false
             _switchToErrorSceneExpanded.value = true
         }
     }
 
-    fun notNowInExpandedErrorClicked(){
+    fun notNowInExpandedErrorClicked() {
         if (connectionState == DummyConnectionState.CONNECTION_FAILED) {
             _switchToErrorSceneExpanded.value = false
             _switchToErrorScene.value = true
@@ -154,6 +166,16 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
             DummyConnectionState.DISCONNECTED -> {}
         }
     }
+
+    fun appNavigationCompleted() {
+        _onAppsPressed.update { it.copy(isSafeToNavigate = false) }
+    }
+
+    fun reportNavigationCompleted() {
+        _switchToReportFrag.update { it.copy(isSafeToNavigate = false) }
+    }
+
+    data class NavigateFromConnectUiState(val isSafeToNavigate: Boolean)
 }
 
 class GuideFrameVP2ViewModel(application: Application) : AndroidViewModel(application) {
