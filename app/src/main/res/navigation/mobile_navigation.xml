@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/connectFragment">
+    app:startDestination="@+id/navigation_connect">
 
     <!--    <include app:graph="@navigation/connect_navigation"/>-->
 
@@ -21,7 +21,7 @@
 
 
     <fragment
-        android:id="@+id/connectFragment"
+        android:id="@+id/navigation_connect"
         android:name="com.example.torwitharti.ui.home.ConnectFragment"
         android:label="@string/nav_connect"
         tools:layout="@layout/fragment_connect">

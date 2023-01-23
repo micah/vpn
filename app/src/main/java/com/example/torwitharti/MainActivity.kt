@@ -1,6 +1,9 @@
 package com.example.torwitharti
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -26,11 +29,6 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        // val appBarConfiguration = AppBarConfiguration(setOf(
-        //        R.id.navigation_connect, R.id.navigation_dashboard, R.id.navigation_notifications))
-        // setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         val appBarConfiguration = AppBarConfiguration(
@@ -41,10 +39,17 @@ class MainActivity : AppCompatActivity() {
             )
         )
         navController.addOnDestinationChangedListener { controller: NavController, destination: NavDestination, bundle: Bundle? ->
-            navView.isVisible = appBarConfiguration.topLevelDestinations.contains(destination.id)
+            if (appBarConfiguration.topLevelDestinations.contains(destination.id)) {
+                navView.isVisible = true
+                supportActionBar?.hide()
+            } else {
+                navView.isVisible = false
+                supportActionBar?.show()
+            }
         }
 
-        //setupActionBarWithNavController(navController)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
