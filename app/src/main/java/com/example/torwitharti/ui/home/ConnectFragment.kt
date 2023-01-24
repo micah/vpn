@@ -7,18 +7,23 @@ import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import androidx.transition.*
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.torwitharti.R
 import com.example.torwitharti.databinding.*
+import com.example.torwitharti.ui.home.model.ConnectFragmentViewModel
+import com.example.torwitharti.ui.home.model.GuideFrameVP2ViewModel
 import com.example.torwitharti.utils.*
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.launch
 
 const val argShowActionCommands = "arg_show_action_commands"
 const val argIndex = "arg_index"
+private const val APP_LISTING_KEY = "app_listing_key"
+
 
 class ConnectFragment : Fragment() {
     private lateinit var binding: FragmentConnectBinding
@@ -37,7 +42,11 @@ class ConnectFragment : Fragment() {
         binding = FragmentConnectBinding.inflate(inflater, container, false)
         binding.viewModel = connectFragmentViewModel
 
-        connectFragmentViewModel.switchToIdleScene.observe(viewLifecycleOwner) { show -> showIdleScene(show) }
+        connectFragmentViewModel.switchToIdleScene.observe(viewLifecycleOwner) { show ->
+            showIdleScene(
+                show
+            )
+        }
 
         connectFragmentViewModel.showGuideTour.observe(viewLifecycleOwner) { show ->
             if (show) {
@@ -52,16 +61,56 @@ class ConnectFragment : Fragment() {
                 show
             )
         }
-        connectFragmentViewModel.onAppsPressed.observe(viewLifecycleOwner) {
-            findNavController().navigate(R.id.action_connectFragment_to_appRoutingFragment)
+
+        lifecycleScope.launch {
+
+            connectFragmentViewModel.onAppsPressed
+                .flowWithLifecycle(viewLifecycleOwner.lifecycle)
+                .collect { uiState ->
+                    if (uiState.isSafeToNavigate) {
+                        findNavController().navigate(R.id.action_connectFragment_to_appRoutingFragment)
+                        connectFragmentViewModel.appNavigationCompleted()
+                    }
+                }
         }
 
-        connectFragmentViewModel.switchToConnectedScene.observe(viewLifecycleOwner) { show -> showConnectedScene(show) }
+        connectFragmentViewModel.switchToConnectedScene.observe(viewLifecycleOwner) { show ->
+            showConnectedScene(
+                show
+            )
+        }
 
-        connectFragmentViewModel.switchToErrorScene.observe(viewLifecycleOwner) { show -> showCollapsedErrorInConnectScreen(show) }
+        connectFragmentViewModel.switchToErrorScene.observe(viewLifecycleOwner) { show ->
+            showCollapsedErrorInConnectScreen(
+                show
+            )
+        }
 
-        connectFragmentViewModel.switchToErrorSceneExpanded.observe(viewLifecycleOwner) { show -> showExpandedErrorInConnectScreen2(show) }
+        connectFragmentViewModel.switchToErrorSceneExpanded.observe(viewLifecycleOwner) { show ->
+            showExpandedErrorInConnectScreen2(
+                show
+            )
+        }
 
+//        connectFragmentViewModel.switchToReportFrag.observe(viewLifecycleOwner) {
+//            findNavController().navigate(
+//                R.id.action_connectFragment_to_reportFragment
+//            )
+//        }
+
+        lifecycleScope.launch {
+
+            connectFragmentViewModel.switchToReportFrag
+                .flowWithLifecycle(viewLifecycleOwner.lifecycle)
+                .collect { uiState ->
+                    if (uiState.isSafeToNavigate) {
+                        findNavController().navigate(
+                            R.id.action_connectFragment_to_reportFragment
+                        )
+                        connectFragmentViewModel.reportNavigationCompleted()
+                    }
+                }
+        }
 
         return binding.root
     }
@@ -181,7 +230,10 @@ class ConnectFragment : Fragment() {
                 TransitionManager.go(connectedScene, this)
             }
 
-            startVectorAnimationWithEndCallback(connectedStateBinding.ivConnectStatusIcon.drawable, lifecycle) {
+            startVectorAnimationWithEndCallback(
+                connectedStateBinding.ivConnectStatusIcon.drawable,
+                lifecycle
+            ) {
                 with(connectedStateBinding.ivConnectStatusIcon) {
                     val concealCenter = center()
                     val concealAnim = ViewAnimationUtils.createCircularReveal(
@@ -227,7 +279,8 @@ class ConnectFragment : Fragment() {
                 addTarget(R.id.iv_connect_status_icon)
 
                 idleScene.setEnterAction {
-                    val medAnimationDuration = resources.getInteger(android.R.integer.config_mediumAnimTime)
+                    val medAnimationDuration =
+                        resources.getInteger(android.R.integer.config_mediumAnimTime)
                     initialStateBinding.includeActions.ivApps.alpha = 0.4f
                     initialStateBinding.includeActions.ivGlobe.alpha = 0.4f
                     initialStateBinding.includeActions.ivApps.animate().alpha(1f).duration =
@@ -391,6 +444,8 @@ class ConnectFragment : Fragment() {
             }
         }
     }
+
+
 }
 
 /**

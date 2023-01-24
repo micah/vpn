@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.torwitharti.ui.home.ConnectFragmentViewModel" />
+            type="com.example.torwitharti.ui.home.model.ConnectFragmentViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -100,7 +100,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <TextView
                 android:id="@+id/textView7"

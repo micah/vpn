@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.torwitharti.ui.home.ConnectFragmentViewModel" />
+            type="com.example.torwitharti.ui.home.model.ConnectFragmentViewModel" />
 
         <import type="android.view.View" />
     </data>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.torwitharti.ui.home.model.ReportFragmentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.ReportFragment">
+
+        <TextView
+            android:id="@+id/tv_report_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="144dp"
+            android:text="@string/frag_report_title"
+            android:textAppearance="@style/title_in_fragment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_report_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/frag_report_sub_title"
+            android:textAppearance="@style/subtitle_in_fragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_report_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_report_title" />
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_report"
+           android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabSelectedTextColor="?colorOnPrimary"
+            app:tabTextColor="?colorOnPrimary"
+            android:textSize="14sp"
+            app:tabIndicator="@null"
+            app:tabBackground="@drawable/selector_report_tab_bg"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/report_tab_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_report_subtitle" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager_report_frag"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout_report"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
