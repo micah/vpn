@@ -1,7 +1,7 @@
 package com.example.torwitharti
 
-import com.example.torwitharti.utils.DummyConnectionState2
+import com.example.torwitharti.vpn.ConnectionState
 
 interface StatusBarProgressInterface {
-    fun setStatus(vpnStatus: DummyConnectionState2)
+    fun setStatus(vpnStatus: ConnectionState)
 }
