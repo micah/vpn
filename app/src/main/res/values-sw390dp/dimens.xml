@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">24dp</dimen>
+    <dimen name="activity_vertical_margin">24dp</dimen>
+    <dimen name="indicator_size">3dp</dimen>
+    <dimen name="selected_indicator_size">4dp</dimen>
+    <dimen name="connect_error_collapsed_bf_radius">28dp</dimen>
+    <dimen name="connect_error_collapsed_title_size">14sp</dimen>
+    <dimen name="connect_error_expanded_title_size">24sp</dimen>
+    <dimen name="default_padding">16dp</dimen>
+    <dimen name="compact_padding">8dp</dimen>
+    <dimen name="switch_padding">20dp</dimen>
+
+<!--  dimens fom new design, at 320 dp horizontal space component size is reduced by 15%   -->
+
+    <dimen name="connect_state_button_height">155dp</dimen>
+    <dimen name="connect_state_button_width">105dp</dimen>
+    <dimen name="bottom_nav_height">168dp</dimen>
+
+
+</resources>

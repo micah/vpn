@@ -1,0 +1,27 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="@dimen/connect_state_button_height"
+    android:height="@dimen/connect_state_button_width"
+    android:viewportWidth="183"
+    android:viewportHeight="124">
+    <path android:pathData="M44,20L139,20A24,24 0,0 1,163 44L163,80A24,24 0,0 1,139 104L44,104A24,24 0,0 1,20 80L20,44A24,24 0,0 1,44 20z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:endX="91.5"
+                android:endY="104"
+                android:startX="91.5"
+                android:startY="20"
+                android:type="linear">
+                <item
+                    android:color="#FF7DE8C8"
+                    android:offset="0" />
+                <item
+                    android:color="#FF3CDDAC"
+                    android:offset="1" />
+                <item
+                    android:color="#FF52E0B6"
+                    android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+</vector>
