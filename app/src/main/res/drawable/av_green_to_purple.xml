@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="183dp"
+            android:height="124dp"
+            android:viewportWidth="183"
+            android:viewportHeight="124">
+
+            <path
+                android:name="shape"
+                android:fillColor="@color/gradient_green"
+                android:pathData="M44,20L139,20A24,24 0,0 1,163 44L163,80A24,24 0,0 1,139 104L44,104A24,24 0,0 1,20 80L20,44A24,24 0,0 1,44 20z" />
+        </vector>
+
+    </aapt:attr>
+    <target
+        android:name="shape"
+        android:animation="@animator/connect_green_to_purple_morph" />
+
+
+
+</animated-vector>

@@ -11,8 +11,13 @@
     <dimen name="compact_padding">8dp</dimen>
     <dimen name="switch_padding">20dp</dimen>
 
-    <!-- TODO
-    This will change the height but the UI needs to be customized.-->
-<!--    <dimen name="design_bottom_navigation_height" tools:override="true">80dp</dimen>-->
+    <!--  dimens fom new design  -->
+
+    <!--  dimens fom new design, at 320 dp horizontal space component size is reduced by 15%   -->
+
+    <dimen name="connect_state_button_height">155dp</dimen>
+    <dimen name="connect_state_button_width">105dp</dimen>
+    <dimen name="bottom_nav_height">68dp</dimen>
+
 
 </resources>

@@ -5,20 +5,11 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_connect">
 
-    <!--    <include app:graph="@navigation/connect_navigation"/>-->
-
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.torwitharti.ui.dashboard.DashboardFragment"
-        android:label="@string/nav_support"
+        android:name="com.example.torwitharti.ui.configure.ConfigureFragment"
+        android:label="@string/nav_configure"
         tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.torwitharti.ui.notifications.NotificationsFragment"
-        android:label="@string/nav_settings"
-        tools:layout="@layout/fragment_notifications" />
-
 
     <fragment
         android:id="@+id/navigation_connect"

@@ -26,4 +26,10 @@
     <target
         android:name="rotation"
         android:animation="@animator/success_rotate" />
+
+    <target
+        android:name="path"
+        android:animation="@animator/connect_state_green_to_purple"
+        />
+
 </animated-vector>

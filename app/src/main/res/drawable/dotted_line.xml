@@ -3,7 +3,7 @@
     android:shape="line">
 
     <stroke
-        android:color="@color/figma_text"
+        android:color="@android:color/black"
         android:dashWidth="2dp"
         android:dashGap="4dp"
         android:width="2dp"/>

@@ -1,56 +1,13 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
-    android:width="120dp"
-    android:height="116dp"
-    android:viewportWidth="120"
-    android:viewportHeight="116">
+    android:width="128dp"
+    android:height="124dp"
+    android:viewportWidth="128"
+    android:viewportHeight="124">
+        <path
+            android:fillColor="#B371F4"
+            android:pathData="M62,20L66,20A42,42 0,0 1,108 62L108,62A42,42 0,0 1,66 104L62,104A42,42 0,0 1,20 62L20,62A42,42 0,0 1,62 20z" />
 
-    <group>
-
-        <clip-path android:pathData="M58 16H62C85.196 16 104 34.804 104 58C104 81.196 85.196 100 62 100H58C34.804 100 16 81.196 16 58C16 34.804 34.804 16 58 16Z" />
-
-        <group
-            android:pivotX="60"
-            android:pivotY="58"
-            android:rotation="90"
-            android:scaleX="2"
-            android:scaleY="2"
-            android:translateX="1"
-            android:translateY="0">
-
-            <path android:pathData="M16 16V100H104V16">
-
-                <aapt:attr name="android:fillColor">
-
-                    <gradient
-                        android:endX="82"
-                        android:endY="58"
-                        android:startX="38"
-                        android:startY="58"
-                        android:type="linear">
-
-                        <item
-                            android:color="#BF89F5"
-                            android:offset="0" />
-
-                        <item
-                            android:color="#A65AF2"
-                            android:offset="1" />
-
-                    </gradient>
-
-                </aapt:attr>
-
-            </path>
-
-        </group>
-
-    </group>
-
-    <group>
-
-        <clip-path android:pathData="M0 0V116H120V0M58 16H62C85.196 16 104 34.804 104 58C104 81.196 85.196 100 62 100H58C34.804 100 16 81.196 16 58C16 34.804 34.804 16 58 16Z" />
-
-    </group>
-
+<!--    <path-->
+<!--        android:fillColor="#B371F4"-->
+<!--        android:pathData="M 62 20 L 93.5 20 A 42 42 0 0 1 135 62 L 135 62 A 42 42 0 0 1 93.5 104 L 89.5 104 A 42 42 0 0 1 48 62 L 48 62 A 42 42 0 0 1 89.5 20 z" />-->
 </vector>

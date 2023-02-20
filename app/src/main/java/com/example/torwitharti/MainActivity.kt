@@ -1,21 +1,26 @@
 package com.example.torwitharti
 
+import android.animation.Animator
+import android.animation.Animator.AnimatorListener
+import android.animation.AnimatorSet
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.ViewAnimationUtils
+import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.torwitharti.databinding.ActivityMainBinding
+import com.example.torwitharti.utils.DummyConnectionState2
+import com.example.torwitharti.utils.DummyConnectionState2.*
+import com.example.torwitharti.utils.center
+import com.example.torwitharti.utils.createStatusBarAnimation
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), StatusBarProgressInterface {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
@@ -34,11 +39,10 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_connect,
-                R.id.navigation_dashboard,
-                R.id.navigation_notifications
+                R.id.navigation_dashboard
             )
         )
-        navController.addOnDestinationChangedListener { controller: NavController, destination: NavDestination, bundle: Bundle? ->
+        navController.addOnDestinationChangedListener { _: NavController, destination: NavDestination, bundle: Bundle? ->
             if (appBarConfiguration.topLevelDestinations.contains(destination.id)) {
                 navView.isVisible = true
                 supportActionBar?.hide()
@@ -55,4 +59,66 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+    override fun setStatus(vpnStatus: DummyConnectionState2) {
+
+        when (vpnStatus) {
+            INIT -> {
+                binding.progressSlider.setBackgroundResource(android.R.color.transparent)
+                binding.toolbar.setBackgroundResource(R.color.purpleDark)
+                binding.toolbar.title = ""
+            }
+            CONNECTING -> {
+                binding.progressSlider.setBackgroundResource(R.drawable.gradient_progress)
+                val gradientAnim = createStatusBarAnimation(
+                    binding.progressSlider.background,
+                    MainActivity@ this,
+                    intArrayOf(R.color.connectingRainbowStart, R.color.connectingRainbowEnd)
+                )
+
+                val center = binding.progressSlider.center()
+                val revealAnim = ViewAnimationUtils.createCircularReveal(
+                    binding.progressSlider,
+                    center.x,
+                    center.y,
+                    0f,
+                    binding.progressSlider.width.toFloat()
+                )
+
+                AnimatorSet().apply {
+                    play(revealAnim).before(gradientAnim)
+                    start()
+                }
+            }
+            PAUSED -> {
+                binding.progressSlider.setBackgroundResource(R.color.yellowNormal)
+
+                val center = binding.progressSlider.center()
+                val revealAnim = ViewAnimationUtils.createCircularReveal(
+                    binding.progressSlider,
+                    center.x,
+                    center.y,
+                    0f,
+                    binding.progressSlider.width.toFloat()
+                )
+                revealAnim.interpolator = DecelerateInterpolator()
+                revealAnim.duration = 1000
+                revealAnim.start()
+            }
+            CONNECTED -> {
+
+            }
+            DISCONNECTED -> {}
+            CONNECTION_ERROR -> {}
+        }
+        if (vpnStatus == INIT) {
+            binding.progressSlider.setBackgroundResource(android.R.color.transparent)
+            binding.toolbar.setBackgroundResource(R.color.purpleDark)
+            binding.toolbar.title = ""
+
+        } else {
+
+        }
+    }
 }
+

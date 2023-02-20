@@ -7,10 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="?attr/actionBarSize"
-    tools:context=".ui.dashboard.DashboardFragment">
+    tools:context=".ui.configure.ConfigureFragment">
 
     <TextView
-        android:id="@+id/text_dashboard"
+        android:id="@+id/text_configure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

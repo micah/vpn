@@ -1,10 +1,10 @@
-package com.example.torwitharti.ui.dashboard
+package com.example.torwitharti.ui.configure
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class ConfigureViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
