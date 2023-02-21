@@ -40,7 +40,7 @@
             app:layout_constraintHeight_percent="0.8"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/figma_gray"
+            android:background="@android:color/darker_gray"
             android:layout_marginHorizontal="@dimen/compact_padding"
             android:paddingHorizontal="@dimen/compact_padding"
             />

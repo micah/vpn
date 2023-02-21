@@ -17,19 +17,62 @@
         android:layout_height="match_parent"
         tools:context=".ui.home.ConnectFragment">
 
-        <FrameLayout
-            android:id="@+id/fl_scene_container"
+
+        <ImageView
+            android:id="@+id/imageView4"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bg_stars"
+            tools:visibility="visible" />
 
-            <include
-                layout="@layout/fragment_connect_scene_initial_state"
-                app:viewModel="@{viewModel}" />
-        </FrameLayout>
+        <include
+            android:id="@+id/include_help"
+            layout="@layout/fragment_guide_frame"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="@{viewModel.showGuideSlide? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_connect_action_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+
+        <TextView
+            android:id="@+id/tv_connect_action_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/av_green_to_purple"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.connectStateButtonClicked()}"
+            android:textAppearance="@style/button_text_connect"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/frag_connect_connect" />
+
+
+        <ImageView
+            android:id="@+id/iv_connect_btn_overlay"
+            tools:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_connect_action_btn"
+            app:layout_constraintEnd_toEndOf="@+id/tv_connect_action_btn"
+            app:layout_constraintStart_toStartOf="@+id/tv_connect_action_btn"
+            app:layout_constraintTop_toTopOf="@+id/tv_connect_action_btn"
+            app:srcCompat="@drawable/av_connect_to_pause" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
