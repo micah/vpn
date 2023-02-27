@@ -41,5 +41,9 @@
     <string name="frag_report_connection_timeline">Connection timeline</string>
     <string name="frag_report_tor_logs">Tor logs</string>
     <string name="frag_report_copy_logs">Copy logs</string>
+    <string name="start">Start VPN</string>
+    <string name="stop">Stop VPN</string>
+    <string name="notification_channel_description">Shows updates about TorVPN.</string>
+    <string name="notification_channel_name">TorVPN notifications</string>
 
 </resources>

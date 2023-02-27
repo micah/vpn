@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.os.Looper
 import android.view.animation.AccelerateInterpolator
 import android.widget.TextView
 import androidx.annotation.ColorRes
@@ -146,4 +147,8 @@ fun createStatusBarAnimation(
 
     return animator
 
+}
+
+fun isRunningOnMainThread(): Boolean {
+    return Looper.getMainLooper().thread === Thread.currentThread()
 }

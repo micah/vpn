@@ -19,7 +19,6 @@ class PreferenceHelper(context: Context) {
     /**
      * Whether guide in the connect screen need to be shown.
      *
-     * TODO currently passing true as default to make the guide visible every time.
      * */
     var shouldShowGuide
         get() = sharedPreference.getBoolean(SHOULD_SHOW_GUIDE, true)

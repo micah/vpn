@@ -1,7 +1,5 @@
 package com.example.torwitharti
 
-import android.animation.Animator
-import android.animation.Animator.AnimatorListener
 import android.animation.AnimatorSet
 import android.os.Bundle
 import android.view.ViewAnimationUtils
@@ -14,10 +12,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.torwitharti.databinding.ActivityMainBinding
-import com.example.torwitharti.utils.DummyConnectionState2
-import com.example.torwitharti.utils.DummyConnectionState2.*
 import com.example.torwitharti.utils.center
 import com.example.torwitharti.utils.createStatusBarAnimation
+import com.example.torwitharti.vpn.ConnectionState
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), StatusBarProgressInterface {
@@ -60,15 +57,15 @@ class MainActivity : AppCompatActivity(), StatusBarProgressInterface {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    override fun setStatus(vpnStatus: DummyConnectionState2) {
+    override fun setStatus(vpnStatus: ConnectionState) {
 
         when (vpnStatus) {
-            INIT -> {
+            ConnectionState.INIT -> {
                 binding.progressSlider.setBackgroundResource(android.R.color.transparent)
                 binding.toolbar.setBackgroundResource(R.color.purpleDark)
                 binding.toolbar.title = ""
             }
-            CONNECTING -> {
+            ConnectionState.CONNECTING -> {
                 binding.progressSlider.setBackgroundResource(R.drawable.gradient_progress)
                 val gradientAnim = createStatusBarAnimation(
                     binding.progressSlider.background,
@@ -90,7 +87,7 @@ class MainActivity : AppCompatActivity(), StatusBarProgressInterface {
                     start()
                 }
             }
-            PAUSED -> {
+            ConnectionState.PAUSED -> {
                 binding.progressSlider.setBackgroundResource(R.color.yellowNormal)
 
                 val center = binding.progressSlider.center()
@@ -105,19 +102,12 @@ class MainActivity : AppCompatActivity(), StatusBarProgressInterface {
                 revealAnim.duration = 1000
                 revealAnim.start()
             }
-            CONNECTED -> {
+            ConnectionState.CONNECTED -> {
 
             }
-            DISCONNECTED -> {}
-            CONNECTION_ERROR -> {}
-        }
-        if (vpnStatus == INIT) {
-            binding.progressSlider.setBackgroundResource(android.R.color.transparent)
-            binding.toolbar.setBackgroundResource(R.color.purpleDark)
-            binding.toolbar.title = ""
-
-        } else {
-
+            ConnectionState.DISCONNECTED -> {}
+            ConnectionState.CONNECTION_ERROR -> {}
+            ConnectionState.DISCONNECTING -> {}
         }
     }
 }
