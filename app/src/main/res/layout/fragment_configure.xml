@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.torwitharti.ui.configure.model.ConfigureFragmentViewModel" />
+        <import type="android.view.View" />
+    </data>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+    android:layout_marginVertical="@dimen/activity_vertical_margin"
+    tools:context=".ui.configure.ConfigureFragment">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/title"
+            style="@style/title_in_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAlignment="viewStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/nav_configure"
+            tools:textColor="#000000"
+            tools:text="Configure"
+            />
+
+        <com.example.torwitharti.ui.configure.view.ConfigItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:drawable="@drawable/ic_apps"
+            app:text="@string/apps"
+            app:secondaryText="@string/apps_description_all_protected"
+            android:onClick="@{()->viewModel.appsEntryClicked()}"
+            />
+
+        <com.example.torwitharti.ui.configure.view.ConfigItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:drawable="@drawable/ic_code"
+            app:text="@string/tor_logs"
+            app:secondaryText="@string/tor_logs_description"
+            android:onClick="@{()->viewModel.torLogsClicked()}"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>
+</layout>

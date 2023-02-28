@@ -12,7 +12,7 @@
 
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/purpleDark</item>
+        <item name="android:statusBarColor" >@color/purpleDark</item>
 
         <!-- Customize your theme here. -->
     </style>

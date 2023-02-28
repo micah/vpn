@@ -9,7 +9,7 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.torwitharti.ui.configure.ConfigureFragment"
         android:label="@string/nav_configure"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_configure" />
 
     <fragment
         android:id="@+id/navigation_connect"

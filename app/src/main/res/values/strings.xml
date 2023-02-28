@@ -51,6 +51,10 @@
     <string name="stop">Stop VPN</string>
     <string name="notification_channel_description">Shows updates about TorVPN.</string>
     <string name="notification_channel_name">TorVPN notifications</string>
+    <string name="apps">Apps</string>
+    <string name="apps_description_all_protected">All apps protected</string>
+    <string name="tor_logs">Tor Logs</string>
+    <string name="tor_logs_description">View and copy tor logs</string>
     <string name="title_guide_welcome_to">Welcome to the\nOnionverse</string>
     <string name="guide_pre_alpha">Pre-alpha</string>
     <string name="guide_version_number">%1$s</string>

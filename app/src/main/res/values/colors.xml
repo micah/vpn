@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--        <color name="figma_gray">#14000000</color>-->
-<!--        <color name="figma_bg">#FFE5E5E5</color>-->
-<!--        <color name="figma_text">#FF000000</color>-->
+    <!--        <color name="figma_gray">#14000000</color>-->
+    <!--        <color name="figma_bg">#FFE5E5E5</color>-->
+    <!--        <color name="figma_text">#FF000000</color>-->
 
-<!--        <color name="figma_gray_inverted">#EB000000</color>-->
-<!--        <color name="figma_bg_inverted">#FF1a1a1a</color>-->
-<!--        <color name="figma_text_inverted">#FFFFFFFF</color>-->
+    <!--        <color name="figma_gray_inverted">#EB000000</color>-->
+    <!--        <color name="figma_bg_inverted">#FF1a1a1a</color>-->
+    <!--        <color name="figma_text_inverted">#FFFFFFFF</color>-->
 
-<!--        <color name="colorIconPrimary">#FFFFFF</color>-->
-<!--        <color name="colorIconSecondary">#000000</color>-->
-<!--        <color name="colorSubtitle">#0C0C0D</color>-->
+    <!--        <color name="colorIconPrimary">#FFFFFF</color>-->
+    <!--        <color name="colorIconSecondary">#000000</color>-->
+    <!--        <color name="colorSubtitle">#0C0C0D</color>-->
 
-<!--        <color name="colorProgress1">#14000000</color>-->
-<!--        <color name="colorProgress2">#0A000000</color>-->
+    <!--        <color name="colorProgress1">#14000000</color>-->
+    <!--        <color name="colorProgress2">#0A000000</color>-->
 
-<!--        <color name="colorInfoErrorCollapsedSubtitle">#66000000</color>-->
+    <!--        <color name="colorInfoErrorCollapsedSubtitle">#66000000</color>-->
 
 
     <!--New colors starts from here-->
@@ -55,6 +55,10 @@
     <color name="shadowColor">#33FFFFFF</color>
 
     <color name="textOnPrimary">#FFFFFF</color>
+    <color name="light_blue_400">#FF29B6F6</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_600">#FF757575</color>
 
 
 
