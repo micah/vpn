@@ -4,6 +4,9 @@
         <variable
             name="viewModel"
             type="com.example.torwitharti.ui.configure.model.ConfigureFragmentViewModel" />
+        <variable
+            name="handler"
+            type="com.example.torwitharti.ui.configure.ClickHandler" />
         <import type="android.view.View" />
     </data>
 
@@ -41,7 +44,7 @@
             app:drawable="@drawable/ic_apps"
             app:text="@string/apps"
             app:secondaryText="@string/apps_description_all_protected"
-            android:onClick="@{()->viewModel.appsEntryClicked()}"
+            android:onClick="@{handler.onAppsClicked}"
             />
 
         <com.example.torwitharti.ui.configure.view.ConfigItemView
@@ -50,7 +53,7 @@
             app:drawable="@drawable/ic_code"
             app:text="@string/tor_logs"
             app:secondaryText="@string/tor_logs_description"
-            android:onClick="@{()->viewModel.torLogsClicked()}"
+            android:onClick="@{handler.onTorLogsClicked}"
             />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>
