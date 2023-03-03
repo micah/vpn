@@ -18,8 +18,7 @@
             />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTitle"
-            style="@style/list_item_style"
-            android:textAppearance="@style/list_item_style"
+            style="@style/list_item_style_medium"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="start"

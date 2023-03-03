@@ -20,9 +20,12 @@
 
     <!--New colors starts from here-->
     <color name="purpleDark">#1D0B41</color>
-    <color name="purpleNormal">#B371F4</color>
+    <color name="purpleDarkBackground">#31136C</color>
     <color name="purpleDarkText">#400A76</color>
+    <color name="purpleDarkTextSubdued">#BEA1F7</color>
+    <color name="purpleNormal">#B371F4</color>
     <color name="purpleDarkBottomNav">#3B1782</color>
+    <color name="purpleDarkBorder">#3F188B</color>
     <color name="purpleDarkDialog">#31136C</color>
     <color name="purpleStatsBg">#441B98</color>
     <color name="purpleStatsDivider">#3F188B</color>
@@ -55,11 +58,6 @@
     <color name="shadowColor">#33FFFFFF</color>
 
     <color name="textOnPrimary">#FFFFFF</color>
-    <color name="light_blue_400">#FF29B6F6</color>
-    <color name="light_blue_600">#FF039BE5</color>
-    <color name="gray_400">#FFBDBDBD</color>
-    <color name="gray_600">#FF757575</color>
-
 
 
 </resources>

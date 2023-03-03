@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="?attr/actionBarSize"
+        android:paddingTop="@dimen/activity_vertical_margin"
         >
         <TextView
             android:id="@+id/tvTitle"
+            android:paddingHorizontal="@dimen/compact_padding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/title_in_fragment"
-            android:text="@string/app_routing" />
+            android:text="@string/apps" />
 
-        <TextView
-            android:id="@+id/tvSubtitle"
-            android:paddingTop="@dimen/default_padding"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/subtitle_in_fragment"
-            android:text="@string/lorem_ipsum_medium" />
-
-        <com.google.android.material.switchmaterial.SwitchMaterial
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/smProtectAllApps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +24,9 @@
             android:layout_marginBottom="15dp"
             android:padding="@dimen/switch_padding"
             android:text="@string/app_routing_protect_all"
-            android:textAppearance="@style/button_text_in_fragment"
+            style="@style/button_text_in_fragment"
+            app:track="@drawable/toggle_track"
+            android:thumb="@drawable/toggle_thumb"
             />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

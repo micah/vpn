@@ -4,7 +4,7 @@
         <shape android:shape="rectangle">
             <corners android:radius="360dp" />
             <!-- TODO: figure out why referencing colorPrimary doesn't work here -->
-            <solid android:color="#14000000">
+            <solid android:color="#99FFFFFF">
 
             </solid>
             <padding

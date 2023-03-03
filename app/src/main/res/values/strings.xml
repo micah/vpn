@@ -27,7 +27,7 @@
     <string name="frag_connect_error_try_a_bridge">Try a bridge</string>
 
     <string name="app_routing">App Routing</string>
-    <string name="app_routing_protect_all">Protect all my apps</string>
+    <string name="app_routing_protect_all">Protect all apps</string>
     <string name="app_routing_tor_apps">Tor powered apps</string>
     <string name="app_routing_browsers">Browsers</string>
     <string name="app_routing_other_apps">Other apps</string>
