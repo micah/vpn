@@ -10,7 +10,13 @@
     <string name="frag_connect_guide_slide_index">Guide Slide # %1$d</string>
     <string name="frag_connect_connecting_to_network">Connecting to the\nTor Network…</string>
     <string name="frag_connect_connected">Connected\n</string>
+    <string name="frag_connect_connecting">Connecting</string>
+    <string name="frag_connect_paused">Paused</string>
+    <string name="frag_connect_disconnecting">Disconnecting</string>
+    <string name="frag_connect_try_again">Trying again…</string>
     <string name="frag_connect_not_connected">Not connected</string>
+    <string name="frag_connect_disconnected">Disconnected</string>
+    <string name="frag_connect_reconnect">Reconnect</string>
     <string name="frag_connect_cannot_connected">Can\'t connect to Tor</string>
     <string name="frag_connect_try_bridge">Try a bridge instead</string>
     <string name="frag_connect_error_content">Trying a bridge could help unblock the Internet in places experiencing censorship.</string>

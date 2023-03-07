@@ -1,24 +1,24 @@
 package com.example.torwitharti.ui.home
 
+import android.animation.AnimatorSet
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.*
 import com.example.torwitharti.R
-import com.example.torwitharti.StatusBarProgressInterface
 import com.example.torwitharti.databinding.*
 import com.example.torwitharti.ui.home.model.ConnectFragmentViewModel
-import com.example.torwitharti.utils.connectionStateGradientAnimation
+import com.example.torwitharti.utils.center
+import com.example.torwitharti.utils.createStatusBarAnimation
+import com.example.torwitharti.utils.createStatusBarConnectedGradientAnimation
 import com.example.torwitharti.utils.startVectorAnimationWithEndCallback
 import com.example.torwitharti.vpn.ConnectionState
 import com.example.torwitharti.vpn.VpnServiceCommand
@@ -29,11 +29,15 @@ class ConnectFragment : Fragment() {
     companion object {
         val TAG: String = ConnectFragment::class.java.simpleName
     }
+
     private lateinit var binding: FragmentConnectBinding
     private lateinit var connectFragmentViewModel: ConnectFragmentViewModel
 
-    //this is required for transitions
-    private lateinit var currentVpnState: ConnectFragmentViewModel.VpnConnectionUIState
+    //this is required to store current state that UI is in so we can decide whether to animate to next state
+    private lateinit var currentVpnState: ConnectionState
+
+    //connecting progress animation is stopped when state goes from connecting to connected.
+    private var progressGradientAnimatorSet: AnimatorSet? = null
 
     private var startForResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -47,13 +51,12 @@ class ConnectFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         connectFragmentViewModel = ViewModelProvider(this)[ConnectFragmentViewModel::class.java]
 
         binding = FragmentConnectBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
         binding.viewModel = connectFragmentViewModel
 
         connectFragmentViewModel.prepareVpn.observe(viewLifecycleOwner) { intent ->
@@ -62,66 +65,41 @@ class ConnectFragment : Fragment() {
             }
         }
 
-        connectFragmentViewModel.connectionState.observe(viewLifecycleOwner) { state ->
-            // nothing to see here.
-            Log.d(TAG, "connection state observer: $state")
-        }
-
         lifecycleScope.launch {
-            connectFragmentViewModel.vpnStatusFlow
-                .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
-                .collect { vpnState ->
-                    Log.d(TAG, "flow connectionState $vpnState")
-                    if (vpnState.isNavigationPending) {
-                        Log.d(
-                            TAG,
-                            "setUIState: ${vpnState.connectionState.name} ${vpnState.isNavigationPending}"
-                        )
-                        currentVpnState = vpnState
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    connectFragmentViewModel.connectionState.collect { vpnState ->
+                        Log.d(TAG, "onCreateView: vpn state ${vpnState}")
                         setUIState(vpnState)
-                        connectFragmentViewModel.appNavigationCompleted()
                     }
                 }
+            }
         }
+
         return binding.root
     }
 
-    private fun setUIState(vpnState: ConnectFragmentViewModel.VpnConnectionUIState) {
-        when (vpnState.connectionState) {
-            ConnectionState.INIT -> {
-                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_green_to_purple)
-                binding.tvConnectActionBtn.setText(R.string.frag_connect_connect)
-                binding.ivConnectBtnOverlay.visibility = View.GONE
-            }
-            ConnectionState.CONNECTING -> {
-                if (vpnState.animate) {
-                    idleToConnectingTransition()
+    private fun setUIState(vpnState: ConnectionState) {
+        if (::currentVpnState.isInitialized && currentVpnState == vpnState) {
+            return
+        }
 
-                } else {
-                    binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_connect_purple)
-                }
-            }
+        when (vpnState) {
+            ConnectionState.INIT -> {}
+            ConnectionState.CONNECTING -> idleToConnectingTransition()
+
             ConnectionState.PAUSED -> {}
-            ConnectionState.CONNECTED -> if (vpnState.animate) {
+            ConnectionState.CONNECTED -> connectingToConnectedTransition()
 
-            } else {
-                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_connect_red)
-            }
-            ConnectionState.DISCONNECTED -> {
-                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_connect_green)
-                binding.tvConnectActionBtn.setText(R.string.frag_connect_connect)
-                binding.ivConnectBtnOverlay.visibility = View.GONE
-            }
-            ConnectionState.CONNECTION_ERROR -> binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_connect_green)
+            ConnectionState.DISCONNECTED -> connectedToDisconnectedTransition()
+
+            ConnectionState.CONNECTION_ERROR -> {}
             ConnectionState.DISCONNECTING -> {
                 // disable btn?
             }
         }
-        //This is responsible for status bar progress changes
-        (requireActivity() as StatusBarProgressInterface).setStatus(vpnState.connectionState)
         currentVpnState = vpnState
     }
-
 
     /*
     * Scene transitions
@@ -130,21 +108,50 @@ class ConnectFragment : Fragment() {
      */
 
     private fun idleToConnectingTransition() {
-        binding.ivConnectBtnOverlay.visibility = View.VISIBLE
-        binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_green_to_purple)
-        binding.ivConnectBtnOverlay.setImageResource(R.drawable.av_connect_to_pause)
-        binding.tvConnectActionBtn.text = ""
+        if (currentVpnState == ConnectionState.INIT || currentVpnState == ConnectionState.DISCONNECTED) {
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
 
-        startVectorAnimationWithEndCallback(
-            binding.tvConnectActionBtn.background,
-            viewLifecycleOwner.lifecycle
-        ) {}
-        startVectorAnimationWithEndCallback(
-            binding.ivConnectBtnOverlay.drawable,
-            viewLifecycleOwner.lifecycle
-        ) {}
+            //connect button vector anim
+            startVectorAnimationWithEndCallback(
+                binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
+            ) {
+                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
+            }
 
-        connectionStateGradientAnimation(
+            //progressbar anim (reveal + infinite gradient shift)
+
+            //infinite gradient
+            val gradientAnim = createStatusBarAnimation(
+                binding.progressSlider.background,
+                requireContext(),
+                intArrayOf(R.color.connectingRainbowStart, R.color.connectingRainbowEnd)
+            )
+            // reveal
+            val center = binding.progressSlider.center()
+            val revealAnim = ViewAnimationUtils.createCircularReveal(
+                binding.progressSlider,
+                center.x,
+                center.y,
+                0f,
+                binding.progressSlider.width.toFloat()
+            )
+
+
+            progressGradientAnimatorSet = AnimatorSet().apply {
+                if (currentVpnState == ConnectionState.INIT) {
+                    play(revealAnim).before(gradientAnim)
+                } else {
+                    play(gradientAnim)
+                }
+                start()
+            }
+
+        } else {
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
+        }
+
+        //TODO Animating gradient is possible but removing gradient transition for time being(as the vector buttons in designs are not totally compatible with Android.)
+        /*connectionStateGradientAnimation(
             binding.tvConnectActionBtn.background,
             requireContext(),
             intArrayOf(
@@ -155,7 +162,9 @@ class ConnectFragment : Fragment() {
                 R.color.purpleGradientLight,
                 R.color.purpleGradientDark
             )
-        )
+        )*/
+
+
     }
 
     private fun connectingToIdleTransition() {
@@ -163,6 +172,32 @@ class ConnectFragment : Fragment() {
     }
 
     private fun connectingToConnectedTransition() {
+        //end infinite gradient animation
+        progressGradientAnimatorSet?.end()
+        progressGradientAnimatorSet = null
+
+        if (currentVpnState == ConnectionState.CONNECTING) {
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_stop)
+
+            // transition from gradient to red(connected color)
+            createStatusBarConnectedGradientAnimation(
+                binding.progressSlider.background, requireContext(), intArrayOf(
+                    R.color.connectingRainbowEnd,
+                    R.color.connectingRainbowStart,
+                    R.color.greenNormal
+                ), lifecycle
+            ) {}
+
+            //pause to stop transition
+            startVectorAnimationWithEndCallback(
+                binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
+            ) {
+                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_stop_connect)
+            }
+
+        } else {
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_stop_connect)
+        }
 
     }
 
@@ -171,28 +206,25 @@ class ConnectFragment : Fragment() {
     }
 
     private fun connectedToDisconnectedTransition() {
+        if (currentVpnState == ConnectionState.DISCONNECTING) {
+            startVectorAnimationWithEndCallback(
+                binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
+            ) {
+                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
+            }
 
-    }
+            // transition from gradient to red(connected color)
+            createStatusBarConnectedGradientAnimation(
+                binding.progressSlider.background, requireContext(), intArrayOf(
+                    R.color.greenNormal,
+                    R.color.greenNormal,
+                    R.color.redNormal
+                ), lifecycle
+            ) {}
 
-    private fun showConnectedScene(show: Boolean) {
-        if (show) {
 
-        }
-    }
-
-    private fun showIdleScene(show: Boolean) {
-        if (show) {
-        }
-    }
-
-    private fun showCollapsedErrorInConnectScreen(show: Boolean) {
-        if (show) {
-        }
-    }
-
-    private fun showExpandedErrorInConnectScreen(show: Boolean) {
-        if (show) {
-
+        } else {
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
         }
     }
 

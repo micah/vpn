@@ -35,6 +35,7 @@
     <color name="yellowNormal">#FAC938</color>
 
     <color name="redNormal">#F07594</color>
+    <color name="redDark">#5C0A1F</color>
     <color name="redGradientLight">#F28CA6</color>
     <color name="redGradientDark">#ED5E82</color>
 

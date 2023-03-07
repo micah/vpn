@@ -3,14 +3,16 @@ package com.example.torwitharti.ui.home.model
 import android.app.Application
 import android.content.Intent
 import android.net.VpnService
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
+import com.example.torwitharti.R
 import com.example.torwitharti.vpn.ConnectionState
+import com.example.torwitharti.vpn.ConnectionState.*
 import com.example.torwitharti.vpn.VpnServiceCommand
 import com.example.torwitharti.vpn.VpnStatusObservable
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 
 /**
  * ViewModel for slider fragment, mostly place holder at this point
@@ -21,44 +23,70 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         val TAG: String = ConnectFragmentViewModel.javaClass.simpleName
     }
 
-    private val _vpnStatusFlow =
-        MutableStateFlow(VpnConnectionUIState(
-            isNavigationPending = true,
-            connectionState = ConnectionState.INIT,
-            animate = false
-        ))
-    private val _showGuideSlide = MutableLiveData<Boolean>(true)
     private val _prepareVpn = MutableLiveData<Intent?>()
-
-
-    val vpnStatusFlow: StateFlow<VpnConnectionUIState> = _vpnStatusFlow
-    val showGuideSlide: LiveData<Boolean> = _showGuideSlide
     val prepareVpn: LiveData<Intent?> = _prepareVpn
 
-    val connectionState: LiveData<ConnectionState> = Transformations.map(
-        VpnStatusObservable.statusLiveData) { connection ->
-        Log.d(TAG, "connectionState from ConnectFragmentViewModel: $connection")
+    val connectionState = VpnStatusObservable.statusLiveData.asFlow()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Lazily,
+            initialValue = INIT
+        )
 
-        _vpnStatusFlow.update {
-            it.copy(
-                connectionState = connection,
-                animate = true,
-                isNavigationPending = true
+    val toolBarTitleAndColor: StateFlow<Pair<String, Int>> = connectionState.map { connectionState ->
+
+        when (connectionState) {
+            CONNECTING -> Pair(
+                application.getString(R.string.frag_connect_connecting),
+                ContextCompat.getColor(application, R.color.purpleNormal)
             )
+            PAUSED -> Pair(
+                application.getString(R.string.frag_connect_paused),
+                ContextCompat.getColor(application, R.color.yellowNormal)
+            )
+            CONNECTED -> Pair(
+                application.getString(R.string.frag_connect_connected),
+                ContextCompat.getColor(application, R.color.greenNormal)
+            )
+            DISCONNECTING -> Pair(
+                application.getString(R.string.frag_connect_disconnecting),
+                ContextCompat.getColor(application, R.color.purpleNormal)
+            )
+            DISCONNECTED -> Pair(
+                application.getString(R.string.frag_connect_disconnected),
+                ContextCompat.getColor(application, R.color.redNormal)
+            )
+            else -> {
+                return@map Pair("", R.color.purpleDark)
+            }
         }
-        connection
-    }
+    }.stateIn(
+        scope = viewModelScope,
+        SharingStarted.Lazily,
+        initialValue = Pair("", R.color.purpleDark)
+    )
+
+    val connectButtonText: StateFlow<String> = connectionState.map { connectionState ->
+        when (connectionState) {
+            INIT, PAUSED -> application.getString(R.string.frag_connect_connect)
+            DISCONNECTED -> application.getString(R.string.frag_connect_reconnect)
+            CONNECTION_ERROR -> application.getString(R.string.frag_connect_try_again)
+            else -> {
+                return@map ""
+            }
+        }
+    }.stateIn(scope = viewModelScope, SharingStarted.WhileSubscribed(), initialValue = "")
 
 
     fun connectStateButtonClicked() {
         when (VpnStatusObservable.statusLiveData.value as ConnectionState) {
-            ConnectionState.INIT -> attemptConnect()
-            ConnectionState.CONNECTING -> attemptPause()
-            ConnectionState.CONNECTED -> attemptDisconnect()
-            ConnectionState.CONNECTION_ERROR -> attemptDisconnect()
-            ConnectionState.DISCONNECTING -> attemptConnect()
-            ConnectionState.DISCONNECTED -> attemptConnect()
-            ConnectionState.PAUSED -> {}
+            INIT -> attemptConnect()
+            CONNECTING -> attemptPause()
+            CONNECTED -> attemptDisconnect()
+            CONNECTION_ERROR -> attemptDisconnect()
+            DISCONNECTING -> attemptConnect()
+            DISCONNECTED -> attemptConnect()
+            PAUSED -> {}
         }
     }
 
@@ -68,23 +96,22 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     }
 
     private fun attemptConnect() {
-        VpnStatusObservable.update(ConnectionState.CONNECTING)
-        prepareToStartVPN()
+        VpnStatusObservable.update(CONNECTING)
+        Handler(Looper.getMainLooper()).postDelayed({
+            prepareToStartVPN()
+        }, 3000)
+
     }
 
     private fun attemptDisconnect() {
-        VpnStatusObservable.update(ConnectionState.DISCONNECTING)
+        VpnStatusObservable.update(DISCONNECTING)
         VpnServiceCommand.stopVpn(getApplication())
     }
 
     private fun attemptCancelConnect() {
-        VpnStatusObservable.update(ConnectionState.DISCONNECTING)
+        VpnStatusObservable.update(DISCONNECTING)
         VpnServiceCommand.stopVpn(getApplication())
         //TODO
-    }
-
-    fun appNavigationCompleted() {
-        _vpnStatusFlow.update { it.copy(isNavigationPending = false) }
     }
 
     private fun prepareToStartVPN() {
@@ -93,9 +120,9 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
             vpnIntent =
                 VpnService.prepare(getApplication()) // stops the VPN connection created by another application.
         } catch (npe: NullPointerException) {
-            VpnStatusObservable.update(ConnectionState.CONNECTION_ERROR)
+            VpnStatusObservable.update(CONNECTION_ERROR)
         } catch (ise: IllegalStateException) {
-            VpnStatusObservable.update(ConnectionState.CONNECTION_ERROR)
+            VpnStatusObservable.update(CONNECTION_ERROR)
         }
         if (vpnIntent != null) {
             _prepareVpn.postValue(vpnIntent)
@@ -108,9 +135,22 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         _prepareVpn.value = null
     }
 
-    data class VpnConnectionUIState(
+    //TODO it appears that there's SharedState we can user to trigger one-off event that does not require maintaining 'isNavigationPending' state to prevent unnecessary transition.
+
+    /*data class VpnConnectionUIState(
         val connectionState: ConnectionState,
         val isNavigationPending: Boolean,
         val animate: Boolean
-    )
+    ) {
+        fun isOneStepBehind(uiState: VpnConnectionUIState): Boolean {
+            return false
+            *//*if (connectionState == ConnectionState.INIT){
+                return false
+            }else if (connectionState == ConnectionState.CONNECTING && uiState.connectionState == ConnectionState.INIT){
+                return true
+            }else if (connectionState == ConnectionState.CONNECTING && uiState.connectionState == ConnectionState.INIT){
+                return true
+            }*//*
+        }
+    }*/
 }

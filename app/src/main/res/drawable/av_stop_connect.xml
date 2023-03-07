@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="183dp"
+            android:height="124dp"
+            android:viewportWidth="183"
+            android:viewportHeight="124">
+            <path
+                android:name="stop-shape"
+                android:fillColor="@color/redNormal"
+                android:pathData="M71.5,20L111.5,20A24,24 0,0 1,135.5 44L135.5,80A24,24 0,0 1,111.5 104L71.5,104A24,24 0,0 1,47.5 80L47.5,44A24,24 0,0 1,71.5 20z" />
+
+            <group>
+                <clip-path android:pathData="M73.5,44h36v36h-36z" />
+                <path
+                    android:name="stop-inner-shape"
+                    android:fillColor="@color/redDark"
+                    android:pathData="M85.65,71C84.78,71 84.03,70.69 83.42,70.08C82.81,69.47 82.5,68.72 82.5,67.85L82.5,56.15C82.5,55.28 82.81,54.53 83.42,53.92C84.03,53.31 84.78,53 85.65,53L97.35,53C98.22,53 98.97,53.31 99.58,53.92C100.19,54.53 100.5,55.28 100.5,56.15L100.5,67.85C100.5,68.72 100.19,69.47 99.58,70.08C98.97,70.69 98.22,71 97.35,71L85.65,71Z" />
+            </group>
+        </vector>
+
+    </aapt:attr>
+
+    <target android:name="stop-shape">
+        <aapt:attr name="android:animation">
+            <set
+                android:duration="@integer/default_transition_anim_duration"
+                android:interpolator="@android:anim/decelerate_interpolator">
+
+                <objectAnimator
+                    android:propertyName="pathData"
+                    android:valueFrom="M71.5,20L111.5,20A24,24 0,0 1,135.5 44L135.5,80A24,24 0,0 1,111.5 104L71.5,104A24,24 0,0 1,47.5 80L47.5,44A24,24 0,0 1,71.5 20z"
+                    android:valueTo="M44,20L139,20A24,24 0,0 1,163 44L163,80A24,24 0,0 1,139 104L44,104A24,24 0,0 1,20 80L20,44A24,24 0,0 1,44 20z"
+                    android:valueType="pathType" />
+
+                <objectAnimator
+                    android:duration="@integer/default_transition_anim_duration"
+                    android:propertyName="fillColor"
+                    android:valueFrom="@color/redNormal"
+                    android:valueTo="@color/greenNormal" />
+            </set>
+        </aapt:attr>
+    </target>
+
+
+    <target android:name="stop-inner-shape">
+        <aapt:attr name="android:animation">
+            <set
+                android:duration="@integer/default_transition_anim_duration"
+                android:interpolator="@android:anim/decelerate_interpolator">
+
+                <objectAnimator
+                    android:duration="@integer/default_transition_anim_duration"
+                    android:propertyName="fillColor"
+                    android:valueFrom="@color/redDark"
+                    android:valueTo="@android:color/transparent" />
+            </set>
+        </aapt:attr>
+    </target>
+
+
+</animated-vector>
