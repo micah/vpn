@@ -105,8 +105,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     private fun attemptDisconnect() {
         VpnStatusObservable.update(DISCONNECTING)
-        VpnServiceCommand.stopVpn(getApplication())
-    }
+        VpnServiceCommand.stopVpn(getApplication())}
 
     private fun attemptCancelConnect() {
         VpnStatusObservable.update(DISCONNECTING)

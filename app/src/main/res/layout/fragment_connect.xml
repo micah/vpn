@@ -90,14 +90,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progress_slider"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <include
             android:id="@+id/include_error"
             layout="@layout/include_error_frame"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTION_ERROR ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_connect_action_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_slider"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/include_stats"
+            layout="@layout/include_connection_stats"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTED ? View.VISIBLE: View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/tv_connect_action_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

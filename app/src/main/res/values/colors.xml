@@ -23,8 +23,12 @@
     <color name="purpleNormal">#B371F4</color>
     <color name="purpleDarkText">#400A76</color>
     <color name="purpleDarkBottomNav">#3B1782</color>
+    <color name="purpleDarkDialog">#31136C</color>
+    <color name="purpleStatsBg">#441B98</color>
+    <color name="purpleStatsDivider">#3F188B</color>
     <color name="purpleGradientLight">#BF89F5</color>
     <color name="purpleGradientDark">#A65AF2</color>
+    <color name="purplesSwitchTrack">#CCA1F7</color>
 
     <color name="greenNormal">#52E0B6</color>
     <color name="greenDarkText">#0B4131</color>
