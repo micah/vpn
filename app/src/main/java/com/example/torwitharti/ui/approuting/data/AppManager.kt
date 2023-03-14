@@ -7,26 +7,19 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.content.pm.ResolveInfo
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.text.TextUtils
-import android.util.Log
 import androidx.annotation.WorkerThread
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
-import com.bumptech.glide.util.LruCache
 import com.example.torwitharti.R
 import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.CELL
 import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.HORIZONTAL_RECYCLER_VIEW
 import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.SECTION_HEADER_VIEW
 import com.example.torwitharti.ui.approuting.model.AppItemModel
-import com.example.torwitharti.ui.glide.ApplicationInfoModel
 import com.example.torwitharti.utils.PreferenceHelper
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
 
 class AppManager(context: Context) {
@@ -95,7 +88,7 @@ class AppManager(context: Context) {
             resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_other_apps)))
         }
         resultList.addAll(sortedOtherApps)
-        preferenceHelper.cachedApps = convertAppItemViewModelsToStringSet(resultList)
+        preferenceHelper.cachedApps = Gson().toJson(resultList)
         return resultList
     }
 
@@ -153,21 +146,8 @@ class AppManager(context: Context) {
         }
 
     fun loadCachedApps(): List<AppItemModel> {
-        return convertStringSetToAppItemViewModels(preferenceHelper.cachedApps)
+        val gson = Gson()
+        val appItemModelListType: Type = object : TypeToken<ArrayList<AppItemModel?>?>() {}.type
+        return gson.fromJson(preferenceHelper.cachedApps, appItemModelListType)
     }
-
-    private fun convertAppItemViewModelsToStringSet(list: List<AppItemModel>): MutableSet<String> {
-        val set: MutableSet<String> = mutableSetOf()
-        list.forEach { set.add(it.toString()) }
-        return set
-    }
-
-    private fun convertStringSetToAppItemViewModels(set: Set<String>): List<AppItemModel> {
-        val viewModels: ArrayList<AppItemModel> = ArrayList()
-        set.forEach {
-            viewModels.add(AppItemModel.fromJson(it))
-        }
-        return viewModels
-    }
-
 }

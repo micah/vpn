@@ -33,9 +33,11 @@ class PreferenceHelper(context: Context) {
         get() = sharedPreference.getStringSet(PROTECTED_APPS, mutableSetOf<String>())
         set(value) = sharedPreference.edit().putStringSet(PROTECTED_APPS, value).apply()
 
-    var cachedApps: MutableSet<String>
-        get() = sharedPreference.getStringSet(CACHED_APPS, mutableSetOf<String>()) as MutableSet<String>
-        set(value) = sharedPreference.edit().putStringSet(CACHED_APPS, value).apply()
+    // cached apps returns a json as string
+    var cachedApps
+        get() = sharedPreference.getString(CACHED_APPS, "[]")
+        set(value) = sharedPreference.edit().putString(CACHED_APPS, value).apply()
+
     fun registerListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
         sharedPreference.registerOnSharedPreferenceChangeListener(listener)
     }
