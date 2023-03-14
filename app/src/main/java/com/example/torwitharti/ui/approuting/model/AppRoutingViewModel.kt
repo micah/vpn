@@ -3,6 +3,7 @@ package com.example.torwitharti.ui.approuting.model
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.torwitharti.ui.approuting.data.AppManager
+import com.example.torwitharti.utils.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,12 +16,17 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
 
     init {
         appManager = AppManager(application)
-        appList.postValue(mutableListOf())
         loadApps()
     }
 
     private fun loadApps() {
-        isLoadingAppList.postValue(true)
+        val cachedViewModels = appManager.loadCachedApps()
+
+        appList.postValue(cachedViewModels)
+        if (cachedViewModels.isEmpty()) {
+            isLoadingAppList.postValue(true)
+        }
+
         viewModelScope.launch(Dispatchers.Default) {
             val apps = appManager.queryInstalledApps()
             withContext(Dispatchers.Main) {

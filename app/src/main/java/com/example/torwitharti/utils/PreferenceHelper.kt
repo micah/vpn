@@ -11,6 +11,7 @@ class PreferenceHelper(context: Context) {
         const val PROTECTED_APPS: String = "protected_apps"
         const val PROTECT_ALL_APPS: String = "protect_all_apps"
         const val SHOULD_SHOW_GUIDE: String = "should_show_guide"
+        const val CACHED_APPS: String = "cached_apps"
     }
 
     private val sharedPreference =
@@ -32,6 +33,9 @@ class PreferenceHelper(context: Context) {
         get() = sharedPreference.getStringSet(PROTECTED_APPS, mutableSetOf<String>())
         set(value) = sharedPreference.edit().putStringSet(PROTECTED_APPS, value).apply()
 
+    var cachedApps: MutableSet<String>
+        get() = sharedPreference.getStringSet(CACHED_APPS, mutableSetOf<String>()) as MutableSet<String>
+        set(value) = sharedPreference.edit().putStringSet(CACHED_APPS, value).apply()
     fun registerListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
         sharedPreference.registerOnSharedPreferenceChangeListener(listener)
     }

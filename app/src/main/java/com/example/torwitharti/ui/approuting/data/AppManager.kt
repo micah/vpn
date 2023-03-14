@@ -7,15 +7,25 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.content.pm.ResolveInfo
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.text.TextUtils
+import android.util.Log
 import androidx.annotation.WorkerThread
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.bumptech.glide.util.LruCache
 import com.example.torwitharti.R
-import com.example.torwitharti.ui.approuting.model.AppItemModel
 import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.CELL
-import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.SECTION_HEADER_VIEW
 import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.HORIZONTAL_RECYCLER_VIEW
+import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.SECTION_HEADER_VIEW
+import com.example.torwitharti.ui.approuting.model.AppItemModel
+import com.example.torwitharti.ui.glide.ApplicationInfoModel
 import com.example.torwitharti.utils.PreferenceHelper
 
 
@@ -26,6 +36,9 @@ class AppManager(context: Context) {
     //TODO: discuss how / if we want to keep a list of apps using netcipher/tor
     private val torPoweredAppPackageNames: List<String> = listOf("org.torproject.android","org.torproject.torbrowser","org.onionshare.android", "org.fdroid.fdroid", "com.google.android.youtube")
 
+    companion object {
+        val TAG = AppManager::class.java.simpleName
+    }
     init {
         this.context = context
         this.preferenceHelper = PreferenceHelper(context)
@@ -43,7 +56,6 @@ class AppManager(context: Context) {
         val protectAllApps = preferenceHelper.protectAllApps
         var androidSystemUid = 0
         val installedOtherApps = mutableListOf<AppItemModel>()
-
         try {
             val system = pm.getApplicationInfo("android", PackageManager.GET_META_DATA)
             androidSystemUid = system.uid
@@ -83,6 +95,7 @@ class AppManager(context: Context) {
             resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_other_apps)))
         }
         resultList.addAll(sortedOtherApps)
+        preferenceHelper.cachedApps = convertAppItemViewModelsToStringSet(resultList)
         return resultList
     }
 
@@ -98,7 +111,6 @@ class AppManager(context: Context) {
             appName = applicationInfo.packageName
 
         appName?.also {
-            val appIcon = applicationInfo.loadIcon(pm)
             val appUID = applicationInfo.uid
             val packageName = applicationInfo.packageName
             return AppItemModel(
@@ -106,7 +118,6 @@ class AppManager(context: Context) {
                 it,
                 packageName,
                 appUID,
-                appIcon,
                 protectedApps?.contains(packageName) ?:run { false },
                 protectAllApps,
                 browserPackages.contains(packageName),
@@ -140,4 +151,23 @@ class AppManager(context: Context) {
             }
             return browserPackageNames
         }
+
+    fun loadCachedApps(): List<AppItemModel> {
+        return convertStringSetToAppItemViewModels(preferenceHelper.cachedApps)
+    }
+
+    private fun convertAppItemViewModelsToStringSet(list: List<AppItemModel>): MutableSet<String> {
+        val set: MutableSet<String> = mutableSetOf()
+        list.forEach { set.add(it.toString()) }
+        return set
+    }
+
+    private fun convertStringSetToAppItemViewModels(set: Set<String>): List<AppItemModel> {
+        val viewModels: ArrayList<AppItemModel> = ArrayList()
+        set.forEach {
+            viewModels.add(AppItemModel.fromJson(it))
+        }
+        return viewModels
+    }
+
 }

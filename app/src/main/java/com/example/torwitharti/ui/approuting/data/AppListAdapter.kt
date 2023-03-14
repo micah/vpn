@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.torwitharti.databinding.AppRoutingTableHeaderBinding
 import com.example.torwitharti.databinding.AppSwitchItemViewBinding
 import com.example.torwitharti.databinding.AppTitleViewBinding
 import com.example.torwitharti.databinding.HorizontalRecyclerViewItemBinding
 import com.example.torwitharti.ui.approuting.model.AppItemModel
+import com.example.torwitharti.ui.glide.ApplicationInfoModel
 import com.example.torwitharti.utils.PreferenceHelper
 
 class AppListAdapter(list: List<AppItemModel>,
@@ -77,7 +80,15 @@ class AppListAdapter(list: List<AppItemModel>,
 
         fun bind(appItem: AppItemModel, pos: Int) {
             this.pos = pos
-            binding.ivAppImage.setImageDrawable(appItem.icon)
+            appItem.appId?.also {
+                Log.d("--->", "load icn for ${appItem.appId}")
+                Glide.with(binding.root.context)
+                    .load(ApplicationInfoModel(appItem.appId))
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .into(binding.ivAppImage)
+            } ?: run {
+                binding.ivAppImage.setImageDrawable(null)
+            }
             binding.tvTitle.text = appItem.text
             binding.smItemSwitch.isChecked = appItem.isRoutingEnabled == true
             binding.tvTitle.setOnClickListener(View.OnClickListener {
@@ -98,12 +109,12 @@ class AppListAdapter(list: List<AppItemModel>,
     internal class HorizontalRecyclerViewItemViewHolder(val binding: HorizontalRecyclerViewItemBinding) :
             RecyclerView.ViewHolder(binding.root) {
         fun bind(appItem: AppItemModel, adapter: TorAppsAdapter, layoutManager: LinearLayoutManager) {
+            Log.d("--", "bind horizontal layout")
             binding.rvTorApps.adapter = adapter
             binding.rvTorApps.layoutManager = layoutManager
-            appItem.appList.also {
-                if (it != null) {
-                    adapter.update(it)
-                }
+            appItem.appList?.also {
+                Log.d("--", "updateAppList $it")
+                adapter.update(it)
             }
         }
     }
