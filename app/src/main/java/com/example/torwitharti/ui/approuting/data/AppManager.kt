@@ -26,8 +26,19 @@ class AppManager(context: Context) {
     private val context: Context
     val preferenceHelper: PreferenceHelper
     private val pm: PackageManager
-    //TODO: discuss how / if we want to keep a list of apps using netcipher/tor
-    private val torPoweredAppPackageNames: List<String> = listOf("org.torproject.android","org.torproject.torbrowser","org.onionshare.android", "org.fdroid.fdroid", "com.google.android.youtube")
+    private val torPoweredAppPackageNames: List<String> = listOf(
+        // orbot
+        "org.torproject.android",
+        "org.torproject.android.nightly",
+        // tor-browser
+        "org.torproject.torbrowser",
+        "org.torproject.torbrowser_alpha",
+        "org.torproject.torbrowser_nightly",
+        "org.torproject.torbrowser_debug",
+        //onionshare
+        "org.onionshare.android",
+        "org.onionshare.android.nightly"
+    )
 
     companion object {
         val TAG = AppManager::class.java.simpleName
