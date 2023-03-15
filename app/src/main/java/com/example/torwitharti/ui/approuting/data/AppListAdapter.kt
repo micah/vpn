@@ -62,6 +62,9 @@ class AppListAdapter(list: List<AppItemModel>,
     fun update(list: List<AppItemModel>) {
         var mutableList = list.toMutableList()
         mutableList.add(0, AppItemModel(TABLE_HEADER_VIEW))
+        if (mutableList == items) {
+            return
+        }
         items = mutableList
         notifyDataSetChanged()
     }

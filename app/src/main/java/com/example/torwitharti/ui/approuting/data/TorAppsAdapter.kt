@@ -28,10 +28,12 @@ class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerVi
     }
 
     fun update(list: List<AppItemModel>) {
+        if (list == items) {
+            return
+        }
         items = list
         notifyDataSetChanged()
     }
-
 
     internal class AppListViewHolder(val binding: AppItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
