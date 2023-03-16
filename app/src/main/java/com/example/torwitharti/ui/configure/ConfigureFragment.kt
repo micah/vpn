@@ -36,11 +36,12 @@ class ConfigureFragment : Fragment(), ClickHandler {
     }
 
     override fun onAppsClicked(v: View) {
-        Log.d(ConfigureFragmentViewModel.TAG, "apps entry clicked")
+        Log.d(TAG, "apps entry clicked")
         findNavController().navigate(R.id.action_configureFragment_to_appRoutingFragment)
     }
 
     override fun onTorLogsClicked(v: View) {
-        Toast.makeText(this.context, "tor logs clicked", Toast.LENGTH_SHORT).show()
+        Log.d(TAG, "tor entry clicked")
+        findNavController().navigate(R.id.action_configureFragment_to_LoggingFragment)
     }
 }

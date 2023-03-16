@@ -56,6 +56,13 @@
         <item name="android:textFontWeight" tools:targetApi="p">400</item>
     </style>
 
+    <style name="text_mono_small" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+        <item name="android:textFontWeight" tools:targetApi="p">450</item>
+    </style>
+
     <style name="list_item_style_medium" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="android:textSize">20sp</item>
         <item name="android:lineSpacingExtra">0sp</item>

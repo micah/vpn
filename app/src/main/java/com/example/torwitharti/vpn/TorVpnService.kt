@@ -18,8 +18,8 @@ import org.torproject.onionmasq.ISocketProtect
 import org.torproject.onionmasq.OnionMasq
 import org.torproject.onionmasq.OnionmasqEvent
 import org.torproject.onionmasq.logging.LogHelper
+import org.torproject.onionmasq.logging.LogObservable
 import java.io.IOException
-import java.net.NetworkInterface
 
 
 class TorVpnService : VpnService() {
@@ -32,8 +32,9 @@ class TorVpnService : VpnService() {
     }
 
     private var fd: ParcelFileDescriptor? = null
-    private var notificationManager: VpnNotificationManager? = null
-    private var logHelper: LogHelper? = null
+    private lateinit var notificationManager: VpnNotificationManager
+    private lateinit var logHelper: LogHelper
+    private var logObservable: LogObservable? = null
 
     private val binder: IBinder = TorVpnServiceBinder()
 
@@ -70,12 +71,13 @@ class TorVpnService : VpnService() {
                 VpnStatusObservable.update(ConnectionState.CONNECTED)
             }
         }
+        logObservable = LogObservable.getInstance()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d(TAG, "service: onStartCommand")
 
-        val notification: Notification? = notificationManager?.buildForegroundServiceNotification()
+        val notification: Notification? = notificationManager.buildForegroundServiceNotification()
         startForeground(VpnNotificationManager.NOTIFICATION_ID, notification)
         val action = if (intent != null) intent.action else ""
         if (action == ACTION_START_VPN ||
@@ -103,10 +105,11 @@ class TorVpnService : VpnService() {
         super.onDestroy()
         job.cancel()
         Log.d(TAG, "service: onDestroy")
-        notificationManager?.cancelNotifications()
+        notificationManager.cancelNotifications()
         if (VpnStatusObservable.statusLiveData.value !== ConnectionState.CONNECTION_ERROR) {
             VpnStatusObservable.update(ConnectionState.DISCONNECTED)
         }
+        logObservable = null
     }
 
     private fun stop() {
@@ -117,7 +120,7 @@ class TorVpnService : VpnService() {
             mainHandler.post { OnionMasq.getProgressEvent().removeObserver(it) }
         }
 
-        logHelper?.stopLog()
+        logHelper.stopLog()
         closeFd()
         stopForeground(true)
         OnionMasq.unbindVPNService()
@@ -153,7 +156,7 @@ class TorVpnService : VpnService() {
         try {
             val builder = prepareVpnProfile()
             fd = builder.establish();
-            logHelper?.readLog()
+            logHelper.readLog()
 
             observer?.let {
                 Log.d(TAG, "observer created!")

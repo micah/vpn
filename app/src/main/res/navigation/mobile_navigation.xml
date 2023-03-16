@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_configureFragment_to_appRoutingFragment"
             app:destination="@id/appRoutingFragment" />
+
+        <action
+            android:id="@+id/action_configureFragment_to_LoggingFragment"
+            app:destination="@id/loggingFragment" />
     </fragment>
 
     <fragment
@@ -26,4 +30,10 @@
         android:name="com.example.torwitharti.ui.approuting.AppRoutingFragment"
         android:label="AppRoutingFragment"
         tools:layout="@layout/fragment_app_routing" />
+
+    <fragment
+        android:id="@+id/loggingFragment"
+        android:name="com.example.torwitharti.ui.logging.LoggingFragment"
+        android:label="Logging"
+        tools:layout="@layout/fragment_logging" />
 </navigation>
