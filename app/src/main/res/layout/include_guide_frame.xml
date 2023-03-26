@@ -3,6 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.torwitharti.ui.home.model.ConnectFragmentViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="com.example.torwitharti.vpn.ConnectionState" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,7 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:textFontWeight="550"
-            android:text="@string/guide_pre_alpha"
+            tools:text="@string/guide_pre_alpha"
+            android:text="@{viewModel.flavor}"
             app:layout_constraintBottom_toTopOf="@+id/textView16"
             app:layout_constraintEnd_toStartOf="@+id/textView6"
             app:layout_constraintHorizontal_bias="0.5"
@@ -45,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:gravity="center"
-            android:text="@string/guide_version_number"
+            android:text="@{viewModel.version}"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

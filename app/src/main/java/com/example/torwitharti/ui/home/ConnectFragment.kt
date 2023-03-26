@@ -4,6 +4,7 @@ import android.animation.AnimatorSet
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -56,7 +57,7 @@ class ConnectFragment : Fragment() {
         connectFragmentViewModel = ViewModelProvider(this)[ConnectFragmentViewModel::class.java]
 
         binding = FragmentConnectBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = connectFragmentViewModel
 
         connectFragmentViewModel.prepareVpn.observe(viewLifecycleOwner) { intent ->
@@ -76,24 +77,39 @@ class ConnectFragment : Fragment() {
             }
         }
 
+
+
         return binding.root
     }
 
     private fun setUIState(vpnState: ConnectionState) {
+        Log.d(TAG, "setUIState: ${vpnState.name}")
         if (::currentVpnState.isInitialized && currentVpnState == vpnState) {
             return
         }
 
         when (vpnState) {
-            ConnectionState.INIT -> {}
+            ConnectionState.INIT -> {
+
+            }
             ConnectionState.CONNECTING -> idleToConnectingTransition()
 
             ConnectionState.PAUSED -> {}
-            ConnectionState.CONNECTED -> connectingToConnectedTransition()
+            ConnectionState.CONNECTED -> {
+                binding.includeStats.chronometer.base = SystemClock.elapsedRealtime()
+                binding.includeStats.chronometer.start()
+                connectingToConnectedTransition()
+            }
 
-            ConnectionState.DISCONNECTED -> connectedToDisconnectedTransition()
+            ConnectionState.DISCONNECTED -> {
+                binding.includeStats.chronometer.stop()
+                connectedToDisconnectedTransition()
+            }
 
-            ConnectionState.CONNECTION_ERROR -> {}
+            ConnectionState.CONNECTION_ERROR -> {
+                binding.includeStats.chronometer.stop()
+                connectingToErrorTransition()
+            }
             ConnectionState.DISCONNECTING -> {
                 // disable btn?
             }
@@ -176,17 +192,17 @@ class ConnectFragment : Fragment() {
         progressGradientAnimatorSet?.end()
         progressGradientAnimatorSet = null
 
+        // transition from gradient to red(connected color)
+        createStatusBarConnectedGradientAnimation(
+            binding.progressSlider.background, requireContext(), intArrayOf(
+                R.color.connectingRainbowEnd,
+                R.color.connectingRainbowStart,
+                R.color.greenNormal
+            ), lifecycle
+        ) {}
+
         if (currentVpnState == ConnectionState.CONNECTING) {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_stop)
-
-            // transition from gradient to red(connected color)
-            createStatusBarConnectedGradientAnimation(
-                binding.progressSlider.background, requireContext(), intArrayOf(
-                    R.color.connectingRainbowEnd,
-                    R.color.connectingRainbowStart,
-                    R.color.greenNormal
-                ), lifecycle
-            ) {}
 
             //pause to stop transition
             startVectorAnimationWithEndCallback(
@@ -202,6 +218,47 @@ class ConnectFragment : Fragment() {
     }
 
     private fun connectingToErrorTransition() {
+        //end infinite gradient animation
+        progressGradientAnimatorSet?.end()
+        progressGradientAnimatorSet = null
+
+        if (currentVpnState == ConnectionState.CONNECTING) {
+
+            // transition from gradient to red(connected color)
+            createStatusBarConnectedGradientAnimation(
+                binding.progressSlider.background, requireContext(), intArrayOf(
+                    R.color.connectingRainbowEnd,
+                    R.color.connectingRainbowStart,
+                    R.color.yellowNormal
+                ), lifecycle
+            ) {}
+
+        }else if (currentVpnState == ConnectionState.CONNECTED) {
+
+            // transition from gradient to red(connected color)
+            createStatusBarConnectedGradientAnimation(
+                binding.progressSlider.background, requireContext(), intArrayOf(
+                    R.color.redNormal,
+                    R.color.redNormal,
+                    R.color.yellowNormal
+                ), lifecycle
+            ) {}
+
+        }
+
+        if (currentVpnState == ConnectionState.CONNECTING) {
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
+
+            //pause to stop transition
+            startVectorAnimationWithEndCallback(
+                binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
+            ) {
+                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
+            }
+
+        } else {
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
+        }
 
     }
 

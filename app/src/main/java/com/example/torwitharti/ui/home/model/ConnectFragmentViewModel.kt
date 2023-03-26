@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
+import com.example.torwitharti.BuildConfig
 import com.example.torwitharti.R
 import com.example.torwitharti.vpn.ConnectionState
 import com.example.torwitharti.vpn.ConnectionState.*
@@ -33,38 +34,39 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
             initialValue = INIT
         )
 
-    val toolBarTitleAndColor: StateFlow<Pair<String, Int>> = connectionState.map { connectionState ->
+    val toolBarTitleAndColor: StateFlow<Pair<String, Int>> =
+        connectionState.map { connectionState ->
 
-        when (connectionState) {
-            CONNECTING -> Pair(
-                application.getString(R.string.frag_connect_connecting),
-                ContextCompat.getColor(application, R.color.purpleNormal)
-            )
-            PAUSED -> Pair(
-                application.getString(R.string.frag_connect_paused),
-                ContextCompat.getColor(application, R.color.yellowNormal)
-            )
-            CONNECTED -> Pair(
-                application.getString(R.string.frag_connect_connected),
-                ContextCompat.getColor(application, R.color.greenNormal)
-            )
-            DISCONNECTING -> Pair(
-                application.getString(R.string.frag_connect_disconnecting),
-                ContextCompat.getColor(application, R.color.purpleNormal)
-            )
-            DISCONNECTED -> Pair(
-                application.getString(R.string.frag_connect_disconnected),
-                ContextCompat.getColor(application, R.color.redNormal)
-            )
-            else -> {
-                return@map Pair("", R.color.purpleDark)
+            when (connectionState) {
+                CONNECTING -> Pair(
+                    application.getString(R.string.frag_connect_connecting),
+                    ContextCompat.getColor(application, R.color.purpleNormal)
+                )
+                PAUSED -> Pair(
+                    application.getString(R.string.frag_connect_paused),
+                    ContextCompat.getColor(application, R.color.yellowNormal)
+                )
+                CONNECTED -> Pair(
+                    application.getString(R.string.frag_connect_connected),
+                    ContextCompat.getColor(application, R.color.greenNormal)
+                )
+                DISCONNECTING -> Pair(
+                    application.getString(R.string.frag_connect_disconnecting),
+                    ContextCompat.getColor(application, R.color.purpleNormal)
+                )
+                DISCONNECTED -> Pair(
+                    application.getString(R.string.frag_connect_disconnected),
+                    ContextCompat.getColor(application, R.color.redNormal)
+                )
+                else -> {
+                    return@map Pair("", R.color.purpleDark)
+                }
             }
-        }
-    }.stateIn(
-        scope = viewModelScope,
-        SharingStarted.Lazily,
-        initialValue = Pair("", R.color.purpleDark)
-    )
+        }.stateIn(
+            scope = viewModelScope,
+            SharingStarted.Lazily,
+            initialValue = Pair("", R.color.purpleDark)
+        )
 
     val connectButtonText: StateFlow<String> = connectionState.map { connectionState ->
         when (connectionState) {
@@ -77,6 +79,9 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         }
     }.stateIn(scope = viewModelScope, SharingStarted.WhileSubscribed(), initialValue = "")
 
+    //these are static one-time-fetch value on viewModel init. Dont need to be LiveData or StateFlow.
+    val flavor = "Pre-alpha"
+    val version = BuildConfig.VERSION_NAME
 
     fun connectStateButtonClicked() {
         when (VpnStatusObservable.statusLiveData.value as ConnectionState) {
@@ -90,8 +95,13 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         }
     }
 
+    //TODO
+    fun viewLogsClicked() {
+    }
+
     private fun attemptPause() {
         //TODO: what are we going to try in paused state?
+        VpnStatusObservable.update(DISCONNECTING)
         VpnServiceCommand.stopVpn(getApplication())
     }
 
@@ -105,7 +115,8 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     private fun attemptDisconnect() {
         VpnStatusObservable.update(DISCONNECTING)
-        VpnServiceCommand.stopVpn(getApplication())}
+        VpnServiceCommand.stopVpn(getApplication())
+    }
 
     private fun attemptCancelConnect() {
         VpnStatusObservable.update(DISCONNECTING)

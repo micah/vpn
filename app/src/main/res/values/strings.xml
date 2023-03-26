@@ -58,5 +58,12 @@
     <string name="guide_bullet_head_2">But don\'t do anything risky</string>
     <string name="guide_bullet_text_1">Don\'t forget to report any bugs you find back to our developers.</string>
     <string name="guide_bullet_text_2">This is pre-release version of the app, and isn\'t safe to use for sensitive activities.</string>
+    <string name="stats_protect_all_apps">Protect all apps</string>
+    <string name="stats_dummy_down">2.12 kbits down</string>
+    <string name="stats_dummy_down_delta">+2.12 kbits/s</string>
+    <string name="stats_dummy_up_delta">+2.12 kbits/s</string>
+    <string name="error_something_went_wrong">Something went wrong</string>
+    <string name="error_detail_message">Onionverse couldn\'t connect to the Tor Network.</string>
+    <string name="error_view_logs">View logs</string>
 
 </resources>
