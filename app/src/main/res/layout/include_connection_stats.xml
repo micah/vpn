@@ -145,7 +145,8 @@
                 android:id="@+id/switch_protect_apps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                app:track="@drawable/switch_track_connected_stats"
+                android:thumb="@drawable/switch_thumb_connected_stats"
                 android:layout_marginEnd="16dp"
                 android:checked="true"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_protect_all_apps_label"

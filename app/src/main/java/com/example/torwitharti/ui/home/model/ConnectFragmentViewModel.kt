@@ -107,9 +107,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     private fun attemptConnect() {
         VpnStatusObservable.update(CONNECTING)
-        Handler(Looper.getMainLooper()).postDelayed({
-            prepareToStartVPN()
-        }, 3000)
+        prepareToStartVPN()
 
     }
 
@@ -144,23 +142,4 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     fun onVpnPrepared() {
         _prepareVpn.value = null
     }
-
-    //TODO it appears that there's SharedState we can user to trigger one-off event that does not require maintaining 'isNavigationPending' state to prevent unnecessary transition.
-
-    /*data class VpnConnectionUIState(
-        val connectionState: ConnectionState,
-        val isNavigationPending: Boolean,
-        val animate: Boolean
-    ) {
-        fun isOneStepBehind(uiState: VpnConnectionUIState): Boolean {
-            return false
-            *//*if (connectionState == ConnectionState.INIT){
-                return false
-            }else if (connectionState == ConnectionState.CONNECTING && uiState.connectionState == ConnectionState.INIT){
-                return true
-            }else if (connectionState == ConnectionState.CONNECTING && uiState.connectionState == ConnectionState.INIT){
-                return true
-            }*//*
-        }
-    }*/
 }

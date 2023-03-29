@@ -92,23 +92,23 @@ class ConnectFragment : Fragment() {
             ConnectionState.INIT -> {
 
             }
-            ConnectionState.CONNECTING -> idleToConnectingTransition()
+            ConnectionState.CONNECTING -> showConnectingTransition()
 
             ConnectionState.PAUSED -> {}
             ConnectionState.CONNECTED -> {
                 binding.includeStats.chronometer.base = SystemClock.elapsedRealtime()
                 binding.includeStats.chronometer.start()
-                connectingToConnectedTransition()
+                showConnectedTransition()
             }
 
             ConnectionState.DISCONNECTED -> {
                 binding.includeStats.chronometer.stop()
-                connectedToDisconnectedTransition()
+                showDisconnectedTransition()
             }
 
             ConnectionState.CONNECTION_ERROR -> {
                 binding.includeStats.chronometer.stop()
-                connectingToErrorTransition()
+                showErrorTransition()
             }
             ConnectionState.DISCONNECTING -> {
                 // disable btn?
@@ -123,7 +123,7 @@ class ConnectFragment : Fragment() {
     * ************
      */
 
-    private fun idleToConnectingTransition() {
+    private fun showConnectingTransition() {
         if (currentVpnState == ConnectionState.INIT || currentVpnState == ConnectionState.DISCONNECTED) {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
 
@@ -187,7 +187,7 @@ class ConnectFragment : Fragment() {
 
     }
 
-    private fun connectingToConnectedTransition() {
+    private fun showConnectedTransition() {
         //end infinite gradient animation
         progressGradientAnimatorSet?.end()
         progressGradientAnimatorSet = null
@@ -217,7 +217,7 @@ class ConnectFragment : Fragment() {
 
     }
 
-    private fun connectingToErrorTransition() {
+    private fun showErrorTransition() {
         //end infinite gradient animation
         progressGradientAnimatorSet?.end()
         progressGradientAnimatorSet = null
@@ -262,7 +262,7 @@ class ConnectFragment : Fragment() {
 
     }
 
-    private fun connectedToDisconnectedTransition() {
+    private fun showDisconnectedTransition() {
         if (currentVpnState == ConnectionState.DISCONNECTING) {
             startVectorAnimationWithEndCallback(
                 binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
