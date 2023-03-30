@@ -1,6 +1,7 @@
 package com.example.torwitharti.ui.approuting.model
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.torwitharti.ui.approuting.data.AppManager
 import com.example.torwitharti.utils.PreferenceHelper
@@ -46,7 +47,9 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
 
     fun onProtectedAppsPrefsChanged(protectAllApps: Boolean) {
         val mutableList = getAppList().toMutableList()
-        mutableList.forEach { it.protectAllApps = protectAllApps }
+        mutableList.onEach {
+            it.protectAllApps = protectAllApps
+        }
         appList.postValue(mutableList)
     }
 

@@ -65,7 +65,7 @@ class AppListAdapter(list: List<AppItemModel>,
         if (mutableList == items) {
             return
         }
-        items = mutableList
+        items = ArrayList(mutableList.map { it.copy() })
         notifyDataSetChanged()
     }
 
