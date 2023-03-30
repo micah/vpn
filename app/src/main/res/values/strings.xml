@@ -10,7 +10,13 @@
     <string name="frag_connect_guide_slide_index">Guide Slide # %1$d</string>
     <string name="frag_connect_connecting_to_network">Connecting to the\nTor Network…</string>
     <string name="frag_connect_connected">Connected\n</string>
+    <string name="frag_connect_connecting">Connecting</string>
+    <string name="frag_connect_paused">Paused</string>
+    <string name="frag_connect_disconnecting">Disconnecting</string>
+    <string name="frag_connect_try_again">Trying again…</string>
     <string name="frag_connect_not_connected">Not connected</string>
+    <string name="frag_connect_disconnected">Disconnected</string>
+    <string name="frag_connect_reconnect">Reconnect</string>
     <string name="frag_connect_cannot_connected">Can\'t connect to Tor</string>
     <string name="frag_connect_try_bridge">Try a bridge instead</string>
     <string name="frag_connect_error_content">Trying a bridge could help unblock the Internet in places experiencing censorship.</string>
@@ -45,5 +51,19 @@
     <string name="stop">Stop VPN</string>
     <string name="notification_channel_description">Shows updates about TorVPN.</string>
     <string name="notification_channel_name">TorVPN notifications</string>
+    <string name="title_guide_welcome_to">Welcome to the\nOnionverse</string>
+    <string name="guide_pre_alpha">Pre-alpha</string>
+    <string name="guide_version_number">%1$s</string>
+    <string name="guide_bullet_head_1">You\'re ready to start testing</string>
+    <string name="guide_bullet_head_2">But don\'t do anything risky</string>
+    <string name="guide_bullet_text_1">Don\'t forget to report any bugs you find back to our developers.</string>
+    <string name="guide_bullet_text_2">This is pre-release version of the app, and isn\'t safe to use for sensitive activities.</string>
+    <string name="stats_protect_all_apps">Protect all apps</string>
+    <string name="stats_dummy_down">2.12 kbits down</string>
+    <string name="stats_dummy_down_delta">+2.12 kbits/s</string>
+    <string name="stats_dummy_up_delta">+2.12 kbits/s</string>
+    <string name="error_something_went_wrong">Something went wrong</string>
+    <string name="error_detail_message">Onionverse couldn\'t connect to the Tor Network.</string>
+    <string name="error_view_logs">View logs</string>
 
 </resources>

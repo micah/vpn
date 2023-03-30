@@ -4,9 +4,11 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.graphics.Point
 import android.graphics.Rect
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.view.View
 import androidx.annotation.FloatRange
 import androidx.lifecycle.Lifecycle
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 
 
 /**
@@ -47,5 +49,10 @@ fun Rect.scale(
     val deltaX = (width() - newWidth) / 2
     val deltaY = (height() - newHeight) / 2
 
-    set((left + deltaX).toInt(), (top + deltaY).toInt(), (right - deltaX).toInt(), (bottom - deltaY).toInt())
+    set(
+        (left + deltaX).toInt(),
+        (top + deltaY).toInt(),
+        (right - deltaX).toInt(),
+        (bottom - deltaY).toInt()
+    )
 }
