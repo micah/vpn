@@ -27,7 +27,7 @@
     <string name="frag_connect_error_try_a_bridge">Try a bridge</string>
 
     <string name="app_routing">App Routing</string>
-    <string name="app_routing_protect_all">Protect all my apps</string>
+    <string name="app_routing_protect_all">Protect all apps</string>
     <string name="app_routing_tor_apps">Tor powered apps</string>
     <string name="app_routing_browsers">Browsers</string>
     <string name="app_routing_other_apps">Other apps</string>
@@ -51,6 +51,10 @@
     <string name="stop">Stop VPN</string>
     <string name="notification_channel_description">Shows updates about TorVPN.</string>
     <string name="notification_channel_name">TorVPN notifications</string>
+    <string name="apps">Apps</string>
+    <string name="apps_description_all_protected">All apps protected</string>
+    <string name="tor_logs">Tor Logs</string>
+    <string name="tor_logs_description">View and copy tor logs</string>
     <string name="title_guide_welcome_to">Welcome to the\nOnionverse</string>
     <string name="guide_pre_alpha">Pre-alpha</string>
     <string name="guide_version_number">%1$s</string>

@@ -7,7 +7,7 @@
         android:title="@string/nav_connect" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/configure_fragment"
         android:icon="@drawable/select_bottom_nav_config"
         android:title="@string/nav_configure" />
 

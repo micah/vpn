@@ -1,6 +1,16 @@
 <resources>
+    <attr name="text" format="string" />
+    <attr name="secondaryText" format="string" />
+    <attr name="drawable" format="color|reference" />
+
     <declare-styleable name="AppItemView">
-        <attr name="text" format="string" />
-        <attr name="drawable" format="color|reference" />
+        <attr name="text"/>
+        <attr name="drawable"/>
+    </declare-styleable>
+
+    <declare-styleable name="ConfigItemView">
+        <attr name="text"/>
+        <attr name="secondaryText"/>
+        <attr name="drawable"/>
     </declare-styleable>
 </resources>

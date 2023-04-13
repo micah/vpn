@@ -12,20 +12,37 @@ import android.os.Build
 import android.text.TextUtils
 import androidx.annotation.WorkerThread
 import com.example.torwitharti.R
-import com.example.torwitharti.ui.approuting.model.AppItemModel
 import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.CELL
-import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.SECTION_HEADER_VIEW
 import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.HORIZONTAL_RECYCLER_VIEW
+import com.example.torwitharti.ui.approuting.data.AppListAdapter.Companion.SECTION_HEADER_VIEW
+import com.example.torwitharti.ui.approuting.model.AppItemModel
 import com.example.torwitharti.utils.PreferenceHelper
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
 
 class AppManager(context: Context) {
     private val context: Context
     val preferenceHelper: PreferenceHelper
     private val pm: PackageManager
-    //TODO: discuss how / if we want to keep a list of apps using netcipher/tor
-    private val torPoweredAppPackageNames: List<String> = listOf("org.torproject.android","org.torproject.torbrowser","org.onionshare.android", "org.fdroid.fdroid", "com.google.android.youtube")
+    private val torPoweredAppPackageNames: List<String> = listOf(
+        // orbot
+        "org.torproject.android",
+        "org.torproject.android.nightly",
+        // tor-browser
+        "org.torproject.torbrowser",
+        "org.torproject.torbrowser_alpha",
+        "org.torproject.torbrowser_nightly",
+        "org.torproject.torbrowser_debug",
+        //onionshare
+        "org.onionshare.android",
+        "org.onionshare.android.nightly"
+    )
 
+    companion object {
+        val TAG = AppManager::class.java.simpleName
+    }
     init {
         this.context = context
         this.preferenceHelper = PreferenceHelper(context)
@@ -43,7 +60,6 @@ class AppManager(context: Context) {
         val protectAllApps = preferenceHelper.protectAllApps
         var androidSystemUid = 0
         val installedOtherApps = mutableListOf<AppItemModel>()
-
         try {
             val system = pm.getApplicationInfo("android", PackageManager.GET_META_DATA)
             androidSystemUid = system.uid
@@ -83,6 +99,7 @@ class AppManager(context: Context) {
             resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_other_apps)))
         }
         resultList.addAll(sortedOtherApps)
+        preferenceHelper.cachedApps = Gson().toJson(resultList)
         return resultList
     }
 
@@ -98,7 +115,6 @@ class AppManager(context: Context) {
             appName = applicationInfo.packageName
 
         appName?.also {
-            val appIcon = applicationInfo.loadIcon(pm)
             val appUID = applicationInfo.uid
             val packageName = applicationInfo.packageName
             return AppItemModel(
@@ -106,7 +122,6 @@ class AppManager(context: Context) {
                 it,
                 packageName,
                 appUID,
-                appIcon,
                 protectedApps?.contains(packageName) ?:run { false },
                 protectAllApps,
                 browserPackages.contains(packageName),
@@ -140,4 +155,10 @@ class AppManager(context: Context) {
             }
             return browserPackageNames
         }
+
+    fun loadCachedApps(): List<AppItemModel> {
+        val gson = Gson()
+        val appItemModelListType: Type = object : TypeToken<ArrayList<AppItemModel?>?>() {}.type
+        return gson.fromJson(preferenceHelper.cachedApps, appItemModelListType)
+    }
 }

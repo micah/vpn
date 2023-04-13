@@ -4,8 +4,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.torwitharti.databinding.AppItemViewBinding
 import com.example.torwitharti.ui.approuting.model.AppItemModel
+import com.example.torwitharti.ui.glide.ApplicationInfoModel
 
 class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -25,10 +28,12 @@ class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerVi
     }
 
     fun update(list: List<AppItemModel>) {
+        if (list == items) {
+            return
+        }
         items = list
         notifyDataSetChanged()
     }
-
 
     internal class AppListViewHolder(val binding: AppItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -36,7 +41,14 @@ class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerVi
 
         fun bind(appItem: AppItemModel, pos: Int) {
             this.pos = pos
-            binding.ivAppImage.setImageDrawable(appItem.icon)
+            appItem.appId?.also {
+                Glide.with(binding.root.context)
+                    .load(ApplicationInfoModel(appItem.appId))
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .into(binding.ivAppImage)
+            } ?: run {
+                binding.ivAppImage.setImageDrawable(null)
+            }
             binding.tvAppTitle.text = appItem.text
             binding.root.setOnClickListener {
                 Log.d("TorAppsAdapter", "TODO: open  detail screen for "  + appItem.text)

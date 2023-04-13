@@ -1,42 +1,48 @@
 package com.example.torwitharti.ui.configure
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.torwitharti.databinding.FragmentDashboardBinding
+import androidx.navigation.fragment.findNavController
+import com.example.torwitharti.R
+import com.example.torwitharti.databinding.FragmentConfigureBinding
 
-class ConfigureFragment : Fragment() {
+import com.example.torwitharti.ui.configure.model.ConfigureFragmentViewModel
 
-    private var _binding: FragmentDashboardBinding? = null
+class ConfigureFragment : Fragment(), ClickHandler {
+    companion object {
+         val TAG: String = ConfigureFragment::class.java.simpleName
+    }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentConfigureBinding
+    private lateinit var configureFragmentViewModel: ConfigureFragmentViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        val configureViewModel =
-                ViewModelProvider(this).get(ConfigureViewModel::class.java)
+        configureFragmentViewModel =
+            ViewModelProvider(this)[ConfigureFragmentViewModel::class.java]
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textConfigure
-        configureViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        binding = FragmentConfigureBinding.inflate(inflater, container, false)
+        binding.viewModel = configureFragmentViewModel
+        binding.handler = this
+        return  binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onAppsClicked(v: View) {
+        Log.d(ConfigureFragmentViewModel.TAG, "apps entry clicked")
+        findNavController().navigate(R.id.action_configureFragment_to_appRoutingFragment)
+    }
+
+    override fun onTorLogsClicked(v: View) {
+        Toast.makeText(this.context, "tor logs clicked", Toast.LENGTH_SHORT).show()
     }
 }

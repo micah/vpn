@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_connect,
-                R.id.navigation_dashboard
+                R.id.configure_fragment
             )
         )
         navController.addOnDestinationChangedListener { _: NavController, destination: NavDestination, bundle: Bundle? ->
