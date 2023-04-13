@@ -16,6 +16,8 @@ import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.example.torwitharti.R
 import kotlin.math.abs
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -45,7 +47,6 @@ fun startVectorAnimationWithEndCallback(
                 }
             }
         })
-
     (drawable as Animatable).start()
 }
 
@@ -119,8 +120,6 @@ fun connectionStateGradientAnimation(
     }
 
     animator.start()
-
-
 }
 
 
@@ -198,4 +197,9 @@ fun createStatusBarConnectedGradientAnimation(
 
 fun isRunningOnMainThread(): Boolean {
     return Looper.getMainLooper().thread === Thread.currentThread()
+}
+
+fun getFormattedDate(timestamp: Long, locale: Locale?): String? {
+    val sdf = SimpleDateFormat("dd/mm/yy, hh:mm:ss.SSS", locale)
+    return sdf.format(timestamp)
 }
