@@ -65,9 +65,7 @@ class TorVpnService : VpnService() {
         //  LogObservable.getInstance().logListData.observe()
         OnionMasq.bindVPNService(TorVpnService::class.java)
         observer = Observer<OnionmasqEvent> { onionmasqEvent: OnionmasqEvent ->
-            Log.d(TAG, "onionmasqEvent observer: ${onionmasqEvent.boostrapStatus} ")
-            // TODO: we should use onionmasqEvent.isReadyForTraffic here as soon as the flag works correctly
-            if (onionmasqEvent.boostrapStatus.contains("connecting successfully")) {
+            if (onionmasqEvent.isReadyForTraffic) {
                 VpnStatusObservable.update(ConnectionState.CONNECTED)
             }
         }
