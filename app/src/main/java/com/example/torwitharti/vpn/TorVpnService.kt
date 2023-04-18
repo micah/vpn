@@ -41,6 +41,7 @@ class TorVpnService : VpnService() {
     private val job = SupervisorJob()
     private val coroutineScope = CoroutineScope(Dispatchers.IO + job)
     private var observer: Observer<OnionmasqEvent>? = null
+    private var vpnStatusObserver: Observer<ConnectionState>? = null
     private val mainHandler: Handler by lazy {
         Handler(mainLooper)
     }
@@ -59,10 +60,6 @@ class TorVpnService : VpnService() {
         super.onCreate()
         notificationManager = VpnNotificationManager(this)
         logHelper = LogHelper()
-        // TODO: observe LogObservable, set VpnStatusObservable to Connected if progress events completed
-        // TODO 2: move VpnStatusObservable to onionmasq lib, handling the onionmasq states Connected, Disconnected and Failed should be encapsulated,
-        //  Connecting and Disconnecting can be triggered by the UI to receive immediate state changes on user interaction
-        //  LogObservable.getInstance().logListData.observe()
         OnionMasq.bindVPNService(TorVpnService::class.java)
         observer = Observer<OnionmasqEvent> { onionmasqEvent: OnionmasqEvent ->
             if (onionmasqEvent.isReadyForTraffic) {
@@ -70,6 +67,11 @@ class TorVpnService : VpnService() {
             }
         }
         logObservable = LogObservable.getInstance()
+        vpnStatusObserver = Observer<ConnectionState> { connectionState: ConnectionState? ->
+            connectionState?.let {
+                notificationManager.updateNotification(connectionState);
+            }
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -117,6 +119,9 @@ class TorVpnService : VpnService() {
         observer?.let {
             mainHandler.post { OnionMasq.getProgressEvent().removeObserver(it) }
         }
+        vpnStatusObserver?.let {
+            mainHandler.post{ VpnStatusObservable.statusLiveData.removeObserver(it) }
+        }
 
         logHelper.stopLog()
         closeFd()
@@ -157,8 +162,11 @@ class TorVpnService : VpnService() {
             logHelper.readLog()
 
             observer?.let {
-                Log.d(TAG, "observer created!")
                 mainHandler.post { OnionMasq.getProgressEvent().observeForever(it) }
+            }
+
+            vpnStatusObserver?.let {
+                mainHandler.post { VpnStatusObservable.statusLiveData.observeForever(it) }
             }
 
             coroutineScope.async {
