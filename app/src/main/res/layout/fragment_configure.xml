@@ -55,6 +55,17 @@
             app:secondaryText="@string/tor_logs_description"
             android:onClick="@{handler::onTorLogsClicked}"
             />
+
+        <com.example.torwitharti.ui.configure.view.ConfigItemView
+            android:id="@+id/always_on_vpn"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:text="@string/always_on_vpn"
+            app:secondaryText="@string/subtitle_always_on_vpn"
+            android:onClick="@{handler::onAlwaysOnClicked}"
+            />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>
 </layout>

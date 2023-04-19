@@ -25,16 +25,12 @@
     <string name="frag_connect_error_allow_once">Allow once</string>
     <string name="frag_connect_error_not_now">Not now</string>
     <string name="frag_connect_error_try_a_bridge">Try a bridge</string>
-
     <string name="app_routing">App Routing</string>
     <string name="app_routing_protect_all">Protect all apps</string>
     <string name="app_routing_tor_apps">Tor powered apps</string>
     <string name="app_routing_browsers">Browsers</string>
     <string name="app_routing_other_apps">Other apps</string>
-    <string name="lorem_ipsum_medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…</string>
-
     <string name="frag_report_title">Connection report</string>
-    <string name="frag_report_sub_title">Suspendisse lacinia commodo tellus sit amet sollicitudin.</string>
     <string name="frag_report_success">Successfully connected</string>
     <string name="frag_report_obfs_snowflake_fail">Could not connect</string>
     <string name="frag_report_snowflake">SnowFlake</string>
@@ -72,5 +68,7 @@
     <string name="statusline_bytecount">↓%2$s %1$s/s - ↑%4$s %3$s/s</string>
     <string name="refresh_circuits">Refresh circuits</string>
     <string name="copied">Copied …</string>
+    <string name="always_on_vpn">Always-on VPN</string>
+    <string name="subtitle_always_on_vpn">Open Android System Settings</string>
 
 </resources>
