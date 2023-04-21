@@ -150,7 +150,7 @@ class TorVpnService : VpnService() {
 
     private fun closeFd() {
         try {
-            if (fd != null) fd!!.close()
+            fd?.close()
         } catch (e: IOException) {
             e.printStackTrace()
         }
