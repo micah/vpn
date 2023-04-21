@@ -94,7 +94,7 @@ class TorVpnService : VpnService() {
             establishVpn()
         } else if (action == ACTION_STOP_VPN) {
             Log.d(TAG, "service: stopping vpn...")
-            stop()
+            stop(false)
         } else {
             Log.d(TAG, "service unknown action: $action" );
         }
@@ -104,7 +104,7 @@ class TorVpnService : VpnService() {
     override fun onRevoke() {
         super.onRevoke()
         Log.d(TAG, "service: onRevoke")
-        stop()
+        stop(false)
     }
 
     override fun onDestroy() {
@@ -118,9 +118,13 @@ class TorVpnService : VpnService() {
         logObservable = null
     }
 
-    private fun stop() {
+    private fun stop(onError: Boolean) {
         Log.d(TAG, "service: stopping")
-        VpnStatusObservable.update(ConnectionState.DISCONNECTING)
+        if (onError) {
+            VpnStatusObservable.update(ConnectionState.CONNECTION_ERROR)
+        } else {
+            VpnStatusObservable.update(ConnectionState.DISCONNECTING)
+        }
         OnionMasq.stop()
         removeObservers()
         logHelper.stopLog()
@@ -200,10 +204,8 @@ class TorVpnService : VpnService() {
             }, 0, 1000)
         } catch (e: Exception) {
             // Catch any exception
-            OnionMasq.stop()
             e.printStackTrace()
-            VpnStatusObservable.update(ConnectionState.CONNECTION_ERROR)
-            stopSelf()
+            stop(true)
         }
     }
 
