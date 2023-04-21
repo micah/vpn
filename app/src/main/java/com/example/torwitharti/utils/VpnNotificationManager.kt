@@ -26,6 +26,7 @@ class VpnNotificationManager(val context: Context) {
     }
 
     private val notificationManager: NotificationManager
+    private var startTime: Long = 0
     init {
         notificationManager = initNotificationManager()
     }
@@ -44,6 +45,7 @@ class VpnNotificationManager(val context: Context) {
         var action: NotificationCompat.Action? = null
         var stateString: String? = null
         var dataUsageString: String? = null
+        var showChronometer = false
         when(state) {
             ConnectionState.CONNECTING -> {
                 action = NotificationCompat.Action.Builder(
@@ -51,6 +53,7 @@ class VpnNotificationManager(val context: Context) {
                     context.getString(R.string.frag_connect_cancel), getStopIntent()
                 ).build()
                 stateString = context.getString(R.string.frag_connect_connecting)
+                startTime = 0
             }
             ConnectionState.PAUSED -> {
                 action = NotificationCompat.Action.Builder(
@@ -58,6 +61,7 @@ class VpnNotificationManager(val context: Context) {
                     context.getString(R.string.frag_connect_reconnect), getStartIntent()
                 ).build()
                 stateString = context.getString(R.string.frag_connect_paused)
+                startTime = 0
             }
             ConnectionState.CONNECTED -> {
                 action = NotificationCompat.Action.Builder(
@@ -66,6 +70,10 @@ class VpnNotificationManager(val context: Context) {
                 ).build()
                 stateString = context.getString(R.string.frag_connect_connected)
                 dataUsageString = getDataUsageText(dataUsage)
+                if (startTime == 0L) {
+                    startTime = System.currentTimeMillis()
+                }
+                showChronometer = true
             }
             ConnectionState.CONNECTION_ERROR -> {
                 action = NotificationCompat.Action.Builder(
@@ -73,15 +81,20 @@ class VpnNotificationManager(val context: Context) {
                     context.getString(R.string.frag_connect_try_again), getStartIntent()
                 ).build()
                 stateString = context.getString(R.string.error_detail_message)
+                startTime = 0
             }
 
-            else -> {}
+            else -> {
+                startTime = 0
+            }
         }
 
         val notificationBuilder = initNotificationBuilderDefaults()
         notificationBuilder
             .setSmallIcon(android.R.drawable.ic_dialog_info)
-            .setWhen(System.currentTimeMillis())
+            .setWhen(startTime)
+            .setUsesChronometer(showChronometer)
+            .setShowWhen(showChronometer)
             .setContentTitle(stateString)
             .setContentText(dataUsageString)
             .setTicker(stateString)
