@@ -8,10 +8,12 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.text.format.Formatter
 import androidx.core.app.NotificationCompat
 import com.example.torwitharti.MainActivity
 import com.example.torwitharti.R
 import com.example.torwitharti.vpn.ConnectionState
+import com.example.torwitharti.vpn.DataUsage
 import com.example.torwitharti.vpn.TorVpnService
 import com.example.torwitharti.vpn.TorVpnService.Companion.ACTION_START_VPN
 import com.example.torwitharti.vpn.TorVpnService.Companion.ACTION_STOP_VPN
@@ -38,9 +40,10 @@ class VpnNotificationManager(val context: Context) {
         return notificationBuilder.build()
     }
 
-    fun updateNotification(state: ConnectionState) {
+    fun updateNotification(state: ConnectionState, dataUsage: DataUsage) {
         var action: NotificationCompat.Action? = null
         var stateString: String? = null
+        var dataUsageString: String? = null
         when(state) {
             ConnectionState.CONNECTING -> {
                 action = NotificationCompat.Action.Builder(
@@ -62,6 +65,7 @@ class VpnNotificationManager(val context: Context) {
                     context.getString(R.string.frag_connect_disconnect), getStopIntent()
                 ).build()
                 stateString = context.getString(R.string.frag_connect_connected)
+                dataUsageString = getDataUsageText(dataUsage)
             }
             ConnectionState.CONNECTION_ERROR -> {
                 action = NotificationCompat.Action.Builder(
@@ -78,13 +82,22 @@ class VpnNotificationManager(val context: Context) {
         notificationBuilder
             .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setWhen(System.currentTimeMillis())
-            .setContentTitle(context.getString(R.string.app_name))
-            .setContentText(stateString)
+            .setContentTitle(stateString)
+            .setContentText(dataUsageString)
             .setTicker(stateString)
             .setContentIntent(getContentPendingIntent())
             .addAction(action)
         notificationManager.notify(NOTIFICATION_ID,  notificationBuilder.build())
     }
+
+    private fun getDataUsageText(dataUsage: DataUsage): String {
+        val received = Formatter.formatFileSize(context, dataUsage.downstreamDataPerSec)
+        val sent = Formatter.formatFileSize(context, dataUsage.upstreamDataPerSec)
+        val receivedOverall = Formatter.formatFileSize(context, dataUsage.downstreamData)
+        val sentOverall = Formatter.formatFileSize(context, dataUsage.upstreamData)
+        return context.getString(R.string.statusline_bytecount, received, receivedOverall, sent, sentOverall);
+    }
+
     private fun getContentPendingIntent(): PendingIntent? {
         val mainActivityIntent = Intent(context, MainActivity::class.java)
         mainActivityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
