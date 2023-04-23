@@ -69,5 +69,6 @@
     <string name="error_something_went_wrong">Something went wrong</string>
     <string name="error_detail_message">Onionverse couldn\'t connect to the Tor Network.</string>
     <string name="error_view_logs">View logs</string>
+    <string name="statusline_bytecount">↓%2$s %1$s/s - ↑%4$s %3$s/s</string>
 
 </resources>

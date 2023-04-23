@@ -8,10 +8,14 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.text.format.Formatter
 import androidx.core.app.NotificationCompat
 import com.example.torwitharti.MainActivity
 import com.example.torwitharti.R
+import com.example.torwitharti.vpn.ConnectionState
+import com.example.torwitharti.vpn.DataUsage
 import com.example.torwitharti.vpn.TorVpnService
+import com.example.torwitharti.vpn.TorVpnService.Companion.ACTION_START_VPN
 import com.example.torwitharti.vpn.TorVpnService.Companion.ACTION_STOP_VPN
 
 class VpnNotificationManager(val context: Context) {
@@ -21,22 +25,90 @@ class VpnNotificationManager(val context: Context) {
         private val NOTIFICATION_CHANNEL_NEWSTATUS_ID = "TORVPN_NOTIFICATION_CHANNEL_NEWSTATUS_ID"
     }
 
+    private val notificationManager: NotificationManager
+    private var startTime: Long = 0
+    init {
+        notificationManager = initNotificationManager()
+    }
 
     fun buildForegroundServiceNotification(): Notification? {
-        initNotificationManager()
-        val actionBuilder = NotificationCompat.Action.Builder(
-            android.R.drawable.ic_menu_close_clear_cancel,
-            "STOP", getStopIntent()
-        )
-
         val notificationBuilder = initNotificationBuilderDefaults()
         notificationBuilder
             .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setWhen(System.currentTimeMillis())
             .setContentTitle(context.getString(R.string.app_name))
             .setContentIntent(getContentPendingIntent())
-            .addAction(actionBuilder.build())
         return notificationBuilder.build()
+    }
+
+    fun updateNotification(state: ConnectionState, dataUsage: DataUsage) {
+        var action: NotificationCompat.Action? = null
+        var stateString: String? = null
+        var dataUsageString: String? = null
+        var showChronometer = false
+        when(state) {
+            ConnectionState.CONNECTING -> {
+                action = NotificationCompat.Action.Builder(
+                    android.R.drawable.ic_menu_close_clear_cancel,
+                    context.getString(R.string.frag_connect_cancel), getStopIntent()
+                ).build()
+                stateString = context.getString(R.string.frag_connect_connecting)
+                startTime = 0
+            }
+            ConnectionState.PAUSED -> {
+                action = NotificationCompat.Action.Builder(
+                    android.R.drawable.ic_menu_close_clear_cancel,
+                    context.getString(R.string.frag_connect_reconnect), getStartIntent()
+                ).build()
+                stateString = context.getString(R.string.frag_connect_paused)
+                startTime = 0
+            }
+            ConnectionState.CONNECTED -> {
+                action = NotificationCompat.Action.Builder(
+                    android.R.drawable.ic_menu_close_clear_cancel,
+                    context.getString(R.string.frag_connect_disconnect), getStopIntent()
+                ).build()
+                stateString = context.getString(R.string.frag_connect_connected)
+                dataUsageString = getDataUsageText(dataUsage)
+                if (startTime == 0L) {
+                    startTime = System.currentTimeMillis()
+                }
+                showChronometer = true
+            }
+            ConnectionState.CONNECTION_ERROR -> {
+                action = NotificationCompat.Action.Builder(
+                    android.R.drawable.ic_menu_close_clear_cancel,
+                    context.getString(R.string.frag_connect_try_again), getStartIntent()
+                ).build()
+                stateString = context.getString(R.string.error_detail_message)
+                startTime = 0
+            }
+
+            else -> {
+                startTime = 0
+            }
+        }
+
+        val notificationBuilder = initNotificationBuilderDefaults()
+        notificationBuilder
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setWhen(startTime)
+            .setUsesChronometer(showChronometer)
+            .setShowWhen(showChronometer)
+            .setContentTitle(stateString)
+            .setContentText(dataUsageString)
+            .setTicker(stateString)
+            .setContentIntent(getContentPendingIntent())
+            .addAction(action)
+        notificationManager.notify(NOTIFICATION_ID,  notificationBuilder.build())
+    }
+
+    private fun getDataUsageText(dataUsage: DataUsage): String {
+        val received = Formatter.formatFileSize(context, dataUsage.downstreamDataPerSec)
+        val sent = Formatter.formatFileSize(context, dataUsage.upstreamDataPerSec)
+        val receivedOverall = Formatter.formatFileSize(context, dataUsage.downstreamData)
+        val sentOverall = Formatter.formatFileSize(context, dataUsage.upstreamData)
+        return context.getString(R.string.statusline_bytecount, received, receivedOverall, sent, sentOverall);
     }
 
     private fun getContentPendingIntent(): PendingIntent? {
@@ -49,6 +121,12 @@ class VpnNotificationManager(val context: Context) {
         val stopVpnIntent = Intent(context, TorVpnService::class.java)
         stopVpnIntent.action = ACTION_STOP_VPN
         return PendingIntent.getService(context, 0, stopVpnIntent, getDefaultFlags())
+    }
+
+    private fun getStartIntent(): PendingIntent? {
+        val startVpnIntent = Intent(context, TorVpnService::class.java)
+        startVpnIntent.action = ACTION_START_VPN
+        return PendingIntent.getService(context, 0, startVpnIntent, getDefaultFlags())
     }
 
     private fun getDefaultFlags(): Int {
@@ -92,7 +170,6 @@ class VpnNotificationManager(val context: Context) {
 
 
     fun cancelNotifications() {
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.cancel(NOTIFICATION_ID)
     }
 }

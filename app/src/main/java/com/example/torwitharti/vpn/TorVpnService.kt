@@ -20,6 +20,7 @@ import org.torproject.onionmasq.OnionmasqEvent
 import org.torproject.onionmasq.logging.LogHelper
 import org.torproject.onionmasq.logging.LogObservable
 import java.io.IOException
+import java.util.*
 
 
 class TorVpnService : VpnService() {
@@ -41,8 +42,13 @@ class TorVpnService : VpnService() {
     private val job = SupervisorJob()
     private val coroutineScope = CoroutineScope(Dispatchers.IO + job)
     private var observer: Observer<OnionmasqEvent>? = null
+    private var vpnStatusObserver: Observer<ConnectionState>? = null
+    private var vpnDataUsageObserver: Observer<DataUsage>? = null
     private val mainHandler: Handler by lazy {
         Handler(mainLooper)
+    }
+    private val timer: Timer by lazy {
+        Timer()
     }
 
     inner class TorVpnServiceBinder : Binder(), ISocketProtect {
@@ -59,10 +65,6 @@ class TorVpnService : VpnService() {
         super.onCreate()
         notificationManager = VpnNotificationManager(this)
         logHelper = LogHelper()
-        // TODO: observe LogObservable, set VpnStatusObservable to Connected if progress events completed
-        // TODO 2: move VpnStatusObservable to onionmasq lib, handling the onionmasq states Connected, Disconnected and Failed should be encapsulated,
-        //  Connecting and Disconnecting can be triggered by the UI to receive immediate state changes on user interaction
-        //  LogObservable.getInstance().logListData.observe()
         OnionMasq.bindVPNService(TorVpnService::class.java)
         observer = Observer<OnionmasqEvent> { onionmasqEvent: OnionmasqEvent ->
             if (onionmasqEvent.isReadyForTraffic) {
@@ -70,6 +72,12 @@ class TorVpnService : VpnService() {
             }
         }
         logObservable = LogObservable.getInstance()
+        vpnStatusObserver = Observer<ConnectionState> { connectionState: ConnectionState? ->
+            notificationManager.updateNotification(connectionState!!, VpnStatusObservable.dataUsage.value!!);
+        }
+        vpnDataUsageObserver = Observer<DataUsage> { dataUsage: DataUsage? ->
+            notificationManager.updateNotification(VpnStatusObservable.statusLiveData.value!!, dataUsage!!)
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -86,7 +94,7 @@ class TorVpnService : VpnService() {
             establishVpn()
         } else if (action == ACTION_STOP_VPN) {
             Log.d(TAG, "service: stopping vpn...")
-            stop()
+            stop(false)
         } else {
             Log.d(TAG, "service unknown action: $action" );
         }
@@ -96,7 +104,7 @@ class TorVpnService : VpnService() {
     override fun onRevoke() {
         super.onRevoke()
         Log.d(TAG, "service: onRevoke")
-        stop()
+        stop(false)
     }
 
     override fun onDestroy() {
@@ -110,24 +118,39 @@ class TorVpnService : VpnService() {
         logObservable = null
     }
 
-    private fun stop() {
+    private fun stop(onError: Boolean) {
         Log.d(TAG, "service: stopping")
-        VpnStatusObservable.update(ConnectionState.DISCONNECTING)
-        OnionMasq.stop()
-        observer?.let {
-            mainHandler.post { OnionMasq.getProgressEvent().removeObserver(it) }
+        if (onError) {
+            VpnStatusObservable.update(ConnectionState.CONNECTION_ERROR)
+        } else {
+            VpnStatusObservable.update(ConnectionState.DISCONNECTING)
         }
-
+        OnionMasq.stop()
+        removeObservers()
         logHelper.stopLog()
+        timer.cancel()
+        VpnStatusObservable.resetDataUsage()
         closeFd()
         stopForeground(true)
         OnionMasq.unbindVPNService()
         stopSelf()
     }
 
+    private fun removeObservers() {
+        observer?.let {
+            mainHandler.post { OnionMasq.getProgressEvent().removeObserver(it) }
+        }
+        vpnStatusObserver?.let {
+            mainHandler.post{ VpnStatusObservable.statusLiveData.removeObserver(it) }
+        }
+        vpnDataUsageObserver?.let {
+            mainHandler.post { VpnStatusObservable.dataUsage.removeObserver(it) }
+        }
+    }
+
     private fun closeFd() {
         try {
-            if (fd != null) fd!!.close()
+            fd?.close()
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -157,19 +180,32 @@ class TorVpnService : VpnService() {
             logHelper.readLog()
 
             observer?.let {
-                Log.d(TAG, "observer created!")
                 mainHandler.post { OnionMasq.getProgressEvent().observeForever(it) }
+            }
+
+            vpnStatusObserver?.let {
+                mainHandler.post { VpnStatusObservable.statusLiveData.observeForever(it) }
+            }
+            vpnDataUsageObserver?.let {
+                mainHandler.post{ VpnStatusObservable.dataUsage.observeForever(it) }
             }
 
             coroutineScope.async {
                 OnionMasq.start(fd!!.detachFd())
             }
+
+            timer.schedule(object : TimerTask() {
+                override fun run() {
+                    VpnStatusObservable.updateDataUsage(
+                        OnionMasq.getBytesReceived(),
+                        OnionMasq.getBytesSent()
+                    )
+                }
+            }, 0, 1000)
         } catch (e: Exception) {
             // Catch any exception
-            OnionMasq.stop()
             e.printStackTrace()
-            VpnStatusObservable.update(ConnectionState.CONNECTION_ERROR)
-            stopSelf()
+            stop(true)
         }
     }
 
