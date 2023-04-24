@@ -25,7 +25,7 @@ class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChang
         fun newInstance() = AppRoutingFragment()
     }
 
-    private val TAG = AppRoutingFragment.javaClass.simpleName
+    private val TAG = AppRoutingFragment::class.java.simpleName
     private lateinit var viewModel: AppRoutingViewModel
     private lateinit var appListAdapter: AppListAdapter
     private var _binding: FragmentAppRoutingBinding? = null
