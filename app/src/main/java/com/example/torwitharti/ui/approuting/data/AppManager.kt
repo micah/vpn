@@ -159,6 +159,10 @@ class AppManager(context: Context) {
     fun loadCachedApps(): List<AppItemModel> {
         val gson = Gson()
         val appItemModelListType: Type = object : TypeToken<ArrayList<AppItemModel?>?>() {}.type
-        return gson.fromJson(preferenceHelper.cachedApps, appItemModelListType)
+        gson.fromJson<List<AppItemModel>>(preferenceHelper.cachedApps, appItemModelListType)?.let {
+            return it
+        } ?: run {
+            return emptyList()
+        }
     }
 }
