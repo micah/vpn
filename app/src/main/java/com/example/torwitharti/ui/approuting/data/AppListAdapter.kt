@@ -88,6 +88,14 @@ class AppListAdapter(list: List<AppItemModel>,
                 Glide.with(binding.root.context)
                     .load(ApplicationInfoModel(appItem.appId))
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .dontAnimate()
+                    .let { requestBuilder ->
+                        binding.ivAppImage.drawable?.let {
+                            requestBuilder.placeholder(it)
+                        } ?: run {
+                            requestBuilder
+                        }
+                    }
                     .into(binding.ivAppImage)
             } ?: run {
                 binding.ivAppImage.setImageDrawable(null)
