@@ -42,6 +42,8 @@ data class AppItemModel (
         return json
     }
 
+    // protectAllApps is excluded on purpose, so that List<AppItemModel> comparisons for
+    // equality return true, even if protectAllApps changed
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is AppItemModel) return false
@@ -58,6 +60,7 @@ data class AppItemModel (
         return true
     }
 
+    // protectAllApps is excluded on purpose
     override fun hashCode(): Int {
         var result = viewType
         result = 31 * result + text.hashCode()
