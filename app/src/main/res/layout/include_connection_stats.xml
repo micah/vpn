@@ -145,13 +145,13 @@
                 android:id="@+id/switch_protect_apps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:track="@drawable/switch_track_connected_stats"
-                android:thumb="@drawable/switch_thumb_connected_stats"
                 android:layout_marginEnd="16dp"
                 android:checked="true"
+                android:thumb="@drawable/switch_thumb_connected_stats"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_protect_all_apps_label"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_protect_all_apps_label" />
+                app:layout_constraintTop_toTopOf="@+id/tv_protect_all_apps_label"
+                app:track="@drawable/switch_track_connected_stats" />
 
             <TextView
                 android:id="@+id/tv_protect_all_apps_label"
@@ -164,10 +164,11 @@
                 android:text="@string/stats_protect_all_apps"
                 android:textFontWeight="550"
                 android:thumb="@drawable/switch_thumb_connected_stats"
+                app:track="@drawable/switch_track_connected_stats"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ic_protect_app"
                 app:layout_constraintTop_toTopOf="parent"
-                app:track="@drawable/switch_track_connected_stats" />
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Chronometer

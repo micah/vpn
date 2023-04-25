@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.torwitharti.databinding.FragmentAppRoutingBinding
 import com.example.torwitharti.ui.approuting.data.AppListAdapter
@@ -48,6 +49,11 @@ class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChang
         binding.rvAppList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvAppList.adapter = appListAdapter
         viewModel.getObservableAppList().observe(viewLifecycleOwner, appListAdapter::update)
+
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
         return binding.root
     }
 

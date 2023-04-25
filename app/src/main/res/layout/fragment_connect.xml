@@ -124,7 +124,7 @@
             android:id="@+id/tv_connect_action_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/connection_button_bottom_padding"
             android:background="@drawable/av_connect_to_pause"
             android:clickable="true"
             android:elevation="0dp"
