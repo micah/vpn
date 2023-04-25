@@ -71,6 +71,10 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
         return appList
     }
 
+    fun getObservableProgress(): LiveData<Boolean> {
+        return isLoadingAppList
+    }
+
     fun getAppList(): List<AppItemModel> {
         appList.value?.also {
             return it

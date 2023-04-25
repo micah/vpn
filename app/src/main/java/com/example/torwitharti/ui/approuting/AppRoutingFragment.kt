@@ -3,11 +3,10 @@ package com.example.torwitharti.ui.approuting
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,6 +51,9 @@ class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChang
         binding.rvAppList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvAppList.adapter = appListAdapter
         viewModel.getObservableAppList().observe(viewLifecycleOwner, appListAdapter::update)
+        viewModel.getObservableProgress().observe(viewLifecycleOwner) { isLoading ->
+            binding.progressIndicator.visibility = if (isLoading) VISIBLE else GONE
+        }
 
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
