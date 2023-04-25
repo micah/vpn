@@ -44,7 +44,7 @@ class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerVi
             appItem.appId?.also {
                 Glide.with(binding.root.context)
                     .load(ApplicationInfoModel(appItem.appId))
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(binding.ivAppImage)
             } ?: run {
                 binding.ivAppImage.setImageDrawable(null)

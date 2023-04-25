@@ -117,7 +117,7 @@ class AppListAdapter(list: List<AppItemModel>,
                 Log.d("--->", "load icn for ${appItem.appId}")
                 Glide.with(binding.root.context)
                     .load(ApplicationInfoModel(appItem.appId))
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .dontAnimate()
                     .let { requestBuilder ->
                         binding.ivAppImage.drawable?.let {

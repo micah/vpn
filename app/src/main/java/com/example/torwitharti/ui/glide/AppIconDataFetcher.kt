@@ -5,10 +5,12 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import androidx.appcompat.content.res.AppCompatResources
 import com.bumptech.glide.Priority
 import com.bumptech.glide.Registry
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.data.DataFetcher
+import com.example.torwitharti.R
 
 
 class AppIconDataFetcher internal constructor(
@@ -29,7 +31,7 @@ class AppIconDataFetcher internal constructor(
             callback.onDataReady(icon)
         } catch (e: Registry.NoResultEncoderAvailableException) {
             e.printStackTrace()
-            // TODO: we need to set a default icn
+            callback.onDataReady(AppCompatResources.getDrawable(mContext, R.drawable.ic_dummy_app))
         }
     }
 
