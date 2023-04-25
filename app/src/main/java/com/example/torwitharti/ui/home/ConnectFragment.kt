@@ -2,6 +2,7 @@ package com.example.torwitharti.ui.home
 
 import android.animation.AnimatorSet
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
@@ -54,8 +55,8 @@ class ConnectFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        currentVpnState = ConnectionState.INIT
         connectFragmentViewModel = ViewModelProvider(this)[ConnectFragmentViewModel::class.java]
-
         binding = FragmentConnectBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = connectFragmentViewModel
@@ -70,20 +71,16 @@ class ConnectFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     connectFragmentViewModel.connectionState.collect { vpnState ->
-                        Log.d(TAG, "onCreateView: vpn state ${vpnState}")
                         setUIState(vpnState)
                     }
                 }
             }
         }
-
-
-
         return binding.root
     }
 
     private fun setUIState(vpnState: ConnectionState) {
-        Log.d(TAG, "setUIState: ${vpnState.name}")
+        Log.d(TAG, "setUIState: ${vpnState.name} | current state :${if(::currentVpnState.isInitialized) currentVpnState else "not initiaized"}")
         if (::currentVpnState.isInitialized && currentVpnState == vpnState) {
             return
         }
