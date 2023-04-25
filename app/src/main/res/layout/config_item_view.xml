@@ -6,7 +6,9 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:padding="@dimen/default_padding">
+        android:padding="@dimen/default_padding"
+        android:background="@drawable/bg_config_item"
+        >
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivIcon"
             android:layout_width="24dp"
