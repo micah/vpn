@@ -1,14 +1,10 @@
 package com.example.torwitharti
 
 import android.animation.AnimatorSet
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.TypedValue
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.MenuItemCompat
-import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -17,10 +13,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.torwitharti.databinding.ActivityMainBinding
 import com.example.torwitharti.vpn.ConnectionState
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarMenu
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,16 +42,11 @@ class MainActivity : AppCompatActivity() {
         )
         navController.addOnDestinationChangedListener { _: NavController, destination: NavDestination, bundle: Bundle? ->
             if (appBarConfiguration.topLevelDestinations.contains(destination.id)) {
-                navView.isVisible = true
-                supportActionBar?.hide()
+                showBottomNavigationView(navView)
             } else {
-                navView.isVisible = false
-                supportActionBar?.show()
+                hideBottomNavigationView(navView)
             }
         }
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
         manuallyAdjustBottomNavItemIconsSize()
     }
@@ -66,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    private fun manuallyAdjustBottomNavItemIconsSize(){
+    private fun manuallyAdjustBottomNavItemIconsSize() {
         //There's default primary color tint that needs to be removed
         binding.navView.itemIconTintList = null;
 
@@ -75,7 +64,8 @@ class MainActivity : AppCompatActivity() {
         for (i in 0 until menuView.childCount) {
 
             val iconView =
-                menuView.getChildAt(i).findViewById<View>(com.google.android.material.R.id.navigation_bar_item_icon_view)
+                menuView.getChildAt(i)
+                    .findViewById<View>(com.google.android.material.R.id.navigation_bar_item_icon_view)
             val layoutParams = iconView.layoutParams
             val displayMetrics = resources.displayMetrics
             layoutParams.height = TypedValue.applyDimension(
@@ -88,8 +78,16 @@ class MainActivity : AppCompatActivity() {
             ).toInt()
             iconView.layoutParams = layoutParams
         }
+    }
 
+    private fun hideBottomNavigationView(view: BottomNavigationView) {
+        view.clearAnimation()
+        view.animate().translationY(view.height.toFloat()).duration = 300
+    }
 
+    private fun showBottomNavigationView(view: BottomNavigationView) {
+        view.clearAnimation()
+        view.animate().translationY(0f).duration = 300
     }
 }
 
