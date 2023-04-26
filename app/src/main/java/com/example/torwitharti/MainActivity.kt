@@ -23,6 +23,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController
     lateinit var connectingAnim: AnimatorSet
 
+    companion object {
+        val KEY_ACTION = "ACTION"
+        val ACTION_REQUEST_VPN_PERMISSON = MainActivity::class.java.simpleName + ".ACTION_REQUEST_VPN_PERMISSON"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -49,6 +54,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         manuallyAdjustBottomNavItemIconsSize()
+
+        intent?.let { intent ->
+            when (intent.action) {
+                ACTION_REQUEST_VPN_PERMISSON -> {
+                    val bundle =  Bundle()
+                    bundle.putString(KEY_ACTION, ACTION_REQUEST_VPN_PERMISSON)
+                    navController.navigate(R.id.navigation_connect, bundle)
+                }
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -167,7 +167,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         //TODO
     }
 
-    private fun prepareToStartVPN() {
+    fun prepareToStartVPN() {
         val vpnIntent: Intent? = VpnServiceCommand.prepareVpn(getApplication())
         if (vpnIntent != null) {
             _prepareVpn.postValue(vpnIntent)
