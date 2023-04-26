@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.example.torwitharti.ui.approuting.model.AppRoutingViewModel" />
@@ -44,6 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
+                    app:menu="@menu/app_routing_menu"
                     app:popupTheme="@style/Theme.TorWithArti.PopupOverlay" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>

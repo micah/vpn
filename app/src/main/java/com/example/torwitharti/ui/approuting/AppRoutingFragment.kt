@@ -2,13 +2,16 @@ package com.example.torwitharti.ui.approuting
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.torwitharti.R
 import com.example.torwitharti.databinding.FragmentAppRoutingBinding
 import com.example.torwitharti.ui.approuting.data.AppListAdapter
 import com.example.torwitharti.ui.approuting.data.TorAppsAdapter
@@ -52,6 +55,16 @@ class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChang
 
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
+        }
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.refresh_circuits -> {
+                    Toast.makeText(requireContext(), "Oops. Refreshing circuits is not yet implemented!", Toast.LENGTH_SHORT).show()
+                    return@setOnMenuItemClickListener true
+                }
+                else -> return@setOnMenuItemClickListener false
+            }
+
         }
 
         return binding.root
