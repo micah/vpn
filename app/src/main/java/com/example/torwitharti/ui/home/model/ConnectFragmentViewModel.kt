@@ -154,7 +154,6 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     private fun attemptConnect() {
         VpnStatusObservable.update(CONNECTING)
         prepareToStartVPN()
-
     }
 
     private fun attemptDisconnect() {
@@ -169,15 +168,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     }
 
     private fun prepareToStartVPN() {
-        var vpnIntent: Intent? = null
-        try {
-            vpnIntent =
-                VpnService.prepare(getApplication()) // stops the VPN connection created by another application.
-        } catch (npe: NullPointerException) {
-            VpnStatusObservable.update(CONNECTION_ERROR)
-        } catch (ise: IllegalStateException) {
-            VpnStatusObservable.update(CONNECTION_ERROR)
-        }
+        val vpnIntent: Intent? = VpnServiceCommand.prepareVpn(getApplication())
         if (vpnIntent != null) {
             _prepareVpn.postValue(vpnIntent)
         } else {
