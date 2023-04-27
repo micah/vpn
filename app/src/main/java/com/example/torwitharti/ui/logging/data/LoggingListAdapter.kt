@@ -28,9 +28,6 @@ class LoggingListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun update(list: List<LogItem>) {
-        if (list == items) {
-            return
-        }
         items = list.toMutableList()
         notifyDataSetChanged()
     }
