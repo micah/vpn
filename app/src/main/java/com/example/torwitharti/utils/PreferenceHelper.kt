@@ -12,6 +12,7 @@ class PreferenceHelper(context: Context) {
         const val PROTECT_ALL_APPS: String = "protect_all_apps"
         const val SHOULD_SHOW_GUIDE: String = "should_show_guide"
         const val CACHED_APPS: String = "cached_apps"
+        const val START_TIME: String = "start_time"
     }
 
     private val sharedPreference =
