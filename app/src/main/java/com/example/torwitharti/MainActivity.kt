@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.configure_fragment
             )
         )
-        navController.addOnDestinationChangedListener { _: NavController, destination: NavDestination, bundle: Bundle? ->
+        navController.addOnDestinationChangedListener { _: NavController, destination: NavDestination, _: Bundle? ->
             if (appBarConfiguration.topLevelDestinations.contains(destination.id)) {
                 showBottomNavigationView(navView)
             } else {

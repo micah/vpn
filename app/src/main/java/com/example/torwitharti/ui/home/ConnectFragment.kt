@@ -2,7 +2,6 @@ package com.example.torwitharti.ui.home
 
 import android.animation.AnimatorSet
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
@@ -16,7 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import com.example.torwitharti.R
-import com.example.torwitharti.databinding.*
+import com.example.torwitharti.databinding.FragmentConnectBinding
 import com.example.torwitharti.ui.home.model.ConnectFragmentViewModel
 import com.example.torwitharti.utils.*
 import com.example.torwitharti.vpn.ConnectionState
@@ -61,11 +60,11 @@ class ConnectFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = connectFragmentViewModel
 
-        connectFragmentViewModel.prepareVpn.observe(viewLifecycleOwner) { intent ->
-            if (intent != null) {
-                startForResult.launch(intent)
+        connectFragmentViewModel.prepareVpn.observe(viewLifecycleOwner, Observer<Intent?> {  intent ->
+            intent?.let {
+                startForResult.launch(it)
             }
-        }
+        })
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
