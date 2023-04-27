@@ -3,13 +3,13 @@ package com.example.torwitharti.ui.home.model
 import android.app.Application
 import android.content.Intent
 import android.net.VpnService
-import android.os.Handler
-import android.os.Looper
 import android.text.format.Formatter
+import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import com.example.torwitharti.BuildConfig
 import com.example.torwitharti.R
+import com.example.torwitharti.utils.PreferenceHelper
 import com.example.torwitharti.vpn.ConnectionState
 import com.example.torwitharti.vpn.ConnectionState.*
 import com.example.torwitharti.vpn.DataUsage
@@ -141,6 +141,11 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     //TODO
     fun viewLogsClicked() {
+    }
+
+    val allAppsProtected: Boolean get() = PreferenceHelper(getApplication()).protectAllApps
+    fun onProtectAppsChanged(compoundButton: CompoundButton, isChecked: Boolean) {
+        PreferenceHelper(getApplication()).protectAllApps = isChecked
     }
 
     private fun attemptPause() {
