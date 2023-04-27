@@ -22,9 +22,6 @@ import kotlinx.coroutines.flow.*
  */
 
 class ConnectFragmentViewModel(application: Application) : AndroidViewModel(application) {
-    companion object {
-        val TAG: String = ConnectFragmentViewModel.javaClass.simpleName
-    }
 
     private val _prepareVpn = MutableLiveData<Intent?>()
     val prepareVpn: LiveData<Intent?> = _prepareVpn

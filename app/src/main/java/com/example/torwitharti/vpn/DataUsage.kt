@@ -5,9 +5,6 @@ class DataUsage {
     var downstreamData: Long = 0
     var upstreamDataPerSec: Long = 0
     var downstreamDataPerSec: Long = 0
-    var timeStamp: Long
+    var timeStamp: Long = System.currentTimeMillis()
 
-    init {
-        timeStamp = System.currentTimeMillis()
-    }
 }
