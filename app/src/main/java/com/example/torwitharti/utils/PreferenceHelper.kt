@@ -12,6 +12,7 @@ class PreferenceHelper(context: Context) {
         const val PROTECT_ALL_APPS: String = "protect_all_apps"
         const val SHOULD_SHOW_GUIDE: String = "should_show_guide"
         const val CACHED_APPS: String = "cached_apps"
+        const val START_TIME: String = "start_time"
     }
 
     private val sharedPreference =
@@ -37,6 +38,10 @@ class PreferenceHelper(context: Context) {
     var cachedApps
         get() = sharedPreference.getString(CACHED_APPS, "[]")
         set(value) = sharedPreference.edit().putString(CACHED_APPS, value).apply()
+
+    var startTime: Long
+        get() = sharedPreference.getLong(START_TIME, 0)
+        set(value) = sharedPreference.edit().putLong(START_TIME, value).apply()
 
     fun registerListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
         sharedPreference.registerOnSharedPreferenceChangeListener(listener)

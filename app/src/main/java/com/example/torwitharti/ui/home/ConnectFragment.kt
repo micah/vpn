@@ -18,10 +18,7 @@ import androidx.lifecycle.*
 import com.example.torwitharti.R
 import com.example.torwitharti.databinding.*
 import com.example.torwitharti.ui.home.model.ConnectFragmentViewModel
-import com.example.torwitharti.utils.center
-import com.example.torwitharti.utils.createStatusBarAnimation
-import com.example.torwitharti.utils.createStatusBarConnectedGradientAnimation
-import com.example.torwitharti.utils.startVectorAnimationWithEndCallback
+import com.example.torwitharti.utils.*
 import com.example.torwitharti.vpn.ConnectionState
 import com.example.torwitharti.vpn.VpnServiceCommand
 import com.example.torwitharti.vpn.VpnStatusObservable
@@ -41,6 +38,8 @@ class ConnectFragment : Fragment() {
     //connecting progress animation is stopped when state goes from connecting to connected.
     private var progressGradientAnimatorSet: AnimatorSet? = null
 
+    private lateinit var preferenceHelper: PreferenceHelper
+
     private var startForResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -56,6 +55,7 @@ class ConnectFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         currentVpnState = ConnectionState.INIT
+        preferenceHelper = PreferenceHelper(requireContext())
         connectFragmentViewModel = ViewModelProvider(this)[ConnectFragmentViewModel::class.java]
         binding = FragmentConnectBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -93,7 +93,16 @@ class ConnectFragment : Fragment() {
 
             ConnectionState.PAUSED -> {}
             ConnectionState.CONNECTED -> {
-                binding.includeStats.chronometer.base = SystemClock.elapsedRealtime()
+                val elapsed = SystemClock.elapsedRealtime()
+                if (preferenceHelper.startTime != 0L) {
+                    binding.includeStats.chronometer.base =
+                        elapsed - (elapsed - preferenceHelper.startTime)
+
+                } else {
+                    binding.includeStats.chronometer.base = elapsed
+                    preferenceHelper.startTime = elapsed
+                }
+
                 binding.includeStats.chronometer.start()
                 showConnectedTransition()
             }
@@ -101,6 +110,7 @@ class ConnectFragment : Fragment() {
             ConnectionState.DISCONNECTED -> {
                 binding.includeStats.chronometer.stop()
                 showDisconnectedTransition()
+                preferenceHelper.startTime = 0
             }
 
             ConnectionState.CONNECTION_ERROR -> {
