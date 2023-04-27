@@ -46,6 +46,7 @@ class ConnectFragment : Fragment() {
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             VpnServiceCommand.startVpn(context)
+            context?.let { PreferenceHelper(it).startOnBoot = true }
         } else {
             VpnStatusObservable.update(ConnectionState.CONNECTION_ERROR)
         }
