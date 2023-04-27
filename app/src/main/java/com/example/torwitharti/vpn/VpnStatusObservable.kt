@@ -1,5 +1,6 @@
 package com.example.torwitharti.vpn
 
+import android.os.SystemClock
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,9 +19,16 @@ object VpnStatusObservable {
     val statusLiveData: LiveData<ConnectionState> = _statusLiveData
     private val _dataUsage: MutableLiveData<DataUsage> = MutableLiveData(DataUsage())
     val dataUsage: LiveData<DataUsage> = _dataUsage
+    private var startTime = 0L
 
     fun update(status: ConnectionState) {
         Log.d(TAG, "status update: $status")
+        if (status == ConnectionState.CONNECTED) {
+            startTime = SystemClock.elapsedRealtime()
+
+        } else if (status == ConnectionState.DISCONNECTED || status == ConnectionState.CONNECTION_ERROR) {
+            startTime = 0L
+        }
         if (isRunningOnMainThread()) {
             _statusLiveData.setValue(status)
         } else {
@@ -46,6 +54,7 @@ object VpnStatusObservable {
         }
     }
 
+    fun getStartTimeBase() = startTime
     fun resetDataUsage() {
         if (isRunningOnMainThread()) {
             _dataUsage.setValue(DataUsage())

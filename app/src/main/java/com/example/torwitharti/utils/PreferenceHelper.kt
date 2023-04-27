@@ -39,10 +39,6 @@ class PreferenceHelper(context: Context) {
         get() = sharedPreference.getString(CACHED_APPS, "[]")
         set(value) = sharedPreference.edit().putString(CACHED_APPS, value).apply()
 
-    var startTime: Long
-        get() = sharedPreference.getLong(START_TIME, 0)
-        set(value) = sharedPreference.edit().putLong(START_TIME, value).apply()
-
     fun registerListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
         sharedPreference.registerOnSharedPreferenceChangeListener(listener)
     }

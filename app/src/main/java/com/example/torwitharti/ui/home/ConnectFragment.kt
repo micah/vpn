@@ -93,15 +93,7 @@ class ConnectFragment : Fragment() {
 
             ConnectionState.PAUSED -> {}
             ConnectionState.CONNECTED -> {
-                val elapsed = SystemClock.elapsedRealtime()
-                if (preferenceHelper.startTime != 0L) {
-                    binding.includeStats.chronometer.base =
-                        elapsed - (elapsed - preferenceHelper.startTime)
-
-                } else {
-                    binding.includeStats.chronometer.base = elapsed
-                    preferenceHelper.startTime = elapsed
-                }
+                binding.includeStats.chronometer.base = VpnStatusObservable.getStartTimeBase()
 
                 binding.includeStats.chronometer.start()
                 showConnectedTransition()
@@ -110,7 +102,6 @@ class ConnectFragment : Fragment() {
             ConnectionState.DISCONNECTED -> {
                 binding.includeStats.chronometer.stop()
                 showDisconnectedTransition()
-                preferenceHelper.startTime = 0
             }
 
             ConnectionState.CONNECTION_ERROR -> {
