@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.TorWithArti" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.TorVPN" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purpleDark</item>
         <item name="colorPrimaryVariant">@color/purpleNormal</item>
@@ -17,12 +17,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.TorWithArti.NoActionBar">
+    <style name="Theme.TorVPN.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.TorWithArti.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.TorVPN.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.TorWithArti.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.TorVPN.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

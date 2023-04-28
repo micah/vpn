@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="?attr/actionBarSize"
-        tools:context=".ui.notifications.NotificationsFragment">
+        tools:context="org.torproject.vpn.ui.notifications.NotificationsFragment">
 
         <TextView
             android:id="@+id/text_notifications"

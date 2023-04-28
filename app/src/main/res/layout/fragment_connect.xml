@@ -7,17 +7,17 @@
 
         <variable
             name="viewModel"
-            type="com.example.torwitharti.ui.home.model.ConnectFragmentViewModel" />
+            type="org.torproject.vpn.ui.home.model.ConnectFragmentViewModel" />
 
         <import type="android.view.View" />
 
-        <import type="com.example.torwitharti.vpn.ConnectionState" />
+        <import type="org.torproject.vpn.vpn.ConnectionState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.ConnectFragment">
+        tools:context="org.torproject.vpn.ui.home.ConnectFragment">
 
 
         <com.google.android.material.appbar.MaterialToolbar

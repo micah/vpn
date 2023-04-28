@@ -6,11 +6,11 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.torwitharti.ui.home.model.ConnectFragmentViewModel" />
+            type="org.torproject.vpn.ui.home.model.ConnectFragmentViewModel" />
 
         <import type="android.view.View" />
 
-        <import type="com.example.torwitharti.vpn.ConnectionState" />
+        <import type="org.torproject.vpn.vpn.ConnectionState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
