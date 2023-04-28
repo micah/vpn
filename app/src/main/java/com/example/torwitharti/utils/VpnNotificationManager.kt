@@ -50,25 +50,25 @@ class VpnNotificationManager(val context: Context) {
             ConnectionState.CONNECTING -> {
                 action = NotificationCompat.Action.Builder(
                     android.R.drawable.ic_menu_close_clear_cancel,
-                    context.getString(R.string.frag_connect_cancel), getStopIntent()
+                    context.getString(R.string.action_cancel), getStopIntent()
                 ).build()
-                stateString = context.getString(R.string.frag_connect_connecting)
+                stateString = context.getString(R.string.state_connecting)
                 startTime = 0
             }
             ConnectionState.PAUSED -> {
                 action = NotificationCompat.Action.Builder(
                     android.R.drawable.ic_menu_close_clear_cancel,
-                    context.getString(R.string.frag_connect_reconnect), getStartIntent()
+                    context.getString(R.string.action_reconnect), getStartIntent()
                 ).build()
-                stateString = context.getString(R.string.frag_connect_paused)
+                stateString = context.getString(R.string.state_paused)
                 startTime = 0
             }
             ConnectionState.CONNECTED -> {
                 action = NotificationCompat.Action.Builder(
                     android.R.drawable.ic_menu_close_clear_cancel,
-                    context.getString(R.string.frag_connect_disconnect), getStopIntent()
+                    context.getString(R.string.action_disconnect), getStopIntent()
                 ).build()
-                stateString = context.getString(R.string.frag_connect_connected)
+                stateString = context.getString(R.string.state_connected)
                 dataUsageString = getDataUsageText(dataUsage)
                 if (startTime == 0L) {
                     startTime = System.currentTimeMillis()
@@ -78,7 +78,7 @@ class VpnNotificationManager(val context: Context) {
             ConnectionState.CONNECTION_ERROR -> {
                 action = NotificationCompat.Action.Builder(
                     android.R.drawable.ic_menu_close_clear_cancel,
-                    context.getString(R.string.frag_connect_try_again), getStartIntent()
+                    context.getString(R.string.action_try_again), getStartIntent()
                 ).build()
                 stateString = context.getString(R.string.error_detail_message)
                 startTime = 0
@@ -108,7 +108,7 @@ class VpnNotificationManager(val context: Context) {
         val sent = Formatter.formatFileSize(context, dataUsage.upstreamDataPerSec)
         val receivedOverall = Formatter.formatFileSize(context, dataUsage.downstreamData)
         val sentOverall = Formatter.formatFileSize(context, dataUsage.upstreamData)
-        return context.getString(R.string.statusline_bytecount, received, receivedOverall, sent, sentOverall);
+        return context.getString(R.string.stats_combined, received, receivedOverall, sent, sentOverall);
     }
 
     private fun getContentPendingIntent(): PendingIntent? {

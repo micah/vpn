@@ -2,7 +2,6 @@ package com.example.torwitharti.ui.home.model
 
 import android.app.Application
 import android.content.Intent
-import android.net.VpnService
 import android.text.format.Formatter
 import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
@@ -80,23 +79,23 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
             when (connectionState) {
                 CONNECTING -> Pair(
-                    application.getString(R.string.frag_connect_connecting),
+                    application.getString(R.string.state_connecting),
                     ContextCompat.getColor(application, R.color.purpleNormal)
                 )
                 PAUSED -> Pair(
-                    application.getString(R.string.frag_connect_paused),
+                    application.getString(R.string.state_paused),
                     ContextCompat.getColor(application, R.color.yellowNormal)
                 )
                 CONNECTED -> Pair(
-                    application.getString(R.string.frag_connect_connected),
+                    application.getString(R.string.state_connected),
                     ContextCompat.getColor(application, R.color.greenNormal)
                 )
                 DISCONNECTING -> Pair(
-                    application.getString(R.string.frag_connect_disconnecting),
+                    application.getString(R.string.state_disconnecting),
                     ContextCompat.getColor(application, R.color.purpleNormal)
                 )
                 DISCONNECTED -> Pair(
-                    application.getString(R.string.frag_connect_disconnected),
+                    application.getString(R.string.state_disconnected),
                     ContextCompat.getColor(application, R.color.redNormal)
                 )
                 else -> {
@@ -111,9 +110,9 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     val connectButtonText: StateFlow<String> = connectionState.map { connectionState ->
         when (connectionState) {
-            INIT, PAUSED -> application.getString(R.string.frag_connect_connect)
-            DISCONNECTED -> application.getString(R.string.frag_connect_reconnect)
-            CONNECTION_ERROR -> application.getString(R.string.frag_connect_try_again)
+            INIT, PAUSED -> application.getString(R.string.action_connect)
+            DISCONNECTED -> application.getString(R.string.action_reconnect)
+            CONNECTION_ERROR -> application.getString(R.string.action_try_again)
             else -> {
                 return@map ""
             }

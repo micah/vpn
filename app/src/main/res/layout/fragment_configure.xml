@@ -33,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/nav_configure"
+            android:text="@string/action_configure"
             tools:textColor="#000000"
             tools:text="Configure"
             />
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:text="@string/always_on_vpn"
-            app:secondaryText="@string/subtitle_always_on_vpn"
+            app:secondaryText="@string/always_on_vpn_description"
             android:onClick="@{handler::onAlwaysOnClicked}"
             />
     </androidx.appcompat.widget.LinearLayoutCompat>
