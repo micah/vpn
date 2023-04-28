@@ -86,11 +86,12 @@ class TorVpnService : VpnService() {
         val notification: Notification? = notificationManager.buildForegroundServiceNotification()
         startForeground(VpnNotificationManager.NOTIFICATION_ID, notification)
         val action = if (intent != null) intent.action else ""
-        if (action == ACTION_START_VPN ||
-            action == "android.net.VpnService" && Build.VERSION.SDK_INT >= ALWAYS_ON_MIN_API_LEVEL
-        //only always-on feature triggers this
-        ) {
-            Log.d(TAG, "service: starting vpn...")
+        val isAlwaysOn =  (intent == null || intent.component == null || !intent.component!!.packageName.equals(getPackageName())) && Build.VERSION.SDK_INT >= ALWAYS_ON_MIN_API_LEVEL
+        if (isAlwaysOn) {
+            VpnStatusObservable.isAlwaysOnBooting.set(true)
+            establishVpn()
+        } else if (action == ACTION_START_VPN) {
+            VpnStatusObservable.isAlwaysOnBooting.set(false)
             establishVpn()
         } else if (action == ACTION_STOP_VPN) {
             Log.d(TAG, "service: stopping vpn...")
@@ -175,6 +176,7 @@ class TorVpnService : VpnService() {
 
     private fun establishVpn() {
         try {
+            Log.d(TAG, "service: starting vpn...")
             val builder = prepareVpnProfile()
             fd = builder.establish();
             logHelper.readLog()

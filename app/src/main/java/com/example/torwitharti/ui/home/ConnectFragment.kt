@@ -14,6 +14,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import com.example.torwitharti.MainActivity
+import com.example.torwitharti.MainActivity.Companion.KEY_ACTION
 import com.example.torwitharti.R
 import com.example.torwitharti.databinding.FragmentConnectBinding
 import com.example.torwitharti.ui.home.model.ConnectFragmentViewModel
@@ -44,6 +46,7 @@ class ConnectFragment : Fragment() {
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             VpnServiceCommand.startVpn(context)
+            context?.let { PreferenceHelper(it).startOnBoot = true }
         } else {
             VpnStatusObservable.update(ConnectionState.CONNECTION_ERROR)
         }
@@ -75,6 +78,14 @@ class ConnectFragment : Fragment() {
                 }
             }
         }
+
+        arguments?.let { bundle ->
+            val action = bundle.getString(KEY_ACTION)
+            if (MainActivity.ACTION_REQUEST_VPN_PERMISSON == action) {
+                connectFragmentViewModel.prepareToStartVPN()
+            }
+        }
+
         return binding.root
     }
 

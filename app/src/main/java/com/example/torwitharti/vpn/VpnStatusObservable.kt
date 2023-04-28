@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.torwitharti.utils.isRunningOnMainThread
 import org.torproject.onionmasq.logging.LogObservable
+import java.util.concurrent.atomic.AtomicBoolean
 
 enum class ConnectionState {
     INIT /*shows 'connect'*/, CONNECTING /*shows 'pause'*/, PAUSED, CONNECTED, DISCONNECTING, DISCONNECTED, CONNECTION_ERROR
@@ -20,6 +21,8 @@ object VpnStatusObservable {
     private val _dataUsage: MutableLiveData<DataUsage> = MutableLiveData(DataUsage())
     val dataUsage: LiveData<DataUsage> = _dataUsage
     private var startTime = 0L
+
+    var isAlwaysOnBooting = AtomicBoolean(false)
 
     fun update(status: ConnectionState) {
         Log.d(TAG, "status update: $status")

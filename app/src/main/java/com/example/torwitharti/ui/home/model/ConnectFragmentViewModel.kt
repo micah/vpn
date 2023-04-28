@@ -149,39 +149,34 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         //TODO: what are we going to try in paused state?
         VpnStatusObservable.update(DISCONNECTING)
         VpnServiceCommand.stopVpn(getApplication())
+        PreferenceHelper(getApplication()).startOnBoot = false
     }
 
     private fun attemptConnect() {
         VpnStatusObservable.update(CONNECTING)
         prepareToStartVPN()
-
     }
 
     private fun attemptDisconnect() {
         VpnStatusObservable.update(DISCONNECTING)
         VpnServiceCommand.stopVpn(getApplication())
+        PreferenceHelper(getApplication()).startOnBoot = false
     }
 
     private fun attemptCancelConnect() {
         VpnStatusObservable.update(DISCONNECTING)
         VpnServiceCommand.stopVpn(getApplication())
+        PreferenceHelper(getApplication()).startOnBoot = false
         //TODO
     }
 
-    private fun prepareToStartVPN() {
-        var vpnIntent: Intent? = null
-        try {
-            vpnIntent =
-                VpnService.prepare(getApplication()) // stops the VPN connection created by another application.
-        } catch (npe: NullPointerException) {
-            VpnStatusObservable.update(CONNECTION_ERROR)
-        } catch (ise: IllegalStateException) {
-            VpnStatusObservable.update(CONNECTION_ERROR)
-        }
+    fun prepareToStartVPN() {
+        val vpnIntent: Intent? = VpnServiceCommand.prepareVpn(getApplication())
         if (vpnIntent != null) {
             _prepareVpn.postValue(vpnIntent)
         } else {
             VpnServiceCommand.startVpn(getApplication())
+            PreferenceHelper(getApplication()).startOnBoot = true
         }
     }
 
