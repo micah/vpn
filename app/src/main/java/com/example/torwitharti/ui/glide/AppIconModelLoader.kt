@@ -2,6 +2,7 @@ package com.example.torwitharti.ui.glide
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import com.bumptech.glide.load.Options
 import com.bumptech.glide.load.model.ModelLoader
 import com.bumptech.glide.load.model.ModelLoader.LoadData
@@ -9,7 +10,7 @@ import com.bumptech.glide.signature.ObjectKey
 
 
 internal class AppIconModelLoader(context: Context) :
-    ModelLoader<ApplicationInfoModel, Bitmap> {
+    ModelLoader<ApplicationInfoModel, Drawable> {
     private val mContext: Context
 
     init {
@@ -21,7 +22,7 @@ internal class AppIconModelLoader(context: Context) :
         width: Int,
         height: Int,
         options: Options
-    ): LoadData<Bitmap> {
+    ): LoadData<Drawable> {
         return LoadData(
             ObjectKey(applicationInfo),
             AppIconDataFetcher(mContext, applicationInfo)

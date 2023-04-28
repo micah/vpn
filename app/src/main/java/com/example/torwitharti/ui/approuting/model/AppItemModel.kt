@@ -42,4 +42,35 @@ data class AppItemModel (
         return json
     }
 
+    // protectAllApps is excluded on purpose, so that List<AppItemModel> comparisons for
+    // equality return true, even if protectAllApps changed
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is AppItemModel) return false
+
+        if (viewType != other.viewType) return false
+        if (text != other.text) return false
+        if (appId != other.appId) return false
+        if (uid != other.uid) return false
+        if (isRoutingEnabled != other.isRoutingEnabled) return false
+        if (isBrowserApp != other.isBrowserApp) return false
+        if (hasTorSupport != other.hasTorSupport) return false
+        if (appList != other.appList) return false
+
+        return true
+    }
+
+    // protectAllApps is excluded on purpose
+    override fun hashCode(): Int {
+        var result = viewType
+        result = 31 * result + text.hashCode()
+        result = 31 * result + (appId?.hashCode() ?: 0)
+        result = 31 * result + (uid ?: 0)
+        result = 31 * result + (isRoutingEnabled?.hashCode() ?: 0)
+        result = 31 * result + (isBrowserApp?.hashCode() ?: 0)
+        result = 31 * result + (hasTorSupport?.hashCode() ?: 0)
+        result = 31 * result + (appList?.hashCode() ?: 0)
+        return result
+    }
+
 }

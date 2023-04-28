@@ -5,27 +5,34 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import androidx.appcompat.content.res.AppCompatResources
 import com.bumptech.glide.Priority
+import com.bumptech.glide.Registry
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.data.DataFetcher
+import com.example.torwitharti.R
 
 
 class AppIconDataFetcher internal constructor(
     context: Context,
     private val mModel: ApplicationInfoModel
 ) :
-    DataFetcher<Bitmap> {
+    DataFetcher<Drawable> {
     private val mContext: Context
 
     init {
         mContext = context
     }
 
-    override fun loadData(priority: Priority, callback: DataFetcher.DataCallback<in Bitmap>) {
-        val applicationInfo = mContext.packageManager.getApplicationInfo(mModel.toString(), 0)
-        val icon: Drawable = mContext.packageManager.getApplicationIcon(applicationInfo)
-        val bitmap = drawableToBitmap(icon)
-        callback.onDataReady(bitmap)
+    override fun loadData(priority: Priority, callback: DataFetcher.DataCallback<in Drawable>) {
+        try {
+            val applicationInfo = mContext.packageManager.getApplicationInfo(mModel.toString(), 0)
+            val icon: Drawable = mContext.packageManager.getApplicationIcon(applicationInfo)
+            callback.onDataReady(icon)
+        } catch (e: Registry.NoResultEncoderAvailableException) {
+            e.printStackTrace()
+            callback.onDataReady(AppCompatResources.getDrawable(mContext, R.drawable.ic_dummy_app))
+        }
     }
 
     override fun cleanup() {
@@ -36,39 +43,11 @@ class AppIconDataFetcher internal constructor(
         // Empty Implementation
     }
 
-    override fun getDataClass(): Class<Bitmap> {
-        return Bitmap::class.java
+    override fun getDataClass(): Class<Drawable> {
+        return Drawable::class.java
     }
 
     override fun getDataSource(): DataSource {
         return DataSource.LOCAL
-    }
-
-    private fun drawableToBitmap(drawable: Drawable): Bitmap? {
-        if (drawable is BitmapDrawable) {
-            drawable.bitmap?.also {
-                return it
-            }
-        }
-        val bitmap: Bitmap? = if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
-            Bitmap.createBitmap(
-                80,
-                80,
-                Bitmap.Config.ARGB_8888
-            )
-        } else {
-            Bitmap.createBitmap(
-                drawable.intrinsicWidth,
-                drawable.intrinsicHeight,
-                Bitmap.Config.ARGB_8888
-            )
-        }
-
-        bitmap?.also {
-            val canvas = Canvas(it)
-            drawable.setBounds(0, 0, canvas.width, canvas.height)
-            drawable.draw(canvas)
-        }
-        return bitmap
     }
 }

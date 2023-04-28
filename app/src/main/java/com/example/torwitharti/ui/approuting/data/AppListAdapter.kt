@@ -27,6 +27,8 @@ class AppListAdapter(list: List<AppItemModel>,
         const val CELL = 1
         const val HORIZONTAL_RECYCLER_VIEW = 2
         const val TABLE_HEADER_VIEW = 3
+
+        val TAG = AppListAdapter::class.java.simpleName
     }
 
     var items: MutableList<AppItemModel> = list.toMutableList()
@@ -42,6 +44,23 @@ class AppListAdapter(list: List<AppItemModel>,
         return viewHolder
     }
 
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position)
+        } else {
+            when(items[position].viewType) {
+                CELL -> {
+                    val protectAllApps = payloads.first() as Boolean
+                    (holder as AppListItemViewHolder).setEnabled(!protectAllApps)
+                }
+                else -> {}
+            }
+        }
+    }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(items[position].viewType) {
             SECTION_HEADER_VIEW -> (holder as AppListTitleViewHolder).bind(items[position])
@@ -62,11 +81,22 @@ class AppListAdapter(list: List<AppItemModel>,
     fun update(list: List<AppItemModel>) {
         var mutableList = list.toMutableList()
         mutableList.add(0, AppItemModel(TABLE_HEADER_VIEW))
-        if (mutableList == items) {
-            return
+        // The following comparison depends on AppItemModels equals() implementation
+        // Hence, dataSetChanged remains false if protectAllApps of AppItemModel changed
+        // b/c protectAllApps is excluded from AppItemModel's equals() method
+        val dataSetChanged = mutableList != items
+        if (!dataSetChanged) {
+            // check separately if protectAllApps changed and update cells without redrawing them
+            for (i in 0..mutableList.size-1) {
+                if (items[i].protectAllApps != mutableList[i].protectAllApps) {
+                    notifyItemChanged(i, mutableList[i].protectAllApps)
+                }
+            }
         }
         items = ArrayList(mutableList.map { it.copy() })
-        notifyDataSetChanged()
+        if (dataSetChanged) {
+            notifyDataSetChanged()
+        }
     }
 
     internal class AppListTitleViewHolder(val binding: AppTitleViewBinding) :
@@ -87,7 +117,15 @@ class AppListAdapter(list: List<AppItemModel>,
                 Log.d("--->", "load icn for ${appItem.appId}")
                 Glide.with(binding.root.context)
                     .load(ApplicationInfoModel(appItem.appId))
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .dontAnimate()
+                    .let { requestBuilder ->
+                        binding.ivAppImage.drawable?.let {
+                            requestBuilder.placeholder(it)
+                        } ?: run {
+                            requestBuilder
+                        }
+                    }
                     .into(binding.ivAppImage)
             } ?: run {
                 binding.ivAppImage.setImageDrawable(null)
@@ -106,6 +144,11 @@ class AppListAdapter(list: List<AppItemModel>,
                 }
             }
             binding.smItemSwitch.isEnabled = appItem.protectAllApps == false
+        }
+
+        fun setEnabled(enabled: Boolean) {
+            Log.d(TAG, "set enabled $enabled called for ${binding.tvTitle.text}")
+            binding.smItemSwitch.isEnabled = enabled
         }
     }
 

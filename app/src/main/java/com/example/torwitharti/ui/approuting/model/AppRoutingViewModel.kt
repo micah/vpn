@@ -1,10 +1,13 @@
 package com.example.torwitharti.ui.approuting.model
 
 import android.app.Application
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.torwitharti.ui.approuting.data.AppManager
 import com.example.torwitharti.utils.PreferenceHelper
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -38,10 +41,10 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun onItemModelChanged(pos: Int, model: AppItemModel) {
-        persistProtectedApp(model)
-
         val mutableList = getAppList().toMutableList()
         mutableList[pos] = model
+        persistProtectedApp(model)
+        appManager.preferenceHelper.cachedApps = Gson().toJson(mutableList)
         appList.postValue(mutableList)
     }
 
@@ -50,6 +53,7 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
         mutableList.onEach {
             it.protectAllApps = protectAllApps
         }
+        appManager.preferenceHelper.cachedApps = Gson().toJson(mutableList)
         appList.postValue(mutableList)
     }
 
@@ -65,6 +69,10 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
 
     fun getObservableAppList(): LiveData<List<AppItemModel>> {
         return appList
+    }
+
+    fun getObservableProgress(): LiveData<Boolean> {
+        return isLoadingAppList
     }
 
     fun getAppList(): List<AppItemModel> {

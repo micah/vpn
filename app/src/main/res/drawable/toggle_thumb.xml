@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="false">
+    <item android:state_checked="false" android:state_enabled="true">
         <shape android:shape="oval">
             <solid android:color="#CCA1F7"/>
             <size android:width="36dp"
@@ -9,9 +9,25 @@
             <stroke android:width="12dp" android:color="#00000000"/>
         </shape>
     </item>
-    <item android:state_checked="true">
+    <item android:state_checked="true" android:state_enabled="true">
         <shape android:shape="oval">
             <solid android:color="#400A76"/>
+            <size android:width="36dp"
+                android:height="36dp"/>
+            <stroke android:width="12dp" android:color="#00000000"/>
+        </shape>
+    </item>
+    <item android:state_checked="false" android:state_enabled="false">
+        <shape android:shape="oval">
+            <solid android:color="#66CCA1F7"/>
+            <size android:width="36dp"
+                android:height="36dp"/>
+            <stroke android:width="12dp" android:color="#00000000"/>
+        </shape>
+    </item>
+    <item android:state_checked="true" android:state_enabled="false">
+        <shape android:shape="oval">
+            <solid android:color="#66400A76"/>
             <size android:width="36dp"
                 android:height="36dp"/>
             <stroke android:width="12dp" android:color="#00000000"/>

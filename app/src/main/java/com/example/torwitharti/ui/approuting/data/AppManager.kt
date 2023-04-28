@@ -159,6 +159,45 @@ class AppManager(context: Context) {
     fun loadCachedApps(): List<AppItemModel> {
         val gson = Gson()
         val appItemModelListType: Type = object : TypeToken<ArrayList<AppItemModel?>?>() {}.type
-        return gson.fromJson(preferenceHelper.cachedApps, appItemModelListType)
+        gson.fromJson<List<AppItemModel>>(preferenceHelper.cachedApps, appItemModelListType)?.let { list ->
+            return sortCachedApps(list)
+        } ?: run {
+            return emptyList()
+        }
+    }
+
+    private fun sortCachedApps(list: List<AppItemModel>): List<AppItemModel> {
+        val installedBrowsersApps = mutableListOf<AppItemModel>()
+        var installedTorApps: AppItemModel? = null
+        val installedOtherApps = mutableListOf<AppItemModel>()
+        for (model in list) {
+            when (model.viewType) {
+                CELL -> {
+                    if (model.isBrowserApp == true) {
+                        installedBrowsersApps.add(model)
+                    } else {
+                        installedOtherApps.add(model)
+                    }
+                }
+                HORIZONTAL_RECYCLER_VIEW -> {
+                    installedTorApps = model
+                }
+                else -> {}
+            }
+        }
+        val sortedBrowsers = installedBrowsersApps.sorted()
+        val sortedOtherApps = installedOtherApps.sorted()
+        val resultList = mutableListOf<AppItemModel>()
+        if (installedTorApps != null) {
+            resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_tor_apps)))
+            resultList.add(installedTorApps)
+        }
+        if (sortedBrowsers.isNotEmpty()) {
+            resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_browsers)))
+            resultList.addAll(sortedBrowsers)
+            resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_other_apps)))
+        }
+        resultList.addAll(sortedOtherApps)
+        return resultList
     }
 }
