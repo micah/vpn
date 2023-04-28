@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.torwitharti.ui.approuting.model.AppRoutingViewModel" />
+            type="org.torproject.vpn.ui.approuting.model.AppRoutingViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -16,14 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".ui.approuting.AppRoutingFragment">
+        tools:context="org.torproject.vpn.ui.approuting.AppRoutingFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height"
             android:fitsSystemWindows="true"
-            android:theme="@style/Theme.TorWithArti.AppBarOverlay"
+            android:theme="@style/Theme.TorVPN.AppBarOverlay"
             >
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -44,7 +44,7 @@
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
                     app:menu="@menu/app_routing_menu"
-                    app:popupTheme="@style/Theme.TorWithArti.PopupOverlay" />
+                    app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>

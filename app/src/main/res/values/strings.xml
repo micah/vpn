@@ -1,56 +1,44 @@
 <resources>
-    <string name="app_name">Tor with Arti</string>
-    <string name="nav_connect">Connect</string>
-    <string name="nav_configure">Configure</string>
-    <string name="frag_connect_explore_pri">Explore. Privately.</string>
-    <string name="frag_connect_you_re_read">You\'re ready for the world\'s most private browsing experience.</string>
-    <string name="frag_connect_connect">Connect</string>
-    <string name="frag_connect_cancel">Cancel</string>
-    <string name="frag_connect_disconnect">Disconnect</string>
-    <string name="frag_connect_guide_slide_index">Guide Slide # %1$d</string>
-    <string name="frag_connect_connecting_to_network">Connecting to the\nTor Network…</string>
-    <string name="frag_connect_connected">Connected\n</string>
-    <string name="frag_connect_connecting">Connecting</string>
-    <string name="frag_connect_paused">Paused</string>
-    <string name="frag_connect_disconnecting">Disconnecting</string>
-    <string name="frag_connect_try_again">Trying again…</string>
-    <string name="frag_connect_not_connected">Not connected</string>
-    <string name="frag_connect_disconnected">Disconnected</string>
-    <string name="frag_connect_reconnect">Reconnect</string>
-    <string name="frag_connect_cannot_connected">Can\'t connect to Tor</string>
-    <string name="frag_connect_try_bridge">Try a bridge instead</string>
-    <string name="frag_connect_error_content">Trying a bridge could help unblock the Internet in places experiencing censorship.</string>
-    <string name="frag_connect_error_content2">Unblock the Internet in…</string>
-    <string name="frag_connect_error_share_location">Share my location</string>
-    <string name="frag_connect_error_allow_once">Allow once</string>
-    <string name="frag_connect_error_not_now">Not now</string>
-    <string name="frag_connect_error_try_a_bridge">Try a bridge</string>
+    <string name="app_name">Tor VPN</string>
+
+    <string name="action_configure">Configure</string>
+    <string name="action_connect">Connect</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_disconnect">Disconnect</string>
+    <string name="action_reconnect">Reconnect</string>
+    <string name="action_try_again">Try again</string>
+    <string name="action_protect_all_apps">Protect all apps</string>
+    <!-- notifications actions -->
+    <string name="action_start">Start VPN</string>
+    <string name="action_stop">Stop VPN</string>
+    <!-- actions required for screen readers -->
+    <string name="action_refresh_circuits">Refresh circuits</string>
+    <string name="action_copy_logs">Copy logs</string>
+
+    <string name="state_connected">Connected</string>
+    <string name="state_connecting">Connecting</string>
+    <string name="state_paused">Paused</string>
+    <string name="state_disconnecting">Disconnecting</string>
+    <string name="state_disconnected">Disconnected</string>
+
+    <!-- app routing screen -->
     <string name="app_routing">App Routing</string>
-    <string name="app_routing_protect_all">Protect all apps</string>
     <string name="app_routing_tor_apps">Tor powered apps</string>
     <string name="app_routing_browsers">Browsers</string>
     <string name="app_routing_other_apps">Other apps</string>
-    <string name="frag_report_title">Connection report</string>
-    <string name="frag_report_success">Successfully connected</string>
-    <string name="frag_report_obfs_snowflake_fail">Could not connect</string>
-    <string name="frag_report_snowflake">SnowFlake</string>
-    <string name="frag_report_direct_conn">Direct connection</string>
-    <string name="frag_report_tor_fail">Tor Network blocked</string>
-    <string name="frag_report_obfs4">obfs4</string>
-    <string name="frag_report_tab1">Report</string>
-    <string name="frag_report_tab2">Logs</string>
-    <string name="frag_report_config_button">Configure connection</string>
-    <string name="frag_report_connection_timeline">Connection timeline</string>
-    <string name="frag_report_tor_logs">Tor logs</string>
-    <string name="frag_report_copy_logs">Copy logs</string>
-    <string name="start">Start VPN</string>
-    <string name="stop">Stop VPN</string>
+
     <string name="notification_channel_description">Shows updates about TorVPN.</string>
     <string name="notification_channel_name">TorVPN notifications</string>
+
+    <!-- configuration screen -->
     <string name="apps">Apps</string>
     <string name="apps_description_all_protected">All apps protected</string>
     <string name="tor_logs">Tor Logs</string>
     <string name="tor_logs_description">View and copy tor logs</string>
+    <string name="always_on_vpn">Always-on VPN</string>
+    <string name="always_on_vpn_description">Open Android System Settings</string>
+    <string name="copied">Copied …</string>
+
     <string name="title_guide_welcome_to">Welcome to the\nOnionverse</string>
     <string name="guide_pre_alpha">Pre-alpha</string>
     <string name="guide_version_number">%1$s</string>
@@ -58,17 +46,19 @@
     <string name="guide_bullet_head_2">But don\'t do anything risky</string>
     <string name="guide_bullet_text_1">Don\'t forget to report any bugs you find back to our developers.</string>
     <string name="guide_bullet_text_2">This is pre-release version of the app, and isn\'t safe to use for sensitive activities.</string>
-    <string name="stats_protect_all_apps">Protect all apps</string>
+
+    <!-- Download statistics, e.g 1.23 MB down -->
     <string name="stats_down">%1$s down</string>
+    <!-- Upload statistics, e.g 1.23 MB up -->
     <string name="stats_up">%1$s up</string>
+    <!-- Download or upload per second, e.g. 0.54 KB/s -->
     <string name="stats_delta">%1$s/s</string>
+    <!-- combined up- and download statistics -->
+    <string name="stats_combined">↓%2$s %1$s/s - ↑%4$s %3$s/s</string>
+
     <string name="error_something_went_wrong">Something went wrong</string>
     <string name="error_detail_message">Onionverse couldn\'t connect to the Tor Network.</string>
     <string name="error_view_logs">View logs</string>
-    <string name="statusline_bytecount">↓%2$s %1$s/s - ↑%4$s %3$s/s</string>
-    <string name="refresh_circuits">Refresh circuits</string>
-    <string name="copied">Copied …</string>
-    <string name="always_on_vpn">Always-on VPN</string>
-    <string name="subtitle_always_on_vpn">Open Android System Settings</string>
+
 
 </resources>

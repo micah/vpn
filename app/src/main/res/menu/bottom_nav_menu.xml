@@ -4,11 +4,11 @@
     <item
         android:id="@+id/navigation_connect"
         android:icon="@drawable/selector_bottom_nav_connect"
-        android:title="@string/nav_connect" />
+        android:title="@string/action_connect" />
 
     <item
         android:id="@+id/configure_fragment"
         android:icon="@drawable/select_bottom_nav_config"
-        android:title="@string/nav_configure" />
+        android:title="@string/action_configure" />
 
 </menu>

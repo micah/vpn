@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.torwitharti">
+    package="org.torproject.vpn">
 
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
@@ -15,17 +15,17 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:name=".TorApplication"
+        android:name="org.torproject.vpn.TorApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TorWithArti"
+        android:theme="@style/Theme.TorVPN"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="org.torproject.vpn.MainActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
@@ -36,7 +36,7 @@
         </activity>
 
         <service
-            android:name=".vpn.TorVpnService"
+            android:name="org.torproject.vpn.vpn.TorVpnService"
             android:exported="false"
             android:permission="android.permission.BIND_VPN_SERVICE">
             <intent-filter>
@@ -45,7 +45,7 @@
         </service>
 
         <receiver
-            android:name=".vpn.OnBootReceiver"
+            android:name="org.torproject.vpn.vpn.OnBootReceiver"
             android:directBootAware="true"
             android:enabled="true"
             android:exported="true"

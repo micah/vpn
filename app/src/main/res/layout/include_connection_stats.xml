@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.torwitharti.ui.home.model.ConnectFragmentViewModel" />
+            type="org.torproject.vpn.ui.home.model.ConnectFragmentViewModel" />
 
         <import type="android.view.View" />
 
@@ -161,7 +161,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:text="@string/stats_protect_all_apps"
+                android:text="@string/action_protect_all_apps"
                 android:textFontWeight="550"
                 android:thumb="@drawable/switch_thumb_connected_stats"
                 app:track="@drawable/switch_track_connected_stats"

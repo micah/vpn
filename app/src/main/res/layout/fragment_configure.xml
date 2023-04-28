@@ -3,10 +3,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.torwitharti.ui.configure.model.ConfigureFragmentViewModel" />
+            type="org.torproject.vpn.ui.configure.model.ConfigureFragmentViewModel" />
         <variable
             name="handler"
-            type="com.example.torwitharti.ui.configure.ClickHandler" />
+            type="org.torproject.vpn.ui.configure.ClickHandler" />
         <import type="android.view.View" />
     </data>
 
@@ -17,7 +17,7 @@
     android:layout_height="match_parent"
     android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
     android:layout_marginVertical="@dimen/activity_vertical_margin"
-    tools:context=".ui.configure.ConfigureFragment">
+    tools:context="org.torproject.vpn.ui.configure.ConfigureFragment">
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,12 +33,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/nav_configure"
+            android:text="@string/action_configure"
             tools:textColor="#000000"
             tools:text="Configure"
             />
 
-        <com.example.torwitharti.ui.configure.view.ConfigItemView
+        <org.torproject.vpn.ui.configure.view.ConfigItemView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:drawable="@drawable/ic_apps"
@@ -47,7 +47,7 @@
             android:onClick="@{handler::onAppsClicked}"
             />
 
-        <com.example.torwitharti.ui.configure.view.ConfigItemView
+        <org.torproject.vpn.ui.configure.view.ConfigItemView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:drawable="@drawable/ic_code"
@@ -56,14 +56,14 @@
             android:onClick="@{handler::onTorLogsClicked}"
             />
 
-        <com.example.torwitharti.ui.configure.view.ConfigItemView
+        <org.torproject.vpn.ui.configure.view.ConfigItemView
             android:id="@+id/always_on_vpn"
             android:visibility="gone"
             tools:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:text="@string/always_on_vpn"
-            app:secondaryText="@string/subtitle_always_on_vpn"
+            app:secondaryText="@string/always_on_vpn_description"
             android:onClick="@{handler::onAlwaysOnClicked}"
             />
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.logging.LoggingFragment">
+        tools:context="org.torproject.vpn.ui.logging.LoggingFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="?attr/homeAsUpIndicator"
             app:menu="@menu/tor_log_menu"
-            app:popupTheme="@style/Theme.TorWithArti.PopupOverlay" />
+            app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
 
 
         <androidx.recyclerview.widget.RecyclerView
