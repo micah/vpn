@@ -42,10 +42,10 @@
     <string name="title_guide_welcome_to">Welcome to the\nOnionverse</string>
     <string name="guide_pre_alpha">Pre-alpha</string>
     <string name="guide_version_number">%1$s</string>
-    <string name="guide_bullet_head_1">You\'re ready to start testing</string>
+    <string name="guide_bullet_head_1">You are ready to start testing</string>
     <string name="guide_bullet_head_2">But don\'t do anything risky</string>
     <string name="guide_bullet_text_1">Don\'t forget to report any bugs you find back to our developers.</string>
-    <string name="guide_bullet_text_2">This is pre-release version of the app, and isn\'t safe to use for sensitive activities.</string>
+    <string name="guide_bullet_text_2">This is a pre-release version of the app, and is not safe to use for sensitive activities.</string>
 
     <!-- Download statistics, e.g 1.23 MB down -->
     <string name="stats_down">%1$s down</string>
