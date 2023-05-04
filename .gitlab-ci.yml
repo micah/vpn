@@ -49,7 +49,8 @@ assembleDebug:
 publish:
   image: "registry.0xacab.org/leap/docker/debian:bullseye_amd64"
   stage: publish
-  dependencies: assembleDebug
+  dependencies: 
+    - assembleDebug
   script:
     - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file app/build/outputs/apk/debug/app-debug.apk "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/pre-alpha/0.0.1/tor-vpn-debug.apk"'
 
