@@ -51,7 +51,7 @@ publish:
   stage: publish
   dependencies: assembleDebug
   script:
-    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file app/build/outputs/app-debug.apk "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/pre-alpha/0.0.1/tor-vpn-debug.apk"'
+    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file app/build/outputs/apk/debug/app-debug.apk "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/pre-alpha/0.0.1/tor-vpn-debug.apk"'
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)
 debugTests:
