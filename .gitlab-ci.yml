@@ -9,7 +9,7 @@ variables:
   DOCKER_DRIVER: overlay
 
 build-docker-image:
-  image: 0xacab.org:4567/leap/docker/debian:bullseye_amd64
+  image: registry.0xacab.org/leap/docker/debian:bullseye_amd64
   stage: build_image
   services:
     - docker:dind
@@ -38,6 +38,8 @@ assembleDebug:
   stage: build
   script:
     - ./gradlew clean assembleDebug --stacktrace
+    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file app/build/outputs/app-debug.apk "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/pre-alpha/0.0.1/tor-vpn-debug.apk"'
+
   when: always
   artifacts:
     paths:
