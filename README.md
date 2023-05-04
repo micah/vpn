@@ -2,14 +2,24 @@
 
 *WARNING* This is experimental software, do not rely on it for anything other than testing and development. It may leak information and should not be relied on for anything sensitive!
 
-## Install a debug version from CI
 
-A debug version of the app is built in the project's CI, which you can install and run on your device.
+## Install debug version
 
-### Download the latest CI artifact
+A debug version of the app is built in each CI run, you can install it on your phone for debugging/development purposes.
+
+### Download debug version
+
+You can [download the latest successfully built package](https://gitlab.torproject.org/tpo/applications/vpn/-/package_files/1206/download) from the [Gitlab package archive](https://gitlab.torproject.org/tpo/applications/vpn/-/packages). Once you have downloaded the apk, you will need to install it on your phone, please follow the [process for installation on your phone](#install-package-on-phone) to do so.
+
+### Download debug version from CI
+
+If you downloaded the apk in the previous step, you do not need to follow this step, unless you are looking for an older built version of the apk. Older versions are obtained directly from the CI artifacts.
+
 If you go to the [pipelines](https://gitlab.torproject.org/tpo/applications/vpn/-/pipelines) page, look for the most recent successful pipeline, and then on the right side you will find a `Download artifacts` button. Click that to download the `artifacts.zip` file.
 
 You will then need to unzip this artifacts.zip file on your computer. The android package is `outputs/apk/debug/app-debug.apk`. 
+
+## Install package on phone
 
 ### Install adb
 In order to install this unsigned package, you will need to have the command-line tool `adb` installed on your computer. On a Debian, or Debian-derived machine, you can `sudo apt install adb` to install it. If using something else, [follow a tutorial](https://www.xda-developers.com/install-adb-windows-macos-linux/) to get it installed.
