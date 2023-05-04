@@ -1,8 +1,8 @@
 stages:
   - build_image
   - build
-  - publish
   - test
+  - publish
 
 variables:
   # When using dind, it's wise to use the overlayfs driver for
