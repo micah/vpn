@@ -1,6 +1,7 @@
 stages:
   - build_image
   - build
+  - publish
   - test
 
 variables:
@@ -9,7 +10,7 @@ variables:
   DOCKER_DRIVER: overlay
 
 build-docker-image:
-  image: registry.0xacab.org/leap/docker/debian:bullseye_amd64
+  image: "registry.0xacab.org/leap/docker/debian:bullseye_amd64"
   stage: build_image
   services:
     - docker:dind
@@ -38,13 +39,19 @@ assembleDebug:
   stage: build
   script:
     - ./gradlew clean assembleDebug --stacktrace
-    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file app/build/outputs/app-debug.apk "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/pre-alpha/0.0.1/tor-vpn-debug.apk"'
-
   when: always
   artifacts:
     paths:
       - app/build/outputs/
       - build.log
+
+# Publish apk
+publish:
+  image: "registry.0xacab.org/leap/docker/debian:bullseye_amd64"
+  stage: publish
+  dependencies: assembleDebug
+  script:
+    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file app/build/outputs/app-debug.apk "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/pre-alpha/0.0.1/tor-vpn-debug.apk"'
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)
 debugTests:
