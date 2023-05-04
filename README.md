@@ -56,7 +56,11 @@ If this does not work, you may need to enable installation of apps from 'unknown
 
 Once you have installed the application, you should be able to find it in your normal list of applications.
 
+You are finished! You do not need to follow the next section, if you are just wanting to install the apk from the CI. The following section is only if you wish to build it locally.
+
 ## Build and run a debug version
+If you are only wanting to install the CI built apk, you do not need to follow this step, simply follow the process detailed above instead. This step is only if you wish to build the app locally, independent of the CI build.
+
 To build the app the Android SDK is required and the command line tool ADB is recommended.
 
 For now the build and installation steps are as easy as:
