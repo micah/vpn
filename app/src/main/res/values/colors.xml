@@ -37,6 +37,7 @@
     <color name="purplesBottomActiveIconBg">#5822C3</color>
 
     <color name="greenNormal">#52E0B6</color>
+    <color name="greenShade">#26D9A3</color>
     <color name="greenDarkText">#0B4131</color>
     <color name="greenGradientLight">#7DE8C8</color>
     <color name="greenGradientNormal">#3CDDAC</color>
