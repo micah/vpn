@@ -49,10 +49,21 @@ assembleDebug:
 publish:
   image: "registry.0xacab.org/leap/docker/debian:bullseye_amd64"
   stage: publish
+  # Only run this stage if one of the following rules is true
+  rules:
+    # Run this job when a tag is created
+    - if: $CI_COMMIT_TAG
+      variables:
+        TAG: "${CI_COMMIT_TAG}"
+    # Run this job when commits are pushed or merged to the default branch
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      variables:
+        TAG: "main"
   dependencies: 
     - assembleDebug
   script:
-    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file app/build/outputs/apk/debug/app-debug.apk "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/pre-alpha/0.0.1/tor-vpn-debug.apk"'
+    - 'echo "Pushing apk with tag: ${TAG} to gitlab package area"'
+    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file app/build/outputs/apk/debug/app-debug.apk "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/org.torproject.vpn.testing/${TAG}/tor-vpn-debug.apk"'
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)
 debugTests:
