@@ -27,6 +27,7 @@
     <color name="purpleDarkBottomNav">#3B1782</color>
     <color name="purpleDarkBorder">#3F188B</color>
     <color name="purpleDarkDialog">#31136C</color>
+    <color name="purpleDarkShade">#9942F0</color>
     <color name="purpleStatsBg">#441B98</color>
     <color name="purpleStatsDivider">#3F188B</color>
     <color name="purpleGradientLight">#BF89F5</color>
@@ -37,8 +38,8 @@
     <color name="purplesBottomActiveIconBg">#5822C3</color>
 
     <color name="greenNormal">#52E0B6</color>
-    <color name="greenShade">#26D9A3</color>
     <color name="greenDarkText">#0B4131</color>
+    <color name="greenDarkShade">#26D9A3</color>
     <color name="greenGradientLight">#7DE8C8</color>
     <color name="greenGradientNormal">#3CDDAC</color>
     <color name="greenGradientDark">#52E0B6</color>
@@ -47,6 +48,7 @@
 
     <color name="redNormal">#F07594</color>
     <color name="redDark">#5C0A1F</color>
+    <color name="redDarkShade">#EB4770</color>
     <color name="redGradientLight">#F28CA6</color>
     <color name="redGradientDark">#ED5E82</color>
 

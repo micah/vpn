@@ -37,7 +37,7 @@
                 <objectAnimator
                     android:duration="@integer/default_transition_anim_duration"
                     android:propertyName="fillColor"
-                    android:valueFrom="@color/greenShade"
+                    android:valueFrom="@color/greenDarkShade"
                     android:valueTo="@color/purpleNormal" />
             </set>
         </aapt:attr>
