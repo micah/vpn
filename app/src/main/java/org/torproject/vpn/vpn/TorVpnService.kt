@@ -217,16 +217,33 @@ class TorVpnService : VpnService() {
      */
     private fun applyAppFilter(builder: Builder) {
         val helper = PreferenceHelper(applicationContext)
-        val selectedApps: Set<String> = helper.protectedApps
-            ?: //No selection done, so we allow all apps.
+        if (helper.protectAllApps) {
+            // no filtering, all apps will be routed over the VPN
             return
+        }
+        val selectedApps: Set<String> = helper.protectedApps ?:
+            HashSet<String>()
+
         val packageManager = packageManager
-        for (appPackage in selectedApps) {
-            try {
-                packageManager.getPackageInfo(appPackage, 0)
-                builder.addAllowedApplication(appPackage)
-            } catch (e: PackageManager.NameNotFoundException) {
-                // The app is selected but isn't installed anymore.
+        if (selectedApps.isNotEmpty()) {
+            // filtering, allow a subset of installed apps
+            for (appPackage in selectedApps) {
+                try {
+                    packageManager.getPackageInfo(appPackage, 0)
+                    builder.addAllowedApplication(appPackage)
+                } catch (e: PackageManager.NameNotFoundException) {
+                    // The app is selected but isn't installed anymore.
+                }
+            }
+        } else {
+            // no app selected and protect all apps disabled: disallow all installed apps
+            val installedPackages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
+            for (appPackage in installedPackages) {
+                try {
+                    builder.addDisallowedApplication(appPackage.packageName)
+                } catch (e: PackageManager.NameNotFoundException) {
+                    e.printStackTrace()
+                }
             }
         }
     }
