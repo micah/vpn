@@ -16,6 +16,7 @@ import org.torproject.vpn.ui.approuting.data.AppListAdapter
 import org.torproject.vpn.ui.approuting.data.TorAppsAdapter
 import org.torproject.vpn.ui.approuting.model.AppRoutingViewModel
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
 
 class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -81,7 +82,11 @@ class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChang
 
     override fun onSharedPreferenceChanged(prefs: SharedPreferences?, key: String?) {
         if (key?.equals(PROTECT_ALL_APPS) == true) {
-            viewModel.onProtectedAppsPrefsChanged(preferenceHelper.protectAllApps)
+            viewModel.onProtectAllAppsPrefsChanged(preferenceHelper.protectAllApps)
+            viewModel.updateVPNSettings()
+        }
+        if (key?.equals(PROTECTED_APPS) == true) {
+            viewModel.updateVPNSettings()
         }
     }
 

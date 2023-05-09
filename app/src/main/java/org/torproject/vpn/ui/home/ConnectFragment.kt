@@ -3,6 +3,7 @@ package org.torproject.vpn.ui.home
 import android.animation.AnimatorSet
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,7 +25,7 @@ import org.torproject.vpn.vpn.VpnStatusObservable
 import kotlinx.coroutines.launch
 import org.torproject.vpn.utils.*
 
-class ConnectFragment : Fragment() {
+class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
     companion object {
         val TAG: String = ConnectFragment::class.java.simpleName
     }
@@ -57,6 +58,7 @@ class ConnectFragment : Fragment() {
     ): View {
         currentVpnState = ConnectionState.INIT
         preferenceHelper = PreferenceHelper(requireContext())
+        preferenceHelper.registerListener(this)
         connectFragmentViewModel = ViewModelProvider(this)[ConnectFragmentViewModel::class.java]
         binding = FragmentConnectBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -86,6 +88,11 @@ class ConnectFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        preferenceHelper.unregisterListener(this)
     }
 
     private fun setUIState(vpnState: ConnectionState) {
@@ -292,6 +299,11 @@ class ConnectFragment : Fragment() {
         }
     }
 
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if (key?.equals(PreferenceHelper.PROTECT_ALL_APPS) == true) {
+            connectFragmentViewModel.updateVPNSettings()
+        }
+    }
 
 }
 

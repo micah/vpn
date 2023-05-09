@@ -66,5 +66,10 @@ object VpnStatusObservable {
         }
     }
 
+    fun isVPNActive(): Boolean {
+        val status = _statusLiveData.value
+        return status == ConnectionState.CONNECTING || status == ConnectionState.CONNECTED
+    }
+
 }
 
