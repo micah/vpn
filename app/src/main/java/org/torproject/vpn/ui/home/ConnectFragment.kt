@@ -46,6 +46,13 @@ class ConnectFragment : Fragment() {
         if (result.resultCode == Activity.RESULT_OK) {
             VpnServiceCommand.startVpn(context)
             context?.let { PreferenceHelper(it).startOnBoot = true }
+
+            // Fixes button color after permission dialog, Quick fix, need refactoring.
+            startVectorAnimationWithEndCallback(
+                binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
+            ) {
+                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
+            }
         } else {
             VpnStatusObservable.update(ConnectionState.CONNECTION_ERROR)
         }

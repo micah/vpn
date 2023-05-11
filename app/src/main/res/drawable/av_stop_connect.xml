@@ -10,7 +10,7 @@
             android:viewportHeight="124">
             <path
                 android:name="stop-shape"
-                android:fillColor="@color/redNormal"
+                android:fillColor="@color/stop_connect_bg_selector"
                 android:pathData="M71.5,20L111.5,20A24,24 0,0 1,135.5 44L135.5,80A24,24 0,0 1,111.5 104L71.5,104A24,24 0,0 1,47.5 80L47.5,44A24,24 0,0 1,71.5 20z" />
 
             <group>
@@ -39,7 +39,7 @@
                 <objectAnimator
                     android:duration="@integer/default_transition_anim_duration"
                     android:propertyName="fillColor"
-                    android:valueFrom="@color/redNormal"
+                    android:valueFrom="@color/redDarkShade"
                     android:valueTo="@color/greenNormal" />
             </set>
         </aapt:attr>

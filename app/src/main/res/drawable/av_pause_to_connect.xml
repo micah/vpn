@@ -10,7 +10,7 @@
             android:viewportHeight="124">
             <path
                 android:name="rounded-corner-shape"
-                android:fillColor="@color/purpleNormal"
+                android:fillColor="@color/pause_to_connect_bg_selector"
                 android:pathData="M89.5,20L93.5,20A42,42 0,0 1,135.5 62L135.5,62A42,42 0,0 1,93.5 104L89.5,104A42,42 0,0 1,47.5 62L47.5,62A42,42 0,0 1,89.5 20z" />
 
             <path
@@ -37,7 +37,7 @@
                 <objectAnimator
                     android:duration="@integer/default_transition_anim_duration"
                     android:propertyName="fillColor"
-                    android:valueFrom="@color/purpleNormal"
+                    android:valueFrom="@color/purpleDarkShade"
                     android:valueTo=" @color/greenNormal" />
             </set>
         </aapt:attr>
