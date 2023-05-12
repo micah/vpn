@@ -96,7 +96,7 @@ class ConnectFragment : Fragment() {
     }
 
     private fun setUIState(vpnState: ConnectionState) {
-        Log.d(TAG, "setUIState: ${vpnState.name} | current state :${if(::currentVpnState.isInitialized) currentVpnState else "not initiaized"}")
+        Log.d(TAG, "setUIState: ${if(::currentVpnState.isInitialized) currentVpnState else "not initialized"} --> ${vpnState.name}")
         if (::currentVpnState.isInitialized && currentVpnState == vpnState) {
             return
         }
@@ -138,7 +138,7 @@ class ConnectFragment : Fragment() {
      */
 
     private fun showConnectingTransition() {
-        if (currentVpnState == ConnectionState.INIT || currentVpnState == ConnectionState.DISCONNECTED) {
+        if (currentVpnState == ConnectionState.INIT || currentVpnState == ConnectionState.DISCONNECTED || currentVpnState == ConnectionState.CONNECTION_ERROR) {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
 
             //connect button vector anim
@@ -238,7 +238,7 @@ class ConnectFragment : Fragment() {
 
         if (currentVpnState == ConnectionState.CONNECTING) {
 
-            // transition from gradient to red(connected color)
+            // transition connect gradient to yellow(error color)
             createStatusBarConnectedGradientAnimation(
                 binding.progressSlider.background, requireContext(), intArrayOf(
                     R.color.connectingRainbowEnd,
@@ -249,7 +249,7 @@ class ConnectFragment : Fragment() {
 
         }else if (currentVpnState == ConnectionState.CONNECTED) {
 
-            // transition from gradient to red(connected color)
+            // transition from connected gradient to yellow(error color)
             createStatusBarConnectedGradientAnimation(
                 binding.progressSlider.background, requireContext(), intArrayOf(
                     R.color.redNormal,

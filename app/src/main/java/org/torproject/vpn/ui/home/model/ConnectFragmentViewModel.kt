@@ -2,6 +2,8 @@ package org.torproject.vpn.ui.home.model
 
 import android.app.Application
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.text.format.Formatter
 import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
@@ -128,7 +130,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
             INIT -> attemptConnect()
             CONNECTING -> attemptPause()
             CONNECTED -> attemptDisconnect()
-            CONNECTION_ERROR -> attemptDisconnect()
+            CONNECTION_ERROR -> attemptConnect()
             DISCONNECTING -> attemptConnect()
             DISCONNECTED -> attemptConnect()
             PAUSED -> {}
