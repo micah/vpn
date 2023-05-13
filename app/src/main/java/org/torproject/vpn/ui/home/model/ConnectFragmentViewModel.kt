@@ -179,6 +179,12 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         }
     }
 
+    fun updateVPNSettings() {
+        if (VpnStatusObservable.isVPNActive()) {
+            VpnServiceCommand.startVpn(getApplication())
+        }
+    }
+
     fun onVpnPrepared() {
         _prepareVpn.value = null
     }

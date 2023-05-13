@@ -65,19 +65,8 @@ class TorVpnService : VpnService() {
         super.onCreate()
         notificationManager = VpnNotificationManager(this)
         logHelper = LogHelper()
-        OnionMasq.bindVPNService(TorVpnService::class.java)
-        observer = Observer<OnionmasqEvent> { onionmasqEvent: OnionmasqEvent ->
-            if (onionmasqEvent.isReadyForTraffic) {
-                VpnStatusObservable.update(ConnectionState.CONNECTED)
-            }
-        }
         logObservable = LogObservable.getInstance()
-        vpnStatusObserver = Observer<ConnectionState> { connectionState: ConnectionState? ->
-            notificationManager.updateNotification(connectionState!!, VpnStatusObservable.dataUsage.value!!);
-        }
-        vpnDataUsageObserver = Observer<DataUsage> { dataUsage: DataUsage? ->
-            notificationManager.updateNotification(VpnStatusObservable.statusLiveData.value!!, dataUsage!!)
-        }
+        OnionMasq.bindVPNService(TorVpnService::class.java)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -137,6 +126,39 @@ class TorVpnService : VpnService() {
         stopSelf()
     }
 
+    private fun createObservers() {
+        observer = Observer<OnionmasqEvent> { onionmasqEvent: OnionmasqEvent ->
+            if (onionmasqEvent.isReadyForTraffic) {
+                VpnStatusObservable.update(ConnectionState.CONNECTED)
+            }
+        }
+        vpnStatusObserver = Observer<ConnectionState> { connectionState: ConnectionState? ->
+            notificationManager.updateNotification(
+                connectionState!!,
+                VpnStatusObservable.dataUsage.value!!
+            );
+        }
+        vpnDataUsageObserver = Observer<DataUsage> { dataUsage: DataUsage? ->
+            notificationManager.updateNotification(
+                VpnStatusObservable.statusLiveData.value!!,
+                dataUsage!!
+            )
+        }
+    }
+
+    private fun startListeningObservers() {
+        observer?.let {
+            mainHandler.post { OnionMasq.getProgressEvent().observeForever(it) }
+        }
+
+        vpnStatusObserver?.let {
+            mainHandler.post { VpnStatusObservable.statusLiveData.observeForever(it) }
+        }
+        vpnDataUsageObserver?.let {
+            mainHandler.post { VpnStatusObservable.dataUsage.observeForever(it) }
+        }
+    }
+
     private fun removeObservers() {
         observer?.let {
             mainHandler.post { OnionMasq.getProgressEvent().removeObserver(it) }
@@ -178,32 +200,28 @@ class TorVpnService : VpnService() {
         try {
             Log.d(TAG, "service: starting vpn...")
             val builder = prepareVpnProfile()
+            fd?.let { fd ->
+                Log.d(TAG, "service: stopping previous Tor session...")
+                OnionMasq.stop()
+                fd.close()
+            } ?: run {
+                logHelper.readLog()
+                createObservers()
+                startListeningObservers()
+                timer.schedule(object: TimerTask() {
+                    override fun run() {
+                        VpnStatusObservable.updateDataUsage(
+                            OnionMasq.getBytesReceived(),
+                            OnionMasq.getBytesSent()
+                        )
+                    }
+                }, 1000, 1000)
+            }
+
             fd = builder.establish();
-            logHelper.readLog()
-
-            observer?.let {
-                mainHandler.post { OnionMasq.getProgressEvent().observeForever(it) }
-            }
-
-            vpnStatusObserver?.let {
-                mainHandler.post { VpnStatusObservable.statusLiveData.observeForever(it) }
-            }
-            vpnDataUsageObserver?.let {
-                mainHandler.post{ VpnStatusObservable.dataUsage.observeForever(it) }
-            }
-
             coroutineScope.async {
                 OnionMasq.start(fd!!.detachFd())
             }
-
-            timer.schedule(object : TimerTask() {
-                override fun run() {
-                    VpnStatusObservable.updateDataUsage(
-                        OnionMasq.getBytesReceived(),
-                        OnionMasq.getBytesSent()
-                    )
-                }
-            }, 0, 1000)
         } catch (e: Exception) {
             // Catch any exception
             e.printStackTrace()
@@ -217,16 +235,33 @@ class TorVpnService : VpnService() {
      */
     private fun applyAppFilter(builder: Builder) {
         val helper = PreferenceHelper(applicationContext)
-        val selectedApps: Set<String> = helper.protectedApps
-            ?: //No selection done, so we allow all apps.
+        if (helper.protectAllApps) {
+            // no filtering, all apps will be routed over the VPN
             return
+        }
+        val selectedApps: Set<String> = helper.protectedApps ?:
+            HashSet<String>()
+
         val packageManager = packageManager
-        for (appPackage in selectedApps) {
-            try {
-                packageManager.getPackageInfo(appPackage, 0)
-                builder.addAllowedApplication(appPackage)
-            } catch (e: PackageManager.NameNotFoundException) {
-                // The app is selected but isn't installed anymore.
+        if (selectedApps.isNotEmpty()) {
+            // filtering, allow a subset of installed apps
+            for (appPackage in selectedApps) {
+                try {
+                    packageManager.getPackageInfo(appPackage, 0)
+                    builder.addAllowedApplication(appPackage)
+                } catch (e: PackageManager.NameNotFoundException) {
+                    // The app is selected but isn't installed anymore.
+                }
+            }
+        } else {
+            // no app selected and protect all apps disabled: disallow all installed apps
+            val installedPackages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
+            for (appPackage in installedPackages) {
+                try {
+                    builder.addDisallowedApplication(appPackage.packageName)
+                } catch (e: PackageManager.NameNotFoundException) {
+                    e.printStackTrace()
+                }
             }
         }
     }
