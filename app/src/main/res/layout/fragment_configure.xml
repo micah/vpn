@@ -38,7 +38,7 @@
             tools:text="Configure"
             />
 
-        <org.torproject.vpn.ui.configure.view.ConfigItemView
+        <org.torproject.vpn.ui.base.view.IconTextEntryView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:drawable="@drawable/ic_apps"
@@ -47,24 +47,13 @@
             android:onClick="@{handler::onAppsClicked}"
             />
 
-        <org.torproject.vpn.ui.configure.view.ConfigItemView
+        <org.torproject.vpn.ui.base.view.IconTextEntryView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:drawable="@drawable/ic_code"
-            app:text="@string/tor_logs"
-            app:secondaryText="@string/tor_logs_description"
-            android:onClick="@{handler::onTorLogsClicked}"
-            />
-
-        <org.torproject.vpn.ui.configure.view.ConfigItemView
-            android:id="@+id/always_on_vpn"
-            android:visibility="gone"
-            tools:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:text="@string/always_on_vpn"
-            app:secondaryText="@string/always_on_vpn_description"
-            android:onClick="@{handler::onAlwaysOnClicked}"
+            app:drawable="@drawable/ic_wifi_tethering"
+            app:text="@string/connection"
+            app:secondaryText="@string/connection_description"
+            android:onClick="@{handler::onConnectionClicked}"
             />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>

@@ -35,9 +35,6 @@ class ConfigureFragment : Fragment(), ClickHandler {
         binding.viewModel = configureFragmentViewModel
         binding.handler = this
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            binding.alwaysOnVpn.visibility = VISIBLE
-        }
         return  binding.root
     }
 
@@ -46,15 +43,8 @@ class ConfigureFragment : Fragment(), ClickHandler {
         findNavController().navigate(R.id.action_configureFragment_to_appRoutingFragment)
     }
 
-    override fun onTorLogsClicked(v: View) {
-        Log.d(TAG, "tor entry clicked")
-        findNavController().navigate(R.id.action_configureFragment_to_LoggingFragment)
+    override fun onConnectionClicked(v: View) {
+        findNavController().navigate(R.id.action_configureFragment_to_connectionFragment)
     }
 
-    override fun onAlwaysOnClicked(v: View) {
-        Log.d(TAG, "on always-on clicked")
-        val intent = Intent("android.net.vpn.SETTINGS")
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-    }
 }

@@ -59,6 +59,12 @@
     <string name="error_something_went_wrong">Something went wrong</string>
     <string name="error_detail_message">Onionverse couldn\'t connect to the Tor Network.</string>
     <string name="error_view_logs">View logs</string>
+    <string name="connection">Connection</string>
+    <string name="connection_description">Configure how to connect to Tor</string>
+    <string name="kill_switch">Kill switch</string>
+    <string name="kill_switch_description">Block apps from connecting to the internet if the Tor network can\'t be reached</string>
+    <string name="quickstart">Quickstart</string>
+    <string name="quickstart_description">Connect to the Tor network automatically when launched</string>
 
 
 </resources>

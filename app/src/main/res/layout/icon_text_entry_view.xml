@@ -17,6 +17,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="gone"
             />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTitle"
@@ -49,20 +50,26 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/smItemSwitch"
             android:paddingStart="28dp"
-            android:paddingEnd="@dimen/compact_padding"            android:singleLine="true"
+            android:paddingEnd="@dimen/compact_padding"
+            android:maxLines="2"
             android:ellipsize="end"
             tools:text="a long test that should not touch the divider letsee"
             tools:textColor="#000000"
             />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
+        />
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/smItemSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:track="@drawable/toggle_track"
+            android:thumb="@drawable/toggle_thumb"
             android:visibility="gone"
             />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

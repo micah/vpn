@@ -46,7 +46,6 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             VpnServiceCommand.startVpn(context)
-            context?.let { PreferenceHelper(it).startOnBoot = true }
 
             // Fixes button color after permission dialog, Quick fix, need refactoring.
             startVectorAnimationWithEndCallback(
