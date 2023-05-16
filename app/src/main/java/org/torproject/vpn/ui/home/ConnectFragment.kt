@@ -13,16 +13,19 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
+import org.torproject.onionmasq.logging.LogObservable
 import org.torproject.vpn.MainActivity
 import org.torproject.vpn.MainActivity.Companion.KEY_ACTION
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentConnectBinding
+import org.torproject.vpn.ui.home.model.ACTION_LOGS
 import org.torproject.vpn.ui.home.model.ConnectFragmentViewModel
+import org.torproject.vpn.utils.*
 import org.torproject.vpn.vpn.ConnectionState
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
-import kotlinx.coroutines.launch
-import org.torproject.vpn.utils.*
 
 class ConnectFragment : Fragment() {
     companion object {
@@ -40,6 +43,8 @@ class ConnectFragment : Fragment() {
 
     private lateinit var preferenceHelper: PreferenceHelper
 
+    private var vpnPermissionDialogStartTime = 0L
+
     private var startForResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -54,6 +59,11 @@ class ConnectFragment : Fragment() {
                 binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
             }
         } else {
+            //this indicates that the permission request failed almost instantly. One of the reason could be that other VPN has always-on flag started.
+            if (System.currentTimeMillis() - vpnPermissionDialogStartTime < 200) {
+                LogObservable.getInstance().addLog("VPN permission request failed instantly. Other VPN is likely on ALWAYS-ON mode!")
+            }
+
             VpnStatusObservable.update(ConnectionState.CONNECTION_ERROR)
         }
         connectFragmentViewModel.onVpnPrepared()
@@ -69,17 +79,33 @@ class ConnectFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = connectFragmentViewModel
 
-        connectFragmentViewModel.prepareVpn.observe(viewLifecycleOwner, Observer<Intent?> {  intent ->
-            intent?.let {
-                startForResult.launch(it)
-            }
-        })
+        connectFragmentViewModel.prepareVpn.observe(
+            viewLifecycleOwner,
+            Observer<Intent?> { intent ->
+                intent?.let {
+                    vpnPermissionDialogStartTime = System.currentTimeMillis()
+                    startForResult.launch(it)
+                }
+            })
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     connectFragmentViewModel.connectionState.collect { vpnState ->
                         setUIState(vpnState)
+                    }
+                }
+
+                launch {
+                    connectFragmentViewModel.navigateToLogsAction.collect { action ->
+                        when (action) {
+                            ACTION_LOGS -> {
+                                findNavController().navigate(R.id.action_navigation_connect_to_loggingFragment)
+                            }
+                            else -> {
+                                //other cases of navigation.
+                            }
+                        }
                     }
                 }
             }
@@ -96,7 +122,10 @@ class ConnectFragment : Fragment() {
     }
 
     private fun setUIState(vpnState: ConnectionState) {
-        Log.d(TAG, "setUIState: ${if(::currentVpnState.isInitialized) currentVpnState else "not initialized"} --> ${vpnState.name}")
+        Log.d(
+            TAG,
+            "setUIState: ${if (::currentVpnState.isInitialized) currentVpnState else "not initialized"} --> ${vpnState.name}"
+        )
         if (::currentVpnState.isInitialized && currentVpnState == vpnState) {
             return
         }
@@ -247,7 +276,7 @@ class ConnectFragment : Fragment() {
                 ), lifecycle
             ) {}
 
-        }else if (currentVpnState == ConnectionState.CONNECTED) {
+        } else if (currentVpnState == ConnectionState.CONNECTED) {
 
             // transition from connected gradient to yellow(error color)
             createStatusBarConnectedGradientAnimation(

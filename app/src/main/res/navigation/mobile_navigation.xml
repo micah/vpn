@@ -24,6 +24,9 @@
         android:name="org.torproject.vpn.ui.home.ConnectFragment"
         android:label="@string/action_connect"
         tools:layout="@layout/fragment_connect">
+        <action
+            android:id="@+id/action_navigation_connect_to_loggingFragment"
+            app:destination="@id/loggingFragment" />
     </fragment>
     <fragment
         android:id="@+id/appRoutingFragment"
