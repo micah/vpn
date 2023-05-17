@@ -6,6 +6,8 @@ import android.text.format.Formatter
 import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import org.torproject.vpn.BuildConfig
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
@@ -14,11 +16,11 @@ import org.torproject.vpn.vpn.ConnectionState.*
 import org.torproject.vpn.vpn.DataUsage
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
-import kotlinx.coroutines.flow.*
 
 /**
  * ViewModel for slider fragment, mostly place holder at this point
  */
+const val ACTION_LOGS = 110
 
 class ConnectFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -119,16 +121,22 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         }
     }.stateIn(scope = viewModelScope, SharingStarted.WhileSubscribed(), initialValue = "")
 
-    //these are static one-time-fetch value on viewModel init. Dont need to be LiveData or StateFlow.
+    //these are static one-time-fetch values on viewModel init. Dont need to be LiveData or StateFlow.
     val flavor = "Pre-alpha"
     val version = BuildConfig.VERSION_NAME
+
+    private val _navigateToLogsAction = MutableSharedFlow<Int>(replay = 0)
+
+    val navigateToLogsAction: SharedFlow<Int>
+        get() = _navigateToLogsAction
+
 
     fun connectStateButtonClicked() {
         when (VpnStatusObservable.statusLiveData.value as ConnectionState) {
             INIT -> attemptConnect()
             CONNECTING -> attemptPause()
             CONNECTED -> attemptDisconnect()
-            CONNECTION_ERROR -> attemptDisconnect()
+            CONNECTION_ERROR -> attemptConnect()
             DISCONNECTING -> attemptConnect()
             DISCONNECTED -> attemptConnect()
             PAUSED -> {}
@@ -137,6 +145,9 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     //TODO
     fun viewLogsClicked() {
+        viewModelScope.launch {
+            _navigateToLogsAction.emit(ACTION_LOGS)
+        }
     }
 
     val allAppsProtected: Boolean get() = PreferenceHelper(getApplication()).protectAllApps
