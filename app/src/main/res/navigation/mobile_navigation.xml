@@ -13,10 +13,9 @@
         <action
             android:id="@+id/action_configureFragment_to_appRoutingFragment"
             app:destination="@id/appRoutingFragment" />
-
         <action
-            android:id="@+id/action_configureFragment_to_LoggingFragment"
-            app:destination="@id/loggingFragment" />
+            android:id="@+id/action_configureFragment_to_connectionFragment"
+            app:destination="@id/connectionFragment" />
     </fragment>
 
     <fragment
@@ -30,7 +29,15 @@
         android:name="org.torproject.vpn.ui.approuting.AppRoutingFragment"
         android:label="AppRoutingFragment"
         tools:layout="@layout/fragment_app_routing" />
-
+    <fragment
+        android:id="@+id/connectionFragment"
+        android:label="ConnectionFragment"
+        android:name="org.torproject.vpn.ui.connectionsettings.ConnectionFragment"
+        tools:layout="@layout/fragment_connectionsettings">
+        <action
+            android:id="@+id/action_connectionFragment_to_LoggingFragment"
+            app:destination="@id/loggingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loggingFragment"
         android:name="org.torproject.vpn.ui.logging.LoggingFragment"

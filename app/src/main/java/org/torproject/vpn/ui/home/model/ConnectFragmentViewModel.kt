@@ -148,7 +148,6 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         //TODO: what are we going to try in paused state?
         VpnStatusObservable.update(DISCONNECTING)
         VpnServiceCommand.stopVpn(getApplication())
-        PreferenceHelper(getApplication()).startOnBoot = false
     }
 
     private fun attemptConnect() {
@@ -159,14 +158,11 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     private fun attemptDisconnect() {
         VpnStatusObservable.update(DISCONNECTING)
         VpnServiceCommand.stopVpn(getApplication())
-        PreferenceHelper(getApplication()).startOnBoot = false
     }
 
     private fun attemptCancelConnect() {
         VpnStatusObservable.update(DISCONNECTING)
         VpnServiceCommand.stopVpn(getApplication())
-        PreferenceHelper(getApplication()).startOnBoot = false
-        //TODO
     }
 
     fun prepareToStartVPN() {
@@ -175,7 +171,6 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
             _prepareVpn.postValue(vpnIntent)
         } else {
             VpnServiceCommand.startVpn(getApplication())
-            PreferenceHelper(getApplication()).startOnBoot = true
         }
     }
 

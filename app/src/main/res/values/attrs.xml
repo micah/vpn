@@ -2,15 +2,19 @@
     <attr name="text" format="string" />
     <attr name="secondaryText" format="string" />
     <attr name="drawable" format="color|reference" />
+    <attr name="hideDrawable" format="boolean" />
+    <attr name="hideSwitch" format="boolean" />
 
     <declare-styleable name="AppItemView">
         <attr name="text"/>
         <attr name="drawable"/>
     </declare-styleable>
 
-    <declare-styleable name="ConfigItemView">
+    <declare-styleable name="IconTextEntryView">
         <attr name="text"/>
         <attr name="secondaryText"/>
         <attr name="drawable"/>
+        <attr name="hideDrawable" />
+        <attr name="hideSwitch" />
     </declare-styleable>
 </resources>
