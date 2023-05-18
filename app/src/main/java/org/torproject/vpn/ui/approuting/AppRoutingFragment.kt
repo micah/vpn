@@ -19,26 +19,18 @@ import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
 
-class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
-
-    companion object {
-        fun newInstance() = AppRoutingFragment()
-    }
+class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val TAG = AppRoutingFragment::class.java.simpleName
     private lateinit var viewModel: AppRoutingViewModel
     private lateinit var appListAdapter: AppListAdapter
-    private var _binding: FragmentAppRoutingBinding? = null
-    private val binding get() = _binding!!
     private lateinit var preferenceHelper: PreferenceHelper
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         preferenceHelper = PreferenceHelper(requireContext())
         viewModel = ViewModelProvider(this)[AppRoutingViewModel::class.java]
-        _binding = FragmentAppRoutingBinding.inflate(inflater, container, false)
+        val binding = FragmentAppRoutingBinding.bind(view)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         preferenceHelper.registerListener(this)
@@ -69,13 +61,10 @@ class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChang
             }
 
         }
-
-        return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
         appListAdapter.onItemModelChanged = null
         preferenceHelper.unregisterListener(this)
     }

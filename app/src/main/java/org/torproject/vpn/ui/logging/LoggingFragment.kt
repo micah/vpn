@@ -17,18 +17,15 @@ import org.torproject.vpn.databinding.FragmentLoggingBinding
 import org.torproject.vpn.ui.logging.data.LoggingListAdapter
 import org.torproject.onionmasq.logging.LogObservable
 
-class LoggingFragment : Fragment() {
+class LoggingFragment : Fragment(R.layout.fragment_logging) {
 
-    private lateinit var binding: FragmentLoggingBinding
-    private lateinit var loggingListAdapter: LoggingListAdapter
+
     private var logObservable = LogObservable.getInstance()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        loggingListAdapter = LoggingListAdapter()
-        binding = FragmentLoggingBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val loggingListAdapter = LoggingListAdapter()
+        val binding = FragmentLoggingBinding.bind(view)
         binding.rvLogList.adapter = loggingListAdapter
         binding.lifecycleOwner = viewLifecycleOwner
         binding.rvLogList.layoutManager =
@@ -54,6 +51,5 @@ class LoggingFragment : Fragment() {
                 else -> return@setOnMenuItemClickListener false
             }
         }
-        return binding.root
     }
 }
