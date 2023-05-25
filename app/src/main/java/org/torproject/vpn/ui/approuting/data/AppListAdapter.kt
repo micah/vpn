@@ -39,6 +39,7 @@ class AppListAdapter(
         val viewHolder: RecyclerView.ViewHolder = when (viewType) {
             CELL -> AppListItemViewHolder(AppSwitchItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             HORIZONTAL_RECYCLER_VIEW -> {
+                Log.d(TAG, "setting horizontal RV adapter and LLM")
                 val binding = HorizontalRecyclerViewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 binding.rvTorApps.adapter = torAppsAdapter
                 binding.rvTorApps.layoutManager = torAppsLayoutManager
