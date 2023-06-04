@@ -33,7 +33,8 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         val TAG: String = ConnectFragment::class.java.simpleName
     }
 
-    private lateinit var binding: FragmentConnectBinding
+    private var _binding: FragmentConnectBinding? = null
+    private val binding get() = _binding!!
     private lateinit var connectFragmentViewModel: ConnectFragmentViewModel
 
     //this is required to store current state that UI is in so we can decide whether to animate to next state
@@ -76,7 +77,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         preferenceHelper = PreferenceHelper(requireContext())
         preferenceHelper.registerListener(this)
         connectFragmentViewModel = ViewModelProvider(this)[ConnectFragmentViewModel::class.java]
-        binding = FragmentConnectBinding.inflate(inflater, container, false)
+        _binding = FragmentConnectBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = connectFragmentViewModel
 
@@ -124,6 +125,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
     override fun onDestroyView() {
         super.onDestroyView()
+        _binding = null
         preferenceHelper.unregisterListener(this)
     }
 

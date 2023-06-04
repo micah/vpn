@@ -15,27 +15,20 @@ import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentConfigureBinding
 import org.torproject.vpn.ui.configure.model.ConfigureFragmentViewModel
 
-class ConfigureFragment : Fragment(), ClickHandler {
+class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
     companion object {
          val TAG: String = ConfigureFragment::class.java.simpleName
     }
 
-    private lateinit var binding: FragmentConfigureBinding
     private lateinit var configureFragmentViewModel: ConfigureFragmentViewModel
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         configureFragmentViewModel =
             ViewModelProvider(this)[ConfigureFragmentViewModel::class.java]
-
-        binding = FragmentConfigureBinding.inflate(inflater, container, false)
+        val binding = FragmentConfigureBinding.bind(view)
         binding.viewModel = configureFragmentViewModel
         binding.handler = this
-
-        return  binding.root
     }
 
     override fun onAppsClicked(v: View) {
