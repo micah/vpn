@@ -23,7 +23,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.TorVPN"
-        tools:targetApi="32">
+        tools:targetApi="33">
         <activity
             android:name="org.torproject.vpn.MainActivity"
             android:exported="true">

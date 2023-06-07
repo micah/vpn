@@ -26,7 +26,7 @@ fun View.centerInParent() = Point((left + width / 2), (top + height / 2))
  */
 fun Animator.animateWithEndCallback(lifecycle: Lifecycle, onAnimationEnd: () -> Unit) {
     addListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationEnd(animation: Animator?) {
+        override fun onAnimationEnd(animation: Animator) {
             if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
                 onAnimationEnd()
             }
