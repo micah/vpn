@@ -46,10 +46,8 @@ class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChang
         // setup vertical list
         appListAdapter = AppListAdapter(viewModel.getAppList(),
             TorAppsAdapter(viewModel.getAppList()),
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
             preferenceHelper)
         appListAdapter.onItemModelChanged = viewModel::onItemModelChanged
-        binding.rvAppList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvAppList.adapter = appListAdapter
         viewModel.getObservableAppList().observe(viewLifecycleOwner, appListAdapter::update)
         viewModel.getObservableProgress().observe(viewLifecycleOwner) { isLoading ->

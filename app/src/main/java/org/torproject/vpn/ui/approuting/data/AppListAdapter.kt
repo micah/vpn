@@ -19,7 +19,6 @@ import org.torproject.vpn.utils.PreferenceHelper
 class AppListAdapter(
     list: List<AppItemModel>,
     var torAppsAdapter: TorAppsAdapter,
-    var torAppsLayoutManager: LinearLayoutManager,
     var preferenceHelper: PreferenceHelper
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -42,7 +41,6 @@ class AppListAdapter(
                 Log.d(TAG, "setting horizontal RV adapter and LLM")
                 val binding = HorizontalRecyclerViewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 binding.rvTorApps.adapter = torAppsAdapter
-                binding.rvTorApps.layoutManager = torAppsLayoutManager
                 HorizontalRecyclerViewItemViewHolder(binding)
             }
             TABLE_HEADER_VIEW -> TableHeaderViewHolder(AppRoutingTableHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false))

@@ -8,5 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        tools:listitem="@layout/app_item_view" />
+        tools:listitem="@layout/app_item_view"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
 </layout>
