@@ -21,6 +21,7 @@
     <!--New colors starts from here-->
     <color name="blue30">#89BFE7</color>
     <color name="blue30_16">#2989BFE7</color>
+    <color name="indigo10">#D3D7FA</color>
     <color name="indigo60">#473BA5</color>
     <color name="indigo70">#352982</color>
     <color name="indigo90">#130D32</color>

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.torproject.vpn.utils.isRunningOnMainThread
 import org.torproject.onionmasq.logging.LogObservable
+import org.torproject.vpn.utils.updateDataUsage
 import java.util.concurrent.atomic.AtomicBoolean
 
 enum class ConnectionState {
@@ -41,15 +42,7 @@ object VpnStatusObservable {
     }
 
     fun updateDataUsage(downstream: Long, upstream: Long) {
-        val lastDataUsage: DataUsage = dataUsage.value!!
-        val updatedDataUsage = DataUsage()
-        updatedDataUsage.downstreamData = downstream
-        updatedDataUsage.upstreamData = upstream
-        val timeDelta = Math.max((updatedDataUsage.timeStamp - lastDataUsage.timeStamp) / 1000, 1)
-        updatedDataUsage.upstreamDataPerSec =
-            (updatedDataUsage.upstreamData - lastDataUsage.upstreamData) / timeDelta
-        updatedDataUsage.downstreamDataPerSec =
-            (updatedDataUsage.downstreamData - lastDataUsage.downstreamData) / timeDelta
+        val updatedDataUsage = updateDataUsage(dataUsage, downstream, upstream)
         if (isRunningOnMainThread()) {
             _dataUsage.setValue(updatedDataUsage)
         } else {

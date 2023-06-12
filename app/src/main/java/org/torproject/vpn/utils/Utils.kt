@@ -14,9 +14,11 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LiveData
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import org.torproject.vpn.R
+import org.torproject.vpn.vpn.DataUsage
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
@@ -204,6 +206,19 @@ fun isRunningOnMainThread(): Boolean {
 fun getFormattedDate(timestamp: Long, locale: Locale?): String? {
     val sdf = SimpleDateFormat("dd/mm/yy, hh:mm:ss.SSS", locale)
     return sdf.format(timestamp)
+}
+
+fun updateDataUsage(dataUsage: LiveData<DataUsage>, downstream: Long, upstream: Long): DataUsage{
+    val lastDataUsage: DataUsage = dataUsage.value!!
+    val updatedDataUsage = DataUsage()
+    updatedDataUsage.downstreamData = downstream
+    updatedDataUsage.upstreamData = upstream
+    val timeDelta = Math.max((updatedDataUsage.timeStamp - lastDataUsage.timeStamp) / 1000, 1)
+    updatedDataUsage.upstreamDataPerSec =
+        (updatedDataUsage.upstreamData - lastDataUsage.upstreamData) / timeDelta
+    updatedDataUsage.downstreamDataPerSec =
+        (updatedDataUsage.downstreamData - lastDataUsage.downstreamData) / timeDelta
+    return updatedDataUsage
 }
 
 fun getDpInPx(context: Context, dp: Float): Int {

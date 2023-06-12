@@ -29,6 +29,7 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
         super.onViewCreated(view, savedInstanceState)
         preferenceHelper = PreferenceHelper(requireContext())
         viewModel = ViewModelProvider(this)[AppRoutingViewModel::class.java]
+        viewModel.loadApps()
         val binding = FragmentAppRoutingBinding.bind(view)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
