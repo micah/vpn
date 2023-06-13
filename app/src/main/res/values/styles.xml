@@ -4,6 +4,7 @@
     <!--  ###### -->
 
     <style name="paragraph_title" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">3sp</item>
         <item name="android:textColor">@color/purpleNormal</item>
@@ -12,6 +13,7 @@
     </style>
 
     <style name="button_text_in_fragment" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">20sp</item>
         <item name="android:lineSpacingExtra">0sp</item>
         <item name="android:textColor">@color/purpleDarkText</item>
@@ -19,6 +21,7 @@
     </style>
 
     <style name="switch_text_without_background" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">0sp</item>
         <item name="android:textColor">@color/textOnPrimary</item>
@@ -26,12 +29,14 @@
     </style>
 
     <style name="app_circuits_text" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/textOnPrimary</item>
         <item name="android:textFontWeight" tools:targetApi="p">500</item>
     </style>
 
     <style name="label_text_in_fragment" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">5sp</item>
         <item name="android:textColor">?colorOnPrimary</item>
@@ -39,6 +44,7 @@
     </style>
 
     <style name="list_item_style" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingExtra">0sp</item>
         <item name="android:textColor">?colorOnPrimary</item>
@@ -54,6 +60,7 @@
     </style>
 
     <style name="text_body_small" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?colorOnPrimary</item>
         <item name="android:textFontWeight" tools:targetApi="p">400</item>
@@ -74,6 +81,7 @@
     </style>
 
     <style name="list_item_subheader_style" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">0sp</item>
         <item name="android:textColor">@color/purpleDarkTextSubdued</item>
@@ -88,6 +96,7 @@
     </style>
 
     <style name="button_text_connect" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">20sp</item>
         <item name="android:lineSpacingExtra">0sp</item>
         <item name="android:textColor">@color/greenDarkText</item>
@@ -185,6 +194,7 @@
     </style>
 
     <style name="info_text" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textFontWeight" tools:targetApi="p">400</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">3sp</item>
@@ -192,6 +202,7 @@
     </style>
 
     <style name="info_button_text" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textFontWeight" tools:targetApi="p">600</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
@@ -219,6 +230,7 @@
     </style>
 
     <style name="title_in_stats" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textFontWeight" tools:targetApi="p">600</item>
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">3sp</item>
@@ -227,6 +239,7 @@
     </style>
 
     <style name="number_in_stats" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textFontWeight" tools:targetApi="p">600</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">3sp</item>
