@@ -227,26 +227,43 @@
                                 tools:text="@string/this_browser"
                                 android:text="@{viewModel.circuitExitApp}"
                                 />
-                            <TextView
-                                android:id="@+id/tv_exit_node"
-                                android:textAppearance="@style/app_circuits_text"
+                            <androidx.appcompat.widget.LinearLayoutCompat
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:orientation="horizontal"
                                 android:layout_toEndOf="@id/iv_hops"
                                 android:layout_below="@id/tv_app_exit"
-                                android:paddingVertical="6dp"
-                                android:paddingEnd="@dimen/compact_padding"
-                                android:paddingRight="@dimen/compact_padding"
-                                tools:text="Spain"
-                                android:text="@{viewModel.circuitExitNode}"
-                                />
+                                android:id="@+id/exit_node_container"
+                                >
+                                <TextView
+                                    android:id="@+id/tv_exit_node"
+                                    android:textAppearance="@style/app_circuits_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+
+                                    android:paddingVertical="6dp"
+                                    android:paddingEnd="@dimen/compact_padding"
+                                    android:paddingRight="@dimen/compact_padding"
+                                    tools:text="Spain"
+                                    android:text="@{viewModel.circuitExitNode}"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/guard"
+                                    android:paddingVertical="6dp"
+                                    android:paddingHorizontal="12dp"
+                                    style="@style/info_tag"
+                                    />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
                             <TextView
                                 android:id="@+id/tv_relay_node"
                                 android:textAppearance="@style/app_circuits_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_toEndOf="@id/iv_hops"
-                                android:layout_below="@id/tv_exit_node"
+                                android:layout_below="@id/exit_node_container"
                                 android:paddingEnd="@dimen/compact_padding"
                                 android:paddingRight="@dimen/compact_padding"
                                 android:paddingVertical="6dp"
