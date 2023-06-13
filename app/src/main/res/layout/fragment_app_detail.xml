@@ -167,8 +167,8 @@
                         android:text="@string/action_protect_this_app"
                         android:checked="@{viewModel.protectThisApp}"
                         android:onCheckedChanged="@{viewModel::onProtectThisAppChanged}"
-                        android:thumb="@drawable/toggle_thumb"
-                        app:track="@drawable/toggle_track" />
+                        android:thumb="@drawable/toggle_thumb_light"
+                        app:track="@drawable/toggle_track_light" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
