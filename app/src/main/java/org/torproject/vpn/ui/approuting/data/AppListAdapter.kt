@@ -141,7 +141,11 @@ class AppListAdapter(
             binding.smItemSwitch.isChecked = appItem.isRoutingEnabled == true
             binding.tvTitle.setOnClickListener(View.OnClickListener {
                 appItem.appId?.let {
-                    val action = AppRoutingFragmentDirections.actionNavigationAppRoutingToAppDetailFragment(appItem.appId, appItem.text, appItem.isBrowserApp ?: false)
+                    val action = AppRoutingFragmentDirections.actionNavigationAppRoutingToAppDetailFragment(
+                        argAppId = appItem.appId,
+                        argAppName = appItem.text,
+                        argIsBrowser = appItem.isBrowserApp ?: false,
+                        argHasTorSupport = appItem.hasTorSupport ?: false)
                     binding.root.findNavController().navigate(action)
                 }
             })

@@ -2,18 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--  ###### -->
-    <style name="you_re_read">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#0C0C0D</item>
-    </style>
-
-    <style name="title_in_fragment" parent="TextAppearance.MaterialComponents.Headline2">
-        <item name="android:textSize">32sp</item>
-        <item name="android:lineSpacingExtra">2sp</item>
-        <item name="android:textColor">?colorOnPrimary</item>
-        <item name="android:paddingBottom">38dp</item>
-        <item name="android:paddingTop">28dp</item>
-    </style>
 
     <style name="paragraph_title" parent="TextAppearance.MaterialComponents.Subtitle1">
         <item name="android:textSize">14sp</item>
@@ -93,115 +81,12 @@
         <item name="android:textFontWeight" tools:targetApi="p">400</item>
     </style>
 
-
-    <style name="action_button1" parent="Widget.MaterialComponents.TextView">
-        <item name="android:background">@drawable/common_rounded_square_action</item>
-        <item name="android:textAppearance">@style/button_text_in_fragment</item>
-        <item name="android:paddingTop">28dp</item>
-        <item name="android:paddingBottom">28dp</item>
-        <item name="android:minEms">7</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-
-    <style name="action_button2" parent="Widget.MaterialComponents.TextView">
-        <item name="android:background">@drawable/common_rounded_square_action</item>
-        <item name="android:textAppearance">@style/button_text_in_fragment</item>
-        <item name="android:minEms">7</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
-        <item name="android:paddingStart">28dp</item>
-        <item name="android:paddingEnd">28dp</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="info_error_dialog_collapsed_title" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:textSize">@dimen/connect_error_collapsed_title_size</item>
-        <item name="android:lineSpacingExtra">3sp</item>
-        <item name="android:textColor">@color/textOnPrimary</item>
-    </style>
-
-
-    <style name="info_error_dialog_collapsed_subtitle" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:textSize">14sp</item>
-        <item name="android:lineSpacingExtra">3sp</item>
-        <!--        <item name="android:textColor">@color/colorInfoErrorCollapsedSubtitle</item>-->
-    </style>
-
     <style name="info_dialog_expanded_title" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="android:textSize">24sp</item>
         <item name="android:lineSpacingExtra">3sp</item>
         <item name="android:textColor">?colorOnPrimary</item>
     </style>
 
-
-    <style name="info_error_dialog_expanded_info1" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:textSize">15sp</item>
-        <item name="android:lineSpacingExtra">3sp</item>
-        <item name="android:textColor">@color/textOnPrimary</item>
-    </style>
-
-    <style name="info_error_dialog_expanded_info2" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:textSize">14sp</item>
-        <item name="android:lineSpacingExtra">3sp</item>
-        <item name="android:textColor">@color/textOnPrimary</item>
-    </style>
-
-
-    <style name="info_error_dialog_expanded_location_title" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:textSize">16sp</item>
-        <item name="android:lineSpacingExtra">5sp</item>
-        <item name="android:textColor">@color/textOnPrimary</item>
-
-    </style>
-
-
-    <style name="info_error_dialog_expanded_location_subtitle" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:textSize">12sp</item>
-        <item name="android:lineSpacingExtra">1sp</item>
-        <!--        <item name="android:textColor">@color/colorInfoErrorCollapsedSubtitle</item>-->
-
-    </style>
-
-
-    <style name="action_button3" parent="Widget.MaterialComponents.TextView">
-        <item name="android:background">@drawable/common_rounded_square_action_white</item>
-        <item name="android:textAppearance">@style/button_text_in_fragment</item>
-        <item name="android:minEms">7</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
-        <item name="android:paddingStart">28dp</item>
-        <item name="android:paddingEnd">28dp</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-
-    <style name="report_step_title" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:textSize">16sp</item>
-        <item name="android:lineSpacingExtra">5sp</item>
-        <item name="android:textColor">?colorOnPrimary</item>
-    </style>
-
-    <style name="report_step_info" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:textSize">12sp</item>
-        <item name="android:lineSpacingExtra">1sp</item>
-        <!--        <item name="android:textColor">@color/colorInfoErrorCollapsedSubtitle</item>-->
-    </style>
-
-    <style name="report_step_duration" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="android:textSize">12sp</item>
-        <item name="android:lineSpacingExtra">1sp</item>
-        <item name="android:textColor">?colorOnPrimary</item>
-    </style>
-
-    <style name="report_tab_header" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="android:textSize">14sp</item>
-        <item name="android:lineSpacingExtra">3sp</item>
-        <item name="android:textColor">?colorOnPrimary</item>
-    </style>
-
-    <!--New styles from here-->
-    <!--  Text styles  -->
     <style name="button_text_connect" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">20sp</item>
         <item name="android:lineSpacingExtra">0sp</item>
@@ -280,7 +165,6 @@
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
-
     <style name="stats_kbits_number">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#FFFFFF</item>
@@ -298,6 +182,21 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:lineSpacingExtra">8sp</item>
+    </style>
+
+    <style name="info_text" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textColor">@color/indigo10</item>
+    </style>
+
+    <style name="info_button_text" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/blue_30</item>
+        <item name="android:lineHeight" tools:targetApi="p">20dp</item>
     </style>
 
     <style name="rounded_bottom_sheet" parent="@style/Widget.Design.BottomSheet.Modal">

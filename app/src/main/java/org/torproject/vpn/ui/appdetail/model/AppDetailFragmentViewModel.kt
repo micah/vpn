@@ -1,10 +1,14 @@
 package org.torproject.vpn.ui.appdetail.model
 
 import android.app.Application
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.text.format.Formatter
 import android.widget.CompoundButton
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.*
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.SharingStarted.Companion.Eagerly
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -17,79 +21,62 @@ import org.torproject.vpn.utils.updateDataUsage
 import org.torproject.vpn.vpn.DataUsage
 import java.util.*
 
+
 class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
     val appId = MutableLiveData("")
     val appName = MutableLiveData("")
     val isBrowser = MutableLiveData(false)
-
+    val hasTorSupport = MutableLiveData(false)
+    var packageManager: PackageManager? = application.packageManager
 
     val circuitDescription: StateFlow<String> = appName.asFlow().map { appName ->
         return@map application.getString(R.string.circuits_app_description, appName)
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = ""
-    )
+    }.stateIn(viewModelScope, Eagerly, "")
+
+    val openAppButtonText: StateFlow<String> = appName.asFlow().map { appName ->
+        return@map application.getString(R.string.action_open_app, appName)
+    }.stateIn(viewModelScope, Eagerly, "")
+
+    val independentTorAppDescriptionText: StateFlow<String> = appName.asFlow().map { appName ->
+        return@map application.getString(R.string.description_independend_tor_powered_app, appName)
+    }.stateIn(viewModelScope, Eagerly, "")
 
     val circuitExitApp: StateFlow<String> = isBrowser.asFlow().map { isBrowser ->
         if (isBrowser) {
             return@map application.getString(R.string.this_browser)
         }
         return@map application.getString(R.string.this_app)
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = ""
-    )
+    }.stateIn(viewModelScope, Eagerly, "")
 
     val circuitExitNode: StateFlow<String> = appId.asFlow().map { appId ->
         // TODO: request node data based on appId
         // this is a dummy implementation for now
         return@map "es".toFlagEmoji() + "\t" + Locale("", "es").displayCountry
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = ""
-    )
+    }.stateIn(viewModelScope, Eagerly, "")
 
     val circuitRelayNode: StateFlow<String> = appId.asFlow().map { appId ->
         // TODO: request node data based on appId
         // this is a dummy implementation for now
         return@map "de".toFlagEmoji() + "\t" + Locale("", "de").displayCountry
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = ""
-    )
+    }.stateIn(viewModelScope, Eagerly, "")
+
     val circuitEntryNode: StateFlow<String> = appId.asFlow().map { appId ->
         // TODO: request node data based on appId
         // this is a dummy implementation for now
         return@map "pl".toFlagEmoji() + "\t" +Locale("", "pl").displayCountry
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = ""
-    )
+    }.stateIn(viewModelScope, Eagerly, "")
 
     private val _dataUsage: MutableLiveData<DataUsage> = MutableLiveData(DataUsage())
     val dataUsage: LiveData<DataUsage> = _dataUsage
 
     val dataUsageDownstream: StateFlow<String> = dataUsage.asFlow().map { data ->
         return@map Formatter.formatFileSize(application, data.downstreamData)
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = Formatter.formatFileSize(application, 0)
-    )
+    }.stateIn(viewModelScope, Eagerly, Formatter.formatFileSize(application, 0))
 
     val dataUsageUpstream: StateFlow<String> = dataUsage.asFlow().map { data ->
         return@map Formatter.formatFileSize(application, data.upstreamData)
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = Formatter.formatFileSize(application, 0)
-    )
+    }.stateIn(viewModelScope, Eagerly, Formatter.formatFileSize(application, 0))
 
     private val preferenceHelper = PreferenceHelper(getApplication())
 
@@ -125,6 +112,19 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
     override fun onCleared() {
         super.onCleared()
         timer.cancel()
+        packageManager = null
+    }
+
+    fun onOpenAppClicked() {
+        appId.value?.let {
+            val launchIntent: Intent? = packageManager?.getLaunchIntentForPackage(it)
+            launchIntent?.let { intent ->
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(getApplication(), intent, null)
+            } ?: kotlin.run {
+                Toast.makeText(getApplication(), "Couldn't find launcher activity for ${appName.value}", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 }

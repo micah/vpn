@@ -68,6 +68,10 @@
             android:name="argIsBrowser"
             app:argType="boolean"
             android:defaultValue="false" />
+        <argument
+            android:name="argHasTorSupport"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
 
 </navigation>
