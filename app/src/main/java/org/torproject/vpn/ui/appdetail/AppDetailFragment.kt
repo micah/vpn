@@ -24,11 +24,6 @@ import org.torproject.vpn.ui.glide.ApplicationInfoModel
 
 class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
 
-    companion object {
-        val ARG_APP_ID = "argAppId"
-        val ARG_APP_NAME = "argAppName"
-    }
-
     private lateinit var appDetailFragmentViewModel: AppDetailFragmentViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
