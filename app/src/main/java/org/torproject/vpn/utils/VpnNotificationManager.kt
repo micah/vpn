@@ -31,7 +31,7 @@ class VpnNotificationManager(val context: Context) {
         notificationManager = initNotificationManager()
     }
 
-    fun buildForegroundServiceNotification(): Notification? {
+    fun buildForegroundServiceNotification(): Notification {
         val notificationBuilder = initNotificationBuilderDefaults()
         notificationBuilder
             .setSmallIcon(android.R.drawable.ic_dialog_info)
@@ -42,6 +42,9 @@ class VpnNotificationManager(val context: Context) {
     }
 
     fun updateNotification(state: ConnectionState, dataUsage: DataUsage) {
+        if (!notificationManager.areNotificationsEnabled()) {
+            return
+        }
         var action: NotificationCompat.Action? = null
         var stateString: String? = null
         var dataUsageString: String? = null
