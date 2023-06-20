@@ -14,6 +14,7 @@ import org.torproject.vpn.ui.exitselection.model.ExitNodeCellModel
 import org.torproject.vpn.ui.exitselection.model.ExitNodeTableHeaderModel
 import org.torproject.vpn.ui.exitselection.model.ViewTypeDependentModel
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.getFlagByCountryCode
 
 class ExitNodeAdapter(liveDataList: LiveData<List<ViewTypeDependentModel>>, viewLifecycleOwner: LifecycleOwner): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var items: List<ViewTypeDependentModel> = mutableListOf()
@@ -63,6 +64,7 @@ class ExitNodeAdapter(liveDataList: LiveData<List<ViewTypeDependentModel>>, view
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ExitNodeCellModel, pos: Int) {
             binding.tvTitle.text = item.countryName
+            binding.ivCountryFlag.setImageDrawable(getFlagByCountryCode(binding.root.context, item.countryCode))
             binding.rbSelected.isChecked = item.selected
             binding.itemContainer.setOnClickListener(OnClickListener {
                 Log.d(">>", "on item clicked")

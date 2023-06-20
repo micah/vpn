@@ -13,7 +13,7 @@
        android:id="@+id/item_container"
        >
       <androidx.cardview.widget.CardView
-          android:id="@+id/cvAppImageContainer"
+          android:id="@+id/cvFlagImageContainer"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           app:cardCornerRadius="4dp"
@@ -26,10 +26,11 @@
           >
 
          <androidx.appcompat.widget.AppCompatImageView
-             android:id="@+id/ivAppImage"
-             android:layout_width="36dp"
-             android:layout_height="36dp"
-             android:src="@drawable/bg_connect_green" />
+             android:id="@+id/ivCountryFlag"
+             android:layout_width="30dp"
+             android:layout_height="20dp"
+             android:scaleType="centerCrop"
+             android:src="@drawable/flag_ua" />
       </androidx.cardview.widget.CardView>
 
       <androidx.appcompat.widget.AppCompatTextView
@@ -40,7 +41,7 @@
           android:gravity="start"
           android:textAlignment="gravity"
           tools:textColor="#000000"
-          app:layout_constraintStart_toEndOf="@id/cvAppImageContainer"
+          app:layout_constraintStart_toEndOf="@id/cvFlagImageContainer"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toStartOf="@+id/rbSelected"
