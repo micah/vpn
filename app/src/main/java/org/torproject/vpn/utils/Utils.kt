@@ -212,6 +212,9 @@ fun getDpInPx(context: Context, dp: Float): Int {
 }
 
 fun getFlagByCountryCode(context: Context, countryCode: String): Drawable? {
+    if (countryCode.isEmpty()) {
+        return null
+    }
     if (countryCode.length != 2) {
         Log.w("FLAG UTIL", "$countryCode is an invalid country code")
         return null

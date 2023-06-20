@@ -135,7 +135,7 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/ll_exit_selection_btn"
                 android:orientation="horizontal"
-                android:layout_width="128dp"
+                android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:focusable="true"
                 android:clickable="true"
@@ -165,13 +165,14 @@
                     android:layout_toEndOf="@id/iv_world"
                     android:layout_gravity="center"
                     android:layout_margin="7dp"
+                    android:visibility="@{viewModel.countryDrawable != null ? View.VISIBLE : View.GONE}"
                     >
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="20dp"
-                        android:src="@color/yellowNormal"
                         android:contentDescription="@{viewModel.selectedCountry}"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerCrop"
+                        android:src="@{viewModel.countryDrawable}"
                         />
                 </androidx.cardview.widget.CardView>
             </androidx.appcompat.widget.LinearLayoutCompat>

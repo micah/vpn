@@ -118,6 +118,12 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 }
 
                 launch {
+                    connectFragmentViewModel.buttonWidth.collect { width ->
+                        binding.llExitSelectionBtn.layoutParams.width = width
+                    }
+                }
+
+                launch {
                     connectFragmentViewModel.action.collect { action ->
                         when (action) {
                             ACTION_LOGS -> {
@@ -366,8 +372,12 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key?.equals(PreferenceHelper.PROTECT_ALL_APPS) == true) {
-            connectFragmentViewModel.updateVPNSettings()
+        key?.let {
+            when(it) {
+                PreferenceHelper.PROTECT_ALL_APPS -> connectFragmentViewModel.updateVPNSettings()
+                PreferenceHelper.EXIT_NODE_COUNTRY -> connectFragmentViewModel.updateExitNodeButton()
+                PreferenceHelper.AUTOMATIC_EXIT_NODE_SELECTION -> connectFragmentViewModel.updateExitNodeButton()
+            }
         }
     }
 
