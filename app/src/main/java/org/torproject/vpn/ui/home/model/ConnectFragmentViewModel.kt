@@ -25,9 +25,13 @@ import org.torproject.vpn.vpn.VpnStatusObservable
  */
 const val ACTION_LOGS = 110
 const val ACTION_REQUEST_NOTIFICATION_PERMISSON = 111
+const val ACTION_EXIT_NODE_SELECTION = 113
+
 class ConnectFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _prepareVpn = MutableLiveData<Intent?>()
+    private val preferenceHelper = PreferenceHelper(application)
+
     val prepareVpn: LiveData<Intent?> = _prepareVpn
 
     private val dataUsage = VpnStatusObservable.dataUsage.asFlow()
@@ -125,6 +129,8 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         }
     }.stateIn(scope = viewModelScope, SharingStarted.WhileSubscribed(), initialValue = "")
 
+    val selectedCountry: MutableLiveData<String> = MutableLiveData(preferenceHelper.exitNodeCountry)
+
     //these are static one-time-fetch values on viewModel init. Dont need to be LiveData or StateFlow.
     val flavor = "Pre-alpha"
     val version = BuildConfig.VERSION_NAME
@@ -147,7 +153,12 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         }
     }
 
-    //TODO
+    fun exitNodeSelectionButtonClicked() {
+        viewModelScope.launch {
+            _navigateToLogsAction.emit(ACTION_EXIT_NODE_SELECTION)
+        }
+    }
+
     fun viewLogsClicked() {
         viewModelScope.launch {
             _action.emit(ACTION_LOGS)
@@ -156,7 +167,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     val allAppsProtected: Boolean get() = PreferenceHelper(getApplication()).protectAllApps
     fun onProtectAppsChanged(compoundButton: CompoundButton, isChecked: Boolean) {
-        PreferenceHelper(getApplication()).protectAllApps = isChecked
+        preferenceHelper.protectAllApps = isChecked
     }
 
     private fun attemptPause() {

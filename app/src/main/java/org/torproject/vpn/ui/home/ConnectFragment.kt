@@ -24,6 +24,8 @@ import org.torproject.vpn.MainActivity
 import org.torproject.vpn.MainActivity.Companion.KEY_ACTION
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentConnectBinding
+import org.torproject.vpn.ui.exitselection.ExitSelectionBottomSheetFragment
+import org.torproject.vpn.ui.home.model.ACTION_EXIT_NODE_SELECTION
 import org.torproject.vpn.ui.home.model.ACTION_LOGS
 import org.torproject.vpn.ui.home.model.ACTION_REQUEST_NOTIFICATION_PERMISSON
 import org.torproject.vpn.ui.home.model.ConnectFragmentViewModel
@@ -124,6 +126,11 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                             ACTION_REQUEST_NOTIFICATION_PERMISSON -> {
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                                     startNotificationRequestForResult.launch(Manifest.permission.POST_NOTIFICATIONS)
+                                }
+                            }
+                            ACTION_EXIT_NODE_SELECTION -> {
+                                if (isAdded) {
+                                    ExitSelectionBottomSheetFragment().show(parentFragmentManager, "exitNodeSelector")
                                 }
                             }
                             else -> {

@@ -50,6 +50,14 @@
         <item name="android:textFontWeight" tools:targetApi="p">400</item>
     </style>
 
+    <style name="bottom_sheet_list_item_style" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/figtree_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+    </style>
+
     <style name="text_body_small" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?colorOnPrimary</item>
@@ -113,7 +121,7 @@
         <!--        <item name="android:textColor">@color/colorInfoErrorCollapsedSubtitle</item>-->
     </style>
 
-    <style name="info_error_dialog_expanded_title" parent="TextAppearance.MaterialComponents.Headline3">
+    <style name="info_dialog_expanded_title" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="android:textSize">24sp</item>
         <item name="android:lineSpacingExtra">3sp</item>
         <item name="android:textColor">?colorOnPrimary</item>
@@ -284,6 +292,17 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:lineSpacingExtra">8sp</item>
+    </style>
+
+    <style name="rounded_bottom_sheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <!-- <item name="android:typeface">monospace</item> -->
+        <item name="android:background">@drawable/bg_bottomsheet_container</item>
+    </style>
+
+    <style name="bottom_sheet_dialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
+      <!--  <item name="android:windowIsFloating">false</item> -->
+      <!--  <item name="android:typeface">monospace</item> -->
+        <item name="bottomSheetStyle">@style/rounded_bottom_sheet</item>
     </style>
 
 </resources>

@@ -22,5 +22,7 @@
     <dimen name="design_bottom_navigation_height" tools:override="true">62dp</dimen>
     <dimen name="title_top_padding">56dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="list_item_spacing">16dp</dimen>
+    <dimen name="list_item_spacing_half">8dp</dimen>
 
 </resources>

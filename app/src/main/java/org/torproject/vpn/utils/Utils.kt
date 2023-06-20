@@ -15,9 +15,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import org.torproject.vpn.R
-import kotlin.math.abs
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 
 /**
@@ -202,4 +202,9 @@ fun isRunningOnMainThread(): Boolean {
 fun getFormattedDate(timestamp: Long, locale: Locale?): String? {
     val sdf = SimpleDateFormat("dd/mm/yy, hh:mm:ss.SSS", locale)
     return sdf.format(timestamp)
+}
+
+fun getDpInPx(context: Context, dp: Float): Int {
+    val scale: Float = context.resources.displayMetrics.density
+    return (dp * scale + 0.5f).toInt()
 }

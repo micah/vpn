@@ -2,14 +2,13 @@ package org.torproject.vpn.ui.approuting
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.*
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentAppRoutingBinding
 import org.torproject.vpn.ui.approuting.data.AppListAdapter

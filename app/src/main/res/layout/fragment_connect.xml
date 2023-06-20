@@ -71,6 +71,7 @@
             android:id="@+id/imageView4"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:importantForAccessibility="no"
             android:scaleType="centerCrop"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -86,7 +87,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="@{viewModel.connectionState == ConnectionState.INIT ? View.VISIBLE: View.GONE}"
-            app:layout_constraintBottom_toTopOf="@+id/tv_connect_action_btn"
+            app:layout_constraintBottom_toTopOf="@+id/ll_fab_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progress_slider"
@@ -99,7 +100,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTION_ERROR ? View.VISIBLE: View.GONE}"
-            app:layout_constraintBottom_toTopOf="@+id/tv_connect_action_btn"
+            app:layout_constraintBottom_toTopOf="@+id/ll_fab_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progress_slider"
@@ -112,30 +113,82 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTED ? View.VISIBLE: View.GONE}"
-            app:layout_constraintBottom_toTopOf="@+id/tv_connect_action_btn"
+            app:layout_constraintBottom_toTopOf="@+id/ll_fab_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progress_slider"
             app:viewModel="@{viewModel}"
             tools:visibility="gone" />
 
-
-        <TextView
-            android:id="@+id/tv_connect_action_btn"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_fab_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/connection_button_bottom_padding"
-            android:background="@drawable/av_connect_to_pause"
-            android:clickable="true"
-            android:elevation="0dp"
-            android:focusable="true"
-            android:gravity="center"
-            android:onClick="@{()->viewModel.connectStateButtonClicked()}"
-            android:text="@{viewModel.connectButtonText}"
-            android:textAppearance="@style/button_text_connect"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/connection_button_bottom_padding"
+            >
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_exit_selection_btn"
+                android:orientation="horizontal"
+                android:layout_width="128dp"
+                android:layout_height="80dp"
+                android:focusable="true"
+                android:clickable="true"
+                android:onClick="@{() -> viewModel.exitNodeSelectionButtonClicked()}"
+                android:background="@drawable/bg_btn_exit_selection"
+                android:contentDescription="@string/exit_location"
+                android:gravity="center"
+                android:layout_gravity="center_vertical|end"
+                android:padding="16dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_world"
+                    android:importantForAccessibility="no"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    android:layout_margin="7dp"
+                    android:src="@drawable/ic_world"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvAppImageContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="0dp"
+                    android:layout_toEndOf="@id/iv_world"
+                    android:layout_gravity="center"
+                    android:layout_margin="7dp"
+                    >
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="20dp"
+                        android:src="@color/yellowNormal"
+                        android:contentDescription="@{viewModel.selectedCountry}"
+                        android:scaleType="fitXY"
+                        />
+                </androidx.cardview.widget.CardView>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <TextView
+                android:id="@+id/tv_connect_action_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/av_connect_to_pause"
+                android:clickable="true"
+                android:elevation="0dp"
+                android:focusable="true"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.connectStateButtonClicked()}"
+                android:text="@{viewModel.connectButtonText}"
+                android:textAppearance="@style/button_text_connect" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

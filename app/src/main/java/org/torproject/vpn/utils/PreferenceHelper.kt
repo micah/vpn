@@ -14,6 +14,8 @@ class PreferenceHelper(context: Context) {
         const val CACHED_APPS: String = "cached_apps"
         const val START_TIME: String = "start_time"
         const val START_ON_BOOT: String = "start_on_boot"
+        const val EXIT_NODE_COUNTRY: String = "exit_node_country"
+        const val AUTOMATIC_EXIT_NODE_SELECTION: String = "automatic_exit_node_selection"
     }
 
     private val sharedPreference =
@@ -41,8 +43,16 @@ class PreferenceHelper(context: Context) {
         set(value) = sharedPreference.edit().putString(CACHED_APPS, value).apply()
 
     var startOnBoot
-        get() = sharedPreference.getBoolean(START_ON_BOOT, false);
+        get() = sharedPreference.getBoolean(START_ON_BOOT, false)
         set(value) = sharedPreference.edit().putBoolean(START_ON_BOOT, value).apply()
+
+    var exitNodeCountry
+        get() = sharedPreference.getString(EXIT_NODE_COUNTRY, null)
+        set(value) = sharedPreference.edit().putString(EXIT_NODE_COUNTRY, value).apply()
+
+    var automaticExitNodeSelection
+        get() = sharedPreference.getBoolean(AUTOMATIC_EXIT_NODE_SELECTION, true)
+        set(value) = sharedPreference.edit().putBoolean(AUTOMATIC_EXIT_NODE_SELECTION, value).apply()
 
     fun registerListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
         sharedPreference.registerOnSharedPreferenceChangeListener(listener)
