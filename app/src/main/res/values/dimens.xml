@@ -19,6 +19,8 @@
     <dimen name="connect_state_button_width">105dp</dimen>
     <dimen name="bottom_nav_height">68dp</dimen>
     <dimen name="connection_button_bottom_padding">84dp</dimen>
+    <dimen name="connection_button_upper_guideline">206dp</dimen>
+    <dimen name="connection_button_lower_guideline">84dp</dimen>
     <dimen name="design_bottom_navigation_height" tools:override="true">62dp</dimen>
     <dimen name="title_top_padding">56dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>

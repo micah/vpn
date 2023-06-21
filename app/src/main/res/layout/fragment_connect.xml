@@ -19,6 +19,20 @@
         android:layout_height="match_parent"
         tools:context="org.torproject.vpn.ui.home.ConnectFragment">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/upper_guideline_action_btns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/connection_button_upper_guideline"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/lower_guideline_action_btns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/connection_button_lower_guideline"
+            />
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -87,7 +101,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="@{viewModel.connectionState == ConnectionState.INIT ? View.VISIBLE: View.GONE}"
-            app:layout_constraintBottom_toTopOf="@+id/ll_fab_container"
+            app:layout_constraintBottom_toTopOf="@+id/upper_guideline_action_btns"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progress_slider"
@@ -100,7 +114,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTION_ERROR ? View.VISIBLE: View.GONE}"
-            app:layout_constraintBottom_toTopOf="@+id/ll_fab_container"
+            app:layout_constraintBottom_toTopOf="@+id/upper_guideline_action_btns"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progress_slider"
@@ -113,24 +127,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTED ? View.VISIBLE: View.GONE}"
-            app:layout_constraintBottom_toTopOf="@+id/ll_fab_container"
+            app:layout_constraintBottom_toTopOf="@+id/upper_guideline_action_btns"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progress_slider"
             app:viewModel="@{viewModel}"
             tools:visibility="gone" />
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_fab_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:gravity="center"
-            android:layout_marginBottom="@dimen/connection_button_bottom_padding"
-            >
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/ll_exit_selection_btn"
@@ -145,6 +147,11 @@
                 android:gravity="center"
                 android:layout_gravity="center_vertical|end"
                 android:padding="16dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintTop_toBottomOf="@+id/upper_guideline_action_btns"
+                app:layout_constraintBottom_toTopOf="@+id/lower_guideline_action_btns"
+                app:layout_constraintEnd_toStartOf="@+id/tv_connect_action_btn"
+                app:layout_constraintStart_toStartOf="parent"
                 >
                 <ImageView
                     android:id="@+id/iv_world"
@@ -188,8 +195,12 @@
                 android:gravity="center"
                 android:onClick="@{()->viewModel.connectStateButtonClicked()}"
                 android:text="@{viewModel.connectButtonText}"
-                android:textAppearance="@style/button_text_connect" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                android:textAppearance="@style/button_text_connect"
+                app:layout_constraintTop_toBottomOf="@+id/upper_guideline_action_btns"
+                app:layout_constraintBottom_toTopOf="@+id/lower_guideline_action_btns"
+                app:layout_constraintStart_toEndOf="@+id/ll_exit_selection_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
