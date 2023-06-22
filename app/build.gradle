@@ -79,9 +79,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    // TODO: import from maven repo
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
 
+    implementation 'org.torproject:onionmasq:0.1.0-local-release'
     //tried this, still not sure we require this so commented for time being.
 /*    implementation("androidx.datastore:datastore-preferences:1.0.0")*/
 

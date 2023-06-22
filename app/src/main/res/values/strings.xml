@@ -66,5 +66,13 @@
     <string name="quickstart">Quickstart</string>
     <string name="quickstart_description">Connect to the Tor network automatically when launched</string>
 
+    <!-- logging related -->
+    <string name="bootstrap_at">Bootstrap at: %1$s</string>
+    <string name="new_connection">%1$s->%2$s: NEW connection to %3$s (app %4$d)</string>
+    <string name="new_connection_hop">%1$s->%2$s: hop %3$d: %4$s (%5$s)</string>
+    <string name="failed_connection">%1$s->%2$s: FAILED connection to %3$s: %4$s (app %5$d)</string>
+    <string name="failed_connection_closed">%1$s->%2$s: FAILED: %3$s</string>
+    <string name="closed_connection">%1$s->%2$s: closed connection</string>
+
 
 </resources>
