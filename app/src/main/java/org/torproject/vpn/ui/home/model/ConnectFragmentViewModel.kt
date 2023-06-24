@@ -165,7 +165,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     fun exitNodeSelectionButtonClicked() {
         viewModelScope.launch {
-            _navigateToLogsAction.emit(ACTION_EXIT_NODE_SELECTION)
+            _action.emit(ACTION_EXIT_NODE_SELECTION)
         }
     }
 
