@@ -14,12 +14,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
-import org.torproject.onionmasq.ISocketProtect
 import org.torproject.onionmasq.OnionMasq
 import org.torproject.onionmasq.OnionmasqEvent
 import org.torproject.onionmasq.logging.LogHelper
 import org.torproject.onionmasq.logging.LogObservable
 import java.io.IOException
+import java.lang.ref.WeakReference
 import java.util.*
 
 
@@ -37,7 +37,7 @@ class TorVpnService : VpnService() {
     private lateinit var logHelper: LogHelper
     private var logObservable: LogObservable? = null
 
-    private val binder: IBinder = TorVpnServiceBinder()
+    private val binder: IBinder = TorVpnServiceBinder(WeakReference(this))
 
     private val job = SupervisorJob()
     private val coroutineScope = CoroutineScope(Dispatchers.IO + job)
@@ -49,12 +49,6 @@ class TorVpnService : VpnService() {
     }
     private val timer: Timer by lazy {
         Timer()
-    }
-
-    inner class TorVpnServiceBinder : Binder(), ISocketProtect {
-        override fun protect(socket: Int): Boolean {
-            return this@TorVpnService.protect(socket)
-        }
     }
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -121,8 +115,8 @@ class TorVpnService : VpnService() {
         timer.cancel()
         VpnStatusObservable.resetDataUsage()
         closeFd()
-        stopForeground(true)
         OnionMasq.unbindVPNService()
+        stopForeground(true)
         stopSelf()
     }
 
