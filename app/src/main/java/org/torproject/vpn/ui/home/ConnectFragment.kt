@@ -1,15 +1,18 @@
 package org.torproject.vpn.ui.home
 
+import android.Manifest
 import android.animation.AnimatorSet
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -22,6 +25,7 @@ import org.torproject.vpn.MainActivity.Companion.KEY_ACTION
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentConnectBinding
 import org.torproject.vpn.ui.home.model.ACTION_LOGS
+import org.torproject.vpn.ui.home.model.ACTION_REQUEST_NOTIFICATION_PERMISSON
 import org.torproject.vpn.ui.home.model.ConnectFragmentViewModel
 import org.torproject.vpn.utils.*
 import org.torproject.vpn.vpn.ConnectionState
@@ -70,6 +74,19 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         connectFragmentViewModel.onVpnPrepared()
     }
 
+    private var startNotificationRequestForResult: ActivityResultLauncher<String> = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (!granted) {
+            Toast.makeText(
+                requireContext(),
+                "TODO: SHOW PROPER HINT HOW TO ALLOW AGAIN NOTIFICATION PERMISSION",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        connectFragmentViewModel.onNotificationPermissionResult()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -99,10 +116,15 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 }
 
                 launch {
-                    connectFragmentViewModel.navigateToLogsAction.collect { action ->
+                    connectFragmentViewModel.action.collect { action ->
                         when (action) {
                             ACTION_LOGS -> {
                                 findNavController().navigate(R.id.action_navigation_connect_to_loggingFragment)
+                            }
+                            ACTION_REQUEST_NOTIFICATION_PERMISSON -> {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                    startNotificationRequestForResult.launch(Manifest.permission.POST_NOTIFICATIONS)
+                                }
                             }
                             else -> {
                                 //other cases of navigation.

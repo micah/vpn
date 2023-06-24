@@ -1,7 +1,10 @@
 package org.torproject.vpn.ui.home.model
 
+import android.Manifest
 import android.app.Application
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.text.format.Formatter
 import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
@@ -21,11 +24,12 @@ import org.torproject.vpn.vpn.VpnStatusObservable
  * ViewModel for slider fragment, mostly place holder at this point
  */
 const val ACTION_LOGS = 110
-
+const val ACTION_REQUEST_NOTIFICATION_PERMISSON = 111
 class ConnectFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _prepareVpn = MutableLiveData<Intent?>()
     val prepareVpn: LiveData<Intent?> = _prepareVpn
+
     private val dataUsage = VpnStatusObservable.dataUsage.asFlow()
         .stateIn(
             scope = viewModelScope,
@@ -125,10 +129,10 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     val flavor = "Pre-alpha"
     val version = BuildConfig.VERSION_NAME
 
-    private val _navigateToLogsAction = MutableSharedFlow<Int>(replay = 0)
+    private val _action = MutableSharedFlow<Int>(replay = 0)
 
-    val navigateToLogsAction: SharedFlow<Int>
-        get() = _navigateToLogsAction
+    val action: SharedFlow<Int>
+        get() = _action
 
 
     fun connectStateButtonClicked() {
@@ -146,7 +150,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     //TODO
     fun viewLogsClicked() {
         viewModelScope.launch {
-            _navigateToLogsAction.emit(ACTION_LOGS)
+            _action.emit(ACTION_LOGS)
         }
     }
 
@@ -162,8 +166,20 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     }
 
     private fun attemptConnect() {
-        VpnStatusObservable.update(CONNECTING)
-        prepareToStartVPN()
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            VpnStatusObservable.update(CONNECTING)
+            prepareToStartVPN()
+            return
+        }
+
+        if (ContextCompat.checkSelfPermission(getApplication(), Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            VpnStatusObservable.update(CONNECTING)
+            prepareToStartVPN()
+        } else {
+            viewModelScope.launch {
+                _action.emit(ACTION_REQUEST_NOTIFICATION_PERMISSON)
+            }
+        }
     }
 
     private fun attemptDisconnect() {
@@ -193,5 +209,10 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     fun onVpnPrepared() {
         _prepareVpn.value = null
+    }
+
+    fun onNotificationPermissionResult() {
+        VpnStatusObservable.update(CONNECTING)
+        prepareToStartVPN()
     }
 }

@@ -3,7 +3,6 @@ package org.torproject.vpn.utils
 import android.content.ContextWrapper
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewTreeLifecycleOwner
 
 
 fun View.getLifeCycleOwner(): LifecycleOwner? {
@@ -17,5 +16,3 @@ fun View.getLifeCycleOwner(): LifecycleOwner? {
     }
     return null
 }
-
-val View.lifecycleOwner get() = ViewTreeLifecycleOwner.get(this)

@@ -56,7 +56,7 @@ fun startVectorAnimationWithEndCallback(
 fun startRevealWithEndCallback(animator: Animator, onAnimationEnd: () -> Unit) {
     with(animator) {
         addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 onAnimationEnd()
             }
         })
@@ -82,7 +82,7 @@ fun animateTextSizeChange(
     }
 
     animator.addListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationEnd(animation: Animator?) {
+        override fun onAnimationEnd(animation: Animator) {
             if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
                 endCallback()
             }
