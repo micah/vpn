@@ -5,6 +5,7 @@ pluginManagement {
         mavenCentral()
     }
 }
+/* replaced by old allprojects block in root build.gradle
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -12,5 +13,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+*/
 rootProject.name = "Tor VPN"
 include ':app'

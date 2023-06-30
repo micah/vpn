@@ -70,7 +70,9 @@ For now the build and installation steps are as easy as:
     git clone https://gitlab.torproject.org/tpo/applications/vpn.git`
     cd vpn
 ```
-2. Build the app: `./gradlew assembleDebug`
-3. Install it on your phone: `adb -d install -t app/build/outputs/apk/debug/app-debug.apk`
+2. create a [personal access token](https://docs.gitlab.com/ee/security/token_overview.html#personal-access-tokens) with the permission `read_api`
+3. add the line `gitLabPrivateToken=<YOUR_PRIVATE_ACCESS_TOKEN>` to your `local.properties` file in your projects root directory. (Replace <YOUR_PRIVATE_ACCESS_TOKEN> ;))
+4. Build the app: `./gradlew assembleDebug`
+5. Install it on your phone: `adb -d install -t app/build/outputs/apk/debug/app-debug.apk`
 
 Have fun!

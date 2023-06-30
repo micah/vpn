@@ -4,20 +4,24 @@ import android.app.Notification
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.VpnService
-import android.os.*
+import android.os.Build
+import android.os.Handler
+import android.os.IBinder
+import android.os.ParcelFileDescriptor
 import android.system.OsConstants
 import android.util.Log
 import androidx.lifecycle.Observer
-import org.torproject.vpn.utils.PreferenceHelper
-import org.torproject.vpn.utils.VpnNotificationManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import org.torproject.onionmasq.OnionMasq
-import org.torproject.onionmasq.OnionmasqEvent
+import org.torproject.onionmasq.events.*
 import org.torproject.onionmasq.logging.LogHelper
 import org.torproject.onionmasq.logging.LogObservable
+import org.torproject.vpn.R
+import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.VpnNotificationManager
 import java.io.IOException
 import java.lang.ref.WeakReference
 import java.util.*
@@ -121,11 +125,76 @@ class TorVpnService : VpnService() {
     }
 
     private fun createObservers() {
-        observer = Observer<OnionmasqEvent> { onionmasqEvent: OnionmasqEvent ->
-            if (onionmasqEvent.isReadyForTraffic) {
-                VpnStatusObservable.update(ConnectionState.CONNECTED)
+        observer = Observer<OnionmasqEvent> { event: OnionmasqEvent ->
+            when (event) {
+                is BootstrapEvent -> {
+                    if (event.isReadyForTraffic) {
+                        VpnStatusObservable.update(ConnectionState.CONNECTED)
+                    }
+                    LogObservable.getInstance()
+                        .addLog(getString(R.string.bootstrap_at, event.bootstrapStatus))
+                }
+                is NewConnectionEvent -> {
+                    LogObservable.getInstance().addLog(
+                        getString(
+                            R.string.new_connection,
+                            event.proxySrc,
+                            event.proxyDst,
+                            event.torDst,
+                            event.appId
+                        )
+                    )
+                    for ((i, relay) in event.circuit.withIndex()) {
+                        val identity = relay.ed_identity ?: relay.rsa_identity ?: "unknown"
+                        val address =
+                            if (relay.addresses.size > 0) relay.addresses[0] else "unknown"
+                        LogObservable.getInstance().addLog(
+                            getString(
+                                R.string.new_connection_hop,
+                                event.proxySrc,
+                                event.proxyDst,
+                                i,
+                                address,
+                                identity
+                            )
+                        )
+                    }
+                }
+                is FailedConnectionEvent -> {
+                    LogObservable.getInstance().addLog(
+                        getString(
+                            R.string.failed_connection,
+                            event.proxySrc,
+                            event.proxyDst,
+                            event.torDst,
+                            event.error,
+                            event.appId
+                        )
+                    )
+                }
+                is ClosedConnectionEvent -> {
+                    event.error?.let {
+                        LogObservable.getInstance().addLog(
+                            getString(
+                                R.string.failed_connection_closed,
+                                event.proxySrc,
+                                event.proxyDst,
+                                event.error
+                            )
+                        )
+                    } ?: run {
+                        LogObservable.getInstance().addLog(
+                            getString(
+                                R.string.closed_connection,
+                                event.proxySrc,
+                                event.proxyDst
+                            )
+                        )
+                    }
+                }
             }
         }
+
         vpnStatusObserver = Observer<ConnectionState> { connectionState: ConnectionState? ->
             notificationManager.updateNotification(
                 connectionState!!,
@@ -142,7 +211,7 @@ class TorVpnService : VpnService() {
 
     private fun startListeningObservers() {
         observer?.let {
-            mainHandler.post { OnionMasq.getProgressEvent().observeForever(it) }
+            mainHandler.post { OnionMasq.getEventObservable().observeForever(it) }
         }
 
         vpnStatusObserver?.let {
@@ -155,7 +224,7 @@ class TorVpnService : VpnService() {
 
     private fun removeObservers() {
         observer?.let {
-            mainHandler.post { OnionMasq.getProgressEvent().removeObserver(it) }
+            mainHandler.post { OnionMasq.getEventObservable().removeObserver(it) }
         }
         vpnStatusObserver?.let {
             mainHandler.post{ VpnStatusObservable.statusLiveData.removeObserver(it) }
@@ -179,8 +248,10 @@ class TorVpnService : VpnService() {
         builder.setSession("TorVPN session")
         builder.addRoute("0.0.0.0", 0)
         builder.addRoute("::", 0)
-        builder.addAddress("10.42.0.8", 16)
+        builder.addAddress("169.254.42.1", 16)
         builder.addAddress("fc00::", 7)
+        builder.addDnsServer("169.254.42.53")
+        builder.addDnsServer("fe80::53")
         builder.allowFamily(OsConstants.AF_INET)
         builder.allowFamily(OsConstants.AF_INET6)
         builder.setMtu(1500)
