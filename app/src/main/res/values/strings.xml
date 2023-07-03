@@ -8,6 +8,7 @@
     <string name="action_reconnect">Reconnect</string>
     <string name="action_try_again">Try again</string>
     <string name="action_protect_all_apps">Protect all apps</string>
+    <string name="action_protect_this_app">Protect this app</string>
     <!-- notifications actions -->
     <string name="action_start">Start VPN</string>
     <string name="action_stop">Stop VPN</string>
@@ -68,6 +69,15 @@
     <string name="exit_location">Exit location</string>
     <string name="exit_location_description">Automatic mode selects exit relays from anywhere in the network, regardless of location. This helps protect your anonymity by preventing your activities from being linked.</string>
     <string name="exit_location_automatic">Automatic (safest)</string>
+    <string name="up">Up</string>
+    <string name="down">Down</string>
+    <string name="circuits_app_description">Circuits for %1$s</string>
+    <string name="this_browser">This browser</string>
+    <string name="this_app">This app</string>
+    <string name="tor_powered_app">Tor-powered app</string>
+    <string name="description_independend_tor_powered_app">This app uses its own Tor connection, independent of the Tor VPN. View and configure its connection in %1$s instead.</string>
+    <string name="action_open_app">Open %1$s</string>
+    <string name="guard">Guard</string>
 
     <!-- logging related -->
     <string name="bootstrap_at">Bootstrap at: %1$s</string>

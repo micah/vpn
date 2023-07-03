@@ -31,7 +31,12 @@
         android:id="@+id/appRoutingFragment"
         android:name="org.torproject.vpn.ui.approuting.AppRoutingFragment"
         android:label="AppRoutingFragment"
-        tools:layout="@layout/fragment_app_routing" />
+        tools:layout="@layout/fragment_app_routing">
+        <action
+            android:id="@+id/action_navigation_appRouting_to_appDetailFragment"
+            app:destination="@+id/appDetailFragment"
+            />
+    </fragment>
     <fragment
         android:id="@+id/connectionFragment"
         android:label="ConnectionFragment"
@@ -46,4 +51,27 @@
         android:name="org.torproject.vpn.ui.logging.LoggingFragment"
         android:label="Logging"
         tools:layout="@layout/fragment_logging" />
+    <fragment
+        android:id="@+id/appDetailFragment"
+        android:name="org.torproject.vpn.ui.appdetail.AppDetailFragment"
+        android:label="AppDetailFragment"
+        tools:layout="@layout/fragment_app_detail" >
+        <argument
+            android:name="argAppId"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="argAppName"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="argIsBrowser"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="argHasTorSupport"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+
 </navigation>

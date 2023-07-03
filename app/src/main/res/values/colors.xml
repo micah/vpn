@@ -21,6 +21,9 @@
     <!--New colors starts from here-->
     <color name="blue30">#89BFE7</color>
     <color name="blue30_16">#2989BFE7</color>
+    <color name="indigo10">#D3D7FA</color>
+    <color name="indigo50">#5B50C1</color>
+    <color name="indigo50_40">#665B50C1</color>
     <color name="indigo60">#473BA5</color>
     <color name="indigo70">#352982</color>
     <color name="indigo90">#130D32</color>
@@ -41,6 +44,8 @@
     <color name="purplesBottomNavNotActive">#BEA1F7</color>
     <color name="purplesBottomNavActive">#FFFFFF</color>
     <color name="purplesBottomActiveIconBg">#5822C3</color>
+    <color name="purple40">#AD6AD7</color>
+    <color name="purple40_40">#66AD6AD7</color>
 
     <color name="greenNormal">#52E0B6</color>
     <color name="greenDarkText">#0B4131</color>

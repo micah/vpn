@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -12,6 +13,7 @@ import org.torproject.vpn.databinding.AppRoutingTableHeaderBinding
 import org.torproject.vpn.databinding.AppSwitchItemViewBinding
 import org.torproject.vpn.databinding.AppTitleViewBinding
 import org.torproject.vpn.databinding.HorizontalRecyclerViewItemBinding
+import org.torproject.vpn.ui.approuting.AppRoutingFragmentDirections
 import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
 import org.torproject.vpn.utils.PreferenceHelper
@@ -138,7 +140,14 @@ class AppListAdapter(
             binding.tvTitle.text = appItem.text
             binding.smItemSwitch.isChecked = appItem.isRoutingEnabled == true
             binding.tvTitle.setOnClickListener(View.OnClickListener {
-                Log.d(TAG, "TODO: open detail screen for " + binding.tvTitle.text)
+                appItem.appId?.let {
+                    val action = AppRoutingFragmentDirections.actionNavigationAppRoutingToAppDetailFragment(
+                        argAppId = appItem.appId,
+                        argAppName = appItem.text,
+                        argIsBrowser = appItem.isBrowserApp ?: false,
+                        argHasTorSupport = appItem.hasTorSupport ?: false)
+                    binding.root.findNavController().navigate(action)
+                }
             })
             binding.smItemSwitch.setOnCheckedChangeListener { switchBtn, isChecked ->
                 if (switchBtn.isPressed) {
