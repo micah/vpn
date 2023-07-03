@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Application
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.format.Formatter
 import android.widget.CompoundButton
@@ -14,6 +15,8 @@ import kotlinx.coroutines.launch
 import org.torproject.vpn.BuildConfig
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.getDpInPx
+import org.torproject.vpn.utils.getFlagByCountryCode
 import org.torproject.vpn.vpn.ConnectionState
 import org.torproject.vpn.vpn.ConnectionState.*
 import org.torproject.vpn.vpn.DataUsage
@@ -25,9 +28,13 @@ import org.torproject.vpn.vpn.VpnStatusObservable
  */
 const val ACTION_LOGS = 110
 const val ACTION_REQUEST_NOTIFICATION_PERMISSON = 111
+const val ACTION_EXIT_NODE_SELECTION = 113
+
 class ConnectFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _prepareVpn = MutableLiveData<Intent?>()
+    private val preferenceHelper = PreferenceHelper(application)
+
     val prepareVpn: LiveData<Intent?> = _prepareVpn
 
     private val dataUsage = VpnStatusObservable.dataUsage.asFlow()
@@ -125,6 +132,15 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         }
     }.stateIn(scope = viewModelScope, SharingStarted.WhileSubscribed(), initialValue = "")
 
+    val selectedCountry: MutableLiveData<String> = MutableLiveData(if (preferenceHelper.automaticExitNodeSelection) "" else preferenceHelper.exitNodeCountry)
+    val countryDrawable: StateFlow<Drawable?> = selectedCountry.asFlow().map { countryCode ->
+        return@map getFlagByCountryCode(application, countryCode)
+    }.stateIn(viewModelScope, SharingStarted.Lazily, null)
+
+    val buttonWidth: StateFlow<Int> = countryDrawable.map { drawable ->
+        return@map getDpInPx(application, if (drawable != null) 128f else 80f )
+    }.stateIn(viewModelScope, SharingStarted.Lazily, getDpInPx(application, 80f))
+
     //these are static one-time-fetch values on viewModel init. Dont need to be LiveData or StateFlow.
     val flavor = "Pre-alpha"
     val version = BuildConfig.VERSION_NAME
@@ -147,7 +163,12 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         }
     }
 
-    //TODO
+    fun exitNodeSelectionButtonClicked() {
+        viewModelScope.launch {
+            _action.emit(ACTION_EXIT_NODE_SELECTION)
+        }
+    }
+
     fun viewLogsClicked() {
         viewModelScope.launch {
             _action.emit(ACTION_LOGS)
@@ -156,7 +177,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     val allAppsProtected: Boolean get() = PreferenceHelper(getApplication()).protectAllApps
     fun onProtectAppsChanged(compoundButton: CompoundButton, isChecked: Boolean) {
-        PreferenceHelper(getApplication()).protectAllApps = isChecked
+        preferenceHelper.protectAllApps = isChecked
     }
 
     private fun attemptPause() {
@@ -204,6 +225,14 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     fun updateVPNSettings() {
         if (VpnStatusObservable.isVPNActive()) {
             VpnServiceCommand.startVpn(getApplication())
+        }
+    }
+
+    fun updateExitNodeButton() {
+        if (preferenceHelper.automaticExitNodeSelection) {
+            selectedCountry.postValue("")
+        } else {
+            selectedCountry.postValue(preferenceHelper.exitNodeCountry)
         }
     }
 

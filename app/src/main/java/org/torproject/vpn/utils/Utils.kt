@@ -2,10 +2,12 @@ package org.torproject.vpn.utils
 
 import android.animation.*
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Looper
+import android.util.Log
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.TextView
@@ -15,9 +17,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import org.torproject.vpn.R
-import kotlin.math.abs
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 
 /**
@@ -202,4 +204,27 @@ fun isRunningOnMainThread(): Boolean {
 fun getFormattedDate(timestamp: Long, locale: Locale?): String? {
     val sdf = SimpleDateFormat("dd/mm/yy, hh:mm:ss.SSS", locale)
     return sdf.format(timestamp)
+}
+
+fun getDpInPx(context: Context, dp: Float): Int {
+    val scale: Float = context.resources.displayMetrics.density
+    return (dp * scale + 0.5f).toInt()
+}
+
+fun getFlagByCountryCode(context: Context, countryCode: String): Drawable? {
+    if (countryCode.isEmpty()) {
+        return null
+    }
+    if (countryCode.length != 2) {
+        Log.w("FLAG UTIL", "$countryCode is an invalid country code")
+        return null
+    }
+
+    val drawableName = "flag_$countryCode"
+    val resID: Int = context.resources.getIdentifier(drawableName, "drawable", context.packageName)
+    return try {
+        ContextCompat.getDrawable(context, resID)
+    } catch (e: Resources.NotFoundException) {
+        null
+    }
 }

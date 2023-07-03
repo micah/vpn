@@ -65,6 +65,9 @@
     <string name="kill_switch_description">Block apps from connecting to the internet if the Tor network can\'t be reached</string>
     <string name="quickstart">Quickstart</string>
     <string name="quickstart_description">Connect to the Tor network automatically when launched</string>
+    <string name="exit_location">Exit location</string>
+    <string name="exit_location_description">Automatic mode selects exit relays from anywhere in the network, regardless of location. This helps protect your anonymity by preventing your activities from being linked.</string>
+    <string name="exit_location_automatic">Automatic (safest)</string>
 
     <!-- logging related -->
     <string name="bootstrap_at">Bootstrap at: %1$s</string>

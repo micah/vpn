@@ -1,0 +1,65 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+   <data>
+      <variable name="viewModel" type="org.torproject.vpn.ui.exitselection.model.ExitNodeCellModel"/>
+   </data>
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:paddingVertical="@dimen/compact_padding"
+       android:focusable="true"
+       android:clickable="true"
+       android:id="@+id/item_container"
+       >
+      <androidx.cardview.widget.CardView
+          android:id="@+id/cvFlagImageContainer"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:cardCornerRadius="4dp"
+          app:cardElevation="0dp"
+          android:layout_margin="5dp"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:cardBackgroundColor="@android:color/transparent"
+          >
+
+         <androidx.appcompat.widget.AppCompatImageView
+             android:id="@+id/ivCountryFlag"
+             android:layout_width="30dp"
+             android:layout_height="20dp"
+             android:scaleType="centerCrop"
+             android:src="@drawable/flag_ua" />
+      </androidx.cardview.widget.CardView>
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/tvTitle"
+          style="@style/bottom_sheet_list_item_style"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:gravity="start"
+          android:textAlignment="gravity"
+          tools:textColor="#000000"
+          app:layout_constraintStart_toEndOf="@id/cvFlagImageContainer"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toStartOf="@+id/rbSelected"
+          android:paddingHorizontal="@dimen/compact_padding"
+          android:singleLine="true"
+          android:ellipsize="end"
+          tools:text="a long test that should not touch the divider letsee"
+          />
+
+      <androidx.appcompat.widget.AppCompatRadioButton
+          android:id="@+id/rbSelected"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          android:buttonTint="#FFFFFF"
+          android:clickable="false"
+          />
+   </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

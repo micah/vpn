@@ -24,6 +24,8 @@ import org.torproject.vpn.MainActivity
 import org.torproject.vpn.MainActivity.Companion.KEY_ACTION
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentConnectBinding
+import org.torproject.vpn.ui.exitselection.ExitSelectionBottomSheetFragment
+import org.torproject.vpn.ui.home.model.ACTION_EXIT_NODE_SELECTION
 import org.torproject.vpn.ui.home.model.ACTION_LOGS
 import org.torproject.vpn.ui.home.model.ACTION_REQUEST_NOTIFICATION_PERMISSON
 import org.torproject.vpn.ui.home.model.ConnectFragmentViewModel
@@ -116,6 +118,12 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 }
 
                 launch {
+                    connectFragmentViewModel.buttonWidth.collect { width ->
+                        binding.llExitSelectionBtn.layoutParams.width = width
+                    }
+                }
+
+                launch {
                     connectFragmentViewModel.action.collect { action ->
                         when (action) {
                             ACTION_LOGS -> {
@@ -124,6 +132,11 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                             ACTION_REQUEST_NOTIFICATION_PERMISSON -> {
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                                     startNotificationRequestForResult.launch(Manifest.permission.POST_NOTIFICATIONS)
+                                }
+                            }
+                            ACTION_EXIT_NODE_SELECTION -> {
+                                if (isAdded) {
+                                    ExitSelectionBottomSheetFragment().show(parentFragmentManager, "exitNodeSelector")
                                 }
                             }
                             else -> {
@@ -359,8 +372,12 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key?.equals(PreferenceHelper.PROTECT_ALL_APPS) == true) {
-            connectFragmentViewModel.updateVPNSettings()
+        key?.let {
+            when(it) {
+                PreferenceHelper.PROTECT_ALL_APPS -> connectFragmentViewModel.updateVPNSettings()
+                PreferenceHelper.EXIT_NODE_COUNTRY -> connectFragmentViewModel.updateExitNodeButton()
+                PreferenceHelper.AUTOMATIC_EXIT_NODE_SELECTION -> connectFragmentViewModel.updateExitNodeButton()
+            }
         }
     }
 

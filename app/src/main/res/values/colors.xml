@@ -19,6 +19,11 @@
 
 
     <!--New colors starts from here-->
+    <color name="blue30">#89BFE7</color>
+    <color name="blue30_16">#2989BFE7</color>
+    <color name="indigo60">#473BA5</color>
+    <color name="indigo70">#352982</color>
+    <color name="indigo90">#130D32</color>
     <color name="purpleDark">#1D0B41</color>
     <color name="purpleDarkBackground">#31136C</color>
     <color name="purpleDarkText">#400A76</color>
