@@ -18,7 +18,7 @@ class BaseDialogFragment : DialogFragment(R.layout.fragment_dialog) {
 
     companion object {
         const val VIEW_TYPE: String = "viewType"
-        const val EXTRA_APP_ID: String = "extra_app_id"
+        const val EXTRA_APP_UID: String = "extra_app_uid"
 
         const val TYPE_REFRESH_ALL_CIRCUITS = 0
         const val TYPE_REFRESH_APP_CIRCUIT = 1
@@ -32,11 +32,11 @@ class BaseDialogFragment : DialogFragment(R.layout.fragment_dialog) {
             return fragment
         }
 
-        fun createRefreshCircuitsForAppDialog(appId: Int): BaseDialogFragment {
+        fun createRefreshCircuitsForAppDialog(appUID: Int): BaseDialogFragment {
             val fragment = BaseDialogFragment()
             val args = Bundle()
             args.putInt(VIEW_TYPE, TYPE_REFRESH_APP_CIRCUIT)
-            args.putInt(EXTRA_APP_ID, appId)
+            args.putInt(EXTRA_APP_UID, appUID)
             fragment.arguments = args
             return fragment
         }
@@ -84,7 +84,7 @@ class BaseDialogFragment : DialogFragment(R.layout.fragment_dialog) {
                 binding.tvHeader.setText(R.string.reload_app_circuits)
                 binding.tvDescription.setText(R.string.reload_app_circuits_description)
                 binding.tvAction.setOnClickListener { _ ->
-                    arguments?.getInt(EXTRA_APP_ID)?.let {
+                    arguments?.getInt(EXTRA_APP_UID)?.let {
                         try {
                             OnionMasq.refreshCircuitsForApp(it.toLong())
                             Log.d("DIALOG", "REFRESH CIRCUITS for app id $it ")

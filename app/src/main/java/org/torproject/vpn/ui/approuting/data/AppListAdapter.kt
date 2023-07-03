@@ -140,8 +140,9 @@ class AppListAdapter(
             binding.tvTitle.text = appItem.text
             binding.smItemSwitch.isChecked = appItem.isRoutingEnabled == true
             binding.tvTitle.setOnClickListener(View.OnClickListener {
-                appItem.appId?.let {
+                if (appItem.appId != null && appItem.uid != null) {
                     val action = AppRoutingFragmentDirections.actionNavigationAppRoutingToAppDetailFragment(
+                        argAppUID = appItem.uid,
                         argAppId = appItem.appId,
                         argAppName = appItem.text,
                         argIsBrowser = appItem.isBrowserApp ?: false,

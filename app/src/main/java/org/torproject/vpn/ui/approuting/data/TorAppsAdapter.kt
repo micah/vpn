@@ -53,8 +53,9 @@ class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerVi
             }
             binding.tvAppTitle.text = appItem.text
             binding.root.setOnClickListener {
-                appItem.appId?.let {
+                if (appItem.appId != null && appItem.uid != null) {
                     val action = AppRoutingFragmentDirections.actionNavigationAppRoutingToAppDetailFragment(
+                        argAppUID = appItem.uid,
                         argAppId = appItem.appId,
                         argAppName = appItem.text,
                         argIsBrowser = appItem.isBrowserApp ?: false,

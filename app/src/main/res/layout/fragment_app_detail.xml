@@ -29,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:title=""
+                app:menu="@menu/app_detail_menu"
                 app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.appcompat.widget.LinearLayoutCompat

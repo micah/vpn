@@ -57,6 +57,11 @@
         android:label="AppDetailFragment"
         tools:layout="@layout/fragment_app_detail" >
         <argument
+            android:name="argAppUID"
+            app:argType="integer"
+            android:defaultValue="-1"
+            />
+        <argument
             android:name="argAppId"
             app:argType="string"
             android:defaultValue='""' />

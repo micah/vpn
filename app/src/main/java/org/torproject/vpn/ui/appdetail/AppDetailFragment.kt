@@ -10,6 +10,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentAppDetailBinding
 import org.torproject.vpn.ui.appdetail.model.AppDetailFragmentViewModel
+import org.torproject.vpn.ui.base.view.BaseDialogFragment
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
 
 
@@ -23,6 +24,7 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
 
         arguments?.let {
             val arguments = AppDetailFragmentArgs.fromBundle(it)
+            viewModel.appUID.value = arguments.argAppUID
             viewModel.appId.value = arguments.argAppId
             viewModel.appName.value = arguments.argAppName
             viewModel.isBrowser.value = arguments.argIsBrowser
@@ -43,6 +45,20 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
 
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
+        }
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.refresh_circuits -> {
+                    viewModel.appUID.value?.let { appUID ->
+                        val dialog = BaseDialogFragment.createRefreshCircuitsForAppDialog(appUID)
+                        dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
+                        return@setOnMenuItemClickListener true
+                    }
+                    return@setOnMenuItemClickListener false
+                }
+                else -> return@setOnMenuItemClickListener false
+            }
+
         }
     }
 }
