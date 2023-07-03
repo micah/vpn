@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/refresh_circuits"
-        android:icon="@drawable/ic_refresh_circuits"
+        android:icon="@drawable/ic_all_new_circuits"
         android:title="@string/action_refresh_circuits"
         app:showAsAction="always" />
 </menu>
