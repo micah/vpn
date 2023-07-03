@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.graphics.Color.TRANSPARENT
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Window
 import androidx.fragment.app.DialogFragment
@@ -72,7 +71,6 @@ class BaseDialogFragment : DialogFragment(R.layout.fragment_dialog) {
                 binding.tvAction.setOnClickListener { _ ->
                     try {
                         OnionMasq.refreshCircuits()
-                        Log.d("DIALOG", "REFRESH ALL CIRCUITS CLICKED")
                     } catch (e: ProxyStoppedException) {
                         e.printStackTrace()
                     }
@@ -87,7 +85,6 @@ class BaseDialogFragment : DialogFragment(R.layout.fragment_dialog) {
                     arguments?.getInt(EXTRA_APP_UID)?.let {
                         try {
                             OnionMasq.refreshCircuitsForApp(it.toLong())
-                            Log.d("DIALOG", "REFRESH CIRCUITS for app id $it ")
                         } catch (e: ProxyStoppedException) {
                             e.printStackTrace()
                         }
