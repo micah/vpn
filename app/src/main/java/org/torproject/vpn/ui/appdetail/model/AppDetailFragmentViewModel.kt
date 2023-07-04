@@ -14,12 +14,15 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.torproject.onionmasq.OnionMasq
+import org.torproject.onionmasq.circuit.Circuit
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.toFlagEmoji
 import org.torproject.vpn.utils.updateDataUsage
 import org.torproject.vpn.vpn.DataUsage
+import org.torproject.vpn.vpn.VpnStatusObservable
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(application) {
@@ -30,6 +33,8 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
     val isBrowser = MutableLiveData(false)
     val hasTorSupport = MutableLiveData(false)
     var packageManager: PackageManager? = application.packageManager
+    private var _circuitList: MutableLiveData<List<Circuit>> = MutableLiveData(ArrayList())
+    val circuitList: LiveData<List<Circuit>> = _circuitList
 
     val circuitDescription: StateFlow<String> = appName.asFlow().map { appName ->
         return@map application.getString(R.string.circuits_app_description, appName)
@@ -105,6 +110,7 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
                 override fun run() {
                     appUID.value?.let {
                         _dataUsage.postValue(updateDataUsage(dataUsage, OnionMasq.getBytesReceivedForApp(it.toLong()), OnionMasq.getBytesSentForApp(it.toLong())))
+                        _circuitList.postValue(VpnStatusObservable.getCircuitsForUid(it))
                     }
                 }
             }, 0, 1000)

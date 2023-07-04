@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentAppDetailBinding
+import org.torproject.vpn.ui.appdetail.data.CircuitCardAdapter
 import org.torproject.vpn.ui.appdetail.model.AppDetailFragmentViewModel
 import org.torproject.vpn.ui.base.view.BaseDialogFragment
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
@@ -17,6 +18,7 @@ import org.torproject.vpn.ui.glide.ApplicationInfoModel
 class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
 
     private lateinit var viewModel: AppDetailFragmentViewModel
+    private lateinit var adapter: CircuitCardAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +30,9 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
             viewModel.appId.value = arguments.argAppId
             viewModel.appName.value = arguments.argAppName
             viewModel.isBrowser.value = arguments.argIsBrowser
-            viewModel.hasTorSupport.value = arguments.argHasTorSupport        }
+            viewModel.hasTorSupport.value = arguments.argHasTorSupport
+        }
+        adapter = CircuitCardAdapter(viewModel.isBrowser.value!!)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +46,8 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
         }
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
+        binding.layoutNoTorSupport.rvCircuitCards.adapter = adapter
+        viewModel.circuitList.observe(viewLifecycleOwner, adapter::update)
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
@@ -58,7 +63,6 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
                 }
                 else -> return@setOnMenuItemClickListener false
             }
-
         }
     }
 }

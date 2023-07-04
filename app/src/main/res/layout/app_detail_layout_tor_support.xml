@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="org.torproject.vpn.ui.appdetail.model.AppDetailFragmentViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/tor_app_container"
+        tools:visibility="visible"
+        android:paddingHorizontal="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/default_padding"
+        android:background="@drawable/bg_rounded"
+        tools:showIn="@layout/fragment_app_detail">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tor_powered_app"
+            android:textAppearance="@style/app_circuits_text"
+            android:paddingBottom="@dimen/compact_padding" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/description_independend_tor_powered_app"
+            android:text="@{viewModel.independentTorAppDescriptionText}"
+            android:textAppearance="@style/info_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            tools:text="@string/action_open_app"
+            android:text="@{viewModel.openAppButtonText}"
+            android:onClick="@{()-> viewModel.onOpenAppClicked()}"
+            android:layout_gravity="end"
+            android:textAppearance="@style/info_button_text"
+            android:padding="@dimen/default_padding" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

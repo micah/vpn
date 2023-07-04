@@ -117,7 +117,7 @@ class TorVpnService : VpnService() {
         removeObservers()
         logHelper.stopLog()
         timer.cancel()
-        VpnStatusObservable.resetDataUsage()
+        VpnStatusObservable.reset()
         closeFd()
         OnionMasq.unbindVPNService()
         stopForeground(true)
@@ -159,6 +159,7 @@ class TorVpnService : VpnService() {
                             )
                         )
                     }
+                    VpnStatusObservable.handleConnectionEvent(event)
                 }
                 is FailedConnectionEvent -> {
                     LogObservable.getInstance().addLog(
@@ -171,6 +172,7 @@ class TorVpnService : VpnService() {
                             event.appId
                         )
                     )
+                    VpnStatusObservable.handleConnectionEvent(event)
                 }
                 is ClosedConnectionEvent -> {
                     event.error?.let {
@@ -191,6 +193,7 @@ class TorVpnService : VpnService() {
                             )
                         )
                     }
+                    VpnStatusObservable.handleConnectionEvent(event)
                 }
             }
         }

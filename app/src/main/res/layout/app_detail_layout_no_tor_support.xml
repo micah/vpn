@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Layout for apps without integrated tor support -->
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="org.torproject.vpn.ui.appdetail.model.AppDetailFragmentViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/circuit_info_container"
+        tools:showIn="@layout/fragment_app_detail">
+
+        <!-- download / upload statistics -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="96dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_rounded_left">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_down_traffic"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_trending_down" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/ic_down_traffic"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:textAppearance="@style/title_in_stats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/down" />
+
+                    <TextView
+                        android:textAppearance="@style/number_in_stats"
+                        android:id="@+id/tv_down_traffic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="17 kb"
+                        android:text="@{viewModel.dataUsageDownstream}" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_height="96dp"
+                android:layout_width="1dp" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="96dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_rounded_right">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_up_traffic"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_trending_up" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/ic_up_traffic"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:textAppearance="@style/title_in_stats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/up" />
+
+                    <TextView
+                        android:textAppearance="@style/number_in_stats"
+
+                        android:id="@+id/tv_up_traffic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="17 kb"
+                        android:text="@{viewModel.dataUsageUpstream}" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </RelativeLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- protect this app switch -->
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/smProtectAllApps"
+            style="@style/switch_text_without_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_padding"
+            android:layout_marginBottom="@dimen/default_padding"
+            android:padding="@dimen/switch_padding"
+            android:text="@string/action_protect_this_app"
+            android:checked="@{viewModel.protectThisApp}"
+            android:onCheckedChanged="@{viewModel::onProtectThisAppChanged}"
+            android:thumb="@drawable/toggle_thumb_light"
+            app:track="@drawable/toggle_track_light" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_circuit_cards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/view_circuits_per_app" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</layout>
