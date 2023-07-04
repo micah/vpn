@@ -104,6 +104,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                             ACTION_LOGS -> {
                                 findNavController().navigate(R.id.action_navigation_connect_to_loggingFragment)
                             }
+
                             else -> {
                                 //other cases of navigation.
                             }
@@ -137,11 +138,13 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         if (::currentVpnState.isInitialized && currentVpnState == vpnState) {
             return
         }
+        binding.gradientView.setState(vpnState)
 
         when (vpnState) {
             ConnectionState.INIT -> {
 
             }
+
             ConnectionState.CONNECTING -> showConnectingTransition()
 
             ConnectionState.PAUSED -> {}
@@ -161,6 +164,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 binding.includeStats.chronometer.stop()
                 showErrorTransition()
             }
+
             ConnectionState.DISCONNECTING -> {
                 // disable btn?
             }
@@ -188,7 +192,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             //progressbar anim (reveal + infinite gradient shift)
 
             //infinite gradient
-            val gradientAnim = createStatusBarAnimation(
+/*            val gradientAnim = createStatusBarAnimation(
                 binding.progressSlider.background,
                 requireContext(),
                 intArrayOf(R.color.connectingRainbowStart, R.color.connectingRainbowEnd)
@@ -212,6 +216,8 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 }
                 start()
             }
+
+ */
 
         } else {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
@@ -244,13 +250,13 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         progressGradientAnimatorSet = null
 
         // transition from gradient to red(connected color)
-        createStatusBarConnectedGradientAnimation(
+/*        createStatusBarConnectedGradientAnimation(
             binding.progressSlider.background, requireContext(), intArrayOf(
                 R.color.connectingRainbowEnd,
                 R.color.connectingRainbowStart,
                 R.color.greenNormal
             ), lifecycle
-        ) {}
+        ) {}*/
 
         if (currentVpnState == ConnectionState.CONNECTING) {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_stop)
@@ -273,7 +279,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         progressGradientAnimatorSet?.end()
         progressGradientAnimatorSet = null
 
-        if (currentVpnState == ConnectionState.CONNECTING) {
+/*        if (currentVpnState == ConnectionState.CONNECTING) {
 
             // transition connect gradient to yellow(error color)
             createStatusBarConnectedGradientAnimation(
@@ -295,7 +301,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 ), lifecycle
             ) {}
 
-        }
+        }*/
 
         if (currentVpnState == ConnectionState.CONNECTING) {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
@@ -321,6 +327,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
             }
 
+/*
             // transition from gradient to red(connected color)
             createStatusBarConnectedGradientAnimation(
                 binding.progressSlider.background, requireContext(), intArrayOf(
@@ -329,6 +336,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                     R.color.redNormal
                 ), lifecycle
             ) {}
+*/
 
 
         } else {

@@ -32,12 +32,13 @@ class GradientGlowView @JvmOverloads constructor(
 
     private lateinit var bitmap: Bitmap
     private lateinit var bitmapCanvas: Canvas
+
     //initial state is just transparent
-    private var colorConfig: ColorConfig = StaticColorConfig(android.R.color.transparent,null)
+    private var colorConfig: ColorConfig = StaticColorConfig(android.R.color.transparent, null)
 
     private val paintForBitmapShader = Paint().apply {
         isDither = true
-        strokeWidth = 20f
+        strokeWidth = 28f
     }
     private val paintForTransparentGradient = Paint().apply {
         isDither = true
@@ -46,7 +47,7 @@ class GradientGlowView @JvmOverloads constructor(
     /**
      * black with alpha for ComposedShader.
      */
-    private val blackForGradient = ColorUtils.setAlphaComponent(Color.BLACK, 64)
+    private val blackForGradient = ColorUtils.setAlphaComponent(Color.BLACK, 48)
 
     init {
         //set current config to animate. This prevents black background for entire view until state is set
@@ -93,6 +94,9 @@ class GradientGlowView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        if (isInEditMode) {
+            return
+        }
         //draw opaque 20f thick line
         canvas.drawLine(0f, 0f, width.toFloat(), 0f, paintForBitmapShader)
         //draw the glow
@@ -104,8 +108,10 @@ class GradientGlowView @JvmOverloads constructor(
      * Color config parent. Provides abstraction for managing animation start/stop and shader calculations.
      */
     abstract inner class ColorConfig {
-        @ColorInt var color1Current: Int = 0
-        @ColorInt var color2Current: Int = 0
+        @ColorInt
+        var color1Current: Int = 0
+        @ColorInt
+        var color2Current: Int = 0
         val animatorSet = AnimatorSet()
         private val evaluator = ArgbEvaluator()
         private var waitingToBeAttachedToWindow: Boolean = false
@@ -147,7 +153,7 @@ class GradientGlowView @JvmOverloads constructor(
                 val gradientShader = LinearGradient(
                     0f, 0f, 0f, height.toFloat(),
                     intArrayOf(blackForGradient, Color.TRANSPARENT),
-                    floatArrayOf(0f, 0.4f), Shader.TileMode.CLAMP
+                    floatArrayOf(0f, 0.8f), Shader.TileMode.CLAMP
                 )
 
                 bitmapCanvas.drawRect(0f, 0f, width.toFloat(), 1f, paintForBitmapShader)
