@@ -198,7 +198,7 @@ class GradientGlowView @JvmOverloads constructor(
     }
 
     /**
-     * Static color configuration for this view.
+     * Animated color configuration for this view.
      * First the current colors are animated to progress colors(pink and green), those colors are then animated indefinitely!
      */
     inner class AnimatedColorConfig(previousConfig: ColorConfig?) : ColorConfig() {
