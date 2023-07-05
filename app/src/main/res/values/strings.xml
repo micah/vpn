@@ -71,7 +71,7 @@
     <string name="exit_location_automatic">Automatic (safest)</string>
     <string name="up">Up</string>
     <string name="down">Down</string>
-    <string name="circuits_app_description">Circuits for %1$s</string>
+    <string name="circuit_app_description">Circuit for %1$s</string>
     <string name="this_browser">This browser</string>
     <string name="this_app">This app</string>
     <string name="tor_powered_app">Tor-powered app</string>
@@ -91,6 +91,7 @@
     <string name="reload_app_circuits">Reload this app\'s circuits?</string>
     <string name="reload_app_circuits_description">New circuits will be established for this app only. Some apps and websites might not recognize you as a result, and could log you out of their services.</string>
     <string name="action_reload_circuits">Reload circuits</string>
+    <string name="routed_over_country">Routed over %1$s</string>
     <string name="guide_got_it">Got it</string>
 
     <string name="connect_direct_to_tor">Connect directly to Tor</string>

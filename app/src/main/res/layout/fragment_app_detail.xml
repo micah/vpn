@@ -39,9 +39,11 @@
             android:paddingHorizontal="@dimen/activity_horizontal_margin"
             tools:background="@color/purpleDark"
             >
-            <ScrollView
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                >
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -80,7 +82,7 @@
                         app:viewModel="@{viewModel}"
                         />
                 </androidx.appcompat.widget.LinearLayoutCompat>
-            </ScrollView>
+            </androidx.core.widget.NestedScrollView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

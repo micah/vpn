@@ -37,7 +37,7 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
     val circuitList: LiveData<List<Circuit>> = _circuitList
 
     val circuitDescription: StateFlow<String> = appName.asFlow().map { appName ->
-        return@map application.getString(R.string.circuits_app_description, appName)
+        return@map application.getString(R.string.circuit_app_description, appName)
     }.stateIn(viewModelScope, Eagerly, "")
 
     val openAppButtonText: StateFlow<String> = appName.asFlow().map { appName ->

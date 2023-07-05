@@ -46,14 +46,15 @@
             </androidx.cardview.widget.CardView>
         </FrameLayout>
 
-
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="@{viewModel.circuitDescription}"
-            tools:text="wikipedia.org"
+            app:layout_constraintWidth_default="wrap"
+            app:layout_constraintHorizontal_bias="0"
+            android:singleLine="true"
+            android:ellipsize="middle"
+            tools:text="duckducklkxvlkadsfnadsnfkljkamksdlolmiakdsjfl.onion"
             android:textAppearance="@style/app_circuits_text"
             app:layout_constraintStart_toEndOf="@id/fl_flag_image_container"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +62,9 @@
             app:layout_constraintBottom_toTopOf="@id/tv_routing_description"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintHorizontal_chainStyle="packed"
-            android:paddingHorizontal="@dimen/default_padding" />
+            android:paddingHorizontal="@dimen/default_padding"
+            />
+
         <TextView
             android:id="@+id/tv_routing_description"
             android:textAppearance="@style/text_body_small"
@@ -74,6 +77,7 @@
             app:layout_constraintStart_toEndOf="@id/fl_flag_image_container"
             app:layout_constraintEnd_toEndOf="parent"
             android:paddingHorizontal="@dimen/default_padding"
+            android:maxLines="1"
             tools:text="Routed through Japan"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

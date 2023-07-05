@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_rounded"
         android:paddingBottom="@dimen/default_padding"
+        android:paddingHorizontal="@dimen/default_padding"
         tools:showIn="@layout/fragment_app_detail">
 
         <TextView
@@ -21,13 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            tools:text="@string/circuits_app_description"
+            android:ellipsize="middle"
+            tools:text="@string/circuit_app_description"
             android:textAppearance="@style/app_circuits_text"
-            android:padding="@dimen/activity_horizontal_margin"
+            android:paddingVertical="@dimen/activity_horizontal_margin"
+            android:paddingHorizontal="@dimen/compact_padding"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
-        <!-- android:text="@{viewModel.circuitDescription}" -->
 
         <ImageView
             android:id="@+id/iv_hops"
@@ -40,9 +42,9 @@
             android:layout_marginStart="2dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="2dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:importantForAccessibility="no"
-            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingStart="8dp"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="11dp"
             android:paddingEnd="11dp"
@@ -53,63 +55,72 @@
         <TextView
             android:id="@+id/tv_app_exit"
             android:textAppearance="@style/app_circuits_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/iv_hops"
-            android:layout_below="@id/tv_circuit_description"
             android:paddingEnd="@dimen/compact_padding"
             android:paddingRight="@dimen/compact_padding"
             android:paddingVertical="6dp"
             tools:text="@string/this_browser"
             app:layout_constraintStart_toEndOf="@+id/iv_hops"
             app:layout_constraintTop_toBottomOf="@id/tv_circuit_description"
-             />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_country_flag_exit_node"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="0dp"
-                android:layout_margin="5dp"
-                app:layout_constraintStart_toEndOf="@+id/iv_hops"
-                app:layout_constraintTop_toTopOf="@+id/tv_exit_node"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_exit_node"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:cardBackgroundColor="@android:color/transparent"
-                >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_country_flag_exit_node"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            android:layout_margin="5dp"
+            app:layout_constraintStart_toEndOf="@+id/iv_hops"
+            app:layout_constraintTop_toTopOf="@+id/tv_exit_node"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_exit_node"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:cardBackgroundColor="@android:color/transparent"
+            >
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_country_flag_exit_node"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/flag_ua" />
-            </androidx.cardview.widget.CardView>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_country_flag_exit_node"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/flag_ua" />
+        </androidx.cardview.widget.CardView>
 
 
-            <TextView
-                android:id="@+id/tv_exit_node"
-                android:textAppearance="@style/app_circuits_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@+id/cv_country_flag_exit_node"
-                app:layout_constraintTop_toBottomOf="@+id/tv_app_exit"
-                android:paddingVertical="6dp"
-                android:paddingHorizontal="@dimen/compact_padding"
-                tools:text="Spain"
-                />
+        <TextView
+            android:id="@+id/tv_exit_node"
+            android:textAppearance="@style/app_circuits_text"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_default="wrap"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/cv_country_flag_exit_node"
+            app:layout_constraintTop_toBottomOf="@+id/tv_app_exit"
+            app:layout_constraintEnd_toStartOf="@id/tv_guard"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:paddingVertical="6dp"
+            android:paddingHorizontal="@dimen/compact_padding"
+            tools:text="a long string coviering the whole line"
+            android:ellipsize="end"
+            android:maxLines="1"
+            />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/guard"
-                android:paddingVertical="6dp"
-                android:paddingHorizontal="12dp"
-                app:layout_constraintStart_toEndOf="@id/tv_exit_node"
-                app:layout_constraintBottom_toBottomOf="@id/tv_exit_node"
-                app:layout_constraintTop_toTopOf="@id/tv_exit_node"
-                style="@style/info_tag" />
+        <TextView
+            android:id="@+id/tv_guard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/guard"
+            android:paddingVertical="6dp"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintStart_toEndOf="@id/tv_exit_node"
+            app:layout_constraintBottom_toBottomOf="@id/tv_exit_node"
+            app:layout_constraintTop_toTopOf="@id/tv_exit_node"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            style="@style/info_tag" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_country_flag_relay_node"
@@ -118,12 +129,11 @@
             app:cardCornerRadius="4dp"
             app:cardElevation="0dp"
             android:layout_margin="4dp"
-            android:layout_toEndOf="@id/iv_hops"
-            android:layout_alignBottom="@+id/tv_relay_node"
             android:foregroundGravity="center"
             app:cardBackgroundColor="@android:color/transparent"
             app:layout_constraintStart_toEndOf="@id/iv_hops"
-            app:layout_constraintTop_toBottomOf="@id/tv_exit_node"
+            app:layout_constraintTop_toTopOf="@id/tv_relay_node"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_relay_node"
             >
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -139,9 +149,10 @@
             android:textAppearance="@style/app_circuits_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/cv_country_flag_relay_node"
             app:layout_constraintTop_toBottomOf="@id/tv_exit_node"
             app:layout_constraintStart_toEndOf="@+id/cv_country_flag_relay_node"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             android:paddingHorizontal="@dimen/compact_padding"
             android:paddingVertical="6dp"
             tools:text="Germany"
@@ -154,9 +165,6 @@
             app:cardCornerRadius="4dp"
             app:cardElevation="0dp"
             android:layout_margin="5dp"
-            android:layout_toEndOf="@id/iv_hops"
-            android:layout_below="@+id/cv_country_flag_relay_node"
-            android:layout_alignBottom="@+id/tv_entry_node"
             app:layout_constraintStart_toEndOf="@id/iv_hops"
             app:layout_constraintTop_toTopOf="@+id/tv_entry_node"
             app:layout_constraintBottom_toBottomOf="@+id/tv_entry_node"
@@ -178,8 +186,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/cv_country_flag_entry_node"
             app:layout_constraintTop_toBottomOf="@id/tv_relay_node"
-            android:layout_toEndOf="@id/cv_country_flag_entry_node"
-            android:layout_below="@id/tv_relay_node"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             android:paddingHorizontal="@dimen/compact_padding"
             android:paddingVertical="6dp"
             tools:text="Poland"

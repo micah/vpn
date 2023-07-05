@@ -56,17 +56,20 @@ class CircuitCardAdapter(val isBrowser: Boolean) : RecyclerView.Adapter<Recycler
                 }
             }
 
-            val relayDetails = item.relayDetails
+            val context = binding.root.context
             if (expandedItemPos == position) {
-                binding.expandedContainer.tvAppExit.text = binding.root.context.getString(if (isBrowser) R.string.this_browser else R.string.this_app)
-                binding.expandedContainer.tvEntryNode.text = if (relayDetails.size >= 1) relayDetails[0].addresses[0] else null
-                binding.expandedContainer.tvRelayNode.text = if (relayDetails.size >= 2) relayDetails[1].addresses[0] else null
-                binding.expandedContainer.tvExitNode.text = if (relayDetails.size >= 3) relayDetails[2].addresses[0] else null
-                binding.expandedContainer.tvCircuitDescription.text  = binding.root.context.getString(R.string.circuits_app_description, "https://wikipedia.org")
+                binding.expandedContainer.tvAppExit.text = context.getString(if (isBrowser) R.string.this_browser else R.string.this_app)
+                binding.expandedContainer.tvEntryNode.text = "Hong Kong"
+                binding.expandedContainer.tvRelayNode.text = "Spain"
+                binding.expandedContainer.tvExitNode.text = "Poland"
+                binding.expandedContainer.tvCircuitDescription.text  = context.getString(R.string.circuit_app_description, item.destinationDomain)
+                binding.expandedContainer.ivCountryFlagEntryNode.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.flag_hk))
+                binding.expandedContainer.ivCountryFlagRelayNode.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.flag_es))
+                binding.expandedContainer.ivCountryFlagExitNode.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.flag_pl))
             } else {
-                binding.collapsedContainer.tvAddress.text = "https://wikipedia.org"
-                binding.collapsedContainer.tvRoutingDescription.text = "Routed over XYZ"
-                binding.collapsedContainer.ivCountryFlag.setImageDrawable(ContextCompat.getDrawable(binding.root.context, R.drawable.flag_ua))
+                binding.collapsedContainer.tvAddress.text = item.destinationDomain
+                binding.collapsedContainer.tvRoutingDescription.text = context.getString(R.string.routed_over_country, "Poland")
+                binding.collapsedContainer.ivCountryFlag.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.flag_pl))
             }
             binding.collapsedContainer.root.visibility = if (expandedItemPos == position) View.GONE else View.VISIBLE
             binding.expandedContainer.root.visibility = if (expandedItemPos == position) View.VISIBLE else View.GONE
