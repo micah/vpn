@@ -18,7 +18,6 @@ import org.torproject.vpn.ui.glide.ApplicationInfoModel
 class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
 
     private lateinit var viewModel: AppDetailFragmentViewModel
-    private lateinit var adapter: CircuitCardAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +31,6 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
             viewModel.isBrowser.value = arguments.argIsBrowser
             viewModel.hasTorSupport.value = arguments.argHasTorSupport
         }
-        adapter = CircuitCardAdapter(viewModel.isBrowser.value!!)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,6 +42,8 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(binding.ivAppIcon)
         }
+
+        val adapter = CircuitCardAdapter(viewModel.isBrowser.value!!)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.layoutNoTorSupport.rvCircuitCards.adapter = adapter
