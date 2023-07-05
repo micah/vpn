@@ -22,7 +22,7 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
 
     private val TAG = AppRoutingFragment::class.java.simpleName
     private lateinit var viewModel: AppRoutingViewModel
-    private lateinit var appListAdapter: AppListAdapter
+    private var appListAdapter: AppListAdapter? = null
     private lateinit var preferenceHelper: PreferenceHelper
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,9 +39,9 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
         appListAdapter = AppListAdapter(viewModel.getAppList(),
             TorAppsAdapter(viewModel.getAppList()),
             preferenceHelper)
-        appListAdapter.onItemModelChanged = viewModel::onItemModelChanged
+        appListAdapter?.onItemModelChanged = viewModel::onItemModelChanged
         binding.rvAppList.adapter = appListAdapter
-        viewModel.getObservableAppList().observe(viewLifecycleOwner, appListAdapter::update)
+        viewModel.getObservableAppList().observe(viewLifecycleOwner) { appListAdapter?.update(it) }
         viewModel.getObservableProgress().observe(viewLifecycleOwner) { isLoading ->
             binding.progressIndicator.visibility = if (isLoading) VISIBLE else GONE
         }
@@ -64,7 +64,8 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
 
     override fun onDestroyView() {
         super.onDestroyView()
-        appListAdapter.onItemModelChanged = null
+        appListAdapter?.onItemModelChanged = null
+        appListAdapter = null
         preferenceHelper.unregisterListener(this)
     }
 
