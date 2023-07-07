@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,6 +13,7 @@ import org.torproject.vpn.databinding.FragmentAppRoutingBinding
 import org.torproject.vpn.ui.approuting.data.AppListAdapter
 import org.torproject.vpn.ui.approuting.data.TorAppsAdapter
 import org.torproject.vpn.ui.approuting.model.AppRoutingViewModel
+import org.torproject.vpn.ui.base.view.BaseDialogFragment
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
@@ -52,7 +52,8 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
         binding.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.refresh_circuits -> {
-                    Toast.makeText(requireContext(), "Oops. Refreshing circuits is not yet implemented!", Toast.LENGTH_SHORT).show()
+                    val dialog = BaseDialogFragment.createRefreshAllCircuitsDialog()
+                    dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
                     return@setOnMenuItemClickListener true
                 }
                 else -> return@setOnMenuItemClickListener false

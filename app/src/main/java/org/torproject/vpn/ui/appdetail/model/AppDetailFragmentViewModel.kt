@@ -24,6 +24,7 @@ import java.util.*
 
 class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
+    val appUID: MutableLiveData<Int?> = MutableLiveData()
     val appId = MutableLiveData("")
     val appName = MutableLiveData("")
     val isBrowser = MutableLiveData(false)
