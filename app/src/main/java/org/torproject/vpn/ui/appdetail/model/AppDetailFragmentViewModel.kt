@@ -103,8 +103,9 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
         viewModelScope.launch {
             timer.schedule(object: TimerTask() {
                 override fun run() {
-                    // TODO: replace Onionmasq.getBytesReceived and ~.getBytesSent() with actual per-app data usage API once it was implemented in onionmasq
-                    _dataUsage.postValue(updateDataUsage(dataUsage, OnionMasq.getBytesReceived(), OnionMasq.getBytesSent()))
+                    appUID.value?.let {
+                        _dataUsage.postValue(updateDataUsage(dataUsage, OnionMasq.getBytesReceivedForApp(it.toLong()), OnionMasq.getBytesSentForApp(it.toLong())))
+                    }
                 }
             }, 0, 1000)
         }
