@@ -3,10 +3,12 @@ package org.torproject.vpn.ui.approuting.data
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import org.torproject.vpn.databinding.AppItemViewBinding
+import org.torproject.vpn.ui.approuting.AppRoutingFragmentDirections
 import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
 
@@ -51,7 +53,15 @@ class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerVi
             }
             binding.tvAppTitle.text = appItem.text
             binding.root.setOnClickListener {
-                Log.d("TorAppsAdapter", "TODO: open  detail screen for "  + appItem.text)
+                if (appItem.appId != null && appItem.uid != null) {
+                    val action = AppRoutingFragmentDirections.actionNavigationAppRoutingToAppDetailFragment(
+                        argAppUID = appItem.uid,
+                        argAppId = appItem.appId,
+                        argAppName = appItem.text,
+                        argIsBrowser = appItem.isBrowserApp ?: false,
+                        argHasTorSupport = appItem.hasTorSupport ?: false)
+                    binding.root.findNavController().navigate(action)
+                }
             }
         }
     }

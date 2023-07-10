@@ -31,17 +31,21 @@ class VpnNotificationManager(val context: Context) {
         notificationManager = initNotificationManager()
     }
 
-    fun buildForegroundServiceNotification(): Notification? {
+    fun buildForegroundServiceNotification(): Notification {
         val notificationBuilder = initNotificationBuilderDefaults()
         notificationBuilder
             .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setWhen(System.currentTimeMillis())
             .setContentTitle(context.getString(R.string.app_name))
             .setContentIntent(getContentPendingIntent())
+            .setPriority(NotificationCompat.PRIORITY_LOW)
         return notificationBuilder.build()
     }
 
     fun updateNotification(state: ConnectionState, dataUsage: DataUsage) {
+        if (!notificationManager.areNotificationsEnabled()) {
+            return
+        }
         var action: NotificationCompat.Action? = null
         var stateString: String? = null
         var dataUsageString: String? = null
@@ -100,6 +104,9 @@ class VpnNotificationManager(val context: Context) {
             .setTicker(stateString)
             .setContentIntent(getContentPendingIntent())
             .addAction(action)
+            .setSound(null)
+            .setOnlyAlertOnce(true)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
         notificationManager.notify(NOTIFICATION_ID,  notificationBuilder.build())
     }
 
@@ -164,7 +171,9 @@ class VpnNotificationManager(val context: Context) {
 
     private fun initNotificationBuilderDefaults(): NotificationCompat.Builder {
         val notificationBuilder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_NEWSTATUS_ID)
-        notificationBuilder.setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true)
+        notificationBuilder.setAutoCancel(true)
+            .setOngoing(true)
+            .setLocalOnly(true)
         return notificationBuilder
     }
 

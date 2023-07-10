@@ -21,10 +21,9 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
 
     init {
         appManager = AppManager(application)
-        loadApps()
     }
 
-    private fun loadApps() {
+    fun loadApps() {
         val cachedViewModels = appManager.loadCachedApps()
 
         appList.postValue(cachedViewModels)

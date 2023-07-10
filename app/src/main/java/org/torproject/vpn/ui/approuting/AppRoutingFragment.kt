@@ -2,19 +2,18 @@ package org.torproject.vpn.ui.approuting
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.*
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentAppRoutingBinding
 import org.torproject.vpn.ui.approuting.data.AppListAdapter
 import org.torproject.vpn.ui.approuting.data.TorAppsAdapter
 import org.torproject.vpn.ui.approuting.model.AppRoutingViewModel
+import org.torproject.vpn.ui.base.view.BaseDialogFragment
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
@@ -30,6 +29,7 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
         super.onViewCreated(view, savedInstanceState)
         preferenceHelper = PreferenceHelper(requireContext())
         viewModel = ViewModelProvider(this)[AppRoutingViewModel::class.java]
+        viewModel.loadApps()
         val binding = FragmentAppRoutingBinding.bind(view)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -38,10 +38,8 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
         // setup vertical list
         appListAdapter = AppListAdapter(viewModel.getAppList(),
             TorAppsAdapter(viewModel.getAppList()),
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
             preferenceHelper)
         appListAdapter.onItemModelChanged = viewModel::onItemModelChanged
-        binding.rvAppList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvAppList.adapter = appListAdapter
         viewModel.getObservableAppList().observe(viewLifecycleOwner, appListAdapter::update)
         viewModel.getObservableProgress().observe(viewLifecycleOwner) { isLoading ->
@@ -54,7 +52,8 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
         binding.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.refresh_circuits -> {
-                    Toast.makeText(requireContext(), "Oops. Refreshing circuits is not yet implemented!", Toast.LENGTH_SHORT).show()
+                    val dialog = BaseDialogFragment.createRefreshAllCircuitsDialog()
+                    dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
                     return@setOnMenuItemClickListener true
                 }
                 else -> return@setOnMenuItemClickListener false

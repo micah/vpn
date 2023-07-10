@@ -1,8 +1,64 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    dependencies {
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3"
+    }
+}
+
 plugins {
     id 'com.android.application' version '7.4.1' apply false
     id 'com.android.library' version '7.4.1' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+}
+
+allprojects {
+    ext.showWarning = { msg ->
+        println()
+        println()
+        println "WARNING: " + msg
+        println()
+        println()
+    }
+    Properties properties = new Properties()
+
+    // add your private gitlab token to "local.properties"
+    if (project.rootProject.file("local.properties").exists()) {
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        if (properties.getProperty('gitLabPrivateToken') == null && System.getenv("CI_JOB_TOKEN") == null) {
+            showWarning('Missing gitLabPrivateToken in local.properties to fetch onionmasq from gitlab maven')
+        }
+    } else if (System.getenv("CI_JOB_TOKEN") == null) {
+        showWarning('Neither CI_JOB_TOKEN nor a local.properties file with a private access token named gitLabPrivateToken is configured to fetch onionmasq from gitlab maven')
+    }
+
+
+    repositories {
+        maven {
+            // artifacts can be accessed at
+            url 'https://gitlab.torproject.org/api/v4/projects/1192/packages/maven'
+            name "GitLab Private"
+            credentials(HttpHeaderCredentials) {
+                name = 'Private-Token'
+                value = properties.getProperty('gitLabPrivateToken')
+            }
+            authentication {
+                header(HttpHeaderAuthentication)
+            }
+        }
+        maven {
+            url 'https://gitlab.torproject.org/api/v4/projects/1192/packages/maven'
+            name "GitLab CI"
+            credentials(HttpHeaderCredentials) {
+                name = 'Job-Token'
+                value = System.getenv("CI_JOB_TOKEN")
+            }
+            authentication {
+                header(HttpHeaderAuthentication)
+            }
+        }
+        google()
+        mavenCentral()
+    }
 }
 
 task clean(type: Delete) {

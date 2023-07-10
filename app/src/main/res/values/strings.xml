@@ -8,6 +8,7 @@
     <string name="action_reconnect">Reconnect</string>
     <string name="action_try_again">Try again</string>
     <string name="action_protect_all_apps">Protect all apps</string>
+    <string name="action_protect_this_app">Protect this app</string>
     <!-- notifications actions -->
     <string name="action_start">Start VPN</string>
     <string name="action_stop">Stop VPN</string>
@@ -65,6 +66,31 @@
     <string name="kill_switch_description">Block apps from connecting to the internet if the Tor network can\'t be reached</string>
     <string name="quickstart">Quickstart</string>
     <string name="quickstart_description">Connect to the Tor network automatically when launched</string>
+    <string name="exit_location">Exit location</string>
+    <string name="exit_location_description">Automatic mode selects exit relays from anywhere in the network, regardless of location. This helps protect your anonymity by preventing your activities from being linked.</string>
+    <string name="exit_location_automatic">Automatic (safest)</string>
+    <string name="up">Up</string>
+    <string name="down">Down</string>
+    <string name="circuits_app_description">Circuits for %1$s</string>
+    <string name="this_browser">This browser</string>
+    <string name="this_app">This app</string>
+    <string name="tor_powered_app">Tor-powered app</string>
+    <string name="description_independend_tor_powered_app">This app uses its own Tor connection, independent of the Tor VPN. View and configure its connection in %1$s instead.</string>
+    <string name="action_open_app">Open %1$s</string>
+    <string name="guard">Guard</string>
+
+    <!-- logging related -->
+    <string name="bootstrap_at">Bootstrap at: %1$s</string>
+    <string name="new_connection">%1$s->%2$s: NEW connection to %3$s (app %4$d)</string>
+    <string name="new_connection_hop">%1$s->%2$s: hop %3$d: %4$s (%5$s)</string>
+    <string name="failed_connection">%1$s->%2$s: FAILED connection to %3$s: %4$s (app %5$d)</string>
+    <string name="failed_connection_closed">%1$s->%2$s: FAILED: %3$s</string>
+    <string name="closed_connection">%1$s->%2$s: closed connection</string>
+    <string name="reload_all_circuits">Reload all circuits?</string>
+    <string name="reload_all_circuits_description">New circuits will be established for all of your apps. Some apps and websites might not recognize you as a result, and could log you out of their services.</string>
+    <string name="reload_app_circuits">Reload this app\'s circuits?</string>
+    <string name="reload_app_circuits_description">New circuits will be established for this app only. Some apps and websites might not recognize you as a result, and could log you out of their services.</string>
+    <string name="action_reload_circuits">Reload circuits</string>
 
 
 </resources>

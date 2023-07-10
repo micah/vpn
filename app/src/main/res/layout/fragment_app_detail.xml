@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="org.torproject.vpn.ui.appdetail.model.AppDetailFragmentViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="org.torproject.vpn.ui.appdetail.AppDetailFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/Theme.TorVPN.AppBarOverlay"
+            android:background="?attr/colorPrimary"
+            >
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                app:navigationIcon="?attr/homeAsUpIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title=""
+                app:menu="@menu/app_detail_menu"
+                app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:paddingHorizontal="@dimen/activity_horizontal_margin"
+            tools:background="@color/purpleDark"
+            >
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/iv_app_icon"
+                        android:scaleType="fitXY"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/default_padding"
+                        tools:src="@drawable/ic_wifi_tethering"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_app_name"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/compact_padding"
+                        android:paddingBottom="48dp"
+                        tools:text="Firefox"
+                        android:text="@{viewModel.appName}"
+                        android:textAppearance="@style/label_text_in_fragment"
+                        />
+                    <!-- Layout for apps without integrated tor support -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.hasTorSupport ? View.GONE : View.VISIBLE}"
+                        android:id="@+id/circuit_info_container">
+
+                        <!-- download / upload statistics -->
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            >
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="96dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_rounded_left"
+                                >
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/ic_down_traffic"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="20dp"
+                                    android:src="@drawable/ic_trending_down"
+                                    />
+                                <androidx.appcompat.widget.LinearLayoutCompat
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toEndOf="@id/ic_down_traffic"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:textAppearance="@style/title_in_stats"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/down"/>
+                                    <TextView
+                                        android:textAppearance="@style/number_in_stats"
+                                        android:id="@+id/tv_down_traffic"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        tools:text="17 kb"
+                                        android:text="@{viewModel.dataUsageDownstream}"
+                                        />
+                                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            </RelativeLayout>
+                            <View
+                                android:layout_height="96dp"
+                                android:layout_width="1dp"
+                                />
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="96dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_rounded_right"
+                                >
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/ic_up_traffic"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="20dp"
+                                    android:src="@drawable/ic_trending_up"
+                                    />
+                                <androidx.appcompat.widget.LinearLayoutCompat
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toEndOf="@id/ic_up_traffic"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:textAppearance="@style/title_in_stats"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/up"/>
+                                    <TextView
+                                        android:textAppearance="@style/number_in_stats"
+
+                                        android:id="@+id/tv_up_traffic"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        tools:text="17 kb"
+                                        android:text="@{viewModel.dataUsageUpstream}"
+                                        />
+
+                                </androidx.appcompat.widget.LinearLayoutCompat>
+                            </RelativeLayout>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <!-- protect this app switch -->
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/smProtectAllApps"
+                            style="@style/switch_text_without_background"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_padding"
+                            android:layout_marginBottom="@dimen/default_padding"
+                            android:padding="@dimen/switch_padding"
+                            android:text="@string/action_protect_this_app"
+                            android:checked="@{viewModel.protectThisApp}"
+                            android:onCheckedChanged="@{viewModel::onProtectThisAppChanged}"
+                            android:thumb="@drawable/toggle_thumb_light"
+                            app:track="@drawable/toggle_track_light" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_rounded"
+                            android:paddingBottom="@dimen/default_padding"
+                            >
+                            <TextView
+                                android:id="@+id/tv_circuit_description"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:text="@{viewModel.circuitDescription}"
+                                tools:text="@string/circuits_app_description"
+                                android:textAppearance="@style/app_circuits_text"
+                                android:padding="@dimen/activity_horizontal_margin"
+                                />
+
+                            <ImageView
+                                android:id="@+id/iv_hops"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_below="@+id/tv_circuit_description"
+                                android:layout_alignTop="@+id/tv_app_exit"
+                                android:layout_alignBottom="@+id/tv_entry_node"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="2dp"
+                                android:layout_marginBottom="10dp"
+                                android:importantForAccessibility="no"
+                                android:paddingStart="@dimen/activity_horizontal_margin"
+                                android:paddingLeft="@dimen/activity_horizontal_margin"
+                                android:paddingRight="11dp"
+                                android:paddingEnd="11dp"
+                                android:paddingHorizontal="@dimen/default_padding"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/bg_hops" />
+                            <TextView
+                                android:id="@+id/tv_app_exit"
+                                android:textAppearance="@style/app_circuits_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/iv_hops"
+                                android:layout_below="@id/tv_circuit_description"
+                                android:paddingEnd="@dimen/compact_padding"
+                                android:paddingRight="@dimen/compact_padding"
+                                android:paddingVertical="6dp"
+                                tools:text="@string/this_browser"
+                                android:text="@{viewModel.circuitExitApp}"
+                                />
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_toEndOf="@id/iv_hops"
+                                android:layout_below="@id/tv_app_exit"
+                                android:id="@+id/exit_node_container"
+                                >
+                                <TextView
+                                    android:id="@+id/tv_exit_node"
+                                    android:textAppearance="@style/app_circuits_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+
+                                    android:paddingVertical="6dp"
+                                    android:paddingEnd="@dimen/compact_padding"
+                                    android:paddingRight="@dimen/compact_padding"
+                                    tools:text="Spain"
+                                    android:text="@{viewModel.circuitExitNode}"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/guard"
+                                    android:paddingVertical="6dp"
+                                    android:paddingHorizontal="12dp"
+                                    style="@style/info_tag"
+                                    />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <TextView
+                                android:id="@+id/tv_relay_node"
+                                android:textAppearance="@style/app_circuits_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/iv_hops"
+                                android:layout_below="@id/exit_node_container"
+                                android:paddingEnd="@dimen/compact_padding"
+                                android:paddingRight="@dimen/compact_padding"
+                                android:paddingVertical="6dp"
+                                tools:text="Germany"
+                                android:text="@{viewModel.circuitRelayNode}"
+                                />
+                            <TextView
+                                android:id="@+id/tv_entry_node"
+                                android:textAppearance="@style/app_circuits_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/iv_hops"
+                                android:layout_below="@id/tv_relay_node"
+                                android:paddingEnd="@dimen/compact_padding"
+                                android:paddingRight="@dimen/compact_padding"
+                                android:paddingVertical="6dp"
+                                tools:text="Poland"
+                                android:text="@{viewModel.circuitEntryNode}"
+                                />
+
+                        </RelativeLayout>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <!-- Layout for apps with integrated tor support -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/tor_app_container"
+                        android:visibility="@{viewModel.hasTorSupport ? View.VISIBLE : View.GONE}"
+                        tools:visibility="visible"
+                        android:paddingHorizontal="@dimen/activity_horizontal_margin"
+                        android:paddingTop="@dimen/activity_vertical_margin"
+                        android:paddingBottom="@dimen/default_padding"
+                        android:background="@drawable/bg_rounded"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tor_powered_app"
+                            android:textAppearance="@style/app_circuits_text"
+                            android:paddingBottom="@dimen/compact_padding"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/description_independend_tor_powered_app"
+                            android:text="@{viewModel.independentTorAppDescriptionText}"
+                            android:textAppearance="@style/info_text"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            tools:text="@string/action_open_app"
+                            android:text="@{viewModel.openAppButtonText}"
+                            android:onClick="@{()-> viewModel.onOpenAppClicked()}"
+                            android:layout_gravity="end"
+                            android:textAppearance="@style/info_button_text"
+                            android:padding="@dimen/default_padding"
+                            />
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </ScrollView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
