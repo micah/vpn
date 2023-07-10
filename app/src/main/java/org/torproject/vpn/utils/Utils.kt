@@ -56,7 +56,7 @@ fun startVectorAnimationWithEndCallback(
 fun startRevealWithEndCallback(animator: Animator, onAnimationEnd: () -> Unit) {
     with(animator) {
         addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 onAnimationEnd()
             }
         })
@@ -82,7 +82,7 @@ fun animateTextSizeChange(
     }
 
     animator.addListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationEnd(animation: Animator?) {
+        override fun onAnimationEnd(animation: Animator) {
             if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
                 endCallback()
             }
@@ -117,79 +117,6 @@ fun connectionStateGradientAnimation(
         gd.colors = intArrayOf(newStart, newMid, newEnd)
         //TODO cant use gd here.... :(. custom view required.
         drawable.setTint(newMid)
-    }
-
-    animator.start()
-}
-
-
-fun createStatusBarAnimation(
-    drawable: Drawable,
-    context: Context,
-    @ColorRes twoColors: IntArray
-): Animator {
-
-//    val duration = context.resources.getInteger(R.integer.statusbar_progress_anim_duration)
-    val duration = 800
-    val colors = twoColors.map { ContextCompat.getColor(context, it) }
-//content.background is set as a GradientDrawable in layout xml file
-    val gradient = drawable as GradientDrawable
-    val evaluator = ArgbEvaluator()
-    val animator = TimeAnimator.ofFloat(0.0f, 1.0f)
-    animator.duration = duration.toLong()
-    animator.repeatCount = ValueAnimator.INFINITE
-    animator.repeatMode = ValueAnimator.REVERSE
-
-    animator.addUpdateListener {
-        val fraction = it.animatedFraction
-        val midFraction = it.animatedFraction.let { f ->
-            val value = 2.0f * f + 0.5f
-            if (value > 1.0) {
-                abs(2f - value)
-            } else {
-                value
-            }
-        }
-        val newStart = evaluator.evaluate(fraction, colors[0], colors[1]) as Int
-        val newMid = evaluator.evaluate(midFraction, colors[0], colors[1]) as Int
-        val newEnd = evaluator.evaluate(fraction, colors[1], colors[0]) as Int
-
-        gradient.colors = intArrayOf(newEnd, newMid, newStart)
-    }
-
-    return animator
-
-}
-
-/**
- * @param threeColors the first two colors are the end state color of connecting anim, the third one should be for paused of connected.
- */
-fun createStatusBarConnectedGradientAnimation(
-    drawable: Drawable,
-    context: Context,
-    @ColorRes threeColors: IntArray,
-    lifecycle: Lifecycle,
-    endCallback: () -> Unit
-) {
-
-    val colors = threeColors.map { ContextCompat.getColor(context, it) }
-    val duration = 1800
-    val gradient = drawable as GradientDrawable
-    gradient.orientation = GradientDrawable.Orientation.LEFT_RIGHT
-    val evaluator = ArgbEvaluator()
-    val animator = TimeAnimator.ofFloat(0.0f, 1.0f)
-    animator.duration = duration.toLong()
-    animator.interpolator = DecelerateInterpolator()
-    animator.addUpdateListener {
-        val fraction = it.animatedFraction
-
-        val newStart = evaluator.evaluate(fraction, colors[0], colors[2]) as Int
-        val newEnd = evaluator.evaluate(fraction, colors[1], colors[2]) as Int
-
-        gradient.colors = intArrayOf(newStart, newEnd)
-    }
-    if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
-        endCallback()
     }
 
     animator.start()
