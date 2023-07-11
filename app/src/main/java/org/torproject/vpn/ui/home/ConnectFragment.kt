@@ -46,9 +46,6 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
     //this is required to store current state that UI is in so we can decide whether to animate to next state
     private lateinit var currentVpnState: ConnectionState
 
-    //connecting progress animation is stopped when state goes from connecting to connected.
-    private var progressGradientAnimatorSet: AnimatorSet? = null
-
     private lateinit var preferenceHelper: PreferenceHelper
 
     private var vpnPermissionDialogStartTime = 0L
@@ -172,11 +169,13 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         if (::currentVpnState.isInitialized && currentVpnState == vpnState) {
             return
         }
+        binding.gradientView.setState(vpnState)
 
         when (vpnState) {
             ConnectionState.INIT -> {
 
             }
+
             ConnectionState.CONNECTING -> showConnectingTransition()
 
             ConnectionState.PAUSED -> {}
@@ -196,6 +195,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 binding.includeStats.chronometer.stop()
                 showErrorTransition()
             }
+
             ConnectionState.DISCONNECTING -> {
                 // disable btn?
             }
@@ -220,53 +220,9 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
             }
 
-            //progressbar anim (reveal + infinite gradient shift)
-
-            //infinite gradient
-            val gradientAnim = createStatusBarAnimation(
-                binding.progressSlider.background,
-                requireContext(),
-                intArrayOf(R.color.connectingRainbowStart, R.color.connectingRainbowEnd)
-            )
-            // reveal
-            val center = binding.progressSlider.center()
-            val revealAnim = ViewAnimationUtils.createCircularReveal(
-                binding.progressSlider,
-                center.x,
-                center.y,
-                0f,
-                binding.progressSlider.width.toFloat()
-            )
-
-
-            progressGradientAnimatorSet = AnimatorSet().apply {
-                if (currentVpnState == ConnectionState.INIT) {
-                    play(revealAnim).before(gradientAnim)
-                } else {
-                    play(gradientAnim)
-                }
-                start()
-            }
-
         } else {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
         }
-
-        //TODO Animating gradient is possible but removing gradient transition for time being(as the vector buttons in designs are not totally compatible with Android.)
-        /*connectionStateGradientAnimation(
-            binding.tvConnectActionBtn.background,
-            requireContext(),
-            intArrayOf(
-                R.color.greenGradientLight,
-                R.color.greenGradientNormal,
-                R.color.greenGradientDark,
-                R.color.purpleGradientLight,
-                R.color.purpleGradientLight,
-                R.color.purpleGradientDark
-            )
-        )*/
-
-
     }
 
     private fun connectingToIdleTransition() {
@@ -274,19 +230,6 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
     }
 
     private fun showConnectedTransition() {
-        //end infinite gradient animation
-        progressGradientAnimatorSet?.end()
-        progressGradientAnimatorSet = null
-
-        // transition from gradient to red(connected color)
-        createStatusBarConnectedGradientAnimation(
-            binding.progressSlider.background, requireContext(), intArrayOf(
-                R.color.connectingRainbowEnd,
-                R.color.connectingRainbowStart,
-                R.color.greenNormal
-            ), lifecycle
-        ) {}
-
         if (currentVpnState == ConnectionState.CONNECTING) {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_stop)
 
@@ -304,34 +247,6 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
     }
 
     private fun showErrorTransition() {
-        //end infinite gradient animation
-        progressGradientAnimatorSet?.end()
-        progressGradientAnimatorSet = null
-
-        if (currentVpnState == ConnectionState.CONNECTING) {
-
-            // transition connect gradient to yellow(error color)
-            createStatusBarConnectedGradientAnimation(
-                binding.progressSlider.background, requireContext(), intArrayOf(
-                    R.color.connectingRainbowEnd,
-                    R.color.connectingRainbowStart,
-                    R.color.yellowNormal
-                ), lifecycle
-            ) {}
-
-        } else if (currentVpnState == ConnectionState.CONNECTED) {
-
-            // transition from connected gradient to yellow(error color)
-            createStatusBarConnectedGradientAnimation(
-                binding.progressSlider.background, requireContext(), intArrayOf(
-                    R.color.redNormal,
-                    R.color.redNormal,
-                    R.color.yellowNormal
-                ), lifecycle
-            ) {}
-
-        }
-
         if (currentVpnState == ConnectionState.CONNECTING) {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
 
@@ -355,16 +270,6 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             ) {
                 binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
             }
-
-            // transition from gradient to red(connected color)
-            createStatusBarConnectedGradientAnimation(
-                binding.progressSlider.background, requireContext(), intArrayOf(
-                    R.color.greenNormal,
-                    R.color.greenNormal,
-                    R.color.redNormal
-                ), lifecycle
-            ) {}
-
 
         } else {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)

@@ -49,40 +49,8 @@
             app:titleTextColor="@{viewModel.toolBarTitleAndColor.second}" />
 
 
-        <View
-            android:id="@+id/progress_slider"
-            android:layout_width="0dp"
-            android:layout_height="6dp"
-            android:background="@drawable/gradient_progress"
-            android:visibility="@{viewModel.connectionState == ConnectionState.INIT? View.INVISIBLE: View.VISIBLE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-
-        <!--This is for the glow above and below progressbar-->
-        <View
-            android:id="@+id/progress_upper_glow"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/progress_slider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:visibility="gone" />
-
-        <View
-            android:id="@+id/progress_lower_glow"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progress_slider" />
-
-
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/iv_background_with_stars"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:importantForAccessibility="no"
@@ -104,9 +72,18 @@
             app:layout_constraintBottom_toTopOf="@+id/upper_guideline_action_btns"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progress_slider"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:viewModel="@{viewModel}"
             tools:visibility="visible" />
+
+        <org.torproject.vpn.utils.GradientGlowView
+            android:id="@+id/gradient_view"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <include
             android:id="@+id/include_error"
@@ -117,7 +94,7 @@
             app:layout_constraintBottom_toTopOf="@+id/upper_guideline_action_btns"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progress_slider"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:viewModel="@{viewModel}"
             tools:visibility="gone" />
 
@@ -130,7 +107,7 @@
             app:layout_constraintBottom_toTopOf="@+id/upper_guideline_action_btns"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progress_slider"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:viewModel="@{viewModel}"
             tools:visibility="gone" />
 
