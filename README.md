@@ -76,3 +76,8 @@ For now the build and installation steps are as easy as:
 5. Install it on your phone: `adb -d install -t app/build/outputs/apk/debug/app-debug.apk`
 
 Have fun!
+
+
+# License
+
+This code is licensed under the [3-clause BSD license](https://opensource.org/license/bsd-3-clause/)
