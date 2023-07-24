@@ -4,8 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import org.torproject.onionmasq.OnionMasq
+import org.torproject.onionmasq.errors.CountryCodeException
+import org.torproject.onionmasq.errors.ProxyStoppedException
 import org.torproject.vpn.ui.exitselection.data.ExitNodeAdapter
 import org.torproject.vpn.utils.PreferenceHelper
+import java.util.Locale
 
 class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -22,18 +26,25 @@ class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewM
     }
 
     private fun getExitNodeList(automaticNodeSelection: Boolean): List<ViewTypeDependentModel> {
-        val exitNodeList = mutableListOf<ViewTypeDependentModel>()
-        exitNodeList.add(ExitNodeTableHeaderModel(automaticNodeSelection))
+        val modelList = mutableListOf<ViewTypeDependentModel>()
+        modelList.add(ExitNodeTableHeaderModel(automaticNodeSelection))
         if (!automaticNodeSelection) {
-            // fill exit node list with dummy items
             val exitNodeCountry = preferenceHelper.exitNodeCountry
-            exitNodeList.add(ExitNodeCellModel("pl", "Poland", "pl".equals(exitNodeCountry)))
-            exitNodeList.add(ExitNodeCellModel("es", "Spain", "es".equals(exitNodeCountry)))
-            exitNodeList.add(ExitNodeCellModel("fr", "France", "fr".equals(exitNodeCountry)))
-            exitNodeList.add(ExitNodeCellModel("ar", "Argentina", "ar".equals(exitNodeCountry)))
-            exitNodeList.add(ExitNodeCellModel("de", "Germany", "de".equals(exitNodeCountry)))
+            val locales = Locale.getAvailableLocales()
+            val countryMap = HashMap<String, ExitNodeCellModel>()
+            for (locale in locales) {
+                if (locale.country.isNullOrEmpty() || locale.country.length != 2) {
+                    continue
+                }
+                countryMap[locale.country.lowercase()] = ExitNodeCellModel(
+                    locale.country.lowercase(),
+                    locale.displayCountry,
+                    locale.country.lowercase() == exitNodeCountry
+                )
+            }
+            modelList.addAll(ArrayList(countryMap.values).sorted())
         }
-        return exitNodeList
+        return modelList
     }
 
     fun onExitNodeSelected(pos: Int, model: ExitNodeCellModel) {
@@ -47,6 +58,14 @@ class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewM
             (mutableList[pos] as ExitNodeCellModel).selected = true
             _list.postValue(mutableList)
             preferenceHelper.exitNodeCountry = model.countryCode
+            try {
+                OnionMasq.setCountryCode(model.countryCode)
+                OnionMasq.refreshCircuits()
+            } catch (e: CountryCodeException) {
+                e.printStackTrace()
+            } catch (e: ProxyStoppedException) {
+                e.printStackTrace()
+            }
         }
     }
 

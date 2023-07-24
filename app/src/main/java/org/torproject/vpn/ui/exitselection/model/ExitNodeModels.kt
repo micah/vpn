@@ -6,14 +6,18 @@ interface ViewTypeDependentModel {
     fun getViewType(): Int
 }
 
-data class ExitNodeCellModel(
+data class ExitNodeCellModel (
     val countryCode: String,
     val countryName: String,
     var selected: Boolean
-) : ViewTypeDependentModel {
+) : ViewTypeDependentModel, Comparable<ExitNodeCellModel> {
 
     override fun getViewType(): Int {
         return ExitNodeAdapter.CELL
+    }
+
+    override fun compareTo(other: ExitNodeCellModel): Int {
+        return compareValuesBy(this, other,  { !other.selected } , { it.countryName })
     }
 }
 

@@ -67,7 +67,6 @@ class ExitNodeAdapter(liveDataList: LiveData<List<ViewTypeDependentModel>>, view
             binding.ivCountryFlag.setImageDrawable(getFlagByCountryCode(binding.root.context, item.countryCode))
             binding.rbSelected.isChecked = item.selected
             binding.itemContainer.setOnClickListener(OnClickListener {
-                Log.d(">>", "on item clicked")
                 onExitNodeSelected?.invoke(pos, item)
             })
         }
