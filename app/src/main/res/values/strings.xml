@@ -42,7 +42,7 @@
 
     <string name="title_guide_welcome_to">Welcome to the\nOnionverse</string>
     <string name="guide_pre_alpha">Pre-alpha</string>
-    <string name="guide_version_number">%1$s</string>
+    <string name="guide_version_number" translatable="false">%1$s</string>
     <string name="guide_bullet_head_1">You are ready to start testing</string>
     <string name="guide_bullet_head_2">But don\'t do anything risky</string>
     <string name="guide_bullet_text_1">Don\'t forget to report any bugs you find back to our developers.</string>
