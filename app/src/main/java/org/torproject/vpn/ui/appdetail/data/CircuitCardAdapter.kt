@@ -3,12 +3,13 @@ package org.torproject.vpn.ui.appdetail.data
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import org.torproject.onionmasq.circuit.Circuit
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.ViewCircuitsPerAppBinding
+import org.torproject.vpn.utils.getCountryByCode
+import org.torproject.vpn.utils.getFlagByCountryCode
 
 class CircuitCardAdapter(val isBrowser: Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
     var items: List<Circuit> = ArrayList()
@@ -59,17 +60,25 @@ class CircuitCardAdapter(val isBrowser: Boolean) : RecyclerView.Adapter<Recycler
             val context = binding.root.context
             if (expandedItemPos == position) {
                 binding.expandedContainer.tvAppExit.text = context.getString(if (isBrowser) R.string.this_browser else R.string.this_app)
-                binding.expandedContainer.tvEntryNode.text = "Hong Kong"
-                binding.expandedContainer.tvRelayNode.text = "Spain"
-                binding.expandedContainer.tvExitNode.text = "Poland"
+                binding.expandedContainer.tvEntryNode.text = getCountryByCode(context, item.relayDetails[2].country_code)
+                binding.expandedContainer.tvRelayNode.text = getCountryByCode(context, item.relayDetails[1].country_code)
+                binding.expandedContainer.tvExitNode.text = getCountryByCode(context, item.relayDetails[0].country_code)
                 binding.expandedContainer.tvCircuitDescription.text  = context.getString(R.string.circuit_app_description, item.destinationDomain)
-                binding.expandedContainer.ivCountryFlagEntryNode.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.flag_hk))
-                binding.expandedContainer.ivCountryFlagRelayNode.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.flag_es))
-                binding.expandedContainer.ivCountryFlagExitNode.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.flag_pl))
+                binding.expandedContainer.ivCountryFlagEntryNode.setImageDrawable(
+                    getFlagByCountryCode(context,  item.relayDetails[2].country_code)
+                )
+                binding.expandedContainer.ivCountryFlagRelayNode.setImageDrawable(
+                    getFlagByCountryCode(context,  item.relayDetails[1].country_code)
+                )
+                binding.expandedContainer.ivCountryFlagExitNode.setImageDrawable(
+                    getFlagByCountryCode(context,  item.relayDetails[0].country_code)
+                )
             } else {
                 binding.collapsedContainer.tvAddress.text = item.destinationDomain
-                binding.collapsedContainer.tvRoutingDescription.text = context.getString(R.string.routed_over_country, "Poland")
-                binding.collapsedContainer.ivCountryFlag.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.flag_pl))
+                binding.collapsedContainer.tvRoutingDescription.text = context.getString(R.string.routed_over_country, getCountryByCode(context, item.relayDetails[0].country_code))
+                binding.collapsedContainer.ivCountryFlag.setImageDrawable(
+                    getFlagByCountryCode(context,  item.relayDetails[0].country_code)
+                )
             }
             binding.collapsedContainer.root.visibility = if (expandedItemPos == position) View.GONE else View.VISIBLE
             binding.expandedContainer.root.visibility = if (expandedItemPos == position) View.VISIBLE else View.GONE

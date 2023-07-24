@@ -9,7 +9,6 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Looper
 import android.util.Log
 import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
@@ -21,7 +20,6 @@ import org.torproject.vpn.R
 import org.torproject.vpn.vpn.DataUsage
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.abs
 
 
 /**
@@ -162,11 +160,18 @@ fun getFlagByCountryCode(context: Context, countryCode: String?): Drawable? {
         return null
     }
 
-    val drawableName = "flag_$countryCode"
+    val drawableName = "flag_${countryCode.lowercase()}"
     val resID: Int = context.resources.getIdentifier(drawableName, "drawable", context.packageName)
     return try {
         ContextCompat.getDrawable(context, resID)
     } catch (e: Resources.NotFoundException) {
         null
     }
+}
+
+fun getCountryByCode(context: Context, code: String?): String {
+    if (code != null) {
+        return  Locale("", code).displayCountry
+    }
+    return context.getString(R.string.unknown)
 }

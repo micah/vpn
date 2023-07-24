@@ -92,6 +92,7 @@
     <string name="reload_app_circuits_description">New circuits will be established for this app only. Some apps and websites might not recognize you as a result, and could log you out of their services.</string>
     <string name="action_reload_circuits">Reload circuits</string>
     <string name="routed_over_country">Routed over %1$s</string>
+    <string name="unknown">Unknown</string>
     <string name="guide_got_it">Got it</string>
 
     <string name="connect_direct_to_tor">Connect directly to Tor</string>
