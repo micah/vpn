@@ -17,7 +17,7 @@ data class ExitNodeCellModel (
     }
 
     override fun compareTo(other: ExitNodeCellModel): Int {
-        return compareValuesBy(this, other,  { !other.selected } , { it.countryName })
+        return compareValuesBy(this, other, { !it.selected }, { it.countryName } )
     }
 }
 
