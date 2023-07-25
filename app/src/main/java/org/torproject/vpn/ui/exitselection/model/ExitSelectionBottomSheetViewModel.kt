@@ -63,8 +63,8 @@ class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewM
     }
 
     fun onAutomaticExitNodeChanged(model: ExitNodeTableHeaderModel) {
-        _fitHalfExpandedContent.postValue(model.selected)
         _list.postValue(getExitNodeList(model.selected))
+        _fitHalfExpandedContent.postValue(model.selected)
         preferenceHelper.automaticExitNodeSelection = model.selected
         if (model.selected) {
             setCountryCode(null)
