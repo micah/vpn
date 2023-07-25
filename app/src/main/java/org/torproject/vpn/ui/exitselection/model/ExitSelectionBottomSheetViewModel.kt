@@ -58,14 +58,7 @@ class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewM
             (mutableList[pos] as ExitNodeCellModel).selected = true
             _list.postValue(mutableList)
             preferenceHelper.exitNodeCountry = model.countryCode
-            try {
-                OnionMasq.setCountryCode(model.countryCode)
-                OnionMasq.refreshCircuits()
-            } catch (e: CountryCodeException) {
-                e.printStackTrace()
-            } catch (e: ProxyStoppedException) {
-                e.printStackTrace()
-            }
+            setCountryCode(model.countryCode)
         }
     }
 
@@ -73,5 +66,21 @@ class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewM
         _fitHalfExpandedContent.postValue(model.selected)
         _list.postValue(getExitNodeList(model.selected))
         preferenceHelper.automaticExitNodeSelection = model.selected
+        if (model.selected) {
+            setCountryCode(null)
+        } else {
+            setCountryCode(preferenceHelper.exitNodeCountry)
+        }
+    }
+
+    private fun setCountryCode(code: String?) {
+        try {
+            OnionMasq.setCountryCode(code)
+            OnionMasq.refreshCircuits()
+        } catch (e: CountryCodeException) {
+            e.printStackTrace()
+        } catch (e: ProxyStoppedException) {
+            e.printStackTrace()
+        }
     }
 }

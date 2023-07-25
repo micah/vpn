@@ -132,7 +132,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         }
     }.stateIn(scope = viewModelScope, SharingStarted.WhileSubscribed(), initialValue = "")
 
-    val selectedCountry: MutableLiveData<String> = MutableLiveData(if (preferenceHelper.automaticExitNodeSelection) "" else preferenceHelper.exitNodeCountry)
+    val selectedCountry: MutableLiveData<String?> = MutableLiveData(if (preferenceHelper.automaticExitNodeSelection) null else preferenceHelper.exitNodeCountry)
     val countryDrawable: StateFlow<Drawable?> = selectedCountry.asFlow().map { countryCode ->
         return@map getFlagByCountryCode(application, countryCode)
     }.stateIn(viewModelScope, SharingStarted.Lazily, null)
@@ -230,7 +230,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     fun updateExitNodeButton() {
         if (preferenceHelper.automaticExitNodeSelection) {
-            selectedCountry.postValue("")
+            selectedCountry.postValue(null)
         } else {
             selectedCountry.postValue(preferenceHelper.exitNodeCountry)
         }

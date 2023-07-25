@@ -153,8 +153,8 @@ fun getDpInPx(context: Context, dp: Float): Int {
     return (dp * scale + 0.5f).toInt()
 }
 
-fun getFlagByCountryCode(context: Context, countryCode: String): Drawable? {
-    if (countryCode.isEmpty()) {
+fun getFlagByCountryCode(context: Context, countryCode: String?): Drawable? {
+    if (countryCode.isNullOrEmpty()) {
         return null
     }
     if (countryCode.length != 2) {

@@ -47,7 +47,7 @@ class PreferenceHelper(context: Context) {
         set(value) = sharedPreference.edit().putBoolean(START_ON_BOOT, value).apply()
 
     var exitNodeCountry
-        get() = sharedPreference.getString(EXIT_NODE_COUNTRY, "")
+        get() = sharedPreference.getString(EXIT_NODE_COUNTRY, null)
         set(value) = sharedPreference.edit().putString(EXIT_NODE_COUNTRY, value).apply()
 
     var automaticExitNodeSelection
