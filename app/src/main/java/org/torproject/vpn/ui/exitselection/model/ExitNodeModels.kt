@@ -1,6 +1,8 @@
 package org.torproject.vpn.ui.exitselection.model
 
 import org.torproject.vpn.ui.exitselection.data.ExitNodeAdapter
+import java.text.Collator
+import java.util.Locale
 
 interface ViewTypeDependentModel {
     fun getViewType(): Int
@@ -17,7 +19,8 @@ data class ExitNodeCellModel (
     }
 
     override fun compareTo(other: ExitNodeCellModel): Int {
-        return compareValuesBy(this, other, { !it.selected }, { it.countryName } )
+        val coll = Collator.getInstance(Locale.getDefault())
+        return compareValuesBy(this, other, { !it.selected }, { coll.compare(it.countryName, countryName) })
     }
 }
 
