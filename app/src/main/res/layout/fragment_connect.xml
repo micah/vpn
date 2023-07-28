@@ -24,15 +24,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_end="@dimen/connection_button_upper_guideline"
-            />
+            app:layout_constraintGuide_percent="0.7438308" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/lower_guideline_action_btns"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_end="@dimen/connection_button_lower_guideline"
-            />
+            app:layout_constraintGuide_end="@dimen/connection_button_lower_guideline" />
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -109,63 +108,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:viewModel="@{viewModel}"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_exit_selection_btn"
-                android:orientation="horizontal"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:focusable="true"
-                android:clickable="true"
-                android:onClick="@{() -> viewModel.exitNodeSelectionButtonClicked()}"
-                android:background="@drawable/bg_btn_exit_selection"
-                android:contentDescription="@string/exit_location"
-                android:gravity="center"
-                android:layout_gravity="center_vertical|end"
-                android:padding="16dp"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintTop_toBottomOf="@+id/upper_guideline_action_btns"
-                app:layout_constraintBottom_toTopOf="@+id/lower_guideline_action_btns"
-                app:layout_constraintEnd_toStartOf="@+id/tv_connect_action_btn"
-                app:layout_constraintStart_toStartOf="parent"
-                >
-                <ImageView
-                    android:id="@+id/iv_world"
-                    android:importantForAccessibility="no"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:scaleType="fitXY"
-                    android:layout_gravity="center"
-                    android:layout_margin="7dp"
-                    android:src="@drawable/ic_world"
-                    />
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cvFlagImageContainer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="0dp"
-                    android:layout_toEndOf="@id/iv_world"
-                    android:layout_gravity="center"
-                    android:layout_margin="7dp"
-                    android:visibility="@{viewModel.countryDrawable != null ? View.VISIBLE : View.GONE}"
-                    >
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@{viewModel.selectedCountry}"
-                        android:scaleType="centerCrop"
-                        android:src="@{viewModel.countryDrawable}"
-                        />
-                </androidx.cardview.widget.CardView>
-            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_exit_selection_button"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/lower_guideline_action_btns"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/upper_guideline_action_btns">
 
             <TextView
                 android:id="@+id/tv_connect_action_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/av_connect_to_pause"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/av_connect_to_cancel"
                 android:clickable="true"
                 android:elevation="0dp"
                 android:focusable="true"
@@ -173,11 +133,61 @@
                 android:onClick="@{()->viewModel.connectStateButtonClicked()}"
                 android:text="@{viewModel.connectButtonText}"
                 android:textAppearance="@style/button_text_connect"
-                app:layout_constraintTop_toBottomOf="@+id/upper_guideline_action_btns"
-                app:layout_constraintBottom_toTopOf="@+id/lower_guideline_action_btns"
-                app:layout_constraintStart_toEndOf="@+id/ll_exit_selection_btn"
+                android:textColor="@{viewModel.connectionState == ConnectionState.CONNECTING ? @android:color/white: @color/emerald80}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cl_selection_exit_inner"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_selection_exit_inner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/round_exit_bg"
+                android:onClick="@{() -> viewModel.exitNodeSelectionButtonClicked()}"
+                android:padding="29dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_connect_action_btn"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView6"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_world" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:adjustViewBounds="true"
+                    android:src="@{viewModel.countryDrawable}"
+                    android:visibility="@{viewModel.countryDrawable != null ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@drawable/flag_de"
+                    tools:visibility="gone" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -10,7 +10,7 @@ import org.torproject.vpn.utils.updateDataUsage
 import java.util.concurrent.atomic.AtomicBoolean
 
 enum class ConnectionState {
-    INIT /*shows 'connect'*/, CONNECTING /*shows 'pause'*/, PAUSED, CONNECTED, DISCONNECTING, DISCONNECTED, CONNECTION_ERROR
+    INIT /*shows 'connect'*/, CONNECTING /*shows 'cancel'*/,CONNECTED, DISCONNECTING, DISCONNECTED, CONNECTION_ERROR
 }
 
 object VpnStatusObservable {

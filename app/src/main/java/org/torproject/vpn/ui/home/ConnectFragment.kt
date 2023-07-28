@@ -1,7 +1,6 @@
 package org.torproject.vpn.ui.home
 
 import android.Manifest
-import android.animation.AnimatorSet
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
@@ -10,13 +9,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewAnimationUtils
 import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import org.torproject.onionmasq.logging.LogObservable
@@ -27,9 +31,11 @@ import org.torproject.vpn.databinding.FragmentConnectBinding
 import org.torproject.vpn.ui.exitselection.ExitSelectionBottomSheetFragment
 import org.torproject.vpn.ui.home.model.ACTION_EXIT_NODE_SELECTION
 import org.torproject.vpn.ui.home.model.ACTION_LOGS
-import org.torproject.vpn.ui.home.model.ACTION_REQUEST_NOTIFICATION_PERMISSON
+import org.torproject.vpn.ui.home.model.ACTION_REQUEST_NOTIFICATION_PERMISSION
 import org.torproject.vpn.ui.home.model.ConnectFragmentViewModel
-import org.torproject.vpn.utils.*
+import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.getDpInPx
+import org.torproject.vpn.utils.startVectorAnimationWithEndCallback
 import org.torproject.vpn.vpn.ConnectionState
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
@@ -50,6 +56,11 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
     private var vpnPermissionDialogStartTime = 0L
 
+    private var initStateFabSpacing: Int = 0
+    private var connectingStateFabSpacing: Int = 0
+    private var connectedStateFabSpacing: Int = 0
+    private var animationDuration: Long = 0
+
     private var startForResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -60,7 +71,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             startVectorAnimationWithEndCallback(
                 binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
             ) {
-                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
+                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_cancel_to_connect)
             }
         } else {
             //this indicates that the permission request failed almost instantly. One of the reason could be that other VPN has always-on flag started.
@@ -96,6 +107,10 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         _binding = FragmentConnectBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = connectFragmentViewModel
+        initStateFabSpacing = getDpInPx(requireContext(), 0f)
+        connectingStateFabSpacing = getDpInPx(requireContext(), (9f)) //dp padding between connect - connecting
+        connectedStateFabSpacing = getDpInPx(requireContext(), (25f)) //dp padding between connect - stop
+        animationDuration = resources.getInteger(R.integer.default_transition_anim_duration).toLong()
 
         connectFragmentViewModel.prepareVpn.observe(
             viewLifecycleOwner,
@@ -114,11 +129,13 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                     }
                 }
 
-                launch {
-                    connectFragmentViewModel.buttonWidth.collect { width ->
-                        binding.llExitSelectionBtn.layoutParams.width = width
-                    }
-                }
+                /*
+                                launch {
+                                    connectFragmentViewModel.buttonWidth.collect { width ->
+                                        binding.llExitSelectionBtn.layoutParams.width = width
+                                    }
+                                }
+                */
 
                 launch {
                     connectFragmentViewModel.action.collect { action ->
@@ -126,16 +143,19 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                             ACTION_LOGS -> {
                                 findNavController().navigate(R.id.action_navigation_connect_to_loggingFragment)
                             }
-                            ACTION_REQUEST_NOTIFICATION_PERMISSON -> {
+
+                            ACTION_REQUEST_NOTIFICATION_PERMISSION -> {
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                                     startNotificationRequestForResult.launch(Manifest.permission.POST_NOTIFICATIONS)
                                 }
                             }
+
                             ACTION_EXIT_NODE_SELECTION -> {
                                 if (isAdded) {
                                     ExitSelectionBottomSheetFragment().show(parentFragmentManager, "exitNodeSelector")
                                 }
                             }
+
                             else -> {
                                 //other cases of navigation.
                             }
@@ -178,10 +198,9 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
             ConnectionState.CONNECTING -> showConnectingTransition()
 
-            ConnectionState.PAUSED -> {}
+
             ConnectionState.CONNECTED -> {
                 binding.includeStats.chronometer.base = VpnStatusObservable.getStartTimeBase()
-
                 binding.includeStats.chronometer.start()
                 showConnectedTransition()
             }
@@ -211,17 +230,20 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
     private fun showConnectingTransition() {
         if (currentVpnState == ConnectionState.INIT || currentVpnState == ConnectionState.DISCONNECTED || currentVpnState == ConnectionState.CONNECTION_ERROR) {
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
+
+            binding.clSelectionExitInner.animate().translationX(connectingStateFabSpacing.toFloat()).setDuration(animationDuration)
+                .setInterpolator(AccelerateInterpolator()).start()
 
             //connect button vector anim
             startVectorAnimationWithEndCallback(
                 binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
             ) {
-                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
+                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_cancel_to_connect)
             }
 
         } else {
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_cancel_to_connect)
         }
     }
 
@@ -231,14 +253,18 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
     private fun showConnectedTransition() {
         if (currentVpnState == ConnectionState.CONNECTING) {
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_stop)
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_cancel_to_stop)
 
-            //pause to stop transition
+            binding.clSelectionExitInner.animate().translationX(connectedStateFabSpacing.toFloat()).setDuration(animationDuration)
+                .setInterpolator(DecelerateInterpolator()).start()
+
+            //cancel to stop transition
             startVectorAnimationWithEndCallback(
                 binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
             ) {
                 binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_stop_connect)
             }
+
 
         } else {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_stop_connect)
@@ -248,37 +274,45 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
     private fun showErrorTransition() {
         if (currentVpnState == ConnectionState.CONNECTING) {
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_pause_to_connect)
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_cancel_to_connect)
 
-            //pause to stop transition
+            binding.clSelectionExitInner.animate().translationX(initStateFabSpacing.toFloat()).setDuration(animationDuration)
+                .setInterpolator(DecelerateInterpolator()).start()
+
+            //cancel to stop transition
             startVectorAnimationWithEndCallback(
                 binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
             ) {
-                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
+                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
             }
 
         } else {
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
         }
 
     }
 
     private fun showDisconnectedTransition() {
         if (currentVpnState == ConnectionState.DISCONNECTING) {
+
+            binding.clSelectionExitInner.animate().translationX(initStateFabSpacing.toFloat()).setDuration(animationDuration)
+                .setInterpolator(DecelerateInterpolator()).start()
+
             startVectorAnimationWithEndCallback(
                 binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
             ) {
-                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
+                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
             }
 
+
         } else {
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_pause)
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
         }
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         key?.let {
-            when(it) {
+            when (it) {
                 PreferenceHelper.PROTECT_ALL_APPS -> connectFragmentViewModel.updateVPNSettings()
                 PreferenceHelper.EXIT_NODE_COUNTRY -> connectFragmentViewModel.updateExitNodeButton()
                 PreferenceHelper.AUTOMATIC_EXIT_NODE_SELECTION -> connectFragmentViewModel.updateExitNodeButton()

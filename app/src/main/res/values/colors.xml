@@ -24,7 +24,8 @@
     <color name="indigo10">#D3D7FA</color>
     <color name="indigo50">#5B50C1</color>
     <color name="indigo50_40">#665B50C1</color>
-    <color name="indigo60">#473BA5</color>
+    <color name="indigo60">#493DA0</color>
+
     <color name="indigo70">#352982</color>
     <color name="indigo90">#130D32</color>
     <color name="purpleDark">#1D0B41</color>
@@ -71,6 +72,18 @@
     <color name="shadowColor">#33FFFFFF</color>
 
     <color name="textOnPrimary">#FFFFFF</color>
+
+
+    <!--Colors changed for alpha-02 release -->
+
+    <color name="emerald40">#5CD5A6</color>
+    <color name="red30">#F27E91</color>
+    <color name="red80">#75101A</color>
+    <color name="emerald80">#0F513B</color>
+
+
+    <color name="blue30_v2">#81C2F2</color>
+
 
 
 </resources>

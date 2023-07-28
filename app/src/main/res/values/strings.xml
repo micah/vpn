@@ -18,7 +18,6 @@
 
     <string name="state_connected">Connected</string>
     <string name="state_connecting">Connecting</string>
-    <string name="state_paused">Paused</string>
     <string name="state_disconnecting">Disconnecting</string>
     <string name="state_disconnected">Disconnected</string>
 

@@ -59,14 +59,6 @@ class VpnNotificationManager(val context: Context) {
                 stateString = context.getString(R.string.state_connecting)
                 startTime = 0
             }
-            ConnectionState.PAUSED -> {
-                action = NotificationCompat.Action.Builder(
-                    android.R.drawable.ic_menu_close_clear_cancel,
-                    context.getString(R.string.action_reconnect), getStartIntent()
-                ).build()
-                stateString = context.getString(R.string.state_paused)
-                startTime = 0
-            }
             ConnectionState.CONNECTED -> {
                 action = NotificationCompat.Action.Builder(
                     android.R.drawable.ic_menu_close_clear_cancel,

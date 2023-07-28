@@ -9,16 +9,29 @@ import android.os.Build
 import android.text.format.Formatter
 import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.*
-import kotlinx.coroutines.flow.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.torproject.vpn.BuildConfig
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
-import org.torproject.vpn.utils.getDpInPx
 import org.torproject.vpn.utils.getFlagByCountryCode
 import org.torproject.vpn.vpn.ConnectionState
-import org.torproject.vpn.vpn.ConnectionState.*
+import org.torproject.vpn.vpn.ConnectionState.CONNECTED
+import org.torproject.vpn.vpn.ConnectionState.CONNECTING
+import org.torproject.vpn.vpn.ConnectionState.CONNECTION_ERROR
+import org.torproject.vpn.vpn.ConnectionState.DISCONNECTED
+import org.torproject.vpn.vpn.ConnectionState.DISCONNECTING
+import org.torproject.vpn.vpn.ConnectionState.INIT
 import org.torproject.vpn.vpn.DataUsage
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
@@ -27,7 +40,7 @@ import org.torproject.vpn.vpn.VpnStatusObservable
  * ViewModel for slider fragment, mostly place holder at this point
  */
 const val ACTION_LOGS = 110
-const val ACTION_REQUEST_NOTIFICATION_PERMISSON = 111
+const val ACTION_REQUEST_NOTIFICATION_PERMISSION = 111
 const val ACTION_EXIT_NODE_SELECTION = 113
 
 class ConnectFragmentViewModel(application: Application) : AndroidViewModel(application) {
@@ -95,10 +108,6 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
                     application.getString(R.string.state_connecting),
                     ContextCompat.getColor(application, R.color.purpleNormal)
                 )
-                PAUSED -> Pair(
-                    application.getString(R.string.state_paused),
-                    ContextCompat.getColor(application, R.color.yellowNormal)
-                )
                 CONNECTED -> Pair(
                     application.getString(R.string.state_connected),
                     ContextCompat.getColor(application, R.color.greenNormal)
@@ -123,7 +132,8 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     val connectButtonText: StateFlow<String> = connectionState.map { connectionState ->
         when (connectionState) {
-            INIT, PAUSED -> application.getString(R.string.action_connect)
+            INIT -> application.getString(R.string.action_connect)
+            CONNECTING -> application.getString(R.string.action_cancel)
             DISCONNECTED -> application.getString(R.string.action_reconnect)
             CONNECTION_ERROR -> application.getString(R.string.action_try_again)
             else -> {
@@ -136,10 +146,6 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     val countryDrawable: StateFlow<Drawable?> = selectedCountry.asFlow().map { countryCode ->
         return@map getFlagByCountryCode(application, countryCode)
     }.stateIn(viewModelScope, SharingStarted.Lazily, null)
-
-    val buttonWidth: StateFlow<Int> = countryDrawable.map { drawable ->
-        return@map getDpInPx(application, if (drawable != null) 128f else 80f )
-    }.stateIn(viewModelScope, SharingStarted.Lazily, getDpInPx(application, 80f))
 
     //these are static one-time-fetch values on viewModel init. Dont need to be LiveData or StateFlow.
     val flavor = "Pre-alpha"
@@ -154,12 +160,11 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     fun connectStateButtonClicked() {
         when (VpnStatusObservable.statusLiveData.value as ConnectionState) {
             INIT -> attemptConnect()
-            CONNECTING -> attemptPause()
+            CONNECTING -> attemptCancel()
             CONNECTED -> attemptDisconnect()
             CONNECTION_ERROR -> attemptConnect()
             DISCONNECTING -> attemptConnect()
             DISCONNECTED -> attemptConnect()
-            PAUSED -> {}
         }
     }
 
@@ -180,8 +185,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         preferenceHelper.protectAllApps = isChecked
     }
 
-    private fun attemptPause() {
-        //TODO: what are we going to try in paused state?
+    private fun attemptCancel() {
         VpnStatusObservable.update(DISCONNECTING)
         VpnServiceCommand.stopVpn(getApplication())
     }
@@ -198,7 +202,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
             prepareToStartVPN()
         } else {
             viewModelScope.launch {
-                _action.emit(ACTION_REQUEST_NOTIFICATION_PERMISSON)
+                _action.emit(ACTION_REQUEST_NOTIFICATION_PERMISSION)
             }
         }
     }
