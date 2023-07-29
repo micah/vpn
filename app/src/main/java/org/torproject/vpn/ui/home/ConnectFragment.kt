@@ -29,6 +29,8 @@ import org.torproject.vpn.MainActivity.Companion.KEY_ACTION
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentConnectBinding
 import org.torproject.vpn.ui.exitselection.ExitSelectionBottomSheetFragment
+import org.torproject.vpn.ui.home.model.ACTION_APPS
+import org.torproject.vpn.ui.home.model.ACTION_CONNECTION
 import org.torproject.vpn.ui.home.model.ACTION_EXIT_NODE_SELECTION
 import org.torproject.vpn.ui.home.model.ACTION_LOGS
 import org.torproject.vpn.ui.home.model.ACTION_REQUEST_NOTIFICATION_PERMISSION
@@ -129,33 +131,24 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                     }
                 }
 
-                /*
-                                launch {
-                                    connectFragmentViewModel.buttonWidth.collect { width ->
-                                        binding.llExitSelectionBtn.layoutParams.width = width
-                                    }
-                                }
-                */
-
                 launch {
                     connectFragmentViewModel.action.collect { action ->
                         when (action) {
                             ACTION_LOGS -> {
                                 findNavController().navigate(R.id.action_navigation_connect_to_loggingFragment)
                             }
-
                             ACTION_REQUEST_NOTIFICATION_PERMISSION -> {
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                                     startNotificationRequestForResult.launch(Manifest.permission.POST_NOTIFICATIONS)
                                 }
                             }
-
                             ACTION_EXIT_NODE_SELECTION -> {
                                 if (isAdded) {
                                     ExitSelectionBottomSheetFragment().show(parentFragmentManager, "exitNodeSelector")
                                 }
                             }
-
+                            ACTION_APPS -> findNavController().navigate(R.id.action_navigation_connect_to_appRoutingFragment)
+                            ACTION_CONNECTION -> findNavController().navigate(R.id.action_navigation_connect_to_connectionFragment)
                             else -> {
                                 //other cases of navigation.
                             }
@@ -265,7 +258,6 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_stop_connect)
             }
 
-
         } else {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_stop_connect)
         }
@@ -303,7 +295,6 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             ) {
                 binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
             }
-
 
         } else {
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)

@@ -3,10 +3,10 @@
     <item android:state_checked="false">
         <aapt:attr name="android:drawable">
             <vector android:width="60dp" android:height="28dp" android:viewportWidth="60" android:viewportHeight="28">
-                <path android:fillColor="@color/purpleDarkBottomNav" android:pathData="M14,0L46,0A14,14 0,0 1,60 14L60,14A14,14 0,0 1,46 28L14,28A14,14 0,0 1,0 14L0,14A14,14 0,0 1,14 0z" />
-                <path android:fillColor="@color/purplesBottomNavNotActive" android:pathData="M33.542,14C33.542,15.956 31.956,17.542 30,17.542C28.044,17.542 26.458,15.956 26.458,14C26.458,12.044 28.044,10.458 30,10.458C31.956,10.458 33.542,12.044 33.542,14Z" />
-                <path android:fillColor="@color/purplesBottomNavNotActive" android:fillType="evenOdd" android:pathData="M36.458,14C36.458,17.567 33.567,20.458 30,20.458C26.433,20.458 23.542,17.567 23.542,14C23.542,10.433 26.433,7.542 30,7.542C33.567,7.542 36.458,10.433 36.458,14ZM34.792,14C34.792,16.646 32.646,18.792 30,18.792C27.354,18.792 25.208,16.646 25.208,14C25.208,11.354 27.354,9.208 30,9.208C32.646,9.208 34.792,11.354 34.792,14Z" />
-                <path android:fillColor="@color/purplesBottomNavNotActive" android:fillType="evenOdd" android:pathData="M39.375,14C39.375,19.178 35.178,23.375 30,23.375C24.822,23.375 20.625,19.178 20.625,14C20.625,8.822 24.822,4.625 30,4.625C35.178,4.625 39.375,8.822 39.375,14ZM37.708,14C37.708,18.257 34.257,21.708 30,21.708C25.743,21.708 22.292,18.257 22.292,14C22.292,9.743 25.743,6.292 30,6.292C34.257,6.292 37.708,9.743 37.708,14Z" />
+                <path android:fillColor="@color/indigo60" android:pathData="M14,0L46,0A14,14 0,0 1,60 14L60,14A14,14 0,0 1,46 28L14,28A14,14 0,0 1,0 14L0,14A14,14 0,0 1,14 0z" />
+                <path android:fillColor="@color/indigo10" android:pathData="M33.542,14C33.542,15.956 31.956,17.542 30,17.542C28.044,17.542 26.458,15.956 26.458,14C26.458,12.044 28.044,10.458 30,10.458C31.956,10.458 33.542,12.044 33.542,14Z" />
+                <path android:fillColor="@color/indigo10" android:fillType="evenOdd" android:pathData="M36.458,14C36.458,17.567 33.567,20.458 30,20.458C26.433,20.458 23.542,17.567 23.542,14C23.542,10.433 26.433,7.542 30,7.542C33.567,7.542 36.458,10.433 36.458,14ZM34.792,14C34.792,16.646 32.646,18.792 30,18.792C27.354,18.792 25.208,16.646 25.208,14C25.208,11.354 27.354,9.208 30,9.208C32.646,9.208 34.792,11.354 34.792,14Z" />
+                <path android:fillColor="@color/indigo10" android:fillType="evenOdd" android:pathData="M39.375,14C39.375,19.178 35.178,23.375 30,23.375C24.822,23.375 20.625,19.178 20.625,14C20.625,8.822 24.822,4.625 30,4.625C35.178,4.625 39.375,8.822 39.375,14ZM37.708,14C37.708,18.257 34.257,21.708 30,21.708C25.743,21.708 22.292,18.257 22.292,14C22.292,9.743 25.743,6.292 30,6.292C34.257,6.292 37.708,9.743 37.708,14Z" />
             </vector>
         </aapt:attr>
 
@@ -14,7 +14,7 @@
     <item android:state_checked="true">
         <aapt:attr name="android:drawable">
             <vector android:width="60dp" android:height="28dp" android:viewportWidth="60" android:viewportHeight="28">
-                <path android:fillColor="@color/purplesBottomActiveIconBg" android:pathData="M14,0L46,0A14,14 0,0 1,60 14L60,14A14,14 0,0 1,46 28L14,28A14,14 0,0 1,0 14L0,14A14,14 0,0 1,14 0z" />
+                <path android:fillColor="@color/indigo50" android:pathData="M14,0L46,0A14,14 0,0 1,60 14L60,14A14,14 0,0 1,46 28L14,28A14,14 0,0 1,0 14L0,14A14,14 0,0 1,14 0z" />
                 <path android:fillColor="#ffffff" android:pathData="M33.542,14C33.542,15.956 31.956,17.542 30,17.542C28.044,17.542 26.458,15.956 26.458,14C26.458,12.044 28.044,10.458 30,10.458C31.956,10.458 33.542,12.044 33.542,14Z" />
                 <path android:fillColor="#ffffff" android:fillType="evenOdd" android:pathData="M36.458,14C36.458,17.567 33.567,20.458 30,20.458C26.433,20.458 23.542,17.567 23.542,14C23.542,10.433 26.433,7.542 30,7.542C33.567,7.542 36.458,10.433 36.458,14ZM34.792,14C34.792,16.646 32.646,18.792 30,18.792C27.354,18.792 25.208,16.646 25.208,14C25.208,11.354 27.354,9.208 30,9.208C32.646,9.208 34.792,11.354 34.792,14Z" />
                 <path android:fillColor="#ffffff" android:fillType="evenOdd" android:pathData="M39.375,14C39.375,19.178 35.178,23.375 30,23.375C24.822,23.375 20.625,19.178 20.625,14C20.625,8.822 24.822,4.625 30,4.625C35.178,4.625 39.375,8.822 39.375,14ZM37.708,14C37.708,18.257 34.257,21.708 30,21.708C25.743,21.708 22.292,18.257 22.292,14C22.292,9.743 25.743,6.292 30,6.292C34.257,6.292 37.708,9.743 37.708,14Z" />

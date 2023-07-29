@@ -5,20 +5,21 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import org.torproject.vpn.R
-import org.torproject.vpn.databinding.ActivityMainBinding
-import org.torproject.vpn.vpn.ConnectionState
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
+import org.torproject.vpn.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var status: ConnectionState
     private lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
     lateinit var connectingAnim: AnimatorSet
@@ -30,8 +31,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
+        val mainActivityVM = ViewModelProvider(this)[MainActivityViewModel::class.java]
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
@@ -58,12 +59,31 @@ class MainActivity : AppCompatActivity() {
         intent?.let { intent ->
             when (intent.action) {
                 ACTION_REQUEST_VPN_PERMISSON -> {
-                    val bundle =  Bundle()
+                    val bundle = Bundle()
                     bundle.putString(KEY_ACTION, ACTION_REQUEST_VPN_PERMISSON)
                     navController.navigate(R.id.navigation_connect, bundle)
                 }
             }
         }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    mainActivityVM.bottomNavVisibility.collect { visible ->
+
+                        navView.post {
+                            if (visible) {
+                                showBottomNavigationView(navView)
+                            } else {
+                                hideBottomNavigationView(navView)
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

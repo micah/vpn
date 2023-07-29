@@ -11,22 +11,26 @@
 
         <import type="android.view.View" />
 
+        <import type="org.torproject.vpn.vpn.ConnectionState" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="24dp"
+        android:paddingStart="16dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp"
         tools:background="@color/purpleDark">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/cl_up_stat"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_dialog_bg"
-            android:elevation="5dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+            android:layout_height="@dimen/stat_card_height"
+            android:layout_marginTop="@dimen/stat_top_margin"
+            android:background="@drawable/round_down_stat_bg"
+            android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTED ? View.VISIBLE: View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,137 +42,251 @@
                 style="@style/stats_kbits_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
                 android:text="@{viewModel.dataUsageDownstream}"
-                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ic_down_traffic"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="spread" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_down_label"
+                app:layout_constraintVertical_chainStyle="spread"
+                tools:text="2.12kbits" />
 
             <TextView
                 android:id="@+id/tv_down_traffic_delta"
                 style="@style/stats_kbits_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="24dp"
                 android:text="@{viewModel.dataUsageDiffDownstream}"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_down_traffic"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_down_traffic" />
+                app:layout_constraintTop_toTopOf="@+id/tv_down_label"
+                tools:text="2.12kbits" />
+
+            <ImageView
+                android:id="@+id/ic_down_traffic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_down_traffic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_down_label"
+                app:srcCompat="@drawable/ic_trending_down" />
+
+            <TextView
+                android:id="@+id/tv_down_label"
+                style="@style/label_in_stats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/down"
+                app:layout_constraintBottom_toTopOf="@+id/tv_down_traffic"
+                app:layout_constraintStart_toStartOf="@+id/tv_down_traffic"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_down_stat"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/stat_card_height"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/round_up_stat_bg"
+            android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTED ? View.VISIBLE: View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_up_stat"
+            app:layout_constraintVertical_chainStyle="packed">
 
             <TextView
                 android:id="@+id/tv_up_traffic"
                 style="@style/stats_kbits_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
                 android:text="@{viewModel.dataUsageUpstream}"
                 android:textFontWeight="550"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ic_up_traffic"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_up_label"
+                tools:text="2.12kbits" />
 
             <TextView
                 android:id="@+id/tv_up_traffic_delta"
                 style="@style/stats_kbits_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="24dp"
                 android:text="@{viewModel.dataUsageDiffUpstream}"
                 android:textFontWeight="550"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_up_traffic"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_up_traffic" />
-
-            <ImageView
-                android:id="@+id/ic_down_traffic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_down_traffic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_down_traffic"
-                app:srcCompat="@drawable/ic_trending_down" />
+                app:layout_constraintTop_toTopOf="@+id/tv_up_label"
+                tools:text="2.12kbits" />
 
             <ImageView
                 android:id="@+id/ic_up_traffic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_up_traffic"
-                app:layout_constraintStart_toStartOf="@+id/ic_down_traffic"
-                app:layout_constraintTop_toTopOf="@+id/tv_up_traffic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_up_label"
                 app:srcCompat="@drawable/ic_trending_up" />
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/purpleStatsDivider"
+            <TextView
+                android:id="@+id/tv_up_label"
+                style="@style/label_in_stats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/up"
                 app:layout_constraintBottom_toTopOf="@+id/tv_up_traffic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_down_traffic" />
+                app:layout_constraintStart_toStartOf="@+id/tv_up_traffic"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="@dimen/stat_switch_height"
+            android:layout_marginTop="8dp"
             android:background="@drawable/round_dialog_bg"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/chronometer"
+            android:onClick="@{() -> viewModel.appCardClicked()}"
+            android:visibility="@{viewModel.appCardVisibility ? View.VISIBLE: View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+            app:layout_constraintTop_toBottomOf="@+id/cl_down_stat">
 
             <ImageView
                 android:id="@+id/ic_protect_app"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_protect_all_apps_label"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_protect_all_apps_label"
+                app:layout_constraintTop_toTopOf="@+id/tv_stat_title"
                 app:srcCompat="@drawable/ic_protect_all_app" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_protect_apps"
-                android:layout_width="wrap_content"
+                android:layout_width="56dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="24dp"
                 android:checked="@{viewModel.allAppsProtected}"
                 android:onCheckedChanged="@{viewModel::onProtectAppsChanged}"
                 android:thumb="@drawable/switch_thumb_connected_stats"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_protect_all_apps_label"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_protect_all_apps_label"
-                app:track="@drawable/switch_track_connected_stats" />
+                app:layout_constraintTop_toTopOf="@+id/tv_stat_title"
+                app:track="@drawable/switch_track_shape"
+                app:trackTint="@color/switch_track_color" />
 
             <TextView
                 android:id="@+id/tv_protect_all_apps_label"
                 style="@style/stats_kbits_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:text="@string/action_protect_all_apps"
+                android:layout_marginStart="24dp"
+                android:text="@{viewModel.allAppsProtected? @string/action_protect_all_apps : @string/label_not_protected}"
                 android:textFontWeight="550"
                 android:thumb="@drawable/switch_thumb_connected_stats"
-                app:track="@drawable/switch_track_connected_stats"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ic_protect_app"
+                app:layout_constraintTop_toBottomOf="@+id/tv_stat_title" />
+
+            <TextView
+                android:id="@+id/tv_stat_title"
+                style="@style/stats_card_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/apps"
+                app:layout_constraintBottom_toTopOf="@+id/tv_protect_all_apps_label"
+                app:layout_constraintStart_toStartOf="@+id/tv_protect_all_apps_label"
                 app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="2dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="12dp"
+                android:background="@color/indigo50"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/switch_protect_apps"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/stat_switch_height"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_dialog_bg"
+            android:onClick="@{() -> viewModel.connectionCardClicked()}"
+            android:visibility="@{viewModel.connectionCardVisibility ? View.VISIBLE: View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <ImageView
+                android:id="@+id/ic_connection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_connection_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_connection_title"
+                app:srcCompat="@drawable/ic_connection" />
+
+            <ImageView
+                android:id="@+id/ic_connection_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/connection_settings"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_connection_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_connection_title" />
+
+            <TextView
+                android:id="@+id/tv_connection_label"
+                style="@style/stats_kbits_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/connect_direct_to_tor"
+                android:textFontWeight="550"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/view3"
+                app:layout_constraintStart_toEndOf="@+id/ic_connection"
+                app:layout_constraintTop_toBottomOf="@+id/tv_connection_title" />
+
+            <TextView
+                android:id="@+id/tv_connection_title"
+                style="@style/stats_card_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/connection"
+                app:layout_constraintBottom_toTopOf="@+id/tv_connection_label"
+                app:layout_constraintStart_toStartOf="@+id/tv_connection_label"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="2dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="12dp"
+                android:background="@color/indigo50"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ic_connection_settings"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Chronometer
@@ -176,6 +294,7 @@
             style="@style/stats_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTED ? View.VISIBLE: View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

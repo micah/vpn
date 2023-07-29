@@ -106,10 +106,10 @@
     </style>
 
     <style name="guide_title_text">
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:fontFamily">@font/figtree_regular</item>
-        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
     </style>
 
     <style name="guide_pre_alpha_text">
@@ -130,17 +130,17 @@
 
     <style name="guide_bullet_head">
         <item name="android:fontFamily">@font/figtree_regular</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:lineSpacingExtra">5sp</item>
 
     </style>
 
     <style name="guide_bullet_text">
         <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textColor">@color/indigo10</item>
+        <item name="android:lineSpacingExtra">3sp</item>
     </style>
 
 
@@ -168,8 +168,8 @@
 
     <style name="stats_kbits_text">
         <item name="android:fontFamily">@font/figtree_regular</item>
-        <item name="android:lineSpacingExtra">6sp</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
@@ -177,7 +177,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:fontFamily">@font/figtree_regular</item>
-        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
         <item name="android:background">@drawable/bg_rounded</item>
         <item name="android:paddingStart">12dp</item>
         <item name="android:paddingTop">8dp</item>
@@ -189,7 +189,15 @@
         <item name="android:textSize">28sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:fontFamily">@font/figtree_regular</item>
-        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+    </style>
+
+
+    <style name="stats_card_title">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/indigo10</item>
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:lineSpacingExtra">2sp</item>
     </style>
 
     <style name="info_text" parent="TextAppearance.MaterialComponents.Body1">
@@ -244,6 +252,20 @@
         <item name="android:lineSpacingExtra">3sp</item>
         <item name="android:textColor">@color/textOnPrimary</item>
         <item name="android:capitalize">characters</item>
+    </style>
+
+    <style name="label_in_stats" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textColor">@color/indigo10</item>
+    </style>
+
+    <style name="connection_toolbar_title" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:textSize">22sp</item>
     </style>
 
 </resources>

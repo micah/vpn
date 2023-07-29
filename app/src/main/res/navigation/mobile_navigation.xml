@@ -26,6 +26,12 @@
         <action
             android:id="@+id/action_navigation_connect_to_loggingFragment"
             app:destination="@id/loggingFragment" />
+        <action
+            android:id="@+id/action_navigation_connect_to_appRoutingFragment"
+            app:destination="@id/appRoutingFragment" />
+        <action
+            android:id="@+id/action_navigation_connect_to_connectionFragment"
+            app:destination="@id/connectionFragment" />
     </fragment>
     <fragment
         android:id="@+id/appRoutingFragment"

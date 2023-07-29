@@ -7,16 +7,16 @@
         android:state_checked="false">
         <aapt:attr name="android:drawable">
             <vector
-                android:width="25dp"
-                android:height="25dp"
+                android:width="28dp"
+                android:height="28dp"
                 android:viewportWidth="25"
                 android:viewportHeight="25">
                 <path
                     android:name="round-shape"
-                    android:fillColor="@color/purpleNormal"
+                    android:fillColor="@color/off_white"
                     android:pathData="M12.5,12.5m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
                     android:strokeWidth="2"
-                    android:strokeColor="@color/purplesSwitchTrack" />
+                    android:strokeColor="@android:color/transparent" />
             </vector>
         </aapt:attr>
     </item>
@@ -26,15 +26,15 @@
         android:state_checked="true">
         <aapt:attr name="android:drawable">
             <vector
-                android:width="25dp"
-                android:height="25dp"
+                android:width="28dp"
+                android:height="28dp"
                 android:viewportWidth="25"
                 android:viewportHeight="25">
                 <path
-                    android:fillColor="@color/purpleDarkText"
+                    android:fillColor="@android:color/white"
                     android:pathData="M12.5,12.5m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
                     android:strokeWidth="2"
-                    android:strokeColor="@color/purplesSwitchTrack" />
+                    android:strokeColor="@android:color/transparent" />
             </vector>
         </aapt:attr>
     </item>
@@ -54,10 +54,10 @@
                         android:viewportHeight="25">
                         <path
                             android:name="round-shape"
-                            android:fillColor="@color/purpleNormal"
+                            android:fillColor="@color/off_white"
                             android:pathData="M12.5,12.5m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
                             android:strokeWidth="2"
-                            android:strokeColor="@color/purplesSwitchTrack" />
+                            android:strokeColor="@android:color/transparent" />
                     </vector>
                 </aapt:attr>
 
@@ -72,8 +72,8 @@
                                 android:duration="@integer/default_transition_anim_duration"
                                 android:fillColor="@color/purpleNormal"
                                 android:propertyName="fillColor"
-                                android:valueFrom="@color/purpleNormal"
-                                android:valueTo="@color/purpleDarkText" />
+                                android:valueFrom="@color/off_white"
+                                android:valueTo="@android:color/white" />
                         </set>
                     </aapt:attr>
                 </target>
@@ -99,7 +99,7 @@
                             android:fillColor="@color/purpleNormal"
                             android:pathData="M12.5,12.5m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
                             android:strokeWidth="2"
-                            android:strokeColor="@color/purplesSwitchTrack" />
+                            android:strokeColor="@android:color/transparent" />
                     </vector>
 
 
@@ -115,8 +115,8 @@
                             <objectAnimator
                                 android:duration="@integer/default_transition_anim_duration"
                                 android:propertyName="fillColor"
-                                android:valueFrom="@color/purpleDarkText"
-                                android:valueTo="@color/purpleNormal" />
+                                android:valueFrom="@android:color/white"
+                                android:valueTo="@color/off_white" />
                         </set>
                     </aapt:attr>
                 </target>

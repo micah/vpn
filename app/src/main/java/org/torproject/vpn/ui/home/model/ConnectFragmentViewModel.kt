@@ -3,6 +3,7 @@ package org.torproject.vpn.ui.home.model
 import android.Manifest
 import android.app.Application
 import android.content.Intent
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -18,12 +19,17 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.launch
 import org.torproject.vpn.BuildConfig
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
+import org.torproject.vpn.utils.PreferenceHelper.Companion.SHOULD_SHOW_GUIDE
 import org.torproject.vpn.utils.getFlagByCountryCode
 import org.torproject.vpn.vpn.ConnectionState
 import org.torproject.vpn.vpn.ConnectionState.CONNECTED
@@ -42,6 +48,8 @@ import org.torproject.vpn.vpn.VpnStatusObservable
 const val ACTION_LOGS = 110
 const val ACTION_REQUEST_NOTIFICATION_PERMISSION = 111
 const val ACTION_EXIT_NODE_SELECTION = 113
+const val ACTION_APPS = 114
+const val ACTION_CONNECTION = 115
 
 class ConnectFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -100,34 +108,23 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
             initialValue = INIT
         )
 
-    val toolBarTitleAndColor: StateFlow<Pair<String, Int>> =
+    val toolBarTitle: StateFlow<String> =
         connectionState.map { connectionState ->
 
             when (connectionState) {
-                CONNECTING -> Pair(
-                    application.getString(R.string.state_connecting),
-                    ContextCompat.getColor(application, R.color.purpleNormal)
-                )
-                CONNECTED -> Pair(
-                    application.getString(R.string.state_connected),
-                    ContextCompat.getColor(application, R.color.greenNormal)
-                )
-                DISCONNECTING -> Pair(
-                    application.getString(R.string.state_disconnecting),
-                    ContextCompat.getColor(application, R.color.purpleNormal)
-                )
-                DISCONNECTED -> Pair(
-                    application.getString(R.string.state_disconnected),
-                    ContextCompat.getColor(application, R.color.redNormal)
-                )
+                INIT -> application.getString(R.string.idle_toolbar_title)
+                CONNECTING -> application.getString(R.string.state_connecting)
+                CONNECTED -> application.getString(R.string.state_connected)
+                DISCONNECTING -> application.getString(R.string.state_disconnecting)
+                DISCONNECTED -> application.getString(R.string.state_disconnected)
                 else -> {
-                    return@map Pair("", R.color.purpleDark)
+                    return@map ""
                 }
             }
         }.stateIn(
             scope = viewModelScope,
             SharingStarted.Lazily,
-            initialValue = Pair("", R.color.purpleDark)
+            initialValue = ""
         )
 
     val connectButtonText: StateFlow<String> = connectionState.map { connectionState ->
@@ -142,7 +139,8 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         }
     }.stateIn(scope = viewModelScope, SharingStarted.WhileSubscribed(), initialValue = "")
 
-    val selectedCountry: MutableLiveData<String?> = MutableLiveData(if (preferenceHelper.automaticExitNodeSelection) null else preferenceHelper.exitNodeCountry)
+    val selectedCountry: MutableLiveData<String> =
+        MutableLiveData(if (preferenceHelper.automaticExitNodeSelection) "" else preferenceHelper.exitNodeCountry)
     val countryDrawable: StateFlow<Drawable?> = selectedCountry.asFlow().map { countryCode ->
         return@map getFlagByCountryCode(application, countryCode)
     }.stateIn(viewModelScope, SharingStarted.Lazily, null)
@@ -156,6 +154,45 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     val action: SharedFlow<Int>
         get() = _action
 
+    val guideScreenVisibility = callbackFlow {
+        val listener = OnSharedPreferenceChangeListener { _, changedKey ->
+            if (SHOULD_SHOW_GUIDE == changedKey) {
+                trySend(preferenceHelper.shouldShowGuide)
+            }
+        }
+        trySend(preferenceHelper.shouldShowGuide)
+        preferenceHelper.registerListener(listener)
+        awaitClose { preferenceHelper.unregisterListener(listener) }
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.Lazily,
+        true
+    )
+
+    val appCardVisibility = combine(
+        guideScreenVisibility,
+        connectionState
+    ) { guideScreenVisibility, connectionState -> !guideScreenVisibility && (connectionState == INIT || connectionState == CONNECTED) }
+        .stateIn(
+            viewModelScope,
+            SharingStarted.Lazily,
+            false
+        )
+
+    val connectionCardVisibility = combine(
+        guideScreenVisibility,
+        connectionState
+    ) { guideScreenVisibility, connectionState -> !guideScreenVisibility && (connectionState == INIT) }
+        .stateIn(
+            viewModelScope,
+            SharingStarted.Lazily,
+            false
+        )
+
+
+    fun setGuideInvisible() {
+        preferenceHelper.shouldShowGuide = false
+    }
 
     fun connectStateButtonClicked() {
         when (VpnStatusObservable.statusLiveData.value as ConnectionState) {
@@ -180,7 +217,37 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         }
     }
 
-    val allAppsProtected: Boolean get() = PreferenceHelper(getApplication()).protectAllApps
+    fun appCardClicked() {
+        viewModelScope.launch {
+            _action.emit(ACTION_APPS)
+        }
+    }
+
+    fun connectionCardClicked() {
+        viewModelScope.launch {
+            _action.emit(ACTION_CONNECTION)
+        }
+    }
+
+
+    //val allAppsProtected: Boolean get() = PreferenceHelper(getApplication()).protectAllApps
+
+    val allAppsProtected = callbackFlow {
+        val listener = OnSharedPreferenceChangeListener { _, changedKey ->
+            if (PROTECT_ALL_APPS == changedKey) {
+                trySend(preferenceHelper.protectAllApps)
+            }
+        }
+        trySend(preferenceHelper.protectAllApps)
+        preferenceHelper.registerListener(listener)
+        awaitClose { preferenceHelper.unregisterListener(listener) }
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.Lazily,
+        false
+    )
+
+
     fun onProtectAppsChanged(compoundButton: CompoundButton, isChecked: Boolean) {
         preferenceHelper.protectAllApps = isChecked
     }
@@ -234,7 +301,7 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     fun updateExitNodeButton() {
         if (preferenceHelper.automaticExitNodeSelection) {
-            selectedCountry.postValue(null)
+            selectedCountry.postValue("")
         } else {
             selectedCountry.postValue(preferenceHelper.exitNodeCountry)
         }

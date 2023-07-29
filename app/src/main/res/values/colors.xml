@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--        <color name="figma_gray">#14000000</color>-->
-    <!--        <color name="figma_bg">#FFE5E5E5</color>-->
-    <!--        <color name="figma_text">#FF000000</color>-->
 
-    <!--        <color name="figma_gray_inverted">#EB000000</color>-->
-    <!--        <color name="figma_bg_inverted">#FF1a1a1a</color>-->
-    <!--        <color name="figma_text_inverted">#FFFFFFFF</color>-->
-
-    <!--        <color name="colorIconPrimary">#FFFFFF</color>-->
-    <!--        <color name="colorIconSecondary">#000000</color>-->
-    <!--        <color name="colorSubtitle">#0C0C0D</color>-->
-
-    <!--        <color name="colorProgress1">#14000000</color>-->
-    <!--        <color name="colorProgress2">#0A000000</color>-->
-
-    <!--        <color name="colorInfoErrorCollapsedSubtitle">#66000000</color>-->
-
-
-    <!--New colors starts from here-->
-    <color name="blue30">#89BFE7</color>
-    <color name="blue30_16">#2989BFE7</color>
-    <color name="indigo10">#D3D7FA</color>
-    <color name="indigo50">#5B50C1</color>
-    <color name="indigo50_40">#665B50C1</color>
-    <color name="indigo60">#493DA0</color>
-
-    <color name="indigo70">#352982</color>
-    <color name="indigo90">#130D32</color>
     <color name="purpleDark">#1D0B41</color>
     <color name="purpleDarkBackground">#31136C</color>
     <color name="purpleDarkText">#400A76</color>
@@ -42,47 +15,56 @@
     <color name="purpleGradientLight">#BF89F5</color>
     <color name="purpleGradientDark">#A65AF2</color>
     <color name="purplesSwitchTrack">#CCA1F7</color>
-    <color name="purplesBottomNavNotActive">#BEA1F7</color>
     <color name="purplesBottomNavActive">#FFFFFF</color>
     <color name="purplesBottomActiveIconBg">#5822C3</color>
-    <color name="purple40">#AD6AD7</color>
-    <color name="purple40_40">#66AD6AD7</color>
-
     <color name="greenNormal">#52E0B6</color>
     <color name="greenDarkText">#0B4131</color>
     <color name="greenDarkShade">#26D9A3</color>
     <color name="greenGradientLight">#7DE8C8</color>
     <color name="greenGradientNormal">#3CDDAC</color>
     <color name="greenGradientDark">#52E0B6</color>
-
     <color name="yellowNormal">#FAC938</color>
-
     <color name="redNormal">#F07594</color>
     <color name="redDark">#5C0A1F</color>
     <color name="redDarkShade">#EB4770</color>
     <color name="redGradientLight">#F28CA6</color>
     <color name="redGradientDark">#ED5E82</color>
-
     <color name="connectingRainbowStart">#FC00FF</color>
     <color name="connectingRainbowEnd">#00DBDE</color>
-
     <color name="connectingRainbowTranslucentStart">#1D0A43</color>
     <color name="connectingRainbowTranslucentEnd">#E61D0A43</color>
-
     <color name="shadowColor">#33FFFFFF</color>
-
     <color name="textOnPrimary">#FFFFFF</color>
 
 
     <!--Colors changed for alpha-02 release -->
 
+    <color name="amber30">#FAB850</color>
+
+    <color name="blue30">#81C2F2</color>
+    <color name="blue30_16">#2981C2F2</color>
+
     <color name="emerald40">#5CD5A6</color>
-    <color name="red30">#F27E91</color>
-    <color name="red80">#75101A</color>
     <color name="emerald80">#0F513B</color>
 
+    <color name="indigo10">#D8DBFA</color>
+    <color name="indigo50">#5D54BE</color>
+    <color name="indigo50_40">#665D54BE</color>
+    <color name="indigo60">#493DA0</color>
+    <color name="indigo70">#352A7B</color>
+    <color name="indigo90">#130D32</color>
 
-    <color name="blue30_v2">#81C2F2</color>
+    <color name="off_white">#B8B8B8</color>
+
+    <color name="purple40">#B86DE8</color>
+    <color name="purple40_40">#66B86DE8</color>
+
+    <color name="red30">#F27E91</color>
+    <color name="red80">#75101A</color>
+
+
+
+
 
 
 

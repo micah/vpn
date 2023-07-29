@@ -9,6 +9,7 @@
     <string name="action_try_again">Try again</string>
     <string name="action_protect_all_apps">Protect all apps</string>
     <string name="action_protect_this_app">Protect this app</string>
+    <string name="label_not_protected">None protected</string>
     <!-- notifications actions -->
     <string name="action_start">Start VPN</string>
     <string name="action_stop">Stop VPN</string>
@@ -39,7 +40,7 @@
     <string name="always_on_vpn_description">Open Android System Settings</string>
     <string name="copied">Copied …</string>
 
-    <string name="title_guide_welcome_to">Welcome to the\nOnionverse</string>
+    <string name="title_guide">This app is highly\nexperimental</string>
     <string name="guide_pre_alpha">Pre-alpha</string>
     <string name="guide_version_number" translatable="false">%1$s</string>
     <string name="guide_bullet_head_1">You are ready to start testing</string>
@@ -48,16 +49,16 @@
     <string name="guide_bullet_text_2">This is a pre-release version of the app, and is not safe to use for sensitive activities.</string>
 
     <!-- Download statistics, e.g 1.23 MB down -->
-    <string name="stats_down">%1$s down</string>
+    <string name="stats_down">%1$s</string>
     <!-- Upload statistics, e.g 1.23 MB up -->
-    <string name="stats_up">%1$s up</string>
+    <string name="stats_up">%1$s</string>
     <!-- Download or upload per second, e.g. 0.54 KB/s -->
     <string name="stats_delta">%1$s/s</string>
     <!-- combined up- and download statistics -->
     <string name="stats_combined">↓%2$s %1$s/s - ↑%4$s %3$s/s</string>
 
     <string name="error_something_went_wrong">Something went wrong</string>
-    <string name="error_detail_message">Onionverse couldn\'t connect to the Tor Network.</string>
+    <string name="error_detail_message">Tor VPN couldn’t connect to the Tor network.</string>
     <string name="error_view_logs">View logs</string>
     <string name="connection">Connection</string>
     <string name="connection_description">Configure how to connect to Tor</string>
@@ -90,6 +91,11 @@
     <string name="reload_app_circuits">Reload this app\'s circuits?</string>
     <string name="reload_app_circuits_description">New circuits will be established for this app only. Some apps and websites might not recognize you as a result, and could log you out of their services.</string>
     <string name="action_reload_circuits">Reload circuits</string>
+    <string name="guide_got_it">Got it</string>
+
+    <string name="connect_direct_to_tor">Connect directly to Tor</string>
+
+    <string name="idle_toolbar_title">Tor VPN</string>
 
 
 </resources>

@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.7438308" />
+            app:layout_constraintGuide_end="@dimen/connection_button_upper_guideline" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/lower_guideline_action_btns"
@@ -36,16 +36,21 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="64dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:background="@color/purpleDark"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@{viewModel.toolBarTitleAndColor.first}"
+            app:title="@{viewModel.toolBarTitle}"
             app:titleCentered="true"
-            app:titleTextColor="@{viewModel.toolBarTitleAndColor.second}" />
+            app:titleTextAppearance="@style/connection_toolbar_title"
+            app:titleTextColor="@color/textOnPrimary"/>
 
 
         <ImageView
@@ -57,8 +62,10 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/bg_stars"
             tools:visibility="visible" />
 
@@ -67,13 +74,13 @@
             layout="@layout/include_guide_frame"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="@{viewModel.connectionState == ConnectionState.INIT ? View.VISIBLE: View.GONE}"
-            app:layout_constraintBottom_toTopOf="@+id/upper_guideline_action_btns"
+            android:visibility="@{viewModel.guideScreenVisibility ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:viewModel="@{viewModel}"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <org.torproject.vpn.utils.GradientGlowView
             android:id="@+id/gradient_view"
@@ -82,7 +89,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:visibility="gone" />
 
         <include
             android:id="@+id/include_error"
@@ -102,7 +110,6 @@
             layout="@layout/include_connection_stats"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTED ? View.VISIBLE: View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/upper_guideline_action_btns"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -117,6 +124,7 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/lower_guideline_action_btns"
             app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{viewModel.guideScreenVisibility ? View.GONE: View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/upper_guideline_action_btns">
 
@@ -173,6 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:adjustViewBounds="true"
+                    android:contentDescription="@{viewModel.selectedCountry}"
                     android:src="@{viewModel.countryDrawable}"
                     android:visibility="@{viewModel.countryDrawable != null ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
