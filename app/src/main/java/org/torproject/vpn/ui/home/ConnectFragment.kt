@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -36,11 +37,13 @@ import org.torproject.vpn.ui.home.model.ACTION_LOGS
 import org.torproject.vpn.ui.home.model.ACTION_REQUEST_NOTIFICATION_PERMISSION
 import org.torproject.vpn.ui.home.model.ConnectFragmentViewModel
 import org.torproject.vpn.utils.PreferenceHelper
-import org.torproject.vpn.utils.getDpInPx
 import org.torproject.vpn.utils.startVectorAnimationWithEndCallback
 import org.torproject.vpn.vpn.ConnectionState
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
+import java.util.concurrent.TimeUnit
+import org.torproject.vpn.utils.getDpInPx
+
 
 class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
     companion object {
@@ -164,6 +167,21 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 connectFragmentViewModel.prepareToStartVPN()
             }
         }
+
+
+        binding.includeStats.chronometer.setOnChronometerTickListener { chronometer ->
+            val elapsedTime = SystemClock.elapsedRealtime() - chronometer.base
+
+            val hours = TimeUnit.MILLISECONDS.toHours(elapsedTime)
+            val minutes = TimeUnit.MILLISECONDS.toMinutes(elapsedTime) -
+                    TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedTime))
+            val seconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTime) -
+                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(elapsedTime))
+
+            val timeFormatted = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+            chronometer.text = timeFormatted
+        }
+
 
         return binding.root
     }
