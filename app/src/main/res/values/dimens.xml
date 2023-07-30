@@ -10,6 +10,7 @@
     <dimen name="default_padding">16dp</dimen>
     <dimen name="compact_padding">8dp</dimen>
     <dimen name="switch_padding">20dp</dimen>
+    <dimen name="super_toggle_padding">24dp</dimen>
 
     <!--  dimens fom new design  -->
 

@@ -1,8 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape android:shape="oval"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-        <solid android:color="#FFFFFF"/>
-        <size android:width="36dp"
-            android:height="36dp"/>
-        <stroke android:width="12dp" android:color="#00000000"/>
-</shape>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+
+    <item
+        android:id="@+id/disabled"
+        android:state_enabled="false">
+        <aapt:attr name="android:drawable">
+            <vector
+                android:width="28dp"
+                android:height="28dp"
+                android:viewportWidth="25"
+                android:viewportHeight="25">
+                <path
+                    android:name="round-shape"
+                    android:fillColor="@color/white_40"
+                    android:pathData="M12.5,12.5m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
+                    android:strokeWidth="2"
+                    android:strokeColor="@android:color/transparent" />
+            </vector>
+        </aapt:attr>
+    </item>
+
+    <item
+        android:id="@+id/enabled"
+        android:state_enabled="true">
+        <aapt:attr name="android:drawable">
+            <vector
+                android:width="28dp"
+                android:height="28dp"
+                android:viewportWidth="25"
+                android:viewportHeight="25">
+                <path
+                    android:fillColor="@android:color/white"
+                    android:pathData="M12.5,12.5m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
+                    android:strokeWidth="2"
+                    android:strokeColor="@android:color/transparent" />
+            </vector>
+        </aapt:attr>
+    </item>
+
+    <transition
+        android:fromId="@+id/disabled"
+        android:toId="@+id/enabled">
+
+        <aapt:attr name="android:drawable">
+            <animated-vector>
+
+                <aapt:attr name="android:drawable">
+                    <vector
+                        android:width="25dp"
+                        android:height="25dp"
+                        android:viewportWidth="25"
+                        android:viewportHeight="25">
+                        <path
+                            android:name="round-shape"
+                            android:fillColor="@color/white_40"
+                            android:pathData="M12.5,12.5m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
+                            android:strokeWidth="2"
+                            android:strokeColor="@android:color/transparent" />
+                    </vector>
+                </aapt:attr>
+
+
+                <target android:name="round-shape">
+                    <aapt:attr name="android:animation">
+                        <set
+                            android:duration="@integer/default_transition_anim_duration"
+                            android:interpolator="@android:anim/decelerate_interpolator">
+
+                            <objectAnimator
+                                android:duration="@integer/default_transition_anim_duration"
+                                android:fillColor="@color/purpleNormal"
+                                android:propertyName="fillColor"
+                                android:valueFrom="@color/white_40"
+                                android:valueTo="@android:color/white" />
+                        </set>
+                    </aapt:attr>
+                </target>
+            </animated-vector>
+        </aapt:attr>
+
+    </transition>
+
+    <transition
+        android:fromId="@+id/enabled"
+        android:toId="@+id/disabled">
+
+        <aapt:attr name="android:drawable">
+            <animated-vector>
+                <aapt:attr name="android:drawable">
+                    <vector
+                        android:width="25dp"
+                        android:height="25dp"
+                        android:viewportWidth="25"
+                        android:viewportHeight="25">
+                        <path
+                            android:name="round-shape"
+                            android:fillColor="@color/purpleNormal"
+                            android:pathData="M12.5,12.5m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
+                            android:strokeWidth="2"
+                            android:strokeColor="@android:color/transparent" />
+                    </vector>
+
+
+                </aapt:attr>
+
+
+                <target android:name="round-shape">
+                    <aapt:attr name="android:animation">
+                        <set
+                            android:duration="@integer/default_transition_anim_duration"
+                            android:interpolator="@android:anim/decelerate_interpolator">
+
+                            <objectAnimator
+                                android:duration="@integer/default_transition_anim_duration"
+                                android:propertyName="fillColor"
+                                android:valueFrom="@android:color/white"
+                                android:valueTo="@color/white_40" />
+                        </set>
+                    </aapt:attr>
+                </target>
+            </animated-vector>
+        </aapt:attr>
+
+    </transition>
+</animated-selector>

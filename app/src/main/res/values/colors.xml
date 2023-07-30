@@ -35,7 +35,7 @@
     <color name="connectingRainbowTranslucentEnd">#E61D0A43</color>
     <color name="shadowColor">#33FFFFFF</color>
     <color name="textOnPrimary">#FFFFFF</color>
-
+    <color name="superSwitchTextColorSecondary">#1E0F33</color>
 
     <!--Colors changed for alpha-02 release -->
 
@@ -54,10 +54,12 @@
     <color name="indigo70">#352A7B</color>
     <color name="indigo90">#130D32</color>
 
-    <color name="off_white">#B8B8B8</color>
+    <color name="white_40">#66FFFFFF</color>
 
+    <color name="purple30">#C88BF2</color>
     <color name="purple40">#B86DE8</color>
     <color name="purple40_40">#66B86DE8</color>
+    <color name="purple60">#943EC4</color>
 
     <color name="red30">#F27E91</color>
     <color name="red80">#75101A</color>

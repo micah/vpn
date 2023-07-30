@@ -113,7 +113,7 @@
         <!-- protect this app switch -->
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/smProtectAllApps"
-            style="@style/switch_text_without_background"
+            style="@style/toggle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_padding"
@@ -122,8 +122,7 @@
             android:text="@string/action_protect_this_app"
             android:checked="@{viewModel.protectThisApp}"
             android:onCheckedChanged="@{viewModel::onProtectThisAppChanged}"
-            android:thumb="@drawable/toggle_thumb_light"
-            app:track="@drawable/toggle_track_light" />
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_circuit_cards"

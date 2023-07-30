@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <!--  ###### -->
 
@@ -20,12 +22,32 @@
         <item name="android:textFontWeight" tools:targetApi="p">550</item>
     </style>
 
-    <style name="switch_text_without_background" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="super_toggle" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+        <item name="android:textColor">@color/super_toggle_text_color</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:padding">@dimen/super_toggle_padding</item>
+        <item name="android:background">@drawable/super_toggle_background</item>
+        <item name="android:thumb">@drawable/toggle_thumb</item>
+        <item name="track">@drawable/toggle_track_shape</item>
+        <item name="trackTint">@color/super_toggle_track_color</item>
+    </style>
+
+    <style name="exit_node_super_toggle" parent="super_toggle">
+        <item name="android:background">@drawable/super_toggle_exit_node_background</item>
+    </style>
+
+    <style name="toggle" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">0sp</item>
         <item name="android:textColor">@color/textOnPrimary</item>
         <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:thumb">@drawable/toggle_thumb</item>
+        <item name="track">@drawable/toggle_track_shape</item>
+        <item name="trackTint">@color/toggle_track_color</item>
     </style>
 
     <style name="app_circuits_text" parent="TextAppearance.MaterialComponents.Body1">
