@@ -35,6 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:gravity="center"
                 tools:text="@string/reload_all_circuits"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,28 +56,26 @@
 
             <TextView
                 android:id="@+id/tv_action_cancel"
-                style="@style/error_action_text"
+                style="@style/error_action_text_secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:layout_marginEnd="8dp"
                 android:padding="@dimen/default_padding"
                 android:text="@string/action_cancel"
-                android:textFontWeight="600"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_action"
                 app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
             <TextView
                 android:id="@+id/tv_action"
-                style="@style/error_action_text"
+                style="@style/error_action_text_primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:layout_marginEnd="8dp"
                 tools:text="@string/action_reload_circuits"
                 android:padding="@dimen/default_padding"
-                android:textFontWeight="600"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_description" />

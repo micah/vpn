@@ -180,6 +180,17 @@
         <item name="android:lineSpacingExtra">6sp</item>
     </style>
 
+    <style name="error_action_text_primary" parent="error_action_text">
+        <item name="android:background">@drawable/bg_rounded_tag</item>
+        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="error_action_text_secondary" parent="error_action_text">
+        <item name="android:textColor">@color/blue20</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="error_action_text">
         <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:lineSpacingExtra">6sp</item>
