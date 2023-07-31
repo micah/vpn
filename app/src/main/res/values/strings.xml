@@ -98,6 +98,7 @@
     <string name="connect_direct_to_tor">Connect directly to Tor</string>
 
     <string name="idle_toolbar_title">Tor VPN</string>
+    <string name="circuits">Circuits</string>
 
 
 </resources>

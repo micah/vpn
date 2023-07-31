@@ -2,6 +2,8 @@ package org.torproject.vpn.ui.appdetail
 
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -47,7 +49,11 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.layoutNoTorSupport.rvCircuitCards.adapter = adapter
-        viewModel.circuitList.observe(viewLifecycleOwner, adapter::update)
+        viewModel.circuitList.observe(viewLifecycleOwner) { list ->
+            adapter.update(list)
+            binding.layoutNoTorSupport.tvCircuits.visibility =
+                if (list.isNotEmpty()) VISIBLE else GONE;
+        }
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
