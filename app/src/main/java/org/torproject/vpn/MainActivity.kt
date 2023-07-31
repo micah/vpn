@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                     mainActivityVM.bottomNavVisibility.collect { visible ->
 
                         navView.post {
-                            if (visible) {
+                            if (visible && appBarConfiguration.topLevelDestinations.contains(navController.currentDestination?.id)) {
                                 showBottomNavigationView(navView)
                             } else {
                                 hideBottomNavigationView(navView)
