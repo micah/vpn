@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    mainActivityVM.bottomNavVisibility.collect { visible ->
+                    mainActivityVM.guideScreenVisibility.collect { visible ->
 
                         navView.post {
                             if (visible && appBarConfiguration.topLevelDestinations.contains(navController.currentDestination?.id)) {

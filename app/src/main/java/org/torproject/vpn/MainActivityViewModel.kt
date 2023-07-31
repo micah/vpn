@@ -13,7 +13,8 @@ import org.torproject.vpn.utils.PreferenceHelper
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
     private val preferenceHelper = PreferenceHelper(application)
 
-    val bottomNavVisibility = callbackFlow {
+    //bottom nav visibility depends on guide screen visibility among other flags
+    val guideScreenVisibility = callbackFlow {
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, changedKey ->
             if (PreferenceHelper.SHOULD_SHOW_GUIDE == changedKey) {
                 trySend(!preferenceHelper.shouldShowGuide) // invert bottom nav visibility in respect to guide visibility
