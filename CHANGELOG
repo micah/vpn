@@ -1,0 +1,10 @@
+CHANGELOG
+=========
+
+0.2.0 Pre-Alpha
+----------------
+* Updated UI
+* App detail screen including throughput and circuit information
+* Global exit node selection
+* trigger new identities (circuits) per app or globally
+* minimum SDK increased to Android 7
