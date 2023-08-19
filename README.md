@@ -9,7 +9,7 @@ A debug version of the app is built in each CI run, you can install it on your p
 
 ## Downloading the apk
 
-You can [download the latest successfully built package](https://gitlab.torproject.org/tpo/applications/vpn/-/package_files/1206/download) from the [Gitlab package archive](https://gitlab.torproject.org/tpo/applications/vpn/-/packages). Once you have downloaded the apk, you will need to install it on your phone, please follow the [process for installation on your phone](#install-package-on-phone) to do so.
+You can download the latest successfully built package from the [Gitlab package archive](https://gitlab.torproject.org/tpo/applications/vpn/-/packages). Once you have downloaded the apk, you will need to install it on your phone, please follow the [process for installation on your phone](#install-package-on-phone) to do so.
 
 ## Install
 
