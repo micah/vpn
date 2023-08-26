@@ -13,18 +13,18 @@ import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentConnectionsettingsBinding
 import org.torproject.vpn.ui.connectionsettings.model.ConnectionFragmentViewModel
 
-class ConnectionFragment: Fragment(), ClickHandler {
+class ConnectionFragment: Fragment(R.layout.fragment_connectionsettings), ClickHandler {
 
-    private lateinit var binding: FragmentConnectionsettingsBinding
     private lateinit var configureFragmentViewModel: ConnectionFragmentViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         configureFragmentViewModel = ViewModelProvider(this)[ConnectionFragmentViewModel::class.java]
-        binding = FragmentConnectionsettingsBinding.inflate(inflater, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val binding = FragmentConnectionsettingsBinding.bind(view)
 
         binding.viewModel = configureFragmentViewModel
         binding.handler = this
@@ -32,14 +32,10 @@ class ConnectionFragment: Fragment(), ClickHandler {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            binding.killSwitch.visibility = View.VISIBLE
-        }
+        binding.killSwitch.visibility = View.VISIBLE
 
         binding.quickstart.isChecked = configureFragmentViewModel.startOnBoot
         binding.quickstart.setOnCheckedChangeListener(configureFragmentViewModel::onStartOnBootChanged)
-
-        return binding.root
     }
 
     override fun onTorLogsClicked(v: View) {
