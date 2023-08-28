@@ -76,6 +76,14 @@
                         app:hideDrawable="true"
                         />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/default_padding"
+                        android:paddingHorizontal="@dimen/activity_horizontal_margin"
+                        style="@style/paragraph_title"
+                        android:text="@string/debugging"
+                        />
 
                     <org.torproject.vpn.ui.base.view.IconTextEntryView
                         android:layout_width="match_parent"

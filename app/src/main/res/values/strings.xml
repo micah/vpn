@@ -99,6 +99,7 @@
 
     <string name="idle_toolbar_title">Tor VPN</string>
     <string name="circuits">Circuits</string>
+    <string name="debugging">Debugging</string>
 
 
 </resources>
