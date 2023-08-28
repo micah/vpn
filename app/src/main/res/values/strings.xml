@@ -35,7 +35,7 @@
     <string name="apps">Apps</string>
     <string name="apps_description_all_protected">All apps protected</string>
     <string name="tor_logs">Tor Logs</string>
-    <string name="tor_logs_description">View and copy tor logs</string>
+    <string name="tor_logs_description">View and copy your Tor logs</string>
     <string name="always_on_vpn">Always-on VPN</string>
     <string name="always_on_vpn_description">Open Android System Settings</string>
     <string name="copied">Copied …</string>
