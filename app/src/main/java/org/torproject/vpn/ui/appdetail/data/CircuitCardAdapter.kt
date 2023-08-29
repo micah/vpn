@@ -40,18 +40,22 @@ class CircuitCardAdapter(val isBrowser: Boolean) : RecyclerView.Adapter<Recycler
     }
 
     inner class CircuitCardViewHolder(val binding: ViewCircuitsPerAppBinding) : ViewHolder(binding.root) {
+        var collapse = false
 
         fun bind(item: Circuit, position: Int) {
             binding.root.setOnClickListener {
                 if (expandedItemPos == position) {
                     expandedItemPos = -1
+                    collapse = false
                     notifyItemChanged(position)
                 } else if (expandedItemPos == -1) {
                     expandedItemPos = position
+                    collapse = true
                     notifyItemChanged(position)
                 } else {
                     val previousExpandedItemPos = expandedItemPos
                     expandedItemPos = position
+                    collapse = true
                     notifyItemChanged(previousExpandedItemPos)
                     notifyItemChanged(position)
                 }

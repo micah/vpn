@@ -49,6 +49,7 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.layoutNoTorSupport.rvCircuitCards.adapter = adapter
+        binding.layoutNoTorSupport.rvCircuitCards.itemAnimator = CircuitCardItemAnimator()
         viewModel.circuitList.observe(viewLifecycleOwner) { list ->
             adapter.update(list)
             binding.layoutNoTorSupport.tvCircuits.visibility =
