@@ -27,23 +27,15 @@
             android:backgroundTint="@color/indigo60"
             android:paddingHorizontal="@dimen/activity_horizontal_margin"
             >
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="0dp"
-                android:layout_margin="5dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                android:layout_gravity="center"
-                >
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_country_flag"
                     android:layout_width="30dp"
-                    android:layout_height="20dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/flag_jp" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"
+                    tools:src="@drawable/flag_1f1e6_1f1e8"
+                    />
         </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatTextView

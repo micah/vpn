@@ -160,7 +160,15 @@ fun getFlagByCountryCode(context: Context, countryCode: String?): Drawable? {
         return null
     }
 
-    val drawableName = "flag_${countryCode.lowercase()}"
+    val countryCodeCaps = countryCode.uppercase()
+    val firstLetter = Character.codePointAt(countryCodeCaps, 0) - 0x41 + 0x1F1E6
+    val secondLetter = Character.codePointAt(countryCodeCaps, 1) - 0x41 + 0x1F1E6
+
+    if (!countryCodeCaps[0].isLetter() || !countryCodeCaps[1].isLetter()) {
+        return null
+    }
+
+    val drawableName =  "flag_${firstLetter.toString(16)}_${secondLetter.toString(16)}"
     val resID: Int = context.resources.getIdentifier(drawableName, "drawable", context.packageName)
     return try {
         ContextCompat.getDrawable(context, resID)

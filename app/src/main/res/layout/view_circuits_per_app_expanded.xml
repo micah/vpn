@@ -67,27 +67,18 @@
             app:layout_constraintHorizontal_bias="0"
             />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_country_flag_exit_node"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="0dp"
-            android:layout_margin="5dp"
-            app:layout_constraintStart_toEndOf="@+id/iv_hops"
-            app:layout_constraintTop_toTopOf="@+id/tv_exit_node"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_exit_node"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:cardBackgroundColor="@android:color/transparent"
-            >
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_country_flag_exit_node"
+                app:layout_constraintStart_toEndOf="@+id/iv_hops"
+                app:layout_constraintTop_toTopOf="@+id/tv_exit_node"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_exit_node"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 android:layout_width="30dp"
-                android:layout_height="20dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/flag_ua" />
-        </androidx.cardview.widget.CardView>
+                android:layout_height="30dp"
+                android:scaleType="fitXY"
+                android:layout_margin="5dp"
+                tools:src="@drawable/flag_1f1e6_1f1ea"
+                />
 
 
         <TextView
@@ -96,7 +87,7 @@
             android:layout_width="0dp"
             app:layout_constraintWidth_default="wrap"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/cv_country_flag_exit_node"
+            app:layout_constraintStart_toEndOf="@+id/iv_country_flag_exit_node"
             app:layout_constraintTop_toBottomOf="@+id/tv_app_exit"
             app:layout_constraintEnd_toStartOf="@id/tv_guard"
             app:layout_constraintHorizontal_bias="0"
@@ -122,27 +113,17 @@
             app:layout_constraintHorizontal_bias="0"
             style="@style/info_tag" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_country_flag_relay_node"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_country_flag_relay_node"
             android:layout_width="30dp"
-            android:layout_height="20dp"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="0dp"
-            android:layout_margin="4dp"
-            android:foregroundGravity="center"
-            app:cardBackgroundColor="@android:color/transparent"
+            android:layout_height="30dp"
             app:layout_constraintStart_toEndOf="@id/iv_hops"
             app:layout_constraintTop_toTopOf="@id/tv_relay_node"
             app:layout_constraintBottom_toBottomOf="@+id/tv_relay_node"
-            >
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_country_flag_relay_node"
-                android:layout_width="30dp"
-                android:layout_height="20dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/flag_ua" />
-        </androidx.cardview.widget.CardView>
+            android:scaleType="fitXY"
+            android:layout_margin="5dp"
+            tools:src="@drawable/flag_1f1e6_1f1ec"
+            />
 
         <TextView
             android:id="@+id/tv_relay_node"
@@ -150,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_exit_node"
-            app:layout_constraintStart_toEndOf="@+id/cv_country_flag_relay_node"
+            app:layout_constraintStart_toEndOf="@+id/iv_country_flag_relay_node"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             android:paddingHorizontal="@dimen/compact_padding"
@@ -158,33 +139,25 @@
             tools:text="Germany"
             />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_country_flag_entry_node"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="0dp"
-            android:layout_margin="5dp"
-            app:layout_constraintStart_toEndOf="@id/iv_hops"
-            app:layout_constraintTop_toTopOf="@+id/tv_entry_node"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_entry_node"
-            app:cardBackgroundColor="@android:color/transparent"
-            >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_country_flag_entry_node"
                 android:layout_width="30dp"
-                android:layout_height="20dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/flag_ua" />
-        </androidx.cardview.widget.CardView>
+                android:layout_height="30dp"
+                android:scaleType="fitXY"
+                android:layout_margin="5dp"
+                app:layout_constraintStart_toEndOf="@id/iv_hops"
+                app:layout_constraintTop_toTopOf="@+id/tv_entry_node"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_entry_node"
+                tools:src="@drawable/flag_1f1e6_1f1f7"
+                />
 
         <TextView
             android:id="@+id/tv_entry_node"
             android:textAppearance="@style/app_circuits_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/cv_country_flag_entry_node"
+            app:layout_constraintStart_toEndOf="@+id/iv_country_flag_entry_node"
             app:layout_constraintTop_toBottomOf="@id/tv_relay_node"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"

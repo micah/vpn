@@ -178,7 +178,8 @@
                 <ImageView
                     android:id="@+id/imageView6"
                     android:layout_width="28dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="28dp"
+                    android:scaleType="fitXY"
                     android:layout_marginStart="16dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="@{viewModel.selectedCountry}"
@@ -189,7 +190,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/imageView5"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@drawable/flag_de"
+                    tools:srcCompat="@drawable/flag_1f1e7_1f1ed"
                     tools:visibility="gone" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
