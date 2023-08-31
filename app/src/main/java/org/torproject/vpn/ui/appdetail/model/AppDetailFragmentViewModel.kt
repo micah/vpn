@@ -17,12 +17,10 @@ import org.torproject.onionmasq.OnionMasq
 import org.torproject.onionmasq.circuit.Circuit
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
-import org.torproject.vpn.utils.toFlagEmoji
 import org.torproject.vpn.utils.updateDataUsage
 import org.torproject.vpn.vpn.DataUsage
 import org.torproject.vpn.vpn.VpnStatusObservable
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(application) {
@@ -36,41 +34,12 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
     private var _circuitList: MutableLiveData<List<Circuit>> = MutableLiveData(ArrayList())
     val circuitList: LiveData<List<Circuit>> = _circuitList
 
-    val circuitDescription: StateFlow<String> = appName.asFlow().map { appName ->
-        return@map application.getString(R.string.circuit_app_description, appName)
-    }.stateIn(viewModelScope, Eagerly, "")
-
     val openAppButtonText: StateFlow<String> = appName.asFlow().map { appName ->
         return@map application.getString(R.string.action_open_app, appName)
     }.stateIn(viewModelScope, Eagerly, "")
 
     val independentTorAppDescriptionText: StateFlow<String> = appName.asFlow().map { appName ->
         return@map application.getString(R.string.description_independend_tor_powered_app, appName)
-    }.stateIn(viewModelScope, Eagerly, "")
-
-    val circuitExitApp: StateFlow<String> = isBrowser.asFlow().map { isBrowser ->
-        if (isBrowser) {
-            return@map application.getString(R.string.this_browser)
-        }
-        return@map application.getString(R.string.this_app)
-    }.stateIn(viewModelScope, Eagerly, "")
-
-    val circuitExitNode: StateFlow<String> = appId.asFlow().map { appId ->
-        // TODO: request node data based on appId
-        // this is a dummy implementation for now
-        return@map "es".toFlagEmoji() + "\t" + Locale("", "es").displayCountry
-    }.stateIn(viewModelScope, Eagerly, "")
-
-    val circuitRelayNode: StateFlow<String> = appId.asFlow().map { appId ->
-        // TODO: request node data based on appId
-        // this is a dummy implementation for now
-        return@map "de".toFlagEmoji() + "\t" + Locale("", "de").displayCountry
-    }.stateIn(viewModelScope, Eagerly, "")
-
-    val circuitEntryNode: StateFlow<String> = appId.asFlow().map { appId ->
-        // TODO: request node data based on appId
-        // this is a dummy implementation for now
-        return@map "pl".toFlagEmoji() + "\t" +Locale("", "pl").displayCountry
     }.stateIn(viewModelScope, Eagerly, "")
 
     private val _dataUsage: MutableLiveData<DataUsage> = MutableLiveData(DataUsage())
