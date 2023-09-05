@@ -7,6 +7,7 @@ plugins {
 
 android {
     compileSdk 33
+    namespace 'org.torproject.vpn'
 
     defaultConfig {
         applicationId "org.torproject.vpn"
