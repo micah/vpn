@@ -2,6 +2,7 @@ package org.torproject.vpn.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.annotation.VisibleForTesting
 
 private const val TOR_VPN_SP: String = "tor-vpn"
 
@@ -60,6 +61,11 @@ class PreferenceHelper(context: Context) {
 
     fun unregisterListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
         sharedPreference.unregisterOnSharedPreferenceChangeListener(listener)
+    }
+
+    @VisibleForTesting
+    fun clear() {
+        sharedPreference.edit().clear().commit()
     }
 
 }
