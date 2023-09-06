@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.net.VpnService
 import android.os.Build
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
@@ -33,10 +34,12 @@ import org.torproject.vpn.R
 import org.torproject.vpn.ui.exitselection.data.ExitNodeAdapter
 import org.torproject.vpn.utils.CustomInteractions.tryResolve
 import org.torproject.vpn.utils.CustomViewActions
+import org.torproject.vpn.utils.NetworkUtils
 import org.torproject.vpn.utils.PreferenceHelper
 import tools.fastlane.screengrab.Screengrab
 import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy
 import tools.fastlane.screengrab.locale.LocaleTestRule
+import java.io.*
 import java.util.*
 import org.hamcrest.CoreMatchers.`is` as Is
 
@@ -140,7 +143,7 @@ class ConnectFragmentTest {
         tryResolve(
             onView(withId(R.id.toolbar)),
             matches(hasDescendant(withText(R.string.state_connected))),
-            60
+            120
         )
         Screengrab.screenshot("connect_fragment_connected_state")
     }
@@ -170,10 +173,6 @@ class ConnectFragmentTest {
         val viewAction = CustomViewActions.actionOnItemView(withId(R.id.smProtectAllApps), click())
         onView(withId(R.id.rv_exit_nodes)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, viewAction))
 
-
-        val currentLocale = InstrumentationRegistry.getInstrumentation().targetContext.resources.configuration.locales[0];
-        currentLocale.displayName
-
         onView(withId(R.id.rv_exit_nodes)).perform(
             RecyclerViewActions.actionOnHolderItem(Matchers.allOf(
                 Is(instanceOf(ExitNodeAdapter.ExitNodeCellViewHolder::class.java)),
@@ -185,8 +184,26 @@ class ConnectFragmentTest {
         onView(withId(R.id.rv_exit_nodes)).perform(pressBack())
         tryResolve(onView(withId(R.id.cl_selection_exit_inner)), matches(isCompletelyDisplayed()), 3)
         onView(withId(R.id.imageView6)).check(matches(isCompletelyDisplayed()))
+        onView(withId(R.id.imageView6)).check(matches(withContentDescription("us")))
 
         Screengrab.screenshot("connect_fragment_US_selected")
+    }
+
+    @Test
+    fun test06CountrySelection() {
+        onView(withId(R.id.imageView6)).check(matches(withContentDescription("us")))
+
+        // start VPN
+        onView(withId(R.id.tv_connect_action_btn)).perform(click())
+        tryResolve(
+            onView(withId(R.id.toolbar)),
+            matches(hasDescendant(withText(R.string.state_connected))),
+            60
+        )
+
+        val geoIPLocale =  NetworkUtils.getGeoIPLocale()
+        Log.d("TEST", "geoIP locale: $geoIPLocale")
+        assertEquals("expected geoIP location is USA","United States", geoIPLocale)
     }
 
     private fun containsCountryName(locale: Locale): Matcher<ExitNodeAdapter.ExitNodeCellViewHolder> {
