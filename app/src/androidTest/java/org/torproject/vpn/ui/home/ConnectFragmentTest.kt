@@ -5,10 +5,12 @@ import android.content.pm.PackageManager
 import android.net.VpnService
 import android.os.Build
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -18,6 +20,8 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject
 import androidx.test.uiautomator.UiSelector
 import junit.framework.TestCase.*
+import org.hamcrest.*
+import org.hamcrest.CoreMatchers.instanceOf
 import org.junit.Before
 import org.junit.FixMethodOrder
 import org.junit.Rule
@@ -26,12 +30,15 @@ import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
 import org.torproject.vpn.MainActivity
 import org.torproject.vpn.R
+import org.torproject.vpn.ui.exitselection.data.ExitNodeAdapter
 import org.torproject.vpn.utils.CustomInteractions.tryResolve
+import org.torproject.vpn.utils.CustomViewActions
 import org.torproject.vpn.utils.PreferenceHelper
 import tools.fastlane.screengrab.Screengrab
 import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy
 import tools.fastlane.screengrab.locale.LocaleTestRule
-
+import java.util.*
+import org.hamcrest.CoreMatchers.`is` as Is
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -149,5 +156,48 @@ class ConnectFragmentTest {
         Screengrab.screenshot("connect_fragment_disconnected_state")
     }
 
+    @Test
+    fun test05CountrySelection() {
+        onView(withId(R.id.cl_selection_exit_inner)).perform(click())
+        onView(withId(R.id.rv_exit_nodes)).check(matches(isDisplayed()))
+        Screengrab.screenshot("exit_selection_all_apps_selected")
 
+        onView(withId(R.id.rv_exit_nodes)).perform(swipeDown())
+        tryResolve(onView(withId(R.id.tv_connect_action_btn)), matches(isCompletelyDisplayed()), 3)
+
+        onView(withId(R.id.cl_selection_exit_inner)).perform(click())
+
+        val viewAction = CustomViewActions.actionOnItemView(withId(R.id.smProtectAllApps), click())
+        onView(withId(R.id.rv_exit_nodes)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, viewAction))
+
+
+        val currentLocale = InstrumentationRegistry.getInstrumentation().targetContext.resources.configuration.locales[0];
+        currentLocale.displayName
+
+        onView(withId(R.id.rv_exit_nodes)).perform(
+            RecyclerViewActions.actionOnHolderItem(Matchers.allOf(
+                Is(instanceOf(ExitNodeAdapter.ExitNodeCellViewHolder::class.java)),
+                containsCountryName(Locale.US)),
+            click()))
+
+        Screengrab.screenshot("exit_selection_US_selected")
+
+        onView(withId(R.id.rv_exit_nodes)).perform(pressBack())
+        tryResolve(onView(withId(R.id.cl_selection_exit_inner)), matches(isCompletelyDisplayed()), 3)
+        onView(withId(R.id.imageView6)).check(matches(isCompletelyDisplayed()))
+
+        Screengrab.screenshot("connect_fragment_US_selected")
+    }
+
+    private fun containsCountryName(locale: Locale): Matcher<ExitNodeAdapter.ExitNodeCellViewHolder> {
+        return object : TypeSafeMatcher<ExitNodeAdapter.ExitNodeCellViewHolder>() {
+            override fun matchesSafely(customHolder: ExitNodeAdapter.ExitNodeCellViewHolder): Boolean {
+                return locale.displayCountry == customHolder.binding.tvTitle.text
+            }
+
+            override fun describeTo(description: Description) {
+                description.appendText("item with Locale ${locale.displayCountry} found")
+            }
+        }
+    }
 }
