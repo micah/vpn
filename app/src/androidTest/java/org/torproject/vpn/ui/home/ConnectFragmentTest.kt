@@ -22,7 +22,7 @@ import androidx.test.uiautomator.UiObject
 import androidx.test.uiautomator.UiSelector
 import junit.framework.TestCase.*
 import org.hamcrest.*
-import org.hamcrest.CoreMatchers.instanceOf
+import org.hamcrest.CoreMatchers.*
 import org.junit.Before
 import org.junit.FixMethodOrder
 import org.junit.Rule
@@ -36,6 +36,7 @@ import org.torproject.vpn.utils.CustomInteractions.tryResolve
 import org.torproject.vpn.utils.CustomViewActions
 import org.torproject.vpn.utils.NetworkUtils
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.vpn.VpnStatusObservable
 import tools.fastlane.screengrab.Screengrab
 import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy
 import tools.fastlane.screengrab.locale.LocaleTestRule
@@ -99,6 +100,8 @@ class ConnectFragmentTest {
 
         onView(withId(R.id.toolbar)).check(matches(hasDescendant(withText(R.string.app_name))))
         onView(withId(R.id.tv_connect_action_btn)).check(matches(withText(R.string.action_connect)))
+        onView(withId(R.id.cl_apps_card)).check(matches(isCompletelyDisplayed()))
+        onView(withId(R.id.cl_connection_card)).check(matches(isCompletelyDisplayed()))
         Screengrab.screenshot("connect_fragment_initial_state")
     }
 
@@ -149,18 +152,62 @@ class ConnectFragmentTest {
     }
 
     @Test
-    fun test04Disconnect() {
+    fun test04ReinitializeConnectedUIState() {
+        if (!VpnStatusObservable.isVPNActive()) {
+            onView(withId(R.id.tv_connect_action_btn)).perform(click())
+            tryResolve(
+                onView(withId(R.id.toolbar)),
+                matches(hasDescendant(withText(R.string.state_connected))),
+                120
+            )
+        }
+        onView(allOf(withText(R.string.action_configure), withResourceName("navigation_bar_item_small_label_view"))).perform(click())
+        onView(allOf(withText(R.string.action_connect), withResourceName("navigation_bar_item_small_label_view"))).perform(click())
+        onView(withId(R.id.chronometer)).check(matches(withText(not(Is("00:00:00")))))
+        onView(withId(R.id.chronometer)).check(matches(isCompletelyDisplayed()))
+    }
+
+    @Test
+    fun test05Disconnect() {
+        if (!VpnStatusObservable.isVPNActive()) {
+            onView(withId(R.id.tv_connect_action_btn)).perform(click())
+            tryResolve(
+                onView(withId(R.id.toolbar)),
+                matches(hasDescendant(withText(R.string.state_connected))),
+                120
+            )
+        }
         onView(withId(R.id.tv_connect_action_btn)).perform(click())
         tryResolve(
             onView(withId(R.id.toolbar)),
             matches(hasDescendant(withText(R.string.state_disconnected))),
             5
         )
+        // in disconnected state the apps and connection card are hidden
+        onView(withId(R.id.cl_apps_card)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.cl_connection_card)).check(matches(not(isDisplayed())))
         Screengrab.screenshot("connect_fragment_disconnected_state")
     }
 
     @Test
-    fun test05CountrySelection() {
+    fun test06ReinitializeDisconnectedState() {
+        if (VpnStatusObservable.isVPNActive()) {
+            onView(withId(R.id.tv_connect_action_btn)).perform(click())
+            tryResolve(
+                onView(withId(R.id.toolbar)),
+                matches(hasDescendant(withText(R.string.state_disconnected))),
+                5
+            )
+        }
+        onView(allOf(withText(R.string.action_configure), withResourceName("navigation_bar_item_small_label_view"))).perform(click())
+        onView(allOf(withText(R.string.action_connect), withResourceName("navigation_bar_item_small_label_view"))).perform(click())
+        onView(withId(R.id.chronometer)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.cl_apps_card)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.cl_connection_card)).check(matches(not(isDisplayed())))
+    }
+
+    @Test
+    fun test07CountrySelection() {
         onView(withId(R.id.cl_selection_exit_inner)).perform(click())
         onView(withId(R.id.rv_exit_nodes)).check(matches(isDisplayed()))
         Screengrab.screenshot("exit_selection_all_apps_selected")
@@ -190,7 +237,7 @@ class ConnectFragmentTest {
     }
 
     @Test
-    fun test06CountrySelection() {
+    fun test08CountrySelection() {
         onView(withId(R.id.imageView6)).check(matches(withContentDescription("us")))
 
         // start VPN
