@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.net.VpnService
 import android.os.Build
 import android.util.Log
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
@@ -16,10 +17,11 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject
 import androidx.test.uiautomator.UiSelector
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import junit.framework.TestCase.*
 import org.hamcrest.*
 import org.hamcrest.CoreMatchers.*
@@ -33,6 +35,8 @@ import org.torproject.vpn.MainActivity
 import org.torproject.vpn.R
 import org.torproject.vpn.ui.exitselection.data.ExitNodeAdapter
 import org.torproject.vpn.utils.CustomInteractions.tryResolve
+import org.torproject.vpn.utils.CustomMatchers.withCollapsibleToolbarTitle
+import org.torproject.vpn.utils.CustomMatchers.withToolbarTitle
 import org.torproject.vpn.utils.CustomViewActions
 import org.torproject.vpn.utils.NetworkUtils
 import org.torproject.vpn.utils.PreferenceHelper
@@ -60,7 +64,7 @@ class ConnectFragmentTest {
     @Before
     fun setup() {
         Screengrab.setDefaultScreenshotStrategy(UiAutomatorScreenshotStrategy())
-        val instrumentation = InstrumentationRegistry.getInstrumentation()
+        val instrumentation = getInstrumentation()
         device = UiDevice.getInstance(instrumentation)
     }
 
@@ -106,7 +110,33 @@ class ConnectFragmentTest {
     }
 
     @Test
-    fun test03Connect() {
+    fun test03ClickAppsCardAndBack() {
+        onView(withId(R.id.cl_apps_card)).perform(click())
+        onView(isAssignableFrom(CollapsingToolbarLayout::class.java)).check(
+            matches(withCollapsibleToolbarTitle(
+                containsString(getInstrumentation().targetContext.getString(R.string.apps))
+            ))
+        )
+
+        onView(allOf(instanceOf(AppCompatImageButton::class.java), withParent(withId(R.id.toolbar)))).perform(click())
+        onView(withId(R.id.tv_connect_action_btn)).check(matches(isCompletelyDisplayed()))
+    }
+
+    @Test
+    fun test04ClickConnectionCardAndBack() {
+        onView(withId(R.id.cl_connection_card)).perform(click())
+        onView(withId(R.id.toolbar)).check(
+            matches(withToolbarTitle(
+                containsString(getInstrumentation().targetContext.getString(R.string.connection))
+            ))
+        )
+
+        onView(allOf(instanceOf(AppCompatImageButton::class.java), withParent(withId(R.id.toolbar)))).perform(click())
+        onView(withId(R.id.tv_connect_action_btn)).check(matches(isCompletelyDisplayed()))
+    }
+
+    @Test
+    fun test05Connect() {
         // determine required permissions
         var needsNotificationPermission = false
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -152,7 +182,7 @@ class ConnectFragmentTest {
     }
 
     @Test
-    fun test04ReinitializeConnectedUIState() {
+    fun test06ReinitializeConnectedUIState() {
         if (!VpnStatusObservable.isVPNActive()) {
             onView(withId(R.id.tv_connect_action_btn)).perform(click())
             tryResolve(
@@ -168,7 +198,7 @@ class ConnectFragmentTest {
     }
 
     @Test
-    fun test05Disconnect() {
+    fun test07Disconnect() {
         if (!VpnStatusObservable.isVPNActive()) {
             onView(withId(R.id.tv_connect_action_btn)).perform(click())
             tryResolve(
@@ -190,7 +220,7 @@ class ConnectFragmentTest {
     }
 
     @Test
-    fun test06ReinitializeDisconnectedState() {
+    fun test08ReinitializeDisconnectedState() {
         if (VpnStatusObservable.isVPNActive()) {
             onView(withId(R.id.tv_connect_action_btn)).perform(click())
             tryResolve(
@@ -207,7 +237,7 @@ class ConnectFragmentTest {
     }
 
     @Test
-    fun test07CountrySelection() {
+    fun test09CountrySelection() {
         onView(withId(R.id.cl_selection_exit_inner)).perform(click())
         onView(withId(R.id.rv_exit_nodes)).check(matches(isDisplayed()))
         Screengrab.screenshot("exit_selection_all_apps_selected")
@@ -237,7 +267,7 @@ class ConnectFragmentTest {
     }
 
     @Test
-    fun test08CountrySelection() {
+    fun test10CountrySelectionGeoIP() {
         onView(withId(R.id.imageView6)).check(matches(withContentDescription("us")))
 
         // start VPN
@@ -245,7 +275,7 @@ class ConnectFragmentTest {
         tryResolve(
             onView(withId(R.id.toolbar)),
             matches(hasDescendant(withText(R.string.state_connected))),
-            60
+            120
         )
 
         val geoIPLocale =  NetworkUtils.getGeoIPLocale()
@@ -254,7 +284,7 @@ class ConnectFragmentTest {
     }
 
     private fun containsCountryName(locale: Locale): Matcher<ExitNodeAdapter.ExitNodeCellViewHolder> {
-        return object : TypeSafeMatcher<ExitNodeAdapter.ExitNodeCellViewHolder>() {
+        return object: TypeSafeMatcher<ExitNodeAdapter.ExitNodeCellViewHolder>() {
             override fun matchesSafely(customHolder: ExitNodeAdapter.ExitNodeCellViewHolder): Boolean {
                 return locale.displayCountry == customHolder.binding.tvTitle.text
             }
