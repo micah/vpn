@@ -254,6 +254,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             }
 
         } else {
+            binding.clSelectionExitInner.translationX = connectingStateFabSpacing.toFloat()
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_cancel_to_connect)
         }
     }
@@ -277,6 +278,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             }
 
         } else {
+            binding.clSelectionExitInner.translationX = connectedStateFabSpacing.toFloat()
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_stop_connect)
         }
 
@@ -297,6 +299,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             }
 
         } else {
+            binding.clSelectionExitInner.translationX = initStateFabSpacing.toFloat()
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
         }
 
@@ -315,6 +318,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             }
 
         } else {
+            binding.clSelectionExitInner.translationX = initStateFabSpacing.toFloat()
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
         }
     }
