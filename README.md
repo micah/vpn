@@ -77,6 +77,22 @@ For now the build and installation steps are as easy as:
 
 Have fun!
 
+# Instrumentation Testing
+
+To run UI tests, you will need to prepare an emulator (or a physical device). Please make sure that animations are disabled, as they are a core reason for flaky test results.
+To disable them, you will need to enable the Developer Mode in your emulator by opening the `Settings` app,
+tapping on  `About emulated device` and 7 times on `Build number`.
+
+Enter the Developer options by going back to the root of the settings app, tap on `System` -> `Developer Options`, scroll down to
+`Window animation scale`, `Transition animation scale` and `Animator animation scale`. Set all of these options to `Animation off`.
+
+It's now time to run the tests. Make sure your emulator is running and enter
+
+```
+/gradlew app:connectedDebugAndroidTest
+```
+
+into your console.
 
 # License
 
