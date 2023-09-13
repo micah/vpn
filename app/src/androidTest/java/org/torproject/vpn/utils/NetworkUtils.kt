@@ -9,6 +9,23 @@ import javax.net.ssl.HttpsURLConnection
 object NetworkUtils {
 
     fun getGeoIPLocale(): String? {
+        val responseJson = getJsonFromGeoIPService()
+        if (responseJson.has("YourFuckingCountry")) {
+            return  responseJson.getString("YourFuckingCountry") as String
+        }
+
+        return null
+    }
+
+    fun getExitIP(): String? {
+        val responseJson = getJsonFromGeoIPService()
+        if (responseJson.has("YourFuckingIPAddress")) {
+            return responseJson.getString("YourFuckingIPAddress") as String
+        }
+        return null
+    }
+
+    private fun getJsonFromGeoIPService(): JSONObject {
         val url = URL("https://wtfismyip.com/json")
         val connection = url.openConnection() as HttpsURLConnection
         val response = StringBuilder()
@@ -22,19 +39,12 @@ object NetworkUtils {
             connection.disconnect()
         }
 
-        val responseJson: JSONObject;
-        try {
-            responseJson = JSONObject(response.toString().trim())
+        return try {
+            JSONObject(response.toString().trim())
         } catch (exception: java.lang.Exception) {
             exception.printStackTrace()
-            return null
+            JSONObject()
         }
-
-        if (responseJson.has("YourFuckingCountry")) {
-            return  responseJson.getString("YourFuckingCountry") as String
-        }
-
-        return null
     }
 
     @Throws(IOException::class)

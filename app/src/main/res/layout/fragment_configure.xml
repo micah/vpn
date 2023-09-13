@@ -63,6 +63,7 @@
                 >
 
                 <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:id="@+id/ite_apps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:drawable="@drawable/ic_apps"
