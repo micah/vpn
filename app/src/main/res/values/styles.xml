@@ -300,4 +300,27 @@
         <item name="android:textSize">22sp</item>
     </style>
 
+    <style name="connection_bridge_info" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/textOnPrimary</item>
+    </style>
+
+    <style name="connection_current_bridge_title" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/indigo10</item>
+    </style>
+
+    <style name="connection_current_bridge" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textOnPrimary</item>
+    </style>
+
+
+
 </resources>

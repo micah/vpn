@@ -100,6 +100,10 @@
     <string name="idle_toolbar_title">Tor VPN</string>
     <string name="circuits">Circuits</string>
     <string name="debugging">Debugging</string>
-
+    <string name="use_a_bridge">Use a bridge</string>
+    <string name="use_a_bridge_info">Bridges help you securely access the Tor network in places where Tor is blocked. Depending on where you are, one bridge may work better than another.</string>
+    <string name="bridge_behaviour">Behaviour</string>
+    <string name="current_bridge">Current bridge</string>
+    <string name="bridge_option_obfs4_built">obfs4 (built-in)</string>
 
 </resources>
