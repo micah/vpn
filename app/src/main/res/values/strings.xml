@@ -105,5 +105,7 @@
     <string name="bridge_behaviour">Behaviour</string>
     <string name="current_bridge">Current bridge</string>
     <string name="bridge_option_obfs4_built">obfs4 (built-in)</string>
+    <!-- content description for bridge settings image button in connection screen -->
+    <string name="bridge_settings">Bridge settings</string>
 
 </resources>

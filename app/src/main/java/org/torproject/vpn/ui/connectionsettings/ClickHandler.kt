@@ -5,4 +5,5 @@ import android.view.View
 interface ClickHandler {
     fun onTorLogsClicked(v: View)
     fun onAlwaysOnClicked(v: View)
+    fun onBridgeSettingsClicked(v: View)
 }

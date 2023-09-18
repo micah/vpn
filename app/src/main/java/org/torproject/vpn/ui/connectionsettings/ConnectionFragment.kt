@@ -1,11 +1,9 @@
 package org.torproject.vpn.ui.connectionsettings
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -28,6 +26,7 @@ class ConnectionFragment: Fragment(R.layout.fragment_connectionsettings), ClickH
 
         binding.viewModel = configureFragmentViewModel
         binding.handler = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
@@ -36,6 +35,8 @@ class ConnectionFragment: Fragment(R.layout.fragment_connectionsettings), ClickH
 
         binding.quickstart.isChecked = configureFragmentViewModel.startOnBoot
         binding.quickstart.setOnCheckedChangeListener(configureFragmentViewModel::onStartOnBootChanged)
+
+        binding.switchUseBridge.setOnCheckedChangeListener(configureFragmentViewModel::onUseBridgeChanged)
     }
 
     override fun onTorLogsClicked(v: View) {
@@ -46,6 +47,10 @@ class ConnectionFragment: Fragment(R.layout.fragment_connectionsettings), ClickH
         val intent = Intent("android.net.vpn.SETTINGS")
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
+    }
+
+    override fun onBridgeSettingsClicked(v: View) {
+        Log.d("ConnectionFragment", "onBridgeSettings clicked")
     }
 
 }

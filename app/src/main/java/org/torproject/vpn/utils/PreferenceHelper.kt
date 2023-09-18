@@ -14,6 +14,7 @@ class PreferenceHelper(context: Context) {
         const val CACHED_APPS: String = "cached_apps"
         const val START_TIME: String = "start_time"
         const val START_ON_BOOT: String = "start_on_boot"
+        const val USE_BRIDGE: String = "use_bridge"
         const val EXIT_NODE_COUNTRY: String = "exit_node_country"
         const val AUTOMATIC_EXIT_NODE_SELECTION: String = "automatic_exit_node_selection"
     }
@@ -45,6 +46,10 @@ class PreferenceHelper(context: Context) {
     var startOnBoot
         get() = sharedPreference.getBoolean(START_ON_BOOT, false)
         set(value) = sharedPreference.edit().putBoolean(START_ON_BOOT, value).apply()
+
+    var useBridge
+        get() = sharedPreference.getBoolean(USE_BRIDGE, false)
+        set(value) = sharedPreference.edit().putBoolean(USE_BRIDGE, value).apply()
 
     var exitNodeCountry
         get() = sharedPreference.getString(EXIT_NODE_COUNTRY, null)
