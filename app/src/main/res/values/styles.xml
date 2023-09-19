@@ -50,6 +50,35 @@
         <item name="trackTint">@color/toggle_track_color</item>
     </style>
 
+    <style name="radio_button" parent="Widget.Material3.CompoundButton.RadioButton">
+        <item name="fontFamily">@font/figtree_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textOnPrimary</item>
+        <item name="buttonTint">@color/radio_button_color</item>
+    </style>
+    <style name="radio_button_title" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/figtree_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textOnPrimary</item>
+        <item name="buttonTint">@color/radio_button_color</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <style name="radio_button_subtitle" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/figtree_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/indigo10</item>
+        <item name="buttonTint">@color/radio_button_color</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:maxLines">5</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <!--         <item name="android:colorControlNormal">@color/textOnPrimary</item>
+        <item name="android:colorAccent">@color/purpleNormal</item>
+        <item name="android:tint">@color/purpleNormal</item>
+        -->
+
     <style name="app_circuits_text" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">16sp</item>
@@ -96,22 +125,24 @@
     </style>
 
     <style name="list_item_style_medium" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">0sp</item>
         <item name="android:textColor">?colorOnPrimary</item>
-        <item name="android:textFontWeight" tools:targetApi="p">550</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
     </style>
 
     <style name="list_item_subheader_style" parent="TextAppearance.MaterialComponents.Subtitle1">
         <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">0sp</item>
-        <item name="android:textColor">@color/purpleDarkTextSubdued</item>
+        <item name="android:textColor">@color/indigo10</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textFontWeight" tools:targetApi="p">400</item>
     </style>
 
     <style name="info_dialog_expanded_title" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">24sp</item>
         <item name="android:lineSpacingExtra">3sp</item>
         <item name="android:textColor">?colorOnPrimary</item>

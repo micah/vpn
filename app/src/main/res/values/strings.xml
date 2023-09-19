@@ -107,5 +107,15 @@
     <string name="bridge_option_obfs4_built">obfs4 (built-in)</string>
     <!-- content description for bridge settings image button in connection screen -->
     <string name="bridge_settings">Bridge settings</string>
+    <string name="bridges">Bridges</string>
+    <string name="built_in_bridges">Choose a built-in bridge</string>
+    <string name="obfs4" translatable="false">obfs4</string>
+    <string name="snowflake">Snowflake</string>
+    <string name="obfs4_description">Makes your traffic look like random data</string>
+    <string name="snowflake_description">Routes your connection through Snowflake proxies to make it look like you\'re placing a video call</string>
+    <string name="add_new_bridge">Add a new bridge</string>
+    <string name="bridge_address">Enter bridge address</string>
+    <string name="bridge_address_description">Add a bridge provided by a trusted organization or someone you know</string>
+
 
 </resources>

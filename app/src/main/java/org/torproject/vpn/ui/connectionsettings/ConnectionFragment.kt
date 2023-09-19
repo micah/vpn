@@ -50,7 +50,7 @@ class ConnectionFragment: Fragment(R.layout.fragment_connectionsettings), ClickH
     }
 
     override fun onBridgeSettingsClicked(v: View) {
-        Log.d("ConnectionFragment", "onBridgeSettings clicked")
+        findNavController().navigate(R.id.action_connectionFragment_to_bridgeSettingsFragment)
     }
 
 }

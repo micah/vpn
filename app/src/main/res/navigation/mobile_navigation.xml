@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_connectionFragment_to_LoggingFragment"
             app:destination="@id/loggingFragment" />
+        <action
+            android:id="@+id/action_connectionFragment_to_bridgeSettingsFragment"
+            app:destination="@id/bridgeSettingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loggingFragment"
@@ -84,5 +87,12 @@
             app:argType="boolean"
             android:defaultValue="false" />
     </fragment>
+
+    <fragment
+        android:id="@+id/bridgeSettingsFragment"
+        android:name="org.torproject.vpn.ui.bridgesettings.BridgeSettingsFragment"
+        android:label="BridgeSettingsFragment"
+        tools:layout="@layout/fragment_bridgesettings"
+        />
 
 </navigation>
