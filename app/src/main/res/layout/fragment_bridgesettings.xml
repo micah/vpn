@@ -9,6 +9,9 @@
             type="org.torproject.vpn.ui.bridgesettings.model.BridgeSettingsFragmentViewModel" />
 
         <import type="android.view.View" />
+        <variable
+            name="handler"
+            type="org.torproject.vpn.ui.bridgesettings.ClickHandler" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -168,6 +171,7 @@
                             android:layoutDirection="rtl"
                             android:textAlignment="textStart"
                             android:layout_gravity="start"
+                            android:onClick="@{() -> viewModel.selectBuiltInObfs4()}"
 
                             />
                         <com.google.android.material.radiobutton.MaterialRadioButton
@@ -178,6 +182,7 @@
                             android:layout_weight="1"
                             android:layoutDirection="rtl"
                             android:textAlignment="textStart"
+                            android:onClick="@{() -> viewModel.selectBuiltInSnowflake()}"
                             />
                     </RadioGroup>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -199,6 +204,7 @@
                     app:text="@string/bridge_address"
                     android:clickable="true"
                     android:focusable="true"
+                    android:onClick="@{handler::onManualBridgeSelectionClicked}"
                     />
 
 

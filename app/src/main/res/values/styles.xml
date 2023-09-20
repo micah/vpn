@@ -196,6 +196,11 @@
         <item name="android:lineSpacingExtra">3sp</item>
     </style>
 
+    <style name="dialog_title_small">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 
     <style name="error_title_text">
         <item name="android:textSize">24sp</item>
@@ -269,6 +274,12 @@
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">3sp</item>
         <item name="android:textColor">@color/indigo10</item>
+    </style>
+
+    <style name="small_info_text" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/indigo10</item>
+        <item name="android:fontFamily">@font/figtree_regular</item>
     </style>
 
     <style name="info_button_text" parent="TextAppearance.MaterialComponents.Body1">

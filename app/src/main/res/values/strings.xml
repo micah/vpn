@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Tor VPN</string>
 
+    <string name="action_save">Save</string>
     <string name="action_configure">Configure</string>
     <string name="action_connect">Connect</string>
     <string name="action_cancel">Cancel</string>
@@ -116,6 +117,14 @@
     <string name="add_new_bridge">Add a new bridge</string>
     <string name="bridge_address">Enter bridge address</string>
     <string name="bridge_address_description">Add a bridge provided by a trusted organization or someone you know</string>
+    <string name="bridge_addresses">Bridge addresses</string>
+    <string name="action_paste_bridges">Paste your bridge addresses here</string>
+
+    <plurals name="n_bridges">
+        <item quantity="one">%1$s bridge added</item>
+        <item quantity="many">%1$s bridges added</item>
+        <item quantity="other">%1$s bridges added</item>
+    </plurals>
 
 
 </resources>
