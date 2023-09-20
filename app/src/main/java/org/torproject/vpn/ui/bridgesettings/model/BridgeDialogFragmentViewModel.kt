@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.flow.*
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 
 class BridgeDialogFragmentViewModel(private val application: Application) : AndroidViewModel(application) {
 
@@ -37,7 +38,13 @@ class BridgeDialogFragmentViewModel(private val application: Application) : Andr
     }
 
     fun save() {
-        preferenceHelper.bridgeLines = _bridgeLines.value?.toSet() ?: emptySet()
+        val bridgeLineSet = _bridgeLines.value?.toSet() ?: emptySet()
+        preferenceHelper.bridgeLines = bridgeLineSet
+        if (bridgeLineSet.isEmpty()) {
+            preferenceHelper.bridgeType = BridgeType.None.toString()
+        } else {
+            preferenceHelper.bridgeType = BridgeType.Manual.toString()
+        }
     }
 
 }

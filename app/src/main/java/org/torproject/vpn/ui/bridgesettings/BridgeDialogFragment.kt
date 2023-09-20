@@ -111,7 +111,7 @@ class BridgeDialogFragment : DialogFragment(R.layout.fragment_bridges_dialog) {
         binding.textinputBridges.requestFocus()
     }
 
-    fun removeEmptyLines(myString: CharSequence): CharSequence {
+    private fun removeEmptyLines(myString: CharSequence): CharSequence {
         val regex = Regex("\n\\s*\n")
         return myString.replace(regex, "")
 
