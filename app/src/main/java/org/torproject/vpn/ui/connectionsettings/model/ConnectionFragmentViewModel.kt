@@ -58,9 +58,6 @@ class ConnectionFragmentViewModel(private val application: Application) : Androi
                 BridgeType.Snowflake -> application.getString(R.string.snowflake_built_in)
                 BridgeType.Obfs4 -> application.getString(R.string.obfs4_built_in)
                 BridgeType.Manual -> application.getString(R.string.manual_bridge)
-                else -> {
-                    application.getString(R.string.none)
-                }
             }
         } catch (ise: java.lang.IllegalStateException) {
             ise.printStackTrace()

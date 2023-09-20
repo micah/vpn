@@ -126,6 +126,8 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 }
             })
 
+        connectFragmentViewModel.updateConnectionLabel()
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -329,6 +331,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 PreferenceHelper.PROTECT_ALL_APPS -> connectFragmentViewModel.updateVPNSettings()
                 PreferenceHelper.EXIT_NODE_COUNTRY -> connectFragmentViewModel.updateExitNodeButton()
                 PreferenceHelper.AUTOMATIC_EXIT_NODE_SELECTION -> connectFragmentViewModel.updateExitNodeButton()
+                PreferenceHelper.BRIDGE_TYPE -> connectFragmentViewModel.updateConnectionLabel()
             }
         }
     }

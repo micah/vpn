@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 import org.torproject.vpn.BuildConfig
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
 import org.torproject.vpn.utils.PreferenceHelper.Companion.SHOULD_SHOW_GUIDE
 import org.torproject.vpn.utils.getFlagByCountryCode
@@ -41,6 +42,7 @@ import org.torproject.vpn.vpn.ConnectionState.INIT
 import org.torproject.vpn.vpn.DataUsage
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
+import java.lang.IllegalStateException
 
 /**
  * ViewModel for slider fragment, mostly place holder at this point
@@ -51,7 +53,7 @@ const val ACTION_EXIT_NODE_SELECTION = 113
 const val ACTION_APPS = 114
 const val ACTION_CONNECTION = 115
 
-class ConnectFragmentViewModel(application: Application) : AndroidViewModel(application) {
+class ConnectFragmentViewModel(private val application: Application) : AndroidViewModel(application) {
 
     private val _prepareVpn = MutableLiveData<Intent?>()
     private val preferenceHelper = PreferenceHelper(application)
@@ -144,6 +146,9 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
     val countryDrawable: StateFlow<Drawable?> = selectedCountry.asFlow().map { countryCode ->
         return@map getFlagByCountryCode(application, countryCode)
     }.stateIn(viewModelScope, SharingStarted.Lazily, null)
+
+    private val _connectionHint: MutableLiveData<String> = MutableLiveData(getConnectionString())
+    val connectionHint: LiveData<String> = _connectionHint
 
     //these are static one-time-fetch values on viewModel init. Dont need to be LiveData or StateFlow.
     val flavor = "Pre-alpha"
@@ -279,11 +284,6 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
         VpnServiceCommand.stopVpn(getApplication())
     }
 
-    private fun attemptCancelConnect() {
-        VpnStatusObservable.update(DISCONNECTING)
-        VpnServiceCommand.stopVpn(getApplication())
-    }
-
     fun prepareToStartVPN() {
         val vpnIntent: Intent? = VpnServiceCommand.prepareVpn(getApplication())
         if (vpnIntent != null) {
@@ -304,6 +304,28 @@ class ConnectFragmentViewModel(application: Application) : AndroidViewModel(appl
             selectedCountry.postValue("")
         } else {
             selectedCountry.postValue(preferenceHelper.exitNodeCountry)
+        }
+    }
+
+    fun updateConnectionLabel() {
+        _connectionHint.postValue(getConnectionString())
+    }
+
+    private fun getConnectionString(): String {
+        return preferenceHelper.bridgeType?.let {
+            try {
+                when (BridgeType.valueOf(it)) {
+                    BridgeType.None -> application.getString(R.string.connect_direct_to_tor)
+                    BridgeType.Snowflake -> application.getString(R.string.snowflake_built_in)
+                    BridgeType.Obfs4 -> application.getString(R.string.obfs4_built_in)
+                    BridgeType.Manual -> application.getString(R.string.manual_bridge)
+                }
+            } catch (ise: IllegalStateException) {
+                ise.printStackTrace()
+                application.getString(R.string.connect_direct_to_tor)
+            }
+        } ?: kotlin.run {
+            application.getString(R.string.connect_direct_to_tor)
         }
     }
 
