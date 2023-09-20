@@ -312,20 +312,11 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
     }
 
     private fun getConnectionString(): String {
-        return preferenceHelper.bridgeType?.let {
-            try {
-                when (BridgeType.valueOf(it)) {
-                    BridgeType.None -> application.getString(R.string.connect_direct_to_tor)
-                    BridgeType.Snowflake -> application.getString(R.string.snowflake_built_in)
-                    BridgeType.Obfs4 -> application.getString(R.string.obfs4_built_in)
-                    BridgeType.Manual -> application.getString(R.string.manual_bridge)
-                }
-            } catch (ise: IllegalStateException) {
-                ise.printStackTrace()
-                application.getString(R.string.connect_direct_to_tor)
-            }
-        } ?: kotlin.run {
-            application.getString(R.string.connect_direct_to_tor)
+        return when (preferenceHelper.bridgeType) {
+            BridgeType.None -> application.getString(R.string.connect_direct_to_tor)
+            BridgeType.Snowflake -> application.getString(R.string.snowflake_built_in)
+            BridgeType.Obfs4 -> application.getString(R.string.obfs4_built_in)
+            BridgeType.Manual -> application.getString(R.string.manual_bridge)
         }
     }
 

@@ -18,6 +18,7 @@ import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import org.torproject.vpn.R
 import org.torproject.vpn.vpn.DataUsage
+import java.io.BufferedReader
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -182,4 +183,12 @@ fun getCountryByCode(context: Context, code: String?): String {
         return  Locale("", code).displayCountry
     }
     return context.getString(R.string.unknown)
+}
+
+fun readAsset(context: Context, fileName: String): String {
+    return context
+        .assets
+        .open(fileName)
+        .bufferedReader()
+        .use(BufferedReader::readText)
 }

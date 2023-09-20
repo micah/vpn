@@ -48,12 +48,12 @@ class ConnectionFragmentViewModel(private val application: Application) : Androi
     }.stateIn(
         viewModelScope,
         SharingStarted.Lazily,
-        getStringForBridgeType(preferenceHelper.bridgeType ?: BridgeType.None.toString())
+        getStringForBridgeType(preferenceHelper.bridgeType)
     )
 
-    private fun getStringForBridgeType(value: String): String {
+    private fun getStringForBridgeType(type: BridgeType): String {
         return try {
-            when (BridgeType.valueOf(value)) {
+            when (type) {
                 BridgeType.None -> application.getString(R.string.none)
                 BridgeType.Snowflake -> application.getString(R.string.snowflake_built_in)
                 BridgeType.Obfs4 -> application.getString(R.string.obfs4_built_in)

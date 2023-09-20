@@ -68,9 +68,9 @@ class PreferenceHelper(context: Context) {
         get() = sharedPreference.getBoolean(AUTOMATIC_EXIT_NODE_SELECTION, true)
         set(value) = sharedPreference.edit().putBoolean(AUTOMATIC_EXIT_NODE_SELECTION, value).apply()
 
-    var bridgeType
-        get() = sharedPreference.getString(BRIDGE_TYPE, BridgeType.None.name)
-        set(value) = sharedPreference.edit().putString(BRIDGE_TYPE, value).apply()
+    var bridgeType: BridgeType
+        get() = BridgeType.valueOf(sharedPreference.getString(BRIDGE_TYPE, BridgeType.None.name)!!)
+        set(bridgeType) = sharedPreference.edit().putString(BRIDGE_TYPE, bridgeType.name).apply()
 
 
     var bridgeLines

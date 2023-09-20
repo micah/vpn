@@ -21,7 +21,9 @@ import org.torproject.onionmasq.logging.LogHelper
 import org.torproject.onionmasq.logging.LogObservable
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 import org.torproject.vpn.utils.VpnNotificationManager
+import org.torproject.vpn.utils.readAsset
 import java.io.IOException
 import java.lang.ref.WeakReference
 import java.util.*
@@ -39,7 +41,9 @@ class TorVpnService : VpnService() {
     private var fd: ParcelFileDescriptor? = null
     private lateinit var notificationManager: VpnNotificationManager
     private lateinit var logHelper: LogHelper
+    private lateinit var preferenceHelper: PreferenceHelper
     private var logObservable: LogObservable? = null
+
 
     private val binder: IBinder = TorVpnServiceBinder(WeakReference(this))
 
@@ -63,6 +67,7 @@ class TorVpnService : VpnService() {
         super.onCreate()
         notificationManager = VpnNotificationManager(this)
         logHelper = LogHelper()
+        preferenceHelper = PreferenceHelper(this)
         logObservable = LogObservable.getInstance()
         OnionMasq.bindVPNService(TorVpnService::class.java)
     }
@@ -288,7 +293,7 @@ class TorVpnService : VpnService() {
 
             fd = builder.establish();
             coroutineScope.async {
-                OnionMasq.start(fd!!.detachFd())
+                OnionMasq.start(fd!!.detachFd(), getBridgeLines())
             }
         } catch (e: Exception) {
             // Catch any exception
@@ -297,17 +302,44 @@ class TorVpnService : VpnService() {
         }
     }
 
+    private fun getBridgeLines(): String? {
+        if (!preferenceHelper.useBridge) {
+            return null
+        }
+
+        return when (preferenceHelper.bridgeType) {
+            BridgeType.None -> null
+            BridgeType.Manual -> getManualBridgeLines()
+            BridgeType.Snowflake -> readAsset(this, "snowflake.txt")
+            BridgeType.Obfs4 -> readAsset(this, "obfs4.txt")
+        }
+    }
+
+    private fun getManualBridgeLines(): String? {
+        val bridgeSet = preferenceHelper.bridgeLines
+        if (bridgeSet.isEmpty()) {
+            return null
+        }
+        var bridgeLines = "";
+        for (line in bridgeSet) {
+            bridgeLines += "$line\n"
+        }
+
+        Log.d(TAG, "returned bridge lines: $bridgeLines")
+        return bridgeLines;
+    }
+
+
     /**
      * Adds selected app into 'allowed apps' for current vpn connection. Only selected apps will use VPN.
      * @param builder VPN Builder
      */
     private fun applyAppFilter(builder: Builder) {
-        val helper = PreferenceHelper(applicationContext)
-        if (helper.protectAllApps) {
+        if (preferenceHelper.protectAllApps) {
             // no filtering, all apps will be routed over the VPN
             return
         }
-        val selectedApps: Set<String> = helper.protectedApps ?:
+        val selectedApps: Set<String> = preferenceHelper.protectedApps ?:
             HashSet<String>()
 
         val packageManager = packageManager

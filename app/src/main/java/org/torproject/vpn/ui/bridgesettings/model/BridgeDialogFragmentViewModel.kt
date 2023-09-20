@@ -41,9 +41,9 @@ class BridgeDialogFragmentViewModel(private val application: Application) : Andr
         val bridgeLineSet = _bridgeLines.value?.toSet() ?: emptySet()
         preferenceHelper.bridgeLines = bridgeLineSet
         if (bridgeLineSet.isEmpty()) {
-            preferenceHelper.bridgeType = BridgeType.None.toString()
+            preferenceHelper.bridgeType = BridgeType.None
         } else {
-            preferenceHelper.bridgeType = BridgeType.Manual.toString()
+            preferenceHelper.bridgeType = BridgeType.Manual
         }
     }
 
