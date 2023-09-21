@@ -31,8 +31,8 @@ class BridgeDialogFragment : DialogFragment(R.layout.fragment_bridges_dialog) {
     }
 
     private lateinit var viewModel: BridgeDialogFragmentViewModel
-    private var _viewBinding: FragmentBridgesDialogBinding? = null
-    private val viewBinding get() = _viewBinding!!
+    private var _binding: FragmentBridgesDialogBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,10 +41,10 @@ class BridgeDialogFragment : DialogFragment(R.layout.fragment_bridges_dialog) {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        _viewBinding = FragmentBridgesDialogBinding.inflate(LayoutInflater.from(requireContext()))
-        bind(viewBinding)
+        _binding = FragmentBridgesDialogBinding.inflate(LayoutInflater.from(requireContext()))
+        bind(binding)
         val builder = AlertDialog.Builder(requireActivity())
-        builder.setView(viewBinding.root)
+        builder.setView(binding.root)
         val dialog = builder.create()
         dialog.window?.apply {
             setBackgroundDrawable(ColorDrawable(TRANSPARENT))
@@ -59,7 +59,7 @@ class BridgeDialogFragment : DialogFragment(R.layout.fragment_bridges_dialog) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.helperText.collect { helperText ->
-                    viewBinding.tvHelpline.text = helperText
+                    binding.tvHelpline.text = helperText
                 }
             }
         }
@@ -67,7 +67,7 @@ class BridgeDialogFragment : DialogFragment(R.layout.fragment_bridges_dialog) {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _viewBinding = null
+        _binding = null
     }
 
     private fun bind(binding: FragmentBridgesDialogBinding) {
