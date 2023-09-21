@@ -312,6 +312,9 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
     }
 
     private fun getConnectionString(): String {
+        if (!preferenceHelper.useBridge) {
+            return application.getString(R.string.connect_direct_to_tor)
+        }
         return when (preferenceHelper.bridgeType) {
             BridgeType.None -> application.getString(R.string.connect_direct_to_tor)
             BridgeType.Snowflake -> application.getString(R.string.snowflake_built_in)
