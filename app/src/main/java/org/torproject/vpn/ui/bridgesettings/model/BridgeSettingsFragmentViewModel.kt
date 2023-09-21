@@ -1,7 +1,6 @@
 package org.torproject.vpn.ui.bridgesettings.model
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
@@ -21,11 +20,9 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
 
     fun selectBuiltInObfs4() {
         preferenceHelper.bridgeType = BridgeType.Obfs4
-        Log.d("BridgeSettingsFragmentViewModel", "selectBuiltInObfs4")
     }
 
     fun selectBuiltInSnowflake() {
         preferenceHelper.bridgeType = BridgeType.Snowflake
-        Log.d("BridgeSettingsFragmentViewModel", "selectBuiltInSnowflake")
     }
 }

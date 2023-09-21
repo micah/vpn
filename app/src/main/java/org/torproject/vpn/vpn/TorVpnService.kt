@@ -325,7 +325,6 @@ class TorVpnService : VpnService() {
             bridgeLines += "$line\n"
         }
 
-        Log.d(TAG, "returned bridge lines: $bridgeLines")
         return bridgeLines;
     }
 
