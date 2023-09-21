@@ -61,8 +61,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView5"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_connection_description"
                     style="@style/connection_bridge_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,7 +80,6 @@
                     android:paddingVertical="@dimen/default_padding"
                     android:text="@string/built_in_bridges" />
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,8 +94,6 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintGuide_percent="0.9"
                         />
-
-
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_obfs4_title"
@@ -172,7 +169,6 @@
                             android:textAlignment="textStart"
                             android:layout_gravity="start"
                             android:onClick="@{() -> viewModel.selectBuiltInObfs4()}"
-
                             />
                         <com.google.android.material.radiobutton.MaterialRadioButton
                             android:id="@+id/rb_snowflake"
@@ -207,10 +203,7 @@
                     android:onClick="@{handler::onManualBridgeSelectionClicked}"
                     />
 
-
             </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 </layout>
