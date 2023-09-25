@@ -147,7 +147,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
+            android:id="@+id/cl_apps_card"
             android:layout_width="0dp"
             android:layout_height="@dimen/stat_switch_height"
             android:layout_marginTop="8dp"
@@ -216,7 +216,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout3"
+            android:id="@+id/cl_connection_card"
             android:layout_width="0dp"
             android:layout_height="@dimen/stat_switch_height"
             android:layout_marginTop="8dp"
@@ -225,7 +225,7 @@
             android:visibility="@{viewModel.connectionCardVisibility ? View.VISIBLE: View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+            app:layout_constraintTop_toBottomOf="@+id/cl_apps_card">
 
             <ImageView
                 android:id="@+id/ic_connection"

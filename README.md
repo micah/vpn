@@ -82,6 +82,23 @@ If you need to fetch the latest onionmasq library during the development, you ha
 fetch the latest version from https://gitlab.torproject.org/tpo/core/onionmasq/-/packages (`main-branch-debug` version, if you're building a debug apk).
 You can have a look at `./scripts/clear_onionmasq_gradle_cache.sh` to get an idea how to remove onionmasq from the gradle cache.
 
+# Instrumentation Testing
+
+To run UI tests, you will need to prepare an emulator (or a physical device). Please make sure that animations are disabled, as they are a core reason for flaky test results.
+To disable them, you will need to enable the Developer Mode in your emulator by opening the `Settings` app,
+tapping on `About emulated device` and 7 times on `Build number`.
+
+Enter the Developer options by going back to the root of the settings app, tap on `System` -> `Developer Options`, scroll down to
+`Window animation scale`, `Transition animation scale` and `Animator animation scale`. Set all of these options to `Animation off`.
+
+It's now time to run the tests. Make sure your emulator is running and enter
+
+```
+./gradlew app:connectedDebugAndroidTest
+```
+
+into your console.
+
 # License
 
 This code is licensed under the [3-clause BSD license](https://opensource.org/license/bsd-3-clause/)

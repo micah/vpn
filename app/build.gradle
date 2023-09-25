@@ -79,9 +79,27 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.15.1'
     kapt 'com.github.bumptech.glide:compiler:4.15.1'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android-core:2.9.1'
-    testImplementation 'junit:junit:4.13.2'
+
+    // Testing
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib"
+    androidTestImplementation 'androidx.test:core:1.5.0'
+    androidTestImplementation 'androidx.test:core-ktx:1.5.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.5'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.1'
+
+    testImplementation 'androidx.test:core:1.5.0'
+    testImplementation 'androidx.test.ext:junit:1.1.5'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
+    testImplementation 'androidx.test.ext:truth:1.5.0'
+
+    androidTestImplementation 'tools.fastlane:screengrab:2.1.1'
+    testImplementation 'tools.fastlane:screengrab:2.1.1'
 
     debugImplementation 'org.torproject:onionmasq:main-branch-debug'
     releaseImplementation 'org.torproject:onionmasq:0.1.0-local-release'
