@@ -89,7 +89,7 @@ Enter the Developer options by going back to the root of the settings app, tap o
 It's now time to run the tests. Make sure your emulator is running and enter
 
 ```
-/gradlew app:connectedDebugAndroidTest
+./gradlew app:connectedDebugAndroidTest
 ```
 
 into your console.
