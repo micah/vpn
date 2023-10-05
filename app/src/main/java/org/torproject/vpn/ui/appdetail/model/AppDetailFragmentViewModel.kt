@@ -39,7 +39,7 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
     }.stateIn(viewModelScope, Eagerly, "")
 
     val independentTorAppDescriptionText: StateFlow<String> = appName.asFlow().map { appName ->
-        return@map application.getString(R.string.description_independend_tor_powered_app, appName)
+        return@map application.getString(R.string.description_independent_tor_powered_app, appName)
     }.stateIn(viewModelScope, Eagerly, "")
 
     private val _dataUsage: MutableLiveData<DataUsage> = MutableLiveData(DataUsage())

@@ -41,7 +41,6 @@
     <string name="copied">Copied …</string>
 
     <string name="title_guide">This app is highly\nexperimental</string>
-    <string name="guide_pre_alpha">Pre-alpha</string>
     <string name="guide_version_number" translatable="false">%1$s</string>
     <string name="guide_bullet_head_1">You are ready to start testing</string>
     <string name="guide_bullet_head_2">But don\'t do anything risky</string>
@@ -75,7 +74,7 @@
     <string name="this_browser">This browser</string>
     <string name="this_app">This app</string>
     <string name="tor_powered_app">Tor-powered app</string>
-    <string name="description_independend_tor_powered_app">This app uses its own Tor connection, independent of the Tor VPN. View and configure its connection in %1$s instead.</string>
+    <string name="description_independent_tor_powered_app">This app uses its own Tor connection, independent of the Tor VPN. View and configure its connection in %1$s instead.</string>
     <string name="action_open_app">Open %1$s</string>
     <string name="guard">Guard</string>
 

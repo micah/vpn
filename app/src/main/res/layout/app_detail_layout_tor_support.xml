@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="@string/description_independend_tor_powered_app"
+            tools:text="@string/description_independent_tor_powered_app"
             android:text="@{viewModel.independentTorAppDescriptionText}"
             android:textAppearance="@style/info_text" />
 

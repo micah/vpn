@@ -150,7 +150,7 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
     private val _connectionHint: MutableLiveData<String> = MutableLiveData(getConnectionString())
     val connectionHint: LiveData<String> = _connectionHint
 
-    //these are static one-time-fetch values on viewModel init. Dont need to be LiveData or StateFlow.
+    //these are static one-time-fetch values on viewModel init. Don't need to be LiveData or StateFlow.
     val flavor = "Pre-alpha"
     val version = BuildConfig.VERSION_NAME
 
