@@ -1,5 +1,14 @@
 CHANGELOG
 =========
+0.3.0 Pre-Alpha
+* Add PT (obfs4)
+* Update UI
+* Adding several tests
+* Manual bridge selection
+* Add bridge settings
+* Add readme
+* String changes
+* And more
 
 0.2.0 Pre-Alpha
 ----------------

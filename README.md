@@ -78,7 +78,7 @@ For now the build and installation steps are as easy as:
 Have fun!
 
 # Update onionmasq during development
-If you need to fetch the latest onionmasq library during the development, you have to clear your gradle cache before you invoke a new build. Gradle will will automatically 
+If you need to fetch the latest onionmasq library during the development, you have to clear your gradle cache before you invoke a new build. Gradle will automatically 
 fetch the latest version from https://gitlab.torproject.org/tpo/core/onionmasq/-/packages (`main-branch-debug` version, if you're building a debug apk).
 You can have a look at `./scripts/clear_onionmasq_gradle_cache.sh` to get an idea how to remove onionmasq from the gradle cache.
 
