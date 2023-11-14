@@ -17,4 +17,10 @@
         <attr name="hideDrawable" />
         <attr name="hideSwitch" />
     </declare-styleable>
+
+    <declare-styleable name="BridgeRequestEntryView">
+        <attr name="text"/>
+        <attr name="secondaryText"/>
+        <attr name="drawable"/>
+    </declare-styleable>
 </resources>

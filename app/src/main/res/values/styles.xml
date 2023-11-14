@@ -120,6 +120,14 @@
         <item name="android:textFontWeight" tools:targetApi="p">450</item>
     </style>
 
+    <style name="list_item_style_small" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+        <item name="android:textColor">@color/indigo10</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+    </style>
+
     <style name="list_item_style_medium" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">16sp</item>

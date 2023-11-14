@@ -4,13 +4,10 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import kotlinx.coroutines.launch
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentBridgesettingsBinding
 import org.torproject.vpn.ui.bridgesettings.model.BridgeSettingsFragmentViewModel
@@ -25,6 +22,7 @@ class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickH
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[BridgeSettingsFragmentViewModel::class.java]
+        viewModel.load()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,6 +48,26 @@ class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickH
     override fun onManualBridgeSelectionClicked(v: View) {
         val dialog = BridgeDialogFragment.create()
         dialog.show(parentFragmentManager, "BRIDGE_DIALOG")
+    }
+
+    override fun onTorBridgeBotClicked(v: View) {
+        Toast.makeText(context, "The UX for the integrated tor bot is not finally decided yet", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onTelegramBridgeBotClicked(v: View) {
+        val intent = viewModel.getTelegramIntent()
+        startActivity(intent);
+    }
+
+    override fun onEmailBridgeBotClicked(v: View) {
+        val intent = viewModel.getEmailBotIntent()
+        startActivity(intent)
+    }
+
+    override fun onWebBridgeBotClicked(v: View) {
+        val intent = viewModel.getWebBotIntent()
+        startActivity(intent)
+
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {

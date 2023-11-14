@@ -121,6 +121,15 @@
     <string name="bridge_addresses">Bridge addresses</string>
     <string name="action_paste_bridges">Paste your bridge addresses here</string>
     <string name="manual_bridge">Manual selection</string>
+    <string name="get_new_bridges">Get new bridges</string>
+    <string name="get_new_bridges_description">Since bridge addresses aren\'t public, you\'ll need to request one from the Tor Project.</string>
+    <string name="ask_bridge_bot">Ask the bridge bot</string>
+    <string name="telegram">Telegram</string>
+    <string name="web">Web</string>
+    <string name="email_providers">Gmail or Riseup</string>
+    <string name="telegram_bot_subtitle">Message %s</string>
+    <string name="email_bot_subtitle">Email %s</string>
+    <string name="web_bot_subtitle">Visit %s</string>
 
     <plurals name="n_bridges">
         <item quantity="one">%1$s bridge added</item>

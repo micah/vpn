@@ -50,32 +50,21 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginVertical="@dimen/activity_vertical_margin"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_connection_description"
-                    style="@style/connection_bridge_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:text="@string/use_a_bridge_info" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/paragraph_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:paddingHorizontal="@dimen/activity_horizontal_margin"
                     android:paddingVertical="@dimen/default_padding"
                     android:text="@string/built_in_bridges" />
@@ -202,8 +191,85 @@
                     android:focusable="true"
                     android:onClick="@{handler::onManualBridgeSelectionClicked}"
                     />
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_rounded_top"
+                    android:paddingTop="@dimen/default_padding"
+                    android:layout_marginTop="@dimen/default_padding"
+                    android:paddingHorizontal="@dimen/compact_padding"
+                    android:layout_marginHorizontal="24dp"
+                    >
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/radio_button_title"
+                        android:padding="@dimen/default_padding"
+                        android:text="@string/get_new_bridges"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/default_padding"
+                        style="@style/radio_button_subtitle"
+                        android:text="@string/get_new_bridges_description"/>
+
+                    <org.torproject.vpn.ui.bridgesettings.view.BridgeRequestEntryView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:text="@string/app_name"
+                        app:secondaryText="@string/ask_bridge_bot"
+                        app:drawable="@drawable/bridge_bot_icon"
+                        android:visibility="visible"
+                        android:onClick="@{handler::onTorBridgeBotClicked}"
+                        />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="4dp"
+                    android:paddingBottom="@dimen/default_padding"
+                    android:paddingHorizontal="@dimen/compact_padding"
+                    android:layout_marginHorizontal="24dp"
+                    android:background="@drawable/bg_rounded_bottom"
+                    >
+                    <org.torproject.vpn.ui.bridgesettings.view.BridgeRequestEntryView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:text="@string/telegram"
+                        app:secondaryText="@{viewModel.formattedTelegramBotSubtitle}"
+                        app:drawable="@{viewModel.telegramDrawable}"
+                        tools:drawable="@drawable/ic_dummy_app"
+                        tools:secondaryText="@{viewModel.formattedTelegramBotSubtitle"
+                        android:visibility="@{viewModel.telegramVisibility}"
+                        android:onClick="@{handler::onTelegramBridgeBotClicked}"
+                        />
+                    <org.torproject.vpn.ui.bridgesettings.view.BridgeRequestEntryView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:text="@string/web"
+                        app:secondaryText="@{viewModel.formattedWebBotSubtitle}"
+                        app:drawable="@{viewModel.webbrowserDrawable}"
+                        android:onClick="@{handler::onWebBridgeBotClicked}"
+                        tools:drawable="@drawable/ic_dummy_app"
+                        tools:secondaryText="Visit bridges.torproject.org"/>
+
+                    <org.torproject.vpn.ui.bridgesettings.view.BridgeRequestEntryView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:text="@string/email_providers"
+                        app:secondaryText="@{viewModel.formattedEmailBotSubtitle}"
+                        app:drawable="@{viewModel.emailDrawable}"
+                        android:onClick="@{handler::onEmailBridgeBotClicked}"
+                        tools:drawable="@drawable/ic_dummy_app"
+                        tools:secondaryText="Email bridges@torproject.org"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
