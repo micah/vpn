@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     app:drawable="@drawable/ic_apps"
                     app:text="@string/apps"
-                    app:secondaryText="@string/apps_description_all_protected"
+                    app:secondaryText="@{viewModel.appProtectionLabel}"
                     android:onClick="@{handler::onAppsClicked}"
                     />
 
