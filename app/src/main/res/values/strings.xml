@@ -11,6 +11,7 @@
     <string name="action_protect_all_apps">Protect all apps</string>
     <string name="action_protect_this_app">Protect this app</string>
     <string name="label_not_protected">None protected</string>
+    <string name="label_some_protected">Some protected</string>
     <!-- notifications actions -->
     <string name="action_start">Start VPN</string>
     <string name="action_stop">Stop VPN</string>

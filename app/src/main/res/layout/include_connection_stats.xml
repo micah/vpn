@@ -181,18 +181,18 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_stat_title"
                 />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_protect_all_apps_label"
                 style="@style/stats_kbits_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:text="@{viewModel.allAppsProtected? @string/action_protect_all_apps : @string/label_not_protected}"
+                android:text="@{viewModel.appProtectionLabel}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ic_protect_app"
                 app:layout_constraintTop_toBottomOf="@+id/tv_stat_title" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_stat_title"
                 style="@style/stats_card_title"
                 android:layout_width="wrap_content"
@@ -235,7 +235,9 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_connection_label"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_connection_title"
-                app:srcCompat="@drawable/ic_connection" />
+                app:srcCompat="@drawable/ic_connection"
+                android:importantForAccessibility="no"
+                />
 
             <ImageView
                 android:id="@+id/ic_connection_settings"
@@ -245,7 +247,9 @@
                 android:src="@drawable/connection_settings"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_connection_label"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_connection_title" />
+                app:layout_constraintTop_toTopOf="@+id/tv_connection_title"
+                android:importantForAccessibility="no"
+                />
 
             <TextView
                 android:id="@+id/tv_connection_label"
