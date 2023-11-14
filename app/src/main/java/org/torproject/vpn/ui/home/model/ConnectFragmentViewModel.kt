@@ -253,7 +253,7 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
         preferenceHelper.protectAllApps
     )
 
-    val someAppsProtected: StateFlow<Boolean> = callbackFlow {
+    private val someAppsProtected: StateFlow<Boolean> = callbackFlow {
         val listener = OnSharedPreferenceChangeListener { _, changedKey ->
             if (PROTECTED_APPS == changedKey) {
                 trySend(!preferenceHelper.protectedApps.isNullOrEmpty())
