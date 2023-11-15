@@ -6,14 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.CompoundButton.OnCheckedChangeListener
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.IconTextEntryViewBinding
-import org.torproject.vpn.utils.getLifeCycleOwner
 
 /**
  * Configuration entry used in ConfigureFragment and ConnectionFragment
@@ -66,15 +61,7 @@ class IconTextEntryView : ConstraintLayout {
     }
 
     fun setStateFlowForSecondaryText(flow: StateFlow<String>) {
-        getLifeCycleOwner()?.let {
-            it.lifecycleScope.launch {
-                it.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    flow.collect() { value ->
-                        binding.tvSubtitle.text = value
-                    }
-                }
-            }
-        }
+        binding.tvSubtitle.text = flow.value
     }
 
     var isChecked: Boolean

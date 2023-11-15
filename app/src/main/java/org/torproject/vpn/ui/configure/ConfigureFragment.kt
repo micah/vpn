@@ -1,13 +1,8 @@
 package org.torproject.vpn.ui.configure
 
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.View.VISIBLE
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -29,6 +24,7 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
         val binding = FragmentConfigureBinding.bind(view)
         binding.viewModel = configureFragmentViewModel
         binding.handler = this
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     override fun onAppsClicked(v: View) {
