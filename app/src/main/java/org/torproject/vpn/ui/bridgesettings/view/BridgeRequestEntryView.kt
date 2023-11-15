@@ -56,14 +56,6 @@ class BridgeRequestEntryView : ConstraintLayout {
     }
 
     fun setDrawableStateFlowForIcon(flow: StateFlow<Drawable?>) {
-        getLifeCycleOwner()?.let {
-            it.lifecycleScope.launch {
-                it.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    flow.collect() { value ->
-                        binding.ivIcon.setImageDrawable(value)
-                    }
-                }
-            }
-        }
+        binding.ivIcon.setImageDrawable(flow.value)
     }
 }
