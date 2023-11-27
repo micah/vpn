@@ -51,7 +51,16 @@ class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickH
     }
 
     override fun onTorBridgeBotClicked(v: View) {
-        Toast.makeText(context, "The UX for the integrated tor bot is not finally decided yet", Toast.LENGTH_SHORT).show()
+        val list = mutableListOf<String>()
+        list.add("obfs4 212.51.134.25:9300 863A70D93A519276EB9DB940642C2E25422646CB cert=AuCuEn3tI14KddV90TKbE6cmwlYYSiWvdccVTDTcZ5U5PtXWRHUo+enb+lGCKwFcqysSfg iat-mode=0")
+        list.add("obfs4 95.217.45.150:8364 17D88EC9D3196D3C5CA126E85C41B2B28B58783C cert=ggBNji0pxQFTlZ4ShZufg597tPOG5w32XUeLx3tPmxch9AQ8hF50703oZWhJVBwNRGc0Xw iat-mode=0")
+
+          val dialog = BridgeDialogFragment.create(
+            BridgeDialogFragmentArgs(
+                argBridgeLines = list.toTypedArray()
+            )
+        )
+        dialog.show(parentFragmentManager, "BRIDGE_DIALOG")
     }
 
     override fun onTelegramBridgeBotClicked(v: View) {

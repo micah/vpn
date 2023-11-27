@@ -7,11 +7,11 @@ import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 
-class BridgeDialogFragmentViewModel(private val application: Application) : AndroidViewModel(application) {
+class BridgeDialogFragmentViewModel(private val application: Application, loadFromPreferences: Boolean) : AndroidViewModel(application) {
 
     val preferenceHelper = PreferenceHelper(application)
 
-    private val _bridgeLines: MutableLiveData<List<String>> = MutableLiveData(preferenceHelper.bridgeLines.toList())
+    private val _bridgeLines: MutableLiveData<List<String>> = MutableLiveData(if (loadFromPreferences) preferenceHelper.bridgeLines.toList() else emptyList())
     val bridgeLines: LiveData<List<String>> get() = _bridgeLines
 
     val helperText: StateFlow<String> = bridgeLines.asFlow().map { bridgeLines ->

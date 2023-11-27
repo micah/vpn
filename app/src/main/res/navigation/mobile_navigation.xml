@@ -89,6 +89,19 @@
     </fragment>
 
     <fragment
+        android:id="@+id/bridgeDialogFragment"
+        android:name="org.torproject.vpn.ui.bridgesettings.BridgeDialogFragment"
+        android:label="BridgeDialogFragment"
+        tools:layout="@layout/fragment_bridges_dialog">
+        <argument
+            android:name="argBridgeLines"
+            app:argType="string[]"
+            app:nullable="false"
+            />
+    </fragment>
+
+
+    <fragment
         android:id="@+id/bridgeSettingsFragment"
         android:name="org.torproject.vpn.ui.bridgesettings.BridgeSettingsFragment"
         android:label="BridgeSettingsFragment"

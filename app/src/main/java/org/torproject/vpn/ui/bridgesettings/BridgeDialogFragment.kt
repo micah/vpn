@@ -13,6 +13,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
@@ -20,13 +21,16 @@ import org.torproject.vpn.R
 import org.torproject.vpn.databinding.ChipItemBinding
 import org.torproject.vpn.databinding.FragmentBridgesDialogBinding
 import org.torproject.vpn.ui.bridgesettings.model.BridgeDialogFragmentViewModel
+import org.torproject.vpn.ui.bridgesettings.model.BridgeDialogViewModelFactory
 
 
 class BridgeDialogFragment : DialogFragment(R.layout.fragment_bridges_dialog) {
 
     companion object {
-        fun create(): BridgeDialogFragment {
-            return BridgeDialogFragment()
+        fun create(args: BridgeDialogFragmentArgs? = null): BridgeDialogFragment {
+            val fragment = BridgeDialogFragment()
+            fragment.arguments = args?.toBundle()
+            return fragment
         }
     }
 
@@ -36,8 +40,14 @@ class BridgeDialogFragment : DialogFragment(R.layout.fragment_bridges_dialog) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[BridgeDialogFragmentViewModel::class.java]
-
+        var loadFromPreferences = true
+        arguments?.let {
+            val bridgeLines = BridgeDialogFragmentArgs.fromBundle(it).argBridgeLines
+            if (!bridgeLines.isEmpty()) {
+                loadFromPreferences = false
+            }
+        }
+        viewModel = ViewModelProvider(this, BridgeDialogViewModelFactory(requireActivity().application, loadFromPreferences))[BridgeDialogFragmentViewModel::class.java]
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -56,6 +66,15 @@ class BridgeDialogFragment : DialogFragment(R.layout.fragment_bridges_dialog) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        arguments?.let {
+            val arguments = BridgeDialogFragmentArgs.fromBundle(it)
+            val bridgeLines = arguments.argBridgeLines
+            for (bridgeLine in bridgeLines) {
+                handleBridgeLine(binding, bridgeLine)
+            }
+        }
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.helperText.collect { helperText ->
