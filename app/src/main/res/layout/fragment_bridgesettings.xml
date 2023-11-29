@@ -94,6 +94,7 @@
                         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
                         app:layout_constraintHorizontal_bias="0"
                         android:text="@string/obfs4"
+                        android:importantForAccessibility="no"
                         android:paddingTop="@dimen/default_padding"
                         />
                     <androidx.appcompat.widget.AppCompatTextView
@@ -106,6 +107,7 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_obfs4_title"
                         app:layout_constraintHorizontal_bias="0"
                         android:text="@string/obfs4_description"
+                        android:importantForAccessibility="no"
                         android:paddingBottom="@dimen/default_padding"
                         />
 
@@ -119,6 +121,7 @@
                         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
                         app:layout_constraintHorizontal_bias="0"
                         android:text="@string/snowflake"
+                        android:importantForAccessibility="no"
                         android:paddingTop="@dimen/default_padding"
                         />
                     <androidx.appcompat.widget.AppCompatTextView
@@ -131,6 +134,7 @@
                         app:layout_constraintEnd_toStartOf="@id/guideline_vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintHorizontal_bias="0"
+                        android:importantForAccessibility="no"
                         android:text="@string/snowflake_description"
                         android:paddingBottom="@dimen/default_padding"
                         />
@@ -157,6 +161,7 @@
                             android:layoutDirection="rtl"
                             android:textAlignment="textStart"
                             android:layout_gravity="start"
+                            android:contentDescription="@{viewModel.obfs4AccessibilityDescription}"
                             android:onClick="@{() -> viewModel.selectBuiltInObfs4()}"
                             />
                         <com.google.android.material.radiobutton.MaterialRadioButton
@@ -167,6 +172,7 @@
                             android:layout_weight="1"
                             android:layoutDirection="rtl"
                             android:textAlignment="textStart"
+                            android:contentDescription="@{viewModel.snowflakeAccessibilityDescription}"
                             android:onClick="@{() -> viewModel.selectBuiltInSnowflake()}"
                             />
                     </RadioGroup>

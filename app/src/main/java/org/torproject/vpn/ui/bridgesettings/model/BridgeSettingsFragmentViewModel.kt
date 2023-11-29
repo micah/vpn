@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.torproject.vpn.R
+import org.torproject.vpn.TorApplication
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 
@@ -81,6 +82,12 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
 
     val formattedWebBotSubtitle: SpannableString
         get() = getFormattedWebBotSubtitle(getApplication())
+
+    val snowflakeAccessibilityDescription: String
+        get() = "${getApplication<TorApplication>().getString(R.string.snowflake)}; ${getApplication<TorApplication>().getString(R.string.snowflake_description)}"
+
+    val obfs4AccessibilityDescription: String
+        get() = "${getApplication<TorApplication>().getString(R.string.obfs4)}; ${getApplication<TorApplication>().getString(R.string.obfs4_description)}"
 
 
 
