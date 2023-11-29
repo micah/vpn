@@ -13,7 +13,6 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
@@ -155,6 +154,9 @@ class BridgeDialogFragment : DialogFragment(R.layout.fragment_bridges_dialog) {
         chipBinding.chip.setOnCloseIconClickListener {
             viewModel.removeBridgeLine(chipBinding.chip.text!!.toString())
             rootBinding.chipContainer.removeView(chipBinding.chip)
+        }
+        context?.let {
+            chipBinding.chip.closeIconContentDescription = it.getString(R.string.remove_bridge);
         }
         rootBinding.chipContainer.addView(chipBinding.chip)
         chipBinding.chip.layoutParams.width = MATCH_PARENT

@@ -131,6 +131,7 @@
     <string name="telegram_bot_subtitle">Message %s</string>
     <string name="email_bot_subtitle">Email %s</string>
     <string name="web_bot_subtitle">Visit %s</string>
+    <string name="remove_bridge">Remove bridge address</string>
 
     <plurals name="n_bridges">
         <item quantity="one">%1$s bridge added</item>
