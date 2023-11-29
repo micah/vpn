@@ -96,9 +96,7 @@ class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickH
         are currently supported.
      */
     private fun askTor () {
-        val countryCodeValue = "ru" //getDeviceCountryCode(requireContext())
-
-        CircumventionApiManager().getSettings(SettingsRequest(countryCodeValue), {
+        CircumventionApiManager().getSettings(SettingsRequest("ru"), {
             it?.let { response ->
                 Log.d("result: ", "${response.settings}")
                 val results = mutableListOf<String>()
@@ -121,33 +119,5 @@ class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickH
             Toast.makeText(requireContext(),"Ask Tor was not available",Toast.LENGTH_LONG).show()
         })
     }
-
-    @SuppressWarnings("unused")
-    private fun getDeviceCountryCode(context: Context): String {
-        var countryCode: String?
-
-        // Try to get country code from TelephonyManager service
-        val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-
-        // Query first getSimCountryIso()
-        countryCode = tm.simCountryIso
-        if (countryCode != null && countryCode.length == 2)
-            return countryCode.lowercase(Locale.getDefault())
-
-        countryCode = tm.networkCountryIso
-        /*
-        TODO: double check if CDMA networks need to be sorted out, see comment
-        Result may be unreliable on CDMA networks (use getPhoneType() to determine if on a CDMA network).
-         */
-        if (countryCode != null && countryCode.length == 2)
-            return countryCode.lowercase(Locale.getDefault())
-
-        countryCode = context.resources.configuration.locales[0].country
-
-        return if (countryCode != null && countryCode.length == 2)
-            countryCode.lowercase(Locale.getDefault()) else "us"
-
-    }
-
 
 }
