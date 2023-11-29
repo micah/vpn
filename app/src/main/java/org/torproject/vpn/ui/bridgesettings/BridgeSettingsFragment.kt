@@ -1,10 +1,8 @@
 package org.torproject.vpn.ui.bridgesettings
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
-import android.telephony.TelephonyManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -17,7 +15,6 @@ import org.torproject.vpn.circumvention.SettingsRequest
 import org.torproject.vpn.databinding.FragmentBridgesettingsBinding
 import org.torproject.vpn.ui.bridgesettings.model.BridgeSettingsFragmentViewModel
 import org.torproject.vpn.utils.PreferenceHelper
-import java.util.Locale
 
 class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickHandler, OnSharedPreferenceChangeListener {
 
