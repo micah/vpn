@@ -10,16 +10,18 @@ variables:
   DOCKER_DRIVER: overlay
 
 build-docker-image:
-  image: "registry.0xacab.org/leap/docker/debian:bullseye_amd64"
   stage: build_image
+  image: docker
   services:
     - docker:dind
+    - name: $CI_REGISTRY_IMAGE:main
   variables:
+    DOCKER_DRIVER: overlay
     IMAGE_TAG: $CI_REGISTRY_IMAGE:main
   script:
-    - echo $CI_BUILD_TOKEN | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+    - echo $CI_REGISTRY_PASSWORD | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
     - docker build -t $IMAGE_TAG .
-    - docker push $IMAGE_TAG
+    - docker push ${IMAGE_TAG}
   when: manual
 
 # Basic android and gradle stuff
@@ -48,7 +50,7 @@ assembleDebug:
 
 # Publish apk
 publish:
-  image: "registry.0xacab.org/leap/docker/debian:bullseye_amd64"
+  image: "registry.0xacab.org/leap/docker/debian:bookworm_amd64"
   stage: publish
   # Only run this stage if one of the following rules is true
   rules:

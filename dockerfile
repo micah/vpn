@@ -1,24 +1,25 @@
-FROM ubuntu:20.04
+FROM registry.0xacab.org/leap/docker/debian:bookworm_amd64
 
 ENV ANDROID_HOME="${PWD}/android-home" \
     ANDROID_COMPILE_SDK="34" \
     ANDROID_BUILD_TOOLS="34.0.0" \
     ANDROID_SDK_TOOLS="10406996" \
-    ANDROID_NDK="25.2.9519653" \
+    ANDROID_NDK_VERSION="25.2.9519653" \
     ANDROID_NDK_SHA256="769ee342ea75f80619d985c2da990c48b3d8eaf45f48783a2d48870d04b46108" \
     ANDROID_CLT_SHA256="8919e8752979db73d8321e9babe2caedcc393750817c1a5f56c128ec442fb540" \
-    ANDROID_NDK_VERSION="r25c"
+    ANDROID_NDK_RELNAME="r25c"
 
 RUN install -d $ANDROID_HOME \
     apt-get clean && \
     apt-get --quiet update --yes && \
     DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata && \
-    apt-get --quiet install --yes apt-utils wget tar unzip lib32stdc++6 lib32z1 build-essential curl git pkg-config libssl-dev openjdk-17-jdk maven
+    apt-get --quiet install --yes apt-utils wget tar unzip lib32stdc++6 lib32z1 build-essential curl git pkg-config libssl-dev openjdk-17-jdk
 
+#Java
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
     PATH="${JAVA_HOME}/bin:${PATH}"
 
-# Update new packages 
+# Update new packages
 RUN apt-get update
 
 # Get Rust
@@ -33,20 +34,19 @@ RUN rustup install "stable" \
 
 # Get Android ndk
 RUN cd $ANDROID_HOME \
-    && wget -nv --output-document=ndk.zip https://dl.google.com/android/repository/android-ndk-${ANDROID_NDK_VERSION}-linux.zip \
-    && echo "${ANDROID_NDK_SHA256} ndk.zip" | sha256sum --strict -c -  \
+    && wget -nv --output-document=ndk.zip https://dl.google.com/android/repository/android-ndk-${ANDROID_NDK_RELNAME}-linux.zip \
+    && echo "${ANDROID_NDK_SHA256} ndk.zip" | sha256sum --strict -c - \
     && unzip -qq -d ndk ndk.zip \
     && rm -f ndk.zip \
-    && rm ndk.zip.sha256 \
-    && mv ndk/android-ndk-$ANDROID_NDK_VERSION/ ndk/${ANDROID_NDK}/ \
+    && mv ndk/android-ndk-${ANDROID_NDK_RELNAME}/ ndk/${ANDROID_NDK_VERSION}/ \
     && cd ..
-  
+
 # Exporting required ndk paths
-ENV ANDROID_NDK_HOME=$ANDROID_HOME/ndk/${ANDROID_NDK} \
-    ANDROID_NDK=$ANDROID_HOME/ndk/${ANDROID_NDK} \
-    LLVM_PREBUILD=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin \
+ENV ANDROID_NDK_HOME=$ANDROID_HOME/ndk/${ANDROID_NDK_VERSION} \
+    ANDROID_NDK=$ANDROID_HOME/ndk/${ANDROID_NDK_VERSION} \
+    LLVM_PREBUILD=$ANDROID_NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/bin \
     PATH=$ANDROID_NDK_HOME:$PATH \
-    PATH=$ANDROID_NDK:$PATH \
+    PATH=$ANDROID_NDK_VERSION:$PATH \
     PATH=$LLVM_PREBUILD:$PATH
 
 # Get Android sdk
