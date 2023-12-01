@@ -44,7 +44,7 @@ class BaseDialogFragment : DialogFragment(R.layout.fragment_dialog) {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = FragmentDialogBinding.inflate(LayoutInflater.from(requireContext()))
 
-        bind(arguments!!.getInt(VIEW_TYPE), binding)
+        bind(requireArguments().getInt(VIEW_TYPE), binding)
         val builder = AlertDialog.Builder(requireActivity())
         builder.setView(binding.root)
         val dialog = builder.create()
