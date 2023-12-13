@@ -11,6 +11,11 @@ A debug version of the app is built in each CI run, you can install it on your p
 
 You can download the latest successfully built package from the [Gitlab package archive](https://gitlab.torproject.org/tpo/applications/vpn/-/packages). Once you have downloaded the apk, you will need to install it on your phone, please follow the [process for installation on your phone](#install-package-on-phone) to do so.
 
+More recent builds can be found in the [pipeline](https://gitlab.torproject.org/tpo/applications/vpn/-/pipelines) as well. Find a passing build and download the artifact. To install:
+
+- Extract the archive
+- Run `adb install app/build/outputs/apk/debug/app-debug.apk`
+
 ## Install
 
 In order to install this unsigned package, you will need to have the command-line tool `adb` installed on your computer. On a Debian, or Debian-derived machine, you can `sudo apt install adb` to install it. If using something else, [follow a tutorial](https://www.xda-developers.com/install-adb-windows-macos-linux/) to get it installed.
