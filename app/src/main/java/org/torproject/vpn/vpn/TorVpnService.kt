@@ -3,6 +3,7 @@ package org.torproject.vpn.vpn
 import android.app.Notification
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.ServiceInfo.*
 import android.net.VpnService
 import android.os.Build
 import android.os.Handler
@@ -10,6 +11,7 @@ import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.system.OsConstants
 import android.util.Log
+import androidx.core.app.ServiceCompat
 import androidx.lifecycle.Observer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -75,8 +77,8 @@ class TorVpnService : VpnService() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d(TAG, "service: onStartCommand")
 
-        val notification: Notification? = notificationManager.buildForegroundServiceNotification()
-        startForeground(VpnNotificationManager.NOTIFICATION_ID, notification)
+        val notification: Notification = notificationManager.buildForegroundServiceNotification()
+        ServiceCompat.startForeground(this, VpnNotificationManager.NOTIFICATION_ID, notification, FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED)
         val action = if (intent != null) intent.action else ""
         val isAlwaysOn =  (intent == null || intent.component == null || intent.component!!.packageName != packageName) && Build.VERSION.SDK_INT >= ALWAYS_ON_MIN_API_LEVEL
         if (isAlwaysOn) {
