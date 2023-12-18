@@ -17,6 +17,9 @@
             android:id="@+id/action_configureFragment_to_connectionFragment"
             app:destination="@id/connectionFragment" />
         <action
+            android:id="@+id/action_configureFragment_to_appearanceFragment"
+            app:destination="@id/appearanceFragment" />
+        <action
             android:id="@+id/action_configureFragment_to_helpFragment"
             app:destination="@+id/helpFragment" />
     </fragment>
@@ -58,6 +61,11 @@
             android:id="@+id/action_connectionFragment_to_bridgeSettingsFragment"
             app:destination="@id/bridgeSettingsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/appearanceFragment"
+        android:label="AppearanceFragment"
+        android:name="org.torproject.vpn.ui.appearancesettings.AppearanceSettingsFragment"
+        tools:layout="@layout/fragment_appearancesettings"/>
     <fragment
         android:id="@+id/loggingFragment"
         android:name="org.torproject.vpn.ui.logging.LoggingFragment"

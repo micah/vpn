@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTorApps"
+        android:id="@+id/rvHorizontalAppIcons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/default_padding"
         android:orientation="horizontal"
         tools:listitem="@layout/app_item_view"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

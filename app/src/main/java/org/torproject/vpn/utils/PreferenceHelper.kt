@@ -3,6 +3,7 @@ package org.torproject.vpn.utils
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.annotation.VisibleForTesting
+import org.torproject.vpn.ui.appearancesettings.model.LauncherDefault
 
 private const val TOR_VPN_SP: String = "tor-vpn"
 
@@ -20,6 +21,7 @@ class PreferenceHelper(context: Context) {
         const val AUTOMATIC_EXIT_NODE_SELECTION: String = "automatic_exit_node_selection"
         const val BRIDGE_TYPE = "bridge_type"
         const val BRIDGE_LINES = "bridge_lines"
+        const val LAUNCHER_CLASS = "launcher_class"
         const val EXIT_NODE_COUNTRIES = "exit_node_countries"
 
         enum class BridgeType {
@@ -40,6 +42,10 @@ class PreferenceHelper(context: Context) {
     var shouldShowGuide
         get() = sharedPreference.getBoolean(SHOULD_SHOW_GUIDE, true)
         set(value) = sharedPreference.edit().putBoolean(SHOULD_SHOW_GUIDE, value).apply()
+
+    var launcherClass: String
+        get() = sharedPreference.getString(LAUNCHER_CLASS, LauncherDefault::class.java.name)!!
+        set(value) = sharedPreference.edit().putString(LAUNCHER_CLASS, value).apply()
 
     var protectAllApps
         get() = sharedPreference.getBoolean(PROTECT_ALL_APPS, true)

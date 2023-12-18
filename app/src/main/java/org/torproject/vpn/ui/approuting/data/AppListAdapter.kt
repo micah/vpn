@@ -43,7 +43,7 @@ class AppListAdapter(
             HORIZONTAL_RECYCLER_VIEW -> {
                 Log.d(TAG, "setting horizontal RV adapter and LLM")
                 val binding = HorizontalRecyclerViewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                binding.rvTorApps.adapter = torAppsAdapter
+                binding.rvHorizontalAppIcons.adapter = torAppsAdapter
                 HorizontalRecyclerViewItemViewHolder(binding)
             }
             TABLE_HEADER_VIEW -> TableHeaderViewHolder(AppRoutingTableHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false))

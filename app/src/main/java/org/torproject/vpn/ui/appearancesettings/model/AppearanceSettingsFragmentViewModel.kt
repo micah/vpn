@@ -1,0 +1,62 @@
+package org.torproject.vpn.ui.appearancesettings.model
+
+import android.app.Application
+import android.content.ComponentName
+import android.content.pm.PackageManager
+import android.util.Log
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import org.torproject.vpn.utils.PreferenceHelper
+
+class AppearanceSettingsFragmentViewModel(private val application: Application) : AndroidViewModel(application) {
+    val preferenceHelper = PreferenceHelper(application)
+
+    private val _list = MutableLiveData<List<LauncherModel>>(mutableListOf())
+    val list: LiveData<List<LauncherModel>> = _list
+
+    init {
+        loadLauncherList()
+    }
+
+    private fun loadLauncherList() {
+        val list = LauncherSet.list
+        val launcherClass = preferenceHelper.launcherClass
+        list.forEach {
+            it.selected = it.launcherClass == launcherClass
+        }
+        _list.postValue(list)
+    }
+
+    fun onLauncherSelected(item: LauncherModel) {
+        Log.d("appearance", ">>>>> save icon")
+        preferenceHelper.launcherClass = item.launcherClass
+        _list.value?.let {
+            it.forEach { appIconModel ->
+                if (appIconModel.launcherClass == item.launcherClass) {
+                    Log.d("appearance", ">>>>> enabling ${appIconModel.launcherClass}")
+
+                    appIconModel.selected = true
+                    application.packageManager.setComponentEnabledSetting(
+                        ComponentName(
+                            application,
+                            appIconModel.launcherClass
+                        ), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
+                    )
+                } else {
+                    appIconModel.selected = false
+                    Log.d("appearance", ">>>>> disabling ${appIconModel.launcherClass}")
+                    application.packageManager.setComponentEnabledSetting(
+                        ComponentName(
+                            application,
+                            appIconModel.launcherClass
+                        ), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP
+                    )
+                }
+            }
+
+            _list.postValue(it)
+        }
+    }
+
+}

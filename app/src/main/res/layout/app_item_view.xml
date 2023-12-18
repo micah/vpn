@@ -23,6 +23,18 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           />
+      <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/ivSelectedIcn"
+          android:layout_width="20dp"
+          android:layout_height="20dp"
+          android:src="@drawable/ic_check_circle"
+          android:background="@drawable/app_item_background"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toBottomOf="@+id/ivAppImage"
+          android:layout_marginBottom="5dp"
+          android:layout_marginEnd="5dp"
+          android:visibility="gone"
+          />
       <androidx.appcompat.widget.AppCompatTextView
           android:id="@+id/tvAppTitle"
           style="@style/text_body_small"
