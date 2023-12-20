@@ -12,11 +12,18 @@ import org.torproject.vpn.utils.PreferenceHelper
 class AppearanceSettingsFragmentViewModel(private val application: Application) : AndroidViewModel(application) {
     val preferenceHelper = PreferenceHelper(application)
 
-    private val _list = MutableLiveData<List<LauncherModel>>(mutableListOf())
-    val list: LiveData<List<LauncherModel>> = _list
+    private val _launcherList = MutableLiveData<List<LauncherModel>>(mutableListOf())
+    val launcherList: LiveData<List<LauncherModel>> = _launcherList
+
+    private val _wallpaperList = MutableLiveData<List<WallpaperModel>>(mutableListOf())
+    val wallpaperList: LiveData<List<WallpaperModel>> = _wallpaperList
+
+    private val _backgroundImage = MutableLiveData<Int>(WallpaperSet.getWallpaperResource(application, preferenceHelper))
+    val backgroundImage: LiveData<Int> = _backgroundImage
 
     init {
         loadLauncherList()
+        _wallpaperList.postValue(WallpaperSet.getWallpaperList(application, preferenceHelper))
     }
 
     private fun loadLauncherList() {
@@ -25,13 +32,18 @@ class AppearanceSettingsFragmentViewModel(private val application: Application) 
         list.forEach {
             it.selected = it.launcherClass == launcherClass
         }
-        _list.postValue(list)
+        _launcherList.postValue(list)
+    }
+
+    fun onWallpaperSelected(item: WallpaperModel) {
+        preferenceHelper.wallpaperResource = item.drawableResName
+        _backgroundImage.postValue(item.drawableResId)
     }
 
     fun onLauncherSelected(item: LauncherModel) {
         Log.d("appearance", ">>>>> save icon")
         preferenceHelper.launcherClass = item.launcherClass
-        _list.value?.let {
+        _launcherList.value?.let {
             it.forEach { appIconModel ->
                 if (appIconModel.launcherClass == item.launcherClass) {
                     Log.d("appearance", ">>>>> enabling ${appIconModel.launcherClass}")
@@ -55,7 +67,7 @@ class AppearanceSettingsFragmentViewModel(private val application: Application) 
                 }
             }
 
-            _list.postValue(it)
+            _launcherList.postValue(it)
         }
     }
 

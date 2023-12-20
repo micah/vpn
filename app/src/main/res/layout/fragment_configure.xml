@@ -85,6 +85,7 @@
                     android:layout_height="wrap_content"
                     app:drawable="@drawable/ic_dummy_app"
                     app:text="@string/appearance"
+                    app:secondaryText="Lorem ipsum dolor sit amet"
                     android:onClick="@{handler::onAppearanceClicked}"
                     />
                 <org.torproject.vpn.ui.base.view.IconTextEntryView

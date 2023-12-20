@@ -23,6 +23,7 @@ class PreferenceHelper(context: Context) {
         const val BRIDGE_LINES = "bridge_lines"
         const val LAUNCHER_CLASS = "launcher_class"
         const val EXIT_NODE_COUNTRIES = "exit_node_countries"
+        const val WALLPAPER_RESOURCE = "wallpaper_resource"
 
         enum class BridgeType {
             Obfs4,
@@ -46,6 +47,10 @@ class PreferenceHelper(context: Context) {
     var launcherClass: String
         get() = sharedPreference.getString(LAUNCHER_CLASS, LauncherDefault::class.java.name)!!
         set(value) = sharedPreference.edit().putString(LAUNCHER_CLASS, value).apply()
+
+    var wallpaperResource
+        get() = sharedPreference.getString(WALLPAPER_RESOURCE, null)
+        set(value) = sharedPreference.edit().putString(WALLPAPER_RESOURCE, value).apply()
 
     var protectAllApps
         get() = sharedPreference.getBoolean(PROTECT_ALL_APPS, true)

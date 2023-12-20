@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentAppearancesettingsBinding
 import org.torproject.vpn.ui.appearancesettings.data.LauncherAdapter
+import org.torproject.vpn.ui.appearancesettings.data.WallpaperAdapter
 import org.torproject.vpn.ui.appearancesettings.model.AppearanceSettingsFragmentViewModel
 
 class AppearanceSettingsFragment: Fragment(R.layout.fragment_appearancesettings),
@@ -33,11 +34,16 @@ class AppearanceSettingsFragment: Fragment(R.layout.fragment_appearancesettings)
             findNavController().popBackStack()
         }
 
-        val adapter = LauncherAdapter(viewModel.list.value!!, viewModel::onLauncherSelected)
+        val adapter = LauncherAdapter(viewModel.launcherList.value!!, viewModel::onLauncherSelected)
         binding.layoutAppIcons.rvHorizontalAppIcons.adapter = adapter
-
-        viewModel.list.observe(viewLifecycleOwner) {
+        viewModel.launcherList.observe(viewLifecycleOwner) {
             adapter.update(it)
+        }
+
+        val wallPaperAdapter = WallpaperAdapter(viewModel.wallpaperList.value!!, viewModel::onWallpaperSelected)
+        binding.rvWallpapers.adapter = wallPaperAdapter
+        viewModel.wallpaperList.observe(viewLifecycleOwner) {
+            wallPaperAdapter.update(it)
         }
     }
 

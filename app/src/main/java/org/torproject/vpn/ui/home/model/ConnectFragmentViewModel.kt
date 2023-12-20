@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import org.torproject.vpn.BuildConfig
 import org.torproject.vpn.R
+import org.torproject.vpn.ui.appearancesettings.model.WallpaperSet
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
@@ -153,6 +154,9 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
 
     private val _connectionHint: MutableLiveData<String> = MutableLiveData(getConnectionString())
     val connectionHint: LiveData<String> = _connectionHint
+
+    private val _backgroundImage: MutableLiveData<Int> = MutableLiveData(WallpaperSet.getWallpaperResource(application, preferenceHelper))
+    val backgroundImage: LiveData<Int> = _backgroundImage
 
     //these are static one-time-fetch values on viewModel init. Don't need to be LiveData or StateFlow.
     val flavor = "Pre-alpha"
@@ -335,6 +339,10 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
 
     fun updateConnectionLabel() {
         _connectionHint.postValue(getConnectionString())
+    }
+
+    fun updateBackgroundImage() {
+        _backgroundImage.postValue(WallpaperSet.getWallpaperResource(application, preferenceHelper))
     }
 
     private fun getConnectionString(): String {
