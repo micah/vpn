@@ -1,15 +1,6 @@
 <resources>
     <string name="app_name">Tor VPN</string>
 
-    <!-- alternative app names are not translated until we know which app names we actually want -->
-    <string name="app_name_variant_1" translatable="false">Weather</string>
-    <string name="app_name_variant_2" translatable="false">Calculator</string>
-    <string name="app_name_variant_3" translatable="false">Telegram</string>
-    <string name="app_name_variant_4" translatable="false">Messages</string>
-    <string name="app_name_variant_5" translatable="false">Tic Tac Toe</string>
-    <string name="app_name_variant_6" translatable="false">Settings</string>
-    <string name="app_name_variant_7" translatable="false">Solitaire</string>
-
     <string name="action_save">Save</string>
     <string name="action_configure">Configure</string>
     <string name="action_connect">Connect</string>
@@ -149,6 +140,21 @@
     <string name="appearance">Appearance</string>
     <string name="name_and_icon">Name and icon</string>
     <string name="wallpaper">Wallpaper</string>
+
+    <string name="wallpaper_1" translatable="false">Onionverse</string>
+    <string name="wallpaper_2" translatable="false">Lorem ipsum</string>
+    <string name="wallpaper_3" translatable="false">Lorem ipsum</string>
+    <string name="wallpaper_4" translatable="false">Lorem ipsum</string>
+
+
+    <!-- alternative app namesare not translated until we know which app names we actually want -->
+    <string name="app_name_variant_1" translatable="false">Weather</string>
+    <string name="app_name_variant_2" translatable="false">Calculator</string>
+    <string name="app_name_variant_3" translatable="false">Telegram</string>
+    <string name="app_name_variant_4" translatable="false">Messages</string>
+    <string name="app_name_variant_5" translatable="false">Tic Tac Toe</string>
+    <string name="app_name_variant_6" translatable="false">Settings</string>
+    <string name="app_name_variant_7" translatable="false">Solitaire</string>
 
     <plurals name="n_bridges">
         <item quantity="one">%1$s bridge added</item>

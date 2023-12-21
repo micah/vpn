@@ -18,9 +18,6 @@ class AppearanceSettingsFragmentViewModel(private val application: Application) 
     private val _wallpaperList = MutableLiveData<List<WallpaperModel>>(mutableListOf())
     val wallpaperList: LiveData<List<WallpaperModel>> = _wallpaperList
 
-    private val _backgroundImage = MutableLiveData<Int>(WallpaperSet.getWallpaperResource(application, preferenceHelper))
-    val backgroundImage: LiveData<Int> = _backgroundImage
-
     init {
         loadLauncherList()
         _wallpaperList.postValue(WallpaperSet.getWallpaperList(application, preferenceHelper))
@@ -37,7 +34,12 @@ class AppearanceSettingsFragmentViewModel(private val application: Application) 
 
     fun onWallpaperSelected(item: WallpaperModel) {
         preferenceHelper.wallpaperResource = item.drawableResName
-        _backgroundImage.postValue(item.drawableResId)
+        _wallpaperList.value?.let {
+            it.forEach { wallpaperModel ->
+                wallpaperModel.selected = wallpaperModel.drawableResName == item.drawableResName
+            }
+            _wallpaperList.postValue(it)
+        }
     }
 
     fun onLauncherSelected(item: LauncherModel) {

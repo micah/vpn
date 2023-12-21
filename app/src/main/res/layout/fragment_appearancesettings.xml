@@ -50,24 +50,6 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <ImageView
-            android:id="@+id/iv_background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:importantForAccessibility="no"
-            android:scaleType="centerCrop"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:src="@{viewModel.backgroundImage}"
-            tools:src="@drawable/bg_stars"
-            tools:visibility="visible"
-            />
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -103,9 +85,9 @@
                     android:id="@+id/rv_wallpapers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/default_padding"
                     android:orientation="horizontal"
                     tools:listitem="@layout/wallpaper_view"
+                    tools:background="@drawable/bg_rounded"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     />
 
