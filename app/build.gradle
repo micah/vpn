@@ -104,7 +104,7 @@ dependencies {
 
     debugImplementation 'org.torproject:onionmasq:main-branch-debug'
     // releaseImplementation 'org.torproject:onionmasq:0.1.0-local-release'
-    releaseImplementation 'org.torproject:onionmasq:0.3-local-release'
+    releaseImplementation 'org.torproject:onionmasq:0.3.0-local-release'
     //tried this, still not sure we require this so commented for time being.
 /*    implementation("androidx.datastore:datastore-preferences:1.0.0")*/
 
