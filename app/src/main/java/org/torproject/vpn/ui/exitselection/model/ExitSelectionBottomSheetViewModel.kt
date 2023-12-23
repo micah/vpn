@@ -30,21 +30,33 @@ class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewM
         modelList.add(ExitNodeTableHeaderModel(automaticNodeSelection))
         if (!automaticNodeSelection) {
             val exitNodeCountry = preferenceHelper.exitNodeCountry
-            val locales = Locale.getAvailableLocales()
             val countryMap = HashMap<String, ExitNodeCellModel>()
-            for (locale in locales) {
-                if (locale.country.isNullOrEmpty() || locale.country.length != 2) {
-                    continue
+            val exitNodeCountries = preferenceHelper.relayCountries
+            if (exitNodeCountries.isEmpty()) {
+                val locales = Locale.getAvailableLocales()
+                for (locale in locales) {
+                   addExitNodeCountryToMap(countryMap, locale, exitNodeCountry)
                 }
-                countryMap[locale.country.lowercase()] = ExitNodeCellModel(
-                    locale.country.lowercase(),
-                    locale.displayCountry,
-                    locale.country.lowercase() == exitNodeCountry
-                )
+            } else {
+                for (countryCode in exitNodeCountries) {
+                    val locale = Locale("", countryCode.uppercase())
+                    addExitNodeCountryToMap(countryMap, locale, exitNodeCountry)
+                }
             }
             modelList.addAll(ArrayList(countryMap.values).sorted())
         }
         return modelList
+    }
+
+    private fun addExitNodeCountryToMap(map: HashMap<String, ExitNodeCellModel>, locale: Locale, selectedExitNodeCountry: String?) {
+        if (locale.country.isNullOrEmpty() || locale.country.length != 2) {
+            return
+        }
+        map[locale.country.lowercase()] = ExitNodeCellModel(
+            locale.country.lowercase(),
+            locale.displayCountry,
+            locale.country.lowercase() == selectedExitNodeCountry
+        )
     }
 
     fun onExitNodeSelected(pos: Int, model: ExitNodeCellModel) {

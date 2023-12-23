@@ -20,6 +20,7 @@ class PreferenceHelper(context: Context) {
         const val AUTOMATIC_EXIT_NODE_SELECTION: String = "automatic_exit_node_selection"
         const val BRIDGE_TYPE = "bridge_type"
         const val BRIDGE_LINES = "bridge_lines"
+        const val EXIT_NODE_COUNTRIES = "exit_node_countries"
 
         enum class BridgeType {
             Obfs4,
@@ -77,6 +78,10 @@ class PreferenceHelper(context: Context) {
     var bridgeLines
         get() = sharedPreference.getStringSet(BRIDGE_LINES, mutableSetOf<String>()) as Set<String>
         set(value) = sharedPreference.edit().putStringSet(BRIDGE_LINES, value).apply()
+
+    var relayCountries
+        get() = sharedPreference.getStringSet(EXIT_NODE_COUNTRIES, mutableSetOf<String>()) as Set<String>
+        set(value) = sharedPreference.edit().putStringSet(EXIT_NODE_COUNTRIES, value).apply()
 
     fun registerListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
         sharedPreference.registerOnSharedPreferenceChangeListener(listener)

@@ -18,7 +18,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import org.torproject.onionmasq.OnionMasq
-import org.torproject.onionmasq.events.*
+import org.torproject.onionmasq.events.BootstrapEvent
+import org.torproject.onionmasq.events.ClosedConnectionEvent
+import org.torproject.onionmasq.events.FailedConnectionEvent
+import org.torproject.onionmasq.events.NewConnectionEvent
+import org.torproject.onionmasq.events.NewDirectoryEvent
+import org.torproject.onionmasq.events.OnionmasqEvent
 import org.torproject.onionmasq.logging.LogHelper
 import org.torproject.onionmasq.logging.LogObservable
 import org.torproject.vpn.R
@@ -28,7 +33,8 @@ import org.torproject.vpn.utils.VpnNotificationManager
 import org.torproject.vpn.utils.readAsset
 import java.io.IOException
 import java.lang.ref.WeakReference
-import java.util.*
+import java.util.Timer
+import java.util.TimerTask
 
 
 class TorVpnService : VpnService() {
@@ -201,6 +207,17 @@ class TorVpnService : VpnService() {
                         )
                     }
                     VpnStatusObservable.handleConnectionEvent(event)
+                }
+                is NewDirectoryEvent -> {
+                    var relaysByCountry = event.relaysByCountry.entries.toList()
+                    relaysByCountry = relaysByCountry.sortedBy { (_, count) -> count }
+                    val countriesWithSufficientExitNodes: ArrayList<String> = ArrayList()
+                    for ((countryCode, count) in relaysByCountry) {
+                        if (count > 3) {
+                            countriesWithSufficientExitNodes.add(countryCode)
+                        }
+                    }
+                    preferenceHelper.relayCountries = countriesWithSufficientExitNodes.toSet()
                 }
             }
         }
