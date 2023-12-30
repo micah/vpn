@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="org.torproject.vpn.ui.approuting.AppRoutingFragment">
+        tools:context="org.torproject.vpn.ui.configure.ConfigureFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
@@ -79,6 +79,14 @@
                     app:text="@string/connection"
                     app:secondaryText="@string/connection_description"
                     android:onClick="@{handler::onConnectionClicked}"
+                    />
+                <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:drawable="@drawable/ic_dummy_app"
+                    app:text="@string/help"
+                    app:secondaryText="lorem ipsum"
+                    android:onClick="@{handler::onHelpClicked}"
                     />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>

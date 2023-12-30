@@ -27,6 +27,10 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
         binding.lifecycleOwner = viewLifecycleOwner
     }
 
+    override fun onHelpClicked(v: View) {
+        findNavController().navigate(R.id.action_configureFragment_to_helpFragment)
+    }
+
     override fun onAppsClicked(v: View) {
         Log.d(TAG, "apps entry clicked")
         findNavController().navigate(R.id.action_configureFragment_to_appRoutingFragment)
