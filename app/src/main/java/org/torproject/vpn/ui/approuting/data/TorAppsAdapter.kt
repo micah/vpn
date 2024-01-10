@@ -11,6 +11,7 @@ import org.torproject.vpn.databinding.AppItemViewBinding
 import org.torproject.vpn.ui.approuting.AppRoutingFragmentDirections
 import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
+import org.torproject.vpn.utils.navigateSafe
 
 class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -60,7 +61,7 @@ class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerVi
                         argAppName = appItem.text,
                         argIsBrowser = appItem.isBrowserApp ?: false,
                         argHasTorSupport = appItem.hasTorSupport ?: false)
-                    binding.root.findNavController().navigate(action)
+                    binding.root.findNavController().navigateSafe(action)
                 }
             }
         }

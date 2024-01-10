@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import org.torproject.vpn.databinding.ActivityMainBinding
+import org.torproject.vpn.utils.navigateSafe
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -61,8 +62,9 @@ class MainActivity : AppCompatActivity() {
                 ACTION_REQUEST_VPN_PERMISSON -> {
                     val bundle = Bundle()
                     bundle.putString(KEY_ACTION, ACTION_REQUEST_VPN_PERMISSON)
-                    navController.navigate(R.id.navigation_connect, bundle)
+                    navController.navigateSafe(R.id.navigation_connect, bundle)
                 }
+                else -> {}
             }
         }
 

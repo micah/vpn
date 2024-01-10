@@ -43,6 +43,7 @@ import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
 import java.util.concurrent.TimeUnit
 import org.torproject.vpn.utils.getDpInPx
+import org.torproject.vpn.utils.navigateSafe
 
 
 class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -140,7 +141,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                     connectFragmentViewModel.action.collect { action ->
                         when (action) {
                             ACTION_LOGS -> {
-                                findNavController().navigate(R.id.action_navigation_connect_to_loggingFragment)
+                                findNavController().navigateSafe(R.id.action_navigation_connect_to_loggingFragment)
                             }
                             ACTION_REQUEST_NOTIFICATION_PERMISSION -> {
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -152,8 +153,8 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                                     ExitSelectionBottomSheetFragment().show(parentFragmentManager, "exitNodeSelector")
                                 }
                             }
-                            ACTION_APPS -> findNavController().navigate(R.id.action_navigation_connect_to_appRoutingFragment)
-                            ACTION_CONNECTION -> findNavController().navigate(R.id.action_navigation_connect_to_connectionFragment)
+                            ACTION_APPS -> findNavController().navigateSafe(R.id.action_navigation_connect_to_appRoutingFragment)
+                            ACTION_CONNECTION -> findNavController().navigateSafe(R.id.action_navigation_connect_to_connectionFragment)
                             else -> {
                                 //other cases of navigation.
                             }

@@ -17,6 +17,7 @@ import org.torproject.vpn.ui.approuting.AppRoutingFragmentDirections
 import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.navigateSafe
 
 class AppListAdapter(
     list: List<AppItemModel>,
@@ -147,7 +148,7 @@ class AppListAdapter(
                         argAppName = appItem.text,
                         argIsBrowser = appItem.isBrowserApp ?: false,
                         argHasTorSupport = appItem.hasTorSupport ?: false)
-                    binding.root.findNavController().navigate(action)
+                    binding.root.findNavController().navigateSafe(action)
                 }
             })
             binding.smItemSwitch.setOnCheckedChangeListener { switchBtn, isChecked ->

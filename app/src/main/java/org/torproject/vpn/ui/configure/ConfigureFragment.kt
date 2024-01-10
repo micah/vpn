@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentConfigureBinding
 import org.torproject.vpn.ui.configure.model.ConfigureFragmentViewModel
+import org.torproject.vpn.utils.navigateSafe
 
 class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
     companion object {
@@ -26,18 +27,16 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
         binding.handler = this
         binding.lifecycleOwner = viewLifecycleOwner
     }
-
     override fun onHelpClicked(v: View) {
-        findNavController().navigate(R.id.action_configureFragment_to_helpFragment)
+        findNavController().navigateSafe(R.id.action_configureFragment_to_helpFragment)
     }
-
     override fun onAppsClicked(v: View) {
         Log.d(TAG, "apps entry clicked")
-        findNavController().navigate(R.id.action_configureFragment_to_appRoutingFragment)
+        findNavController().navigateSafe(R.id.action_configureFragment_to_appRoutingFragment)
     }
 
     override fun onConnectionClicked(v: View) {
-        findNavController().navigate(R.id.action_configureFragment_to_connectionFragment)
+        findNavController().navigateSafe(R.id.action_configureFragment_to_connectionFragment)
     }
 
 }

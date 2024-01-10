@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentConnectionsettingsBinding
 import org.torproject.vpn.ui.connectionsettings.model.ConnectionFragmentViewModel
+import org.torproject.vpn.utils.navigateSafe
 
 class ConnectionFragment: Fragment(R.layout.fragment_connectionsettings), ClickHandler {
 
@@ -40,7 +41,7 @@ class ConnectionFragment: Fragment(R.layout.fragment_connectionsettings), ClickH
     }
 
     override fun onTorLogsClicked(v: View) {
-        findNavController().navigate(R.id.action_connectionFragment_to_LoggingFragment)
+        findNavController().navigateSafe(R.id.action_connectionFragment_to_LoggingFragment)
     }
 
     override fun onAlwaysOnClicked(v: View) {
@@ -50,7 +51,7 @@ class ConnectionFragment: Fragment(R.layout.fragment_connectionsettings), ClickH
     }
 
     override fun onBridgeSettingsClicked(v: View) {
-        findNavController().navigate(R.id.action_connectionFragment_to_bridgeSettingsFragment)
+        findNavController().navigateSafe(R.id.action_connectionFragment_to_bridgeSettingsFragment)
     }
 
 }

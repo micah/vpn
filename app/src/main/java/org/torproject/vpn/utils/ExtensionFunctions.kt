@@ -2,11 +2,17 @@ package org.torproject.vpn.utils
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.annotation.SuppressLint
 import android.graphics.Point
 import android.graphics.Rect
+import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.FloatRange
+import androidx.annotation.IdRes
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 
 
 /**
@@ -54,3 +60,23 @@ fun Rect.scale(
         (bottom - deltaY).toInt()
     )
 }
+
+fun NavController.navigateSafe(@IdRes action: Int, args: Bundle? = null): Boolean {
+    return try {
+        navigate(action, args)
+        true
+    } catch (t: Throwable) {
+        Log.e("TorVPN navigation", "Navigation failed: ${t.localizedMessage}")
+        false
+    }
+}
+fun NavController.navigateSafe(action: NavDirections): Boolean {
+    return try {
+        navigate(action)
+        true
+    } catch (t: Throwable) {
+        Log.e("TorVPN navigation", "Navigation failed: ${t.localizedMessage}")
+        false
+    }
+}
+
