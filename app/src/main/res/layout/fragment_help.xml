@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
+            android:background="@color/purpleDark"
             android:theme="@style/Theme.TorVPN.AppBarOverlay"
             >
             <androidx.appcompat.widget.Toolbar
