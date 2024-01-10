@@ -1,6 +1,16 @@
 CHANGELOG
 =========
+0.4.0 Pre-Alpha
+----------------
+* support for Android API 34
+* Request bridges in app
+* request bridges from alternative locations
+* fix missing UI state for the case only some apps were selected for onion routing
+* fix app crash
+
+
 0.3.0 Pre-Alpha
+----------------
 * Add PT (obfs4)
 * Update UI
 * Adding several tests
