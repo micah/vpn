@@ -276,9 +276,11 @@ class TorVpnService : VpnService() {
             Log.d(TAG, "service: starting vpn...")
             val builder = prepareVpnProfile()
             fd?.let { fd ->
-                Log.d(TAG, "service: stopping previous Tor session...")
-                OnionMasq.stop()
-                fd.close()
+                coroutineScope.async {
+                    Log.d(TAG, "service: stopping previous Tor session...")
+                    OnionMasq.stop()
+                    fd.close()
+                }
             } ?: run {
                 logHelper.readLog()
                 createObservers()
