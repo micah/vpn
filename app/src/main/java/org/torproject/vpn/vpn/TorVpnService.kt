@@ -132,7 +132,13 @@ class TorVpnService : VpnService() {
         timer.cancel()
         VpnStatusObservable.reset()
         closeFd()
-        OnionMasq.unbindVPNService()
+        try {
+            OnionMasq.unbindVPNService()
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+        }
+
+
         stopForeground(true)
         stopSelf()
     }
