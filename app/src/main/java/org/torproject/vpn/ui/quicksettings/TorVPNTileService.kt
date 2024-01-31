@@ -2,12 +2,14 @@ package org.torproject.vpn.ui.quicksettings
 
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.drawable.Icon
 import android.os.Handler
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import android.util.Log
 import androidx.lifecycle.Observer
+import org.torproject.vpn.MainActivity
 import org.torproject.vpn.R
 import org.torproject.vpn.vpn.ConnectionState
 import org.torproject.vpn.vpn.VpnServiceCommand
@@ -35,7 +37,16 @@ class TorVPNTileService : TileService() {
         if (VpnStatusObservable.isVPNActive()) {
             VpnServiceCommand.stopVpn(this)
         } else {
-            VpnServiceCommand.startVpn(this)
+            if (VpnServiceCommand.prepareVpn(this) == null) {
+                VpnServiceCommand.startVpn(this)
+                VpnStatusObservable.update(ConnectionState.CONNECTING)
+            } else {
+                // retry to prepare and start the VPN but with some UI to show possible errors
+                val startIntent = Intent(this.applicationContext, MainActivity::class.java)
+                startIntent.action = MainActivity.ACTION_REQUEST_VPN_PERMISSON
+                startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(startIntent)
+            }
         }
     }
 
@@ -44,7 +55,8 @@ class TorVPNTileService : TileService() {
 
     override fun onCreate() {
         super.onCreate()
-        vpnStatusObserver = Observer<ConnectionState> { connectionState: ConnectionState? ->
+        Log.d("TILE_TOR_VPN", "On Create")
+        vpnStatusObserver = Observer { connectionState: ConnectionState? ->
             onStatusChanged(connectionState)
         }
     }
@@ -88,7 +100,8 @@ class TorVPNTileService : TileService() {
         vpnStatusObserver?.let {
             mainHandler.post {
                 Log.d("TILE_TOR_VPN", "onStartListening - observe forever")
-                VpnStatusObservable.statusLiveData.observeForever(it) }
+                VpnStatusObservable.statusLiveData.observeForever(it)
+            }
         }
         onStatusChanged(VpnStatusObservable.statusLiveData.value)
     }
@@ -106,7 +119,7 @@ class TorVPNTileService : TileService() {
 
     override fun onDestroy() {
         super.onDestroy()
-        vpnStatusObserver = null;
-
+        Log.d("TILE_TOR_VPN", "onDestroy")
+        vpnStatusObserver = null
     }
 }
