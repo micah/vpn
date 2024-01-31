@@ -24,9 +24,10 @@ object VpnServiceCommand {
         if (context == null) {
             return
         }
-        val intent = Intent(context.applicationContext, TorVpnService::class.java)
+        val appContext = context.applicationContext
+        val intent = Intent(appContext, TorVpnService::class.java)
         intent.action = ACTION_START_VPN
-        startServiceIntent(context, intent)
+        startServiceIntent(appContext, intent)
     }
 
 
@@ -34,9 +35,10 @@ object VpnServiceCommand {
         if (context == null) {
             return
         }
-        val intent = Intent(context.applicationContext, TorVpnService::class.java)
+        val appContext = context.applicationContext
+        val intent = Intent(appContext, TorVpnService::class.java)
         intent.action = ACTION_STOP_VPN
-        startServiceIntent(context, intent)
+        startServiceIntent(appContext, intent)
     }
 
     private fun startServiceIntent(context: Context, intent: Intent) {
