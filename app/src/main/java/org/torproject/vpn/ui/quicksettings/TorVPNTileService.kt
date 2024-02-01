@@ -2,6 +2,7 @@ package org.torproject.vpn.ui.quicksettings
 
 
 import android.annotation.SuppressLint
+import android.app.PendingIntent
 import android.content.Intent
 import android.content.Intent.ACTION_MAIN
 import android.graphics.drawable.Icon
@@ -66,7 +67,13 @@ class TorVPNTileService : TileService() {
         val startIntent = Intent(this.applicationContext, MainActivity::class.java)
         startIntent.action = action
         startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        this.applicationContext.startActivity(startIntent)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            this.startActivityAndCollapse(startIntent)
+        } else {
+            val flags = PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            val pendingIntent = PendingIntent.getActivity(this, 0, startIntent, flags)
+            this.startActivityAndCollapse(pendingIntent)
+        }
     }
 
     override fun onTileAdded() {
