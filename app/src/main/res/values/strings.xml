@@ -133,11 +133,8 @@
     <string name="web_bot_subtitle">Visit %s</string>
     <string name="remove_bridge">Remove bridge address</string>
     <string name="help">Help</string>
-    <string name="qs_disconnect">Stop TorVPN</string>
-    <string name="qs_connect">Start TorVPN</string>
-    <string name="qs_connecting">Connecting…</string>
     <string name="qs_error">Connection error</string>
-    <string name="qs_title">Toggle VPN</string>
+    <string name="qs_show_error">Show error</string>
 
     <plurals name="n_bridges">
         <item quantity="one">%1$s bridge added</item>
