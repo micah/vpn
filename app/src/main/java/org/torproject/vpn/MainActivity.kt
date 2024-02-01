@@ -1,6 +1,7 @@
 package org.torproject.vpn
 
 import android.animation.AnimatorSet
+import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
@@ -57,16 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         manuallyAdjustBottomNavItemIconsSize()
 
-        intent?.let { intent ->
-            when (intent.action) {
-                ACTION_REQUEST_VPN_PERMISSON -> {
-                    val bundle = Bundle()
-                    bundle.putString(KEY_ACTION, ACTION_REQUEST_VPN_PERMISSON)
-                    navController.navigateSafe(R.id.navigation_connect, bundle)
-                }
-                else -> {}
-            }
-        }
+        handleIntentAction()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -85,7 +77,26 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+    }
 
+    private fun handleIntentAction() {
+        intent?.let { intent ->
+            when (intent.action) {
+                ACTION_REQUEST_VPN_PERMISSON -> {
+                    val bundle = Bundle()
+                    bundle.putString(KEY_ACTION, ACTION_REQUEST_VPN_PERMISSON)
+                    navController.navigateSafe(R.id.navigation_connect, bundle)
+                }
+
+                else -> {}
+            }
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleIntentAction()
     }
 
     override fun onSupportNavigateUp(): Boolean {
