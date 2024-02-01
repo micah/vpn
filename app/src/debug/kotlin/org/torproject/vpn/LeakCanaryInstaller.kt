@@ -6,12 +6,16 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 import leakcanary.AppWatcher
+import java.util.concurrent.TimeUnit
 
 
 class LeakCanaryInstaller : ContentProvider() {
     override fun onCreate(): Boolean {
         if (!isTest) {
-            AppWatcher.manualInstall(context!!.applicationContext as Application)
+            AppWatcher.manualInstall(
+                application = context!!.applicationContext as Application,
+                retainedDelayMillis = TimeUnit.SECONDS.toMillis(60)
+                )
         }
         return false
     }
