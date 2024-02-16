@@ -87,6 +87,7 @@
                     app:text="@string/help"
                     app:secondaryText="lorem ipsum"
                     android:onClick="@{handler::onHelpClicked}"
+                    android:visibility="gone"
                     />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>
