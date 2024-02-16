@@ -1,5 +1,14 @@
 CHANGELOG
 =========
+0.5.0 Pre-Alpha
+---------------
+* Quick Settings Tile to start/stop the VPN
+* Help Pages support (hidden in this version)
+* improved tor exit country selection
+* fix Leak Canary crash (only available in debug builds)
+* fix refreshing tor circuits on configuration changes
+* fix crashes related to tapping different buttons at the same time
+
 0.4.0 Pre-Alpha
 ----------------
 * support for Android API 34
