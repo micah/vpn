@@ -6,12 +6,12 @@
     <data>
         <variable
             name="viewModel"
-            type="org.torproject.vpn.ui.appearancesettings.model.AppearanceSettingsFragmentViewModel" />
+            type="org.torproject.vpn.ui.generalsettings.model.GeneralSettingsFragmentViewModel" />
 
         <import type="android.view.View" />
         <variable
             name="handler"
-            type="org.torproject.vpn.ui.appearancesettings.ClickHandler" />
+            type="org.torproject.vpn.ui.generalsettings.ClickHandler" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -36,7 +36,7 @@
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="@string/appearance"
+                app:title="@string/general"
                 app:toolbarId="@+id/toolbar">
 
                 <androidx.appcompat.widget.Toolbar
@@ -65,9 +65,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/paragraph_title"
-                    android:paddingHorizontal="@dimen/default_padding"
-                    android:paddingBottom="@dimen/activity_vertical_margin"
-                    android:text="@string/name_and_icon"/>
+                    android:paddingHorizontal="@dimen/activity_vertical_margin"
+                    android:paddingTop="@dimen/default_padding"
+                    android:paddingBottom="@dimen/default_padding"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/appearance"/>
 
                 <include android:id="@+id/layout_app_icons"
                     layout="@layout/horizontal_recycler_view_item"
@@ -76,23 +78,33 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/paragraph_title"
-                    android:paddingHorizontal="@dimen/default_padding"
-                    android:paddingVertical="@dimen/activity_vertical_margin"
-                    android:text="@string/wallpaper"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_wallpapers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    tools:listitem="@layout/wallpaper_view"
-                    tools:background="@drawable/bg_rounded"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:paddingVertical="@dimen/default_padding"
+                    android:paddingHorizontal="@dimen/activity_vertical_margin"
+                    style="@style/text_body_small"
+                    android:text="@string/launcher_hint"
                     />
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/paragraph_title"
+                    android:paddingHorizontal="@dimen/activity_vertical_margin"
+                    android:paddingTop="@dimen/default_padding"
+                    android:paddingBottom="@dimen/default_padding"
+                    android:text="@string/warnings"/>
 
-
+                <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:id="@+id/warnings_settings_entry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/compact_padding"
+                    app:hideSwitch="false"
+                    app:hideDrawable="true"
+                    app:secondaryText="@string/new_circuits_warnings_description"
+                    app:text="@string/new_circuits_warnings"
+                    android:clickable="true"
+                    android:focusable="true"
+                    />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -39,7 +39,7 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
         findNavController().navigateSafe(R.id.action_configureFragment_to_connectionFragment)
     }
 
-    override fun onAppearanceClicked(v: View) {
+    override fun onGeneralClicked(v: View) {
         findNavController().navigate(R.id.action_configureFragment_to_appearanceFragment)
     }
 

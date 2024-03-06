@@ -5,6 +5,9 @@
     >
     <solid android:color="@color/purpleDarkBackground"/>
     <corners android:radius="16dp"/>
+    <stroke android:color="@color/secondary"
+        android:width="2dp"
+        />
     <size android:width="72dp" android:height="72dp"/>
 
 </shape>

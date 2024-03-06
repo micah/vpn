@@ -1,12 +1,14 @@
-package org.torproject.vpn.ui.appearancesettings.data
+package org.torproject.vpn.ui.generalsettings.data
 
 import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import org.torproject.vpn.R
 import org.torproject.vpn.databinding.AppItemViewBinding
-import org.torproject.vpn.ui.appearancesettings.model.LauncherModel
+import org.torproject.vpn.ui.generalsettings.model.LauncherModel
 
 class LauncherAdapter(
     private var list: List<LauncherModel>,
@@ -34,11 +36,14 @@ class LauncherAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(launcherModel: LauncherModel) {
             binding.ivAppImage.setImageResource(launcherModel.drawableResId)
-            binding.ivSelectedIcn.visibility = if (launcherModel.selected) VISIBLE else GONE
+            val backgroundResource = if (launcherModel.selected) R.drawable.app_item_background_selected else R.drawable.app_item_background
+            binding.ivAppImageBackground.setBackgroundResource(backgroundResource)
             binding.root.setOnClickListener {
                 onAppIconSelected?.invoke(launcherModel)
             }
             binding.tvAppTitle.text = binding.root.context.getText(launcherModel.appNameResId)
+            val textColor = if (launcherModel.selected) R.color.secondary else R.color.white
+            binding.tvAppTitle.setTextColor(ContextCompat.getColor(binding.root.context, textColor))
         }
     }
 }

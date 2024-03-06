@@ -11,11 +11,9 @@ import android.text.format.Formatter
 import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -26,11 +24,9 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import org.torproject.vpn.BuildConfig
 import org.torproject.vpn.R
-import org.torproject.vpn.ui.appearancesettings.model.WallpaperSet
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
@@ -47,7 +43,6 @@ import org.torproject.vpn.vpn.ConnectionState.INIT
 import org.torproject.vpn.vpn.DataUsage
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
-import java.lang.IllegalStateException
 
 /**
  * ViewModel for slider fragment, mostly place holder at this point
@@ -154,9 +149,6 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
 
     private val _connectionHint: MutableLiveData<String> = MutableLiveData(getConnectionString())
     val connectionHint: LiveData<String> = _connectionHint
-
-    private val _backgroundImage: MutableLiveData<Int> = MutableLiveData(WallpaperSet.getWallpaperResource(application, preferenceHelper))
-    val backgroundImage: LiveData<Int> = _backgroundImage
 
     //these are static one-time-fetch values on viewModel init. Don't need to be LiveData or StateFlow.
     val flavor = "Pre-alpha"
@@ -339,10 +331,6 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
 
     fun updateConnectionLabel() {
         _connectionHint.postValue(getConnectionString())
-    }
-
-    fun updateBackgroundImage() {
-        _backgroundImage.postValue(WallpaperSet.getWallpaperResource(application, preferenceHelper))
     }
 
     private fun getConnectionString(): String {

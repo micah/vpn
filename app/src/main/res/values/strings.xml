@@ -34,12 +34,15 @@
 
     <!-- configuration screen -->
     <string name="apps">Apps</string>
+    <string name="apps_description">Choose apps to route through Tor</string>
     <string name="apps_description_all_protected">All apps protected</string>
     <string name="tor_logs">Tor Logs</string>
     <string name="tor_logs_description">View and copy your Tor logs</string>
     <string name="always_on_vpn">Always-on VPN</string>
     <string name="always_on_vpn_description">Open Android System Settings</string>
     <string name="copied">Copied …</string>
+    <string name="general">General</string>
+    <string name="general_description">Configure general settings</string>
 
     <string name="title_guide">This app is highly\nexperimental</string>
     <string name="guide_version_number" translatable="false">%1$s</string>
@@ -139,22 +142,16 @@
     <!-- appearance screen -->
     <string name="appearance">Appearance</string>
     <string name="name_and_icon">Name and icon</string>
-    <string name="wallpaper">Wallpaper</string>
-
-    <string name="wallpaper_1" translatable="false">Onionverse</string>
-    <string name="wallpaper_2" translatable="false">Lorem ipsum</string>
-    <string name="wallpaper_3" translatable="false">Lorem ipsum</string>
-    <string name="wallpaper_4" translatable="false">Lorem ipsum</string>
+    <string name="launcher_hint">Choose an icon and name for your home screen and app drawer. The default Tor VPN icon and name will still be used in notifications.</string>
 
 
     <!-- alternative app namesare not translated until we know which app names we actually want -->
-    <string name="app_name_variant_1" translatable="false">Weather</string>
-    <string name="app_name_variant_2" translatable="false">Calculator</string>
-    <string name="app_name_variant_3" translatable="false">Telegram</string>
-    <string name="app_name_variant_4" translatable="false">Messages</string>
-    <string name="app_name_variant_5" translatable="false">Tic Tac Toe</string>
-    <string name="app_name_variant_6" translatable="false">Settings</string>
-    <string name="app_name_variant_7" translatable="false">Solitaire</string>
+    <string name="app_name_variant_1" translatable="false">Calculator</string>
+    <string name="app_name_variant_2" translatable="false">Flashlight</string>
+    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="warnings">Warnings</string>
+    <string name="new_circuits_warnings">New circuits warnings</string>
+    <string name="new_circuits_warnings_description">Warn before reloading circuits.</string>
 
     <plurals name="n_bridges">
         <item quantity="one">%1$s bridge added</item>

@@ -131,7 +131,6 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                connectFragmentViewModel.updateBackgroundImage()
                 launch {
                     connectFragmentViewModel.connectionState.collect { vpnState ->
                         setUIState(vpnState)
@@ -334,7 +333,6 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 PreferenceHelper.EXIT_NODE_COUNTRY -> connectFragmentViewModel.updateExitNodeButton()
                 PreferenceHelper.AUTOMATIC_EXIT_NODE_SELECTION -> connectFragmentViewModel.updateExitNodeButton()
                 PreferenceHelper.BRIDGE_TYPE -> connectFragmentViewModel.updateConnectionLabel()
-                PreferenceHelper.WALLPAPER_RESOURCE -> connectFragmentViewModel.updateBackgroundImage()
             }
         }
     }

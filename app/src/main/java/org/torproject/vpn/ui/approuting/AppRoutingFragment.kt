@@ -8,6 +8,8 @@ import android.view.View.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import org.torproject.onionmasq.OnionMasq
+import org.torproject.onionmasq.errors.ProxyStoppedException
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentAppRoutingBinding
 import org.torproject.vpn.ui.approuting.data.AppListAdapter
@@ -52,8 +54,17 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
         binding.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.refresh_circuits -> {
-                    val dialog = BaseDialogFragment.createRefreshAllCircuitsDialog()
-                    dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
+                    if (preferenceHelper.warningsEnabled) {
+                        val dialog = BaseDialogFragment.createRefreshAllCircuitsDialog()
+                        dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
+                    } else {
+                        try {
+                            OnionMasq.refreshCircuits()
+                        } catch (e: ProxyStoppedException) {
+                            e.printStackTrace()
+                        }
+                    }
+
                     return@setOnMenuItemClickListener true
                 }
                 else -> return@setOnMenuItemClickListener false

@@ -9,12 +9,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import org.torproject.onionmasq.OnionMasq
+import org.torproject.onionmasq.errors.ProxyStoppedException
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentAppDetailBinding
 import org.torproject.vpn.ui.appdetail.data.CircuitCardAdapter
 import org.torproject.vpn.ui.appdetail.model.AppDetailFragmentViewModel
 import org.torproject.vpn.ui.base.view.BaseDialogFragment
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
+import org.torproject.vpn.utils.PreferenceHelper
 
 
 class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
@@ -44,7 +47,7 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(binding.ivAppIcon)
         }
-
+        val preferenceHelper = PreferenceHelper(view.context)
         val adapter = CircuitCardAdapter(viewModel.isBrowser.value!!)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -62,8 +65,17 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
             when (item.itemId) {
                 R.id.refresh_circuits -> {
                     viewModel.appUID.value?.let { appUID ->
-                        val dialog = BaseDialogFragment.createRefreshCircuitsForAppDialog(appUID)
-                        dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
+                        if (preferenceHelper.warningsEnabled) {
+                            val dialog = BaseDialogFragment.createRefreshCircuitsForAppDialog(appUID)
+                            dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
+                        } else {
+                            try {
+                                OnionMasq.refreshCircuitsForApp(appUID.toLong())
+                            } catch (e: ProxyStoppedException) {
+                                e.printStackTrace()
+                            }
+                        }
+
                         return@setOnMenuItemClickListener true
                     }
                     return@setOnMenuItemClickListener false

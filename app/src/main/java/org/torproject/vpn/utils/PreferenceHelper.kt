@@ -3,7 +3,7 @@ package org.torproject.vpn.utils
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.annotation.VisibleForTesting
-import org.torproject.vpn.ui.appearancesettings.model.LauncherDefault
+import org.torproject.vpn.ui.generalsettings.model.LauncherDefault
 
 private const val TOR_VPN_SP: String = "tor-vpn"
 
@@ -16,6 +16,7 @@ class PreferenceHelper(context: Context) {
         const val CACHED_APPS: String = "cached_apps"
         const val START_TIME: String = "start_time"
         const val START_ON_BOOT: String = "start_on_boot"
+        const val WARNINGS_ENABLED: String = "warnings_enabled"
         const val USE_BRIDGE: String = "use_bridge"
         const val EXIT_NODE_COUNTRY: String = "exit_node_country"
         const val AUTOMATIC_EXIT_NODE_SELECTION: String = "automatic_exit_node_selection"
@@ -23,7 +24,6 @@ class PreferenceHelper(context: Context) {
         const val BRIDGE_LINES = "bridge_lines"
         const val LAUNCHER_CLASS = "launcher_class"
         const val EXIT_NODE_COUNTRIES = "exit_node_countries"
-        const val WALLPAPER_RESOURCE = "wallpaper_resource"
 
         enum class BridgeType {
             Obfs4,
@@ -48,10 +48,6 @@ class PreferenceHelper(context: Context) {
         get() = sharedPreference.getString(LAUNCHER_CLASS, LauncherDefault::class.java.name)!!
         set(value) = sharedPreference.edit().putString(LAUNCHER_CLASS, value).apply()
 
-    var wallpaperResource
-        get() = sharedPreference.getString(WALLPAPER_RESOURCE, null)
-        set(value) = sharedPreference.edit().putString(WALLPAPER_RESOURCE, value).apply()
-
     var protectAllApps
         get() = sharedPreference.getBoolean(PROTECT_ALL_APPS, true)
         set(value) = sharedPreference.edit().putBoolean(PROTECT_ALL_APPS, value).apply()
@@ -68,6 +64,10 @@ class PreferenceHelper(context: Context) {
     var startOnBoot
         get() = sharedPreference.getBoolean(START_ON_BOOT, false)
         set(value) = sharedPreference.edit().putBoolean(START_ON_BOOT, value).apply()
+
+    var warningsEnabled
+        get() = sharedPreference.getBoolean(WARNINGS_ENABLED, true)
+        set(value) = sharedPreference.edit().putBoolean(WARNINGS_ENABLED, value).apply()
 
     var useBridge
         get() = sharedPreference.getBoolean(USE_BRIDGE, false)

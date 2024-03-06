@@ -1,26 +1,29 @@
-package org.torproject.vpn.ui.appearancesettings.model
+package org.torproject.vpn.ui.generalsettings.model
 
 import android.app.Application
 import android.content.ComponentName
 import android.content.pm.PackageManager
 import android.util.Log
+import android.widget.CompoundButton
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.torproject.vpn.utils.PreferenceHelper
 
-class AppearanceSettingsFragmentViewModel(private val application: Application) : AndroidViewModel(application) {
+class GeneralSettingsFragmentViewModel(private val application: Application) : AndroidViewModel(application) {
     val preferenceHelper = PreferenceHelper(application)
 
     private val _launcherList = MutableLiveData<List<LauncherModel>>(mutableListOf())
     val launcherList: LiveData<List<LauncherModel>> = _launcherList
 
-    private val _wallpaperList = MutableLiveData<List<WallpaperModel>>(mutableListOf())
-    val wallpaperList: LiveData<List<WallpaperModel>> = _wallpaperList
+    val warningEnabled: Boolean get() = preferenceHelper.warningsEnabled
 
     init {
         loadLauncherList()
-        _wallpaperList.postValue(WallpaperSet.getWallpaperList(application, preferenceHelper))
+    }
+
+    fun onWarningsSettingsChanged(compoundButton: CompoundButton, isChecked: Boolean) {
+        preferenceHelper.warningsEnabled = isChecked
     }
 
     private fun loadLauncherList() {
@@ -30,16 +33,6 @@ class AppearanceSettingsFragmentViewModel(private val application: Application) 
             it.selected = it.launcherClass == launcherClass
         }
         _launcherList.postValue(list)
-    }
-
-    fun onWallpaperSelected(item: WallpaperModel) {
-        preferenceHelper.wallpaperResource = item.drawableResName
-        _wallpaperList.value?.let {
-            it.forEach { wallpaperModel ->
-                wallpaperModel.selected = wallpaperModel.drawableResName == item.drawableResName
-            }
-            _wallpaperList.postValue(it)
-        }
     }
 
     fun onLauncherSelected(item: LauncherModel) {
