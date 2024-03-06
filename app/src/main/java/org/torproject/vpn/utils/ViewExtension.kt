@@ -72,7 +72,6 @@ fun TextView.startVectorAnimationWithEndCallback(
             override fun onAnimationEnd(drawable: Drawable?) {
                 lifecycle?.let { lifecycle ->
                     if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
-                        Log.d("ANIMATE", "setUI - cancel text animation")
                         textAnimator.cancel()
                         onAnimationEnd?.invoke()
                         setTextColor(ContextCompat.getColor(context, endTextColorRes))
