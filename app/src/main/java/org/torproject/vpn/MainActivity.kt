@@ -1,6 +1,5 @@
 package org.torproject.vpn
 
-import android.animation.AnimatorSet
 import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
@@ -24,8 +23,6 @@ import org.torproject.vpn.utils.navigateSafe
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
-    lateinit var connectingAnim: AnimatorSet
-
     companion object {
         val KEY_ACTION = "ACTION"
         val ACTION_REQUEST_VPN_PERMISSON = MainActivity::class.java.simpleName + ".ACTION_REQUEST_VPN_PERMISSON"

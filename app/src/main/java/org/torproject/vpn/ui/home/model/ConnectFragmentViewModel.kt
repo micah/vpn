@@ -15,6 +15,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -107,7 +108,7 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Lazily,
-            initialValue = INIT
+            initialValue = VpnStatusObservable.statusLiveData.value ?: INIT
         )
 
     val toolBarTitle: StateFlow<String> =

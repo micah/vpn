@@ -23,49 +23,18 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-/**
- * this can be an extension function but bifurcation between AnimatedVectorDrawableCompat and AnimatedVectorDrawable needs to be done manually.
- */
-fun repeatVectorAnimation(drawable: Drawable, lifecycle: Lifecycle) {
-    fun startIfResumed() {
-        startVectorAnimationWithEndCallback(drawable, lifecycle) { startIfResumed() }
-    }
-    startIfResumed()
-}
-
-/**
- * Top level function for end animation callback. Mainly to use with vector animation but can be used with anything that uses #AnimatedVectorDrawableCompat.registerAnimationCallback
- */
-fun startVectorAnimationWithEndCallback(
-    drawable: Drawable,
-    lifecycle: Lifecycle,
-    onAnimationEnd: () -> Unit
-) {
-    AnimatedVectorDrawableCompat.registerAnimationCallback(
-        drawable,
-        object : Animatable2Compat.AnimationCallback() {
-            override fun onAnimationEnd(drawable: Drawable?) {
-                if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
-                    onAnimationEnd()
-                }
-            }
-        })
-    (drawable as Animatable).start()
-}
-
-/**
- * Wrapper around animator listener
- */
-fun startRevealWithEndCallback(animator: Animator, onAnimationEnd: () -> Unit) {
-    with(animator) {
-        addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                onAnimationEnd()
-            }
-        })
-
-        start()
-    }
+fun getTextColorAnimation(
+    textView: TextView,
+    startColorRes: Int,
+    endColorRes: Int,
+    duration: Int
+): ObjectAnimator {
+    val startColor = ContextCompat.getColor(textView.context, startColorRes)
+    val endColor = ContextCompat.getColor(textView.context, endColorRes)
+    // Log.d("ANIMATE", "setUI animate colors ${String.format("#%08X", 0xFFFFFFFF and startColor.toLong())} -> ${String.format("#%08X", 0xFFFFFFFF and endColor.toLong())}")
+    val animator: ObjectAnimator = ObjectAnimator.ofArgb(textView, "textColor", startColor, endColor)
+    animator.duration = (duration.toLong() - 50).coerceAtLeast(50)
+    return animator
 }
 
 fun animateTextSizeChange(

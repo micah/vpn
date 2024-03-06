@@ -11,11 +11,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
@@ -37,13 +37,13 @@ import org.torproject.vpn.ui.home.model.ACTION_LOGS
 import org.torproject.vpn.ui.home.model.ACTION_REQUEST_NOTIFICATION_PERMISSION
 import org.torproject.vpn.ui.home.model.ConnectFragmentViewModel
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.getDpInPx
+import org.torproject.vpn.utils.navigateSafe
 import org.torproject.vpn.utils.startVectorAnimationWithEndCallback
 import org.torproject.vpn.vpn.ConnectionState
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
 import java.util.concurrent.TimeUnit
-import org.torproject.vpn.utils.getDpInPx
-import org.torproject.vpn.utils.navigateSafe
 
 
 class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -62,9 +62,9 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
     private var vpnPermissionDialogStartTime = 0L
 
-    private var initStateFabSpacing: Int = 0
-    private var connectingStateFabSpacing: Int = 0
-    private var connectedStateFabSpacing: Int = 0
+    private var initStateFabSpacing: Float = 0f
+    private var connectingStateFabSpacing: Float = 0f
+    private var connectedStateFabSpacing: Float = 0f
     private var animationDuration: Long = 0
 
     private var startForResult: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -72,13 +72,6 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             VpnServiceCommand.startVpn(context)
-
-            // Fixes button color after permission dialog, Quick fix, need refactoring.
-            startVectorAnimationWithEndCallback(
-                binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
-            ) {
-                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_cancel_to_connect)
-            }
         } else {
             //this indicates that the permission request failed almost instantly. One of the reason could be that other VPN has always-on flag started.
             if (System.currentTimeMillis() - vpnPermissionDialogStartTime < 200) {
@@ -106,16 +99,15 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        currentVpnState = ConnectionState.INIT
         preferenceHelper = PreferenceHelper(requireContext())
         preferenceHelper.registerListener(this)
         connectFragmentViewModel = ViewModelProvider(this)[ConnectFragmentViewModel::class.java]
         _binding = FragmentConnectBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = connectFragmentViewModel
-        initStateFabSpacing = getDpInPx(requireContext(), 0f)
-        connectingStateFabSpacing = getDpInPx(requireContext(), (9f)) //dp padding between connect - connecting
-        connectedStateFabSpacing = getDpInPx(requireContext(), (25f)) //dp padding between connect - stop
+        initStateFabSpacing = getDpInPx(requireContext(), 0f).toFloat()
+        connectingStateFabSpacing = getDpInPx(requireContext(), (9f)).toFloat() //dp padding between connect - connecting
+        connectedStateFabSpacing = getDpInPx(requireContext(), (25f)).toFloat() //dp padding between connect - stop
         animationDuration = resources.getInteger(R.integer.default_transition_anim_duration).toLong()
 
         connectFragmentViewModel.prepareVpn.observe(
@@ -129,6 +121,9 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
         connectFragmentViewModel.updateConnectionLabel()
 
+        currentVpnState = connectFragmentViewModel.connectionState.value
+        setUIState(currentVpnState)
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -137,6 +132,13 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                     }
                 }
 
+                launch {
+                    connectFragmentViewModel.guideScreenVisibility.collect { isVisible ->
+                        if (!isVisible) {
+                            setUIState(currentVpnState)
+                        }
+                    }
+                }
                 launch {
                     connectFragmentViewModel.action.collect { action ->
                         when (action) {
@@ -200,40 +202,33 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             TAG,
             "setUIState: ${if (::currentVpnState.isInitialized) currentVpnState else "not initialized"} --> ${vpnState.name}"
         )
-        if (::currentVpnState.isInitialized && currentVpnState == vpnState) {
-            return
-        }
         binding.gradientView.setState(vpnState)
 
         when (vpnState) {
-            ConnectionState.INIT -> {
-
-            }
-
+            ConnectionState.INIT -> showInitUI()
             ConnectionState.CONNECTING -> showConnectingTransition()
-
-
             ConnectionState.CONNECTED -> {
                 binding.includeStats.chronometer.base = VpnStatusObservable.getStartTimeBase()
                 binding.includeStats.chronometer.start()
                 showConnectedTransition()
             }
-
             ConnectionState.DISCONNECTED -> {
                 binding.includeStats.chronometer.stop()
                 showDisconnectedTransition()
             }
-
             ConnectionState.CONNECTION_ERROR -> {
                 binding.includeStats.chronometer.stop()
                 showErrorTransition()
             }
-
-            ConnectionState.DISCONNECTING -> {
-                // disable btn?
-            }
+            ConnectionState.DISCONNECTING -> showDisconnectingTransition()
         }
         currentVpnState = vpnState
+    }
+
+    private fun showInitUI() {
+        binding.clSelectionExitInner.translationX = initStateFabSpacing
+        binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_connect)
+        binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.emerald80))
     }
 
     /*
@@ -243,86 +238,108 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
      */
 
     private fun showConnectingTransition() {
-        if (currentVpnState == ConnectionState.INIT || currentVpnState == ConnectionState.DISCONNECTED || currentVpnState == ConnectionState.CONNECTION_ERROR) {
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
+        if (currentVpnState == ConnectionState.INIT ||
+            currentVpnState == ConnectionState.DISCONNECTED ||
+            currentVpnState == ConnectionState.CONNECTION_ERROR) {
 
-            binding.clSelectionExitInner.animate().translationX(connectingStateFabSpacing.toFloat()).setDuration(animationDuration)
-                .setInterpolator(AccelerateInterpolator()).start()
+            binding.clSelectionExitInner.animate().translationX(connectingStateFabSpacing).setDuration(animationDuration)
+                .setInterpolator(DecelerateInterpolator()).start()
 
-            //connect button vector anim
-            startVectorAnimationWithEndCallback(
-                binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
-            ) {
-                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_cancel_to_connect)
-            }
-
+            //connect/reconnect to cancel btn animation
+            binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
+                R.color.emerald80,
+                R.color.white,
+                startAnimationDrawableRes = R.drawable.av_connect_to_cancel,
+                onAnimationEnd = {
+                    binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_cancel)
+                }
+            )
         } else {
-            binding.clSelectionExitInner.translationX = connectingStateFabSpacing.toFloat()
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_cancel_to_connect)
+            binding.clSelectionExitInner.translationX = connectingStateFabSpacing
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_cancel)
+            binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
         }
-    }
-
-    private fun connectingToIdleTransition() {
-
     }
 
     private fun showConnectedTransition() {
         if (currentVpnState == ConnectionState.CONNECTING) {
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_cancel_to_stop)
-
-            binding.clSelectionExitInner.animate().translationX(connectedStateFabSpacing.toFloat()).setDuration(animationDuration)
+            binding.clSelectionExitInner.animate().translationX(connectedStateFabSpacing).setDuration(animationDuration)
                 .setInterpolator(DecelerateInterpolator()).start()
 
             //cancel to stop transition
-            startVectorAnimationWithEndCallback(
-                binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
-            ) {
-                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_stop_connect)
-            }
+            binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
+                R.color.white,
+                R.color.transparent,
+                startAnimationDrawableRes = R.drawable.av_cancel_to_stop,
+                onAnimationEnd = {
+                    binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_stop)
+                }
+            )
 
         } else {
-            binding.clSelectionExitInner.translationX = connectedStateFabSpacing.toFloat()
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_stop_connect)
+            binding.clSelectionExitInner.translationX = connectedStateFabSpacing
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_stop)
+            binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.transparent))
         }
 
     }
 
     private fun showErrorTransition() {
         if (currentVpnState == ConnectionState.CONNECTING) {
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_cancel_to_connect)
-
-            binding.clSelectionExitInner.animate().translationX(initStateFabSpacing.toFloat()).setDuration(animationDuration)
+            binding.clSelectionExitInner.animate().translationX(initStateFabSpacing).setDuration(animationDuration)
                 .setInterpolator(DecelerateInterpolator()).start()
 
-            //cancel to stop transition
-            startVectorAnimationWithEndCallback(
-                binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
-            ) {
-                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
-            }
-
+            //cancel to connect transition
+            binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
+                R.color.white,
+                R.color.emerald80,
+                startAnimationDrawableRes = R.drawable.av_cancel_to_connect,
+                onAnimationEnd = {
+                    R.drawable.bg_btn_connect
+                }
+            )
         } else {
-            binding.clSelectionExitInner.translationX = initStateFabSpacing.toFloat()
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
+            binding.clSelectionExitInner.translationX = initStateFabSpacing
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_connect)
+            binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.emerald80))
         }
+    }
 
+    private fun showDisconnectingTransition() {
+        if (currentVpnState == ConnectionState.CONNECTING) {
+            binding.clSelectionExitInner.animate().translationX(initStateFabSpacing).setDuration(animationDuration)
+                .setInterpolator(DecelerateInterpolator()).start()
+
+            binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
+                R.color.white,
+                R.color.emerald80,
+                startAnimationDrawableRes = R.drawable.av_cancel_to_connect,
+                onAnimationEnd = {
+                    binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_connect)
+                }
+            )
+        } else if (currentVpnState == ConnectionState.CONNECTED) {
+            binding.clSelectionExitInner.animate().translationX(initStateFabSpacing).setDuration(animationDuration)
+                .setInterpolator(DecelerateInterpolator()).start()
+
+            binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
+                R.color.transparent,
+                R.color.emerald80,
+                startAnimationDrawableRes = R.drawable.av_stop_connect,
+                onAnimationEnd = {
+                    binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_connect)
+                }
+            )
+        }
     }
 
     private fun showDisconnectedTransition() {
         if (currentVpnState == ConnectionState.DISCONNECTING) {
-
-            binding.clSelectionExitInner.animate().translationX(initStateFabSpacing.toFloat()).setDuration(animationDuration)
-                .setInterpolator(DecelerateInterpolator()).start()
-
-            startVectorAnimationWithEndCallback(
-                binding.tvConnectActionBtn.background, viewLifecycleOwner.lifecycle
-            ) {
-                binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
-            }
-
+            // Disconnecting animation is already running
         } else {
-            binding.clSelectionExitInner.translationX = initStateFabSpacing.toFloat()
-            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.av_connect_to_cancel)
+            binding.clSelectionExitInner.translationX = initStateFabSpacing
+            binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_connect)
+            binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.emerald80))
         }
     }
 
