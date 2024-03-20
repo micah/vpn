@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.ViewUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import org.torproject.vpn.circumvention.SettingsRequest
 import org.torproject.vpn.databinding.FragmentBridgesettingsBinding
 import org.torproject.vpn.ui.bridgesettings.model.BridgeSettingsFragmentViewModel
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.navigateSafe
 
 class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickHandler, OnSharedPreferenceChangeListener {
 
@@ -58,7 +60,7 @@ class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickH
     }
 
     override fun onTorBridgeBotClicked(v: View) {
-        askTor()
+        findNavController().navigateSafe(R.id.action_navigation_bridgeSettings_to_bridgeBot)
     }
 
     override fun onTelegramBridgeBotClicked(v: View) {

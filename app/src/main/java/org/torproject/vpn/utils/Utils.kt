@@ -1,6 +1,10 @@
 package org.torproject.vpn.utils
 
-import android.animation.*
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ArgbEvaluator
+import android.animation.TimeAnimator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Animatable
@@ -8,10 +12,13 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat
@@ -20,7 +27,7 @@ import org.torproject.vpn.R
 import org.torproject.vpn.vpn.DataUsage
 import java.io.BufferedReader
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 
 fun getTextColorAnimation(
@@ -34,6 +41,67 @@ fun getTextColorAnimation(
     // Log.d("ANIMATE", "setUI animate colors ${String.format("#%08X", 0xFFFFFFFF and startColor.toLong())} -> ${String.format("#%08X", 0xFFFFFFFF and endColor.toLong())}")
     val animator: ObjectAnimator = ObjectAnimator.ofArgb(textView, "textColor", startColor, endColor)
     animator.duration = (duration.toLong() - 50).coerceAtLeast(50)
+    return animator
+}
+
+
+fun getVerticalBiasChangeAnimator(
+    view: View,
+    startSize: Float,
+    endSize: Float,
+): Animator {
+    val animationDuration: Long = 250 // Animation duration in ms
+
+    val animator = ValueAnimator.ofFloat(startSize, endSize)
+    animator.duration = animationDuration
+
+    animator.addUpdateListener { valueAnimator ->
+        view.updateLayoutParams<ConstraintLayout.LayoutParams> { verticalBias = (valueAnimator.animatedValue as Float)}
+    }
+    return animator
+}
+
+fun getVisibilityAnimator(view: View,
+                          startVisibility: Int,
+                          endVisibility: Int,
+                          lifecycle: Lifecycle): Animator? {
+    if (startVisibility == endVisibility) {
+        return null
+    }
+
+    if ((startVisibility != View.VISIBLE && startVisibility != View.INVISIBLE && startVisibility != View.GONE) ||
+        (endVisibility != View.VISIBLE && endVisibility != View.INVISIBLE && endVisibility != View.GONE)) {
+        throw IllegalArgumentException("animated start or end visibility is neither VISIBLE, INVISIBLE or GONE")
+    }
+
+    var animator: ValueAnimator? = null
+    when (startVisibility) {
+        View.VISIBLE -> {
+            view.alpha = 1f
+            view.visibility = View.VISIBLE
+            animator = ValueAnimator.ofFloat(1f, 0f)
+        }
+        View.GONE, View.INVISIBLE -> {
+            view.alpha = 0f
+            view.visibility = View.VISIBLE
+            if (endVisibility == View.VISIBLE) {
+                animator = ValueAnimator.ofFloat(0f, 1f)
+            }
+        }
+    }
+
+    animator?.duration = 250
+    animator?.addUpdateListener { valueAnimator ->
+        view.alpha = valueAnimator.animatedValue as Float
+    }
+    animator?.addListener(object : AnimatorListenerAdapter() {
+        override fun onAnimationEnd(animation: Animator) {
+            if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+                view.visibility = endVisibility
+            }
+        }
+    })
+
     return animator
 }
 

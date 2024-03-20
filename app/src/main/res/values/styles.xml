@@ -14,6 +14,15 @@
         <item name="android:textFontWeight" tools:targetApi="p">550</item>
     </style>
 
+    <style name="paragraph_title_small" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textColor">@color/on_surface_variant</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+    </style>
+
     <style name="button_text_in_fragment" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:textSize">20sp</item>
@@ -111,6 +120,13 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?colorOnPrimary</item>
         <item name="android:textFontWeight" tools:targetApi="p">400</item>
+    </style>
+
+    <style name="text_body_large" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:textColor">?colorOnPrimary</item>
     </style>
 
     <style name="text_mono_small" parent="TextAppearance.MaterialComponents.Body1">
@@ -277,7 +293,7 @@
         <item name="android:textFontWeight" tools:targetApi="p">400</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">3sp</item>
-        <item name="android:textColor">@color/indigo10</item>
+        <item name="android:textColor">@color/on_surface_variant</item>
     </style>
 
     <style name="small_info_text" parent="TextAppearance.MaterialComponents.Body1">
@@ -292,6 +308,14 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/blue30</item>
+        <item name="android:lineHeight" tools:targetApi="p">20dp</item>
+    </style>
+
+    <style name="button_text" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:lineHeight" tools:targetApi="p">20dp</item>
     </style>
 

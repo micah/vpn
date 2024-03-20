@@ -126,6 +126,9 @@
     <string name="action_paste_bridges">Paste your bridge addresses here</string>
     <string name="manual_bridge">Manual selection</string>
     <string name="get_new_bridges">Get new bridges</string>
+    <string name="new_bridges">I need new bridges</string>
+    <string name="fetching_bridges">Fetching your new bridges…</string>
+    <string name="new_bridges_result">Here are your new bridges:</string>
     <string name="get_new_bridges_description">Since bridge addresses aren\'t public, you\'ll need to request one from the Tor Project.</string>
     <string name="ask_bridge_bot">Ask the bridge bot</string>
     <string name="telegram">Telegram</string>
@@ -152,6 +155,13 @@
     <string name="warnings">Warnings</string>
     <string name="new_circuits_warnings">New circuits warnings</string>
     <string name="new_circuits_warnings_description">Warn before reloading circuits.</string>
+
+    <!-- Bridge Bot -->
+    <string name="bridge_bot">Bridge Bot</string>
+    <string name="bot_msg_welcome">Welcome, weary traveler</string>
+    <string name="bot_msg_results">Here are your bridges:</string>
+    <string name="start_again">Start again</string>
+    <string name="use_bridges">Use bridges</string>
 
     <plurals name="n_bridges">
         <item quantity="one">%1$s bridge added</item>

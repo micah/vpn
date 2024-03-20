@@ -116,7 +116,18 @@
         android:id="@+id/bridgeSettingsFragment"
         android:name="org.torproject.vpn.ui.bridgesettings.BridgeSettingsFragment"
         android:label="BridgeSettingsFragment"
-        tools:layout="@layout/fragment_bridgesettings"
+        tools:layout="@layout/fragment_bridgesettings">
+        <action
+            android:id="@+id/action_navigation_bridgeSettings_to_bridgeBot"
+            app:destination="@+id/bridgeBotFragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bridgeBotFragment"
+        android:name="org.torproject.vpn.ui.bridgebot.BridgeBotFragment"
+        android:label="BridgeBotFragment"
+        tools:layout="@layout/fragment_bridgebot"
         />
 
     <fragment
