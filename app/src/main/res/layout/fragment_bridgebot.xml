@@ -82,8 +82,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_bar"
             android:indeterminate="true"
-            app:showAnimationBehavior="inward"
-            app:hideAnimationBehavior="outward"
             android:visibility="@{viewModel.isFetching ? View.VISIBLE : View.GONE }"
             />
 
