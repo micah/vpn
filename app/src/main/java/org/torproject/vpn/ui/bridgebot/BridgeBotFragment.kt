@@ -5,19 +5,13 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.View.GONE
-import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import kotlinx.coroutines.launch
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentBridgebotBinding
 import org.torproject.vpn.ui.bridgebot.model.BridgeBotFragmentViewModel
@@ -107,12 +101,10 @@ class BridgeBotFragment: Fragment(R.layout.fragment_bridgebot), ClickHandler, On
 
 
     override fun onBridgeButtonClicked(v: View) {
-        Log.d("BridgeBotFragment", "onBridgeButtonClicked")
        viewModel.fetchBridges()
     }
 
     override fun onUseBridgesClicked(v: View) {
-        Log.d("BridgeBotFragment", "onUseBridgesClicked")
         viewModel.useBridges()
     }
 
