@@ -28,7 +28,7 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
         binding.lifecycleOwner = viewLifecycleOwner
     }
     override fun onHelpClicked(v: View) {
-        findNavController().navigateSafe(R.id.action_configureFragment_to_helpFragment)
+        findNavController().navigateSafe(R.id.action_configureFragment_to_offlineHelpFragment)
     }
     override fun onAppsClicked(v: View) {
         Log.d(TAG, "apps entry clicked")

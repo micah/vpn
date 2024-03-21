@@ -20,8 +20,8 @@
             android:id="@+id/action_configureFragment_to_appearanceFragment"
             app:destination="@id/generalFragment" />
         <action
-            android:id="@+id/action_configureFragment_to_helpFragment"
-            app:destination="@+id/helpFragment" />
+            android:id="@+id/action_configureFragment_to_offlineHelpFragment"
+            app:destination="@+id/offlineHelpFragment" />
     </fragment>
 
     <fragment
@@ -131,9 +131,9 @@
         />
 
     <fragment
-        android:id="@+id/helpFragment"
-        android:name="org.torproject.vpn.ui.help.HelpFragment"
+        android:id="@+id/offlineHelpFragment"
+        android:name="org.torproject.vpn.ui.help.OfflineHelpFragment"
         android:label="HelpFragment"
-        tools:layout="@layout/fragment_help"
+        tools:layout="@layout/fragment_offline_help"
         />
 </navigation>

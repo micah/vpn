@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:background="@color/purpleDark"
-        tools:context="org.torproject.vpn.ui.help.HelpFragment">
+        tools:context="org.torproject.vpn.ui.help.OfflineHelpFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
@@ -36,6 +36,6 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:background="@color/purpleDark"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context="org.torproject.vpn.ui.help.HelpFragment"/>
+            tools:context="org.torproject.vpn.ui.help.OfflineHelpFragment"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
