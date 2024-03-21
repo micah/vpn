@@ -1,24 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
     <item android:state_checked="false">
-        <aapt:attr name="android:drawable">
-            <vector android:width="60dp" android:height="28dp" android:viewportWidth="60" android:viewportHeight="28">
-                <path android:fillColor="@color/indigo60" android:pathData="M14,0L46,0A14,14 0,0 1,60 14L60,14A14,14 0,0 1,46 28L14,28A14,14 0,0 1,0 14L0,14A14,14 0,0 1,14 0z" />
-                <path android:fillColor="@color/indigo10" android:pathData="M33.542,14C33.542,15.956 31.956,17.542 30,17.542C28.044,17.542 26.458,15.956 26.458,14C26.458,12.044 28.044,10.458 30,10.458C31.956,10.458 33.542,12.044 33.542,14Z" />
-                <path android:fillColor="@color/indigo10" android:fillType="evenOdd" android:pathData="M36.458,14C36.458,17.567 33.567,20.458 30,20.458C26.433,20.458 23.542,17.567 23.542,14C23.542,10.433 26.433,7.542 30,7.542C33.567,7.542 36.458,10.433 36.458,14ZM34.792,14C34.792,16.646 32.646,18.792 30,18.792C27.354,18.792 25.208,16.646 25.208,14C25.208,11.354 27.354,9.208 30,9.208C32.646,9.208 34.792,11.354 34.792,14Z" />
-                <path android:fillColor="@color/indigo10" android:fillType="evenOdd" android:pathData="M39.375,14C39.375,19.178 35.178,23.375 30,23.375C24.822,23.375 20.625,19.178 20.625,14C20.625,8.822 24.822,4.625 30,4.625C35.178,4.625 39.375,8.822 39.375,14ZM37.708,14C37.708,18.257 34.257,21.708 30,21.708C25.743,21.708 22.292,18.257 22.292,14C22.292,9.743 25.743,6.292 30,6.292C34.257,6.292 37.708,9.743 37.708,14Z" />
-            </vector>
-        </aapt:attr>
+        <layer-list>
+            <item android:height="28dp" android:width="60dp">
+                <aapt:attr name="android:drawable">
+                    <vector android:width="60dp" android:height="28dp" android:viewportWidth="60" android:viewportHeight="28">
+                        <path android:fillColor="@color/indigo60" android:pathData="M14,0L46,0A14,14 0,0 1,60 14L60,14A14,14 0,0 1,46 28L14,28A14,14 0,0 1,0 14L0,14A14,14 0,0 1,14 0z" />
+                    </vector>
+                </aapt:attr>
+            </item>
+            <item
+                android:width="24dp"
+                android:height="24dp"
+                android:gravity="center"
+                >
+                <aapt:attr name="android:drawable">
 
+                    <vector
+                        android:width="24dp"
+                        android:height="24dp"
+                        android:viewportWidth="24"
+                        android:viewportHeight="24">
+                        <path
+                            android:pathData="M14,12C14,13.105 13.105,14 12,14C10.895,14 10,13.105 10,12C10,10.895 10.895,10 12,10C13.105,10 14,10.895 14,12Z"
+                            android:fillColor="@color/on_surface_variant"/>
+                        <path
+                            android:pathData="M13,16.649C13,16.193 13.316,15.806 13.727,15.609C15.072,14.964 16,13.59 16,12C16,9.791 14.209,8 12,8C9.791,8 8,9.791 8,12C8,13.59 8.928,14.964 10.273,15.609C10.684,15.806 11,16.193 11,16.649V20.896C11,21.487 10.487,21.954 9.909,21.83C5.39,20.862 2,16.806 2,12C2,6.477 6.477,2 12,2C17.523,2 22,6.477 22,12C22,16.806 18.61,20.862 14.091,21.83C13.513,21.954 13,21.487 13,20.896V16.649ZM15,17.819C15,18.584 15.775,19.096 16.413,18.674C18.574,17.242 20,14.787 20,12C20,7.582 16.418,4 12,4C7.582,4 4,7.582 4,12C4,14.787 5.426,17.242 7.587,18.674C8.225,19.096 9,18.584 9,17.819C9,17.434 8.79,17.085 8.479,16.859C6.977,15.768 6,13.998 6,12C6,8.686 8.686,6 12,6C15.314,6 18,8.686 18,12C18,13.998 17.023,15.768 15.521,16.859C15.21,17.085 15,17.434 15,17.819Z"
+                            android:fillColor="@color/on_surface_variant"
+                            android:fillType="evenOdd"/>
+                    </vector>
+                </aapt:attr>
+            </item>
+        </layer-list>
     </item>
     <item android:state_checked="true">
-        <aapt:attr name="android:drawable">
-            <vector android:width="60dp" android:height="28dp" android:viewportWidth="60" android:viewportHeight="28">
-                <path android:fillColor="@color/indigo50" android:pathData="M14,0L46,0A14,14 0,0 1,60 14L60,14A14,14 0,0 1,46 28L14,28A14,14 0,0 1,0 14L0,14A14,14 0,0 1,14 0z" />
-                <path android:fillColor="#ffffff" android:pathData="M33.542,14C33.542,15.956 31.956,17.542 30,17.542C28.044,17.542 26.458,15.956 26.458,14C26.458,12.044 28.044,10.458 30,10.458C31.956,10.458 33.542,12.044 33.542,14Z" />
-                <path android:fillColor="#ffffff" android:fillType="evenOdd" android:pathData="M36.458,14C36.458,17.567 33.567,20.458 30,20.458C26.433,20.458 23.542,17.567 23.542,14C23.542,10.433 26.433,7.542 30,7.542C33.567,7.542 36.458,10.433 36.458,14ZM34.792,14C34.792,16.646 32.646,18.792 30,18.792C27.354,18.792 25.208,16.646 25.208,14C25.208,11.354 27.354,9.208 30,9.208C32.646,9.208 34.792,11.354 34.792,14Z" />
-                <path android:fillColor="#ffffff" android:fillType="evenOdd" android:pathData="M39.375,14C39.375,19.178 35.178,23.375 30,23.375C24.822,23.375 20.625,19.178 20.625,14C20.625,8.822 24.822,4.625 30,4.625C35.178,4.625 39.375,8.822 39.375,14ZM37.708,14C37.708,18.257 34.257,21.708 30,21.708C25.743,21.708 22.292,18.257 22.292,14C22.292,9.743 25.743,6.292 30,6.292C34.257,6.292 37.708,9.743 37.708,14Z" />
-            </vector>
-        </aapt:attr>
+        <layer-list>
+            <item android:width="60dp" android:height="28dp">
+                <aapt:attr name="android:drawable">
+                    <vector android:width="60dp" android:height="28dp" android:viewportWidth="60" android:viewportHeight="28">
+                        <path android:fillColor="@color/indigo50" android:pathData="M14,0L46,0A14,14 0,0 1,60 14L60,14A14,14 0,0 1,46 28L14,28A14,14 0,0 1,0 14L0,14A14,14 0,0 1,14 0z" />
+                    </vector>
+                </aapt:attr>
+            </item>
+            <item
+                android:width="24dp"
+                android:height="24dp"
+                android:gravity="center"
+                >
+                <aapt:attr name="android:drawable">
+                    <vector
+                        android:width="24dp"
+                        android:height="24dp"
+                        android:viewportWidth="24"
+                        android:viewportHeight="24">
+                        <path
+                            android:pathData="M14,12C14,13.105 13.105,14 12,14C10.895,14 10,13.105 10,12C10,10.895 10.895,10 12,10C13.105,10 14,10.895 14,12Z"
+                            android:fillColor="@color/on_surface"/>
+                        <path
+                            android:pathData="M13,16.649C13,16.193 13.316,15.806 13.727,15.609C15.072,14.964 16,13.59 16,12C16,9.791 14.209,8 12,8C9.791,8 8,9.791 8,12C8,13.59 8.928,14.964 10.273,15.609C10.684,15.806 11,16.193 11,16.649V20.896C11,21.487 10.487,21.954 9.909,21.83C5.39,20.862 2,16.806 2,12C2,6.477 6.477,2 12,2C17.523,2 22,6.477 22,12C22,16.806 18.61,20.862 14.091,21.83C13.513,21.954 13,21.487 13,20.896V16.649ZM15,17.819C15,18.584 15.775,19.096 16.413,18.674C18.574,17.242 20,14.787 20,12C20,7.582 16.418,4 12,4C7.582,4 4,7.582 4,12C4,14.787 5.426,17.242 7.587,18.674C8.225,19.096 9,18.584 9,17.819C9,17.434 8.79,17.085 8.479,16.859C6.977,15.768 6,13.998 6,12C6,8.686 8.686,6 12,6C15.314,6 18,8.686 18,12C18,13.998 17.023,15.768 15.521,16.859C15.21,17.085 15,17.434 15,17.819Z"
+                            android:fillColor="@color/on_surface"
+                            android:fillType="evenOdd"/>
+                    </vector>
+                </aapt:attr>
+            </item>
+        </layer-list>
     </item>
 </selector>
