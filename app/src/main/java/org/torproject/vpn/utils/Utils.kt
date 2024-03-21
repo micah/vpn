@@ -3,6 +3,7 @@ package org.torproject.vpn.utils
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
 import android.animation.TimeAnimator
 import android.animation.ValueAnimator
 import android.content.Context
