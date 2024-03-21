@@ -8,7 +8,6 @@ import android.animation.TimeAnimator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Looper
@@ -22,8 +21,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
-import androidx.vectordrawable.graphics.drawable.Animatable2Compat
-import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import org.torproject.vpn.R
 import org.torproject.vpn.vpn.DataUsage
 import java.io.BufferedReader
