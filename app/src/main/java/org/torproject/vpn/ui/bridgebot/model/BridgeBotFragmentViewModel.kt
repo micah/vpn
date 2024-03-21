@@ -96,8 +96,6 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
 
         CircumventionApiManager().getBuiltInTransports({
             it?.let { response ->
-                Log.d("result obfs4: ", "${response.obfs4}")
-                Log.d("result snowflake: ", "${response.snowflake}")
                 val results = mutableListOf<String>()
                 for (i in 0 until (response.obfs4.size).coerceAtMost(3)) {
                     results.add(response.obfs4[i])
@@ -116,7 +114,6 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
     fun fetchBridgesForCurrentLocation() {
         CircumventionApiManager().getSettings(SettingsRequest(), {
             it?.let { response ->
-                Log.d("result: ", "${response.settings}")
                 val results = mutableListOf<String>()
                 response.settings?.let { bridgesList ->
                     for (bridges in bridgesList) {
