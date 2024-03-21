@@ -83,11 +83,8 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
     )
 
     /*
-        This functionality is still very alpha. We're requesting bridge lines from the circumvention API,
-        but instead of evaluating the assumed device's country location, the country code of RU is hard coded
-        in order to enforce to receive actual results. For requested (presumably) uncensored locations an
-        empty array gets returned by the circumvention API. Moreover this feature doesn't use any
-        circumvention strategy itself for the API communication. Finally the returned bridge lines cannot be
+        This functionality is still very alpha. We don't use any
+        circumvention strategy for the API communication itself. The returned bridge lines cannot be
         used in reality to start tor, since PT support is not yet available. Only bridges without obfuscation
         are currently supported.
      */
@@ -97,7 +94,27 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
         }
         _botState.postValue(BotState.FETCHING)
 
-        CircumventionApiManager().getSettings(SettingsRequest("ru"), {
+        CircumventionApiManager().getBuiltInTransports({
+            it?.let { response ->
+                Log.d("result obfs4: ", "${response.obfs4}")
+                Log.d("result snowflake: ", "${response.snowflake}")
+                val results = mutableListOf<String>()
+                for (i in 0 until (response.obfs4.size).coerceAtMost(3)) {
+                    results.add(response.obfs4[i])
+                }
+                for (i in 0 until (response.snowflake.size).coerceAtMost(3)) {
+                    results.add(response.snowflake[i])
+                }
+                _bridgeResult.postValue(results)
+                _botState.postValue(BotState.SHOW_RESULT)
+            } ?: run {
+                _botState.postValue(BotState.INIT)
+            }
+        })
+    }
+
+    fun fetchBridgesForCurrentLocation() {
+        CircumventionApiManager().getSettings(SettingsRequest(), {
             it?.let { response ->
                 Log.d("result: ", "${response.settings}")
                 val results = mutableListOf<String>()
@@ -126,7 +143,6 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
         if (bridgeLineSet.isEmpty()) {
             preferenceHelper.bridgeType = PreferenceHelper.Companion.BridgeType.None
         } else {
-            //TODO: figure out if asking the bridge bot should result in BridgeType.Manual, if we need to introduce another state etc.
             preferenceHelper.bridgeType = PreferenceHelper.Companion.BridgeType.Manual
         }
         _botState.postValue(BotState.SAVED_BRIDGES)
