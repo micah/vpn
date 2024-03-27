@@ -370,6 +370,14 @@
         <item name="android:textSize">22sp</item>
     </style>
 
+    <style name="bottom_sheet_title" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textFontWeight" tools:targetApi="p">500</item>
+        <item name="android:lineHeight" tools:targetApi="p">28dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/textOnPrimary</item>
+    </style>
+
     <style name="connection_bridge_info" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:fontFamily">@font/figtree_regular</item>
         <item name="android:lineSpacingExtra">3sp</item>

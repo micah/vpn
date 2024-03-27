@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_connect,
+                R.id.navigation_help,
                 R.id.configure_fragment
             )
         )

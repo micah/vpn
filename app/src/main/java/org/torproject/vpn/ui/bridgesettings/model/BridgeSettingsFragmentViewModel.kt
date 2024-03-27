@@ -4,9 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -25,6 +23,7 @@ import org.torproject.vpn.R
 import org.torproject.vpn.TorApplication
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
+import org.torproject.vpn.utils.resolveActivityForUri
 
 class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -148,27 +147,6 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
 
     private fun queryWebActivityInfo(context: Context): ActivityInfo? {
         return resolveActivityForUri(context.packageManager, WEB_BOT_URI)
-    }
-
-
-    private fun resolveActivityForUri(packageManager: PackageManager, uriString: String): ActivityInfo? {
-        val intent =
-            Intent(Intent.ACTION_VIEW, Uri.parse(uriString))
-        try {
-            val resolveInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                packageManager.resolveActivity(
-                    intent,
-                    PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_DEFAULT_ONLY.toLong())
-                )
-            } else {
-                packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
-            }
-
-            resolveInfo?.let { return it.activityInfo }
-        } catch (uoe: UnsupportedOperationException) {
-            uoe.printStackTrace()
-        }
-        return null
     }
 
     fun getTelegramIntent(): Intent {

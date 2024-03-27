@@ -39,6 +39,14 @@
             android:id="@+id/action_navigation_connect_to_connectionFragment"
             app:destination="@id/connectionFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_help"
+        android:name="org.torproject.vpn.ui.help.HelpFragment"
+        android:label="HelpFragment"
+        >
+
+    </fragment>
     <fragment
         android:id="@+id/appRoutingFragment"
         android:name="org.torproject.vpn.ui.approuting.AppRoutingFragment"

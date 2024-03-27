@@ -5,6 +5,7 @@
             <item
                 android:width="60dp"
                 android:height="28dp"
+                android:bottom="4dp"
                 >
                 <aapt:attr name="android:drawable">
                     <vector android:width="60dp" android:height="28dp" android:viewportWidth="60" android:viewportHeight="28">
@@ -16,6 +17,7 @@
                 android:width="24dp"
                 android:height="24dp"
                 android:gravity="center"
+                android:bottom="4dp"
                 >
                 <aapt:attr name="android:drawable">
                     <vector
@@ -72,10 +74,11 @@
             <item
                 android:width="60dp"
                 android:height="28dp"
+                android:bottom="4dp"
                 >
                 <aapt:attr name="android:drawable">
                     <vector android:width="60dp" android:height="28dp" android:viewportWidth="60" android:viewportHeight="28">
-                        <path android:fillColor="@color/indigo50" android:pathData="M14,0L46,0A14,14 0,0 1,60 14L60,14A14,14 0,0 1,46 28L14,28A14,14 0,0 1,0 14L0,14A14,14 0,0 1,14 0z" />
+                        <path android:fillColor="@color/surface_container_low" android:pathData="M14,0L46,0A14,14 0,0 1,60 14L60,14A14,14 0,0 1,46 28L14,28A14,14 0,0 1,0 14L0,14A14,14 0,0 1,14 0z" />
                     </vector>
                 </aapt:attr>
             </item>
@@ -83,6 +86,7 @@
                 android:width="24dp"
                 android:height="24dp"
                 android:gravity="center"
+                android:bottom="4dp"
                 >
                 <aapt:attr name="android:drawable">
                     <vector

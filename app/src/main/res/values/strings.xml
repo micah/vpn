@@ -132,6 +132,8 @@
     <string name="get_new_bridges_description">Since bridge addresses aren\'t public, you\'ll need to request one from the Tor Project.</string>
     <string name="ask_bridge_bot">Ask the bridge bot</string>
     <string name="telegram">Telegram</string>
+    <string name="signal">Signal</string>
+    <string name="whatsapp">Whatsapp</string>
     <string name="web">Web</string>
     <string name="email_providers">Gmail or Riseup</string>
     <string name="telegram_bot_subtitle">Message %s</string>
@@ -155,6 +157,14 @@
     <string name="warnings">Warnings</string>
     <string name="new_circuits_warnings">New circuits warnings</string>
     <string name="new_circuits_warnings_description">Warn before reloading circuits.</string>
+    <string name="view_faq">View our FAQ</string>
+    <string name="report_bug">Report a bug</string>
+    <string name="contact_support">Contact support</string>
+    <string name="help_description_wip">Tor VPN is a work in progress, and some features may not work as expected.</string>
+    <string name="help_description_bug_report">If you encounter an issue that’s not answered by our FAQ, please open a bug report or contact support.</string>
+    <string name="bug_tor_forum">On the Tor Torum</string>
+    <string name="bug_gitlab">On Gitlab</string>
+    <string name="email">Email</string>
 
     <!-- Bridge Bot -->
     <string name="bridge_bot">Bridge Bot</string>
