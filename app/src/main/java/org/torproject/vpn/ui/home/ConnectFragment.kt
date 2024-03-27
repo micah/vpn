@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +42,6 @@ import org.torproject.vpn.utils.startVectorAnimationWithEndCallback
 import org.torproject.vpn.vpn.ConnectionState
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
-import java.util.concurrent.TimeUnit
 
 
 class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -174,20 +172,6 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         }
 
 
-        binding.includeStats.chronometer.setOnChronometerTickListener { chronometer ->
-            val elapsedTime = SystemClock.elapsedRealtime() - chronometer.base
-
-            val hours = TimeUnit.MILLISECONDS.toHours(elapsedTime)
-            val minutes = TimeUnit.MILLISECONDS.toMinutes(elapsedTime) -
-                    TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedTime))
-            val seconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTime) -
-                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(elapsedTime))
-
-            val timeFormatted = String.format("%02d:%02d:%02d", hours, minutes, seconds)
-            chronometer.text = timeFormatted
-        }
-
-
         return binding.root
     }
 
@@ -208,16 +192,12 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             ConnectionState.INIT -> showInitUI()
             ConnectionState.CONNECTING -> showConnectingTransition()
             ConnectionState.CONNECTED -> {
-                binding.includeStats.chronometer.base = VpnStatusObservable.getStartTimeBase()
-                binding.includeStats.chronometer.start()
                 showConnectedTransition()
             }
             ConnectionState.DISCONNECTED -> {
-                binding.includeStats.chronometer.stop()
                 showDisconnectedTransition()
             }
             ConnectionState.CONNECTION_ERROR -> {
-                binding.includeStats.chronometer.stop()
                 showErrorTransition()
             }
             ConnectionState.DISCONNECTING -> showDisconnectingTransition()
