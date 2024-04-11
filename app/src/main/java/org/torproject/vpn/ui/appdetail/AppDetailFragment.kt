@@ -48,7 +48,7 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
                 .into(binding.ivAppIcon)
         }
         val preferenceHelper = PreferenceHelper(view.context)
-        val adapter = CircuitCardAdapter(viewModel.isBrowser.value!!)
+        val adapter = CircuitCardAdapter(viewModel.appName.value!!, preferenceHelper)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.layoutNoTorSupport.rvCircuitCards.adapter = adapter

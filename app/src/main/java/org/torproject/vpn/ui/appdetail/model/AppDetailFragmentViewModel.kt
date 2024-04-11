@@ -7,20 +7,24 @@ import android.text.format.Formatter
 import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted.Companion.Eagerly
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.torproject.onionmasq.OnionMasq
-import org.torproject.onionmasq.circuit.Circuit
+import org.torproject.onionmasq.circuit.CircuitCountryCodes
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.updateDataUsage
 import org.torproject.vpn.vpn.DataUsage
-import org.torproject.vpn.vpn.VpnStatusObservable
-import java.util.*
+import java.util.Timer
+import java.util.TimerTask
 
 
 class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(application) {
@@ -31,8 +35,8 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
     val isBrowser = MutableLiveData(false)
     val hasTorSupport = MutableLiveData(false)
     var packageManager: PackageManager? = application.packageManager
-    private var _circuitList: MutableLiveData<List<Circuit>> = MutableLiveData(ArrayList())
-    val circuitList: LiveData<List<Circuit>> = _circuitList
+    private var _circuitList: MutableLiveData<List<CircuitCountryCodes>> = MutableLiveData(ArrayList())
+    val circuitList: LiveData<List<CircuitCountryCodes>> = _circuitList
 
     val openAppButtonText: StateFlow<String> = appName.asFlow().map { appName ->
         return@map application.getString(R.string.action_open_app, appName)
@@ -79,7 +83,7 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
                 override fun run() {
                     appUID.value?.let {
                         _dataUsage.postValue(updateDataUsage(dataUsage, OnionMasq.getBytesReceivedForApp(it.toLong()), OnionMasq.getBytesSentForApp(it.toLong())))
-                        _circuitList.postValue(VpnStatusObservable.getCircuitsForUid(it))
+                        _circuitList.postValue(OnionMasq.getCircuitCountryCodesForAppUid(it))
                     }
                 }
             }, 0, 1000)

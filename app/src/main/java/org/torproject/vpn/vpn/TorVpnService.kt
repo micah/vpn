@@ -3,7 +3,7 @@ package org.torproject.vpn.vpn
 import android.app.Notification
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.pm.ServiceInfo.*
+import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED
 import android.net.VpnService
 import android.os.Build
 import android.os.Handler
@@ -141,8 +141,7 @@ class TorVpnService : VpnService() {
             e.printStackTrace()
         }
 
-
-        stopForeground(true)
+        stopForeground(STOP_FOREGROUND_REMOVE)
         stopSelf()
     }
 
@@ -181,7 +180,6 @@ class TorVpnService : VpnService() {
                             )
                         )
                     }
-                    VpnStatusObservable.handleConnectionEvent(event)
                 }
                 is FailedConnectionEvent -> {
                     LogObservable.getInstance().addLog(
@@ -194,7 +192,6 @@ class TorVpnService : VpnService() {
                             event.appId
                         )
                     )
-                    VpnStatusObservable.handleConnectionEvent(event)
                 }
                 is ClosedConnectionEvent -> {
                     event.error?.let {
@@ -215,7 +212,6 @@ class TorVpnService : VpnService() {
                             )
                         )
                     }
-                    VpnStatusObservable.handleConnectionEvent(event)
                 }
                 is NewDirectoryEvent -> {
                     var relaysByCountry = event.relaysByCountry.entries.toList()

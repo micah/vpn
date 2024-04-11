@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginHorizontal="@dimen/default_padding"
             android:weightSum="2">
 
             <RelativeLayout
@@ -48,13 +49,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:textAppearance="@style/title_in_stats"
+                        style="@style/title_in_stats"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/down" />
 
                     <TextView
-                        android:textAppearance="@style/number_in_stats"
+                        style="@style/number_in_stats"
                         android:id="@+id/tv_down_traffic"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -67,7 +68,7 @@
             <View
                 android:layout_height="96dp"
                 android:layout_width="1dp"
-                android:background="@color/indigo50"
+                android:background="@color/outline"
                 />
 
             <RelativeLayout
@@ -120,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_padding"
             android:layout_marginBottom="@dimen/default_padding"
-            android:padding="@dimen/switch_padding"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             android:text="@string/action_protect_this_app"
             android:checked="@{viewModel.protectThisApp}"
             android:onCheckedChanged="@{viewModel::onProtectThisAppChanged}"
@@ -128,6 +129,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_circuits"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/default_padding"
@@ -142,6 +144,7 @@
             android:orientation="vertical"
             android:overScrollMode="never"
             android:scrollbars="none"
+            android:layout_marginHorizontal="12dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/view_circuits_per_app" />
 

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -8,156 +10,180 @@
 
         <import type="android.view.View" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_rounded"
-        android:paddingBottom="@dimen/default_padding"
-        android:paddingHorizontal="@dimen/default_padding"
+        android:padding="@dimen/default_padding"
         tools:showIn="@layout/fragment_app_detail">
 
-        <TextView
-            android:id="@+id/tv_circuit_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:ellipsize="middle"
-            tools:text="@string/circuit_app_description"
-            android:textAppearance="@style/app_circuits_text"
-            android:paddingVertical="@dimen/activity_horizontal_margin"
-            android:paddingHorizontal="@dimen/compact_padding"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
-
         <ImageView
-            android:id="@+id/iv_hops"
+            android:id="@+id/iv_hops_top"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_circuit_description"
-            app:layout_constraintTop_toTopOf="@+id/tv_app_exit"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_entry_node"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/tv_device"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_device"
+            android:src="@drawable/ic_hops_top"
             android:importantForAccessibility="no"
-            android:paddingStart="8dp"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="11dp"
-            android:paddingEnd="11dp"
-            android:paddingHorizontal="@dimen/default_padding"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bg_hops" />
-
+            android:paddingHorizontal="@dimen/compact_padding"
+            />
         <TextView
-            android:id="@+id/tv_app_exit"
+            android:id="@+id/tv_device"
             android:textAppearance="@style/app_circuits_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingEnd="@dimen/compact_padding"
             android:paddingRight="@dimen/compact_padding"
             android:paddingVertical="6dp"
-            tools:text="@string/this_browser"
-            app:layout_constraintStart_toEndOf="@+id/iv_hops"
-            app:layout_constraintTop_toBottomOf="@id/tv_circuit_description"
+            android:text="@string/this_device"
+            app:layout_constraintStart_toEndOf="@+id/iv_hops_top"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_country_flag_exit_node"
-                app:layout_constraintStart_toEndOf="@+id/iv_hops"
-                app:layout_constraintTop_toTopOf="@+id/tv_exit_node"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_exit_node"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:scaleType="fitXY"
-                android:layout_margin="5dp"
-                tools:src="@drawable/flag_1f1e6_1f1ea"
-                />
-
-
-        <TextView
-            android:id="@+id/tv_exit_node"
-            android:textAppearance="@style/app_circuits_text"
-            android:layout_width="0dp"
-            app:layout_constraintWidth_default="wrap"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/iv_country_flag_exit_node"
-            app:layout_constraintTop_toBottomOf="@+id/tv_app_exit"
-            app:layout_constraintEnd_toStartOf="@id/tv_guard"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            android:paddingVertical="6dp"
-            android:paddingHorizontal="@dimen/compact_padding"
-            tools:text="a long string coviering the whole line"
-            android:ellipsize="end"
-            android:maxLines="1"
-            />
-
-        <TextView
-            android:id="@+id/tv_guard"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_hops_entry_node"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/guard"
+            app:layout_constraintTop_toTopOf="@id/tv_entry_node"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_entry_node"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_hops_section"
+            android:paddingHorizontal="@dimen/compact_padding"
+            android:importantForAccessibility="no"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_country_flag_entry_node"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitXY"
+            android:layout_marginStart="5dp"
+            tools:src="@drawable/flag_1f1e6_1f1ea"
+            app:layout_constraintStart_toEndOf="@+id/iv_hops_top"
+            app:layout_constraintEnd_toStartOf="@+id/tv_entry_node"
+            app:layout_constraintTop_toTopOf="@+id/tv_entry_node"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_entry_node"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="0"
+            />
+
+        <TextView
+            android:id="@+id/tv_entry_node"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingHorizontal="@dimen/compact_padding"
+            android:paddingVertical="6dp"
+            android:textAppearance="@style/app_circuits_text"
+            app:layout_constraintEnd_toStartOf="@id/tv_change"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/iv_country_flag_entry_node"
+            app:layout_constraintTop_toBottomOf="@+id/tv_device"
+            app:layout_constraintWidth_default="wrap"
+            tools:text="a long tkjhkjh sdlf" />
+
+        <TextView
+            android:id="@+id/tv_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change"
             android:paddingVertical="6dp"
             android:paddingHorizontal="12dp"
-            app:layout_constraintStart_toEndOf="@id/tv_exit_node"
-            app:layout_constraintBottom_toBottomOf="@id/tv_exit_node"
-            app:layout_constraintTop_toTopOf="@id/tv_exit_node"
+            style="@style/button_text"
+            android:textColor="@color/tertiary"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="@id/tv_entry_node"
+            app:layout_constraintTop_toTopOf="@id/tv_entry_node"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            style="@style/info_tag" />
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tv_relay_node"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_relay_node"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_hops_section"
+            android:paddingHorizontal="@dimen/compact_padding"
+            android:importantForAccessibility="no"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tv_exit_node"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_exit_node"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_hops_section"
+            android:paddingHorizontal="@dimen/compact_padding"
+            android:importantForAccessibility="no"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/tv_app_exit"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_app_exit"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingHorizontal="@dimen/compact_padding"
+            android:src="@drawable/ic_hops_bottom"
+            android:importantForAccessibility="no"
+            />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_country_flag_relay_node"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            app:layout_constraintStart_toEndOf="@id/iv_hops"
+            app:layout_constraintStart_toEndOf="@id/iv_hops_top"
             app:layout_constraintTop_toTopOf="@id/tv_relay_node"
             app:layout_constraintBottom_toBottomOf="@+id/tv_relay_node"
+            app:layout_constraintHorizontal_chainStyle="packed"
             android:scaleType="fitXY"
             android:layout_margin="5dp"
             tools:src="@drawable/flag_1f1e6_1f1ec"
+            android:visibility="visible"
             />
 
         <TextView
             android:id="@+id/tv_relay_node"
             android:textAppearance="@style/app_circuits_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_exit_node"
+            app:layout_constraintTop_toBottomOf="@id/tv_entry_node"
             app:layout_constraintStart_toEndOf="@+id/iv_country_flag_relay_node"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
             android:paddingHorizontal="@dimen/compact_padding"
             android:paddingVertical="6dp"
             tools:text="Germany"
             />
 
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_country_flag_entry_node"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:scaleType="fitXY"
-                android:layout_margin="5dp"
-                app:layout_constraintStart_toEndOf="@id/iv_hops"
-                app:layout_constraintTop_toTopOf="@+id/tv_entry_node"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_entry_node"
-                tools:src="@drawable/flag_1f1e6_1f1f7"
-                />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_country_flag_exit_node"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitXY"
+            android:layout_margin="5dp"
+            app:layout_constraintStart_toEndOf="@id/iv_hops_top"
+            app:layout_constraintTop_toTopOf="@+id/tv_exit_node"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_exit_node"
+            tools:src="@drawable/flag_1f1e6_1f1f7"
+            android:visibility="visible"
+            />
 
         <TextView
-            android:id="@+id/tv_entry_node"
+            android:id="@+id/tv_exit_node"
             android:textAppearance="@style/app_circuits_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/iv_country_flag_entry_node"
+            app:layout_constraintStart_toEndOf="@+id/iv_country_flag_exit_node"
             app:layout_constraintTop_toBottomOf="@id/tv_relay_node"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -166,6 +192,22 @@
             tools:text="Poland"
             />
 
+        <TextView
+            android:id="@+id/tv_app_exit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="6dp"
+            android:paddingEnd="@dimen/compact_padding"
+            android:paddingRight="@dimen/compact_padding"
+
+            app:layout_constraintStart_toEndOf="@id/iv_hops_top"
+            app:layout_constraintTop_toBottomOf="@id/tv_exit_node"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAppearance="@style/app_circuits_text"
+            tools:text="Firefox"
+            app:layout_constraintHorizontal_bias="0"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -4,11 +4,8 @@ import android.os.SystemClock
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import org.torproject.onionmasq.circuit.Circuit
-import org.torproject.onionmasq.circuit.CircuitStore
-import org.torproject.onionmasq.events.OnionmasqEvent
-import org.torproject.vpn.utils.isRunningOnMainThread
 import org.torproject.onionmasq.logging.LogObservable
+import org.torproject.vpn.utils.isRunningOnMainThread
 import org.torproject.vpn.utils.updateDataUsage
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -25,7 +22,6 @@ object VpnStatusObservable {
     private val _dataUsage: MutableLiveData<DataUsage> = MutableLiveData(DataUsage())
     val dataUsage: LiveData<DataUsage> = _dataUsage
 
-    private val circuitStore: CircuitStore = CircuitStore()
     private var startTime = 0L
 
     var isAlwaysOnBooting = AtomicBoolean(false)
@@ -55,14 +51,6 @@ object VpnStatusObservable {
         }
     }
 
-    fun handleConnectionEvent(event: OnionmasqEvent) {
-        circuitStore.handleEvent(event)
-    }
-
-    fun getCircuitsForUid(appUid: Int): ArrayList<Circuit> {
-        return circuitStore.getCircuitsForAppUid(appUid)
-    }
-
     fun getStartTimeBase() = startTime
     fun reset() {
         if (isRunningOnMainThread()) {
@@ -70,7 +58,6 @@ object VpnStatusObservable {
         } else {
             _dataUsage.postValue(DataUsage())
         }
-        circuitStore.reset()
     }
 
     fun isVPNActive(): Boolean {

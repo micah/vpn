@@ -16,12 +16,12 @@
 
         <include layout="@layout/view_circuits_per_app_collapsed"
             android:id="@+id/collapsed_container"
-            android:visibility="visible"
+            android:visibility="gone"
             app:viewModel="@{viewModel}"
             />
         <include layout="@layout/view_circuits_per_app_expanded"
             android:id="@+id/expanded_container"
-            android:visibility="gone"
+            android:visibility="visible"
             app:viewModel="@{viewModel}"
             />
 

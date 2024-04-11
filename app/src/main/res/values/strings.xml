@@ -12,6 +12,7 @@
     <string name="action_protect_this_app">Protect this app</string>
     <string name="label_not_protected">None protected</string>
     <string name="label_some_protected">Some protected</string>
+    <string name="action_refresh">Refresh</string>
     <!-- notifications actions -->
     <string name="action_start">Start VPN</string>
     <string name="action_stop">Stop VPN</string>
@@ -91,7 +92,7 @@
     <string name="closed_connection">%1$s->%2$s: closed connection</string>
     <string name="reload_all_circuits">Reload all circuits?</string>
     <string name="reload_all_circuits_description">New circuits will be established for all of your apps. Some apps and websites might not recognize you as a result, and could log you out of their services.</string>
-    <string name="reload_app_circuits">Reload this app\'s circuits?</string>
+    <string name="reload_app_circuits">Refresh this circuit?</string>
     <string name="reload_app_circuits_description">New circuits will be established for this app only. Some apps and websites might not recognize you as a result, and could log you out of their services.</string>
     <string name="action_reload_circuits">Reload circuits</string>
     <string name="routed_over_country">Routed over %1$s</string>
@@ -172,6 +173,9 @@
     <string name="bot_msg_results">Here are your bridges:</string>
     <string name="start_again">Start again</string>
     <string name="use_bridges">Use bridges</string>
+    <string name="change">Change</string>
+    <string name="this_device">This device</string>
+    <string name="obfs4_bridge">obfs4 bridge</string>
 
     <plurals name="n_bridges">
         <item quantity="one">%1$s bridge added</item>

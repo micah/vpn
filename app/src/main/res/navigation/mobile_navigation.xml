@@ -105,6 +105,11 @@
             android:name="argHasTorSupport"
             app:argType="boolean"
             android:defaultValue="false" />
+
+        <action
+            android:id="@+id/action_navigation_appDetails_to_bridgeSettings"
+            app:destination="@+id/bridgeSettingsFragment"
+            />
     </fragment>
 
     <fragment
