@@ -1,5 +1,18 @@
 CHANGELOG
 =========
+0.6.0 Pre-Alpha
+---------------
+* General settings screen, including launcher icon and name selection
+* Bridge Bot UI
+* new Help menu
+* cleaner UI:
+    updated bottom navigation layout
+    remove timer in main screen shown when the VPN is running
+    revamp app detail screen
+* updated built-in bridges
+* fix on-off-button state transition
+* fix crash that occurs if the user removes the VPN permissions while the VPN is still running
+
 0.5.0 Pre-Alpha
 ---------------
 * Quick Settings Tile to start/stop the VPN

@@ -13,8 +13,8 @@ android {
         applicationId "org.torproject.vpn"
         minSdk 24
         targetSdk 34
-        versionCode 5
-        versionName "0.5.0"
+        versionCode 6
+        versionName "0.6.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -104,7 +104,7 @@ dependencies {
     testImplementation 'tools.fastlane:screengrab:2.1.1'
 
     debugImplementation 'org.torproject:onionmasq:main-branch-debug'
-    releaseImplementation 'org.torproject:onionmasq:0.5.0-local-release'
+    releaseImplementation 'org.torproject:onionmasq:0.6.0-local-release'
     //tried this, still not sure we require this so commented for time being.
 /*    implementation("androidx.datastore:datastore-preferences:1.0.0")*/
 
