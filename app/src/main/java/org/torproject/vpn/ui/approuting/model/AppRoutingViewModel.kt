@@ -60,9 +60,17 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
 
     fun onProtectAllAppsPrefsChanged(protectAllApps: Boolean) {
         val mutableList = getAppList().toMutableList()
+        val protectedApps = emptySet<String>().toMutableSet()
         mutableList.onEach {
             it.protectAllApps = protectAllApps
+            it.isRoutingEnabled = protectAllApps
+            if (protectAllApps) {
+                it.appId?.let { appId ->
+                    protectedApps.add(appId)
+                }
+            }
         }
+        appManager.preferenceHelper.protectedApps = protectedApps
         appManager.preferenceHelper.cachedApps = Gson().toJson(mutableList)
         appList.postValue(mutableList)
     }

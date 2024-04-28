@@ -15,6 +15,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -24,10 +26,10 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.launch
 import org.torproject.vpn.BuildConfig
 import org.torproject.vpn.R
+import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
@@ -44,6 +46,7 @@ import org.torproject.vpn.vpn.ConnectionState.INIT
 import org.torproject.vpn.vpn.DataUsage
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
+import java.lang.reflect.Type
 
 /**
  * ViewModel for slider fragment, mostly place holder at this point
@@ -277,7 +280,30 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
 
 
     fun onProtectAppsChanged(compoundButton: CompoundButton, isChecked: Boolean) {
+        val mutableList = loadCachedApps()
+        val protectedApps = emptySet<String>().toMutableSet()
+        mutableList.onEach {
+            it.protectAllApps = isChecked
+            it.isRoutingEnabled = isChecked
+            if (isChecked) {
+                it.appId?.let { appId ->
+                    protectedApps.add(appId)
+                }
+            }
+        }
+        preferenceHelper.protectedApps = protectedApps
+        preferenceHelper.cachedApps = Gson().toJson(mutableList)
         preferenceHelper.protectAllApps = isChecked
+    }
+
+    private fun loadCachedApps(): List<AppItemModel> {
+        val gson = Gson()
+        val appItemModelListType: Type = object : TypeToken<ArrayList<AppItemModel?>?>() {}.type
+        gson.fromJson<List<AppItemModel>>(preferenceHelper.cachedApps, appItemModelListType)?.let { list ->
+            return list
+        } ?: run {
+            return emptyList()
+        }
     }
 
     private fun attemptCancel() {

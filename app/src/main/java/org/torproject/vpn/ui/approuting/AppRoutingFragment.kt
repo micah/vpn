@@ -83,7 +83,6 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
     override fun onSharedPreferenceChanged(prefs: SharedPreferences?, key: String?) {
         if (key?.equals(PROTECT_ALL_APPS) == true) {
             viewModel.onProtectAllAppsPrefsChanged(preferenceHelper.protectAllApps)
-            viewModel.updateVPNSettings()
         }
         if (key?.equals(PROTECTED_APPS) == true) {
             viewModel.updateVPNSettings()
