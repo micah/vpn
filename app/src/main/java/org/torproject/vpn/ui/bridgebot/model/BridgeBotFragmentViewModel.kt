@@ -94,14 +94,17 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
         }
         _botState.postValue(BotState.FETCHING)
 
-        CircumventionApiManager().getBuiltInTransports({
-            it?.let { response ->
+        val transports = emptyList<String>().toMutableList()
+        transports.add("obfs4")
+        val request = SettingsRequest(null, transports)
+        CircumventionApiManager().getDefaults(request, { settingsResponse ->
+            settingsResponse?.let { response ->
                 val results = mutableListOf<String>()
-                for (i in 0 until (response.obfs4.size).coerceAtMost(3)) {
-                    results.add(response.obfs4[i])
-                }
-                for (i in 0 until (response.snowflake.size).coerceAtMost(3)) {
-                    results.add(response.snowflake[i])
+                val bridgeDBList = response.settings?.filter { it.bridges.source == "bridgedb" }
+                bridgeDBList?.let { list ->
+                    list.forEach { bridges ->
+                        bridges.bridges.bridge_strings?.let { results.addAll(it) }
+                    }
                 }
                 _bridgeResult.postValue(results)
                 _botState.postValue(BotState.SHOW_RESULT)
