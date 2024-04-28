@@ -103,6 +103,8 @@ dependencies {
     androidTestImplementation 'tools.fastlane:screengrab:2.1.1'
     testImplementation 'tools.fastlane:screengrab:2.1.1'
 
+    // if onionmasq was built locally, the lib can be integrated like this
+    // implementation fileTree(dir: "libs", include: ["onionmasq-debug.aar"])
     debugImplementation 'org.torproject:onionmasq:main-branch-debug'
     releaseImplementation 'org.torproject:onionmasq:0.6.0-local-release'
     //tried this, still not sure we require this so commented for time being.
