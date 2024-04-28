@@ -57,17 +57,7 @@ class AppListAdapter(
         position: Int,
         payloads: MutableList<Any>
     ) {
-        if (payloads.isEmpty()) {
-            onBindViewHolder(holder, position)
-        } else {
-            when (items[position].viewType) {
-                CELL -> {
-                    val protectAllApps = payloads.first() as Boolean
-                    (holder as AppListItemViewHolder).setEnabled(!protectAllApps)
-                }
-                else -> {}
-            }
-        }
+        onBindViewHolder(holder, position)
     }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (items[position].viewType) {
@@ -93,14 +83,6 @@ class AppListAdapter(
         // Hence, dataSetChanged remains false if protectAllApps of AppItemModel changed
         // b/c protectAllApps is excluded from AppItemModel's equals() method
         val dataSetChanged = mutableList != items
-        if (!dataSetChanged) {
-            // check separately if protectAllApps changed and update cells without redrawing them
-            for (i in 0..mutableList.size - 1) {
-                if (items[i].protectAllApps != mutableList[i].protectAllApps) {
-                    notifyItemChanged(i, mutableList[i].protectAllApps)
-                }
-            }
-        }
         items = ArrayList(mutableList.map { it.copy() })
         if (dataSetChanged) {
             notifyDataSetChanged()
@@ -159,12 +141,6 @@ class AppListAdapter(
                     onItemModelChanged?.invoke(pos - 1, itemModel)
                 }
             }
-            binding.smItemSwitch.isEnabled = appItem.protectAllApps == false
-        }
-
-        fun setEnabled(enabled: Boolean) {
-            Log.d(TAG, "set enabled $enabled called for ${binding.tvTitle.text}")
-            binding.smItemSwitch.isEnabled = enabled
         }
     }
 
