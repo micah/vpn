@@ -231,7 +231,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 R.color.white,
                 startAnimationDrawableRes = R.drawable.av_connect_to_cancel,
                 onAnimationEnd = {
-                    binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_cancel)
+                    _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_cancel)
                 }
             )
         } else {
@@ -252,7 +252,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 R.color.transparent,
                 startAnimationDrawableRes = R.drawable.av_cancel_to_stop,
                 onAnimationEnd = {
-                    binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_stop)
+                    _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_stop)
                 }
             )
 
@@ -275,7 +275,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 R.color.emerald80,
                 startAnimationDrawableRes = R.drawable.av_cancel_to_connect,
                 onAnimationEnd = {
-                    R.drawable.bg_btn_connect
+                    _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_connect)
                 }
             )
         } else {
@@ -295,7 +295,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 R.color.emerald80,
                 startAnimationDrawableRes = R.drawable.av_cancel_to_connect,
                 onAnimationEnd = {
-                    binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_connect)
+                    _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_connect)
                 }
             )
         } else if (currentVpnState == ConnectionState.CONNECTED) {
@@ -307,7 +307,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 R.color.emerald80,
                 startAnimationDrawableRes = R.drawable.av_stop_connect,
                 onAnimationEnd = {
-                    binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_connect)
+                    _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_connect)
                 }
             )
         }
