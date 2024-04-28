@@ -8,7 +8,6 @@ import android.net.VpnService
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
-import android.os.ParcelFileDescriptor
 import android.system.OsConstants
 import android.util.Log
 import androidx.core.app.ServiceCompat
@@ -31,7 +30,6 @@ import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 import org.torproject.vpn.utils.VpnNotificationManager
 import org.torproject.vpn.utils.readAsset
-import java.io.IOException
 import java.lang.ref.WeakReference
 import java.util.Timer
 import java.util.TimerTask
@@ -46,7 +44,6 @@ class TorVpnService : VpnService() {
         val ACTION_STOP_VPN = "$TAG.stop"
     }
 
-    private var fd: ParcelFileDescriptor? = null
     private lateinit var notificationManager: VpnNotificationManager
     private lateinit var logHelper: LogHelper
     private lateinit var preferenceHelper: PreferenceHelper
@@ -134,7 +131,6 @@ class TorVpnService : VpnService() {
         logHelper.stopLog()
         timer.cancel()
         VpnStatusObservable.reset()
-        closeFd()
         try {
             OnionMasq.unbindVPNService()
         } catch (e: IllegalArgumentException) {
@@ -266,14 +262,6 @@ class TorVpnService : VpnService() {
         }
     }
 
-    private fun closeFd() {
-        try {
-            fd?.close()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-    }
-
     private fun prepareVpnProfile(): Builder {
         val builder = Builder()
         applyAppFilter(builder)
@@ -296,14 +284,10 @@ class TorVpnService : VpnService() {
     private fun establishVpn() {
         try {
             Log.d(TAG, "service: starting vpn...")
-            val builder = prepareVpnProfile()
-            fd?.let { fd ->
-                coroutineScope.async {
-                    Log.d(TAG, "service: stopping previous Tor session...")
-                    OnionMasq.stop()
-                    fd.close()
-                }
-            } ?: run {
+            if (OnionMasq.isRunning()) {
+                Log.d(TAG, "service: stopping previous Tor session...")
+                OnionMasq.stop()
+            } else {
                 logHelper.readLog()
                 createObservers()
                 startListeningObservers()
@@ -316,8 +300,8 @@ class TorVpnService : VpnService() {
                     }
                 }, 1000, 1000)
             }
-
-            fd = builder.establish();
+            val builder = prepareVpnProfile()
+            val fd = builder.establish();
             coroutineScope.async {
                 OnionMasq.start(fd!!.detachFd(), getBridgeLines())
             }
