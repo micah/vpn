@@ -43,6 +43,12 @@ class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickH
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.rgBridgeOptions.check(viewModel.getSelectedBridgeTypeId())
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.preferenceHelper.unregisterListener(this)
