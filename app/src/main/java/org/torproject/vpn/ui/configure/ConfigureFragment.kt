@@ -40,7 +40,11 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
     }
 
     override fun onGeneralClicked(v: View) {
-        findNavController().navigate(R.id.action_configureFragment_to_appearanceFragment)
+        findNavController().navigateSafe(R.id.action_configureFragment_to_appearanceFragment)
+    }
+
+    override fun onAboutClicked(v: View) {
+       findNavController().navigateSafe(R.id.action_configureFragment_to_aboutFragment)
     }
 
 }

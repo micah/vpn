@@ -90,6 +90,15 @@
                 <org.torproject.vpn.ui.base.view.IconTextEntryView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:drawable="@drawable/ic_info"
+                    app:text="@string/about"
+                    app:secondaryText="@string/about_description"
+                    android:onClick="@{handler::onAboutClicked}"
+                    />
+
+                <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     app:drawable="@drawable/ic_dummy_app"
                     app:text="@string/help"
                     app:secondaryText="lorem ipsum"

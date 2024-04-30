@@ -7,4 +7,5 @@ interface ClickHandler {
     fun onAppsClicked(v: View)
     fun onConnectionClicked(v: View)
     fun onGeneralClicked(v: View)
+    fun onAboutClicked(v: View)
 }
