@@ -218,6 +218,7 @@
     <style name="dialog_title_small">
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
@@ -300,6 +301,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/indigo10</item>
         <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
     </style>
 
     <style name="info_button_text" parent="TextAppearance.MaterialComponents.Body1">

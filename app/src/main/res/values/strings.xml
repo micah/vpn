@@ -120,9 +120,9 @@
     <string name="none">None</string>
     <string name="obfs4_description">Makes your traffic look like random data</string>
     <string name="snowflake_description">Routes your connection through Snowflake proxies to make it look like you\'re placing a video call</string>
-    <string name="add_new_bridge">Add a new bridge</string>
+    <string name="add_new_bridge">Add new bridges</string>
     <string name="bridge_address">Enter bridge address</string>
-    <string name="bridge_address_description">Add a bridge provided by a trusted organization or someone you know</string>
+    <string name="bridge_address_description">Add one or more bridges provided by a trusted person or organization.</string>
     <string name="bridge_addresses">Bridge addresses</string>
     <string name="action_paste_bridges">Paste your bridge addresses here</string>
     <string name="manual_bridge">Manual selection</string>

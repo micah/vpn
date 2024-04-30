@@ -56,8 +56,7 @@ class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickH
     }
 
     override fun onManualBridgeSelectionClicked(v: View) {
-        val dialog = BridgeDialogFragment.create()
-        dialog.show(parentFragmentManager, "BRIDGE_DIALOG")
+        findNavController().navigateSafe(R.id.action_navigation_bridgeSettings_to_bridgeLines)
     }
 
     override fun onTorBridgeBotClicked(v: View) {

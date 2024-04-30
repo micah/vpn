@@ -18,6 +18,7 @@
             app:closeIconTint="@color/white"
             app:chipStartPadding="@dimen/default_padding"
             app:chipEndPadding="@dimen/default_padding"
+            app:chipMinTouchTargetSize="2dp"
             tools:background="@color/purple40"
             />
 </layout>

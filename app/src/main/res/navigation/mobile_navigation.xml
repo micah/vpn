@@ -113,15 +113,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/bridgeDialogFragment"
-        android:name="org.torproject.vpn.ui.bridgesettings.BridgeDialogFragment"
-        android:label="BridgeDialogFragment"
-        tools:layout="@layout/fragment_bridges_dialog">
-        <argument
-            android:name="argBridgeLines"
-            app:argType="string[]"
-            app:nullable="false"
-            />
+        android:id="@+id/bridgelinesFragment"
+        android:name="org.torproject.vpn.ui.bridgesettings.BridgeLinesFragment"
+        android:label="BridgeLinesFragment"
+        tools:layout="@layout/fragment_bridgelines">
     </fragment>
 
 
@@ -133,6 +128,10 @@
         <action
             android:id="@+id/action_navigation_bridgeSettings_to_bridgeBot"
             app:destination="@+id/bridgeBotFragment"
+            />
+        <action
+            android:id="@+id/action_navigation_bridgeSettings_to_bridgeLines"
+            app:destination="@+id/bridgelinesFragment"
             />
     </fragment>
 
