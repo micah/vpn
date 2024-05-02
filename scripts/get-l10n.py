@@ -1,5 +1,6 @@
 import os
 from shutil import copytree
+import sys
 
 def count_lines(filename):
   """Counts the number of lines in translation."""
@@ -16,12 +17,16 @@ def copy_directory(src, dst, line_threshold):
     copytree(src, dst, dirs_exist_ok=True)
     print(f"Copied directory {src} to {dst} (lines: {line_count})")
 
-# Specify the translations directory and minimum line count
-start_dir = "/home/kwadronaut/Android/tor-trans/res"
+# Get source by an argument
+if len(sys.argv) < 2:
+  print("Usage: python get-l10n.py <source_directory>")
+  sys.exit(1)
+source_dir = sys.argv[1]
+
 line_threshold = 150  # Change this to your desired minimum
 
 # Loop through subdirectories
-for root, _, files in os.walk(start_dir):
+for root, _, files in os.walk(source_dir):
   for filename in files:
     if filename == "strings.xml":
       # Construct destination directory with same name as source
