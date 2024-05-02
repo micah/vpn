@@ -104,6 +104,13 @@ It's now time to run the tests. Make sure your emulator is running and enter
 
 into your console.
 
+# In your language
+
+Check this out on how to contribute: https://gitlab.torproject.org/tpo/community/l10n/-/wikis/home 
+For devs: before publishing a new version, try the ./scripts/get-l10n.py You need to have
+https://gitlab.torproject.org/tpo/translation checked out and switched to the tor-vpn
+branch. Make sure to adapt paths when necessary. It's a bit crude, but should work.
+
 # License
 
 This code is licensed under the [3-clause BSD license](https://opensource.org/license/bsd-3-clause/)
