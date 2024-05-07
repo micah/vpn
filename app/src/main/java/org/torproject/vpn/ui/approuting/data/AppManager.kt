@@ -122,7 +122,7 @@ class AppManager(context: Context) {
                 it,
                 packageName,
                 appUID,
-                protectedApps?.contains(packageName) ?:run { false },
+                (protectedApps?.contains(packageName) ?:run { false }) || protectAllApps,
                 protectAllApps,
                 browserPackages.contains(packageName),
                 torPackages.contains(packageName))

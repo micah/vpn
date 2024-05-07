@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import org.torproject.vpn.databinding.AppRoutingTableHeaderBinding
 import org.torproject.vpn.databinding.AppSwitchItemViewBinding
 import org.torproject.vpn.databinding.AppTitleViewBinding
@@ -18,10 +19,11 @@ import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.navigateSafe
+import java.lang.reflect.Type
 
 class AppListAdapter(
     list: List<AppItemModel>,
-    var torAppsAdapter: TorAppsAdapter,
+    private var torAppsAdapter: TorAppsAdapter,
     var preferenceHelper: PreferenceHelper
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -31,11 +33,12 @@ class AppListAdapter(
         const val HORIZONTAL_RECYCLER_VIEW = 2
         const val TABLE_HEADER_VIEW = 3
 
-        val TAG = AppListAdapter::class.java.simpleName
+        val TAG: String = AppListAdapter::class.java.simpleName
     }
 
     var items: MutableList<AppItemModel> = list.toMutableList()
     var onItemModelChanged: ((pos: Int, item: AppItemModel) -> Unit)? = null
+    var onProtectAllAppsChanged: ((isChecked: Boolean) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val viewHolder: RecyclerView.ViewHolder = when (viewType) {
@@ -64,7 +67,7 @@ class AppListAdapter(
             SECTION_HEADER_VIEW -> (holder as AppListTitleViewHolder).bind(items[position])
             HORIZONTAL_RECYCLER_VIEW -> (holder as HorizontalRecyclerViewItemViewHolder).bind(items[position], torAppsAdapter)
             CELL -> (holder as AppListItemViewHolder).bind(items[position], position)
-            TABLE_HEADER_VIEW -> (holder as TableHeaderViewHolder).bind(preferenceHelper)
+            TABLE_HEADER_VIEW -> (holder as TableHeaderViewHolder).bind(items[position])
         }
     }
 
@@ -77,15 +80,26 @@ class AppListAdapter(
     }
 
     fun update(list: List<AppItemModel>) {
-        var mutableList = list.toMutableList()
-        mutableList.add(0, AppItemModel(TABLE_HEADER_VIEW))
+        val mutableList = list.toMutableList()
+        var protectAllAppsEntryChanged = false
+
+        if (mutableList.isNotEmpty()) {
+            mutableList.add(0, AppItemModel(TABLE_HEADER_VIEW, (mutableList.first { it.viewType == CELL }).protectAllApps))
+        } else {
+            mutableList.add(0, AppItemModel(TABLE_HEADER_VIEW, preferenceHelper.protectAllApps))
+        }
         // The following comparison depends on AppItemModels equals() implementation
         // Hence, dataSetChanged remains false if protectAllApps of AppItemModel changed
         // b/c protectAllApps is excluded from AppItemModel's equals() method
         val dataSetChanged = mutableList != items
+        if (items.isNotEmpty()) {
+            protectAllAppsEntryChanged = items[0].protectAllApps != mutableList[0].protectAllApps
+        }
         items = ArrayList(mutableList.map { it.copy() })
         if (dataSetChanged) {
             notifyDataSetChanged()
+        } else if (protectAllAppsEntryChanged) {
+            notifyItemChanged(0)
         }
     }
 
@@ -135,8 +149,17 @@ class AppListAdapter(
             })
             binding.smItemSwitch.setOnCheckedChangeListener { switchBtn, isChecked ->
                 if (switchBtn.isPressed) {
+                    val appItemModelListType: Type = object : TypeToken<ArrayList<AppItemModel?>?>() {}.type
+                    val allConfigurableApps = (Gson().fromJson<List<AppItemModel>>(preferenceHelper.cachedApps, appItemModelListType) ?: emptyList()).filter { it.viewType == CELL }
                     val itemModel = items[pos]
                     itemModel.isRoutingEnabled = isChecked
+                    val protectedAppsSize = preferenceHelper.protectedApps?.size
+                    if (!isChecked) {
+                        itemModel.protectAllApps = false
+                    } else if (protectedAppsSize == allConfigurableApps.size - 1) {
+                        // isChecked == true and thus all apps will be protected now
+                        itemModel.protectAllApps = true
+                    }
                     // pos - 1: the first item is the header view, which is manually added only here in AppListAdapter
                     onItemModelChanged?.invoke(pos - 1, itemModel)
                 }
@@ -157,13 +180,13 @@ class AppListAdapter(
         }
     }
 
-    internal class TableHeaderViewHolder(val binding: AppRoutingTableHeaderBinding) :
+    inner class TableHeaderViewHolder(val binding: AppRoutingTableHeaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(preferenceHelper: PreferenceHelper) {
-            binding.smProtectAllApps.isChecked = preferenceHelper.protectAllApps
+        fun bind(item: AppItemModel) {
+            binding.smProtectAllApps.isChecked = item.protectAllApps == true
             binding.smProtectAllApps.setOnCheckedChangeListener { switchBtn, isChecked ->
                 if (switchBtn.isPressed) {
-                    preferenceHelper.protectAllApps = isChecked
+                    onProtectAllAppsChanged?.invoke(isChecked)
                 }
             }
         }

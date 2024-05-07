@@ -24,7 +24,7 @@ data class AppItemModel (
     constructor(viewType: Int,
                 text: String) : this(viewType, text, null, null, null, null, null, null, null)
     constructor(viewType: Int, appList: List<AppItemModel>?) : this(viewType, "", null, null, /*null,*/ null, null, null, null, appList)
-    constructor(viewType: Int) : this(viewType, "", null, null, null, null, null, null, null)
+    constructor(viewType: Int, protectAllApps: Boolean?) : this(viewType, "", null, null, null, protectAllApps, null, null, null)
 
     companion object {
         fun fromJson(json: String): AppItemModel {

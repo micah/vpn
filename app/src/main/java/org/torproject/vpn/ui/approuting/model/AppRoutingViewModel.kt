@@ -42,9 +42,15 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
 
     fun onItemModelChanged(pos: Int, model: AppItemModel) {
         val mutableList = getAppList().toMutableList()
+        if (mutableList[pos].protectAllApps != model.protectAllApps) {
+            mutableList.forEach {
+                it.protectAllApps = model.protectAllApps
+            }
+        }
         mutableList[pos] = model
         persistProtectedApp(model)
         appManager.preferenceHelper.cachedApps = Gson().toJson(mutableList)
+        appManager.preferenceHelper.protectAllApps = model.protectAllApps == true
         appList.postValue(mutableList)
     }
 
@@ -71,6 +77,7 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
             }
         }
         appManager.preferenceHelper.protectedApps = protectedApps
+        appManager.preferenceHelper.protectAllApps = protectAllApps
         appManager.preferenceHelper.cachedApps = Gson().toJson(mutableList)
         appList.postValue(mutableList)
     }

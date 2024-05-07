@@ -42,6 +42,7 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
             TorAppsAdapter(viewModel.getAppList()),
             preferenceHelper)
         appListAdapter?.onItemModelChanged = viewModel::onItemModelChanged
+        appListAdapter?.onProtectAllAppsChanged = viewModel::onProtectAllAppsPrefsChanged
         binding.rvAppList.adapter = appListAdapter
         viewModel.getObservableAppList().observe(viewLifecycleOwner) { appListAdapter?.update(it) }
         viewModel.getObservableProgress().observe(viewLifecycleOwner) { isLoading ->
@@ -76,14 +77,12 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
     override fun onDestroyView() {
         super.onDestroyView()
         appListAdapter?.onItemModelChanged = null
+        appListAdapter?.onProtectAllAppsChanged = null
         appListAdapter = null
         preferenceHelper.unregisterListener(this)
     }
 
     override fun onSharedPreferenceChanged(prefs: SharedPreferences?, key: String?) {
-        if (key?.equals(PROTECT_ALL_APPS) == true) {
-            viewModel.onProtectAllAppsPrefsChanged(preferenceHelper.protectAllApps)
-        }
         if (key?.equals(PROTECTED_APPS) == true) {
             viewModel.updateVPNSettings()
         }
