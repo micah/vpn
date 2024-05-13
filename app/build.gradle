@@ -57,6 +57,12 @@ android {
     }
 
     tasks.register("prepareKotlinBuildScriptModel"){}
+
+    lint {
+       disable 'MissingTranslation'
+    }
+
+
 }
 
 dependencies {
