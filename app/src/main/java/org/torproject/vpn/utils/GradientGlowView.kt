@@ -11,11 +11,13 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ComposeShader
 import android.graphics.LinearGradient
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.Shader
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.LinearInterpolator
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
@@ -29,9 +31,6 @@ import org.torproject.vpn.vpn.ConnectionState
 class GradientGlowView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
-
-    private lateinit var bitmap: Bitmap
-    private lateinit var bitmapCanvas: Canvas
 
     //initial state is just transparent
     private var colorConfig: ColorConfig = StaticColorConfig(android.R.color.transparent, null)
@@ -70,13 +69,6 @@ class GradientGlowView @JvmOverloads constructor(
         colorConfig.animate()
     }
 
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        colorConfig.onViewAttachedToWindow()
-
-    }
-
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         colorConfig.onViewDetachedFromWindow()
@@ -84,13 +76,8 @@ class GradientGlowView @JvmOverloads constructor(
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        if (this::bitmap.isInitialized) {
-            bitmap.recycle()
-        }
-        bitmap = Bitmap.createBitmap(width, 1, Bitmap.Config.ARGB_8888)
-        bitmapCanvas = Canvas(bitmap)
+        colorConfig.onSizeChanged()
     }
-
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -110,39 +97,47 @@ class GradientGlowView @JvmOverloads constructor(
     abstract inner class ColorConfig {
         @ColorInt
         var color1Current: Int = 0
+
         @ColorInt
         var color2Current: Int = 0
         val animatorSet = AnimatorSet()
         private val evaluator = ArgbEvaluator()
         private var waitingToBeAttachedToWindow: Boolean = false
+        private lateinit var bitmap: Bitmap
+        private lateinit var bitmapCanvas: Canvas
 
-        fun onViewAttachedToWindow() {
-            if (waitingToBeAttachedToWindow) {
-                animatorSet.start()
-            }
-        }
+        protected abstract fun prepareAnimators()
 
         fun onViewDetachedFromWindow() {
             animatorSet.cancel()
         }
 
+        open fun onSizeChanged() {
+            if (this::bitmap.isInitialized) {
+                bitmap.recycle()
+            }
+            bitmap = Bitmap.createBitmap(width, 1, Bitmap.Config.ARGB_8888)
+            bitmapCanvas = Canvas(bitmap)
+            if (waitingToBeAttachedToWindow) { //assuming we are attached here
+                animate()
+            }
+        }
+
         fun animate() {
             if (isAttachedToWindow) {
+                prepareAnimators()
                 animatorSet.start()
             } else {
                 waitingToBeAttachedToWindow = true
             }
         }
 
-        private fun calculateCurrentColor(fraction: Float, color1Start: Int, color1End: Int, color2Start: Int, color2End: Int) {
+
+        protected fun calculateColorTransformationShaders(fraction: Float, color1Start: Int, color1End: Int, color2Start: Int, color2End: Int) {
             color1Current = evaluator.evaluate(fraction, color1Start, color1End) as Int
             color2Current = evaluator.evaluate(fraction, color2Start, color2End) as Int
-        }
 
-        protected fun calculateShaders(fraction: Float, color1Start: Int, color1End: Int, color2Start: Int, color2End: Int) {
-            calculateCurrentColor(fraction, color1Start, color1End, color2Start, color2End)
-
-            if (this@GradientGlowView::bitmapCanvas.isInitialized) {
+            if (this::bitmapCanvas.isInitialized) {
 
                 paintForBitmapShader.shader = LinearGradient(
                     0f, 0f, width.toFloat(), 0f,
@@ -164,26 +159,54 @@ class GradientGlowView @JvmOverloads constructor(
 
                 invalidate()
             }
+        }
 
+        protected fun calculateColorTranslationShaders(fraction: Float, colors: IntArray, colorsPositions: FloatArray) {
+            if (this::bitmapCanvas.isInitialized) {
+                val matrix = Matrix()
+                matrix.setTranslate(fraction, 0f)
+                val colorShader = LinearGradient(
+                    (-(colors.size - 2) * width).toFloat(), 0f, width.toFloat(), 0f,
+                    colors,
+                    colorsPositions,
+                    Shader.TileMode.CLAMP
+                )
+                paintForBitmapShader.shader = colorShader
+                colorShader.setLocalMatrix(matrix)
+
+                val gradientShader = LinearGradient(
+                    0f, 0f, 0f, height.toFloat(),
+                    intArrayOf(blackForGradient, Color.TRANSPARENT),
+                    floatArrayOf(0f, 0.8f), Shader.TileMode.CLAMP
+                )
+                gradientShader.setLocalMatrix(matrix)
+
+                bitmapCanvas.drawRect(0f, 0f, width.toFloat(), 1f, paintForBitmapShader)
+
+                val bitmapShader = BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+
+                paintForTransparentGradient.shader = ComposeShader(bitmapShader, gradientShader, PorterDuff.Mode.DST_IN)
+
+                invalidate()
+
+            }
         }
     }
 
     /**
      * Static color configuration for this view. This will animate from current color(s) to the static color passed in the argument.
      */
-    inner class StaticColorConfig(@ColorRes color: Int, previousConfig: ColorConfig?) : ColorConfig() {
+    inner class StaticColorConfig(@ColorRes color: Int, val previousConfig: ColorConfig?) : ColorConfig() {
         @ColorInt
         val color1: Int = ContextCompat.getColor(context, color)
-
-        init {
-
+        override fun prepareAnimators() {
             previousConfig?.animatorSet?.cancel()
 
             val animatorA = TimeAnimator.ofFloat(0f, 1f)
             animatorA.duration = 800
 
             animatorA.addUpdateListener {
-                calculateShaders(
+                calculateColorTransformationShaders(
                     it.animatedFraction,
                     previousConfig?.color1Current ?: android.R.color.transparent,
                     color1,
@@ -195,58 +218,51 @@ class GradientGlowView @JvmOverloads constructor(
             animatorSet.play(animatorA)
         }
 
+
     }
 
     /**
      * Animated color configuration for this view.
      * First the current colors are animated to progress colors(pink and green), those colors are then animated indefinitely!
      */
-    inner class AnimatedColorConfig(previousConfig: ColorConfig?) : ColorConfig() {
-        @ColorInt
-        val color1Start: Int = ContextCompat.getColor(context, R.color.connectingRainbowStart)
+    inner class AnimatedColorConfig(val previousConfig: ColorConfig?) : ColorConfig() {
+        val start: Int = ContextCompat.getColor(context, R.color.connectingRainbowStart)
+        val end: Int = ContextCompat.getColor(context, R.color.connectingRainbowEnd)
 
-        @ColorInt
-        val color1End: Int = ContextCompat.getColor(context, R.color.connectingRainbowEnd)
+        //3 undulations
+        private val colors = intArrayOf(start, end, start, end, start, end)
+        private val colorsPositions = floatArrayOf(0.00f, 0.20f, 0.40f, 0.60f, 0.80f, 1.00f)
 
-        @ColorInt
-        val color2Start: Int = ContextCompat.getColor(context, R.color.connectingRainbowEnd)
-
-        @ColorInt
-        val color2End: Int = ContextCompat.getColor(context, R.color.connectingRainbowStart)
-
-        init {
+        override fun prepareAnimators() {
             previousConfig?.animatorSet?.cancel()
 
             val animatorA = TimeAnimator.ofFloat(0f, 1f)
             animatorA.duration = 800
             animatorA.addUpdateListener {
-                calculateShaders(
+                calculateColorTransformationShaders(
                     it.animatedFraction,
                     previousConfig?.color1Current ?: android.R.color.transparent,
-                    color1Start,
+                    start,
                     previousConfig?.color2Current ?: android.R.color.transparent,
-                    color2Start
+                    end
                 )
             }
 
-            val animatorB = TimeAnimator.ofFloat(0f, 1f)
-            animatorB.duration = 600
-            animatorB.repeatCount = ValueAnimator.INFINITE
-            animatorB.repeatMode = ValueAnimator.REVERSE
+            val animatorB = ValueAnimator.ofFloat(0f, (width * (colors.size - 2)).toFloat()).apply {
+                duration = 6000
+                repeatCount = ValueAnimator.INFINITE
+                repeatMode = ValueAnimator.RESTART
+                interpolator = LinearInterpolator()
 
-            animatorB.addUpdateListener {
-                calculateShaders(
-                    it.animatedFraction,
-                    color1Start,
-                    color1End,
-                    color2Start,
-                    color2End
+            }
 
-                )
+            animatorB.addUpdateListener { animation ->
+                val translation = (animation.animatedValue as Float)
+                calculateColorTranslationShaders(translation, colors, colorsPositions)
+                calculateColorTranslationShaders(translation, colors, colorsPositions)
             }
 
             animatorSet.playSequentially(animatorA, animatorB)
-
         }
     }
 }

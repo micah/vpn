@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -126,6 +128,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     connectFragmentViewModel.connectionState.collect { vpnState ->
+                        //Handler(Looper.getMainLooper()).postDelayed({ setUIState(vpnState) }, 6000)
                         setUIState(vpnState)
                     }
                 }
