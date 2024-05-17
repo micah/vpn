@@ -32,6 +32,9 @@ class GradientGlowView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
+    private lateinit var bitmap: Bitmap
+    private lateinit var bitmapCanvas: Canvas
+
     //initial state is just transparent
     private var colorConfig: ColorConfig = StaticColorConfig(android.R.color.transparent, null)
 
@@ -76,6 +79,11 @@ class GradientGlowView @JvmOverloads constructor(
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
+        if (this::bitmap.isInitialized) {
+            bitmap.recycle()
+        }
+        bitmap = Bitmap.createBitmap(width, 1, Bitmap.Config.ARGB_8888)
+        bitmapCanvas = Canvas(bitmap)
         colorConfig.onSizeChanged()
     }
 
@@ -97,14 +105,12 @@ class GradientGlowView @JvmOverloads constructor(
     abstract inner class ColorConfig {
         @ColorInt
         var color1Current: Int = 0
-
         @ColorInt
         var color2Current: Int = 0
         val animatorSet = AnimatorSet()
         private val evaluator = ArgbEvaluator()
         private var waitingToBeAttachedToWindow: Boolean = false
-        private lateinit var bitmap: Bitmap
-        private lateinit var bitmapCanvas: Canvas
+
 
         protected abstract fun prepareAnimators()
 
@@ -113,11 +119,6 @@ class GradientGlowView @JvmOverloads constructor(
         }
 
         open fun onSizeChanged() {
-            if (this::bitmap.isInitialized) {
-                bitmap.recycle()
-            }
-            bitmap = Bitmap.createBitmap(width, 1, Bitmap.Config.ARGB_8888)
-            bitmapCanvas = Canvas(bitmap)
             if (waitingToBeAttachedToWindow) { //assuming we are attached here
                 animate()
             }
@@ -132,13 +133,11 @@ class GradientGlowView @JvmOverloads constructor(
             }
         }
 
-
         protected fun calculateColorTransformationShaders(fraction: Float, color1Start: Int, color1End: Int, color2Start: Int, color2End: Int) {
             color1Current = evaluator.evaluate(fraction, color1Start, color1End) as Int
             color2Current = evaluator.evaluate(fraction, color2Start, color2End) as Int
 
-            if (this::bitmapCanvas.isInitialized) {
-
+            if (this@GradientGlowView::bitmapCanvas.isInitialized) {
                 paintForBitmapShader.shader = LinearGradient(
                     0f, 0f, width.toFloat(), 0f,
                     intArrayOf(color1Current, color2Current),
@@ -162,7 +161,7 @@ class GradientGlowView @JvmOverloads constructor(
         }
 
         protected fun calculateColorTranslationShaders(fraction: Float, colors: IntArray, colorsPositions: FloatArray) {
-            if (this::bitmapCanvas.isInitialized) {
+            if (this@GradientGlowView::bitmapCanvas.isInitialized) {
                 val matrix = Matrix()
                 matrix.setTranslate(fraction, 0f)
                 val colorShader = LinearGradient(
@@ -217,8 +216,6 @@ class GradientGlowView @JvmOverloads constructor(
 
             animatorSet.play(animatorA)
         }
-
-
     }
 
     /**
@@ -232,6 +229,11 @@ class GradientGlowView @JvmOverloads constructor(
         //3 undulations
         private val colors = intArrayOf(start, end, start, end, start, end)
         private val colorsPositions = floatArrayOf(0.00f, 0.20f, 0.40f, 0.60f, 0.80f, 1.00f)
+
+        init {
+            color1Current = start
+            color2Current = end
+        }
 
         override fun prepareAnimators() {
             previousConfig?.animatorSet?.cancel()
@@ -258,7 +260,6 @@ class GradientGlowView @JvmOverloads constructor(
 
             animatorB.addUpdateListener { animation ->
                 val translation = (animation.animatedValue as Float)
-                calculateColorTranslationShaders(translation, colors, colorsPositions)
                 calculateColorTranslationShaders(translation, colors, colorsPositions)
             }
 
