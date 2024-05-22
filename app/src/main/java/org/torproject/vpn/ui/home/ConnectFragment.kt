@@ -128,7 +128,6 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     connectFragmentViewModel.connectionState.collect { vpnState ->
-                        //Handler(Looper.getMainLooper()).postDelayed({ setUIState(vpnState) }, 6000)
                         setUIState(vpnState)
                     }
                 }

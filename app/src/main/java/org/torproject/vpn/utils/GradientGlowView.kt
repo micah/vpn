@@ -84,7 +84,7 @@ class GradientGlowView @JvmOverloads constructor(
         }
         bitmap = Bitmap.createBitmap(width, 1, Bitmap.Config.ARGB_8888)
         bitmapCanvas = Canvas(bitmap)
-        colorConfig.onSizeChanged()
+        colorConfig.prepare()
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -105,12 +105,13 @@ class GradientGlowView @JvmOverloads constructor(
     abstract inner class ColorConfig {
         @ColorInt
         var color1Current: Int = 0
+
         @ColorInt
         var color2Current: Int = 0
         val animatorSet = AnimatorSet()
         private val evaluator = ArgbEvaluator()
-        private var waitingToBeAttachedToWindow: Boolean = false
-
+        private var waitingForAnimationPrepare: Boolean = false
+        private var isAnimationPrepared: Boolean = false
 
         protected abstract fun prepareAnimators()
 
@@ -118,18 +119,23 @@ class GradientGlowView @JvmOverloads constructor(
             animatorSet.cancel()
         }
 
-        open fun onSizeChanged() {
-            if (waitingToBeAttachedToWindow) { //assuming we are attached here
+        fun prepare() {
+            animatorSet.cancel()
+            prepareAnimators()
+            isAnimationPrepared = true
+            if (waitingForAnimationPrepare) { //assuming we are attached here
                 animate()
             }
         }
 
         fun animate() {
-            if (isAttachedToWindow) {
-                prepareAnimators()
+            if (isAnimationPrepared) {
                 animatorSet.start()
             } else {
-                waitingToBeAttachedToWindow = true
+                waitingForAnimationPrepare = true
+                if (this@GradientGlowView::bitmap.isInitialized) {
+                    prepare()
+                }
             }
         }
 
