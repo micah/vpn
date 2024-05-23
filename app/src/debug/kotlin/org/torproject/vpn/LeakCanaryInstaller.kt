@@ -16,6 +16,7 @@ class LeakCanaryInstaller : ContentProvider() {
                 application = context!!.applicationContext as Application,
                 retainedDelayMillis = TimeUnit.SECONDS.toMillis(60)
                 )
+            return true
         }
         return false
     }
