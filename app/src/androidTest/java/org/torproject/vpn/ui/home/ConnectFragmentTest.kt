@@ -125,8 +125,8 @@ class ConnectFragmentTest {
     @Test
     fun test04ClickConnectionCardAndBack() {
         onView(withId(R.id.cl_connection_card)).perform(click())
-        onView(withId(R.id.toolbar)).check(
-            matches(withToolbarTitle(
+        onView(isAssignableFrom(CollapsingToolbarLayout::class.java)).check(
+            matches(withCollapsibleToolbarTitle(
                 containsString(getInstrumentation().targetContext.getString(R.string.connection))
             ))
         )
