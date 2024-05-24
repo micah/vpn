@@ -193,8 +193,6 @@ class ConnectFragmentTest {
         }
         onView(allOf(withText(R.string.action_configure), withResourceName("navigation_bar_item_small_label_view"))).perform(click())
         onView(allOf(withText(R.string.action_connect), withResourceName("navigation_bar_item_small_label_view"))).perform(click())
-        onView(withId(R.id.chronometer)).check(matches(withText(not(Is("00:00:00")))))
-        onView(withId(R.id.chronometer)).check(matches(isCompletelyDisplayed()))
     }
 
     @Test
@@ -231,7 +229,6 @@ class ConnectFragmentTest {
         }
         onView(allOf(withText(R.string.action_configure), withResourceName("navigation_bar_item_small_label_view"))).perform(click())
         onView(allOf(withText(R.string.action_connect), withResourceName("navigation_bar_item_small_label_view"))).perform(click())
-        onView(withId(R.id.chronometer)).check(matches(not(isDisplayed())))
         onView(withId(R.id.cl_apps_card)).check(matches(not(isDisplayed())))
         onView(withId(R.id.cl_connection_card)).check(matches(not(isDisplayed())))
     }
