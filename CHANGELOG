@@ -1,5 +1,17 @@
 CHANGELOG
 =========
+
+0.6.1 Pre-Alpha
+---------------
+* transform manual bridge entry dialog to a full-scale fragment
+* changed app routing selection UI behavior
+* added About Screen
+* new localizations including script for easier updates
+* updated onionmasq dependencies
+* fix bootstrap status (onionmasq)
+* fixed progress animation
+* fix possible app crash related to animation handling
+
 0.6.0 Pre-Alpha
 ---------------
 * General settings screen, including launcher icon and name selection
