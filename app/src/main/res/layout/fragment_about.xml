@@ -23,7 +23,7 @@
             android:theme="@style/Theme.TorVPN.AppBarOverlay"
             android:background="?attr/colorPrimary"
             >
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 app:navigationIcon="?attr/homeAsUpIndicator"
                 android:layout_width="match_parent"

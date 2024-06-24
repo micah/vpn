@@ -18,7 +18,7 @@
             android:background="@color/purpleDark"
             android:theme="@style/Theme.TorVPN.AppBarOverlay"
             >
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 app:title="@string/help"
                 app:navigationIcon="?attr/homeAsUpIndicator"

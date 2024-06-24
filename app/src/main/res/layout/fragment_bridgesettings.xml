@@ -30,7 +30,7 @@
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                style="Widget.Material3.CollapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
@@ -39,7 +39,7 @@
                 app:title="@string/bridges"
                 app:toolbarId="@+id/toolbar">
 
-                <androidx.appcompat.widget.Toolbar
+                <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     app:navigationIcon="?attr/homeAsUpIndicator"
                     android:layout_width="match_parent"

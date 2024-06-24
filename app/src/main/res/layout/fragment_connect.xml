@@ -49,6 +49,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:title="@{viewModel.toolBarTitle}"
             app:titleCentered="true"
+            app:popupTheme="@style/Theme.TorVPN.PopupOverlay"
             app:titleTextAppearance="@style/connection_toolbar_title"
             app:titleTextColor="@color/textOnPrimary"/>
 

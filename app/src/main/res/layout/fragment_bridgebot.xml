@@ -49,7 +49,6 @@
             android:theme="@style/Theme.TorVPN.AppBarOverlay">
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
                 app:navigationIcon="?attr/homeAsUpIndicator"
@@ -68,7 +67,8 @@
                 app:title="@string/bridge_bot"
                 app:titleCentered="true"
                 app:titleTextAppearance="@style/connection_toolbar_title"
-                app:titleTextColor="@color/textOnPrimary"/>
+                app:titleTextColor="@color/textOnPrimary"
+                app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
