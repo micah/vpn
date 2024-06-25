@@ -68,7 +68,6 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="@dimen/default_padding"
                     android:layout_marginEnd="16dp"
-                    android:animateLayoutChanges="true"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/round_bridge_info_bg">
 
@@ -86,14 +85,17 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_bridgeSettingsContainer"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        app:layout_height="@{viewModel.bridgeSettingsContainerHeight}"
                         android:clickable="true"
                         android:focusable="true"
                         android:onClick="@{handler::onBridgeSettingsClicked}"
-                        android:visibility="@{viewModel.useBridge ? View.VISIBLE: View.GONE}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/switch_use_bridge"
                         app:layout_constraintStart_toEndOf="parent"
+
+                        app:visibility="@{viewModel.bridgeSettingContainerVisibility}"
+                        app:alpha="@{viewModel.bridgeSettingsContainerAlpha}"
                         >
 
                         <TextView
@@ -137,7 +139,6 @@
                             android:layout_height="28dp"
                             android:layout_marginEnd="4dp"
                             android:background="@color/indigo50"
-                            android:visibility="@{viewModel.useBridge ? View.VISIBLE: View.GONE}"
                             app:layout_constraintBottom_toBottomOf="@+id/tv_current_bridge_value"
                             app:layout_constraintEnd_toStartOf="@+id/ic_connection_settings"
                             app:layout_constraintTop_toTopOf="@+id/tv_current_bridge_title" />
@@ -146,7 +147,7 @@
 
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/tv_bridge_info"
                     style="@style/connection_bridge_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

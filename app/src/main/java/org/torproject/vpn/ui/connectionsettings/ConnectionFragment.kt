@@ -2,7 +2,6 @@ package org.torproject.vpn.ui.connectionsettings
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -37,7 +36,15 @@ class ConnectionFragment: Fragment(R.layout.fragment_connectionsettings), ClickH
         binding.quickstart.isChecked = configureFragmentViewModel.startOnBoot
         binding.quickstart.setOnCheckedChangeListener(configureFragmentViewModel::onStartOnBootChanged)
 
-        binding.switchUseBridge.setOnCheckedChangeListener(configureFragmentViewModel::onUseBridgeChanged)
+        binding.switchUseBridge.setOnCheckedChangeListener { buttonView, isChecked ->
+            configureFragmentViewModel.onUseBridgeChanged(buttonView, isChecked)
+            if (binding.switchUseBridge.isPressed) {
+                configureFragmentViewModel.animateBridgeSettingsContainerHeight(isChecked)
+            } else {
+                configureFragmentViewModel.setBridgeSettingsContainerHeight()
+            }
+        }
+        configureFragmentViewModel.setBridgeSettingsContainerHeight()
     }
 
     override fun onTorLogsClicked(v: View) {
