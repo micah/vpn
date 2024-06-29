@@ -25,6 +25,7 @@ import org.torproject.onionmasq.events.NewDirectoryEvent
 import org.torproject.onionmasq.events.OnionmasqEvent
 import org.torproject.onionmasq.logging.LogHelper
 import org.torproject.onionmasq.logging.LogObservable
+import org.torproject.vpn.BuildConfig
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
@@ -345,7 +346,8 @@ class TorVpnService : VpnService() {
      */
     private fun applyAppFilter(builder: Builder) {
         if (preferenceHelper.protectAllApps) {
-            // no filtering, all apps will be routed over the VPN
+            // no filtering, all apps will be routed over the VPN, except TorVPN itself
+            builder.addDisallowedApplication(BuildConfig.APPLICATION_ID)
             return
         }
         val selectedApps: Set<String> = preferenceHelper.protectedApps ?:
@@ -357,6 +359,10 @@ class TorVpnService : VpnService() {
             for (appPackage in selectedApps) {
                 try {
                     packageManager.getPackageInfo(appPackage, 0)
+                    if (BuildConfig.APPLICATION_ID == appPackage) {
+                        // always exclude TorVPN
+                        continue;
+                    }
                     builder.addAllowedApplication(appPackage)
                 } catch (e: PackageManager.NameNotFoundException) {
                     // The app is selected but isn't installed anymore.
