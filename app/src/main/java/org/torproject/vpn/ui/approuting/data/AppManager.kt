@@ -19,6 +19,7 @@ import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.utils.PreferenceHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.torproject.vpn.BuildConfig
 import java.lang.reflect.Type
 
 
@@ -72,7 +73,8 @@ class AppManager(context: Context) {
         for (appInfo in installedPackages) {
             // only add apps which are allowed to use internet
             if (pm.checkPermission(INTERNET, appInfo.packageName) == PERMISSION_GRANTED &&
-                appInfo.uid != androidSystemUid) {
+                appInfo.uid != androidSystemUid &&
+                appInfo.packageName != BuildConfig.APPLICATION_ID) {
                 createAppItemModel(appInfo, installedBrowserPackageNames, torPoweredAppPackageNames, protectedApps, protectAllApps)?.also {
                     if (it.hasTorSupport == true) {
                         installedTorApps.add(it)
