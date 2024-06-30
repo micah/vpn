@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentLoggingBinding
 import org.torproject.vpn.ui.logging.data.LoggingListAdapter
@@ -32,6 +34,12 @@ class LoggingFragment : Fragment(R.layout.fragment_logging) {
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         logObservable.logListData.observe(viewLifecycleOwner, loggingListAdapter::update)
 
+        loggingListAdapter.registerAdapterDataObserver(object : AdapterDataObserver() {
+            override fun onChanged() {
+                binding.rvLogList.scrollToPosition(loggingListAdapter.itemCount.minus(1))
+
+            }
+        })
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
