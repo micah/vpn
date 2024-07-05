@@ -21,7 +21,7 @@
     <string name="action_copy_logs">Copy logs</string>
 
     <string name="state_connected">Connected</string>
-    <string name="state_connecting">Connecting</string>
+    <string name="state_connecting">Connecting …</string>
     <string name="state_disconnecting">Disconnecting</string>
     <string name="state_disconnected">Disconnected</string>
 
@@ -47,7 +47,7 @@
 
     <string name="title_guide">This app is highly\nexperimental</string>
     <string name="guide_version_number" translatable="false">%1$s</string>
-    <string name="guide_bullet_head_1">You are ready to start testing</string>
+    <string name="guide_bullet_head_1">Report Bugs</string>
     <string name="guide_bullet_head_2">But don\'t do anything risky</string>
     <string name="guide_bullet_text_1">Don\'t forget to report any bugs you find back to our developers.</string>
     <string name="guide_bullet_text_2">This is a pre-release version of the app, and is not safe to use for sensitive activities.</string>
@@ -63,7 +63,7 @@
 
     <string name="error_something_went_wrong">Something went wrong</string>
     <string name="error_detail_message">Tor VPN couldn’t connect to the Tor network.</string>
-    <string name="error_view_logs">View logs</string>
+    <string name="error_view_logs">View Tor logs</string>
     <string name="connection">Connection</string>
     <string name="connection_description">Configure how to connect to Tor</string>
     <string name="kill_switch">Kill switch</string>
