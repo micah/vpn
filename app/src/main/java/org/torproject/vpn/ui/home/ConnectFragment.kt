@@ -208,7 +208,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
     private fun showInitUI() {
         binding.clSelectionExitInner.translationX = initStateFabSpacing
         binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_connect)
-        binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.emerald80))
+        binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.inverse_on_surface))
     }
 
     /*
@@ -227,7 +227,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
             //connect/reconnect to cancel btn animation
             binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
-                R.color.emerald80,
+                R.color.inverse_on_surface,
                 R.color.white,
                 startAnimationDrawableRes = R.drawable.av_connect_to_cancel,
                 onAnimationEnd = {
@@ -272,7 +272,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             //cancel to connect transition
             binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
                 R.color.white,
-                R.color.emerald80,
+                R.color.inverse_on_surface,
                 startAnimationDrawableRes = R.drawable.av_cancel_to_connect,
                 onAnimationEnd = {
                     _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_connect)
@@ -281,7 +281,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         } else {
             binding.clSelectionExitInner.translationX = initStateFabSpacing
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_connect)
-            binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.emerald80))
+            binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.inverse_on_surface))
         }
     }
 
@@ -292,7 +292,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
             binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
                 R.color.white,
-                R.color.emerald80,
+                R.color.inverse_on_surface,
                 startAnimationDrawableRes = R.drawable.av_cancel_to_connect,
                 onAnimationEnd = {
                     _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_connect)
@@ -304,7 +304,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
             binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
                 R.color.transparent,
-                R.color.emerald80,
+                R.color.inverse_on_surface,
                 startAnimationDrawableRes = R.drawable.av_stop_connect,
                 onAnimationEnd = {
                     _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_connect)
@@ -319,7 +319,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         } else {
             binding.clSelectionExitInner.translationX = initStateFabSpacing
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_connect)
-            binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.emerald80))
+            binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.inverse_on_surface))
         }
     }
 
