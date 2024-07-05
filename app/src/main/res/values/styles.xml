@@ -5,38 +5,18 @@
 
     <!--  ###### -->
 
-    <style name="paragraph_title" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:lineSpacingExtra">3sp</item>
-        <item name="android:textColor">@color/purpleNormal</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textFontWeight" tools:targetApi="p">550</item>
-    </style>
-
-    <style name="paragraph_title_small" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:lineSpacingExtra">3sp</item>
+    <style name="paragraph_title" parent="label_medium">
         <item name="android:textColor">@color/on_surface_variant</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textFontWeight" tools:targetApi="p">600</item>
     </style>
 
-    <style name="button_text_in_fragment" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:lineSpacingExtra">0sp</item>
-        <item name="android:textColor">@color/purpleDarkText</item>
-        <item name="android:textFontWeight" tools:targetApi="p">550</item>
+    <style name="paragraph_title_small" parent="label_medium">
+        <item name="android:textColor">@color/on_surface_variant</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="super_toggle" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:lineSpacingExtra">0sp</item>
+    <style name="super_toggle" parent="title_medium">
         <item name="android:textColor">@color/super_toggle_text_color</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
         <item name="android:padding">@dimen/super_toggle_padding</item>
         <item name="android:background">@drawable/super_toggle_background</item>
         <item name="android:thumb">@drawable/toggle_thumb</item>
@@ -48,12 +28,8 @@
         <item name="android:background">@drawable/super_toggle_exit_node_background</item>
     </style>
 
-    <style name="toggle" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:lineSpacingExtra">0sp</item>
-        <item name="android:textColor">@color/textOnPrimary</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+    <style name="toggle" parent="body_large">
+        <item name="android:textColor">@color/on_surface</item>
         <item name="android:thumb">@drawable/toggle_thumb</item>
         <item name="track">@drawable/toggle_track_shape</item>
         <item name="trackTint">@color/toggle_track_color</item>
@@ -62,178 +38,103 @@
     <style name="radio_button" parent="Widget.Material3.CompoundButton.RadioButton">
         <item name="fontFamily">@font/inter_variable</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/textOnPrimary</item>
+        <item name="android:textColor">@color/on_surface</item>
         <item name="buttonTint">@color/radio_button_color</item>
     </style>
-    <style name="radio_button_title" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/textOnPrimary</item>
+    <style name="radio_button_title" parent="body_large">
+        <item name="android:textColor">@color/on_surface</item>
         <item name="buttonTint">@color/radio_button_color</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
     </style>
-    <style name="radio_button_subtitle" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">14sp</item>
+    <style name="radio_button_subtitle" parent="body_medium">
         <item name="android:textColor">@color/indigo10</item>
         <item name="buttonTint">@color/radio_button_color</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
         <item name="android:maxLines">5</item>
         <item name="android:ellipsize">end</item>
     </style>
 
-    <style name="app_circuits_text" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/textOnPrimary</item>
-        <item name="android:textFontWeight" tools:targetApi="p">500</item>
+    <style name="app_circuits_text" parent="body_large">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="label_text_in_fragment" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:lineSpacingExtra">5sp</item>
-        <item name="android:textColor">?colorOnPrimary</item>
-
+    <style name="label_text_in_fragment" parent="title_medium">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="list_item_style" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:lineSpacingExtra">0sp</item>
-        <item name="android:textColor">?colorOnPrimary</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+    <style name="list_item_style" parent="body_large">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="bottom_sheet_list_item_style" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:lineSpacingExtra">0sp</item>
-        <item name="android:textColor">?colorOnPrimary</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+    <style name="bottom_sheet_list_item_style" parent="body_large">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="text_body_small" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">?colorOnPrimary</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+    <style name="text_body_small" parent="body_small">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="text_body_large" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
-        <item name="android:textColor">?colorOnPrimary</item>
+    <style name="text_body_large" parent="body_large">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="text_mono_small" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="text_mono_small" parent="body_small">
         <item name="android:fontFamily">monospace</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?colorOnPrimary</item>
-        <item name="android:textFontWeight" tools:targetApi="p">450</item>
+        <item name="android:textColor">@color/on_surface_variant</item>
     </style>
 
-    <style name="list_item_style_small" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:lineSpacingExtra">0sp</item>
-        <item name="android:textColor">@color/indigo10</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+    <style name="text_mono_medium" parent="body_medium">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="list_item_style_medium" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:lineSpacingExtra">0sp</item>
-        <item name="android:textColor">?colorOnPrimary</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+    <style name="list_item_style_small" parent="label_medium">
+        <item name="android:textColor">@color/on_surface_variant</item>
     </style>
 
-    <style name="list_item_subheader_style" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:lineSpacingExtra">0sp</item>
-        <item name="android:textColor">@color/indigo10</item>
+    <style name="list_item_style_medium" parent="body_large">
+        <item name="android:textColor">@color/on_surface</item>
+    </style>
+
+    <style name="list_item_subheader_style" parent="body_medium">
+        <item name="android:textColor">@color/on_surface_variant</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
     </style>
 
-    <style name="info_dialog_expanded_title" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:lineSpacingExtra">3sp</item>
-        <item name="android:textColor">?colorOnPrimary</item>
+    <style name="info_dialog_expanded_title" parent="title_large">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="button_text_connect" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:lineSpacingExtra">0sp</item>
+    <style name="button_text_connect" parent="title_large">
         <item name="android:shadowColor">@color/shadowColor</item>
         <item name="android:shadowDx">0</item>
         <item name="android:shadowDy">1.5</item>
         <item name="android:shadowRadius">0</item>
+        <item name="android:textColor">@color/inverse_on_surface</item>
     </style>
 
-    <style name="guide_title_text">
-        <item name="android:textSize">24sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:lineSpacingExtra">3sp</item>
+    <style name="guide_title_text" parent="headline_small">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="guide_pre_alpha_text">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/purpleNormal</item>
-        <item name="android:lineSpacingExtra">8sp</item>
-        <item name="android:fontFamily">@font/inter_variable</item>
+    <style name="guide_bullet_head" parent="body_large">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="guide_version_text">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:lineSpacingExtra">4sp</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:letterSpacing">-0.01</item>
-        <item name="android:background">@drawable/bg_guide_version</item>
-        <item name="android:textColor">@color/purpleDarkText</item>
+    <style name="guide_bullet_text" parent="body_medium">
+        <item name="android:textColor">@color/on_surface_variant</item>
     </style>
 
-    <style name="guide_bullet_head">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:lineSpacingExtra">5sp</item>
+    <style name="dialog_title_small" parent="body_medium">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="guide_bullet_text">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/indigo10</item>
-        <item name="android:lineSpacingExtra">3sp</item>
+    <style name="error_title_text" parent="headline_small">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="dialog_title_small">
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
-        <item name="android:textColor">#FFFFFF</item>
-    </style>
-
-    <style name="error_title_text">
-        <item name="android:textSize">24sp</item>
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:lineSpacingExtra">6sp</item>
-    </style>
-
-    <style name="error_content_text">
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:lineSpacingExtra">6sp</item>
+    <style name="error_content_text" parent="body_medium">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
     <style name="error_action_text_primary" parent="error_action_text">
@@ -247,78 +148,43 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="error_action_text">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:lineSpacingExtra">6sp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:letterSpacing">-0.01</item>
-        <item name="android:textColor">#FFFFFF</item>
+    <style name="error_action_text" parent="label_large">
+        <item name="android:textColor">@color/tertiary</item>
     </style>
 
-    <style name="stats_kbits_text">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:lineSpacingExtra">5sp</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:fontWeight" tools:targetApi="o">550</item>
+    <style name="stats_kbits_text" parent="title_medium">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="stats_kbits_number">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:lineSpacingExtra">3sp</item>
-        <item name="android:background">@drawable/bg_rounded</item>
+    <style name="stats_kbits_number" parent="title_small">
+        <item name="android:textColor">@color/inverse_on_surface</item>
         <item name="android:paddingStart">12dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingEnd">12dp</item>
         <item name="android:paddingBottom">8dp</item>
     </style>
 
-    <style name="stats_timer">
-        <item name="android:textSize">28sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:lineSpacingExtra">8sp</item>
-    </style>
-
-    <style name="stats_card_title">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/indigo10</item>
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:lineSpacingExtra">2sp</item>
-    </style>
-
-
-    <style name="info_text" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:lineSpacingExtra">3sp</item>
+    <style name="stats_card_title" parent="label_medium">
         <item name="android:textColor">@color/on_surface_variant</item>
     </style>
 
-    <style name="small_info_text" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/indigo10</item>
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+
+    <style name="info_text" parent="body_medium">
+        <item name="android:textColor">@color/on_surface_variant</item>
     </style>
 
-    <style name="info_button_text" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textFontWeight" tools:targetApi="p">600</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/blue30</item>
-        <item name="android:lineHeight" tools:targetApi="p">20dp</item>
+    <style name="small_info_text" parent="label_medium">
+        <item name="android:textColor">@color/on_surface_variant</item>
     </style>
 
-    <style name="button_text" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+    <style name="info_button_text" parent="label_large">
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:lineHeight" tools:targetApi="p">20dp</item>
+        <item name="android:textColor">@color/tertiary</item>
+    </style>
+
+    <style name="button_text" parent="label_large">
+        <item name="android:textStyle">bold</item>
+       <item name="android:textColor">@color/on_surface</item>
     </style>
 
     <style name="rounded_bottom_sheet" parent="@style/Widget.Design.BottomSheet.Modal">
@@ -332,65 +198,134 @@
         <item name="bottomSheetStyle">@style/rounded_bottom_sheet</item>
     </style>
 
-    <style name="title_in_stats" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textFontWeight" tools:targetApi="p">600</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:lineSpacingExtra">3sp</item>
+    <style name="title_in_stats" parent="label_medium">
         <item name="android:textColor">@color/on_surface_variant</item>
-        <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="number_in_stats" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textFontWeight" tools:targetApi="p">600</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:lineSpacingExtra">3sp</item>
+    <style name="number_in_stats" parent="title_medium">
         <item name="android:textColor">@color/textOnPrimary</item>
         <item name="android:capitalize">characters</item>
     </style>
 
-    <style name="label_in_stats" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:lineSpacingExtra">3sp</item>
-        <item name="android:textColor">@color/indigo10</item>
+    <style name="label_in_stats" parent="label_medium">
+        <item name="android:textColor">@color/on_surface_variant</item>
     </style>
 
-    <style name="connection_toolbar_title" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:textFontWeight" tools:targetApi="p">600</item>
-        <item name="android:lineSpacingExtra">2sp</item>
-        <item name="android:textSize">22sp</item>
+    <style name="connection_toolbar_title" parent="title_large">
+        <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="bottom_sheet_title" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="bottom_sheet_title" parent="title_large">
+        <item name="android:textColor">@color/on_surface</item>
+    </style>
+
+    <style name="connection_bridge_info" parent="body_medium">
+        <item name="android:textColor">@color/on_surface</item>
+    </style>
+
+    <style name="connection_current_bridge_title" parent="label_medium">
+        <item name="android:textColor">@color/on_surface_variant</item>
+    </style>
+
+    <style name="connection_current_bridge" parent="title_medium">
+        <item name="android:textColor">@color/on_surface</item>
+    </style>
+
+    <!--   NEW STYLES INTER_VARIABLE   -->
+    <style name="headline_large" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:fontFamily">@font/inter_variable</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:lineHeight" tools:targetApi="p">40dp</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="headline_medium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">@font/inter_variable</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:lineHeight" tools:targetApi="p">36dp</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="headline_small" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:fontFamily">@font/inter_variable</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:lineHeight" tools:targetApi="p">32dp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="title_large" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:fontFamily">@font/inter_variable</item>
         <item name="android:textFontWeight" tools:targetApi="p">500</item>
         <item name="android:lineHeight" tools:targetApi="p">28dp</item>
         <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/textOnPrimary</item>
+        <item name="android:letterSpacing">0</item>
     </style>
 
-    <style name="connection_bridge_info" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="title_medium" parent="TextAppearance.Material3.TitleMedium">
         <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:lineSpacingExtra">3sp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/textOnPrimary</item>
-    </style>
-
-    <style name="connection_current_bridge_title" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:lineSpacingExtra">3sp</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/indigo10</item>
-    </style>
-
-    <style name="connection_current_bridge" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/inter_variable</item>
-        <item name="android:lineSpacingExtra">5sp</item>
+        <item name="android:textFontWeight" tools:targetApi="p">500</item>
+        <item name="android:lineHeight" tools:targetApi="p">24dp</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/textOnPrimary</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="title_small" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:fontFamily">@font/inter_variable</item>
+        <item name="android:textFontWeight" tools:targetApi="p">500</item>
+        <item name="android:lineHeight" tools:targetApi="p">20dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="body_large" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:fontFamily">@font/inter_variable</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:lineHeight" tools:targetApi="p">24dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="body_medium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/inter_variable</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:lineHeight" tools:targetApi="p">20dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="body_small" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:fontFamily">@font/inter_variable</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:lineHeight" tools:targetApi="p">16dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="label_large" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:fontFamily">@font/inter_variable</item>
+        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+        <item name="android:lineHeight" tools:targetApi="p">20dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="label_medium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:fontFamily">@font/inter_variable</item>
+        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+        <item name="android:lineHeight" tools:targetApi="p">16dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="label_small" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:fontFamily">@font/inter_variable</item>
+        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+        <item name="android:lineHeight" tools:targetApi="p">16dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0</item>
     </style>
 
 
