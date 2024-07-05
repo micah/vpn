@@ -173,7 +173,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_world" />
+                    app:srcCompat="@drawable/ic_globe" />
 
                 <ImageView
                     android:id="@+id/imageView6"
