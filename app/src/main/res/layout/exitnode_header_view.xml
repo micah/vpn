@@ -11,6 +11,7 @@
             android:layout_height="wrap_content"
             android:text="@string/exit_location"
             android:textAppearance="@style/info_dialog_expanded_title"
+            android:gravity="center_horizontal"
             tools:textColor="#000000"
             android:paddingVertical="@dimen/compact_padding"
             />
