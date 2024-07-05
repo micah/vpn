@@ -38,22 +38,84 @@
             app:layout_constraintVertical_chainStyle="packed">
 
             <TextView
+                android:id="@+id/tv_up_traffic"
+                style="@style/stats_kbits_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
+                android:text="@{viewModel.dataUsageUpstream}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ic_up_traffic"
+                app:layout_constraintTop_toBottomOf="@+id/tv_up_label"
+                app:layout_constraintVertical_chainStyle="spread"
+                tools:text="2.12kbits" />
+
+            <TextView
+                android:id="@+id/tv_up_traffic_delta"
+                style="@style/stats_kbits_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_rounded_secondary"
+                android:text="@{viewModel.dataUsageDiffUpstream}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_up_traffic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_up_label"
+                tools:text="2.12kbits" />
+
+            <ImageView
+                android:id="@+id/ic_up_traffic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_up_traffic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_up_label"
+                app:srcCompat="@drawable/ic_trending_up" />
+
+            <TextView
+                android:id="@+id/tv_up_label"
+                style="@style/label_in_stats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/up"
+                app:layout_constraintBottom_toTopOf="@+id/tv_up_traffic"
+                app:layout_constraintStart_toStartOf="@+id/tv_up_traffic"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_down_stat"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/stat_card_height"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/round_up_stat_bg"
+            android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTED ? View.VISIBLE: View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_up_stat"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <TextView
                 android:id="@+id/tv_down_traffic"
                 style="@style/stats_kbits_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="4dp"
-                android:text="@{viewModel.dataUsageDownstream}"
+                android:text="@{viewModel.dataUsageUpstream}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ic_down_traffic"
                 app:layout_constraintTop_toBottomOf="@+id/tv_down_label"
-                app:layout_constraintVertical_chainStyle="spread"
                 tools:text="2.12kbits" />
 
             <TextView
                 android:id="@+id/tv_down_traffic_delta"
                 style="@style/stats_kbits_number"
+                android:background="@drawable/bg_rounded_tertiary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
@@ -81,66 +143,6 @@
                 android:text="@string/down"
                 app:layout_constraintBottom_toTopOf="@+id/tv_down_traffic"
                 app:layout_constraintStart_toStartOf="@+id/tv_down_traffic"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_down_stat"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/stat_card_height"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/round_up_stat_bg"
-            android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTED ? View.VISIBLE: View.GONE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_up_stat"
-            app:layout_constraintVertical_chainStyle="packed">
-
-            <TextView
-                android:id="@+id/tv_up_traffic"
-                style="@style/stats_kbits_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="4dp"
-                android:text="@{viewModel.dataUsageUpstream}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ic_up_traffic"
-                app:layout_constraintTop_toBottomOf="@+id/tv_up_label"
-                tools:text="2.12kbits" />
-
-            <TextView
-                android:id="@+id/tv_up_traffic_delta"
-                style="@style/stats_kbits_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:text="@{viewModel.dataUsageDiffUpstream}"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_up_traffic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_up_label"
-                tools:text="2.12kbits" />
-
-            <ImageView
-                android:id="@+id/ic_up_traffic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_up_traffic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_up_label"
-                app:srcCompat="@drawable/ic_trending_up" />
-
-            <TextView
-                android:id="@+id/tv_up_label"
-                style="@style/label_in_stats"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/up"
-                app:layout_constraintBottom_toTopOf="@+id/tv_up_traffic"
-                app:layout_constraintStart_toStartOf="@+id/tv_up_traffic"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed" />
 
