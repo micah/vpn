@@ -128,7 +128,7 @@
 
                 <TextView
                     style="@style/small_info_text"
-                    android:textColor="@color/purple40"
+                    android:textColor="@color/primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bridgeline_addresses_bg"
@@ -143,7 +143,8 @@
 
             <TextView
                 android:id="@+id/tv_helpline"
-                style="@style/small_info_text"
+                style="@style/body_small"
+                android:textColor="@color/on_surface_variant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="40dp"
