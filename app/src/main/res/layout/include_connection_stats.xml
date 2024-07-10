@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="4dp"
-                android:text="@{viewModel.dataUsageUpstream}"
+                android:text="@{viewModel.dataUsageDownstream}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ic_down_traffic"
                 app:layout_constraintTop_toBottomOf="@+id/tv_down_label"
