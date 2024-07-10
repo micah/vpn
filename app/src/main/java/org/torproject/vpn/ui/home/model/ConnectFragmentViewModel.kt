@@ -35,6 +35,7 @@ import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
 import org.torproject.vpn.utils.PreferenceHelper.Companion.SHOULD_SHOW_GUIDE
+import org.torproject.vpn.utils.formatBits
 import org.torproject.vpn.utils.getFlagByCountryCode
 import org.torproject.vpn.vpn.ConnectionState
 import org.torproject.vpn.vpn.ConnectionState.CONNECTED
@@ -72,7 +73,7 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
         )
 
     val dataUsageDownstream: StateFlow<String> = dataUsage.map { data ->
-        val received = Formatter.formatFileSize(application, data.downstreamData)
+        val received = formatBits(data.downstreamData)
         return@map application.getString(R.string.stats_down, received)
     }.stateIn(
         scope = viewModelScope,
@@ -81,7 +82,7 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
     )
 
     val dataUsageUpstream: StateFlow<String> = dataUsage.map { data ->
-        val sent = Formatter.formatFileSize(application, data.upstreamData)
+        val sent = formatBits(data.upstreamData)
         return@map application.getString(R.string.stats_up, sent)
     }.stateIn(
         scope = viewModelScope,
@@ -90,8 +91,8 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
     )
 
     val dataUsageDiffDownstream: StateFlow<String> = dataUsage.map { data ->
-        val receivedDiff = Formatter.formatFileSize(application, data.downstreamDataPerSec)
-        return@map application.getString(R.string.stats_delta, receivedDiff)
+        val receivedDiff = formatBits(data.downstreamDataPerSec)
+        return@map "+${application.getString(R.string.stats_delta, receivedDiff)}"
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
@@ -99,8 +100,8 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
     )
 
     val dataUsageDiffUpstream: StateFlow<String> = dataUsage.map { data ->
-        val receivedDiff = Formatter.formatFileSize(application, data.upstreamDataPerSec)
-        return@map application.getString(R.string.stats_delta, receivedDiff)
+        val receivedDiff = formatBits(data.upstreamDataPerSec)
+        return@map "+${application.getString(R.string.stats_delta, receivedDiff)}"
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,

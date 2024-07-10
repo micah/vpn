@@ -182,6 +182,16 @@ fun updateDataUsage(dataUsage: LiveData<DataUsage>, downstream: Long, upstream: 
     return updatedDataUsage
 }
 
+fun formatBits(bits: Long): String {
+   return if (bits < 1000000) {
+        String.format("%.2f kbit", bits / 1000.0)
+    } else if (bits < 1000000000) {
+        String.format("%.2f Mbit", bits / 1000000.0)
+    } else {
+        String.format("%.2f Gbit", bits / 1000000000.0)
+    }
+}
+
 fun getDpInPx(context: Context, dp: Float): Int {
     val scale: Float = context.resources.displayMetrics.density
     return (dp * scale + 0.5f).toInt()
