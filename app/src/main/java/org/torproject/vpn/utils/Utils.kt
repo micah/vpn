@@ -165,7 +165,7 @@ fun isRunningOnMainThread(): Boolean {
 }
 
 fun getFormattedDate(timestamp: Long, locale: Locale?): String? {
-    val sdf = SimpleDateFormat("dd/mm/yy, hh:mm:ss.SSS", locale)
+    val sdf = SimpleDateFormat("dd/MM/yy, hh:mm:ss.SSS", locale)
     return sdf.format(timestamp)
 }
 
