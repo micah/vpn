@@ -21,7 +21,7 @@
     <string name="action_copy_logs">Copy logs</string>
 
     <string name="state_connected">Connected</string>
-    <string name="state_connecting">Connecting …</string>
+    <string name="state_connecting">Connecting…</string>
     <string name="state_disconnecting">Disconnecting</string>
     <string name="state_disconnected">Disconnected</string>
 
