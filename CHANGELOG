@@ -1,6 +1,20 @@
 CHANGELOG
 =========
 
+0.6.2 Pre-Alpha
+---------------
+* fix various strings used in the application (connections, units used for KB/MB/GB, etc.)
+* center exit node selection title
+* correctly display downstream data usage display
+* center the exit node selection title
+* new start/stop button and bridgeline setting color scheme
+* inverse the download and upload stats UI
+* better data and time formatting
+* reverse the order of logs
+* don't list the tor-vpn app in routing list
+* various layout fixes
+* bump onionmasq to 0.6.2
+
 0.6.1 Pre-Alpha
 ---------------
 * transform manual bridge entry dialog to a full-scale fragment
