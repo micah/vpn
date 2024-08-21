@@ -25,7 +25,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_all_new_circuits"
+                tools:src="@drawable/ic_refresh_all"
                 android:importantForAccessibility="no"
                 />
 

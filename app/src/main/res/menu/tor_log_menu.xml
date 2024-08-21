@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/copy"
-        android:icon="@drawable/ic_content_copy"
+        android:icon="@drawable/ic_copy_simple"
         android:title="@string/action_copy_logs"
         app:showAsAction="always" />
 

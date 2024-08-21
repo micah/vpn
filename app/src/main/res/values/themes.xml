@@ -13,6 +13,9 @@
         <item name="android:actionMenuTextColor">@color/tertiary</item>
 
         <!-- Customize your theme here. -->
+        <item name="android:homeAsUpIndicator">
+            @drawable/ic_arrow_left
+        </item>
 
         <item name="android:colorBackground">@color/surface</item>
         <item name="colorError">@color/md_theme_error</item>

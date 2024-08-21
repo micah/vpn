@@ -44,6 +44,7 @@
             android:background="@color/surface"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -174,7 +175,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_globe" />
+                    app:srcCompat="@drawable/ic_globe_hemisphere_west" />
 
                 <ImageView
                     android:id="@+id/imageView6"

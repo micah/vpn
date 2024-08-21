@@ -30,7 +30,7 @@
             >
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
-                app:navigationIcon="@drawable/ic_close_big"
+                app:navigationIcon="@drawable/ic_x"
                 android:paddingEnd="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"

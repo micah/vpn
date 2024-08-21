@@ -72,7 +72,9 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_up_traffic"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_up_label"
-                app:srcCompat="@drawable/ic_trending_up" />
+                app:srcCompat="@drawable/ic_trend_up"
+                android:importantForAccessibility="no"
+                />
 
             <TextView
                 android:id="@+id/tv_up_label"
@@ -133,7 +135,9 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_down_traffic"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_down_label"
-                app:srcCompat="@drawable/ic_trending_down" />
+                app:srcCompat="@drawable/ic_trend_down"
+                android:importantForAccessibility="no"
+                />
 
             <TextView
                 android:id="@+id/tv_down_label"
@@ -168,7 +172,10 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_protect_all_apps_label"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_stat_title"
-                app:srcCompat="@drawable/ic_protect_all_app" />
+                app:srcCompat="@drawable/ic_squares_four"
+                app:tint="@color/primary"
+                android:importantForAccessibility="no"
+                />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/switch_protect_apps"
@@ -242,7 +249,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_connection_label"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_connection_title"
-                app:srcCompat="@drawable/ic_connection"
+                app:srcCompat="@drawable/ic_connect"
+                app:tint="@color/primary"
                 android:importantForAccessibility="no"
                 />
 
@@ -251,7 +259,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:src="@drawable/connection_settings"
+                android:src="@drawable/ic_gear"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_connection_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_connection_title"

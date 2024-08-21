@@ -65,7 +65,7 @@ class BaseDialogFragment : DialogFragment(R.layout.fragment_dialog) {
 
         when (type) {
             TYPE_REFRESH_ALL_CIRCUITS -> {
-                binding.ivHeader.setImageResource(R.drawable.ic_all_new_circuits)
+                binding.ivHeader.setImageResource(R.drawable.ic_refresh_all)
                 binding.tvHeader.setText(R.string.refresh_all_circuits)
                 binding.tvDescription.setText(R.string.reload_all_circuits_description)
                 binding.tvAction.setOnClickListener { _ ->
@@ -78,7 +78,7 @@ class BaseDialogFragment : DialogFragment(R.layout.fragment_dialog) {
                 }
             }
             TYPE_REFRESH_APP_CIRCUIT -> {
-                binding.ivHeader.setImageResource(R.drawable.ic_new_circuit)
+                binding.ivHeader.setImageResource(R.drawable.ic_refresh_circuit)
                 binding.tvHeader.setText(R.string.reload_app_circuits)
                 binding.tvDescription.setText(R.string.reload_app_circuits_description)
                 binding.tvAction.setOnClickListener { _ ->

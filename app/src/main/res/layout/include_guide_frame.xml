@@ -53,7 +53,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textView18"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toTopOf="@+id/textView16"
-                app:srcCompat="@drawable/ic_guide_bug_report" />
+                app:srcCompat="@drawable/ic_bug_beetle" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -63,7 +63,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textView19"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toTopOf="@+id/textView17"
-                app:srcCompat="@drawable/ic_guide_block" />
+                app:srcCompat="@drawable/ic_prohibit" />
 
             <TextView
                 android:id="@+id/textView16"

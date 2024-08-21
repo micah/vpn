@@ -94,7 +94,7 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_external_link"
+                            android:src="@drawable/ic_arrow_up_right"
                             android:layout_gravity="center_vertical"
                             />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -118,7 +118,8 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_bug"
+                            android:src="@drawable/ic_bug_beetle"
+                            app:tint="@color/on_surface"
                             android:layout_gravity="center_vertical"
                             />
                         <androidx.appcompat.widget.AppCompatTextView
@@ -151,7 +152,7 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_support"
+                            android:src="@drawable/ic_chats_circle"
                             android:layout_gravity="center_vertical"
                             />
                         <androidx.appcompat.widget.AppCompatTextView

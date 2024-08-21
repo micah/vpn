@@ -77,7 +77,7 @@
                     android:id="@+id/ite_apps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:drawable="@drawable/ic_apps"
+                    app:drawable="@drawable/ic_squares_four"
                     app:text="@string/apps"
                     app:secondaryText="@string/apps_description"
                     android:onClick="@{handler::onAppsClicked}"
@@ -86,7 +86,7 @@
                 <org.torproject.vpn.ui.base.view.IconTextEntryView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:drawable="@drawable/ic_wifi_tethering"
+                    app:drawable="@drawable/ic_connect"
                     app:text="@string/connection"
                     app:secondaryText="@string/connection_description"
                     android:onClick="@{handler::onConnectionClicked}"
@@ -94,7 +94,7 @@
                 <org.torproject.vpn.ui.base.view.IconTextEntryView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:drawable="@drawable/ic_info"
+                    app:drawable="@drawable/ic_onion_rings"
                     app:text="@string/about"
                     app:secondaryText="@string/about_description"
                     android:onClick="@{handler::onAboutClicked}"

@@ -53,7 +53,7 @@
                         android:scaleType="fitXY"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/default_padding"
-                        tools:src="@drawable/ic_wifi_tethering"
+                        tools:src="@drawable/ic_connect"
                         />
                     <TextView
                         android:layout_width="wrap_content"
