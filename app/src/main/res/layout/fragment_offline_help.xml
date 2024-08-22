@@ -17,6 +17,8 @@
             android:fitsSystemWindows="true"
             android:background="@color/purpleDark"
             android:theme="@style/Theme.TorVPN.AppBarOverlay"
+            app:liftOnScroll="false"
+            app:elevation="0dp"
             >
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"

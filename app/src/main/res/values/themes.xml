@@ -34,11 +34,6 @@
 
     </style>
 
-    <style name="Theme.TorVPN.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
     <style name="Theme.TorVPN.AppBarOverlay" parent="ThemeOverlay.Material3.Dark.ActionBar" />
 
     <style name="Theme.TorVPN.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
