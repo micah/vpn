@@ -26,7 +26,7 @@
     <dimen name="title_top_padding">56dp</dimen>
     <dimen name="list_item_spacing">16dp</dimen>
     <dimen name="list_item_spacing_half">8dp</dimen>
-    <dimen name="bottom_nav_padding">6dp</dimen>
+    <dimen name="bottom_nav_padding">1dp</dimen>
     <dimen name="stat_top_margin">0dp</dimen>
     <dimen name="stat_cards_padding">16dp</dimen>
     <dimen name="stat_card_height">70dp</dimen>
