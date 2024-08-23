@@ -15,24 +15,19 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="super_toggle" parent="title_medium">
+    <style name="super_toggle" parent="toggle">
         <item name="android:textColor">@color/super_toggle_text_color</item>
         <item name="android:padding">@dimen/super_toggle_padding</item>
         <item name="android:background">@drawable/super_toggle_background</item>
-        <item name="android:thumb">@drawable/toggle_thumb</item>
-        <item name="track">@drawable/toggle_track_shape</item>
-        <item name="trackTint">@color/super_toggle_track_color</item>
     </style>
 
-    <style name="exit_node_super_toggle" parent="super_toggle">
-        <item name="android:background">@drawable/super_toggle_exit_node_background</item>
-    </style>
-
-    <style name="toggle" parent="body_large">
+    <style name="toggle" parent="Widget.Material3.CompoundButton.MaterialSwitch">
         <item name="android:textColor">@color/on_surface</item>
-        <item name="android:thumb">@drawable/toggle_thumb</item>
-        <item name="track">@drawable/toggle_track_shape</item>
+        <item name="thumbIcon">@drawable/toggle_material_thumb</item>
+        <item name="thumbIconSize">24dp</item>
+        <item name="thumbIconTint">@color/toggle_tint_color</item>
         <item name="trackTint">@color/toggle_track_color</item>
+        <item name="trackDecorationTint">@color/toggle_track_color</item>
     </style>
 
     <style name="radio_button" parent="Widget.Material3.CompoundButton.RadioButton">

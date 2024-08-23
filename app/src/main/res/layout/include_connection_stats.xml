@@ -170,10 +170,10 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_stat_title"
                 app:srcCompat="@drawable/ic_protect_all_app" />
 
-            <androidx.appcompat.widget.SwitchCompat
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/switch_protect_apps"
                 style="@style/toggle"
-                android:layout_width="56dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:checked="@{viewModel.allAppsProtected}"

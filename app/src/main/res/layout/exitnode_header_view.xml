@@ -26,7 +26,7 @@
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/smProtectAllApps"
-            style="@style/exit_node_super_toggle"
+            style="@style/super_toggle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_padding"

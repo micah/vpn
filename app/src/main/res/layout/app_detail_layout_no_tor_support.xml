@@ -114,7 +114,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <!-- protect this app switch -->
-        <androidx.appcompat.widget.SwitchCompat
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/smProtectAllApps"
             style="@style/toggle"
             android:layout_width="match_parent"
