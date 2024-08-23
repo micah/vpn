@@ -33,7 +33,7 @@
                     android:duration="@integer/default_transition_anim_duration"
                     android:propertyName="fillColor"
                     android:valueFrom="@color/primary"
-                    android:valueTo="@color/indigo60" />
+                    android:valueTo="@color/surface_container" />
             </set>
         </aapt:attr>
     </target>

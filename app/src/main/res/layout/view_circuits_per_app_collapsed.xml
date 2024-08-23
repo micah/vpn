@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_gravity="center_vertical"
             android:background="@drawable/bg_rounded_left"
-            android:backgroundTint="@color/indigo60"
+            android:backgroundTint="@color/surface_container"
             android:paddingHorizontal="@dimen/activity_horizontal_margin"
             >
                 <androidx.appcompat.widget.AppCompatImageView
