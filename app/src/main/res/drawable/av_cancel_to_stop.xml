@@ -36,7 +36,7 @@
                     android:duration="50"
                     android:propertyName="fillColor"
                     android:valueFrom="@android:color/transparent"
-                    android:valueTo="@color/red80" />
+                    android:valueTo="@color/on_error" />
 
                 <objectAnimator
                     android:duration="@integer/default_transition_anim_duration"
@@ -66,7 +66,7 @@
                     android:duration="@integer/default_transition_anim_duration"
                     android:propertyName="fillColor"
                     android:valueFrom="@color/surface_container"
-                    android:valueTo="@color/red30" />
+                    android:valueTo="@color/error" />
             </set>
         </aapt:attr>
 

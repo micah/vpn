@@ -34,7 +34,7 @@ class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
             .build()
         binding.wvHelp.webViewClient = LocalContentWebViewClient(assetLoader)
         binding.wvHelp.loadUrl("https://localhost/assets/help/index.html")
-        binding.wvHelp.setBackgroundColor(ResourcesCompat.getColor(view.resources, R.color.purpleDark, null))
+        binding.wvHelp.setBackgroundColor(ResourcesCompat.getColor(view.resources, R.color.surface, null))
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (binding.wvHelp.canGoBack()) {

@@ -40,7 +40,7 @@ class LoggingListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 binding.container.background = ContextCompat.getDrawable(binding.root.context, R.drawable.log_item_bottom_background)
             } else {
                 binding.container.background = null
-                binding.container.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.purpleDarkBackground))
+                binding.container.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.surface_container_low))
             }
             binding.tvTimestamp.text = getFormattedDate(item.timestamp, Locale.getDefault())
             binding.tvLog.text = item.content

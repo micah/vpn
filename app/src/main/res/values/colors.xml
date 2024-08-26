@@ -1,73 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="purpleDark">#1D0B41</color>
-    <color name="purpleDarkBackground">#31136C</color>
-    <color name="purpleDarkText">#400A76</color>
-    <color name="purpleDarkTextSubdued">#BEA1F7</color>
-    <color name="purpleNormal">#B371F4</color>
-    <color name="purpleDarkBottomNav">#3B1782</color>
-    <color name="purpleDarkBorder">#3F188B</color>
-    <color name="purpleDarkDialog">#31136C</color>
-    <color name="purpleDarkShade">#9942F0</color>
-    <color name="purpleStatsBg">#441B98</color>
-    <color name="purpleStatsDivider">#3F188B</color>
-    <color name="purpleGradientLight">#BF89F5</color>
-    <color name="purpleGradientDark">#A65AF2</color>
-    <color name="purplesSwitchTrack">#CCA1F7</color>
-    <color name="purplesBottomNavActive">#FFFFFF</color>
-    <color name="purplesBottomActiveIconBg">#5822C3</color>
-    <color name="greenNormal">#52E0B6</color>
-    <color name="greenDarkText">#0B4131</color>
-    <color name="greenDarkShade">#26D9A3</color>
-    <color name="greenGradientLight">#7DE8C8</color>
-    <color name="greenGradientNormal">#3CDDAC</color>
-    <color name="greenGradientDark">#52E0B6</color>
-    <color name="yellowNormal">#FAC938</color>
-    <color name="redNormal">#F07594</color>
-    <color name="redDark">#5C0A1F</color>
-    <color name="redDarkShade">#EB4770</color>
-    <color name="redGradientLight">#F28CA6</color>
-    <color name="redGradientDark">#ED5E82</color>
-    <color name="connectingRainbowStart">#FC00FF</color>
-    <color name="connectingRainbowEnd">#00DBDE</color>
-    <color name="connectingRainbowTranslucentStart">#1D0A43</color>
-    <color name="connectingRainbowTranslucentEnd">#E61D0A43</color>
-    <color name="shadowColor">#33FFFFFF</color>
-    <color name="textOnPrimary">#FFFFFF</color>
-    <color name="superSwitchTextColorSecondary">#1E0F33</color>
-
-    <!--Colors changed for alpha-02 release -->
-
-    <color name="amber30">#FAB850</color>
-
-    <color name="blue30">#81C2F2</color>
-    <color name="blue30_16">#2981C2F2</color>
-    <color name="blue20">#A8D8F8</color>
-    <color name="secondary">#C3F79A</color>
-
-    <color name="emerald40">#5CD5A6</color>
-    <color name="emerald80">#0F513B</color>
-
-    <color name="indigo10">#D8DBFA</color>
-    <color name="indigo50">#5D54BE</color>
-    <color name="indigo50_40">#665D54BE</color>
-    <color name="indigo90">#130D32</color>
-
     <color name="white_40">#66FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="connectingRainbowStart">#FC00FF</color>
+    <color name="connectingRainbowEnd">#00DBDE</color>
 
-    <color name="purple30">#C88BF2</color>
-    <color name="purple40">#B86DE8</color>
-    <color name="purple40_40">#66B86DE8</color>
-    <color name="purple60">#943EC4</color>
-
-    <color name="red30">#F27E91</color>
-    <color name="red80">#75101A</color>
+    <color name="error">#F797A7</color>
+    <color name="on_error">#74232C</color>
+    <color name="warning">#EAA93B</color>
     <color name="primary">#D697F8</color>
     <color name="primary_variant">#A357D3</color>
+    <color name="secondary">#C3F79A</color>
+    <color name="secondary_variant">#A4E776</color>
     <color name="outline">#5A4CD3</color>
+    <color name="surface">#201852</color>
     <color name="surface_container">#4638AE</color>
     <color name="surface_container_low">#32277F</color>
     <color name="on_surface">#FFFFFF</color>

@@ -117,7 +117,7 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
         val botString = "bridges.torproject.org";
         val subtitleString = context.getString(R.string.web_bot_subtitle, botString)
         val spannable = SpannableString(subtitleString)
-        spannable.setSpan(ForegroundColorSpan(context.getColor(R.color.blue20)), subtitleString.indexOf(botString), subtitleString.indexOf(botString) + botString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(ForegroundColorSpan(context.getColor(R.color.tertiary)), subtitleString.indexOf(botString), subtitleString.indexOf(botString) + botString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         return spannable
     }
 
@@ -125,7 +125,7 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
         val botString = "bridges@torproject";
         val subtitleString = context.getString(R.string.email_bot_subtitle, botString)
         val spannable = SpannableString(subtitleString)
-        spannable.setSpan(ForegroundColorSpan(context.getColor(R.color.blue20)), subtitleString.indexOf(botString), subtitleString.indexOf(botString) + botString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(ForegroundColorSpan(context.getColor(R.color.tertiary)), subtitleString.indexOf(botString), subtitleString.indexOf(botString) + botString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         return spannable
     }
 
@@ -133,7 +133,7 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
         val botString = "GetBridgesBot";
         val subtitleString = context.getString(R.string.telegram_bot_subtitle, botString)
         val spannable = SpannableString(subtitleString)
-        spannable.setSpan(ForegroundColorSpan(context.getColor(R.color.blue20)), subtitleString.indexOf(botString), subtitleString.indexOf(botString) + botString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(ForegroundColorSpan(context.getColor(R.color.tertiary)), subtitleString.indexOf(botString), subtitleString.indexOf(botString) + botString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         return spannable
     }
 

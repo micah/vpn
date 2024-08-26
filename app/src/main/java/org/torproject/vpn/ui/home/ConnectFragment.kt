@@ -228,7 +228,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             //connect/reconnect to cancel btn animation
             binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
                 R.color.inverse_on_surface,
-                R.color.white,
+                R.color.on_surface,
                 startAnimationDrawableRes = R.drawable.av_connect_to_cancel,
                 onAnimationEnd = {
                     _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_cancel)
@@ -237,7 +237,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         } else {
             binding.clSelectionExitInner.translationX = connectingStateFabSpacing
             binding.tvConnectActionBtn.setBackgroundResource(R.drawable.bg_btn_cancel)
-            binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            binding.tvConnectActionBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface))
         }
     }
 
@@ -248,7 +248,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
             //cancel to stop transition
             binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
-                R.color.white,
+                R.color.on_surface,
                 R.color.transparent,
                 startAnimationDrawableRes = R.drawable.av_cancel_to_stop,
                 onAnimationEnd = {
@@ -271,7 +271,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
             //cancel to connect transition
             binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
-                R.color.white,
+                R.color.on_surface,
                 R.color.inverse_on_surface,
                 startAnimationDrawableRes = R.drawable.av_cancel_to_connect,
                 onAnimationEnd = {
@@ -291,7 +291,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 .setInterpolator(DecelerateInterpolator()).start()
 
             binding.tvConnectActionBtn.startVectorAnimationWithEndCallback(
-                R.color.white,
+                R.color.on_surface,
                 R.color.inverse_on_surface,
                 startAnimationDrawableRes = R.drawable.av_cancel_to_connect,
                 onAnimationEnd = {

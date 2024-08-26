@@ -7,7 +7,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/purpleDark">
+        android:background="@color/surface">
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -19,7 +19,7 @@
             android:paddingTop="@dimen/bottom_nav_padding"
             android:background="@color/surface_container"
             app:itemActiveIndicatorStyle="@color/surface_container"
-            app:itemRippleColor="@color/indigo50"
+            app:itemRippleColor="@color/surface_container_low"
             app:itemTextColor="@color/bottom_nav_text_selector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

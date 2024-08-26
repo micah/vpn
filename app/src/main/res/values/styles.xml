@@ -43,7 +43,7 @@
         <item name="android:ellipsize">end</item>
     </style>
     <style name="radio_button_subtitle" parent="body_medium">
-        <item name="android:textColor">@color/indigo10</item>
+        <item name="android:textColor">@color/on_surface_variant</item>
         <item name="buttonTint">@color/radio_button_color</item>
         <item name="android:maxLines">5</item>
         <item name="android:ellipsize">end</item>
@@ -132,14 +132,15 @@
         <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="error_action_text_primary" parent="error_action_text">
+    <style name="error_action_text_primary" parent="body_medium">
+        <item name="android:textColor">@color/on_surface</item>
         <item name="android:background">@drawable/bg_rounded_tag</item>
         <item name="android:textFontWeight" tools:targetApi="p">600</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="error_action_text_secondary" parent="error_action_text">
-        <item name="android:textColor">@color/blue20</item>
+        <item name="android:textColor">@color/tertiary</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -198,7 +199,7 @@
     </style>
 
     <style name="number_in_stats" parent="title_medium">
-        <item name="android:textColor">@color/textOnPrimary</item>
+        <item name="android:textColor">@color/on_surface</item>
         <item name="android:capitalize">characters</item>
     </style>
 

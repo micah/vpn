@@ -64,10 +64,10 @@ class GradientGlowView @JvmOverloads constructor(
         colorConfig = when (connectionState) {
             ConnectionState.INIT -> StaticColorConfig(android.R.color.transparent, previousConfig = colorConfig)
             ConnectionState.CONNECTING -> AnimatedColorConfig(previousConfig = colorConfig)
-            ConnectionState.CONNECTED -> StaticColorConfig(R.color.emerald40, previousConfig = colorConfig)
+            ConnectionState.CONNECTED -> StaticColorConfig(R.color.secondary_variant, previousConfig = colorConfig)
             ConnectionState.DISCONNECTING -> AnimatedColorConfig(previousConfig = colorConfig)
-            ConnectionState.DISCONNECTED -> StaticColorConfig(R.color.red30, previousConfig = colorConfig)
-            ConnectionState.CONNECTION_ERROR -> StaticColorConfig(R.color.amber30, previousConfig = colorConfig)
+            ConnectionState.DISCONNECTED -> StaticColorConfig(R.color.error, previousConfig = colorConfig)
+            ConnectionState.CONNECTION_ERROR -> StaticColorConfig(R.color.warning, previousConfig = colorConfig)
         }
         colorConfig.animate()
     }

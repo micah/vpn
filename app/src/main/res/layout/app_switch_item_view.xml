@@ -40,7 +40,7 @@
             app:layout_constraintEnd_toStartOf="@id/smItemSwitch"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/purpleDarkBorder"
+            android:background="@color/outline"
             android:layout_marginHorizontal="@dimen/compact_padding"
             android:paddingHorizontal="@dimen/compact_padding"
             />

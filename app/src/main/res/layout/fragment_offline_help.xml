@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:background="@color/purpleDark"
+        android:background="@color/surface"
         tools:context="org.torproject.vpn.ui.help.OfflineHelpFragment">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
-            android:background="@color/purpleDark"
+            android:background="@color/surface"
             android:theme="@style/Theme.TorVPN.AppBarOverlay"
             app:liftOnScroll="false"
             app:elevation="0dp"
@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:background="@color/purpleDark"
+            android:background="@color/surface"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:context="org.torproject.vpn.ui.help.OfflineHelpFragment"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

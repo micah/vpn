@@ -9,16 +9,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="an extremely long line with so much content I can't believe it"
-            android:textColor="@color/white"
+            android:textColor="@color/on_surface"
             android:ellipsize="end"
             app:chipBackgroundColor="@android:color/transparent"
             app:chipSurfaceColor="@android:color/transparent"
             app:closeIcon="@drawable/ic_close"
             app:closeIconEnabled="true"
-            app:closeIconTint="@color/white"
+            app:closeIconTint="@color/on_surface_variant"
             app:chipStartPadding="@dimen/default_padding"
             app:chipEndPadding="@dimen/default_padding"
             app:chipMinTouchTargetSize="2dp"
-            tools:background="@color/purple40"
             />
 </layout>

@@ -41,7 +41,7 @@
             android:paddingTop="8dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:background="@color/purpleDark"
+            android:background="@color/surface"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,7 @@
             app:titleCentered="true"
             app:popupTheme="@style/Theme.TorVPN.PopupOverlay"
             app:titleTextAppearance="@style/connection_toolbar_title"
-            app:titleTextColor="@color/textOnPrimary"/>
+            app:titleTextColor="@color/on_surface"/>
 
 
         <ImageView
