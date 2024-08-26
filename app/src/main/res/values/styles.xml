@@ -101,10 +101,6 @@
     </style>
 
     <style name="button_text_connect" parent="title_large">
-        <item name="android:shadowColor">@color/shadowColor</item>
-        <item name="android:shadowDx">0</item>
-        <item name="android:shadowDy">1.5</item>
-        <item name="android:shadowRadius">0</item>
         <item name="android:textColor">@color/inverse_on_surface</item>
     </style>
 
