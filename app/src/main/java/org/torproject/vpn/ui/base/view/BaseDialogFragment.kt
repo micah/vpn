@@ -61,14 +61,13 @@ class BaseDialogFragment : DialogFragment(R.layout.fragment_dialog) {
         binding.tvActionCancel.setOnClickListener{ _ ->
             dismiss()
         }
-        binding.tvAction.setText(R.string.action_refresh_circuits)
+        binding.tvAction.setText(R.string.action_refresh)
 
         when (type) {
             TYPE_REFRESH_ALL_CIRCUITS -> {
                 binding.ivHeader.setImageResource(R.drawable.ic_all_new_circuits)
                 binding.tvHeader.setText(R.string.refresh_all_circuits)
                 binding.tvDescription.setText(R.string.reload_all_circuits_description)
-                binding.tvAction.setText(R.string.action_refresh_circuits)
                 binding.tvAction.setOnClickListener { _ ->
                     try {
                         OnionMasq.refreshCircuits()
@@ -82,7 +81,6 @@ class BaseDialogFragment : DialogFragment(R.layout.fragment_dialog) {
                 binding.ivHeader.setImageResource(R.drawable.ic_new_circuit)
                 binding.tvHeader.setText(R.string.reload_app_circuits)
                 binding.tvDescription.setText(R.string.reload_app_circuits_description)
-                binding.tvAction.setText(R.string.action_refresh)
                 binding.tvAction.setOnClickListener { _ ->
                     arguments?.getInt(EXTRA_APP_UID)?.let {
                         try {

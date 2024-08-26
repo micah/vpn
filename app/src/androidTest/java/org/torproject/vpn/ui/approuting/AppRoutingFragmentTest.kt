@@ -50,7 +50,7 @@ class AppRoutingFragmentTest {
         // menu item click
         onView(withContentDescription(R.string.action_refresh_circuits)).perform(click())
         // dialog action click
-        onView(withText(R.string.action_refresh_circuits)).perform(click())
+        onView(withText(R.string.action_refresh)).perform(click())
 
         val newIP = NetworkUtils.getExitIP();
 
