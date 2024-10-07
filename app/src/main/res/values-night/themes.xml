@@ -17,7 +17,7 @@
         <item name="colorError">@color/md_theme_error</item>
         <item name="colorOnError">@color/md_theme_onError</item>
 
-        <item name="toolbarStyle">@style/Widget.Material3.Toolbar</item>
+        <item name="toolbarStyle">@style/toolbar_theme</item>
         <item name="bottomNavigationStyle">@style/Widget.Material3.BottomNavigationView</item>
 
 
