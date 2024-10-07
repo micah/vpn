@@ -346,8 +346,11 @@ class TorVpnService : VpnService() {
      */
     private fun applyAppFilter(builder: Builder) {
         if (preferenceHelper.protectAllApps) {
-            // no filtering, all apps will be routed over the VPN, except TorVPN itself
-            builder.addDisallowedApplication(BuildConfig.APPLICATION_ID)
+            // no filtering, all apps will be routed over the VPN
+            if (preferenceHelper.useBridge) {
+                // however we exclude tor-vpn being routed over the VPN in case we use bridges
+                builder.addDisallowedApplication(BuildConfig.APPLICATION_ID)
+            }
             return
         }
         val selectedApps: Set<String> = preferenceHelper.protectedApps ?:
@@ -359,8 +362,8 @@ class TorVpnService : VpnService() {
             for (appPackage in selectedApps) {
                 try {
                     packageManager.getPackageInfo(appPackage, 0)
-                    if (BuildConfig.APPLICATION_ID == appPackage) {
-                        // always exclude TorVPN
+                    if (BuildConfig.APPLICATION_ID == appPackage && preferenceHelper.useBridge) {
+                        // always exclude TorVPN in case we use bridges
                         continue;
                     }
                     builder.addAllowedApplication(appPackage)
