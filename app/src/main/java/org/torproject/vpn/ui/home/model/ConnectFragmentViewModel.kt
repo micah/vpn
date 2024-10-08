@@ -114,25 +114,33 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
             started = SharingStarted.Lazily,
             initialValue = VpnStatusObservable.statusLiveData.value ?: INIT
         )
-
-    val toolBarTitle: StateFlow<String> =
-        connectionState.map { connectionState ->
-
-            when (connectionState) {
-                INIT -> application.getString(R.string.idle_toolbar_title)
-                CONNECTING -> application.getString(R.string.state_connecting)
-                CONNECTED -> application.getString(R.string.state_connected)
-                DISCONNECTING -> application.getString(R.string.state_disconnecting)
-                DISCONNECTED -> application.getString(R.string.state_disconnected)
-                else -> {
-                    return@map ""
-                }
-            }
-        }.stateIn(
+    val internetConnectivity = VpnStatusObservable.hasInternetConnectivity.asFlow()
+        .stateIn(
             scope = viewModelScope,
-            SharingStarted.Lazily,
-            initialValue = ""
+            started = SharingStarted.Lazily,
+            initialValue = VpnStatusObservable.hasInternetConnectivity.value ?: true
         )
+
+    val toolBarTitle: StateFlow<String> = combine(
+        connectionState,
+        internetConnectivity
+    ) {
+        connState, inetConnectivity ->
+        return@combine when (connState) {
+            INIT -> application.getString(R.string.idle_toolbar_title)
+            CONNECTING -> if (inetConnectivity) application.getString(R.string.state_connecting) else application.getString(R.string.no_internet)
+            CONNECTED -> if (inetConnectivity) application.getString(R.string.state_connected) else application.getString(R.string.no_internet)
+            DISCONNECTING -> if (inetConnectivity) application.getString(R.string.state_disconnecting)else application.getString(R.string.no_internet)
+            DISCONNECTED -> application.getString(R.string.state_disconnected)
+            else -> {
+                ""
+            }
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        SharingStarted.Lazily,
+        initialValue = ""
+    )
 
     val connectButtonText: StateFlow<String> = connectionState.map { connectionState ->
         when (connectionState) {

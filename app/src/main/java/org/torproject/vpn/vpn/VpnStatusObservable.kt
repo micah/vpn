@@ -21,6 +21,8 @@ object VpnStatusObservable {
     val statusLiveData: LiveData<ConnectionState> = _statusLiveData
     private val _dataUsage: MutableLiveData<DataUsage> = MutableLiveData(DataUsage())
     val dataUsage: LiveData<DataUsage> = _dataUsage
+    private var _hasInternetConnectivity: MutableLiveData<Boolean> = MutableLiveData(true);
+    val hasInternetConnectivity: LiveData<Boolean> =  _hasInternetConnectivity
 
     private var startTime = 0L
 
@@ -40,6 +42,14 @@ object VpnStatusObservable {
             _statusLiveData.postValue(status)
         }
         LogObservable.getInstance().addLog(status.toString())
+    }
+
+    fun updateInternetConnectivity(isConnected: Boolean) {
+        if (isRunningOnMainThread()) {
+            _hasInternetConnectivity.setValue(isConnected)
+        } else {
+            _hasInternetConnectivity.postValue(isConnected)
+        }
     }
 
     fun updateDataUsage(downstream: Long, upstream: Long) {

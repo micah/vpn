@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import org.torproject.onionmasq.logging.LogObservable
 import org.torproject.vpn.MainActivity
@@ -120,20 +121,23 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         connectFragmentViewModel.updateConnectionLabel()
 
         currentVpnState = connectFragmentViewModel.connectionState.value
-        setUIState(currentVpnState)
+        setUIState(currentVpnState, connectFragmentViewModel.internetConnectivity.value)
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    connectFragmentViewModel.connectionState.collect { vpnState ->
-                        setUIState(vpnState)
-                    }
+                combine(
+                    connectFragmentViewModel.connectionState,
+                    connectFragmentViewModel.internetConnectivity
+                ) { vpnState, hasConnectivity ->
+                    vpnState to hasConnectivity
+                }.collect { (vpnState, hasConnectivity) ->
+                    setUIState(vpnState, hasConnectivity)
                 }
 
                 launch {
                     connectFragmentViewModel.guideScreenVisibility.collect { isVisible ->
                         if (!isVisible) {
-                            setUIState(currentVpnState)
+                            setUIState(currentVpnState, connectFragmentViewModel.internetConnectivity.value)
                         }
                     }
                 }
@@ -181,12 +185,12 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         preferenceHelper.unregisterListener(this)
     }
 
-    private fun setUIState(vpnState: ConnectionState) {
+    private fun setUIState(vpnState: ConnectionState, hasInternetConnectivity: Boolean) {
         Log.d(
             TAG,
-            "setUIState: ${if (::currentVpnState.isInitialized) currentVpnState else "not initialized"} --> ${vpnState.name}"
+            "setUIState: ${if (::currentVpnState.isInitialized) currentVpnState else "not initialized"} --> ${vpnState.name} (hasInternetConnectivity; $hasInternetConnectivity)"
         )
-        binding.gradientView.setState(vpnState)
+        binding.gradientView.setState(vpnState, hasInternetConnectivity)
 
         when (vpnState) {
             ConnectionState.INIT -> showInitUI()

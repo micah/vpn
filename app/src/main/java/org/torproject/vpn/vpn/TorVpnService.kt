@@ -16,9 +16,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
+import org.torproject.onionmasq.ConnectivityHandler
 import org.torproject.onionmasq.OnionMasq
 import org.torproject.onionmasq.events.BootstrapEvent
 import org.torproject.onionmasq.events.ClosedConnectionEvent
+import org.torproject.onionmasq.events.ConnectivityEvent
 import org.torproject.onionmasq.events.FailedConnectionEvent
 import org.torproject.onionmasq.events.NewConnectionEvent
 import org.torproject.onionmasq.events.NewDirectoryEvent
@@ -48,6 +50,8 @@ class TorVpnService : VpnService() {
     private lateinit var notificationManager: VpnNotificationManager
     private lateinit var logHelper: LogHelper
     private lateinit var preferenceHelper: PreferenceHelper
+    private lateinit var connectivityHandler : ConnectivityHandler
+
     private var logObservable: LogObservable? = null
 
 
@@ -75,6 +79,8 @@ class TorVpnService : VpnService() {
         logHelper = LogHelper()
         preferenceHelper = PreferenceHelper(this)
         logObservable = LogObservable.getInstance()
+        connectivityHandler = ConnectivityHandler(this)
+        connectivityHandler.register()
         OnionMasq.bindVPNService(TorVpnService::class.java)
     }
 
@@ -117,6 +123,7 @@ class TorVpnService : VpnService() {
         if (VpnStatusObservable.statusLiveData.value !== ConnectionState.CONNECTION_ERROR) {
             VpnStatusObservable.update(ConnectionState.DISCONNECTED)
         }
+        connectivityHandler.unregister()
         logObservable = null
     }
 
@@ -220,6 +227,9 @@ class TorVpnService : VpnService() {
                         }
                     }
                     preferenceHelper.relayCountries = countriesWithSufficientExitNodes.toSet()
+                }
+                is ConnectivityEvent -> {
+                    VpnStatusObservable.updateInternetConnectivity(event.hasInternetConnectivity)
                 }
             }
         }
