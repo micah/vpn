@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="org.torproject.vpn.ui.connectionsettings.model.ConnectionFragmentViewModel" />
+
+        <variable
+            name="handler"
+            type="org.torproject.vpn.ui.connectionsettings.ClickHandler" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="org.torproject.vpn.ui.approuting.AppRoutingFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:liftOnScroll="false"
+            app:elevation="0dp"
+            android:theme="@style/Theme.TorVPN.AppBarOverlay">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                app:navigationIcon="?attr/homeAsUpIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/connection"
+                android:background="@color/surface"
+                app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="@dimen/default_padding"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/round_bridge_info_bg">
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/switch_use_bridge"
+                        style="@style/super_toggle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/use_a_bridge"
+                        android:checked="@{viewModel.useBridge}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_bridgeSettingsContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_height="@{viewModel.bridgeSettingsContainerHeight}"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{handler::onBridgeSettingsClicked}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/switch_use_bridge"
+                        app:layout_constraintStart_toEndOf="parent"
+
+                        app:visibility="@{viewModel.bridgeSettingContainerVisibility}"
+                        app:alpha="@{viewModel.bridgeSettingsContainerAlpha}"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_current_bridge_title"
+                            style="@style/connection_current_bridge_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="24dp"
+                            android:text="@string/current_bridge"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_current_bridge_value"
+                            style="@style/connection_current_bridge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="24dp"
+                            android:text="@{viewModel.bridgeType}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/tv_current_bridge_title"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_current_bridge_title" />
+
+                        <ImageView
+                            android:id="@+id/ic_connection_settings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:paddingVertical="8dp"
+                            android:paddingHorizontal="8dp"
+                            android:contentDescription="@string/bridge_settings"
+                            android:src="@drawable/ic_gear"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_current_bridge_value"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tv_current_bridge_title" />
+
+                        <View
+                            android:id="@+id/view_divider"
+                            android:layout_width="2dp"
+                            android:layout_height="28dp"
+                            android:layout_marginEnd="4dp"
+                            android:background="@color/outline"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_current_bridge_value"
+                            app:layout_constraintEnd_toStartOf="@+id/ic_connection_settings"
+                            app:layout_constraintTop_toTopOf="@+id/tv_current_bridge_title" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_bridge_info"
+                    style="@style/connection_bridge_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:text="@string/use_a_bridge_info" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/paragraph_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:paddingHorizontal="@dimen/activity_horizontal_margin"
+                    android:paddingVertical="@dimen/default_padding"
+                    android:text="@string/bridge_behaviour" />
+
+                <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:id="@+id/quickstart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:hideDrawable="true"
+                    app:hideSwitch="false"
+                    app:secondaryText="@string/quickstart_description"
+                    app:text="@string/quickstart" />
+
+                <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:id="@+id/kill_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{handler::onAlwaysOnClicked}"
+                    android:visibility="gone"
+                    app:hideDrawable="true"
+                    app:secondaryText="@string/kill_switch_description"
+                    app:text="@string/kill_switch"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/paragraph_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/activity_horizontal_margin"
+                    android:paddingVertical="@dimen/default_padding"
+                    android:text="@string/debugging" />
+
+                <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{handler::onTorLogsClicked}"
+                    app:drawable="@drawable/ic_code"
+                    app:hideDrawable="true"
+                    app:secondaryText="@string/tor_logs_description"
+                    app:text="@string/tor_logs" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

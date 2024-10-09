@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="org.torproject.vpn.ui.generalsettings.model.GeneralSettingsFragmentViewModel" />
+
+        <import type="android.view.View" />
+        <variable
+            name="handler"
+            type="org.torproject.vpn.ui.generalsettings.ClickHandler" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="@color/surface"
+        tools:context="org.torproject.vpn.ui.approuting.AppRoutingFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/Theme.TorVPN.AppBarOverlay"
+            app:liftOnScroll="false"
+            app:elevation="0dp"
+            >
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                app:navigationIcon="?attr/homeAsUpIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:title="@string/general"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:weightSum="1"
+                android:orientation="vertical">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/paragraph_title"
+                    android:paddingHorizontal="@dimen/activity_vertical_margin"
+                    android:paddingTop="@dimen/default_padding"
+                    android:paddingBottom="@dimen/default_padding"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/appearance"/>
+
+                <include android:id="@+id/layout_app_icons"
+                    layout="@layout/horizontal_recycler_view_item"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="@dimen/default_padding"
+                    android:paddingHorizontal="@dimen/activity_vertical_margin"
+                    style="@style/text_body_small"
+                    android:text="@string/launcher_hint"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/paragraph_title"
+                    android:paddingHorizontal="@dimen/activity_vertical_margin"
+                    android:paddingTop="@dimen/default_padding"
+                    android:paddingBottom="@dimen/default_padding"
+                    android:text="@string/warnings"/>
+
+                <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:id="@+id/warnings_settings_entry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/compact_padding"
+                    app:hideSwitch="false"
+                    app:hideDrawable="true"
+                    app:secondaryText="@string/new_circuits_warnings_description"
+                    app:text="@string/new_circuits_warnings"
+                    android:clickable="true"
+                    android:focusable="true"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

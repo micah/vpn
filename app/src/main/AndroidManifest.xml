@@ -46,7 +46,7 @@
         <activity
             android:name="org.torproject.vpn.MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:launchMode="singleInstance">
         </activity>
         <activity-alias

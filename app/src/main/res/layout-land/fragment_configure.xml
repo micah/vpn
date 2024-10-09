@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="org.torproject.vpn.ui.configure.model.ConfigureFragmentViewModel" />
+        <variable
+            name="handler"
+            type="org.torproject.vpn.ui.configure.ClickHandler" />
+        <import type="android.view.View" />
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="org.torproject.vpn.ui.configure.ConfigureFragment">
+
+       <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/Theme.TorVPN.AppBarOverlay"
+            app:liftOnScroll="false"
+            app:elevation="0dp"
+            >
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="pin"
+                app:title="@string/action_configure"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/Theme.TorVPN.PopupOverlay"
+                />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/bottom_nav_height"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="org.torproject.vpn.ui.configure.ConfigureFragment">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:drawable="@drawable/ic_configure"
+                    app:text="@string/general"
+                    app:secondaryText="@string/general_description"
+                    android:onClick="@{handler::onGeneralClicked}"
+                    />
+                <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:id="@+id/ite_apps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:drawable="@drawable/ic_squares_four"
+                    app:text="@string/apps"
+                    app:secondaryText="@string/apps_description"
+                    android:onClick="@{handler::onAppsClicked}"
+                    />
+
+                <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:drawable="@drawable/ic_connect"
+                    app:text="@string/connection"
+                    app:secondaryText="@string/connection_description"
+                    android:onClick="@{handler::onConnectionClicked}"
+                    />
+                <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:drawable="@drawable/ic_onion_rings"
+                    app:text="@string/about"
+                    app:secondaryText="@string/about_description"
+                    android:onClick="@{handler::onAboutClicked}"
+                    />
+
+                <org.torproject.vpn.ui.base.view.IconTextEntryView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:drawable="@drawable/ic_dummy_app"
+                    app:text="@string/help"
+                    app:secondaryText="lorem ipsum"
+                    android:onClick="@{handler::onHelpClicked}"
+                    android:visibility="gone"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
