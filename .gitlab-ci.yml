@@ -14,7 +14,7 @@ build-docker-image:
     TAG: main # non-tag build will be unset, set to 'latest' in script
   stage: build_image
   image:
-    name: containers.torproject.org/tpo/tpa/base-images/podman:bookworm
+    name: "containers.torproject.org/tpo/tpa/base-images/podman:bookworm"
   script:
     - export TMPDIR=$(pwd)/.tmp
     - podman login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -25,7 +25,7 @@ build-docker-image:
 # Basic android and gradle stuff
 # Check linting
 lintDebug:
-  image : "registry.0xacab.org/leap/tor/tor-vpn:main"
+  image : "containers.torproject.org/tpo/applications/vpn:main"
   interruptible: true
   stage: test
   when: always
@@ -34,7 +34,7 @@ lintDebug:
 
 # Make Project
 assembleDebug:
-  image : "registry.0xacab.org/leap/tor/tor-vpn:main"
+  image : "containers.torproject.org/tpo/applications/vpn:main"
   interruptible: true
   stage: build
   script:
@@ -48,7 +48,7 @@ assembleDebug:
 
 # Publish apk
 publish:
-  image: "registry.0xacab.org/leap/docker/debian:bookworm_amd64"
+  image: "containers.torproject.org/tpo/tpa/base-images:bookworm"
   stage: publish
   # Only run this stage if one of the following rules is true
   rules:
@@ -68,7 +68,7 @@ publish:
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)
 debugTests:
-  image : "registry.0xacab.org/leap/tor/tor-vpn:main"
+  image : "containers.torproject.org/tpo/applications/vpn:main"
   interruptible: true
   stage: test
   when: always
