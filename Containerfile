@@ -9,7 +9,7 @@ ENV ANDROID_HOME="${PWD}/android-home" \
     ANDROID_CLT_SHA256="8919e8752979db73d8321e9babe2caedcc393750817c1a5f56c128ec442fb540" \
     ANDROID_NDK_RELNAME="r25c"
 
-RUN install -d $ANDROID_HOME \
+RUN install -d $ANDROID_HOME && \
     apt-get clean && \
     apt-get --quiet update --yes && \
     DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata && \
