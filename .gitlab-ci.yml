@@ -10,18 +10,16 @@ variables:
   DOCKER_DRIVER: overlay
 
 build-docker-image:
-  stage: build_image
-  image: docker
-  services:
-    - docker:dind
-    - name: $CI_REGISTRY_IMAGE:main
   variables:
-    DOCKER_DRIVER: overlay
-    IMAGE_TAG: $CI_REGISTRY_IMAGE:main
+    TAG: main # non-tag build will be unset, set to 'latest' in script
+  stage: build_image
+  image:
+    name: containers.torproject.org/tpo/tpa/base-images/podman:bookworm
   script:
-    - echo $CI_REGISTRY_PASSWORD | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
-    - docker build -t $IMAGE_TAG .
-    - docker push ${IMAGE_TAG}
+    - export TMPDIR=$(pwd)/.tmp
+    - podman login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - podman build -t ${CI_REGISTRY_IMAGE}:${TAG} .
+    - podman push ${CI_REGISTRY_IMAGE}:${TAG}
   when: manual
 
 # Basic android and gradle stuff
