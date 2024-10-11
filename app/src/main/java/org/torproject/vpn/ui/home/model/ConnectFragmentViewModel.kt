@@ -138,6 +138,7 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
         when (connectionState) {
             INIT -> application.getString(R.string.action_connect)
             CONNECTING -> application.getString(R.string.action_cancel)
+            DISCONNECTING -> application.getString(R.string.action_reconnect)
             DISCONNECTED -> application.getString(R.string.action_reconnect)
             CONNECTION_ERROR -> application.getString(R.string.action_try_again)
             else -> {
