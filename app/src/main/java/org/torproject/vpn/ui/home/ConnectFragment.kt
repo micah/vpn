@@ -231,7 +231,9 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 R.color.on_surface,
                 startAnimationDrawableRes = R.drawable.av_connect_to_cancel,
                 onAnimationEnd = {
-                    _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_cancel)
+                    if (currentVpnState == ConnectionState.CONNECTING) {
+                        _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_cancel)
+                    }
                 }
             )
         } else {
@@ -252,7 +254,9 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 R.color.transparent,
                 startAnimationDrawableRes = R.drawable.av_cancel_to_stop,
                 onAnimationEnd = {
-                    _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_stop)
+                    if (currentVpnState == ConnectionState.CONNECTED) {
+                        _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_stop)
+                    }
                 }
             )
 
@@ -275,7 +279,9 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 R.color.inverse_on_surface,
                 startAnimationDrawableRes = R.drawable.av_cancel_to_connect,
                 onAnimationEnd = {
-                    _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_connect)
+                    if (currentVpnState == ConnectionState.CONNECTION_ERROR) {
+                        _binding?.tvConnectActionBtn?.setBackgroundResource(R.drawable.bg_btn_connect)
+                    }
                 }
             )
         } else {
