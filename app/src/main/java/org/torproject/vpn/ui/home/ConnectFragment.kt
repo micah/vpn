@@ -125,13 +125,15 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                combine(
-                    connectFragmentViewModel.connectionState,
-                    connectFragmentViewModel.internetConnectivity
-                ) { vpnState, hasConnectivity ->
-                    vpnState to hasConnectivity
-                }.collect { (vpnState, hasConnectivity) ->
-                    setUIState(vpnState, hasConnectivity)
+                launch {
+                    combine(
+                        connectFragmentViewModel.connectionState,
+                        connectFragmentViewModel.internetConnectivity
+                    ) { vpnState, hasConnectivity ->
+                        vpnState to hasConnectivity
+                    }.collect { (vpnState, hasConnectivity) ->
+                        setUIState(vpnState, hasConnectivity)
+                    }
                 }
 
                 launch {
