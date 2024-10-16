@@ -27,22 +27,23 @@ class AppManager(context: Context) {
     private val context: Context
     val preferenceHelper: PreferenceHelper
     private val pm: PackageManager
-    private val torPoweredAppPackageNames: List<String> = listOf(
-        // orbot
-        "org.torproject.android",
-        "org.torproject.android.nightly",
-        // tor-browser
-        "org.torproject.torbrowser",
-        "org.torproject.torbrowser_alpha",
-        "org.torproject.torbrowser_nightly",
-        "org.torproject.torbrowser_debug",
-        //onionshare
-        "org.onionshare.android",
-        "org.onionshare.android.nightly"
-    )
+
 
     companion object {
         val TAG = AppManager::class.java.simpleName
+        val TOR_POWERED_APP_PACKAGE_NAMES: List<String> = listOf(
+            // orbot
+            "org.torproject.android",
+            "org.torproject.android.nightly",
+            // tor-browser
+            "org.torproject.torbrowser",
+            "org.torproject.torbrowser_alpha",
+            "org.torproject.torbrowser_nightly",
+            "org.torproject.torbrowser_debug",
+            //onionshare
+            "org.onionshare.android",
+            "org.onionshare.android.nightly"
+        )
     }
     init {
         this.context = context
@@ -75,7 +76,7 @@ class AppManager(context: Context) {
             if (pm.checkPermission(INTERNET, appInfo.packageName) == PERMISSION_GRANTED &&
                 appInfo.uid != androidSystemUid &&
                 appInfo.packageName != BuildConfig.APPLICATION_ID) {
-                createAppItemModel(appInfo, installedBrowserPackageNames, torPoweredAppPackageNames, protectedApps, protectAllApps)?.also {
+                createAppItemModel(appInfo, installedBrowserPackageNames, TOR_POWERED_APP_PACKAGE_NAMES, protectedApps, protectAllApps)?.also {
                     if (it.hasTorSupport == true) {
                         installedTorApps.add(it)
                     } else if (it.isBrowserApp == true) {

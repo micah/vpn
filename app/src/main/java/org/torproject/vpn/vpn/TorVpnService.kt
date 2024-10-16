@@ -29,6 +29,7 @@ import org.torproject.onionmasq.logging.LogHelper
 import org.torproject.onionmasq.logging.LogObservable
 import org.torproject.vpn.BuildConfig
 import org.torproject.vpn.R
+import org.torproject.vpn.ui.approuting.data.AppManager
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 import org.torproject.vpn.utils.VpnNotificationManager
@@ -355,20 +356,32 @@ class TorVpnService : VpnService() {
      * @param builder VPN Builder
      */
     private fun applyAppFilter(builder: Builder) {
+        val packageManager = packageManager
+        // all apps that don't include a tor-client themselves will be routed over the VPN
         if (preferenceHelper.protectAllApps) {
-            // no filtering, all apps will be routed over the VPN
+
+            // exclude tor-powered apps
+            for (appPackage in AppManager.TOR_POWERED_APP_PACKAGE_NAMES) {
+                try {
+                    packageManager.getPackageInfo(appPackage, 0)
+                    builder.addDisallowedApplication(appPackage)
+                } catch (e: PackageManager.NameNotFoundException) {
+                    // The tor-powered app is not installed
+                    Log.d(TAG, "Tor-powered app $appPackage is not installed.")
+                }
+            }
+
+            // exclude tor-vpn in case  we use bridges
             if (preferenceHelper.useBridge) {
-                // however we exclude tor-vpn being routed over the VPN in case we use bridges
                 builder.addDisallowedApplication(BuildConfig.APPLICATION_ID)
             }
             return
         }
+
         val selectedApps: Set<String> = preferenceHelper.protectedApps ?:
             HashSet<String>()
-
-        val packageManager = packageManager
+        // filtering, allow a subset of installed apps
         if (selectedApps.isNotEmpty()) {
-            // filtering, allow a subset of installed apps
             for (appPackage in selectedApps) {
                 try {
                     packageManager.getPackageInfo(appPackage, 0)
