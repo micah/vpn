@@ -123,6 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:paddingHorizontal="@dimen/compact_padding"
                 tools:background="@drawable/av_connect_to_cancel"
                 android:clickable="true"
                 android:elevation="0dp"
