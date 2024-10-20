@@ -15,7 +15,7 @@ import androidx.lifecycle.Observer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import org.torproject.onionmasq.ConnectivityHandler
 import org.torproject.onionmasq.OnionMasq
 import org.torproject.onionmasq.events.BootstrapEvent
@@ -314,14 +314,24 @@ class TorVpnService : VpnService() {
             }
             val builder = prepareVpnProfile()
             val fd = builder.establish();
-            coroutineScope.async {
-                OnionMasq.start(fd!!.detachFd(), getBridgeLines())
+            coroutineScope.launch {
+                try {
+                    OnionMasq.start(fd!!.detachFd(), getBridgeLines())
+                } catch (npe: NullPointerException) {
+                    handleException(npe, "Could not create tun interface fd.")
+                } catch (e: Exception) {
+                   handleException(e, "Onionmasq error: ${e.message}")
+                }
             }
         } catch (e: Exception) {
-            // Catch any exception
-            e.printStackTrace()
-            stop(true)
+           handleException(e, "Failed to establish VPN.");
         }
+    }
+
+    private fun handleException(e: Exception, msg: String) {
+        Log.w(TAG, msg)
+        e.printStackTrace()
+        stop(true)
     }
 
     private fun getBridgeLines(): String? {
