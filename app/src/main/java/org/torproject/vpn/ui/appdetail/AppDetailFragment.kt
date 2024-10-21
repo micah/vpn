@@ -61,26 +61,30 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-        binding.toolbar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.refresh_circuits -> {
-                    viewModel.appUID.value?.let { appUID ->
-                        if (preferenceHelper.warningsEnabled) {
-                            val dialog = BaseDialogFragment.createRefreshCircuitsForAppDialog(appUID)
-                            dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
-                        } else {
-                            try {
-                                OnionMasq.refreshCircuitsForApp(appUID.toLong())
-                            } catch (e: ProxyStoppedException) {
-                                e.printStackTrace()
+        val hasTorSupport = viewModel.hasTorSupport.value ?: false
+        if (!hasTorSupport) {
+            binding.toolbar.inflateMenu(R.menu.app_detail_menu)
+            binding.toolbar.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.refresh_circuits -> {
+                        viewModel.appUID.value?.let { appUID ->
+                            if (preferenceHelper.warningsEnabled) {
+                                val dialog = BaseDialogFragment.createRefreshCircuitsForAppDialog(appUID)
+                                dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
+                            } else {
+                                try {
+                                    OnionMasq.refreshCircuitsForApp(appUID.toLong())
+                                } catch (e: ProxyStoppedException) {
+                                    e.printStackTrace()
+                                }
                             }
-                        }
 
-                        return@setOnMenuItemClickListener true
+                            return@setOnMenuItemClickListener true
+                        }
+                        return@setOnMenuItemClickListener false
                     }
-                    return@setOnMenuItemClickListener false
+                    else -> return@setOnMenuItemClickListener false
                 }
-                else -> return@setOnMenuItemClickListener false
             }
         }
     }
