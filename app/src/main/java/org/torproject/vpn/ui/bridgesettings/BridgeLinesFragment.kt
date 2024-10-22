@@ -45,6 +45,7 @@ class BridgeLinesFragment: Fragment(R.layout.fragment_bridgelines), OnSharedPref
         binding.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.save -> {
+                    handleUnsavedBridges()
                     viewModel.save()
                     findNavController().popBackStack()
                     return@setOnMenuItemClickListener true
@@ -53,15 +54,15 @@ class BridgeLinesFragment: Fragment(R.layout.fragment_bridgelines), OnSharedPref
             }
         }
         binding.textinputBridges.doAfterTextChanged { text ->
-            if (text == null || text.isBlank() || !text.contains("\n")) {
+            if (text.isNullOrBlank() || !text.contains("\n")) {
                 return@doAfterTextChanged
             }
             val trimmed = removeEmptyLines(text)
             val lastLineEndsWithNewLine = text.endsWith("\n")
             val bridgeEntries = trimmed.split("\n")
 
-            for (i in 0 until bridgeEntries.size - 1) {
-                handleBridgeLine(binding, bridgeEntries[i])
+            for (element in bridgeEntries) {
+                handleBridgeLine(binding, element)
             }
 
             if (lastLineEndsWithNewLine) {
@@ -115,6 +116,16 @@ class BridgeLinesFragment: Fragment(R.layout.fragment_bridgelines), OnSharedPref
         }
     }
 
+
+    private fun handleUnsavedBridges() {
+        _binding?.textinputBridges?.text?.let { unSavedBridges ->
+            val bridgeEntries = unSavedBridges.split("\n")
+
+            for (element in bridgeEntries) {
+                handleBridgeLine(binding, element)
+            }
+        }
+    }
     private fun isValidBridgeLine(value: String): Boolean {
         // TODO: evaluate input
         return value.isNotBlank()
