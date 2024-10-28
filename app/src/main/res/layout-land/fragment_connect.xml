@@ -54,7 +54,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="?attr/actionBarSize"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:paddingStart="8dp"
@@ -62,6 +62,7 @@
             android:background="@color/surface"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
+            android:contentDescription="@{viewModel.toolBarTitle}"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -131,6 +132,7 @@
                 android:gravity="center"
                 android:onClick="@{()->viewModel.connectStateButtonClicked()}"
                 android:text="@{viewModel.connectButtonText}"
+                android:contentDescription="@{viewModel.connectButtonText}"
                 android:textAppearance="@style/button_text_connect"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

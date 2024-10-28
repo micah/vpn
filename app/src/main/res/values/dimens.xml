@@ -30,6 +30,7 @@
     <dimen name="stat_top_margin">0dp</dimen>
     <dimen name="stat_cards_padding">16dp</dimen>
     <dimen name="stat_card_height">70dp</dimen>
+    <dimen name="stat_card_padding_vertical">20dp</dimen>
     <dimen name="stat_switch_height">78dp</dimen>
 
 </resources>

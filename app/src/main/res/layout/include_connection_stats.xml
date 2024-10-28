@@ -27,10 +27,12 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_up_stat"
             android:layout_width="0dp"
-            android:layout_height="@dimen/stat_card_height"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/stat_card_padding_vertical"
             android:layout_marginTop="@dimen/stat_top_margin"
             android:background="@drawable/round_down_stat_bg"
             android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTED ? View.VISIBLE: View.GONE}"
+            android:contentDescription="@string/up"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +46,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="@{viewModel.dataUsageUpstream}"
+                android:contentDescription="@{viewModel.dataUsageUpstream}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ic_up_traffic"
                 app:layout_constraintTop_toBottomOf="@+id/tv_up_label"
@@ -91,10 +96,12 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_down_stat"
             android:layout_width="0dp"
-            android:layout_height="@dimen/stat_card_height"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/stat_card_padding_vertical"
             android:layout_marginTop="4dp"
             android:background="@drawable/round_up_stat_bg"
             android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTED ? View.VISIBLE: View.GONE}"
+            android:contentDescription="@string/down"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +115,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="@{viewModel.dataUsageDownstream}"
+                android:contentDescription="@{viewModel.dataUsageDownstream}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ic_down_traffic"
                 app:layout_constraintTop_toBottomOf="@+id/tv_down_label"
@@ -155,11 +165,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_apps_card"
             android:layout_width="0dp"
-            android:layout_height="@dimen/stat_switch_height"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/stat_card_padding_vertical"
             android:layout_marginTop="8dp"
             android:background="@drawable/round_dialog_bg"
             android:onClick="@{() -> viewModel.appCardClicked()}"
             android:visibility="@{viewModel.appCardVisibility ? View.VISIBLE: View.GONE}"
+            android:contentDescription="@string/apps"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_down_stat">
@@ -174,8 +186,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_stat_title"
                 app:srcCompat="@drawable/ic_squares_four"
                 app:tint="@color/primary"
-                android:importantForAccessibility="no"
-                />
+                android:importantForAccessibility="no" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/switch_protect_apps"
@@ -187,8 +198,7 @@
                 android:onCheckedChanged="@{viewModel::onProtectAppsChanged}"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_protect_all_apps_label"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_stat_title"
-                />
+                app:layout_constraintTop_toTopOf="@+id/tv_stat_title" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_protect_all_apps_label"
@@ -199,7 +209,7 @@
                 android:layout_marginEnd="8dp"
                 android:text="@{viewModel.appProtectionLabel}"
                 tools:text="a very long string that completely overflows"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:ellipsize="end"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ic_protect_app"
@@ -232,7 +242,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_connection_card"
             android:layout_width="0dp"
-            android:layout_height="@dimen/stat_switch_height"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/stat_card_padding_vertical"
             android:layout_marginTop="8dp"
             android:background="@drawable/round_dialog_bg"
             android:onClick="@{() -> viewModel.connectionCardClicked()}"
@@ -274,7 +285,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="8dp"
                 android:text="@{viewModel.connectionHint}"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:ellipsize="end"
                 tools:text="a very long string that overflows the ui"
                 app:layout_constraintBottom_toBottomOf="parent"
