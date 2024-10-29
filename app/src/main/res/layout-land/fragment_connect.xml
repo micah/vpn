@@ -149,6 +149,7 @@
                 android:background="@drawable/round_exit_bg"
                 android:onClick="@{() -> viewModel.exitNodeSelectionButtonClicked()}"
                 android:padding="29dp"
+                android:contentDescription="@string/exit_location"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_connect_action_btn"
                 app:layout_constraintHorizontal_chainStyle="packed"
