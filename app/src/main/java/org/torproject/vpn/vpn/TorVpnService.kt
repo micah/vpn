@@ -114,7 +114,8 @@ class TorVpnService : VpnService() {
     }
 
     override fun onRevoke() {
-        super.onRevoke()
+        // do not call super here, stop(onError: Boolean) calls stopSelf() which is the default
+        // implementation of super.onRevoke
         Log.d(TAG, "service: onRevoke")
         stop(false)
     }
