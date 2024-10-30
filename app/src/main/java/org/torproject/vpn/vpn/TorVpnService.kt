@@ -25,6 +25,7 @@ import org.torproject.onionmasq.events.FailedConnectionEvent
 import org.torproject.onionmasq.events.NewConnectionEvent
 import org.torproject.onionmasq.events.NewDirectoryEvent
 import org.torproject.onionmasq.events.OnionmasqEvent
+import org.torproject.onionmasq.events.VPNetworkLostEvent
 import org.torproject.onionmasq.logging.LogHelper
 import org.torproject.onionmasq.logging.LogObservable
 import org.torproject.vpn.BuildConfig
@@ -232,6 +233,13 @@ class TorVpnService : VpnService() {
                 is ConnectivityEvent -> {
                     VpnStatusObservable.updateInternetConnectivity(event.hasInternetConnectivity)
                 }
+                is VPNetworkLostEvent -> {
+                    if (OnionMasq.isRunning()) {
+                        // Always-on was turned off, while the VPN was running.
+                        // Try to restart VPN or stop gracefully.
+                        tryToRecoverVPN()
+                    }
+                }
             }
         }
 
@@ -246,6 +254,16 @@ class TorVpnService : VpnService() {
                 VpnStatusObservable.statusLiveData.value!!,
                 dataUsage!!
             )
+        }
+    }
+
+    private fun tryToRecoverVPN() {
+        val intent = VpnServiceCommand.prepareVpn(this)
+        if (intent == null) {
+            establishVpn()
+        } else {
+            // User interaction is required. Stop VPN to return to a consistent state.
+            stop(true)
         }
     }
 
