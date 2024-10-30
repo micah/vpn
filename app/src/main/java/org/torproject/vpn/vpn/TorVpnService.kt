@@ -72,11 +72,13 @@ class TorVpnService : VpnService() {
     }
 
     override fun onBind(intent: Intent?): IBinder? {
+        Log.d(TAG, "service: onBind")
         return binder
     }
 
     override fun onCreate() {
         super.onCreate()
+        Log.d(TAG, "service: onCreate")
         notificationManager = VpnNotificationManager(this)
         logHelper = LogHelper()
         preferenceHelper = PreferenceHelper(this)
