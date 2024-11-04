@@ -14,7 +14,12 @@ import androidx.core.app.ServiceCompat
 import androidx.lifecycle.Observer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.torproject.onionmasq.ConnectivityHandler
 import org.torproject.onionmasq.OnionMasq
@@ -60,10 +65,17 @@ class TorVpnService : VpnService() {
     private val binder: IBinder = TorVpnServiceBinder(WeakReference(this))
 
     private val job = SupervisorJob()
+    private var collectionJob: Job? = null
     private val coroutineScope = CoroutineScope(Dispatchers.IO + job)
     private var observer: Observer<OnionmasqEvent>? = null
-    private var vpnStatusObserver: Observer<ConnectionState>? = null
-    private var vpnDataUsageObserver: Observer<DataUsage>? = null
+    private var vpnStateFlow = combine(VpnStatusObservable.statusLiveData, VpnStatusObservable.dataUsage, VpnStatusObservable.hasInternetConnectivity) {
+            connectionState, dataUsage, hasInternetConnectivity ->
+        return@combine Triple(connectionState, dataUsage, hasInternetConnectivity)
+    }.stateIn(
+        scope = this.coroutineScope,
+        started = SharingStarted.Eagerly,
+        initialValue = Triple(VpnStatusObservable.statusLiveData.value, VpnStatusObservable.dataUsage.value, VpnStatusObservable.hasInternetConnectivity.value)
+    )
     private val mainHandler: Handler by lazy {
         Handler(mainLooper)
     }
@@ -245,19 +257,6 @@ class TorVpnService : VpnService() {
                 }
             }
         }
-
-        vpnStatusObserver = Observer<ConnectionState> { connectionState: ConnectionState? ->
-            notificationManager.updateNotification(
-                connectionState!!,
-                VpnStatusObservable.dataUsage.value!!
-            );
-        }
-        vpnDataUsageObserver = Observer<DataUsage> { dataUsage: DataUsage? ->
-            notificationManager.updateNotification(
-                VpnStatusObservable.statusLiveData.value!!,
-                dataUsage!!
-            )
-        }
     }
 
     private fun tryToRecoverVPN() {
@@ -275,11 +274,10 @@ class TorVpnService : VpnService() {
             mainHandler.post { OnionMasq.getEventObservable().observeForever(it) }
         }
 
-        vpnStatusObserver?.let {
-            mainHandler.post { VpnStatusObservable.statusLiveData.observeForever(it) }
-        }
-        vpnDataUsageObserver?.let {
-            mainHandler.post { VpnStatusObservable.dataUsage.observeForever(it) }
+        collectionJob = this.coroutineScope.launch {
+            vpnStateFlow.collect { triple ->
+                notificationManager.updateNotification(state = triple.first, dataUsage = triple.second, hasConnectivity = triple.third)
+            }
         }
     }
 
@@ -287,12 +285,7 @@ class TorVpnService : VpnService() {
         observer?.let {
             mainHandler.post { OnionMasq.getEventObservable().removeObserver(it) }
         }
-        vpnStatusObserver?.let {
-            mainHandler.post{ VpnStatusObservable.statusLiveData.removeObserver(it) }
-        }
-        vpnDataUsageObserver?.let {
-            mainHandler.post { VpnStatusObservable.dataUsage.removeObserver(it) }
-        }
+        collectionJob?.cancel()
     }
 
     private fun prepareVpnProfile(): Builder {

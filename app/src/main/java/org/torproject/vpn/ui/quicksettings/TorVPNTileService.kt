@@ -7,11 +7,18 @@ import android.content.Intent
 import android.content.Intent.ACTION_MAIN
 import android.graphics.drawable.Icon
 import android.os.Build
-import android.os.Handler
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import android.util.Log
-import androidx.lifecycle.Observer
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import org.torproject.vpn.MainActivity
 import org.torproject.vpn.MainActivity.Companion.ACTION_REQUEST_VPN_PERMISSON
 import org.torproject.vpn.R
@@ -28,10 +35,19 @@ import org.torproject.vpn.vpn.VpnStatusObservable
 
 class TorVPNTileService : TileService() {
 
-    private var vpnStatusObserver: Observer<ConnectionState>? = null
-    private val mainHandler: Handler by lazy {
-        Handler(mainLooper)
-    }
+    private val observerCoroutineScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private var vpnStateFlow: StateFlow<Pair<ConnectionState, Boolean>> = combine(
+        VpnStatusObservable.statusLiveData,
+        VpnStatusObservable.hasInternetConnectivity
+    ) { status, hasInternet ->
+        return@combine Pair(status, hasInternet)
+    }.stateIn(
+        scope = observerCoroutineScope,
+        started = SharingStarted.Eagerly,
+        initialValue = Pair(VpnStatusObservable.statusLiveData.value, VpnStatusObservable.hasInternetConnectivity.value)
+    )
+    private var collectionJob: Job? = null
+
 
     @SuppressLint("Override")
     override fun onClick() {
@@ -82,12 +98,9 @@ class TorVPNTileService : TileService() {
     override fun onCreate() {
         super.onCreate()
         Log.d("TILE_TOR_VPN", "On Create")
-        vpnStatusObserver = Observer { connectionState: ConnectionState? ->
-            onStatusChanged(connectionState)
-        }
     }
 
-    private fun onStatusChanged(connectionState: ConnectionState?) {
+    private fun onStatusChanged(connectionState: ConnectionState, hasInternet: Boolean) {
         val t = qsTile ?: return
         Log.d("TILE_TOR_VPN", "CONNECTION STATE CHANGED: ${connectionState?.name}")
         when (connectionState) {
@@ -103,7 +116,7 @@ class TorVPNTileService : TileService() {
                 t.state =  Tile.STATE_ACTIVE
                 t.label = getString(R.string.app_name)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    t.subtitle = getString(R.string.state_connecting)
+                    t.subtitle = getString(if (hasInternet) R.string.state_connecting else R.string.no_internet)
                 }
             }
             DISCONNECTING,
@@ -111,7 +124,7 @@ class TorVPNTileService : TileService() {
                 t.state = Tile.STATE_ACTIVE
                 t.label = getString(R.string.app_name)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    t.subtitle = getString(R.string.state_connected)
+                    t.subtitle = getString(if (hasInternet) R.string.state_connected else R.string.no_internet)
                 }
             }
             CONNECTION_ERROR -> {
@@ -138,29 +151,21 @@ class TorVPNTileService : TileService() {
     override fun onStartListening() {
         super.onStartListening()
         Log.d("TILE_TOR_VPN", "onStartListening")
-        vpnStatusObserver?.let {
-            mainHandler.post {
-                Log.d("TILE_TOR_VPN", "onStartListening - observe forever")
-                VpnStatusObservable.statusLiveData.observeForever(it)
+        collectionJob = this.observerCoroutineScope.launch {
+            vpnStateFlow.collect {
+                onStatusChanged(it.first, it.second)
             }
         }
-        onStatusChanged(VpnStatusObservable.statusLiveData.value)
+        onStatusChanged(VpnStatusObservable.statusLiveData.value, VpnStatusObservable.hasInternetConnectivity.value)
     }
 
     override fun onStopListening() {
-        vpnStatusObserver?.let {
-            Log.d("TILE_TOR_VPN", "onStopListening")
-            mainHandler.post {
-                Log.d("TILE_TOR_VPN", "onStopListening - remove observer")
-                VpnStatusObservable.statusLiveData.removeObserver(it)
-            }
-        }
+        collectionJob?.cancel()
         super.onStopListening()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         Log.d("TILE_TOR_VPN", "onDestroy")
-        vpnStatusObserver = null
     }
 }

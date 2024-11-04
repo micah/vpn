@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.StateFlow
 import org.torproject.vpn.R
 import org.torproject.vpn.vpn.DataUsage
 import java.io.BufferedReader
@@ -169,8 +170,8 @@ fun getFormattedDate(timestamp: Long, locale: Locale?): String? {
     return sdf.format(timestamp)
 }
 
-fun updateDataUsage(dataUsage: LiveData<DataUsage>, downstream: Long, upstream: Long): DataUsage{
-    val lastDataUsage: DataUsage = dataUsage.value!!
+fun updateDataUsage(dataUsage: StateFlow<DataUsage>, downstream: Long, upstream: Long): DataUsage{
+    val lastDataUsage: DataUsage = dataUsage.value
     val updatedDataUsage = DataUsage()
     updatedDataUsage.downstreamData = downstream
     updatedDataUsage.upstreamData = upstream

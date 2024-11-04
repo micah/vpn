@@ -3,7 +3,6 @@ package org.torproject.vpn.ui.appdetail.model
 import android.app.Application
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.text.format.Formatter
 import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
@@ -12,10 +11,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted.Companion.Eagerly
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.torproject.onionmasq.OnionMasq
 import org.torproject.onionmasq.circuit.CircuitCountryCodes
@@ -47,14 +48,14 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
         return@map application.getString(R.string.description_independent_tor_powered_app, appName)
     }.stateIn(viewModelScope, Eagerly, "")
 
-    private val _dataUsage: MutableLiveData<DataUsage> = MutableLiveData(DataUsage())
-    val dataUsage: LiveData<DataUsage> = _dataUsage
+    private val _dataUsage: MutableStateFlow<DataUsage> = MutableStateFlow(DataUsage())
+    val dataUsage: StateFlow<DataUsage> = _dataUsage
 
-    val dataUsageDownstream: StateFlow<String> = dataUsage.asFlow().map { data ->
+    val dataUsageDownstream: StateFlow<String> = dataUsage.map { data ->
         return@map formatBits(data.downstreamData)
     }.stateIn(viewModelScope, Eagerly, formatBits(0))
 
-    val dataUsageUpstream: StateFlow<String> = dataUsage.asFlow().map { data ->
+    val dataUsageUpstream: StateFlow<String> = dataUsage.map { data ->
         return@map formatBits(data.upstreamData)
     }.stateIn(viewModelScope, Eagerly, formatBits(0))
 
@@ -82,9 +83,9 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
         viewModelScope.launch {
             timer.schedule(object: TimerTask() {
                 override fun run() {
-                    appUID.value?.let {
-                        _dataUsage.postValue(updateDataUsage(dataUsage, OnionMasq.getBytesReceivedForApp(it.toLong()), OnionMasq.getBytesSentForApp(it.toLong())))
-                        _circuitList.postValue(OnionMasq.getCircuitCountryCodesForAppUid(it))
+                    appUID.value?.let { id ->
+                        _dataUsage.update { updateDataUsage(dataUsage, OnionMasq.getBytesReceivedForApp(id.toLong()), OnionMasq.getBytesSentForApp(id.toLong())) }
+                        _circuitList.postValue(OnionMasq.getCircuitCountryCodesForAppUid(id))
                     }
                 }
             }, 0, 1000)

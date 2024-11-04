@@ -7,7 +7,6 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.text.format.Formatter
 import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
@@ -65,7 +64,7 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
 
     val prepareVpn: LiveData<Intent?> = _prepareVpn
 
-    private val dataUsage = VpnStatusObservable.dataUsage.asFlow()
+    private val dataUsage = VpnStatusObservable.dataUsage
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Lazily,
@@ -108,13 +107,13 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
         initialValue = ""
     )
 
-    val connectionState = VpnStatusObservable.statusLiveData.asFlow()
+    val connectionState = VpnStatusObservable.statusLiveData
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Lazily,
             initialValue = VpnStatusObservable.statusLiveData.value ?: INIT
         )
-    val internetConnectivity = VpnStatusObservable.hasInternetConnectivity.asFlow()
+    val internetConnectivity = VpnStatusObservable.hasInternetConnectivity
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Lazily,

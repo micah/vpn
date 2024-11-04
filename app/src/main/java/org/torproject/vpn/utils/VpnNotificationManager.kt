@@ -42,7 +42,7 @@ class VpnNotificationManager(val context: Context) {
         return notificationBuilder.build()
     }
 
-    fun updateNotification(state: ConnectionState, dataUsage: DataUsage) {
+    fun updateNotification(state: ConnectionState, dataUsage: DataUsage, hasConnectivity: Boolean) {
         if (!notificationManager.areNotificationsEnabled()) {
             return
         }
@@ -56,7 +56,7 @@ class VpnNotificationManager(val context: Context) {
                     android.R.drawable.ic_menu_close_clear_cancel,
                     context.getString(R.string.action_cancel), getStopIntent()
                 ).build()
-                stateString = context.getString(R.string.state_connecting)
+                stateString = context.getString(if (hasConnectivity) R.string.state_connecting else R.string.no_internet)
                 startTime = 0
             }
             ConnectionState.CONNECTED -> {
@@ -64,7 +64,7 @@ class VpnNotificationManager(val context: Context) {
                     android.R.drawable.ic_menu_close_clear_cancel,
                     context.getString(R.string.action_disconnect), getStopIntent()
                 ).build()
-                stateString = context.getString(R.string.state_connected)
+                stateString = context.getString(if (hasConnectivity) R.string.state_connected else R.string.no_internet)
                 dataUsageString = getDataUsageText(dataUsage)
                 if (startTime == 0L) {
                     startTime = System.currentTimeMillis()
