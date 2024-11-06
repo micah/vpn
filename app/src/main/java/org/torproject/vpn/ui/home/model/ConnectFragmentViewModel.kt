@@ -7,6 +7,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.view.View
 import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
@@ -205,6 +206,13 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
             false
         )
 
+    val exitNodeSelectionVisibility = connectionState.map { state ->
+        return@map if (state == CONNECTED) View.VISIBLE else View.GONE
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.Lazily,
+        View.GONE
+    )
 
     fun setGuideInvisible() {
         preferenceHelper.shouldShowGuide = false
