@@ -132,7 +132,7 @@
                 android:gravity="center"
                 android:onClick="@{()->viewModel.connectStateButtonClicked()}"
                 android:text="@{viewModel.connectButtonText}"
-                android:contentDescription="@{viewModel.connectButtonText}"
+                android:contentDescription="@{viewModel.connectButtonContentDescription}"
                 android:textAppearance="@style/button_text_connect"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

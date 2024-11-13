@@ -190,7 +190,8 @@
     </plurals>
 
     <!-- Content Description -->
-    <string name="up_content_description">Upload</string>"
-    <string name="down_content_description">Download</string>"
+    <string name="up_content_description">Upload</string>
+    <string name="down_content_description">Download</string>
+    <string name="current_state">Current state: </string>
 
 </resources>

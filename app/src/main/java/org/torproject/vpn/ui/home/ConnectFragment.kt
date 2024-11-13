@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityEvent
 import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -275,6 +276,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
     }
 
     private fun showErrorTransition() {
+        binding.includeError.root.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
         if (currentVpnState == ConnectionState.CONNECTING) {
             binding.clSelectionExitInner.animate().translationX(initStateFabSpacing).setDuration(animationDuration)
                 .setInterpolator(DecelerateInterpolator()).start()
