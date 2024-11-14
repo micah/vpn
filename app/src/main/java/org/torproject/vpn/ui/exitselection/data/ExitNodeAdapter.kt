@@ -1,10 +1,7 @@
 package org.torproject.vpn.ui.exitselection.data
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -66,9 +63,10 @@ class ExitNodeAdapter(liveDataList: LiveData<List<ViewTypeDependentModel>>, view
             binding.tvTitle.text = item.countryName
             binding.ivCountryFlag.setImageDrawable(getFlagByCountryCode(binding.root.context, item.countryCode))
             binding.rbSelected.isChecked = item.selected
-            binding.itemContainer.setOnClickListener(OnClickListener {
+            binding.rbSelected.contentDescription = item.countryName
+            binding.itemContainer.setOnClickListener {
                 onExitNodeSelected?.invoke(pos, item)
-            })
+            }
         }
     }
 
@@ -76,10 +74,10 @@ class ExitNodeAdapter(liveDataList: LiveData<List<ViewTypeDependentModel>>, view
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ExitNodeTableHeaderModel) {
             binding.smProtectAllApps.isChecked = item.selected
-            binding.smProtectAllApps.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            binding.smProtectAllApps.setOnCheckedChangeListener { buttonView, isChecked ->
                 item.selected = isChecked
                 onAutomaticExitNodeChanged?.invoke(item)
-            })
+            }
         }
     }
 }

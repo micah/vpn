@@ -41,6 +41,7 @@
           android:paddingHorizontal="@dimen/compact_padding"
           android:singleLine="true"
           android:ellipsize="end"
+          android:labelFor="@+id/rbSelected"
           tools:text="a long test that should not touch the divider letsee"
           />
 
