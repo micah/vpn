@@ -68,10 +68,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@{viewModel.toolBarTitle}"
+            android:importantForAccessibility="no"
             app:titleCentered="true"
             app:popupTheme="@style/Theme.TorVPN.PopupOverlay"
             app:titleTextAppearance="@style/connection_toolbar_title"
-            app:titleTextColor="@color/on_surface"/>
+            app:titleTextColor="@color/on_surface">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="match_parent"
+                android:text="@{viewModel.toolBarTitle}"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:textAppearance="@style/connection_toolbar_title" />
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <include
             android:id="@+id/include_help"
