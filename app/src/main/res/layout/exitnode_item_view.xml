@@ -45,14 +45,14 @@
           tools:text="a long test that should not touch the divider letsee"
           />
 
-      <androidx.appcompat.widget.AppCompatRadioButton
+      <com.google.android.material.radiobutton.MaterialRadioButton
           android:id="@+id/rbSelected"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintBottom_toBottomOf="parent"
-          android:buttonTint="#FFFFFF"
+          style="@style/radio_button"
           android:clickable="false"
           />
    </androidx.constraintlayout.widget.ConstraintLayout>
