@@ -4,6 +4,7 @@ import android.Manifest.permission.INTERNET
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.content.pm.ResolveInfo
@@ -11,15 +12,15 @@ import android.net.Uri
 import android.os.Build
 import android.text.TextUtils
 import androidx.annotation.WorkerThread
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import org.torproject.vpn.BuildConfig
 import org.torproject.vpn.R
 import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.CELL
 import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.HORIZONTAL_RECYCLER_VIEW
 import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.SECTION_HEADER_VIEW
 import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.utils.PreferenceHelper
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import org.torproject.vpn.BuildConfig
 import java.lang.reflect.Type
 
 
@@ -51,10 +52,20 @@ class AppManager(context: Context) {
         this.pm = context.packageManager
     }
 
+    /**
+     * Checks if the app is system app or not.
+     */
+    private fun isSystemApp(packageInfo: PackageInfo): Boolean {
+        val flags = packageInfo.applicationInfo.flags
+        return (flags and ApplicationInfo.FLAG_SYSTEM) != 0 ||
+                (flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0
+    }
 
     @WorkerThread
     fun queryInstalledApps() : List<AppItemModel> {
-        val installedPackages = pm.getInstalledApplications(PackageManager.GET_META_DATA)
+        val installedPackages = pm.getInstalledPackages(PackageManager.GET_PERMISSIONS).filter {
+            it.requestedPermissions?.contains(INTERNET) == true
+        }.map { it.applicationInfo }
         val installedBrowserPackageNames = getInstalledBrowserPackages()
         val installedBrowsersApps = mutableListOf<AppItemModel>()
         val installedTorApps = mutableListOf<AppItemModel>()
@@ -62,11 +73,12 @@ class AppManager(context: Context) {
         val protectAllApps = preferenceHelper.protectAllApps
         var androidSystemUid = 0
         val installedOtherApps = mutableListOf<AppItemModel>()
+        val systemApps = mutableListOf<AppItemModel>()
         try {
             val system = pm.getApplicationInfo("android", PackageManager.GET_META_DATA)
             androidSystemUid = system.uid
             createAppItemModel(system, protectedApps = protectedApps, protectAllApps = protectAllApps)?.also {
-                installedOtherApps.add(it)
+                systemApps.add(it)
             }
         } catch (e: PackageManager.NameNotFoundException) {
         }
@@ -81,6 +93,8 @@ class AppManager(context: Context) {
                         installedTorApps.add(it)
                     } else if (it.isBrowserApp == true) {
                         installedBrowsersApps.add(it)
+                    } else if(isSystemApp(pm.getPackageInfo(appInfo.packageName, 0))) {
+                        systemApps.add(it)
                     } else {
                         installedOtherApps.add(it)
                     }
@@ -102,6 +116,10 @@ class AppManager(context: Context) {
             resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_other_apps)))
         }
         resultList.addAll(sortedOtherApps)
+
+        resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_system_apps)))
+        resultList.addAll(systemApps.sorted())
+
         preferenceHelper.cachedApps = Gson().toJson(resultList)
         return resultList
     }
@@ -117,6 +135,7 @@ class AppManager(context: Context) {
         if (TextUtils.isEmpty(appName))
             appName = applicationInfo.packageName
 
+        // val category = applicationInfo.category
         appName?.also {
             val appUID = applicationInfo.uid
             val packageName = applicationInfo.packageName

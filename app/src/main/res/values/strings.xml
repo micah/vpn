@@ -29,6 +29,7 @@
     <string name="app_routing_tor_apps">Tor powered apps</string>
     <string name="app_routing_browsers">Browsers</string>
     <string name="app_routing_other_apps">Other apps</string>
+    <string name="app_routing_system_apps">System apps</string>
 
     <string name="notification_channel_description">Shows updates about TorVPN.</string>
     <string name="notification_channel_name">TorVPN notifications</string>
