@@ -155,11 +155,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                                     startNotificationRequestForResult.launch(Manifest.permission.POST_NOTIFICATIONS)
                                 }
                             }
-                            ACTION_EXIT_NODE_SELECTION -> {
-                                if (isAdded) {
-                                    ExitSelectionBottomSheetFragment().show(parentFragmentManager, "exitNodeSelector")
-                                }
-                            }
+                            ACTION_EXIT_NODE_SELECTION -> findNavController().navigateSafe(R.id.action_navigation_appRouting_to_ExitNodeSelection)
                             ACTION_APPS -> findNavController().navigateSafe(R.id.action_navigation_connect_to_appRoutingFragment)
                             ACTION_CONNECTION -> findNavController().navigateSafe(R.id.action_navigation_connect_to_connectionFragment)
                             else -> {

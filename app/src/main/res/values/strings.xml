@@ -74,8 +74,9 @@
     <string name="quickstart">Auto-Connect</string>
     <string name="quickstart_description">Connect to the Tor network automatically when launched</string>
     <string name="exit_location">Exit location</string>
-    <string name="exit_location_description">Automatic mode selects exit relays from anywhere in the network, regardless of location. This helps protect your anonymity by preventing your activities from being linked.</string>
-    <string name="exit_location_automatic">Automatic (safest)</string>
+    <string name="exit_location_description">While using Tor, websites and apps will think you’re connecting from the same country as your exit relay, which is the final hop in each of your Tor circuits.</string>
+    <string name="exit_location_automatic">Random per circuit</string>
+    <string name="exit_location_safest">Safest</string>
     <string name="up">Up</string>
     <string name="down">Down</string>
     <string name="circuit_app_description">Circuit for %1$s</string>

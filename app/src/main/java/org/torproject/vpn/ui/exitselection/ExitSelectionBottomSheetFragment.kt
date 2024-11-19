@@ -1,25 +1,21 @@
 package org.torproject.vpn.ui.exitselection
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.updatePadding
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentExitSelectionBottomSheetBinding
 import org.torproject.vpn.ui.exitselection.data.ExitNodeAdapter
 import org.torproject.vpn.ui.exitselection.model.ExitSelectionBottomSheetViewModel
-import org.torproject.vpn.utils.getDpInPx
 
-class ExitSelectionBottomSheetFragment : BottomSheetDialogFragment() {
+class ExitSelectionBottomSheetFragment : Fragment() {
 
     private lateinit var viewModel: ExitSelectionBottomSheetViewModel
     private lateinit var adapter: ExitNodeAdapter
@@ -39,6 +35,10 @@ class ExitSelectionBottomSheetFragment : BottomSheetDialogFragment() {
         adapter.onExitNodeSelected = viewModel::onExitNodeSelected
         adapter.onAutomaticExitNodeChanged = viewModel::onAutomaticExitNodeChanged
 
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
         val dividerItemDecoration = DividerItemDecoration (
             binding.rvExitNodes.context,
             LinearLayoutManager.VERTICAL
@@ -51,26 +51,6 @@ class ExitSelectionBottomSheetFragment : BottomSheetDialogFragment() {
         binding.rvExitNodes.addItemDecoration(dividerItemDecoration)
         viewModel.requestExitNodes()
         return binding.root
-    }
-
-    override fun getTheme(): Int = R.style.bottom_sheet_dialog
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(requireContext(), theme)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        (dialog as? BottomSheetDialog)?.behavior?.let { behavior ->
-            behavior.skipCollapsed = true
-            behavior.state = STATE_EXPANDED
-        }
-
-        viewModel.fitHalfExpandedContent.observe(viewLifecycleOwner) { fitContent ->
-            (dialog as? BottomSheetDialog)?.behavior?.let { behavior ->
-                behavior.isFitToContents = fitContent
-                behavior.expandedOffset = if (fitContent) 0 else 200
-                binding.rvExitNodes.updatePadding(0, 0, 0, if (fitContent) getDpInPx(view.context, -2.5f) else 200)
-            }
-        }
     }
 
     override fun onDestroyView() {

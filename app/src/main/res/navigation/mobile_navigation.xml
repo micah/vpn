@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_navigation_connect_to_connectionFragment"
             app:destination="@id/connectionFragment" />
+        <action
+            android:id="@+id/action_navigation_appRouting_to_ExitNodeSelection"
+            app:destination="@id/exitNodeFragment" />
     </fragment>
 
     <fragment
@@ -57,6 +60,16 @@
         tools:layout="@layout/fragment_app_routing">
         <action
             android:id="@+id/action_navigation_appRouting_to_appDetailFragment"
+            app:destination="@+id/appDetailFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/exitNodeFragment"
+        android:name="org.torproject.vpn.ui.exitselection.ExitSelectionBottomSheetFragment"
+        android:label="ExitSelectionFragment"
+        tools:layout="@layout/fragment_exit_selection_bottom_sheet">
+        <action
+            android:id="@+id/action_navigation_appRouting_to_ExitNodeSelection"
             app:destination="@+id/appDetailFragment"
             />
     </fragment>

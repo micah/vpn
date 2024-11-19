@@ -16,35 +16,37 @@ class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewM
     private val _list = MutableLiveData<List<ViewTypeDependentModel>>(mutableListOf())
     val list: LiveData<List<ViewTypeDependentModel>> = _list
     private val preferenceHelper = PreferenceHelper(application)
-    private val _fitHalfExpandedContent = MutableLiveData(preferenceHelper.automaticExitNodeSelection)
-    val fitHalfExpandedContent: LiveData<Boolean> = _fitHalfExpandedContent
 
 
     fun requestExitNodes() {
         val automaticExitNodeSelected = preferenceHelper.automaticExitNodeSelection
-        _list.postValue(getExitNodeList(automaticExitNodeSelected))
+        val updatedList = getExitNodeList(automaticExitNodeSelected).map {
+            if (automaticExitNodeSelected && it is ExitNodeCellModel) {
+                it.selected = false
+            }
+            it
+        }
+        _list.postValue(updatedList)
     }
 
     private fun getExitNodeList(automaticNodeSelection: Boolean): List<ViewTypeDependentModel> {
         val modelList = mutableListOf<ViewTypeDependentModel>()
         modelList.add(ExitNodeTableHeaderModel(automaticNodeSelection))
-        if (!automaticNodeSelection) {
-            val exitNodeCountry = preferenceHelper.exitNodeCountry
-            val countryMap = HashMap<String, ExitNodeCellModel>()
-            val exitNodeCountries = preferenceHelper.relayCountries
-            if (exitNodeCountries.isEmpty()) {
-                val locales = Locale.getAvailableLocales()
-                for (locale in locales) {
-                   addExitNodeCountryToMap(countryMap, locale, exitNodeCountry)
-                }
-            } else {
-                for (countryCode in exitNodeCountries) {
-                    val locale = Locale("", countryCode.uppercase())
-                    addExitNodeCountryToMap(countryMap, locale, exitNodeCountry)
-                }
+        val exitNodeCountry = preferenceHelper.exitNodeCountry
+        val countryMap = HashMap<String, ExitNodeCellModel>()
+        val exitNodeCountries = preferenceHelper.relayCountries
+        if (exitNodeCountries.isEmpty()) {
+            val locales = Locale.getAvailableLocales()
+            for (locale in locales) {
+                addExitNodeCountryToMap(countryMap, locale, exitNodeCountry)
             }
-            modelList.addAll(ArrayList(countryMap.values).sorted())
+        } else {
+            for (countryCode in exitNodeCountries) {
+                val locale = Locale("", countryCode.uppercase())
+                addExitNodeCountryToMap(countryMap, locale, exitNodeCountry)
+            }
         }
+        modelList.addAll(ArrayList(countryMap.values).sorted())
         return modelList
     }
 
@@ -65,6 +67,8 @@ class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewM
             mutableList.onEach { model ->
                 if (model.getViewType() == ExitNodeAdapter.CELL) {
                     (model as ExitNodeCellModel).selected = false
+                } else {
+                    (model as ExitNodeTableHeaderModel).selected = false
                 }
             }
             (mutableList[pos] as ExitNodeCellModel).selected = true
@@ -75,8 +79,14 @@ class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewM
     }
 
     fun onAutomaticExitNodeChanged(model: ExitNodeTableHeaderModel) {
-        _list.postValue(getExitNodeList(model.selected))
-        _fitHalfExpandedContent.postValue(model.selected)
+        model.selected = true
+        val updatedList = getExitNodeList(model.selected).map {
+            if (model.selected && it is ExitNodeCellModel) {
+                it.selected = false
+            }
+            it
+        }
+        _list.postValue(updatedList)
         preferenceHelper.automaticExitNodeSelection = model.selected
         if (model.selected) {
             setCountryCode(null)

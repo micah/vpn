@@ -74,8 +74,8 @@ class ExitNodeAdapter(liveDataList: LiveData<List<ViewTypeDependentModel>>, view
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ExitNodeTableHeaderModel) {
             binding.smProtectAllApps.isChecked = item.selected
-            binding.smProtectAllApps.setOnCheckedChangeListener { buttonView, isChecked ->
-                item.selected = isChecked
+            binding.automaticContainer.setOnClickListener {
+                item.selected = item.selected
                 onAutomaticExitNodeChanged?.invoke(item)
             }
         }

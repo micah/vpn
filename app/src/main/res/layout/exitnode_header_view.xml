@@ -6,15 +6,7 @@
         android:layout_height="wrap_content"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/exit_location"
-            android:textAppearance="@style/info_dialog_expanded_title"
-            android:gravity="center_horizontal"
-            tools:textColor="#000000"
-            android:paddingVertical="@dimen/compact_padding"
-            />
+
         <TextView
             android:id="@+id/tv_description"
             android:layout_width="match_parent"
@@ -24,14 +16,69 @@
             android:textAppearance="@style/text_body_small"
             />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/smProtectAllApps"
-            style="@style/super_toggle"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_padding"
-            android:layout_marginBottom="15dp"
-            android:padding="@dimen/switch_padding"
-            android:text="@string/exit_location_automatic" />
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:paddingVertical="@dimen/compact_padding"
+            android:focusable="true"
+            android:clickable="true"
+            android:id="@+id/automatic_container">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivCountryFlag"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_globe_hemisphere_west" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                style="@style/bottom_sheet_list_item_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="start"
+                android:textAlignment="gravity"
+                android:text="@string/exit_location_safest"
+                tools:textColor="#C4C8FF"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/ivCountryFlag"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/smProtectAllApps"
+                android:paddingHorizontal="@dimen/compact_padding"
+                android:singleLine="true"
+                android:ellipsize="end" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSubtitle"
+                style="@style/bottom_sheet_list_item_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="start"
+                android:textAlignment="gravity"
+                android:text="@string/exit_location_automatic"
+                tools:textColor="#000000"
+                app:layout_constraintStart_toEndOf="@id/ivCountryFlag"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/smProtectAllApps"
+                android:paddingHorizontal="@dimen/compact_padding"
+                android:singleLine="true"
+                android:ellipsize="end"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/smProtectAllApps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:buttonTint="#FFFFFF"
+                android:clickable="false" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>
