@@ -4,13 +4,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.torproject.vpn.R
 import org.torproject.vpn.databinding.AppRoutingTableHeaderBinding
+import org.torproject.vpn.databinding.AppShowAppsViewBinding
 import org.torproject.vpn.databinding.AppSwitchItemViewBinding
 import org.torproject.vpn.databinding.AppTitleViewBinding
 import org.torproject.vpn.databinding.HorizontalRecyclerViewItemBinding
@@ -20,6 +23,7 @@ import org.torproject.vpn.ui.glide.ApplicationInfoModel
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.navigateSafe
 import java.lang.reflect.Type
+import kotlin.math.exp
 
 class AppListAdapter(
     list: List<AppItemModel>,
@@ -32,6 +36,7 @@ class AppListAdapter(
         const val CELL = 1
         const val HORIZONTAL_RECYCLER_VIEW = 2
         const val TABLE_HEADER_VIEW = 3
+        const val SHOW_APPS_VIEW = 4
 
         val TAG: String = AppListAdapter::class.java.simpleName
     }
@@ -39,6 +44,7 @@ class AppListAdapter(
     var items: MutableList<AppItemModel> = list.toMutableList()
     var onItemModelChanged: ((pos: Int, item: AppItemModel) -> Unit)? = null
     var onProtectAllAppsChanged: ((isChecked: Boolean) -> Unit)? = null
+    private var isExpanded = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val viewHolder: RecyclerView.ViewHolder = when (viewType) {
@@ -50,7 +56,8 @@ class AppListAdapter(
                 HorizontalRecyclerViewItemViewHolder(binding)
             }
             TABLE_HEADER_VIEW -> TableHeaderViewHolder(AppRoutingTableHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-            else -> AppListTitleViewHolder(AppTitleViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            SHOW_APPS_VIEW -> ShowAppsViewHolder(AppShowAppsViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+           else -> AppListTitleViewHolder(AppTitleViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         }
         return viewHolder
     }
@@ -68,11 +75,12 @@ class AppListAdapter(
             HORIZONTAL_RECYCLER_VIEW -> (holder as HorizontalRecyclerViewItemViewHolder).bind(items[position], torAppsAdapter)
             CELL -> (holder as AppListItemViewHolder).bind(items[position], position)
             TABLE_HEADER_VIEW -> (holder as TableHeaderViewHolder).bind(items[position])
+            SHOW_APPS_VIEW -> (holder as ShowAppsViewHolder).bind(items[position])
         }
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return if (isExpanded) items.size else items.indexOfFirst { it.viewType == SHOW_APPS_VIEW } + 1
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -100,6 +108,27 @@ class AppListAdapter(
             notifyDataSetChanged()
         } else if (protectAllAppsEntryChanged) {
             notifyItemChanged(0)
+        }
+    }
+
+    inner class ShowAppsViewHolder(val binding: AppShowAppsViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(appItem: AppItemModel) {
+            val ctx = binding.root.context
+            if (isExpanded) {
+                binding.tvTitle.text = ctx.getString(R.string.app_routing_hide_apps, appItem.text)
+            } else {
+                binding.tvTitle.text = ctx.getString(R.string.app_routing_show_apps, appItem.text)
+            }
+            binding.root.setOnClickListener {
+                isExpanded = !isExpanded
+                if (isExpanded) {
+                    binding.ivIcon.setImageDrawable(ContextCompat.getDrawable(ctx, R.drawable.carat_up))
+                } else {
+                    binding.ivIcon.setImageDrawable(ContextCompat.getDrawable(ctx, R.drawable.carat_down))
+                }
+                notifyDataSetChanged()
+            }
         }
     }
 

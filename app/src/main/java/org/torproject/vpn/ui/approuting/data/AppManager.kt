@@ -19,6 +19,7 @@ import org.torproject.vpn.R
 import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.CELL
 import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.HORIZONTAL_RECYCLER_VIEW
 import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.SECTION_HEADER_VIEW
+import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.SHOW_APPS_VIEW
 import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.utils.PreferenceHelper
 import java.lang.reflect.Type
@@ -118,6 +119,7 @@ class AppManager(context: Context) {
         resultList.addAll(sortedOtherApps)
 
         resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_system_apps)))
+        resultList.add(AppItemModel(SHOW_APPS_VIEW, systemApps.size.toString()))
         resultList.addAll(systemApps.sorted())
 
         preferenceHelper.cachedApps = Gson().toJson(resultList)
