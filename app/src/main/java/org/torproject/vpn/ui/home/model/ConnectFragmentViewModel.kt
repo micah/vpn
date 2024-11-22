@@ -155,12 +155,12 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
 
     val connectButtonContentDescription: StateFlow<String> = connectionState.map { connectionState ->
         when (connectionState) {
-            INIT -> application.getString(R.string.action_connect) + "." + application.getString(R.string.current_state) + " " + application.getString(R.string.state_disconnected)
-            CONNECTING -> application.getString(R.string.action_cancel) + "." + application.getString(R.string.current_state) + " " + application.getString(R.string.state_connecting)
-            DISCONNECTING -> application.getString(R.string.action_reconnect) + "." + application.getString(R.string.current_state) + " " + application.getString(R.string.state_disconnecting)
-            DISCONNECTED -> application.getString(R.string.action_reconnect) + "." + application.getString(R.string.current_state) + " " + application.getString(R.string.state_disconnected)
-            CONNECTION_ERROR -> application.getString(R.string.action_try_again) + "." + application.getString(R.string.current_state) + " " + application.getString(R.string.state_disconnected)
-            CONNECTED -> application.getString(R.string.action_stop) + "." + application.getString(R.string.current_state) + " " + application.getString(R.string.state_connected)
+            INIT -> application.getString(R.string.action_connect) + ". " + application.getString(R.string.current_state) + " " + application.getString(R.string.state_disconnected)
+            CONNECTING -> application.getString(R.string.action_cancel) + ". " + application.getString(R.string.current_state) + " " + application.getString(R.string.state_connecting)
+            DISCONNECTING -> application.getString(R.string.action_reconnect) + ". " + application.getString(R.string.current_state) + " " + application.getString(R.string.state_disconnecting)
+            DISCONNECTED -> application.getString(R.string.action_reconnect) + ". " + application.getString(R.string.current_state) + " " + application.getString(R.string.state_disconnected)
+            CONNECTION_ERROR -> application.getString(R.string.action_try_again) + ". " + application.getString(R.string.current_state) + " " + application.getString(R.string.state_disconnected)
+            CONNECTED -> application.getString(R.string.action_stop) + ". " + application.getString(R.string.current_state) + " " + application.getString(R.string.state_connected)
         }
     }.stateIn(scope = viewModelScope, SharingStarted.WhileSubscribed(), initialValue = "")
 
