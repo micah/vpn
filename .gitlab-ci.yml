@@ -48,7 +48,7 @@ assembleDebug:
 
 # Publish apk
 publish:
-  image: "containers.torproject.org/tpo/tpa/base-images/debian:bookworm"
+  image: "containers.torproject.org/tpo/applications/vpn:main"
   stage: publish
   # Only run this stage if one of the following rules is true
   rules:
