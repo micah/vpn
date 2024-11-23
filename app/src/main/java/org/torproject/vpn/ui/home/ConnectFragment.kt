@@ -17,6 +17,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -164,6 +165,13 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                         }
                     }
                 }
+            }
+        }
+
+        setFragmentResultListener(ExitSelectionBottomSheetFragment.REQUEST_KEY) { key, bundle ->
+            val preferenceChanged = bundle.getBoolean(ExitSelectionBottomSheetFragment.REQUEST_KEY)
+            if (preferenceChanged) {
+                connectFragmentViewModel.updateExitNodeButton()
             }
         }
 

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,6 +18,9 @@ import org.torproject.vpn.ui.exitselection.data.ExitNodeAdapter
 import org.torproject.vpn.ui.exitselection.model.ExitSelectionBottomSheetViewModel
 
 class ExitSelectionBottomSheetFragment : Fragment() {
+    companion object {
+            val REQUEST_KEY = ExitSelectionBottomSheetFragment::class.java.simpleName
+    }
 
     private lateinit var viewModel: ExitSelectionBottomSheetViewModel
     private lateinit var adapter: ExitNodeAdapter
@@ -33,9 +38,9 @@ class ExitSelectionBottomSheetFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         adapter = ExitNodeAdapter(viewModel.list, viewLifecycleOwner)
         adapter.onExitNodeSelected = viewModel::onExitNodeSelected
-        adapter.onAutomaticExitNodeChanged = viewModel::onAutomaticExitNodeChanged
 
         binding.toolbar.setNavigationOnClickListener {
+            setFragmentResult(REQUEST_KEY, bundleOf(REQUEST_KEY to viewModel.preferenceChanged.value))
             findNavController().popBackStack()
         }
 
@@ -45,6 +50,13 @@ class ExitSelectionBottomSheetFragment : Fragment() {
         )
         ContextCompat.getDrawable(binding.root.context, R.drawable.divider)?.let {
             dividerItemDecoration.setDrawable(it)
+        }
+
+        viewModel.automaticExitNodeSelected.observe(viewLifecycleOwner) {
+            binding.smProtectAllApps.isChecked = it
+        }
+        binding.automaticContainer.setOnClickListener {
+            viewModel.onAutomaticExitNodeChanged(true)
         }
 
         binding.rvExitNodes.adapter = adapter
@@ -57,7 +69,6 @@ class ExitSelectionBottomSheetFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         adapter.onExitNodeSelected = null
-        adapter.onAutomaticExitNodeChanged = null
     }
 
 }

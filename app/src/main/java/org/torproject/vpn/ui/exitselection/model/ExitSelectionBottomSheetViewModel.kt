@@ -13,15 +13,15 @@ import java.util.Locale
 
 class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _list = MutableLiveData<List<ViewTypeDependentModel>>(mutableListOf())
-    val list: LiveData<List<ViewTypeDependentModel>> = _list
+    private val _list = MutableLiveData<List<ExitNodeCellModel>>(mutableListOf())
+    val list: LiveData<List<ExitNodeCellModel>> = _list
     private val preferenceHelper = PreferenceHelper(application)
-
+    val preferenceChanged = MutableLiveData(false)
+    var automaticExitNodeSelected = MutableLiveData(preferenceHelper.automaticExitNodeSelection)
 
     fun requestExitNodes() {
-        val automaticExitNodeSelected = preferenceHelper.automaticExitNodeSelection
-        val updatedList = getExitNodeList(automaticExitNodeSelected).map {
-            if (automaticExitNodeSelected && it is ExitNodeCellModel) {
+        val updatedList = getExitNodeList().map {
+            if (automaticExitNodeSelected.value==true) {
                 it.selected = false
             }
             it
@@ -29,9 +29,8 @@ class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewM
         _list.postValue(updatedList)
     }
 
-    private fun getExitNodeList(automaticNodeSelection: Boolean): List<ViewTypeDependentModel> {
-        val modelList = mutableListOf<ViewTypeDependentModel>()
-        modelList.add(ExitNodeTableHeaderModel(automaticNodeSelection))
+    private fun getExitNodeList(): List<ExitNodeCellModel> {
+        val modelList = mutableListOf<ExitNodeCellModel>()
         val exitNodeCountry = preferenceHelper.exitNodeCountry
         val countryMap = HashMap<String, ExitNodeCellModel>()
         val exitNodeCountries = preferenceHelper.relayCountries
@@ -62,33 +61,33 @@ class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewM
     }
 
     fun onExitNodeSelected(pos: Int, model: ExitNodeCellModel) {
+        if (automaticExitNodeSelected.value == true) {
+            preferenceHelper.automaticExitNodeSelection = false
+            automaticExitNodeSelected.postValue(false)
+        }
         list.value?.let {
             val mutableList = it.toMutableList()
             mutableList.onEach { model ->
-                if (model.getViewType() == ExitNodeAdapter.CELL) {
-                    (model as ExitNodeCellModel).selected = false
-                } else {
-                    (model as ExitNodeTableHeaderModel).selected = false
-                }
+                model.selected = false
             }
-            (mutableList[pos] as ExitNodeCellModel).selected = true
+            mutableList[pos].selected = true
             _list.postValue(mutableList)
             preferenceHelper.exitNodeCountry = model.countryCode
             setCountryCode(model.countryCode)
         }
     }
 
-    fun onAutomaticExitNodeChanged(model: ExitNodeTableHeaderModel) {
-        model.selected = true
-        val updatedList = getExitNodeList(model.selected).map {
-            if (model.selected && it is ExitNodeCellModel) {
+    fun onAutomaticExitNodeChanged(selected: Boolean) {
+        val updatedList = getExitNodeList().map {
+            if (selected) {
                 it.selected = false
             }
             it
         }
         _list.postValue(updatedList)
-        preferenceHelper.automaticExitNodeSelection = model.selected
-        if (model.selected) {
+        preferenceHelper.automaticExitNodeSelection = selected
+        automaticExitNodeSelected.postValue(selected)
+        if (selected) {
             setCountryCode(null)
         } else {
             setCountryCode(preferenceHelper.exitNodeCountry)
@@ -96,6 +95,7 @@ class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewM
     }
 
     private fun setCountryCode(code: String?) {
+        preferenceChanged.postValue(true)
         try {
             OnionMasq.setCountryCode(code)
             OnionMasq.refreshCircuits()
