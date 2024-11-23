@@ -86,8 +86,7 @@ class AppManager(context: Context) {
 
         for (appInfo in installedPackages) {
             // only add apps which are allowed to use internet
-            if (pm.checkPermission(INTERNET, appInfo.packageName) == PERMISSION_GRANTED &&
-                appInfo.uid != androidSystemUid &&
+            if (appInfo.uid != androidSystemUid &&
                 appInfo.packageName != BuildConfig.APPLICATION_ID) {
                 createAppItemModel(appInfo, installedBrowserPackageNames, TOR_POWERED_APP_PACKAGE_NAMES, protectedApps, protectAllApps)?.also {
                     if (it.hasTorSupport == true) {
@@ -137,7 +136,6 @@ class AppManager(context: Context) {
         if (TextUtils.isEmpty(appName))
             appName = applicationInfo.packageName
 
-        // val category = applicationInfo.category
         appName?.also {
             val appUID = applicationInfo.uid
             val packageName = applicationInfo.packageName
