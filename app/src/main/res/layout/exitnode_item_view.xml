@@ -38,7 +38,7 @@
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toStartOf="@+id/rbSelected"
-          android:paddingHorizontal="@dimen/compact_padding"
+          android:paddingHorizontal="@dimen/default_padding"
           android:singleLine="true"
           android:ellipsize="end"
           android:labelFor="@+id/rbSelected"
