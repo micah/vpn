@@ -34,6 +34,7 @@
                 app:title="@string/exit_location"
                 app:navigationIcon="?attr/homeAsUpIndicator"
                 app:popupTheme="@style/Theme.TorVPN.PopupOverlay"
+                app:titleTextAppearance="@style/title_large"
                 style="@style/collapsing_toolbar_style" />
 
         </com.google.android.material.appbar.AppBarLayout>
