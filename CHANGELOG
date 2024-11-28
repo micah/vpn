@@ -1,6 +1,30 @@
 CHANGELOG
 =========
 
+0.8.0 Pre-Alpha
+----------------
+* improved accessibility in various screens
+* improve location selection UX
+* fix network traffic leak on VPN permission revocation
+* fix tor traffic obfuscation
+* fix excluding tor-powered apps such as Tor Browser from being routed via the VPN
+* landscape layout fixes
+* indicate in UI if internet connectivity is missing
+* dependency updates
+* onionmasq: improved bootstrapping state handling
+* onionmasq: fixed file descriptor leaks
+* onionmasq: improved udp packet validation
+* onionmasq: fixed IPv6 DNS handling
+* onionmasq: fixed IPv6 packet handling
+* onionmasq: fixed memory leaks
+
+0.7.0 git tag version
+----------------------------
+* phosphor icon set
+* switch to material3 design
+* updated color scheme
+* fix refresh circuits dialog UI
+
 0.6.2 Pre-Alpha
 ---------------
 * fix various strings used in the application (connections, units used for KB/MB/GB, etc.)
