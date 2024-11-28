@@ -117,7 +117,7 @@ dependencies {
     // if onionmasq was built locally, the lib can be integrated like this
     // implementation fileTree(dir: "libs", include: ["onionmasq-debug.aar"])
     debugImplementation 'org.torproject:onionmasq:main-branch-debug'
-    releaseImplementation 'org.torproject:onionmasq:0.6.2-local-release'
+    releaseImplementation 'org.torproject:onionmasq:0.8.0-local-release'
     //tried this, still not sure we require this so commented for time being.
 /*    implementation("androidx.datastore:datastore-preferences:1.0.0")*/
 
