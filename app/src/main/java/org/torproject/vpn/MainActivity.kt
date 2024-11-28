@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +15,6 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import org.torproject.vpn.databinding.ActivityMainBinding
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
         binding.navView.itemIconTintList = null;
 
         //loop over each menuItem to change it's icons' width and height
-        val menuView = binding.navView.getChildAt(0) as BottomNavigationMenuView
+        val menuView = binding.navView.getChildAt(0) as ViewGroup
         for (i in 0 until menuView.childCount) {
 
             val iconView =
