@@ -78,6 +78,7 @@ class TorVPNTileService : TileService() {
         }
     }
 
+    @SuppressLint("StartActivityAndCollapseDeprecated")
     private fun startMainActivity(action: String) {
         // retry to prepare and start the VPN but with some UI to show possible errors
         val startIntent = Intent(this.applicationContext, MainActivity::class.java)
