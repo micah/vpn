@@ -57,9 +57,10 @@ class AppManager(context: Context) {
      * Checks if the app is system app or not.
      */
     private fun isSystemApp(packageInfo: PackageInfo): Boolean {
-        val flags = packageInfo.applicationInfo.flags
-        return (flags and ApplicationInfo.FLAG_SYSTEM) != 0 ||
-                (flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0
+        val flags = packageInfo.applicationInfo?.flags
+        return flags != null && ((flags and ApplicationInfo.FLAG_SYSTEM) != 0 ||
+                (flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0)
+
     }
 
     @WorkerThread
@@ -86,7 +87,7 @@ class AppManager(context: Context) {
 
         for (appInfo in installedPackages) {
             // only add apps which are allowed to use internet
-            if (appInfo.uid != androidSystemUid &&
+            if (appInfo != null && appInfo.uid != androidSystemUid &&
                 appInfo.packageName != BuildConfig.APPLICATION_ID) {
                 createAppItemModel(appInfo, installedBrowserPackageNames, TOR_POWERED_APP_PACKAGE_NAMES, protectedApps, protectAllApps)?.also {
                     if (it.hasTorSupport == true) {
