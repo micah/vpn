@@ -34,17 +34,25 @@ class AppManager(context: Context) {
     companion object {
         val TAG = AppManager::class.java.simpleName
         val TOR_POWERED_APP_PACKAGE_NAMES: List<String> = listOf(
+            // cwtch
+            "im.cwtch.flwtch",
+            // briar
+            "org.briarproject.briar.android",
+            "org.briarproject.mailbox",
+            // onionshare
+            "org.onionshare.android",
+            "org.onionshare.android.fdroid",
+            "org.onionshare.android.nightly",
             // orbot
             "org.torproject.android",
             "org.torproject.android.nightly",
             // tor-browser
             "org.torproject.torbrowser",
             "org.torproject.torbrowser_alpha",
-            "org.torproject.torbrowser_nightly",
             "org.torproject.torbrowser_debug",
-            //onionshare
-            "org.onionshare.android",
-            "org.onionshare.android.nightly"
+            "org.torproject.torbrowser_nightly",
+            // tor services
+            "org.torproject.torservices"
         )
     }
     init {
