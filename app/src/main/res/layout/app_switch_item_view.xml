@@ -33,6 +33,19 @@
             tools:text="a long test that should not touch the divider letsee"
 
             />
+
+        <ImageView
+            android:id="@+id/ivCircuit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:src="@drawable/circuit"
+            android:paddingHorizontal="@dimen/compact_padding"
+            app:layout_constraintEnd_toStartOf="@id/divider"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone" />
+
         <View
             android:id="@+id/divider"
             android:layout_width="1dp"

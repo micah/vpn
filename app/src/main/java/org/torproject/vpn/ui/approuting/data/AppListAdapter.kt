@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -164,24 +165,29 @@ class AppListAdapter(
                 binding.ivAppImage.setImageDrawable(null)
             }
             binding.tvTitle.text = appItem.text
-            binding.smItemSwitch.isChecked = appItem.isRoutingEnabled == true
-            binding.tvTitle.setOnClickListener(View.OnClickListener {
+            val isRoutingEnabled = appItem.isRoutingEnabled == true
+            binding.ivCircuit.isVisible = isRoutingEnabled
+            binding.smItemSwitch.isChecked = isRoutingEnabled
+            binding.tvTitle.setOnClickListener {
                 if (appItem.appId != null && appItem.uid != null) {
-                    val action = AppRoutingFragmentDirections.actionNavigationAppRoutingToAppDetailFragment(
-                        argAppUID = appItem.uid,
-                        argAppId = appItem.appId,
-                        argAppName = appItem.text,
-                        argIsBrowser = appItem.isBrowserApp ?: false,
-                        argHasTorSupport = appItem.hasTorSupport ?: false)
+                    val action =
+                        AppRoutingFragmentDirections.actionNavigationAppRoutingToAppDetailFragment(
+                            argAppUID = appItem.uid,
+                            argAppId = appItem.appId,
+                            argAppName = appItem.text,
+                            argIsBrowser = appItem.isBrowserApp ?: false,
+                            argHasTorSupport = appItem.hasTorSupport ?: false
+                        )
                     binding.root.findNavController().navigateSafe(action)
                 }
-            })
+            }
             binding.smItemSwitch.setOnCheckedChangeListener { switchBtn, isChecked ->
                 if (switchBtn.isPressed) {
                     val appItemModelListType: Type = object : TypeToken<ArrayList<AppItemModel?>?>() {}.type
                     val allConfigurableApps = (Gson().fromJson<List<AppItemModel>>(preferenceHelper.cachedApps, appItemModelListType) ?: emptyList()).filter { it.viewType == CELL }
                     val itemModel = items[pos]
                     itemModel.isRoutingEnabled = isChecked
+                    binding.ivCircuit.isVisible = isChecked
                     val protectedAppsSize = preferenceHelper.protectedApps?.size
                     if (!isChecked) {
                         itemModel.protectAllApps = false
