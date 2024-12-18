@@ -122,7 +122,7 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
     }
 
     private fun getFormattedEmailBotSubtext(context: Context): SpannableString {
-        val botString = "bridges@torproject";
+        val botString = "bridges@torproject.org";
         val subtitleString = context.getString(R.string.email_bot_subtitle, botString)
         val spannable = SpannableString(subtitleString)
         spannable.setSpan(ForegroundColorSpan(context.getColor(R.color.tertiary)), subtitleString.indexOf(botString), subtitleString.indexOf(botString) + botString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
