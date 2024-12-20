@@ -40,7 +40,7 @@ echo $TEST_APP_URL
 showtitle "Submit Espresso test"
 BUILD_ID=$(curl -s -u "$USER_NAME:$ACCESS_KEY" \
 -X POST "https://api-cloud.browserstack.com/app-automate/espresso/v2/build" \
--d "{\"app\": \"${APP_URL}\", \"testSuite\": \"${TEST_APP_URL}\", \"devices\": [\"Samsung Galaxy S9-8.0\"]}" \
+-d "{\"project\" : \"TorVPN\", \"app\": \"${APP_URL}\", \"testSuite\": \"${TEST_APP_URL}\", \"deviceLogs\" : true, \"networkLogs\" : true, \"devices\": [\"Samsung Galaxy S9-8.0\", \"Samsung Galaxy Note 20-10.0\", \"Xiaomi Redmi Note 11-11.0\", \"Google Pixel 9 Pro XL-15.0\"]}" \
 -H "Content-Type: application/json" | jq -r .build_id)
 echo "BUILD_ID: $BUILD_ID"
 
