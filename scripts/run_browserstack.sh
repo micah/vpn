@@ -4,7 +4,7 @@ source secrets.properties
 
 RED='\033[0;31m'
 NC='\033[0m'
-BOLD='\033[1m';
+BOLD='\033[1m'
 
 function quit {
     echo -e "${RED}Task failed. $1 ${NC}"
@@ -16,7 +16,7 @@ function showtitle {
 }
 
 
-mkdir "reports" && echo "create reports directory" || echo "reports directory exists"
+mkdir -p "reports"
 
 if [[ -z $USER_NAME || -z $ACCESS_KEY ]]; then
   quit "Missing secrets.properties or missing environment variables USER_NAME and ACCESS_KEY"
@@ -57,12 +57,10 @@ if [[ -z $SESSION_IDS ]]; then
     quit "Failed to fetch session IDs"
 fi
 
-
-
-showtitle "Wait For Espresso test finished"
+showtitle "Wait until Espresso tests finish"
 # Loop through each SESSION_ID
 for SESSION_ID in $SESSION_IDS; do
-    echo "Checking SESSION_ID: $SESSION_ID"
+    echo "Checking status of test with SESSION_ID: $SESSION_ID"
     # Loop for a maximum of 180 attempts / 30 minutes
     for (( attempt=1; attempt<=180; attempt++ )); do
         # Make the curl request and capture the response
@@ -83,17 +81,15 @@ for SESSION_ID in $SESSION_IDS; do
                     sleep 10
                     ;;
                 success)
-                    echo -ne " DONE\n"
-                    echo "Success: $response"
+                    echo "SUCCESS"
                     break
                     ;;
                 failed)
-                    echo -ne " DONE\n"
-                    echo "Failed: $response"
+                    echo "FAILED"
                     break
                     ;;
                 *)
-                    echo -ne " DONE\n"
+                    echo "DONE"
                     echo "Result: $response"
                     break
                    ;;
