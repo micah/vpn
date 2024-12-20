@@ -58,6 +58,7 @@ if [[ -z $SESSION_IDS ]]; then
 fi
 
 showtitle "Wait until Espresso tests finish"
+TEST_FAILED=0
 # Loop through each SESSION_ID
 for SESSION_ID in $SESSION_IDS; do
     echo "Checking status of test with SESSION_ID: $SESSION_ID"
@@ -86,6 +87,7 @@ for SESSION_ID in $SESSION_IDS; do
                     ;;
                 failed)
                     echo "FAILED"
+                    ((TEST_FAILED++))
                     break
                     ;;
                 *)
@@ -105,4 +107,6 @@ for SESSION_ID in $SESSION_IDS; do
 done
 
 
-
+if [[ $TEST_FAILED > 0 ]]; then
+    quit "At least one test on $TEST_FAILED device(s) failed."
+fi
