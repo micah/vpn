@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-source secrets.properties
 
 RED='\033[0;31m'
 NC='\033[0m'
@@ -18,8 +17,14 @@ function showtitle {
 
 mkdir -p "reports"
 
+if [[ -e secrets.properties ]]; then
+  source secrets.properties
+else
+  echo "Missing secrets.properties file. Make sure you provide \$USER_NAME and \$ACCESS_KEY by other means."
+fi
+
 if [[ -z $USER_NAME || -z $ACCESS_KEY ]]; then
-  quit "Missing secrets.properties or missing environment variables USER_NAME and ACCESS_KEY"
+  quit "Missing environment variables USER_NAME and ACCESS_KEY."
 fi
 
 showtitle "Building APKs"
