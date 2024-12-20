@@ -68,9 +68,20 @@ publish:
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)
 debugTests:
-  image : "containers.torproject.org/tpo/applications/vpn:main"
+  image: "containers.torproject.org/tpo/applications/vpn:main"
   interruptible: true
   stage: test
   when: always
   script:
     - ./gradlew -Pci --console=plain :app:testDebug
+
+debugIntegrationTests:
+  image: "containers.torproject.org/tpo/applications/vpn:main"
+  interruptible: true
+  stage: test
+  when: manual
+  script:
+    - ./scripts/run_browserstack.sh
+  artifacts:
+    paths:
+      - reports/
