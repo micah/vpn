@@ -14,9 +14,6 @@
             android:id="@+id/action_configureFragment_to_appRoutingFragment"
             app:destination="@id/appRoutingFragment" />
         <action
-            android:id="@+id/action_configureFragment_to_connectionFragment"
-            app:destination="@id/connectionFragment" />
-        <action
             android:id="@+id/action_configureFragment_to_appearanceFragment"
             app:destination="@id/generalFragment" />
         <action
@@ -25,6 +22,15 @@
         <action
             android:id="@+id/action_configureFragment_to_aboutFragment"
             app:destination="@+id/aboutFragment" />
+        <action
+            android:id="@+id/action_configureFragment_to_LoggingFragment"
+            app:destination="@id/loggingFragment" />
+        <action
+            android:id="@+id/action_configureFragment_to_bridgeSettingsFragment"
+            app:destination="@id/bridgeSettingsFragment" />
+        <action
+            android:id="@+id/action_configureFragment_to_ExitNodeSelection"
+            app:destination="@id/exitNodeFragment" />
     </fragment>
 
     <fragment
@@ -79,6 +85,7 @@
         android:label="AboutFragment"
         tools:layout="@layout/fragment_about">
     </fragment>
+    <!--TODO: Remove and clean resources-->
     <fragment
         android:id="@+id/connectionFragment"
         android:label="ConnectionFragment"

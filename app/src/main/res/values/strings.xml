@@ -48,6 +48,16 @@
     <string name="general">General</string>
     <string name="general_description">Configure general settings</string>
 
+
+    <string name="about_tor_vpn">About Tor VPN</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="open_source_licenses">Open source licenses</string>
+    <string name="app_icon">App icon</string>
+    <string name="default_icon_and_name">Default icon and name</string>
+    <string name="no_bridge">Not using bridges</string>
+    <string name="connect_automatically">Connect automatically</string>
+    <string name="connect_automatically_description">Connect to the Tor network automatically when launched</string>
+
     <string name="title_guide">This app is highly\nexperimental</string>
     <string name="guide_version_number" translatable="false">%1$s</string>
     <string name="guide_bullet_head_1">Report Bugs</string>
@@ -197,5 +207,6 @@
     <string name="up_content_description">Upload</string>
     <string name="down_content_description">Download</string>
     <string name="current_state">Current state: </string>
+    <string name="advanced">Advanced</string>
 
 </resources>

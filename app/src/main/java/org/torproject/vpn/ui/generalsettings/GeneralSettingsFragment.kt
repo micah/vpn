@@ -11,6 +11,7 @@ import org.torproject.vpn.databinding.FragmentGeneralsettingsBinding
 import org.torproject.vpn.ui.generalsettings.data.LauncherAdapter
 import org.torproject.vpn.ui.generalsettings.model.GeneralSettingsFragmentViewModel
 
+// TODO: Rename to `IconSettingFragment` and remove warning section
 class GeneralSettingsFragment: Fragment(R.layout.fragment_generalsettings),
     SharedPreferences.OnSharedPreferenceChangeListener, ClickHandler {
     private lateinit var viewModel: GeneralSettingsFragmentViewModel

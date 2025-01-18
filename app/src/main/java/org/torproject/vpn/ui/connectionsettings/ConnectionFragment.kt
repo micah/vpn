@@ -11,6 +11,8 @@ import org.torproject.vpn.databinding.FragmentConnectionsettingsBinding
 import org.torproject.vpn.ui.connectionsettings.model.ConnectionFragmentViewModel
 import org.torproject.vpn.utils.navigateSafe
 
+// TODO: Restructure class. Still required to disable bridges.
+//  Moving mode bridge to BridgesFragment will do the trick.
 class ConnectionFragment: Fragment(R.layout.fragment_connectionsettings), ClickHandler {
 
     private lateinit var configureFragmentViewModel: ConnectionFragmentViewModel
