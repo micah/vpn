@@ -77,6 +77,6 @@ class AppRoutingFragmentTest {
             )
         ).perform(click())
 
-        onView(withId(R.id.ite_apps)).perform(click())
+        onView(withId(R.id.apps)).perform(click())
     }
 }
