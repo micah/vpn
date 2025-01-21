@@ -30,24 +30,14 @@
             app:liftOnScroll="false"
             app:elevation="0dp"
             android:theme="@style/Theme.TorVPN.AppBarOverlay">
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/toolbar_layout"
-                style="@style/collapsing_toolbar_style"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                app:navigationIcon="?attr/homeAsUpIndicator"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
+                android:layout_height="?attr/actionBarSize"
                 app:title="@string/connection"
-                app:toolbarId="@+id/toolbar">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolbar"
-                    app:navigationIcon="?attr/homeAsUpIndicator"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
+                android:background="@color/surface"
+                app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView

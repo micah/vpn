@@ -17,9 +17,6 @@ class HelpFragment : Fragment(R.layout.fragment_help), ClickHandler {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHelpBinding.bind(view)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
 
         binding.handler = this
     }

@@ -26,10 +26,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
-            android:theme="@style/Theme.TorVPN.AppBarOverlay"
             app:liftOnScroll="false"
             app:elevation="0dp"
-            >
+            android:theme="@style/Theme.TorVPN.AppBarOverlay">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
@@ -45,6 +44,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
+                    app:title="@string/connection"
+                    android:background="@color/surface"
                     app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>

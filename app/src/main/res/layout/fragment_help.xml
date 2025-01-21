@@ -27,13 +27,12 @@
                 android:id="@+id/toolbar_layout"
                 style="@style/collapsing_toolbar_style"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
+                android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
                 app:title="@string/help"
                 app:toolbarId="@+id/toolbar">
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
-                    app:navigationIcon="?attr/homeAsUpIndicator"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
