@@ -79,9 +79,11 @@ debugIntegrationTests:
   image: "containers.torproject.org/tpo/applications/vpn:main"
   interruptible: true
   stage: test
-  when: manual
   script:
     - ./scripts/run_browserstack.sh
   artifacts:
     paths:
       - reports/
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web"  # This checks if the job is manually triggered
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH   # This checks if the current branch is the main branch
