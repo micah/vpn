@@ -173,12 +173,7 @@ class ConnectFragmentTest {
         val preferenceHelper = PreferenceHelper(ApplicationProvider.getApplicationContext())
         preferenceHelper.shouldShowGuide = false
         if (!VpnStatusObservable.isVPNActive()) {
-            onView(withId(R.id.tv_connect_action_btn)).perform(click())
-            tryResolve(
-                onView(withId(R.id.toolbar)),
-                matches(hasDescendant(withText(R.string.state_connected))),
-                120
-            )
+            ConnectHelper.connect(device, false)
         }
         onView(withId(R.id.tv_connect_action_btn)).perform(click())
         tryResolve(
@@ -196,6 +191,10 @@ class ConnectFragmentTest {
     fun test08ReinitializeDisconnectedState() {
         val preferenceHelper = PreferenceHelper(ApplicationProvider.getApplicationContext())
         preferenceHelper.shouldShowGuide = false
+        // initialize disconnected state by first connecting, then disconnecting (in contrast to initial state)
+        if (!VpnStatusObservable.isVPNActive()) {
+            ConnectHelper.connect(device, false)
+        }
         if (VpnStatusObservable.isVPNActive()) {
             onView(withId(R.id.tv_connect_action_btn)).perform(click())
             tryResolve(
