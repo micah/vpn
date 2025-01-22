@@ -131,7 +131,6 @@
     <string name="view_faq">Skoðaðu algengar spurningar</string>
     <string name="bug_tor_forum">Á umræðusvæði Tor</string>
     <string name="bug_gitlab">Á GitLab</string>
-    <string name="this_device">Þetta tæki</string>
     <string name="obfs4_bridge">obfs4-brú</string>
     <string name="help_description_bug_report">Ef þú rekst á vandamál sem ekki hefur verið fjallað um í algengu spurningunum okkar, ættirðu að opna villutilkynningu eða hafa samband við aðstoðarteymið.</string>
     <string name="remove_bridge">Fjarlægja vistfang brúar</string>

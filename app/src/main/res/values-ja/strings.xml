@@ -145,6 +145,5 @@
     <string name="action_refresh">更新</string>
     <string name="refresh_all_circuits">全ての回路を更新しますか？</string>
     <string name="change">変更</string>
-    <string name="this_device">このデバイス</string>
     <string name="obfs4_bridge">obfs4 ブリッジ</string>
 </resources>

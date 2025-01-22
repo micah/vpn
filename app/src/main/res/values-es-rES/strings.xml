@@ -148,7 +148,6 @@
     <string name="help_description_bug_report">Si te encuentras con un problema que no ha sido respondido en nuestras preguntas frecuentes, por favor abre un informe de error o contacta con el soporte técnico.</string>
     <string name="action_refresh">Refrescar</string>
     <string name="refresh_all_circuits">¿Refrescar todos los circuitos?</string>
-    <string name="this_device">Este dispositivo</string>
     <string name="obfs4_bridge">puente obfs4</string>
     <string name="change">Cambiar</string>
 </resources>

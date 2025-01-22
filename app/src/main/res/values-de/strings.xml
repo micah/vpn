@@ -145,7 +145,6 @@
     <string name="use_bridges">Brücken benutzen</string>
     <string name="action_refresh">Auffrischen</string>
     <string name="change">Ändern</string>
-    <string name="this_device">Dieses Gerät</string>
     <string name="refresh_all_circuits">Alle Kanäle aktualisieren?</string>
     <string name="obfs4_bridge">obfs4 Brücke</string>
 </resources>

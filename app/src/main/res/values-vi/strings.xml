@@ -145,6 +145,5 @@
     <string name="help_description_bug_report">Nếu như bạn gặp phải bất kỳ vấn đề nào chưa thể được giải đáp trong mục Các câu hỏi thường gặp của chúng tôi, xin vui lòng mở một báo cáo lỗi bug hoặc liên hệ đội ngũ hỗ trợ.</string>
     <string name="bug_tor_forum">Trên diễn đàn Tor</string>
     <string name="use_bridges">Sử dụng cầu Bridge</string>
-    <string name="this_device">Thiết bị này</string>
     <string name="change">Thay đổi</string>
 </resources>

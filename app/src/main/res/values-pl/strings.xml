@@ -150,6 +150,5 @@
     <string name="action_refresh">Odśwież</string>
     <string name="refresh_all_circuits">Odświeżyć wszystkie obwody?</string>
     <string name="change">Zmień</string>
-    <string name="this_device">To urządzenie</string>
     <string name="obfs4_bridge">mostek obfs4</string>
 </resources>

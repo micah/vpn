@@ -148,5 +148,4 @@
     <string name="obfs4_bridge">ponte obfs4</string>
     <string name="refresh_all_circuits">Atualizar todos os circuitos?</string>
     <string name="change">Alterar</string>
-    <string name="this_device">Este dispositivo</string>
 </resources>

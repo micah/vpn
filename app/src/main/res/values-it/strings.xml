@@ -147,6 +147,5 @@
     <string name="action_refresh">Aggiorna</string>
     <string name="refresh_all_circuits">Aggiornare tutti i circuiti?</string>
     <string name="change">Cambia</string>
-    <string name="this_device">Questo dispositivo</string>
     <string name="obfs4_bridge">bridge obfs4</string>
 </resources>

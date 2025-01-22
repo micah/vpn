@@ -188,7 +188,7 @@
     <string name="start_again">Start again</string>
     <string name="use_bridges">Use bridges</string>
     <string name="change">Change</string>
-    <string name="this_device">This device</string>
+    <string name="the_internet">The internet</string>
     <string name="obfs4_bridge">obfs4 bridge</string>
     <string name="about">About</string>
     <string name="about_description">Find out more about Tor VPN</string>

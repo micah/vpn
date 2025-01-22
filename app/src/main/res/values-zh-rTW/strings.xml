@@ -144,7 +144,6 @@
     <string name="bot_msg_results">這是你的橋接器：</string>
     <string name="refresh_all_circuits">重新整理所有迴路？</string>
     <string name="change">變更</string>
-    <string name="this_device">此裝置</string>
     <string name="obfs4_bridge">obfs4 橋接器</string>
     <string name="action_refresh">重新整理</string>
 </resources>

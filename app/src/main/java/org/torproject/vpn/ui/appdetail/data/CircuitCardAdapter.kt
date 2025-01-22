@@ -44,7 +44,7 @@ class CircuitCardAdapter(val appName: String, val preferenceHelper: PreferenceHe
 
         fun bind(item: CircuitCountryCodes) {
             val context = binding.root.context
-            binding.expandedContainer.tvAppExit.text = appName
+            binding.expandedContainer.tvApp.text = appName
             if (preferenceHelper.useBridge) {
                 val guardNodeText = when (preferenceHelper.bridgeType) {
                     BridgeType.Obfs4,
