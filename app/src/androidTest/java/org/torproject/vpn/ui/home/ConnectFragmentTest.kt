@@ -157,12 +157,7 @@ class ConnectFragmentTest {
         val preferenceHelper = PreferenceHelper(ApplicationProvider.getApplicationContext())
         preferenceHelper.shouldShowGuide = false
         if (!VpnStatusObservable.isVPNActive()) {
-            onView(withId(R.id.tv_connect_action_btn)).perform(click())
-            tryResolve(
-                onView(withId(R.id.toolbar)),
-                matches(hasDescendant(withText(R.string.state_connected))),
-                120
-            )
+            ConnectHelper.connect(device, false)
         }
         onView(allOf(withText(R.string.action_configure), withResourceName("navigation_bar_item_small_label_view"))).perform(click())
         onView(allOf(withText(R.string.action_connect), withResourceName("navigation_bar_item_small_label_view"))).perform(click())
