@@ -83,20 +83,6 @@
             android:textAppearance="@style/connection_toolbar_title" />
     </com.google.android.material.appbar.MaterialToolbar>
 
-
-        <include
-            android:id="@+id/include_help"
-            layout="@layout/include_guide_frame"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="@{viewModel.guideScreenVisibility ? View.VISIBLE: View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:viewModel="@{viewModel}"
-            tools:visibility="gone" />
-
         <org.torproject.vpn.utils.GradientGlowView
             android:id="@+id/gradient_view"
             android:layout_width="0dp"
@@ -105,19 +91,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            tools:visibility="gone" />
-
-        <include
-            android:id="@+id/include_error"
-            layout="@layout/include_error_frame"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTION_ERROR ? View.VISIBLE: View.GONE}"
-            app:layout_constraintBottom_toTopOf="@+id/upper_guideline_action_btns"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:viewModel="@{viewModel}"
             tools:visibility="gone" />
 
         <ScrollView
@@ -218,6 +191,32 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <include
+            android:id="@+id/include_error"
+            layout="@layout/include_error_frame"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTION_ERROR ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/upper_guideline_action_btns"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:viewModel="@{viewModel}"
+            tools:visibility="gone" />
+
+
+        <include
+            android:id="@+id/include_help"
+            layout="@layout/include_guide_frame"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="@{viewModel.guideScreenVisibility ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:viewModel="@{viewModel}"
+            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

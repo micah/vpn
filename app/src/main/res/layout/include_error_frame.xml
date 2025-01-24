@@ -37,7 +37,7 @@
                 app:srcCompat="@drawable/ic_connect_broken" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_error_title"
                 style="@style/error_title_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_error_description"
                 style="@style/error_content_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -58,22 +58,23 @@
                 android:text="@string/error_detail_message"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_error_title" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tv_btn_action"
                 style="@style/error_action_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="64dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="0dp"
                 android:text="@string/error_view_logs"
                 android:onClick="@{()-> viewModel.viewLogsClicked()}"
+                android:padding="16dp"
                 android:textFontWeight="600"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_error_description" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </layout>
