@@ -124,6 +124,7 @@
                             android:paddingBottom="@dimen/default_padding"
                             android:textColor="@color/on_surface"
                             android:textCursorDrawable="@drawable/edittext_cursor"
+                            android:minLines="10"
                             tools:text="obfs4blub" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.core.widget.NestedScrollView>
