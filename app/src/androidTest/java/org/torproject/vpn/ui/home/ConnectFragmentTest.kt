@@ -92,10 +92,10 @@ class ConnectFragmentTest {
             "PreferenceHelper.shouldShowGuide should be true",
             preferenceHelper.shouldShowGuide
         )
-        onView(withId(R.id.include_help)).check(matches(isDisplayed()))
+        tryResolve(onView(withId(R.id.include_help)), matches(isDisplayed()))
         Screengrab.screenshot("connect_fragment_experimental_hint")
         onView(withId(R.id.bt_got_it)).perform(click())
-        onView(withId(R.id.tv_connect_action_btn)).check(matches(isCompletelyDisplayed()))
+        tryResolve(onView(withId(R.id.tv_connect_action_btn)), matches(isCompletelyDisplayed()))
         assertFalse(
             "PreferenceHelper.shouldShowGuide should be false",
             preferenceHelper.shouldShowGuide

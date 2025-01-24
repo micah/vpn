@@ -14,19 +14,35 @@ import javax.net.ssl.TrustManagerFactory
 
 object NetworkUtils {
 
+    /**
+     * Attempts to fetch the client's geo location from a public geoIP service.
+     * Since this is a flaky network operation, we try it 5 times before giving up.
+     */
     fun getGeoIPLocale(): String? {
-        val responseJson = getJsonFromGeoIPService()
-        if (responseJson.has("YourFuckingCountry")) {
-            return  responseJson.getString("YourFuckingCountry") as String
+        var maxTries = 0
+        while (maxTries < 5) {
+            val responseJson = getJsonFromGeoIPService()
+            if (responseJson.has("YourFuckingCountry")) {
+                return  responseJson.getString("YourFuckingCountry") as String
+            }
+            maxTries++
         }
 
         return null
     }
 
+    /**
+     * Attempts to fetch the client's IP address from a public geoIP service.
+     * Since this is a flaky network operation, we try it 5 times before giving up.
+     */
     fun getExitIP(): String? {
-        val responseJson = getJsonFromGeoIPService()
-        if (responseJson.has("YourFuckingIPAddress")) {
-            return responseJson.getString("YourFuckingIPAddress") as String
+        var maxTries = 0
+        while (maxTries < 5) {
+            val responseJson = getJsonFromGeoIPService()
+            if (responseJson.has("YourFuckingIPAddress")) {
+                return responseJson.getString("YourFuckingIPAddress") as String
+            }
+            maxTries++
         }
         return null
     }

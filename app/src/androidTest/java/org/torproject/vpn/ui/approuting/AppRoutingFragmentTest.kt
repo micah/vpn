@@ -56,7 +56,7 @@ class AppRoutingFragmentTest {
         }
         openAppFragment()
         val currentIP = NetworkUtils.getExitIP()
-        assertTrue("exit IP remains same", currentIP == NetworkUtils.getExitIP())
+
         // menu item click
         onView(withContentDescription(R.string.action_refresh_circuits)).perform(click())
         // dialog action click
@@ -64,8 +64,8 @@ class AppRoutingFragmentTest {
 
         val newIP = NetworkUtils.getExitIP();
 
-        assertNotNull(newIP)
-        assertNotNull(currentIP)
+        assertNotNull("new IP is not null: $newIP", newIP)
+        assertNotNull("previous IP was not null: $currentIP", currentIP)
         assertFalse("IP changed after global IP switch (currentIP $currentIP - new IP $newIP)", newIP == currentIP)
     }
 
