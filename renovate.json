@@ -5,11 +5,11 @@
     {
       "matchManagers": ["gradle", "gradle-wrapper"],
       "matchPackagePatterns": [
-        "^androidx\\..*",
-        "^org\\.jetbrains\\.kotlinx",
+        "^androidx\\:",
+        "^org\\.jetbrains\\.kotlinx\\:",
         "^gradle$",
-        "^com\\.android\\..*",
-        "^org\\.jetbrains\\.kotlin\\..*"
+        "^com\\.android\\:",
+        "^org\\.jetbrains\\.kotlin\\:"
       ],
       "enabled": false
     },
