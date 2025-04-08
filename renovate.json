@@ -4,17 +4,13 @@
   "packageRules": [
     {
       "matchManagers": ["gradle", "gradle-wrapper"],
-      "matchPackagePatterns": [
+      "excludePackagePatterns": [
         "^androidx\\:",
         "^org\\.jetbrains\\.kotlinx\\:",
         "^gradle$",
         "^com\\.android\\:",
         "^org\\.jetbrains\\.kotlin\\:"
       ],
-      "enabled": false
-    },
-    {
-      "matchManagers": ["gradle", "gradle-wrapper"],
       "enabled": true,
       "automerge": false
     },
