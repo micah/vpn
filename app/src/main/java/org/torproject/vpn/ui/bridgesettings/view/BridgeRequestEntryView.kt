@@ -6,6 +6,7 @@ import android.text.Spannable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -47,6 +48,7 @@ class BridgeRequestEntryView : ConstraintLayout {
         )
         binding.tvTitle.text = a.getString(R.styleable.BridgeRequestEntryView_text)
         binding.tvSubtitle.text = a.getString(R.styleable.BridgeRequestEntryView_secondaryText)
+        binding.ivArrow.isVisible = a.getBoolean(R.styleable.BridgeRequestEntryView_external, true)
         binding.ivIcon.setImageDrawable(a.getDrawable(R.styleable.BridgeRequestEntryView_drawable))
         a.recycle()
     }

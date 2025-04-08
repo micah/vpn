@@ -3,19 +3,25 @@ package org.torproject.vpn.ui.bridgesettings.model
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.widget.CompoundButton
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -49,6 +55,13 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
         started = SharingStarted.Lazily,
         initialValue = View.VISIBLE
     )
+    fun onUseBridgeChanged(compoundButton: CompoundButton, isChecked: Boolean) {
+        preferenceHelper.useBridge = isChecked
+        _useBridge.postValue(isChecked)
+    }
+
+    private val _useBridge = MutableLiveData(preferenceHelper.useBridge)
+    val useBridge: LiveData<Boolean> = _useBridge
 
     val telegramDrawable = telegramActivityInfo.asFlow().map { info ->
         return@map info?.applicationInfo?.loadIcon(application.packageManager)
@@ -88,7 +101,80 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
     val obfs4AccessibilityDescription: String
         get() = "${getApplication<TorApplication>().getString(R.string.obfs4)}; ${getApplication<TorApplication>().getString(R.string.obfs4_description)}"
 
+    private val bridgeLines = callbackFlow {
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, changedKey ->
+            if (PreferenceHelper.BRIDGE_LINES == changedKey) {
+                trySend(preferenceHelper.bridgeLines.toList())
+            }
+        }
+        preferenceHelper.registerListener(listener)
+        awaitClose { preferenceHelper.unregisterListener(listener) }
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.Lazily,
+        preferenceHelper.bridgeLines.toList()
+    )
 
+    val manualAccessibilityDescription: StateFlow<String> = bridgeLines.map { bridgeLines ->
+        if (bridgeLines.isEmpty()) {
+            return@map application.resources.getString(R.string.action_paste_bridges)
+        }
+        return@map application.resources.getQuantityString(R.plurals.n_bridges, bridgeLines.size, bridgeLines.size)
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Lazily,
+        initialValue = ""
+    )
+
+    val bridgeType = callbackFlow {
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, changedKey ->
+            if (PreferenceHelper.BRIDGE_TYPE == changedKey) {
+                trySend(preferenceHelper.bridgeType)
+            }
+        }
+        preferenceHelper.registerListener(listener)
+        awaitClose { preferenceHelper.unregisterListener(listener) }
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.Lazily,
+        preferenceHelper.bridgeType
+    )
+
+    val bridgeWeightSum = bridgeType.map {
+        return@map if (it == BridgeType.Manual  || bridgeLines.value.isNotEmpty()) {
+            3f
+        } else {
+            2f
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Lazily,
+        initialValue = 2f
+    )
+
+    val manualSelectionVisibility = bridgeType.map {
+        return@map if (it == BridgeType.Manual || bridgeLines.value.isNotEmpty()) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Lazily,
+        initialValue = View.GONE
+    )
+
+    val addManualSelectionVisibility = bridgeType.map {
+        return@map if (it == BridgeType.Manual || bridgeLines.value.isNotEmpty()) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Lazily,
+        initialValue = View.VISIBLE
+    )
 
     fun load() {
         viewModelScope.launch(Dispatchers.Default) {
@@ -101,7 +187,8 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
         return when(preferenceHelper.bridgeType) {
             BridgeType.Obfs4 -> R.id.rb_obfs4
             BridgeType.Snowflake -> R.id.rb_snowflake
-            else -> -1
+            BridgeType.Manual -> R.id.rb_manual
+            else -> R.id.rb_none
         }
     }
 
@@ -114,26 +201,17 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
     }
 
     private fun getFormattedWebBotSubtitle(context: Context): SpannableString {
-        val botString = "bridges.torproject.org";
-        val subtitleString = context.getString(R.string.web_bot_subtitle, botString)
-        val spannable = SpannableString(subtitleString)
-        spannable.setSpan(ForegroundColorSpan(context.getColor(R.color.tertiary)), subtitleString.indexOf(botString), subtitleString.indexOf(botString) + botString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        return spannable
+        return SpannableString("bridges.torproject.org")
     }
 
     private fun getFormattedEmailBotSubtext(context: Context): SpannableString {
-        val botString = "bridges@torproject.org";
-        val subtitleString = context.getString(R.string.email_bot_subtitle, botString)
-        val spannable = SpannableString(subtitleString)
-        spannable.setSpan(ForegroundColorSpan(context.getColor(R.color.tertiary)), subtitleString.indexOf(botString), subtitleString.indexOf(botString) + botString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        return spannable
+        return SpannableString("bridges@torproject.org")
     }
 
     private fun getFormattedTelegramText(context: Context): SpannableString {
-        val botString = "GetBridgesBot";
+        val botString = "@GetBridgesBot";
         val subtitleString = context.getString(R.string.telegram_bot_subtitle, botString)
         val spannable = SpannableString(subtitleString)
-        spannable.setSpan(ForegroundColorSpan(context.getColor(R.color.tertiary)), subtitleString.indexOf(botString), subtitleString.indexOf(botString) + botString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         return spannable
     }
 

@@ -4,6 +4,7 @@
     <attr name="drawable" format="color|reference" />
     <attr name="hideDrawable" format="boolean" />
     <attr name="hideSwitch" format="boolean" />
+    <attr name="external" format="boolean" />
 
     <declare-styleable name="AppItemView">
         <attr name="text"/>
@@ -22,5 +23,6 @@
         <attr name="text"/>
         <attr name="secondaryText"/>
         <attr name="drawable"/>
+        <attr name="external"/>
     </declare-styleable>
 </resources>

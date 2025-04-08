@@ -41,6 +41,10 @@ class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickH
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
+
+        binding.switchUseBridge.setOnCheckedChangeListener { buttonView, isChecked ->
+            viewModel.onUseBridgeChanged(buttonView, isChecked)
+        }
     }
 
     override fun onResume() {

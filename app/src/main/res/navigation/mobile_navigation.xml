@@ -45,8 +45,8 @@
             android:id="@+id/action_navigation_connect_to_appRoutingFragment"
             app:destination="@id/appRoutingFragment" />
         <action
-            android:id="@+id/action_navigation_connect_to_connectionFragment"
-            app:destination="@id/connectionFragment" />
+            android:id="@+id/action_navigation_connect_to_BridgesSettingsFragment"
+            app:destination="@id/bridgeSettingsFragment" />
         <action
             android:id="@+id/action_navigation_appRouting_to_ExitNodeSelection"
             app:destination="@id/exitNodeFragment" />

@@ -158,7 +158,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                             }
                             ACTION_EXIT_NODE_SELECTION -> findNavController().navigateSafe(R.id.action_navigation_appRouting_to_ExitNodeSelection)
                             ACTION_APPS -> findNavController().navigateSafe(R.id.action_navigation_connect_to_appRoutingFragment)
-                            ACTION_CONNECTION -> findNavController().navigateSafe(R.id.action_navigation_connect_to_connectionFragment)
+                            ACTION_CONNECTION -> findNavController().navigateSafe(R.id.action_navigation_connect_to_BridgesSettingsFragment)
                             else -> {
                                 //other cases of navigation.
                             }
