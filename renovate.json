@@ -5,7 +5,7 @@
     {
       "matchManagers": ["gradle", "gradle-wrapper"],
       "excludePackagePatterns": [
-        "^androidx\\:",
+        "^androidx([\\.:])",
         "^org\\.jetbrains\\.kotlinx\\:",
         "^gradle$",
         "^com\\.android\\:",
