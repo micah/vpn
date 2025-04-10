@@ -21,6 +21,6 @@ class TorVpnServiceBinder(private val torVpnServiceReference: WeakReference<TorV
                 return true
             }
         }
-        return super.onTransact(code, data, reply, flags)
+        return false
     }
 }
