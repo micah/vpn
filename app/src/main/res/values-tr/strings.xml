@@ -87,7 +87,6 @@
     <string name="current_bridge">Geçerli köprü</string>
     <string name="snowflake">Snowflake</string>
     <string name="manual_bridge">Elle seçim</string>
-    <string name="bridge_behaviour">Davranış</string>
     <string name="bridge_option_obfs4_built">obfs4 (hazır)</string>
     <string name="snowflake_built_in">Snowflake (hazır)</string>
     <string name="action_paste_bridges">Köprü adreslerinizi buraya yapıştırın</string>

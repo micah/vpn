@@ -103,7 +103,6 @@
     <string name="action_save">Сохранить</string>
     <string name="snowflake_description">Направляет ваше соединение через прокси-серверы Snowflake, чтобы выглядело так, будто вы совершаете видеозвонок</string>
     <string name="manual_bridge">Ручной выбор</string>
-    <string name="bridge_behaviour">Поведение</string>
     <string name="built_in_bridges">Выберите встроенный мост</string>
     <string name="description_independent_tor_powered_app">Это приложение использует собственное подключение к Tor, независимое от Tor VPN. Вместо этого просмотрите и настройте его соединение в %1$s.</string>
     <string name="telegram">Telegram</string>

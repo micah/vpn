@@ -111,7 +111,6 @@
     <string name="current_bridge">目前使用的橋接器</string>
     <string name="snowflake">Snowflake</string>
     <string name="manual_bridge">手動選擇</string>
-    <string name="bridge_behaviour">行為</string>
     <string name="general">一般</string>
     <string name="warnings">警告</string>
     <string name="help">幫助</string>

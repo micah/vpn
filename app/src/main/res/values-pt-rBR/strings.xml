@@ -29,7 +29,6 @@
     <string name="qs_error">Erro de conexão</string>
     <string name="qs_show_error">Mostrar erro</string>
     <string name="remove_bridge">Remover endereço da ponte</string>
-    <string name="bridge_behaviour">Comportamento</string>
     <string name="debugging">Depuração</string>
     <string name="use_a_bridge">Use uma ponte</string>
     <string name="current_bridge">Ponte atual</string>

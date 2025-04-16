@@ -96,7 +96,6 @@
     <string name="new_connection">%1$s-&gt;%2$s: NUOVA connessione a %3$s (app %4$d)</string>
     <string name="bootstrap_at">Bootstrap in: %1$s</string>
     <string name="snowflake_description">Instrada la tua connessione attraverso i proxy Snowflake per far sembrare che si sia in videochiamata</string>
-    <string name="bridge_behaviour">Comportamento</string>
     <string name="action_reload_circuits">Ricarica circuiti</string>
     <string name="web_bot_subtitle">Visita %s</string>
     <string name="action_open_app">Apri %1$s</string>

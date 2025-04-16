@@ -99,7 +99,6 @@
     <string name="action_save">保存</string>
     <string name="snowflake_description">Snowflakeのプロキシを経由して接続をルーティングし、まるでビデオ通話をしているように見せかけます。</string>
     <string name="manual_bridge">手動選択</string>
-    <string name="bridge_behaviour">詳細</string>
     <string name="built_in_bridges">内蔵ブリッジを選択する</string>
     <string name="email_providers">GmailまたはRiseup</string>
     <string name="get_new_bridges_description">ブリッジアドレスは公開されていないので、Tor Projectにリクエストする必要があります。</string>

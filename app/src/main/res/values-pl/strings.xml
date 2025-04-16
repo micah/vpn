@@ -103,7 +103,6 @@
     <string name="action_save">Zapisz</string>
     <string name="snowflake_description">Kieruje połączenie przez serwery proxy Snowflake, aby wyglądało to tak, że użytkownik prowadzi rozmowę wideo</string>
     <string name="manual_bridge">Wybór ręczny</string>
-    <string name="bridge_behaviour">Zachowanie</string>
     <string name="built_in_bridges">Wybierz wbudowany mostek</string>
     <string name="description_independent_tor_powered_app">Ta aplikacja korzysta z własnego połączenia Tor, niezależnego od Tor VPN. Zamiast tego wyświetl i skonfiguruj połączenie w %1$s.</string>
     <string name="email_providers">Gmail lub Riseup</string>

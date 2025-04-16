@@ -70,7 +70,6 @@
     <string name="idle_toolbar_title">Tor VPN</string>
     <string name="debugging">Gỡ lỗi</string>
     <string name="use_a_bridge">Sử dụng cầu Bridge</string>
-    <string name="bridge_behaviour">Hành vi</string>
     <string name="snowflake">Cầu Bridge Snowflake</string>
     <string name="none">Không có</string>
     <string name="telegram">Telegram</string>

@@ -100,7 +100,6 @@
     <string name="action_save">Guardar</string>
     <string name="snowflake_description">Enruta tu conexión a través de proxies de Snowflake para que parezca que estás haciendo una video llamada</string>
     <string name="manual_bridge">Selección manual</string>
-    <string name="bridge_behaviour">Comportamiento</string>
     <string name="built_in_bridges">Elegir un puente integrado</string>
     <string name="bridge_option_obfs4_built">obfs4 (incorporado)</string>
     <string name="description_independent_tor_powered_app">Esta aplicación utiliza su propia conexión Tor, independiente de la VPN Tor. Mira y configura tu conexión en %1$s.</string>

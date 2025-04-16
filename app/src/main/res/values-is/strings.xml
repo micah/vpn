@@ -102,7 +102,6 @@
     <string name="action_save">Vista</string>
     <string name="snowflake_description">Endurbeinir tengingunni þinni í gegnum Snowflake-milliþjóna svo hún líti út eins og þú sért í myndsímtali</string>
     <string name="manual_bridge">Handvirkt val</string>
-    <string name="bridge_behaviour">Hegðun</string>
     <string name="built_in_bridges">Velja innbyggða brú</string>
     <string name="general">Almennt</string>
     <string name="web">Vefur</string>

@@ -85,19 +85,6 @@
         android:label="AboutFragment"
         tools:layout="@layout/fragment_about">
     </fragment>
-    <!--TODO: Remove and clean resources-->
-    <fragment
-        android:id="@+id/connectionFragment"
-        android:label="ConnectionFragment"
-        android:name="org.torproject.vpn.ui.connectionsettings.ConnectionFragment"
-        tools:layout="@layout/fragment_connectionsettings">
-        <action
-            android:id="@+id/action_connectionFragment_to_LoggingFragment"
-            app:destination="@id/loggingFragment" />
-        <action
-            android:id="@+id/action_connectionFragment_to_bridgeSettingsFragment"
-            app:destination="@id/bridgeSettingsFragment" />
-    </fragment>
     <fragment
         android:id="@+id/generalFragment"
         android:label="GeneralFragment"

@@ -92,7 +92,6 @@
     <string name="kill_switch_description">Bllokoju aplikacioneve lidhjen në internet, nëse s’kapet dot rrjeti Tor</string>
     <string name="manual_bridge">Përzgjedhje dorazi</string>
     <string name="guide_bullet_head_1">Jeni gati për t’ia filluar testimit</string>
-    <string name="bridge_behaviour">Sjellje</string>
     <string name="action_reload_circuits">Ringarko qarqet</string>
     <string name="title_guide">Ky aplikacion është
 \ntejet eksperimental</string>

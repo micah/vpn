@@ -52,7 +52,6 @@
     <string name="use_a_bridge_info">پل‌ها کمک می‌کنند تا در جاهایی که تور مسدود است، به صورت امن به شبکه‌اش دسترسی داشته باشید. بسته به این که کجایید، ممکن است پلی بهتر از پل دیگر کار کند.</string>
     <string name="use_a_bridge">استفاده از پل</string>
     <string name="current_bridge">پل کنونی</string>
-    <string name="bridge_behaviour">رفتار</string>
     <string name="email_providers">جی‌میل یا رایزآپ</string>
     <string name="bridge_option_obfs4_built">obfs4 (توکار)</string>
     <string name="snowflake_built_in">دانه برفی (توکار)</string>
