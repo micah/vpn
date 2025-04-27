@@ -3,7 +3,12 @@ package org.torproject.vpn.utils
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.annotation.VisibleForTesting
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.CELL
+import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.ui.generalsettings.model.LauncherDefault
+import java.lang.reflect.Type
 
 private const val TOR_VPN_SP: String = "tor-vpn"
 
@@ -109,3 +114,7 @@ class PreferenceHelper(context: Context) {
 
 }
 
+fun PreferenceHelper.getConfigurableApps(): List<AppItemModel> {
+    val appItemModelListType: Type = object : TypeToken<ArrayList<AppItemModel?>?>() {}.type
+    return (Gson().fromJson<List<AppItemModel>>(cachedApps, appItemModelListType) ?: emptyList()).filter { it.viewType == CELL }
+}

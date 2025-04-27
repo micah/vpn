@@ -1,5 +1,6 @@
 package org.torproject.vpn.ui.appdetail
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
@@ -18,11 +19,13 @@ import org.torproject.vpn.ui.appdetail.model.AppDetailFragmentViewModel
 import org.torproject.vpn.ui.base.view.BaseDialogFragment
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
 
 
-class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
+class AppDetailFragment : Fragment(R.layout.fragment_app_detail) , SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var viewModel: AppDetailFragmentViewModel
+    private lateinit var preferenceHelper: PreferenceHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,7 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        preferenceHelper = PreferenceHelper(requireContext())
         val binding = FragmentAppDetailBinding.bind(view)
         arguments?.let {
             Glide.with(binding.root.context)
@@ -51,6 +55,9 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
         val adapter = CircuitCardAdapter(viewModel.appName.value!!, preferenceHelper)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        preferenceHelper.registerListener(this)
+
         binding.layoutNoTorSupport.rvCircuitCards.adapter = adapter
         binding.layoutNoTorSupport.rvCircuitCards.itemAnimator = CircuitCardItemAnimator()
         viewModel.circuitList.observe(viewLifecycleOwner) { list ->
@@ -88,4 +95,16 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) {
             }
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        preferenceHelper.unregisterListener(this)
+    }
+
+    override fun onSharedPreferenceChanged(prefs: SharedPreferences?, key: String?) {
+        if (key?.equals(PROTECTED_APPS) == true) {
+            viewModel.updateVPNSettings()
+        }
+    }
+
 }
