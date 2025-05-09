@@ -99,7 +99,9 @@ class ConfigureFragmentViewModel(application: Application) : AndroidViewModel(ap
     )
 
     fun onStartOnBootChanged(compoundButton: CompoundButton, isChecked: Boolean) {
-        preferenceHelper.startOnBoot = isChecked
+        if(compoundButton.isPressed) {
+            preferenceHelper.startOnBoot = isChecked
+        }
     }
 
     val appProtectionLabel: StateFlow<String> = allAppsProtected.combine(someAppsProtected) { allApps, someApps ->

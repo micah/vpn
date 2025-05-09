@@ -6,10 +6,12 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.materialswitch.MaterialSwitch
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentConfigureBinding
 import org.torproject.vpn.ui.configure.model.ConfigureFragmentViewModel
@@ -53,6 +55,13 @@ class ConfigureFragment : Fragment(), ClickHandler {
         binding.bridges.apply {
             findViewById<TextView>(R.id.tvSubtitle).text =
                 configureFragmentViewModel.selectedBridgeType
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.quickstart.apply {
+            isChecked = configureFragmentViewModel.startOnBoot
         }
     }
 
