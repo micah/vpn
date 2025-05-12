@@ -81,6 +81,7 @@
                     app:hideDrawable="true"
                     app:hideSwitch="false"
                     app:secondaryText="@string/connect_automatically_description"
+                    app:checked="@{viewModel.startOnBoot}"
                     app:text="@string/connect_automatically" />
 
                 <org.torproject.vpn.ui.base.view.IconTextEntryView

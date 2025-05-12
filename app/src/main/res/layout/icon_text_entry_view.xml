@@ -56,8 +56,6 @@
             tools:text="a long test that should not touch the divider letsee"
             tools:textColor="#000000"
             />
-
-        />
         <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/smItemSwitch"
             style="@style/toggle"

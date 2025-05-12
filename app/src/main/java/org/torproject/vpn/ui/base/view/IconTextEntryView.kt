@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.CompoundButton.OnCheckedChangeListener
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.coroutines.flow.StateFlow
@@ -53,6 +54,7 @@ class IconTextEntryView : ConstraintLayout {
             binding.ivIcon.visibility = View.VISIBLE
         }
         binding.smItemSwitch.visibility = if (a.getBoolean(R.styleable.IconTextEntryView_hideSwitch, true)) View.GONE else View.VISIBLE
+        binding.smItemSwitch.isChecked = a.getBoolean(R.styleable.IconTextEntryView_checked, false)
         a.recycle()
     }
 

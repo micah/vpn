@@ -11,4 +11,10 @@ object ViewBindingUtils {
         view.setStateFlowForSecondaryText(flow)
     }
 
+    @BindingAdapter("checked")
+    @JvmStatic
+    fun setCheckedState(view: IconTextEntryView, flow: StateFlow<Boolean>) {
+        view.isChecked = flow.value
+    }
+
 }

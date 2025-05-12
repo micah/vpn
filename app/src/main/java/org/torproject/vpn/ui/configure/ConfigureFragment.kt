@@ -15,40 +15,31 @@ import org.torproject.vpn.databinding.FragmentConfigureBinding
 import org.torproject.vpn.ui.configure.model.ConfigureFragmentViewModel
 import org.torproject.vpn.utils.navigateSafe
 
-class ConfigureFragment : Fragment(), ClickHandler {
+class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
     companion object {
         val TAG: String = ConfigureFragment::class.java.simpleName
     }
 
-    private lateinit var binding: FragmentConfigureBinding
     private lateinit var configureFragmentViewModel: ConfigureFragmentViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentConfigureBinding.inflate(inflater, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         configureFragmentViewModel =
             ViewModelProvider(this)[ConfigureFragmentViewModel::class.java]
-        binding.viewModel = configureFragmentViewModel
-        binding.handler = this
-        binding.lifecycleOwner = viewLifecycleOwner
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.quickstart.apply {
-            isChecked = configureFragmentViewModel.startOnBoot
-            setOnCheckedChangeListener(configureFragmentViewModel::onStartOnBootChanged)
-        }
+        val binding = FragmentConfigureBinding.bind(view)
+        binding.viewModel = configureFragmentViewModel
+        binding.handler = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.exitLocation.apply {
             findViewById<TextView>(R.id.tvSubtitle).text =
                 configureFragmentViewModel.exitNodeCountry
         }
+        binding.quickstart.isChecked = configureFragmentViewModel.startOnBoot.value
+        binding.quickstart.setOnCheckedChangeListener(configureFragmentViewModel::onStartOnBootChanged)
 
         binding.bridges.apply {
             findViewById<TextView>(R.id.tvSubtitle).text =

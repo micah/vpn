@@ -5,6 +5,7 @@
     <attr name="hideDrawable" format="boolean" />
     <attr name="hideSwitch" format="boolean" />
     <attr name="external" format="boolean" />
+    <attr name="checked" format="boolean" />
 
     <declare-styleable name="AppItemView">
         <attr name="text"/>
@@ -17,6 +18,7 @@
         <attr name="drawable"/>
         <attr name="hideDrawable" />
         <attr name="hideSwitch" />
+        <attr name="checked" />
     </declare-styleable>
 
     <declare-styleable name="BridgeRequestEntryView">

@@ -17,7 +17,6 @@ import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 import org.torproject.vpn.vpn.ConnectionState.CONNECTED
-import org.torproject.vpn.vpn.ConnectionState.INIT
 import org.torproject.vpn.vpn.VpnStatusObservable
 import java.util.Locale
 
@@ -27,7 +26,21 @@ class ConfigureFragmentViewModel(application: Application) : AndroidViewModel(ap
     }
     private val preferenceHelper = PreferenceHelper(application)
 
-    val startOnBoot: Boolean get() = preferenceHelper.startOnBoot
+
+    val startOnBoot: StateFlow<Boolean> = callbackFlow {
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, changedKey ->
+            if (PreferenceHelper.START_ON_BOOT == changedKey) {
+                trySend(preferenceHelper.startOnBoot)
+            }
+        }
+        trySend(preferenceHelper.startOnBoot)
+        preferenceHelper.registerListener(listener)
+        awaitClose { preferenceHelper.unregisterListener(listener) }
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.Lazily,
+        preferenceHelper.startOnBoot
+    )
 
     val exitNodeCountry: String
         get() {
@@ -99,7 +112,9 @@ class ConfigureFragmentViewModel(application: Application) : AndroidViewModel(ap
     )
 
     fun onStartOnBootChanged(compoundButton: CompoundButton, isChecked: Boolean) {
-        preferenceHelper.startOnBoot = isChecked
+        if (compoundButton.isPressed) {
+            preferenceHelper.startOnBoot = isChecked
+        }
     }
 
     val appProtectionLabel: StateFlow<String> = allAppsProtected.combine(someAppsProtected) { allApps, someApps ->
