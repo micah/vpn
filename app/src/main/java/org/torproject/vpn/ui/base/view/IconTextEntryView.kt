@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.CompoundButton
 import android.widget.CompoundButton.OnCheckedChangeListener
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.coroutines.flow.StateFlow
@@ -72,4 +71,11 @@ class IconTextEntryView : ConstraintLayout {
             binding.smItemSwitch.isChecked = value
         }
 
+    var subtitle: CharSequence
+        get() {
+            return binding.tvSubtitle.text
+        }
+        set(value) {
+            binding.tvSubtitle.text = value
+        }
 }

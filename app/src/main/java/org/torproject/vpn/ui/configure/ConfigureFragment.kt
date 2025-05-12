@@ -3,10 +3,8 @@ package org.torproject.vpn.ui.configure
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -34,17 +32,11 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
         binding.handler = this
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.exitLocation.apply {
-            findViewById<TextView>(R.id.tvSubtitle).text =
-                configureFragmentViewModel.exitNodeCountry
-        }
         binding.quickstart.isChecked = configureFragmentViewModel.startOnBoot.value
         binding.quickstart.setOnCheckedChangeListener(configureFragmentViewModel::onStartOnBootChanged)
 
-        binding.bridges.apply {
-            findViewById<TextView>(R.id.tvSubtitle).text =
-                configureFragmentViewModel.selectedBridgeType
-        }
+        binding.exitLocation.subtitle = configureFragmentViewModel.exitNodeCountry
+        binding.bridges.subtitle = configureFragmentViewModel.selectedBridgeType
     }
 
     override fun onHelpClicked(v: View) {
