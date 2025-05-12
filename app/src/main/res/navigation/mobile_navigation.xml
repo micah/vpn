@@ -71,9 +71,9 @@
     </fragment>
     <fragment
         android:id="@+id/exitNodeFragment"
-        android:name="org.torproject.vpn.ui.exitselection.ExitSelectionBottomSheetFragment"
+        android:name="org.torproject.vpn.ui.exitselection.ExitSelectionFragment"
         android:label="ExitSelectionFragment"
-        tools:layout="@layout/fragment_exit_selection_bottom_sheet">
+        tools:layout="@layout/fragment_exit_selection">
         <action
             android:id="@+id/action_navigation_appRouting_to_ExitNodeSelection"
             app:destination="@+id/appDetailFragment"

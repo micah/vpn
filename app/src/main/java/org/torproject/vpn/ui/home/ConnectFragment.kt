@@ -31,7 +31,7 @@ import org.torproject.vpn.MainActivity
 import org.torproject.vpn.MainActivity.Companion.KEY_ACTION
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentConnectBinding
-import org.torproject.vpn.ui.exitselection.ExitSelectionBottomSheetFragment
+import org.torproject.vpn.ui.exitselection.ExitSelectionFragment
 import org.torproject.vpn.ui.home.model.ACTION_APPS
 import org.torproject.vpn.ui.home.model.ACTION_CONNECTION
 import org.torproject.vpn.ui.home.model.ACTION_EXIT_NODE_SELECTION
@@ -168,8 +168,8 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
             }
         }
 
-        setFragmentResultListener(ExitSelectionBottomSheetFragment.REQUEST_KEY) { key, bundle ->
-            val preferenceChanged = bundle.getBoolean(ExitSelectionBottomSheetFragment.REQUEST_KEY)
+        setFragmentResultListener(ExitSelectionFragment.REQUEST_KEY) { key, bundle ->
+            val preferenceChanged = bundle.getBoolean(ExitSelectionFragment.REQUEST_KEY)
             if (preferenceChanged) {
                 connectFragmentViewModel.updateExitNodeButton()
             }

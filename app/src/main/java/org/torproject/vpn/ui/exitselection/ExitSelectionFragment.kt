@@ -13,18 +13,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.torproject.vpn.R
-import org.torproject.vpn.databinding.FragmentExitSelectionBottomSheetBinding
+import org.torproject.vpn.databinding.FragmentExitSelectionBinding
 import org.torproject.vpn.ui.exitselection.data.ExitNodeAdapter
-import org.torproject.vpn.ui.exitselection.model.ExitSelectionBottomSheetViewModel
+import org.torproject.vpn.ui.exitselection.model.ExitSelectionFragmentViewModel
 
-class ExitSelectionBottomSheetFragment : Fragment() {
+class ExitSelectionFragment : Fragment() {
     companion object {
-            val REQUEST_KEY = ExitSelectionBottomSheetFragment::class.java.simpleName
+            val REQUEST_KEY = ExitSelectionFragment::class.java.simpleName
     }
 
-    private lateinit var viewModel: ExitSelectionBottomSheetViewModel
+    private lateinit var viewModel: ExitSelectionFragmentViewModel
     private lateinit var adapter: ExitNodeAdapter
-    private var _binding: FragmentExitSelectionBottomSheetBinding? = null
+    private var _binding: FragmentExitSelectionBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -32,8 +32,8 @@ class ExitSelectionBottomSheetFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this)[ExitSelectionBottomSheetViewModel::class.java]
-        _binding = FragmentExitSelectionBottomSheetBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[ExitSelectionFragmentViewModel::class.java]
+        _binding = FragmentExitSelectionBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         adapter = ExitNodeAdapter(viewModel.list, viewLifecycleOwner)

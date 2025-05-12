@@ -7,11 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import org.torproject.onionmasq.OnionMasq
 import org.torproject.onionmasq.errors.CountryCodeException
 import org.torproject.onionmasq.errors.ProxyStoppedException
-import org.torproject.vpn.ui.exitselection.data.ExitNodeAdapter
 import org.torproject.vpn.utils.PreferenceHelper
 import java.util.Locale
 
-class ExitSelectionBottomSheetViewModel(application: Application) : AndroidViewModel(application) {
+class ExitSelectionFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _list = MutableLiveData<List<ExitNodeCellModel>>(mutableListOf())
     val list: LiveData<List<ExitNodeCellModel>> = _list
