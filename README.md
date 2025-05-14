@@ -76,7 +76,9 @@ For now the build and installation steps are as easy as:
     cd vpn
 ```
 2. create a [personal access token](https://docs.gitlab.com/ee/security/token_overview.html#personal-access-tokens) with the permission `read_api`
-3. add the line `gitLabPrivateToken=<YOUR_PRIVATE_ACCESS_TOKEN>` to your `local.properties` file in your projects root directory. (Replace <YOUR_PRIVATE_ACCESS_TOKEN> ;))
+3. configure access to AndroidOnionmasq with one of:
+   a. use gitlab ci prebuilt: add the line `gitLabPrivateToken=<YOUR_PRIVATE_ACCESS_TOKEN>` to your `local.properties` file in your projects root directory. (Replace <YOUR_PRIVATE_ACCESS_TOKEN> ;))
+   b. use local build: run `onionmasq:publishLibraryDebugPublicationToMavenLocal` in your local copy of onionmasq/android/OnionmasqAndroid to publish to your local maven repo, default `~/.m2/repository`
 4. Build the app: `./gradlew assembleDebug`
 5. Install it on your phone: `adb -d install -t app/build/outputs/apk/debug/app-debug.apk`
 

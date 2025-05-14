@@ -31,8 +31,10 @@ allprojects {
         showWarning('Neither CI_JOB_TOKEN nor a local.properties file with a private access token named gitLabPrivateToken is configured to fetch onionmasq from gitlab maven')
     }
 
-
     repositories {
+        if(properties.getProperty('gitLabPrivateToken') == null) {
+            mavenLocal()
+        }
         maven {
             // artifacts can be accessed at
             url 'https://gitlab.torproject.org/api/v4/projects/1192/packages/maven'
