@@ -7,7 +7,7 @@ espressoVersion = "3.6.1"
 glide = "4.16.0"
 androidxJunit = "1.2.1"
 androidxLifecycle = "2.9.0"
-retrofit = "2.11.0"
+retrofit = "2.12.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
