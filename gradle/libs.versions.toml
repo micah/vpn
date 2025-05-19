@@ -17,7 +17,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinGra
 [libraries]
 # Kotlin
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version = "1.8.0" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version = "1.10.2" }
 
 # Annotation processing
 glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
