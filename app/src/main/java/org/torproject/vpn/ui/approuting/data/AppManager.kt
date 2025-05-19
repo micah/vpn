@@ -201,24 +201,35 @@ class AppManager(context: Context) {
         val installedBrowsersApps = mutableListOf<AppItemModel>()
         var installedTorApps: AppItemModel? = null
         val installedOtherApps = mutableListOf<AppItemModel>()
+        val systemApps = mutableListOf<AppItemModel>()
+        var inSystemSection = false
+        var systemAppsCount: String? = null
+
         for (model in list) {
             when (model.viewType) {
+                HORIZONTAL_RECYCLER_VIEW -> installedTorApps = model
+                SHOW_APPS_VIEW -> {
+                    inSystemSection = true
+                    systemAppsCount = model.text
+                }
                 CELL -> {
-                    if (model.isBrowserApp == true) {
+                    if (inSystemSection) {
+                        systemApps.add(model)
+                    } else if (model.isBrowserApp == true) {
                         installedBrowsersApps.add(model)
                     } else {
                         installedOtherApps.add(model)
                     }
                 }
-                HORIZONTAL_RECYCLER_VIEW -> {
-                    installedTorApps = model
-                }
-                else -> {}
+                else -> { /* skip headers */ }
             }
         }
+
         val sortedBrowsers = installedBrowsersApps.sorted()
         val sortedOtherApps = installedOtherApps.sorted()
+        val sortedSystemApps = systemApps.sorted()
         val resultList = mutableListOf<AppItemModel>()
+
         if (installedTorApps != null) {
             resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_tor_apps)))
             resultList.add(installedTorApps)
@@ -229,6 +240,10 @@ class AppManager(context: Context) {
             resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_other_apps)))
         }
         resultList.addAll(sortedOtherApps)
+        resultList.add(AppItemModel(SECTION_HEADER_VIEW, context.getString(R.string.app_routing_system_apps)))
+        resultList.add(AppItemModel(SHOW_APPS_VIEW, systemAppsCount ?: sortedSystemApps.size.toString()))
+        resultList.addAll(sortedSystemApps)
+
         return resultList
     }
 }

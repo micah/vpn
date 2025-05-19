@@ -27,7 +27,7 @@ import java.lang.reflect.Type
 import kotlin.math.exp
 
 class AppListAdapter(
-    list: List<AppItemModel>,
+    list: List<AppItemModel> = emptyList(),
     private var torAppsAdapter: TorAppsAdapter,
     var preferenceHelper: PreferenceHelper
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

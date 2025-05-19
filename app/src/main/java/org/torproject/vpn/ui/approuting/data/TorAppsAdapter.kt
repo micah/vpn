@@ -13,7 +13,7 @@ import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
 import org.torproject.vpn.utils.navigateSafe
 
-class TorAppsAdapter(list: List<AppItemModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TorAppsAdapter(list: List<AppItemModel> = emptyList()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var items: List<AppItemModel> = list
 

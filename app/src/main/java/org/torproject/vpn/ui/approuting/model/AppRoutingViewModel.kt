@@ -21,6 +21,7 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
 
     init {
         appManager = AppManager(application)
+        loadApps()
     }
 
     fun loadApps() {
@@ -33,9 +34,17 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
 
         viewModelScope.launch(Dispatchers.Default) {
             val apps = appManager.queryInstalledApps()
-            withContext(Dispatchers.Main) {
-                appList.postValue(apps)
-                isLoadingAppList.postValue(false)
+            val appIds = apps.toList().mapNotNull { it.appId }
+            val appListIds = appList.value.orEmpty().toList().map { it.appId }
+            if (appIds.minus(appListIds).isNotEmpty()) {
+                withContext(Dispatchers.Main) {
+                    appList.postValue(apps)
+                    isLoadingAppList.postValue(false)
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    isLoadingAppList.postValue(false)
+                }
             }
         }
     }

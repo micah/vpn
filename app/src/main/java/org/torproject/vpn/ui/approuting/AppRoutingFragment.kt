@@ -2,6 +2,7 @@ package org.torproject.vpn.ui.approuting
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -31,22 +32,25 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
         super.onViewCreated(view, savedInstanceState)
         preferenceHelper = PreferenceHelper(requireContext())
         viewModel = ViewModelProvider(this)[AppRoutingViewModel::class.java]
-        viewModel.loadApps()
         val binding = FragmentAppRoutingBinding.bind(view)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         preferenceHelper.registerListener(this)
 
         // setup vertical list
-        appListAdapter = AppListAdapter(viewModel.getAppList(),
-            TorAppsAdapter(viewModel.getAppList()),
-            preferenceHelper)
+        appListAdapter = AppListAdapter(
+            torAppsAdapter = TorAppsAdapter(),
+            preferenceHelper= preferenceHelper
+        )
         appListAdapter?.onItemModelChanged = viewModel::onItemModelChanged
         appListAdapter?.onProtectAllAppsChanged = viewModel::onProtectAllAppsPrefsChanged
         binding.rvAppList.adapter = appListAdapter
-        viewModel.getObservableAppList().observe(viewLifecycleOwner) { appListAdapter?.update(it) }
+
         viewModel.getObservableProgress().observe(viewLifecycleOwner) { isLoading ->
             binding.progressIndicator.visibility = if (isLoading) VISIBLE else GONE
+        }
+        viewModel.getObservableAppList().observe(viewLifecycleOwner) {
+            appListAdapter?.update(it)
         }
 
         binding.toolbar.setNavigationOnClickListener {
