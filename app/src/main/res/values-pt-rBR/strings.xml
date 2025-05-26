@@ -51,7 +51,6 @@
 \nexperimental</string>
     <string name="error_detail_message">O Tor VPN não conseguiu se conectar à rede Tor.</string>
     <string name="tor_logs_description">Visualize e copie seus registros do Tor</string>
-    <string name="copied">Copiado …</string>
     <string name="guide_bullet_head_1">Você está pronto para começar a testar</string>
     <string name="guide_bullet_head_2">Mas não faça nada arriscado</string>
     <string name="guide_bullet_text_1">Não se esqueça de relatar quaisquer bugs que encontrar aos nossos desenvolvedores.</string>

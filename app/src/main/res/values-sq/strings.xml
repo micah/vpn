@@ -56,7 +56,6 @@
     <string name="description_independent_tor_powered_app">Ky aplikacion përdor lidhje të vetën Tor, të pavarur nga VPN-ja Tor. Në vend të kësaj, shihni dhe formësoni lidhjen e tij në %1$s.</string>
     <string name="app_routing_other_apps">Aplikacione të tjera</string>
     <string name="apps_description_all_protected">Krejt aplikacionet të mbrojtur</string>
-    <string name="copied">U kopjua…</string>
     <string name="bridge_settings">Rregullime ure</string>
     <string name="kill_switch">Buton asgjësimi</string>
     <string name="always_on_vpn_description">Hapni Rregullime Sistemi Android</string>

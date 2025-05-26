@@ -44,7 +44,7 @@
     <string name="tor_logs_description">View and copy your Tor logs</string>
     <string name="always_on_vpn">Always-on VPN</string>
     <string name="always_on_vpn_description">Open Android System Settings</string>
-    <string name="copied">Copied …</string>
+    <string name="copied_clipboard">Copied to clipboard</string>
     <string name="general">General</string>
     <string name="general_description">Configure general settings</string>
 

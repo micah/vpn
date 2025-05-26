@@ -13,7 +13,6 @@
     <string name="action_stop">停止VPN</string>
     <string name="exit_location_description">自動模式從網路中的任何位置選擇退出中繼，無論位置為何。 這有助於防止您的活動被鏈接，從而保護您的匿名性。</string>
     <string name="apps_description_all_protected">已代理所有應用程式</string>
-    <string name="copied">已複製…</string>
     <string name="kill_switch">緊急斷開</string>
     <string name="action_start">啟動VPN</string>
     <string name="always_on_vpn_description">開啟安卓系統設定</string>

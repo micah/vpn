@@ -7,8 +7,7 @@
         android:background="@color/surface_container_low"
         android:paddingVertical="@dimen/compact_padding"
         android:paddingHorizontal="@dimen/default_padding"
-        android:id="@+id/container"
-        >
+        android:id="@+id/container">
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/text_mono_small"
             android:textColor="@color/on_surface_variant"
@@ -16,12 +15,13 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:id="@+id/tv_timestamp"
-            tools:text="06/30/22, 16:45:56.230"
-            />
+            android:paddingBottom="4dp"
+            tools:text="06/30/22, 16:45:56.230" />
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/text_mono_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             tools:text="[Notice] Opening Socks listener on 127.0.0.1:9160"
             android:id="@+id/tv_log"/>
     </LinearLayout>

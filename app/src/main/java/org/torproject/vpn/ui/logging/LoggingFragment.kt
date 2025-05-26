@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
+import com.google.android.material.snackbar.Snackbar
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentLoggingBinding
 import org.torproject.vpn.ui.logging.data.LoggingListAdapter
@@ -52,7 +53,7 @@ class LoggingFragment : Fragment(R.layout.fragment_logging) {
                     }
                     // Android 13+ has its own Toasts to confirm copy to clipboard
                     if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-                        Toast.makeText(requireContext(), getString(R.string.copied), Toast.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, getString(R.string.copied_clipboard), Toast.LENGTH_SHORT).show()
                     }
                     return@setOnMenuItemClickListener true
                 }

@@ -53,7 +53,6 @@
     <string name="action_reconnect">Połącz ponownie</string>
     <string name="action_start">Uruchom VPN</string>
     <string name="action_stop">Zatrzymaj VPN</string>
-    <string name="copied">Skopiowano…</string>
     <string name="guide_bullet_head_2">Ale nie rób nic ryzykownego</string>
     <string name="guide_bullet_head_1">Możesz przystąpić do rozpoczęcia testów</string>
     <string name="guide_version_number">%1$s</string>

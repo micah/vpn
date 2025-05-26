@@ -36,7 +36,6 @@
     <string name="apps_description_all_protected">Todas las aplicaciones protegidas</string>
     <string name="tor_logs">Registros de Tor</string>
     <string name="tor_logs_description">Ver y copiar tus registros de Tor</string>
-    <string name="copied">Copiado…</string>
     <string name="guide_bullet_head_2">Pero no hagas nada arriesgado</string>
     <string name="guide_bullet_text_2">Esta es una versión anterior al lanzamiento de la aplicación y no está lista para usarla para actividades sensibles.</string>
     <string name="stats_down">%1$s</string>

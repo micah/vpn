@@ -45,7 +45,6 @@
     <string name="exit_location_description">Sjálfvirkur hamur velur útgangsendurvarpa einhversstaðar í netkerfinu, burtséð frá staðsetningu. Þetta hjálpar til við að vernda nafnleynd þinni með því að koma í veg fyrir að hægt sé að tengja saman aðgerðir þínar á mismunandi stöðum.</string>
     <string name="app_routing_other_apps">Önnur forrit</string>
     <string name="apps_description_all_protected">Öll forrit vernduð</string>
-    <string name="copied">Afritað …</string>
     <string name="kill_switch">Lokari</string>
     <string name="connection">Tenging</string>
     <string name="down">Sótt</string>

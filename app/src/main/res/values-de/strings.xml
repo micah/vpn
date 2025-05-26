@@ -24,7 +24,6 @@
     <string name="apps_description_all_protected">Alle Anwendungen verschlüsselt</string>
     <string name="tor_logs">Tor-Logs</string>
     <string name="always_on_vpn">Immer eingeschaltetes VPN</string>
-    <string name="copied">Kopiert …</string>
     <string name="guide_version_number" translatable="false">%1$s</string>
     <string name="action_save">Speichern</string>
     <string name="app_routing_browsers">Browser</string>

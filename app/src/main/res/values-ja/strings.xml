@@ -29,7 +29,6 @@
     <string name="guide_bullet_head_2">ですが、リスクの大きいことはしないでください</string>
     <string name="guide_bullet_text_1">バグを発見した場合は開発者に報告をお願いします。</string>
     <string name="tor_logs">Tor ログ</string>
-    <string name="copied">コピー済み…</string>
     <string name="guide_bullet_text_2">これはアプリのプレリリース版であり、機密性の高いアクティビティに使用するのは安全ではありません。</string>
     <string name="kill_switch_description">Torネットワークにアクセスできない場合にアプリによるインターネット接続をブロックする</string>
     <string name="quickstart">自動接続</string>

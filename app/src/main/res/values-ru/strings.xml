@@ -31,7 +31,6 @@
     <string name="guide_bullet_text_1">Не забывайте сообщать нашим разработчикам о любых найденных ошибках.</string>
     <string name="guide_bullet_text_2">Это предварительная версия приложения, и ее небезопасно использовать для конфиденциальных действий.</string>
     <string name="stats_down">%1$s</string>
-    <string name="copied">Скопировано…</string>
     <string name="stats_up">%1$s</string>
     <string name="stats_delta">%1$s/с</string>
     <string name="error_something_went_wrong">Что-то пошло не так</string>

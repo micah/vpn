@@ -34,7 +34,6 @@
     <string name="exit_location_automatic">Automatica (la più sicura)</string>
     <string name="exit_location_description">La modalità automatica seleziona i relay di uscita da ovunque nella rete, indipendentemente dal luogo. Ciò protegge l\'anonimato impedendo la correlazione delle tue attività.</string>
     <string name="apps_description_all_protected">Tutte le app sono protette</string>
-    <string name="copied">Copiato …</string>
     <string name="down">Download</string>
     <string name="always_on_vpn_description">Apri impostazioni di sistema di Android</string>
     <string name="stats_delta">%1$s/s</string>

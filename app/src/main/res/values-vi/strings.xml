@@ -53,7 +53,6 @@
     <string name="closed_connection">%1$s-&gt;%2$s: kết nối đã đóng lại</string>
     <string name="reload_app_circuits">Làm mới lại mạch nối circuit này chứ?</string>
     <string name="always_on_vpn">VPN luôn luôn bật</string>
-    <string name="copied">Đã sao chép …</string>
     <string name="guide_bullet_head_1">Bạn đã sẵn sàng để bắt đầu test thử nghiệm</string>
     <string name="guide_bullet_head_2">Nhưng đừng làm điều gì rủi ro cả</string>
     <string name="guide_bullet_text_1">Hãy đừng quên báo cáo bất kỳ lỗi bug nào mà bạn phát hiện được cho các lập trình viên của chúng tôi.</string>

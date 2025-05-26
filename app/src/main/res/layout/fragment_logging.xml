@@ -18,6 +18,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="?attr/homeAsUpIndicator"
+            app:title="@string/tor_logs"
             app:menu="@menu/tor_log_menu"
             app:popupTheme="@style/ThemeOverlay.Material3.Light" />
 
