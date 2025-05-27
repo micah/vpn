@@ -134,6 +134,7 @@
     <string name="obfs4_description">Disguises your traffic as random data</string>
     <string name="snowflake_description">Disguises your traffic as a video call</string>
     <string name="add_new_bridge">Add new bridges</string>
+    <string name="add_bridge">Add bridges</string>
     <string name="bridge_address">Enter bridge address</string>
     <string name="bridge_address_description">Paste bridge addresses you already know</string>
     <string name="bridge_addresses">Bridge addresses</string>

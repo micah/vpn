@@ -9,8 +9,8 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:statusBarColor">@color/surface</item>
 
-        <item name="actionMenuTextColor">@color/tertiary</item>
-        <item name="android:actionMenuTextColor">@color/tertiary</item>
+        <item name="actionMenuTextColor">@color/primary</item>
+        <item name="android:actionMenuTextColor">@color/primary</item>
 
         <!-- Customize your theme here. -->
         <item name="android:homeAsUpIndicator">

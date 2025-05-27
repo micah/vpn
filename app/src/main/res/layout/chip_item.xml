@@ -13,6 +13,7 @@
             android:ellipsize="end"
             app:chipBackgroundColor="@android:color/transparent"
             app:chipSurfaceColor="@android:color/transparent"
+            app:chipStrokeWidth="0dp"
             app:closeIcon="@drawable/ic_x_circle"
             app:closeIconEnabled="true"
             app:closeIconTint="@color/on_surface_variant"
