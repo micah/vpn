@@ -18,7 +18,7 @@
             android:layout_gravity="start"
             android:paddingBottom="@dimen/bottom_nav_padding"
             android:paddingTop="@dimen/bottom_nav_padding"
-            android:background="@color/surface_container"
+            android:background="@color/secondary_container"
             app:itemActiveIndicatorStyle="@color/surface_container"
             app:itemRippleColor="@color/surface_container_low"
             app:itemTextColor="@color/bottom_nav_text_selector"

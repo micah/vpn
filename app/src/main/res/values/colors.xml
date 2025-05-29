@@ -28,5 +28,6 @@
     <color name="tertiary">#93CBF8</color>
     <color name="md_theme_error">#BA1A1A</color>
     <color name="md_theme_onError">#FFFFFF</color>
+    <color name="secondary_container">#281C70</color>
 
 </resources>
