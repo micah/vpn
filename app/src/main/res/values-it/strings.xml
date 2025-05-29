@@ -133,7 +133,7 @@
     <string name="new_bridges_result">Ecco i tuoi nuovi bridge:</string>
     <string name="bridge_bot">Bot dei bridge</string>
     <string name="bot_msg_welcome">Benvenuto, stanco viaggiatore</string>
-    <string name="bot_msg_results">Ecco i tuoi bridge:</string>
+    <string name="bot_msg_results">Ecco i tuoi bridge</string>
     <string name="use_bridges">Usa i bridge</string>
     <string name="whatsapp">Whatsapp</string>
     <string name="new_circuits_warnings">Nuovi avvisi sui circuiti</string>

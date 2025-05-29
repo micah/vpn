@@ -1,6 +1,7 @@
 package org.torproject.vpn.ui.bridgebot.model
 
 import android.app.Application
+import android.graphics.drawable.Drawable
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -25,7 +26,8 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
         INIT,
         FETCHING,
         SHOW_RESULT,
-        SAVED_BRIDGES
+        SAVED_BRIDGES,
+        CANCELED_BRIDGES,
     }
 
     private val TAG: String = BridgeBotFragmentViewModel::class.java.simpleName
@@ -39,7 +41,8 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
 
     val bridgeButtonText: StateFlow<String> = botState.asFlow().map { data ->
         return@map when (data) {
-            BotState.SHOW_RESULT -> application.getString(R.string.start_again)
+            BotState.SHOW_RESULT -> application.getString(R.string.action_cancel)
+            BotState.FETCHING -> application.getString(R.string.action_cancel)
             else -> application.getString(R.string.new_bridges)
         }
     }.stateIn(
@@ -50,13 +53,24 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
 
     val bridgeButtonTextColor: StateFlow<Int> = botState.asFlow().map { data ->
         return@map when (data) {
-            BotState.FETCHING -> ContextCompat.getColor(application, R.color.inverse_on_surface)
-            else -> ContextCompat.getColor(application, R.color.on_surface)
+            BotState.FETCHING,BotState.SHOW_RESULT -> ContextCompat.getColor(application, R.color.on_surface)
+            else -> ContextCompat.getColor(application, R.color.bridge_bot_text_color)
         }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
-        initialValue = ContextCompat.getColor(application, R.color.on_surface)
+        initialValue = ContextCompat.getColor(application, R.color.bridge_bot_text_color)
+    )
+
+    val bridgeButtonBackgroundColor: StateFlow<Drawable?> = botState.asFlow().map { data ->
+        return@map when (data) {
+            BotState.INIT -> ContextCompat.getDrawable(application, R.drawable.bg_primary_round_btn)
+            else -> ContextCompat.getDrawable(application, R.drawable.bg_surface_round_btn)
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Lazily,
+        initialValue = ContextCompat.getDrawable(application, R.drawable.bg_surface_round_btn)
     )
 
     val isFetching: StateFlow<Boolean> = botState.asFlow().map { data ->
@@ -72,9 +86,9 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
 
     val botMessage: StateFlow<String> = botState.asFlow().map { data ->
         return@map when (data) {
-            BotState.INIT, BotState.SAVED_BRIDGES -> application.getString(R.string.bot_msg_welcome)
             BotState.FETCHING -> application.getString(R.string.fetching_bridges)
             BotState.SHOW_RESULT -> application.getString(R.string.bot_msg_results)
+            else -> application.getString(R.string.bot_msg_welcome)
         }
     }.stateIn(
         scope = viewModelScope,
@@ -90,6 +104,9 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
      */
     fun fetchBridges() {
         if (botState.value == BotState.FETCHING) {
+            return
+        } else if (botState.value == BotState.SHOW_RESULT) {
+            _botState.postValue(BotState.CANCELED_BRIDGES)
             return
         }
         _botState.postValue(BotState.FETCHING)
@@ -145,6 +162,7 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
         } else {
             preferenceHelper.bridgeType = PreferenceHelper.Companion.BridgeType.Manual
         }
+        preferenceHelper.useBridge = true
         _botState.postValue(BotState.SAVED_BRIDGES)
     }
 }

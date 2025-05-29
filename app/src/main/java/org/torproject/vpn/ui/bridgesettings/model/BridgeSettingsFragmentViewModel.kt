@@ -57,11 +57,21 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
     )
     fun onUseBridgeChanged(compoundButton: CompoundButton, isChecked: Boolean) {
         preferenceHelper.useBridge = isChecked
-        _useBridge.postValue(isChecked)
     }
 
-    private val _useBridge = MutableLiveData(preferenceHelper.useBridge)
-    val useBridge: LiveData<Boolean> = _useBridge
+    val useBridge = callbackFlow {
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, changedKey ->
+            if (PreferenceHelper.USE_BRIDGE == changedKey) {
+                trySend(preferenceHelper.useBridge)
+            }
+        }
+        preferenceHelper.registerListener(listener)
+        awaitClose { preferenceHelper.unregisterListener(listener) }
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.Lazily,
+        preferenceHelper.useBridge
+    )
 
     val telegramDrawable = telegramActivityInfo.asFlow().map { info ->
         return@map info?.applicationInfo?.loadIcon(application.packageManager)

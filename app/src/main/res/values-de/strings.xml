@@ -132,7 +132,7 @@
     <string name="fetching_bridges">Hole deine neuen Brücken…</string>
     <string name="new_bridges_result">Hier sind deine neuen Brücken:</string>
     <string name="bridge_bot">Brücken Bot</string>
-    <string name="bot_msg_results">Hier sind deine Brücken:</string>
+    <string name="bot_msg_results">Hier sind deine Brücken</string>
     <string name="whatsapp">Whatsapp</string>
     <string name="view_faq">Unsere FAQ ansehen</string>
     <string name="help_description_wip">Tor VPN befindet sich noch in der Entwicklung, und einige Funktionen funktionieren möglicherweise nicht wie erwartet.</string>

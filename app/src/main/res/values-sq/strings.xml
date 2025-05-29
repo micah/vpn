@@ -129,7 +129,7 @@
     <string name="fetching_bridges">Po sillen urat tuaja të reja…</string>
     <string name="new_bridges_result">Ja urat tuaja të reja:</string>
     <string name="bot_msg_welcome">Mirë se vini, rrugëtar i sfilitur</string>
-    <string name="bot_msg_results">Ja urat tuaja:</string>
+    <string name="bot_msg_results">Ja urat tuaja</string>
     <string name="bridge_bot">Robot Urash</string>
     <string name="contact_support">Lidhuni me asistencën</string>
     <string name="signal">Signal</string>

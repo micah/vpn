@@ -128,7 +128,7 @@
     <string name="new_circuits_warnings_description">Cảnh báo trước khi tải lại mạch nối circuit.</string>
     <string name="bridge_bot">Bot cung cấp cầu Bridge</string>
     <string name="bot_msg_welcome">Xin chào mừng, nhà lữ hành đầy sương gió</string>
-    <string name="bot_msg_results">Đây là các cầu Bridge của bạn:</string>
+    <string name="bot_msg_results">Đây là các cầu Bridge của bạn</string>
     <string name="label_not_protected">Chẳng có gì được bảo vệ</string>
     <string name="routed_over_country">Đã định tuyến thông qua %1$s</string>
     <string name="label_some_protected">Một số đã được bảo vệ</string>

@@ -127,7 +127,7 @@
     <string name="new_bridges">Eu preciso de novas pontes</string>
     <string name="fetching_bridges">Buscando suas novas pontes…</string>
     <string name="new_bridges_result">Aqui estão suas novas pontes:</string>
-    <string name="bot_msg_results">Aqui estão suas pontes:</string>
+    <string name="bot_msg_results">Aqui estão suas pontes</string>
     <string name="use_bridges">Usar pontes</string>
     <string name="bridge_bot">Ponte Bot</string>
     <string name="bot_msg_welcome">Bem-vindo, viajante cansado</string>

@@ -4,6 +4,6 @@ import android.view.View
 
 interface ClickHandler {
     fun onBridgeButtonClicked(v: View)
-    fun onUseBridgesClicked(v: View)
+    fun onSaveBridgesClicked(v: View)
 
 }

@@ -139,7 +139,7 @@
     <string name="bug_tor_forum">在Tor Torum上</string>
     <string name="bridge_bot">橋接器機器人</string>
     <string name="bot_msg_welcome">歡迎，疲憊的旅行者</string>
-    <string name="bot_msg_results">這是你的橋接器：</string>
+    <string name="bot_msg_results">這是你的橋接器</string>
     <string name="refresh_all_circuits">重新整理所有迴路？</string>
     <string name="change">變更</string>
     <string name="obfs4_bridge">obfs4 橋接器</string>

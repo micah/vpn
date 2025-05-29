@@ -7,13 +7,17 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentBridgesettingsBinding
+import org.torproject.vpn.ui.bridgebot.BridgeBotFragment
 import org.torproject.vpn.ui.bridgesettings.model.BridgeSettingsFragmentViewModel
+import org.torproject.vpn.ui.home.ConnectFragment.Companion.TRIGGER_ACTION_CONNECT
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.navigateSafe
 
-class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickHandler, OnSharedPreferenceChangeListener {
+class BridgeSettingsFragment : Fragment(R.layout.fragment_bridgesettings), ClickHandler,
+    OnSharedPreferenceChangeListener {
 
     companion object {
         val TAG = BridgeSettingsFragment::class.java.simpleName
@@ -45,6 +49,19 @@ class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickH
         binding.switchUseBridge.setOnCheckedChangeListener { buttonView, isChecked ->
             viewModel.onUseBridgeChanged(buttonView, isChecked)
         }
+
+        parentFragmentManager.setFragmentResultListener(
+            BridgeBotFragment.REQUEST_KEY_BRIDGE_SAVE_RESULT,
+            viewLifecycleOwner
+        ) { requestKey, bundle ->
+            if (bundle.getBoolean(BridgeBotFragment.BUNDLE_KEY_SAVE_SUCCESSFUL)) {
+                Snackbar.make(requireView(), R.string.bridges, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.action_connect) {
+                        startVPN()
+                    }
+                    .show()
+            }
+        }
     }
 
     override fun onResume() {
@@ -57,6 +74,12 @@ class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickH
         super.onDestroyView()
         viewModel.preferenceHelper.unregisterListener(this)
         _binding = null
+    }
+
+    fun startVPN() {
+        // Navigate to ConnectFragment and trigger connect action
+        parentFragmentManager.setFragmentResult(TRIGGER_ACTION_CONNECT, Bundle())
+        findNavController().navigate(R.id.navigation_connect)
     }
 
     override fun onManualBridgeSelectionClicked(v: View) {
@@ -90,3 +113,4 @@ class BridgeSettingsFragment: Fragment(R.layout.fragment_bridgesettings), ClickH
     }
 
 }
+

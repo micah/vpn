@@ -127,7 +127,7 @@
     <string name="name_and_icon">Ad ve simge</string>
     <string name="new_bridges_result">İşte yeni köprüleriniz:</string>
     <string name="bot_msg_welcome">Hoş geldin, yorgun gezgin</string>
-    <string name="bot_msg_results">İşte köprüleriniz:</string>
+    <string name="bot_msg_results">İşte köprüleriniz</string>
     <string name="new_bridges">Yeni köprüler gerekli</string>
     <string name="fetching_bridges">Yeni köprüleriniz alınıyor…</string>
     <string name="bridge_bot">Köprü botu</string>

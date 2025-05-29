@@ -26,15 +26,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5"
-            />
+            app:layout_constraintGuide_percent="0.5" />
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/center_vertical_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5"
-            />
+            app:layout_constraintGuide_percent="0.5" />
 
 
 
@@ -48,8 +46,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:theme="@style/Theme.TorVPN.AppBarOverlay"
             app:liftOnScroll="false"
-            app:elevation="0dp"
-            >
+            app:elevation="0dp">
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:fitsSystemWindows="true"
@@ -57,8 +54,6 @@
                 app:navigationIcon="?attr/homeAsUpIndicator"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:background="@color/surface"
@@ -68,7 +63,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:title="@string/bridge_bot"
-                app:titleCentered="true"
                 app:titleTextAppearance="@style/connection_toolbar_title"
                 app:titleTextColor="@color/on_surface"
                 app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
@@ -85,8 +79,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_bar"
             android:indeterminate="true"
-            android:visibility="@{viewModel.isFetching ? View.VISIBLE : View.GONE }"
-            />
+            android:visibility="@{viewModel.isFetching ? View.VISIBLE : View.GONE }" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_bot"
@@ -97,8 +90,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_bar"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_bridge_bot"
-            />
+            android:src="@drawable/ic_bridge_bot" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_bot_message"
@@ -112,14 +104,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             style="@style/info_text"
             tools:text="@string/bot_msg_welcome"
-            android:text="@{viewModel.botMessage}"
-            />
+            android:text="@{viewModel.botMessage}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ll_bridge_result_conatiner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/tv_bot_message"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_action_btn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:orientation="vertical"
@@ -127,18 +119,28 @@
             android:background="@drawable/bg_rounded"
             android:layout_marginHorizontal="@dimen/default_padding"
             android:paddingHorizontal="@dimen/activity_horizontal_margin"
-            android:paddingVertical="@dimen/activity_vertical_margin"
-            >
+            android:paddingVertical="@dimen/activity_vertical_margin">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_bridge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_bridge"
+                app:tint="#85BBF8"/>
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_title_bridge_addresses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                style="@style/paragraph_title_small"
-                android:text="@string/bridge_addresses"
-                />
+                app:layout_constraintTop_toBottomOf="@id/iv_bridge"
+                android:gravity="center_horizontal"
+                style="@style/headline_small"
+                android:textColor="@color/white"
+                android:text="@string/bot_msg_results"
+                android:paddingBottom="@dimen/default_padding"/>
             <ScrollView
                 android:id="@+id/sv_bridgeLines"
                 android:layout_width="match_parent"
@@ -147,13 +149,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_max="200dp"
-                >
+                android:paddingBottom="@dimen/default_padding">
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/ll_bridge_line_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
                     <!-- Views added dynamically here -->
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </ScrollView>
@@ -166,14 +167,15 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sv_bridgeLines"
                 android:layout_gravity="end"
-                style="@style/info_button_text"
+                style="@style/button_text"
                 android:text="@string/use_bridges"
+                android:textColor="@color/inverse_on_surface"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="@{handler::onUseBridgesClicked}"
+                android:background="@drawable/bg_primary_round_btn"
+                android:onClick="@{handler::onSaveBridgesClicked}"
                 android:paddingHorizontal="@dimen/default_padding"
-                android:paddingVertical="10dp"
-                />
+                android:paddingVertical="16dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -188,7 +190,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:background="@drawable/bg_btn"
+            android:background="@{viewModel.bridgeButtonBackgroundColor}"
             android:gravity="center"
             android:clickable="true"
             android:focusable="true"
@@ -196,8 +198,7 @@
             android:textColor="@{viewModel.bridgeButtonTextColor}"
             android:text="@{viewModel.bridgeButtonText}"
             android:onClick="@{handler::onBridgeButtonClicked}"
-            android:enabled="@{!viewModel.isFetching}"
-            />
+            android:enabled="@{!viewModel.isFetching}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

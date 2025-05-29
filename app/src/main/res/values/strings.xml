@@ -141,7 +141,7 @@
     <string name="action_paste_bridges">Paste your bridge addresses here</string>
     <string name="manual_bridge">Manual selection</string>
     <string name="get_new_bridges">Find more bridges</string>
-    <string name="new_bridges">I need new bridges</string>
+    <string name="new_bridges">Give me new bridges</string>
     <string name="fetching_bridges">Fetching your new bridges…</string>
     <string name="new_bridges_result">Here are your new bridges:</string>
     <string name="get_new_bridges_description">Since bridge addresses aren\'t public, you\'ll need to request one from the Tor Project.</string>
@@ -184,9 +184,9 @@
     <!-- Bridge Bot -->
     <string name="bridge_bot">Bridge Bot</string>
     <string name="bot_msg_welcome">Welcome, weary traveler</string>
-    <string name="bot_msg_results">Here are your bridges:</string>
+    <string name="bot_msg_results">Here are your bridges</string>
     <string name="start_again">Start again</string>
-    <string name="use_bridges">Use bridges</string>
+    <string name="use_bridges">Save bridges</string>
     <string name="change">Change</string>
     <string name="the_internet">The internet</string>
     <string name="obfs4_bridge">obfs4 bridge</string>

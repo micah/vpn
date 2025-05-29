@@ -50,6 +50,7 @@ import org.torproject.vpn.vpn.VpnStatusObservable
 class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
     companion object {
         val TAG: String = ConnectFragment::class.java.simpleName
+        val TRIGGER_ACTION_CONNECT: String = "trigger_connect_action"
     }
 
     private var _binding: FragmentConnectBinding? = null
@@ -110,6 +111,11 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         connectingStateFabSpacing = getDpInPx(requireContext(), (9f)).toFloat() //dp padding between connect - connecting
         connectedStateFabSpacing = getDpInPx(requireContext(), (25f)).toFloat() //dp padding between connect - stop
         animationDuration = resources.getInteger(R.integer.default_transition_anim_duration).toLong()
+
+        // Listen for `TRIGGER_ACTION_CONNECT` result
+        parentFragmentManager.setFragmentResultListener(TRIGGER_ACTION_CONNECT, this) { _, _ ->
+            connectFragmentViewModel.connectStateButtonClicked()
+        }
 
         connectFragmentViewModel.prepareVpn.observe(
             viewLifecycleOwner,

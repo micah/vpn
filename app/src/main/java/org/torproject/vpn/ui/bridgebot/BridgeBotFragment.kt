@@ -9,6 +9,8 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -23,6 +25,8 @@ class BridgeBotFragment: Fragment(R.layout.fragment_bridgebot), ClickHandler, On
 
     companion object {
         val TAG = BridgeBotFragment::class.java.simpleName
+        const val REQUEST_KEY_BRIDGE_SAVE_RESULT = "request_key_bridge_save_result"
+        const val BUNDLE_KEY_SAVE_SUCCESSFUL = "bundle_key_save_successful"
     }
 
     private lateinit var viewModel: BridgeBotFragmentViewModel
@@ -53,8 +57,9 @@ class BridgeBotFragment: Fragment(R.layout.fragment_bridgebot), ClickHandler, On
                 textView.maxLines = 1
                 textView.text = bridgeLine
                 textView.ellipsize = TextUtils.TruncateAt.END
-                val horizontalPadding = getDpInPx(binding.root.context, 2f)
-                textView.setPadding(0, horizontalPadding, 0, horizontalPadding)
+                textView.setTextColor(ContextCompat.getColor(binding.root.context,R.color.bridge_bot_surface_variant))
+                val verticalPadding = getDpInPx(binding.root.context, 6f)
+                textView.setPadding(0, verticalPadding, 0, verticalPadding) // left, top, right, bottom
                 binding.llBridgeLineContainer.addView(textView)
             }
         }
@@ -62,7 +67,8 @@ class BridgeBotFragment: Fragment(R.layout.fragment_bridgebot), ClickHandler, On
         viewModel.botState.observe(viewLifecycleOwner) {  botState ->
             when(botState) {
                 BridgeBotFragmentViewModel.BotState.SHOW_RESULT -> showBotResults()
-                BridgeBotFragmentViewModel.BotState.SAVED_BRIDGES -> hideBotResults()
+                BridgeBotFragmentViewModel.BotState.CANCELED_BRIDGES -> findNavController().popBackStack()
+                BridgeBotFragmentViewModel.BotState.SAVED_BRIDGES -> bridgesSaved()
                 else -> {}
             }
         }
@@ -74,21 +80,21 @@ class BridgeBotFragment: Fragment(R.layout.fragment_bridgebot), ClickHandler, On
         }
         val animatorSet = AnimatorSet()
         animatorSet.playTogether(
-            getVerticalBiasChangeAnimator(binding.ivBot, 0.5f, 0f),
+            getVisibilityAnimator(binding.tvBotMessage,  VISIBLE, GONE, viewLifecycleOwner.lifecycle),
+            getVisibilityAnimator(binding.ivBot,  VISIBLE, GONE, viewLifecycleOwner.lifecycle),
             getVisibilityAnimator(binding.llBridgeResultConatiner, GONE, VISIBLE, viewLifecycleOwner.lifecycle)
         )
         animatorSet.start()
     }
 
-    private fun hideBotResults() {
-        val animatorSet = AnimatorSet()
-        animatorSet.playTogether(
-            getVerticalBiasChangeAnimator(binding.ivBot, 0f, 0.5f),
-            getVisibilityAnimator(binding.llBridgeResultConatiner, VISIBLE, GONE, viewLifecycleOwner.lifecycle)
+    private fun bridgesSaved() {
+        parentFragmentManager.setFragmentResult(
+            REQUEST_KEY_BRIDGE_SAVE_RESULT,
+            bundleOf(BUNDLE_KEY_SAVE_SUCCESSFUL to true)
         )
-        binding.tvBotMessage.text = getString(R.string.bot_msg_welcome)
-        animatorSet.start()
+        findNavController().popBackStack()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.preferenceHelper.unregisterListener(this)
@@ -104,7 +110,7 @@ class BridgeBotFragment: Fragment(R.layout.fragment_bridgebot), ClickHandler, On
        viewModel.fetchBridges()
     }
 
-    override fun onUseBridgesClicked(v: View) {
+    override fun onSaveBridgesClicked(v: View) {
         viewModel.useBridges()
     }
 

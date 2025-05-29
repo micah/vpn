@@ -138,7 +138,7 @@
     <string name="new_bridges">پل‌های جدید می‌خواهم</string>
     <string name="bridge_bot">روبوت پل</string>
     <string name="bot_msg_welcome">خوش آمدی مسافر خسته</string>
-    <string name="bot_msg_results">پل‌هایتان:</string>
+    <string name="bot_msg_results">پل‌هایتان</string>
     <string name="refresh_all_circuits">نوسازی همهٔ مدارها؟</string>
     <string name="fetching_bridges">واکشیدن پل‌های جدیدتان…</string>
     <string name="new_bridges_result">پل‌های جدیدتان:</string>

@@ -132,7 +132,7 @@
     <string name="new_bridges">Necesito nuevos puentes</string>
     <string name="new_bridges_result">Aquí están tus puentes nuevos:</string>
     <string name="bot_msg_welcome">Bienvenido, viajero cansado</string>
-    <string name="bot_msg_results">Aquí están tus puentes:</string>
+    <string name="bot_msg_results">Aquí están tus puentes</string>
     <string name="start_again">Comenzar de nuevo</string>
     <string name="signal">Señal</string>
     <string name="report_bug">Informar de un error</string>

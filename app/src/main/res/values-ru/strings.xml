@@ -133,7 +133,7 @@
     <string name="new_bridges_result">Ваши новые мосты:</string>
     <string name="bug_gitlab">Через Gitlab</string>
     <string name="bot_msg_welcome">Привет, усталый путник</string>
-    <string name="bot_msg_results">Ваши мосты:</string>
+    <string name="bot_msg_results">Ваши мосты</string>
     <string name="new_circuits_warnings">Предупреждения о новых цепочках</string>
     <string name="action_refresh">Обновить</string>
     <string name="fetching_bridges">Получение новых мостов…</string>

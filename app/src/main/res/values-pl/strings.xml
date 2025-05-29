@@ -134,7 +134,7 @@
     <string name="new_bridges">Potrzebuję nowych mostków</string>
     <string name="fetching_bridges">Pobieram nowe mostki…</string>
     <string name="bot_msg_welcome">Witaj, zmęczony podróżniku</string>
-    <string name="bot_msg_results">Oto Twoje mostki:</string>
+    <string name="bot_msg_results">Oto Twoje mostki</string>
     <string name="signal">Signal</string>
     <string name="whatsapp">WhatsApp</string>
     <string name="help_description_wip">Prace nad Tor VPN są w toku, a niektóre funkcje mogą nie działać zgodnie z oczekiwaniami.</string>
