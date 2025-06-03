@@ -92,11 +92,11 @@ class AppListAdapter(
         val mutableList = list.toMutableList()
         var protectAllAppsEntryChanged = false
 
-        if (mutableList.isNotEmpty()) {
-            mutableList.add(0, AppItemModel(TABLE_HEADER_VIEW, (mutableList.first { it.viewType == CELL }).protectAllApps))
-        } else {
-            mutableList.add(0, AppItemModel(TABLE_HEADER_VIEW, preferenceHelper.protectAllApps))
-        }
+        val protectAllAppsValue = mutableList.firstOrNull { it.viewType == CELL }?.protectAllApps
+            ?: preferenceHelper.protectAllApps
+
+        mutableList.add(0, AppItemModel(TABLE_HEADER_VIEW, protectAllAppsValue))
+
         // The following comparison depends on AppItemModels equals() implementation
         // Hence, dataSetChanged remains false if protectAllApps of AppItemModel changed
         // b/c protectAllApps is excluded from AppItemModel's equals() method
