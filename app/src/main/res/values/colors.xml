@@ -7,27 +7,47 @@
     <color name="connectingRainbowStart">#FC00FF</color>
     <color name="connectingRainbowEnd">#00DBDE</color>
 
-    <color name="error">#F797A7</color>
-    <color name="on_error">#74232C</color>
-    <color name="warning">#EAA93B</color>
-    <color name="primary">#D697F8</color>
+    <color name="primary">#C272FF</color>
+    <color name="on_primary">#18242F</color>
+    <color name="primary_container">#701498</color>
+    <color name="on_primary_container">#F5E3FF</color>
     <color name="primary_variant">#A357D3</color>
-    <color name="secondary">#C3F79A</color>
-    <color name="secondary_variant">#A4E776</color>
-    <color name="outline">#5A4CD3</color>
-    <color name="surface">#201852</color>
-    <color name="surface_container">#4638AE</color>
-    <color name="surface_container_low">#32277F</color>
+
+    <color name="secondary">#85BBF8</color>
+    <color name="on_secondary">#18242F</color>
+    <color name="secondary_container">#2E3781</color>
+    <color name="on_secondary_container">#DAECFF</color>
+
+    <color name="tertiary">#B6E368</color>
+    <color name="on_tertiary">#18242F</color>
+    <color name="tertiary_container">#376C12</color>
+    <color name="on_tertiary_container">#EBFFC4</color>
+
+    <color name="error">#F47B7B</color>
+    <color name="on_error">#742027</color>
+    <color name="error_container">#742027</color>
+    <color name="on_error_container">#FFD9D4</color>
+
+    <color name="warning">#FFCB52</color>
+
+    <color name="surface">#160F43</color>
     <color name="on_surface">#FFFFFF</color>
-    <color name="on_surface_variant">#CCCCFF</color>
-    <color name="sub_header_color">#C272FF</color>
-    <color name="inverse_surface">#CCCCFF</color>
-    <color name="inverse_on_surface">#181F2F</color>
-    <color name="bridge_bot_text_color">#18242F</color>
-    <color name="bridge_bot_surface_variant">#C4C8FF</color>
-    <color name="tertiary">#93CBF8</color>
-    <color name="md_theme_error">#BA1A1A</color>
-    <color name="md_theme_onError">#FFFFFF</color>
-    <color name="secondary_container">#281C70</color>
+    <color name="surface_variant">#D9D9D9</color>
+    <color name="on_surface_variant">#C4C8FF</color>
+    <color name="surface_container_highest">#342786</color>
+    <color name="surface_container_high">#31247C</color>
+    <color name="surface_container">#281C70</color>
+    <color name="surface_container_low">#21185C</color>
+    <color name="surface_container_lowest">#120C38</color>
+
+    <color name="inverse_surface">#C4C8FF</color>
+    <color name="inverse_on_surface">#18242F</color>
+
+    <color name="outline">#DAECFF</color>
+    <color name="outline_variant">#3C319C</color>
+
+    <color name="scrim">#18242F</color>
+
+    <color name="inverse_primary">#701498</color>
 
 </resources>

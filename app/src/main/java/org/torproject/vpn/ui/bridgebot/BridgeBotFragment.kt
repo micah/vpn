@@ -57,7 +57,7 @@ class BridgeBotFragment: Fragment(R.layout.fragment_bridgebot), ClickHandler, On
                 textView.maxLines = 1
                 textView.text = bridgeLine
                 textView.ellipsize = TextUtils.TruncateAt.END
-                textView.setTextColor(ContextCompat.getColor(binding.root.context,R.color.bridge_bot_surface_variant))
+                textView.setTextColor(ContextCompat.getColor(binding.root.context, R.color.on_surface_variant))
                 val verticalPadding = getDpInPx(binding.root.context, 6f)
                 textView.setPadding(0, verticalPadding, 0, verticalPadding) // left, top, right, bottom
                 binding.llBridgeLineContainer.addView(textView)

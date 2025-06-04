@@ -18,8 +18,8 @@
         </item>
 
         <item name="android:colorBackground">@color/surface</item>
-        <item name="colorError">@color/md_theme_error</item>
-        <item name="colorOnError">@color/md_theme_onError</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
 
         <!--//We have explicitly defined these on Toolbars and BottomNav but adding here for consistency across the app in case future updates adds more toolbars-->
         <item name="toolbarStyle">@style/toolbar_theme</item>

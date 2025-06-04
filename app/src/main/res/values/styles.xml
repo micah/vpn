@@ -6,7 +6,7 @@
     <!--  ###### -->
 
     <style name="paragraph_title" parent="label_medium">
-        <item name="android:textColor">@color/sub_header_color</item>
+        <item name="android:textColor">@color/primary</item>
         <item name="android:textStyle">bold</item>
     </style>
 

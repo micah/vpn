@@ -14,8 +14,8 @@
         <!-- Customize your theme here. -->
 
         <item name="android:colorBackground">@color/surface</item>
-        <item name="colorError">@color/md_theme_error</item>
-        <item name="colorOnError">@color/md_theme_onError</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
 
         <item name="toolbarStyle">@style/toolbar_theme</item>
         <item name="bottomNavigationStyle">@style/Widget.Material3.BottomNavigationView</item>
