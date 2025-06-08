@@ -153,7 +153,7 @@
                 android:layout_marginEnd="8dp"
                 android:onClick="@{() -> viewModel.setGuideInvisible()}"
                 android:text="@string/guide_got_it"
-                android:textColor="@color/tertiary"
+                android:textColor="@color/secondary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 

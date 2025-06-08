@@ -136,12 +136,12 @@
     </style>
 
     <style name="error_action_text_secondary" parent="error_action_text">
-        <item name="android:textColor">@color/tertiary</item>
+        <item name="android:textColor">@color/secondary</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="error_action_text" parent="label_large">
-        <item name="android:textColor">@color/tertiary</item>
+        <item name="android:textColor">@color/secondary</item>
     </style>
 
     <style name="stats_kbits_text" parent="title_medium">
