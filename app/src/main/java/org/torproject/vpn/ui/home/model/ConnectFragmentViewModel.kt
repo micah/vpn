@@ -149,7 +149,9 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
             DISCONNECTING -> application.getString(R.string.action_reconnect)
             DISCONNECTED -> application.getString(R.string.action_reconnect)
             CONNECTION_ERROR -> application.getString(R.string.action_try_again)
-            CONNECTED -> application.getString(R.string.action_stop)
+            else -> {
+                return@map ""
+            }
         }
     }.stateIn(scope = viewModelScope, SharingStarted.WhileSubscribed(), initialValue = "")
 
