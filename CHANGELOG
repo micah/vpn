@@ -1,6 +1,23 @@
 CHANGELOG
 =========
 
+0.9.0 Pre-Alpha
+----------------
+* update color scheme
+* fix: show show connection stats in tablet landscape layout
+* fix: App crash when configuring apps
+* update bridge bot UX to latest figma designs
+* update manual bridge selection UI to latest figma designs
+* update tor Logs UI to latest figma designs
+* update app routing UI to latest figma designs
+* fix: flickering in app routing screen
+* fix: long app name entries overlap circuit icon
+* add ability and instructions to use a local build of AndroidOnionmasq
+* fix: App detail view: App on/off doesn't change the status
+* Update TargetSDK to API 35
+* fix disconnecting VPN in system settings, auto-reconnect from Tor VPN
+* accessibility improvements
+
 0.8.0 Pre-Alpha
 ----------------
 * improved accessibility in various screens
