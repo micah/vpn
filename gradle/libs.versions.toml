@@ -62,8 +62,7 @@ androidx-test-truth = { module = "androidx.test.ext:truth", version = "1.6.0" }
 leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version = "3.0-alpha-1" }
 
 # OnionMasq
-# if onionmasq was built locally, the lib can be integrated like this
-onionmasq-release = { module = "org.torproject:onionmasq", version = "0.9.0-local-release" }
+onionmasq-release = { module = "org.torproject:onionmasq", version = "0.9.1-local-release" }
 onionmasq-debug = { module = "org.torproject:onionmasq", version = "main-branch-debug" }
 
 [bundles]

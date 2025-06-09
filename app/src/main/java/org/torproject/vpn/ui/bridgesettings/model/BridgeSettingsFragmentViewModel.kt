@@ -6,14 +6,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import android.net.Uri
-import android.text.Spannable
 import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.CompoundButton
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
@@ -30,6 +27,8 @@ import org.torproject.vpn.TorApplication
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 import org.torproject.vpn.utils.resolveActivityForUri
+import org.torproject.vpn.vpn.VpnServiceCommand
+import org.torproject.vpn.vpn.VpnStatusObservable
 
 class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -57,6 +56,7 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
     )
     fun onUseBridgeChanged(compoundButton: CompoundButton, isChecked: Boolean) {
         preferenceHelper.useBridge = isChecked
+        updateVPNSettings()
     }
 
     val useBridge = callbackFlow {
@@ -204,10 +204,12 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
 
     fun selectBuiltInObfs4() {
         preferenceHelper.bridgeType = BridgeType.Obfs4
+        updateVPNSettings()
     }
 
     fun selectBuiltInSnowflake() {
         preferenceHelper.bridgeType = BridgeType.Snowflake
+        updateVPNSettings()
     }
 
     private fun getFormattedWebBotSubtitle(context: Context): SpannableString {
@@ -248,4 +250,11 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
     fun getWebBotIntent(): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(WEB_BOT_URI))
     }
+
+    private fun updateVPNSettings() {
+        if (VpnStatusObservable.isVPNActive()) {
+            VpnServiceCommand.startVpn(getApplication())
+        }
+    }
+
 }

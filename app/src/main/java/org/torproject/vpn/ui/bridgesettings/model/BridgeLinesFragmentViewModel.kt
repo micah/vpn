@@ -1,11 +1,20 @@
 package org.torproject.vpn.ui.bridgesettings.model
 
 import android.app.Application
-import androidx.lifecycle.*
-import kotlinx.coroutines.flow.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
+import org.torproject.vpn.vpn.VpnServiceCommand
+import org.torproject.vpn.vpn.VpnStatusObservable
 
 class BridgeLinesFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -44,6 +53,13 @@ class BridgeLinesFragmentViewModel(application: Application) : AndroidViewModel(
             preferenceHelper.bridgeType = BridgeType.None
         } else {
             preferenceHelper.bridgeType = BridgeType.Manual
+            updateVPNSettings()
+        }
+    }
+
+    private fun updateVPNSettings() {
+        if (VpnStatusObservable.isVPNActive()) {
+            VpnServiceCommand.startVpn(getApplication())
         }
     }
 
