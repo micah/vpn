@@ -105,7 +105,7 @@ class VpnNotificationManager(val context: Context) {
     private fun getDataUsageText(dataUsage: DataUsage): String {
         val received = formatBytes(dataUsage.downstreamDataPerSec)
         val sent = formatBytes(dataUsage.upstreamDataPerSec)
-        val receivedOverall = formatBytests(dataUsage.downstreamData)
+        val receivedOverall = formatBytes(dataUsage.downstreamData)
         val sentOverall = formatBytes(dataUsage.upstreamData)
         return context.getString(R.string.stats_combined, received, receivedOverall, sent, sentOverall);
     }
