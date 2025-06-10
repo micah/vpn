@@ -23,7 +23,7 @@ import org.torproject.onionmasq.OnionMasq
 import org.torproject.onionmasq.circuit.CircuitCountryCodes
 import org.torproject.vpn.R
 import org.torproject.vpn.utils.PreferenceHelper
-import org.torproject.vpn.utils.formatBits
+import org.torproject.vpn.utils.formatBytes
 import org.torproject.vpn.utils.getConfigurableApps
 import org.torproject.vpn.utils.updateDataUsage
 import org.torproject.vpn.vpn.DataUsage
@@ -56,12 +56,12 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
     val dataUsage: StateFlow<DataUsage> = _dataUsage
 
     val dataUsageDownstream: StateFlow<String> = dataUsage.map { data ->
-        return@map formatBits(data.downstreamData)
-    }.stateIn(viewModelScope, Eagerly, formatBits(0))
+        return@map formatBytes(data.downstreamData)
+    }.stateIn(viewModelScope, Eagerly, formatBytes(0))
 
     val dataUsageUpstream: StateFlow<String> = dataUsage.map { data ->
-        return@map formatBits(data.upstreamData)
-    }.stateIn(viewModelScope, Eagerly, formatBits(0))
+        return@map formatBytes(data.upstreamData)
+    }.stateIn(viewModelScope, Eagerly, formatBytes(0))
 
     private val preferenceHelper = PreferenceHelper(getApplication())
 

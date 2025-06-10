@@ -35,7 +35,7 @@ import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
 import org.torproject.vpn.utils.PreferenceHelper.Companion.SHOULD_SHOW_GUIDE
-import org.torproject.vpn.utils.formatBits
+import org.torproject.vpn.utils.formatBytes
 import org.torproject.vpn.utils.getFlagByCountryCode
 import org.torproject.vpn.vpn.ConnectionState
 import org.torproject.vpn.vpn.ConnectionState.CONNECTED
@@ -73,7 +73,7 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
         )
 
     val dataUsageDownstream: StateFlow<String> = dataUsage.map { data ->
-        val received = formatBits(data.downstreamData)
+        val received = formatBytes(data.downstreamData)
         return@map application.getString(R.string.stats_down, received)
     }.stateIn(
         scope = viewModelScope,
@@ -82,7 +82,7 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
     )
 
     val dataUsageUpstream: StateFlow<String> = dataUsage.map { data ->
-        val sent = formatBits(data.upstreamData)
+        val sent = formatBytes(data.upstreamData)
         return@map application.getString(R.string.stats_up, sent)
     }.stateIn(
         scope = viewModelScope,
@@ -91,7 +91,7 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
     )
 
     val dataUsageDiffDownstream: StateFlow<String> = dataUsage.map { data ->
-        val receivedDiff = formatBits(data.downstreamDataPerSec)
+        val receivedDiff = formatBytes(data.downstreamDataPerSec)
         return@map "+${application.getString(R.string.stats_delta, receivedDiff)}"
     }.stateIn(
         scope = viewModelScope,
@@ -100,7 +100,7 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
     )
 
     val dataUsageDiffUpstream: StateFlow<String> = dataUsage.map { data ->
-        val receivedDiff = formatBits(data.upstreamDataPerSec)
+        val receivedDiff = formatBytes(data.upstreamDataPerSec)
         return@map "+${application.getString(R.string.stats_delta, receivedDiff)}"
     }.stateIn(
         scope = viewModelScope,
