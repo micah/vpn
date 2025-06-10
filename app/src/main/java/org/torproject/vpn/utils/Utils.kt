@@ -183,14 +183,14 @@ fun updateDataUsage(dataUsage: StateFlow<DataUsage>, downstream: Long, upstream:
     return updatedDataUsage
 }
 
-fun formatData(bytes: Long) = when {
+fun formatBytes(bytes: Long) = when {
     bytes < 1e6  -> "%.2f KB".format(bytes / 1e3)
     bytes < 1e9  -> "%.2f MB".format(bytes / 1e6)
     bytes < 1e12 -> "%.2f GB".format(bytes / 1e9)
     else         -> "%.2f TB".format(bytes / 1e12)
 }
 
-fun formatRate(bitsPerSec: Long) = when {
+fun formatBitRate(bitsPerSec: Long) = when { // Renamed formatRate to formatBitRate
     bitsPerSec < 1e3  -> "%.2f bit/s".format(bitsPerSec.toDouble())
     bitsPerSec < 1e6  -> "%.2f Kbit/s".format(bitsPerSec / 1e3)
     bitsPerSec < 1e9  -> "%.2f Mbit/s".format(bitsPerSec / 1e6)
