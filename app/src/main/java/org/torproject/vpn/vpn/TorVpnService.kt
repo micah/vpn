@@ -248,24 +248,7 @@ class TorVpnService : VpnService() {
                 is ConnectivityEvent -> {
                     VpnStatusObservable.updateInternetConnectivity(event.hasInternetConnectivity)
                 }
-                is VPNetworkLostEvent -> {
-                    if (OnionMasq.isRunning()) {
-                        // Always-on was turned off, while the VPN was running.
-                        // Try to restart VPN or stop gracefully.
-                        tryToRecoverVPN()
-                    }
-                }
             }
-        }
-    }
-
-    private fun tryToRecoverVPN() {
-        val intent = VpnServiceCommand.prepareVpn(this)
-        if (intent == null) {
-            establishVpn()
-        } else {
-            // User interaction is required. Stop VPN to return to a consistent state.
-            stop(true)
         }
     }
 
