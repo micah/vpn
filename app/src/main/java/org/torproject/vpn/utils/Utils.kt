@@ -170,11 +170,6 @@ fun getFormattedDate(timestamp: Long, locale: Locale?): String? {
     return sdf.format(timestamp)
 }
 
-fun getFormattedDate(timestamp: Long, locale: Locale?): String? {
-    val sdf = SimpleDateFormat("dd/MM/yy, HH:mm:ss.SSS", locale)
-    return sdf.format(timestamp)
-}
-
 fun updateDataUsage(dataUsage: StateFlow<DataUsage>, downstream: Long, upstream: Long): DataUsage {
     val lastDataUsage: DataUsage = dataUsage.value
     val updatedDataUsage = DataUsage()
