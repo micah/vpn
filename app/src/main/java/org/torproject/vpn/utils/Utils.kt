@@ -170,7 +170,12 @@ fun getFormattedDate(timestamp: Long, locale: Locale?): String? {
     return sdf.format(timestamp)
 }
 
-fun updateDataUsage(dataUsage: StateFlow<DataUsage>, downstream: Long, upstream: Long): DataUsage{
+fun getFormattedDate(timestamp: Long, locale: Locale?): String? {
+    val sdf = SimpleDateFormat("dd/MM/yy, HH:mm:ss.SSS", locale)
+    return sdf.format(timestamp)
+}
+
+fun updateDataUsage(dataUsage: StateFlow<DataUsage>, downstream: Long, upstream: Long): DataUsage {
     val lastDataUsage: DataUsage = dataUsage.value
     val updatedDataUsage = DataUsage()
     updatedDataUsage.downstreamData = downstream
@@ -183,6 +188,7 @@ fun updateDataUsage(dataUsage: StateFlow<DataUsage>, downstream: Long, upstream:
     return updatedDataUsage
 }
 
+// cumulative total data transferred (in bytes → MB/GB/TB)
 fun formatBytes(bytes: Long) = when {
     bytes < 1e6  -> "%.2f KB".format(bytes / 1e3)
     bytes < 1e9  -> "%.2f MB".format(bytes / 1e6)
@@ -190,13 +196,13 @@ fun formatBytes(bytes: Long) = when {
     else         -> "%.2f TB".format(bytes / 1e12)
 }
 
-fun formatBitRate(bitsPerSec: Long) = when { // Renamed formatRate to formatBitRate
+// instantaneous transfer rates (in bits per second)
+fun formatBitRate(bitsPerSec: Long) = when {
     bitsPerSec < 1e3  -> "%.2f bit/s".format(bitsPerSec.toDouble())
     bitsPerSec < 1e6  -> "%.2f Kbit/s".format(bitsPerSec / 1e3)
     bitsPerSec < 1e9  -> "%.2f Mbit/s".format(bitsPerSec / 1e6)
     else              -> "%.2f Gbit/s".format(bitsPerSec / 1e9)
 }
-
 fun getDpInPx(context: Context, dp: Float): Int {
     val scale: Float = context.resources.displayMetrics.density
     return (dp * scale + 0.5f).toInt()
