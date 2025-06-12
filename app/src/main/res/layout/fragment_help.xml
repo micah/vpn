@@ -69,7 +69,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:paddingHorizontal="@dimen/activity_horizontal_margin"
-                        android:onClick="@{handler::onFAQClicked}"
+                        android:onClick="@{handler::onOfflineHelpClicked}"
                         >
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="24dp"

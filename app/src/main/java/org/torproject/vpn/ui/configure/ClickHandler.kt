@@ -4,8 +4,6 @@ import android.view.View
 
 interface ClickHandler {
 
-    fun onHelpClicked(v: View)
-
     fun onAppsClicked(v: View)
 
     fun onAppIconClicked(v: View)

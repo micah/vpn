@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentHelpBinding
+import org.torproject.vpn.utils.navigateSafe
 
 class HelpFragment : Fragment(R.layout.fragment_help), ClickHandler {
 
@@ -23,14 +24,8 @@ class HelpFragment : Fragment(R.layout.fragment_help), ClickHandler {
 
 
 
-    override fun onFAQClicked(v: View) {
-        val webpage: Uri = Uri.parse("https://support.torproject.org")
-        val intent = Intent(ACTION_VIEW, webpage)
-        this.context?.let {
-            if (intent.resolveActivity(it.packageManager) != null) {
-                startActivity(intent)
-            }
-        }
+    override fun onOfflineHelpClicked(v: View) {
+        findNavController().navigateSafe(R.id.action_helpFragment_to_offlineHelpFragment)
     }
 
     override fun onReportBugClicked(v: View) {

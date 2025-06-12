@@ -17,9 +17,6 @@
             android:id="@+id/action_configureFragment_to_appearanceFragment"
             app:destination="@id/generalFragment" />
         <action
-            android:id="@+id/action_configureFragment_to_offlineHelpFragment"
-            app:destination="@+id/offlineHelpFragment" />
-        <action
             android:id="@+id/action_configureFragment_to_aboutFragment"
             app:destination="@+id/aboutFragment" />
         <action
@@ -57,6 +54,9 @@
         android:name="org.torproject.vpn.ui.help.HelpFragment"
         android:label="HelpFragment"
         >
+        <action
+            android:id="@+id/action_helpFragment_to_offlineHelpFragment"
+            app:destination="@+id/offlineHelpFragment" />
 
     </fragment>
     <fragment
