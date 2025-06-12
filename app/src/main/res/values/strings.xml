@@ -173,6 +173,7 @@
     <string name="new_circuits_warnings">New circuits warnings</string>
     <string name="new_circuits_warnings_description">Warn before reloading circuits.</string>
     <string name="view_faq">View our FAQ</string>
+    <string name="view_support_docs">View support docs</string>
     <string name="report_bug">Report a bug</string>
     <string name="contact_support">Contact support</string>
     <string name="help_description_wip">Tor VPN is a work in progress, and some features may not work as expected.</string>
