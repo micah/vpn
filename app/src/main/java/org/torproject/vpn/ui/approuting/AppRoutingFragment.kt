@@ -20,6 +20,7 @@ import org.torproject.vpn.ui.base.view.BaseDialogFragment
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
+import org.torproject.vpn.vpn.VpnStatusObservable
 
 class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -56,25 +57,28 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-        binding.toolbar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.refresh_circuits -> {
-                    if (preferenceHelper.warningsEnabled) {
-                        val dialog = BaseDialogFragment.createRefreshAllCircuitsDialog()
-                        dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
-                    } else {
-                        try {
-                            OnionMasq.refreshCircuits()
-                        } catch (e: ProxyStoppedException) {
-                            e.printStackTrace()
+        if (VpnStatusObservable.isVPNActive()) {
+            binding.toolbar.inflateMenu(R.menu.app_routing_menu)
+            binding.toolbar.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.refresh_circuits -> {
+                        if (preferenceHelper.warningsEnabled) {
+                            val dialog = BaseDialogFragment.createRefreshAllCircuitsDialog()
+                            dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
+                        } else {
+                            try {
+                                OnionMasq.refreshCircuits()
+                            } catch (e: ProxyStoppedException) {
+                                e.printStackTrace()
+                            }
                         }
+
+                        return@setOnMenuItemClickListener true
                     }
-
-                    return@setOnMenuItemClickListener true
+                    else -> return@setOnMenuItemClickListener false
                 }
-                else -> return@setOnMenuItemClickListener false
-            }
 
+            }
         }
     }
 

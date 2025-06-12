@@ -20,6 +20,7 @@ import org.torproject.vpn.ui.base.view.BaseDialogFragment
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
+import org.torproject.vpn.vpn.VpnStatusObservable
 
 
 class AppDetailFragment : Fragment(R.layout.fragment_app_detail) , SharedPreferences.OnSharedPreferenceChangeListener {
@@ -69,7 +70,7 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) , SharedPrefere
             findNavController().popBackStack()
         }
         val hasTorSupport = viewModel.hasTorSupport.value ?: false
-        if (!hasTorSupport) {
+        if (!hasTorSupport && VpnStatusObservable.isVPNActive()) {
             binding.toolbar.inflateMenu(R.menu.app_detail_menu)
             binding.toolbar.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
