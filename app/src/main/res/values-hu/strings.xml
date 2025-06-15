@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guide_version_number" translatable="false">%1$s</string>
+    <string name="up">Fel</string>
+    <string name="down">Le</string>
+    <string name="this_browser">Ez a böngésző</string>
+    <string name="action_open_app">%1$s megnyitása</string>
+    <string name="unknown">Ismeretlen</string>
+    <string name="guide_got_it">Értem</string>
+    <string name="debugging">Hibakeresés</string>
+    <string name="bridges">Hidak</string>
+    <string name="snowflake">Snowflake</string>
+    <string name="manual_bridge">Kézi kiválasztás</string>
+    <string name="telegram">Telegram</string>
+    <string name="web">Web</string>
+    <string name="appearance">Megjelenés</string>
+    <string name="warnings">Figyelmeztetések</string>
+    <string name="qs_error">Kapcsolódási hiba</string>
+    <string name="qs_show_error">Hiba megjelenítése</string>
+    <string name="start_again">Újrakezdés</string>
+    <string name="action_save">Mentés</string>
+    <string name="action_connect">Kapcsolódás</string>
+    <string name="action_cancel">Mégsem</string>
+    <string name="action_disconnect">Szétkapcsolás</string>
+    <string name="action_reconnect">Újrakapcsolódás</string>
+    <string name="action_try_again">Próbáld újra</string>
+    <string name="none">Nincs</string>
+    <string name="help">Segítség</string>
+    <string name="action_configure">Beállítás</string>
+    <string name="app_routing_browsers">Böngészők</string>
+    <string name="app_routing_other_apps">Egyéb alkalmazások</string>
+    <string name="apps">Appok</string>
+    <string name="guard">Őr</string>
+    <string name="signal">Jelzés</string>
+    <string name="report_bug">Hiba bejelentése</string>
+    <string name="contact_support">Kapcsolatfelvétel az ügyfélszolgálattal</string>
+    <string name="tor_logs">Tor Napló</string>
+    <string name="general">Általános</string>
+    <string name="error_something_went_wrong">Valami hiba történt</string>
+    <string name="error_view_logs">Naplóbejegyzések megtekintése</string>
+    <string name="connection">Kapcsolat</string>
+    <string name="action_copy_logs">Naplók másolása</string>
+    <string name="state_connected">Csatlakoztatva</string>
+    <string name="state_connecting">Kapcsolódás…</string>
+    <string name="state_disconnecting">Lekapcsolódás</string>
+    <string name="state_disconnected">Szétkapcsolódva</string>
+    <string name="email">E-mail</string>
+    <string name="action_refresh">Frissítés</string>
+    <string name="use_a_bridge">Használj hidat</string>
+    <string name="current_bridge">Aktuális híd</string>
+    <string name="change">Változtatás</string>
+    <string name="email_providers">Gmail vagy Riseup</string>
+    <string name="bridge_addresses">Híd címek</string>
+    <string name="about">Névjegy</string>
+    <string name="version">Verzió</string>
+    <string name="last_updated">Utoljára frissítve</string>
+    <string name="tor_project">Tor Project</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="bridge_settings">Hídbeállítások</string>
+    <string name="use_a_bridge_info">A hidak segíthetik a Tor hálózat elérését olyan helyeken, ahol a Tor blokkolt. Attól függően, hogy hol van egyik híd jobban működhet, mint egy másik.</string>
+    <string name="add_new_bridge">Új hidak hozzáadása</string>
+    <string name="always_on_vpn">Always-On VPN</string>
+    <string name="up_content_description">Feltöltés</string>
+    <string name="down_content_description">Letöltés</string>
+    <string name="exit_location_safest">Legbiztonságosabb</string>
+    <string name="app_icon">Alkalmazásikon</string>
+    <string name="connect_automatically">Kapcsolódás automatikusan</string>
+    <string name="privacy_policy">Adatvédelmi irányelvek</string>
+    <string name="open_source_licenses">Nyílt forrású licencek</string>
+    <string name="advanced">Fejlett</string>
+    <string name="app_name_variant_2" translatable="false">Flashlight</string>
+    <string name="stats_down" translatable="false">%1$s</string>
+    <string name="obfs4" translatable="false">obfs4</string>
+    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="stats_up" translatable="false">%1$s</string>
+    <string name="app_name_variant_1" translatable="false">Calculator</string>
+    <string name="use_bridges">Hidak használata</string>
+</resources>

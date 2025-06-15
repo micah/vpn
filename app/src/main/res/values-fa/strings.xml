@@ -2,21 +2,21 @@
 <resources>
     <string name="action_connect">اتصال</string>
     <string name="apps">کاره‌ها</string>
-    <string name="error_view_logs">دیدن گزارش‌ها</string>
+    <string name="error_view_logs">دیدن گزارش‌های تور</string>
     <string name="tor_logs">گزارش‌های تور</string>
     <string name="connection_description">پیکربندی چگونگی وصل شدن به تور</string>
     <string name="state_disconnected">قطع شده</string>
-    <string name="state_connecting">در حال وصل شدن</string>
+    <string name="state_connecting">وصل شدن…</string>
     <string name="state_connected">وصل شده</string>
     <string name="app_routing_other_apps">دیگر کاره‌ها</string>
     <string name="connection">اتصال</string>
     <string name="action_start">آغاز وی‌پی‌ان</string>
-    <string name="action_configure">پیکربندی(تنظیمات)</string>
+    <string name="action_configure">پیکربندی</string>
     <string name="action_reconnect">وصل شدن دوباره</string>
     <string name="action_disconnect">قطع شدن</string>
     <string name="action_try_again">دوباره تلاش کن</string>
     <string name="action_cancel">لغو</string>
-    <string name="state_disconnecting">در حال قطع شدن</string>
+    <string name="state_disconnecting">قطع شدن</string>
     <string name="app_routing_browsers">مرورگرها</string>
     <string name="guide_version_number" translatable="false">%1$s</string>
     <string name="up">بالا</string>
@@ -39,16 +39,15 @@
     <string name="app_routing_tor_apps">کاره‌های قدرت گرفته از تور</string>
     <string name="guide_bullet_head_2">ولی کارهای ریسکی نکنید</string>
     <string name="action_protect_this_app">محافظت از این کاره</string>
-    <string name="guide_bullet_head_1">آمادهٔ آغاز آزمونید</string>
-    <string name="title_guide">این کاره به شدّت
-\nآزمایشی است</string>
+    <string name="guide_bullet_head_1">گزارش مشکل‌ها</string>
+    <string name="title_guide">این کاره به شدّت \nآزمایشی است</string>
     <string name="notification_channel_description">نمایش به‌روز رسانی‌ها دربارهٔ وی‌پی‌ان تور.</string>
     <string name="always_on_vpn">وی‌پی‌ان همیشه روشن</string>
     <string name="app_name">وی‌پی‌ان تور</string>
     <string name="action_open_app">گشودن %1$s</string>
-    <string name="guide_bullet_text_1">فراموش نکنید که اشکالاتی که پیدا میکنید را به توسعه دهندگان ما گزارش کنید.</string>
+    <string name="guide_bullet_text_1">گزارش مشکلات پیدا شده به توسعه‌دهندگانمان را فراموش نکنید.</string>
     <string name="action_save">ذخیره</string>
-    <string name="use_a_bridge_info">پل‌ها کمک می‌کنند تا در جاهایی که تور مسدود است، به صورت امن به شبکه‌اش دسترسی داشته باشید. بسته به این که کجایید، ممکن است پلی بهتر از پل دیگر کار کند.</string>
+    <string name="use_a_bridge_info">پل‌ها در وصل شدن امن به شبکهٔ تور در جاهایی که مسدود است کمکتان می‌کنند. بسته به این که کجایید، ممکن است پلی بهتر از پل دیگر کار کند.</string>
     <string name="use_a_bridge">استفاده از پل</string>
     <string name="current_bridge">پل کنونی</string>
     <string name="email_providers">جی‌میل یا رایزآپ</string>
@@ -59,7 +58,7 @@
     <string name="telegram">تلگرام</string>
     <string name="bridges">پل‌ها</string>
     <string name="telegram_bot_subtitle">پیام به %s</string>
-    <string name="add_new_bridge">افزودن پلی جدید</string>
+    <string name="add_new_bridge">افزودن پل‌های جدید</string>
     <string name="bridge_settings">تنظیمات پل</string>
     <string name="obfs4_built_in">obfs4 (توکار)</string>
     <plurals name="n_bridges">
@@ -85,7 +84,7 @@
     <string name="routed_over_country">مسیربابی شده روی %1$s</string>
     <string name="circuits">مدارها</string>
     <string name="this_app">این کاره</string>
-    <string name="exit_location_automatic">خودکار (امن‌ترین)</string>
+    <string name="exit_location_automatic">کاتوره‌ای برای هر مدار</string>
     <string name="closed_connection">%1$s-&gt;%2$s: اتّصال بسته</string>
     <string name="stats_delta">%1$s/ث</string>
     <string name="exit_location">مکان خروج</string>
@@ -107,8 +106,8 @@
     <string name="qs_error">خطای اتصال</string>
     <string name="qs_show_error">نمایش خطا</string>
     <string name="get_new_bridges_description">از آنجایی که آدرس های پل عمومی نیستند، باید از پروژه Tor درخواست کنید.</string>
-    <string name="bridge_address_description">یک پل ارائه شده توسط یک سازمان مورد اعتماد یا شخصی که می‌شناسید اضافه کنید</string>
-    <string name="exit_location_description">حالت خودکار رله های خروج را از هر نقطه از شبکه، بدون توجه به مکان، انتخاب می کند. این به محافظت از ناشناس بودن شما با جلوگیری از مرتبط شدن فعالیت های شما کمک می کند.</string>
+    <string name="bridge_address_description">یک یا چند پل ارائه شده توسط یک سازمان یا شخص مورد اعتماد اضافه کنید.</string>
+    <string name="exit_location_description">پایگاه‌های وب و کاره‌ها هنگم استفاده از تور فکر خواهند کرد که از همان گشور رلهٔ خروجی که آخرین گذر در هر کدام از مدارهای تورتان است وصل شده‌اید.</string>
     <string name="description_independent_tor_powered_app">این کاره از اتصال تور خود مستقل از وی‌پی‌ان تور استفاده می کند. مشاهده و پیکربندی اتّصالش در %1$s.</string>
     <string name="failed_connection">%1$s-&gt;%2$s: شکست در اتّصال به %3$s: ‏%4$s (کاره %5$d)</string>
     <string name="reload_all_circuits_description">مدارهای جدیدی برای همهٔ کاره‌تان برقرار خواهد شد. در نتیجه ممکن است برخی کاره‌ها و پایگاه‌های وب نشناسندتان و از خدماتشان خارجتان کنند.</string>
@@ -123,10 +122,10 @@
     <string name="general">عمومی</string>
     <string name="appearance">ظاهر</string>
     <string name="warnings">هشدارها</string>
-    <string name="start_again">شروع دوباره</string>
+    <string name="start_again">آغاز دوباره</string>
     <string name="report_bug">گزارش مشکل</string>
     <string name="contact_support">تماس با پشتیبانی</string>
-    <string name="email">پست الکترونیکی</string>
+    <string name="email">رایانامه</string>
     <string name="action_refresh">نوسازی</string>
     <string name="signal">سیگنال</string>
     <string name="change">تغییر</string>
@@ -138,11 +137,41 @@
     <string name="new_bridges">پل‌های جدید می‌خواهم</string>
     <string name="bridge_bot">روبوت پل</string>
     <string name="bot_msg_welcome">خوش آمدی مسافر خسته</string>
-    <string name="bot_msg_results">پل‌هایتان</string>
+    <string name="bot_msg_results">پل‌هایتان:</string>
     <string name="refresh_all_circuits">نوسازی همهٔ مدارها؟</string>
     <string name="fetching_bridges">واکشیدن پل‌های جدیدتان…</string>
     <string name="new_bridges_result">پل‌های جدیدتان:</string>
     <string name="help_description_bug_report">اگر به مشکلی برخوردید که در پرسش‌های پرتکرار پاسخ داده نشده، لطفاً گزارش مشکلی گشوده یا با پشتیبانی تماس بگیرید.</string>
     <string name="bug_gitlab">روی گیت‌لب</string>
     <string name="use_bridges">استفاده از پل‌ها</string>
+    <string name="about_description">دانستن بیش‌تر دربارهٔ وی‌پی‌ان تور</string>
+    <string name="version">نگارش</string>
+    <string name="about_description_long">وی‌پی‌ان تور کارهٔ وی‌پی‌انی آزمایشی بوده که به دست %1$s، توسعه دهندگان تور و مرورگر تور —قوی ترین ابزارهای جهان برای محرمانگی و آزادی برخط— ساخته شده.</string>
+    <string name="about">درباره</string>
+    <string name="last_updated">آخرین به‌روز رسانی</string>
+    <string name="tor_project">پروژهٔ تور</string>
+    <string name="no_internet">بدون اینترنت</string>
+    <string name="app_routing_system_apps">کاره‌های سامانه‌ای</string>
+    <string name="up_content_description">بارگذاری</string>
+    <string name="down_content_description">بارگیری</string>
+    <string name="exit_location_safest">امن‌ترین</string>
+    <string name="app_routing_hide_apps">نهفتن %1$s کاره</string>
+    <string name="app_routing_show_apps">نمایش %1$s کاره</string>
+    <string name="current_state">وضعیت کنونی:</string>
+    <string name="privacy_policy">سیاست حریم شخصی</string>
+    <string name="open_source_licenses">مجوزهای منبع باز</string>
+    <string name="app_icon">نقشک کاره</string>
+    <string name="connect_automatically_description">وصل شدن خودکار به شبکهٔ تور هنگام اجرا</string>
+    <string name="advanced">پیشرفته</string>
+    <string name="connect_automatically">اتصال به صورت خودکار</string>
+    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="stats_up" translatable="false">%1$s</string>
+    <string name="stats_down" translatable="false">%1$s</string>
+    <string name="obfs4" translatable="false">obfs4</string>
+    <string name="app_name_variant_1" translatable="false">Calculator</string>
+    <string name="app_name_variant_2" translatable="false">Flashlight</string>
+    <string name="default_icon_and_name">آیکون و اسم پیشفرض</string>
+    <string name="about_tor_vpn">درباره تور وی‌پی‌ان</string>
+    <string name="no_bridge">بدون پل</string>
+    <string name="the_internet">اینترنت</string>
 </resources>

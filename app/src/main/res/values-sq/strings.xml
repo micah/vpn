@@ -8,14 +8,14 @@
     <string name="apps">Aplikacione</string>
     <string name="action_disconnect">Shkëputu</string>
     <string name="state_connected">I lidhur</string>
-    <string name="state_connecting">Po lidhet</string>
+    <string name="state_connecting">Po lidhet…</string>
     <string name="error_something_went_wrong">Diç shkoi ters</string>
     <string name="quickstart">Vetëlidhu</string>
     <string name="connection">Lidhje</string>
     <string name="this_browser">Ky shfletues</string>
     <string name="action_open_app">Hap %1$s</string>
     <string name="guard">Guard</string>
-    <string name="guide_version_number">%1$s</string>
+    <string name="guide_version_number" translatable="false">%1$s</string>
     <string name="action_try_again">Riprovoni</string>
     <string name="state_disconnected">E shkëputur</string>
     <string name="app_routing_browsers">Shfletues</string>
@@ -36,7 +36,7 @@
     <string name="snowflake_built_in">Snowflake (e brendshme)</string>
     <string name="idle_toolbar_title">VPN Tor-i</string>
     <string name="circuits">Qarqe</string>
-    <string name="error_view_logs">Shihni regjistrat</string>
+    <string name="error_view_logs">Shihni regjistra Tor-i</string>
     <string name="connection_description">Formësoni se si lidhet me Tor-in</string>
     <string name="label_not_protected">Asnjë i mbrojtur</string>
     <string name="action_refresh_circuits">Rifresko qarqet</string>
@@ -44,14 +44,14 @@
     <string name="this_app">Këtë aplikacion</string>
     <string name="reload_all_circuits_description">Qarqe të rinj do të përdoren për krejt aplikacionet tuaja. Për pasojë, disa aplikacione dhe sajte mund të mos ju njohin më dhe mund të bëjnë daljen tuaj nga llogaritë me shërbimet e tyre.</string>
     <string name="action_paste_bridges">Hidhni këtu adresat e urave tuaja</string>
-    <string name="exit_location_automatic">Automatikisht (më e sigurta)</string>
+    <string name="exit_location_automatic">Kuturu, për qark</string>
     <string name="none">Asnjë</string>
     <string name="new_connection_hop">%1$s-&gt;%2$s: hop %3$d: %4$s (%5$s)</string>
     <string name="bridges">Ura</string>
     <string name="closed_connection">%1$s-&gt;%2$s: lidhjen e mbyllur</string>
     <string name="action_stop">Ndale VPN-në</string>
-    <string name="exit_location_description">Mënyra e automatizuar përzgjedh rele dalje prej ngado në rrjet, pavarësisht vendndodhjes. Kjo ndihmon të mbrohet anonimiteti juaj, duke penguar pikasje lidhjesh mes veprimtarive tuaja.</string>
-    <string name="add_new_bridge">Shtoni një urë të re</string>
+    <string name="exit_location_description">Kur përdoret Tor, sajtet dhe aplikacionet do të mendojnë se po lidheni nga i njëjti vend me relenë tuaj të daljes, e cila është hopi përfundimtar në secilin nga qarqet tuaj Tor.</string>
+    <string name="add_new_bridge">Shtoni ura të reja</string>
     <string name="obfs4_description">E bën trafikun tuaj të duket si të dhëna kuturu</string>
     <string name="description_independent_tor_powered_app">Ky aplikacion përdor lidhje të vetën Tor, të pavarur nga VPN-ja Tor. Në vend të kësaj, shihni dhe formësoni lidhjen e tij në %1$s.</string>
     <string name="app_routing_other_apps">Aplikacione të tjera</string>
@@ -79,7 +79,7 @@
     <string name="bridge_addresses">Adresa urash</string>
     <string name="error_detail_message">VPN Tor s’u lidh dot me rrjetin Tor.</string>
     <string name="circuit_app_description">Qark për %1$s</string>
-    <string name="bridge_address_description">Shtoni një urë të dhënë nga një ent i besueshëm, ose dikush që njihni</string>
+    <string name="bridge_address_description">Shtoni një, ose më tepër ura të dhëna nga një person, ose ent i besueshëm.</string>
     <string name="guide_bullet_text_1">Mos harroni t’u njoftoni zhvilluesve tanë çfarëdo të mete që gjeni.</string>
     <string name="app_routing_tor_apps">Aplikacione të tjera të bazuara në Tor</string>
     <string name="action_save">Ruaje</string>
@@ -90,10 +90,9 @@
     <string name="action_protect_this_app">Mbroje këtë aplikacion</string>
     <string name="kill_switch_description">Bllokoju aplikacioneve lidhjen në internet, nëse s’kapet dot rrjeti Tor</string>
     <string name="manual_bridge">Përzgjedhje dorazi</string>
-    <string name="guide_bullet_head_1">Jeni gati për t’ia filluar testimit</string>
+    <string name="guide_bullet_head_1">Njoftoni të Meta</string>
     <string name="action_reload_circuits">Ringarko qarqet</string>
-    <string name="title_guide">Ky aplikacion është
-\ntejet eksperimental</string>
+    <string name="title_guide">Ky aplikacion është \ntejet eksperimental</string>
     <string name="notification_channel_description">Shfaq përditësime rreth TorVPN-së.</string>
     <string name="always_on_vpn">VPN “Përherë në punë”</string>
     <string name="app_name">VPN Tor-i</string>
@@ -129,7 +128,7 @@
     <string name="fetching_bridges">Po sillen urat tuaja të reja…</string>
     <string name="new_bridges_result">Ja urat tuaja të reja:</string>
     <string name="bot_msg_welcome">Mirë se vini, rrugëtar i sfilitur</string>
-    <string name="bot_msg_results">Ja urat tuaja</string>
+    <string name="bot_msg_results">Ja urat tuaja:</string>
     <string name="bridge_bot">Robot Urash</string>
     <string name="contact_support">Lidhuni me asistencën</string>
     <string name="signal">Signal</string>
@@ -145,4 +144,35 @@
     <string name="refresh_all_circuits">Të rifreskohet krejt qarqet?</string>
     <string name="action_refresh">Rifreskoje</string>
     <string name="obfs4_bridge">urë obfs4</string>
+    <string name="last_updated">Përditësuar së fundi më</string>
+    <string name="about">Mbi</string>
+    <string name="version">Version</string>
+    <string name="tor_project">Projekti Tor</string>
+    <string name="about_description_long">Tor VPN është një aplikacion VPN eksperimental i krijuar nga %1$s, zhvillues të Tor-it dhe të Shfletuesit Tor—mjeteve më të fuqishme në botë për privatësi dhe liri internetore.</string>
+    <string name="about_description">Shihni mër tepër rreth Tor VPN-së</string>
+    <string name="no_internet">S’ka internet</string>
+    <string name="current_state">Gjendje e tanishme:</string>
+    <string name="up_content_description">Ngarkim</string>
+    <string name="down_content_description">Shkarkim</string>
+    <string name="exit_location_safest">Më e sigurta</string>
+    <string name="app_routing_hide_apps">Fshih aplikacione %1$s</string>
+    <string name="app_routing_system_apps">Aplikacione sistemi</string>
+    <string name="app_routing_show_apps">Shfaq aplikacione %1$s</string>
+    <string name="app_icon">Ikonë aplikacioni</string>
+    <string name="connect_automatically_description">Lidhu vetvetiu me Rrjetin Tor, kur bëhet nisja</string>
+    <string name="privacy_policy">Rregulla privatësie</string>
+    <string name="open_source_licenses">Licenca me burim të hapët</string>
+    <string name="advanced">Të mëtejshme</string>
+    <string name="the_internet">Interneti</string>
+    <string name="about_tor_vpn">Mbi VPN-në Tor</string>
+    <string name="default_icon_and_name">Ikonë dhe emër parazgjedhje</string>
+    <string name="no_bridge">Pa përdorim urash</string>
+    <string name="connect_automatically">Lidhu vetvetiu</string>
+    <string name="stats_down" translatable="false">%1$s</string>
+    <string name="obfs4" translatable="false">obfs4</string>
+    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="stats_up" translatable="false">%1$s</string>
+    <string name="app_name_variant_1" translatable="false">Calculator</string>
+    <string name="app_name_variant_2" translatable="false">Flashlight</string>
+    <string name="add_bridge">Shtoni ura</string>
 </resources>

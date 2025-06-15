@@ -14,7 +14,7 @@
     <string name="action_refresh_circuits">Endurnýja rásir</string>
     <string name="action_copy_logs">Afrita atvikaskrár</string>
     <string name="state_connected">Tengt</string>
-    <string name="state_connecting">Tengist</string>
+    <string name="state_connecting">Tengist…</string>
     <string name="state_disconnecting">Aftengist</string>
     <string name="state_disconnected">Aftengt</string>
     <string name="reload_app_circuits_description">Nýjum rásum verður komið á fyrir einungis þetta forrit. Þar af leiðandi gætu sum forrit og vefsvæði ekki þekkt þig og skráð þig þá út úr þjónustum sínum.</string>
@@ -31,18 +31,18 @@
     <string name="apps">Forrit</string>
     <string name="guard">Vörður (guard)</string>
     <string name="guide_got_it">Náði því</string>
-    <string name="error_view_logs">Skoða atvikaskrár</string>
+    <string name="error_view_logs">Skoða atvikaskrár Tor</string>
     <string name="tor_logs">Atvikaskrár Tor</string>
     <string name="connection_description">Stilltu hvernig á að tengjast við Tor</string>
     <string name="label_not_protected">Ekkert verndað</string>
     <string name="unknown">Óþekkt</string>
     <string name="this_app">Þetta forrit</string>
     <string name="reload_all_circuits_description">Nýjum rásum verður komið á fyrir öll forritin þín. Þar af leiðandi gætu sum forrit og vefsvæði ekki þekkt þig og skráð þig þá út úr þjónustum sínum.</string>
-    <string name="exit_location_automatic">Sjálfvirkt (öruggast)</string>
+    <string name="exit_location_automatic">Tilviljunarkennt á hverja rás</string>
     <string name="new_connection_hop">%1$s-&gt;%2$s: hopp %3$d: %4$s (%5$s)</string>
     <string name="closed_connection">%1$s-&gt;%2$s: lokaði tengingu</string>
-    <string name="stats_down">%1$s</string>
-    <string name="exit_location_description">Sjálfvirkur hamur velur útgangsendurvarpa einhversstaðar í netkerfinu, burtséð frá staðsetningu. Þetta hjálpar til við að vernda nafnleynd þinni með því að koma í veg fyrir að hægt sé að tengja saman aðgerðir þínar á mismunandi stöðum.</string>
+    <string name="stats_down" translatable="false">%1$s</string>
+    <string name="exit_location_description">Á meðan verið er að nota Tor, munu vefsvæði og forrit halda að þú sért að tengjast frá sama landi og útgangsendurvarpinn er staddur í, þangað sem síðasta hoppið í Tor-rásunum þínum beinist.</string>
     <string name="app_routing_other_apps">Önnur forrit</string>
     <string name="apps_description_all_protected">Öll forrit vernduð</string>
     <string name="kill_switch">Lokari</string>
@@ -65,11 +65,10 @@
     <string name="guide_bullet_head_2">En ekki gera neitt áhættusamt</string>
     <string name="bootstrap_at">Ræsiferli á: %1$s</string>
     <string name="kill_switch_description">Komdu í veg fyrir að forrit tengist við internetið ef ekki næst í Tor-netkerfið</string>
-    <string name="guide_bullet_head_1">Þú ert klár í að hefja prófanir</string>
-    <string name="stats_up">%1$s</string>
+    <string name="guide_bullet_head_1">Tilkynna villur</string>
+    <string name="stats_up" translatable="false">%1$s</string>
     <string name="action_reload_circuits">Endurlesa rásir</string>
-    <string name="title_guide">Þetta forrit er á
-\nmiklu tilraunastigi</string>
+    <string name="title_guide">Þetta forrit er á \nmiklu tilraunastigi</string>
     <string name="notification_channel_description">Sýnir uppfærslur á TorVPN.</string>
     <string name="always_on_vpn">Alltaf á VPN</string>
     <string name="app_routing_browsers">Vafrar</string>
@@ -82,7 +81,7 @@
     <string name="action_paste_bridges">Límdu vistföng brúanna þinna hér</string>
     <string name="none">Engin</string>
     <string name="bridges">Brýr</string>
-    <string name="add_new_bridge">Bæta við nýrri brú</string>
+    <string name="add_new_bridge">Bæta við nýjum brúm</string>
     <string name="obfs4_description">Lætur umferðina þína líta út eins og tilviljanakennd gögn</string>
     <string name="description_independent_tor_powered_app">Þetta forrit notar sína eigin Tor-tengingu, óháða þeirri í Tor VPN. Skoðaðu frekar og stilltu tenginguna í %1$s.</string>
     <string name="bridge_settings">Stillingar brúar</string>
@@ -97,11 +96,11 @@
     <string name="current_bridge">Núverandi brú</string>
     <string name="snowflake">Snowflake</string>
     <string name="bridge_addresses">Vistföng brúa</string>
-    <string name="bridge_address_description">Bættu við brú frá einhverjum sem þú þekkir eða treystir</string>
+    <string name="bridge_address_description">Límdu inn vistföng brúa sem þú þekkir nú þegar</string>
     <string name="action_save">Vista</string>
-    <string name="snowflake_description">Endurbeinir tengingunni þinni í gegnum Snowflake-milliþjóna svo hún líti út eins og þú sért í myndsímtali</string>
+    <string name="snowflake_description">Lætur tenginguna þína líta út eins og þú sért í myndsímtali</string>
     <string name="manual_bridge">Handvirkt val</string>
-    <string name="built_in_bridges">Velja innbyggða brú</string>
+    <string name="built_in_bridges">Brýrnar þínar</string>
     <string name="general">Almennt</string>
     <string name="web">Vefur</string>
     <string name="telegram">Telegram</string>
@@ -115,14 +114,14 @@
     <string name="email">Tölvupóstur</string>
     <string name="help_description_wip">Tor VPN er alltaf í vinnslu og mögulega eru einhverjir eiginleikar sem virka ekki eins og búist má við.</string>
     <string name="get_new_bridges_description">Þar sem vistföng brúa eru ekki opinber, þarft þú að biðja um slíkt frá Tor-verkefninu.</string>
-    <string name="bot_msg_results">Hér eru brýrnar þínar</string>
+    <string name="bot_msg_results">Hér eru brýrnar þínar:</string>
     <string name="start_again">Byrja aftur</string>
-    <string name="get_new_bridges">Sækja nýjar brýr</string>
+    <string name="get_new_bridges">Finna fleiri brýr</string>
     <string name="new_circuits_warnings">Aðvaranir nýrra rása</string>
     <string name="apps_description">Veldu forrit til að beina í gegnum Tor</string>
     <string name="general_description">Sýsla með almennar stillingar</string>
     <string name="refresh_all_circuits">Endurlesa allar rásir?</string>
-    <string name="ask_bridge_bot">Spyrðu brúa-yrkið</string>
+    <string name="ask_bridge_bot">Biðja um brýr</string>
     <string name="email_providers">Gmail eða Riseup</string>
     <string name="web_bot_subtitle">Farðu á %s</string>
     <string name="new_circuits_warnings_description">Aðvara áður en rásum er enduhlaðið.</string>
@@ -142,9 +141,38 @@
     <string name="bot_msg_welcome">Velkominn, lúni ferðalangur</string>
     <string name="launcher_hint">Veldu táknmynd og heiti fyrir heimaskjáinn þinn og forritabakkann. Sjálfgefin táknmynd og nafn Tor VPN verða áfram notuð í tilkynningum.</string>
     <string name="label_some_protected">Sum varin</string>
-    <string name="signal">Signal</string>
     <string name="whatsapp">Whatsapp</string>
     <string name="action_refresh">Endurlesa</string>
     <string name="change">Breyta</string>
     <string name="use_bridges">Nota brýr</string>
+    <string name="about">Um hugbúnaðinn</string>
+    <string name="last_updated">Síðast uppfært</string>
+    <string name="tor_project">Tor-verkefnið</string>
+    <string name="about_description">Fræðstu meira um Tor VPN</string>
+    <string name="version">Útgáfa</string>
+    <string name="about_description_long">Tor VPN er VPN-forrit á tilraunastigi, hönnuð af %1$s, sem þróað hafa Tor og Tor-vafrann - öflugustu verkfærin til að gæta öryggis og frelsis á netinu.</string>
+    <string name="signal">Signal</string>
+    <string name="exit_location_safest">Öruggast</string>
+    <string name="up_content_description">Senda inn</string>
+    <string name="down_content_description">Sækja</string>
+    <string name="privacy_policy">Meðferð persónuupplýsinga</string>
+    <string name="open_source_licenses">Opin notkunarleyfi</string>
+    <string name="connect_automatically_description">Tengjast sjálfkrafa við Tor-netið við ræsingu</string>
+    <string name="advanced">Ítarlegt</string>
+    <string name="current_state">Núverandi staða:</string>
+    <string name="default_icon_and_name">Sjálfgefin táknmynd og nafn</string>
+    <string name="about_tor_vpn">Um Tor VPN</string>
+    <string name="app_icon">Forritstákn</string>
+    <string name="no_internet">Engin internettenging</string>
+    <string name="no_bridge">Ekki að nota brýr</string>
+    <string name="connect_automatically">Tengjast sjálfkrafa</string>
+    <string name="app_routing_system_apps">Kerfisforrit</string>
+    <string name="app_routing_hide_apps">Fela %1$s forrit</string>
+    <string name="the_internet">Internetið</string>
+    <string name="app_routing_show_apps">Birta %1$s forrit</string>
+    <string name="app_name_variant_2" translatable="false">Flashlight</string>
+    <string name="obfs4" translatable="false">obfs4</string>
+    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="app_name_variant_1" translatable="false">Calculator</string>
+    <string name="copied_clipboard">Afritað á klippiborð</string>
 </resources>

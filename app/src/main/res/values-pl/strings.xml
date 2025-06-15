@@ -3,7 +3,7 @@
     <string name="action_refresh_circuits">Odśwież obwody</string>
     <string name="action_copy_logs">Skopiuj dzienniki</string>
     <string name="state_connected">Połączono</string>
-    <string name="state_connecting">Łączenie</string>
+    <string name="state_connecting">Łączenie…</string>
     <string name="state_disconnecting">Rozłączanie</string>
     <string name="state_disconnected">Rozłączono</string>
     <string name="app_routing_tor_apps">Aplikacje obsługiwane przez Tor</string>
@@ -20,14 +20,14 @@
     <string name="guide_bullet_text_2">To jest robocza wersja aplikacji i nie jest bezpieczna pod względem wrażliwych działań.</string>
     <string name="stats_combined">↓%2$s %1$s/s - ↑%4$s %3$s/s</string>
     <string name="error_detail_message">Tor VPN nie może połączyć się z siecią Tor.</string>
-    <string name="error_view_logs">Zobacz dzienniki</string>
+    <string name="error_view_logs">Zobacz dzienniki Tor</string>
     <string name="connection">Połączenie</string>
     <string name="kill_switch_description">Zablokuj aplikacjom łączenie się z Internetem, jeśli sieć Tor jest nieosiągalna</string>
     <string name="quickstart">Automatyczne polączenie</string>
     <string name="quickstart_description">Połącz się z siecią Tor automatycznie po uruchomieniu</string>
     <string name="exit_location">Lokalizacja wyjściowa</string>
-    <string name="exit_location_description">Tryb automatyczny wybiera przekaźniki wyjściowe z dowolnego miejsca w sieci, niezależnie od lokalizacji. Pomaga to chronić Twoją anonimowość, zapobiegając łączeniu Twoich działań.</string>
-    <string name="exit_location_automatic">Automatyczny (najbezpieczniejszy)</string>
+    <string name="exit_location_description">Podczas korzystania z sieci Tor witryny internetowe i aplikacje będą uważać, że łączysz się z tego samego kraju, co Twój przekaźnik wyjściowy, który jest ostatnim przeskokiem w każdym z Twoich obwodów sieci Tor.</string>
+    <string name="exit_location_automatic">Losowo na obwód</string>
     <string name="this_browser">Ta przeglądarka</string>
     <string name="this_app">Ta aplikacja</string>
     <string name="tor_powered_app">Aplikacja obsługiwana przez Tor</string>
@@ -54,11 +54,11 @@
     <string name="action_start">Uruchom VPN</string>
     <string name="action_stop">Zatrzymaj VPN</string>
     <string name="guide_bullet_head_2">Ale nie rób nic ryzykownego</string>
-    <string name="guide_bullet_head_1">Możesz przystąpić do rozpoczęcia testów</string>
-    <string name="guide_version_number">%1$s</string>
+    <string name="guide_bullet_head_1">Zgłoś błędy</string>
+    <string name="guide_version_number" translatable="false">%1$s</string>
     <string name="guide_bullet_text_1">Nie zapomnij zgłosić wszelkich znalezionych błędów naszym programistom.</string>
-    <string name="stats_down">%1$s</string>
-    <string name="stats_up">%1$s</string>
+    <string name="stats_down" translatable="false">%1$s</string>
+    <string name="stats_up" translatable="false">%1$s</string>
     <string name="connection_description">Skonfiguruj sposób łączenia się z Tor</string>
     <string name="stats_delta">%1$s/s</string>
     <string name="error_something_went_wrong">Coś poszło nie tak</string>
@@ -74,16 +74,15 @@
     <string name="unknown">Nieznane</string>
     <string name="connect_direct_to_tor">Połącz się bezpośrednio z siecią Tor</string>
     <string name="circuit_app_description">Obwód dla %1$s</string>
-    <string name="title_guide">Ta aplikacja jest bardzo
-\neksperymentalna</string>
-    <string name="use_a_bridge_info">Mostki pomagają w bezpiecznym dostępie do sieci Tor w miejscach, w których ją zablokowano. W zależności od tego, gdzie jesteś, jeden mostek może działać lepiej niż inny.</string>
+    <string name="title_guide">Ta aplikacja jest bardzo \neksperymentalna</string>
+    <string name="use_a_bridge_info">Mostki pomagają w bezpiecznym dostępie do sieci Tor w miejscach, w których ją zablokowano. W zależności od tego, gdzie jesteś, jeden mostek może działać lepiej niż inny.</string>
     <string name="bridge_option_obfs4_built">obfs4 (wbudowany)</string>
     <string name="snowflake_built_in">Snowflake (wbudowany)</string>
     <string name="action_paste_bridges">Wklej tutaj adresy swoich mostków</string>
     <string name="none">Brak</string>
     <string name="bridges">Mostki</string>
-    <string name="add_new_bridge">Dodaj nowy mostek</string>
-    <string name="obfs4_description">Sprawia, że Twój ruch wygląda jak losowe dane</string>
+    <string name="add_new_bridge">Dodaj nowe mostki</string>
+    <string name="obfs4_description">Maskuje ruch jako losowe dane</string>
     <string name="bridge_settings">Ustawienia mostków</string>
     <string name="obfs4_built_in">obfs4 (wbudowany)</string>
     <string name="debugging">Debugowanie</string>
@@ -98,18 +97,18 @@
     <string name="current_bridge">Obecny mostek</string>
     <string name="snowflake">Snowflake</string>
     <string name="bridge_addresses">Adresy mostków</string>
-    <string name="bridge_address_description">Dodaj mostek dostarczony przez zaufaną organizację lub osobę, którą znasz</string>
+    <string name="bridge_address_description">Wklej adresy mostków, które już znasz</string>
     <string name="action_save">Zapisz</string>
-    <string name="snowflake_description">Kieruje połączenie przez serwery proxy Snowflake, aby wyglądało to tak, że użytkownik prowadzi rozmowę wideo</string>
+    <string name="snowflake_description">Maskuje ruch jako połączenie wideo</string>
     <string name="manual_bridge">Wybór ręczny</string>
-    <string name="built_in_bridges">Wybierz wbudowany mostek</string>
+    <string name="built_in_bridges">Twoje mostki</string>
     <string name="description_independent_tor_powered_app">Ta aplikacja korzysta z własnego połączenia Tor, niezależnego od Tor VPN. Zamiast tego wyświetl i skonfiguruj połączenie w %1$s.</string>
     <string name="email_providers">Gmail lub Riseup</string>
     <string name="get_new_bridges_description">Ponieważ adresy mostków nie są publiczne, należy zażądać takiego adresu z Tor Project.</string>
     <string name="telegram">Telegram</string>
     <string name="telegram_bot_subtitle">Wiadomość %s</string>
-    <string name="ask_bridge_bot">Zapytaj bota mostka</string>
-    <string name="get_new_bridges">Uzyskaj nowe mostki</string>
+    <string name="ask_bridge_bot">Poproś o mostki</string>
+    <string name="get_new_bridges">Znajdź więcej mostków</string>
     <string name="email_bot_subtitle">E-mail %s</string>
     <string name="web">Web</string>
     <string name="web_bot_subtitle">Odwiedź %s</string>
@@ -130,8 +129,8 @@
     <string name="new_bridges_result">Oto nowe mostki:</string>
     <string name="bridge_bot">Bot mostkowy</string>
     <string name="start_again">Zacznij od nowa</string>
-    <string name="use_bridges">Użyj mostków</string>
-    <string name="new_bridges">Potrzebuję nowych mostków</string>
+    <string name="use_bridges">Zapisz mostki</string>
+    <string name="new_bridges">Daj mi nowe mostki</string>
     <string name="fetching_bridges">Pobieram nowe mostki…</string>
     <string name="bot_msg_welcome">Witaj, zmęczony podróżniku</string>
     <string name="bot_msg_results">Oto Twoje mostki</string>
@@ -149,4 +148,34 @@
     <string name="refresh_all_circuits">Odświeżyć wszystkie obwody?</string>
     <string name="change">Zmień</string>
     <string name="obfs4_bridge">mostek obfs4</string>
+    <string name="version">Wersja</string>
+    <string name="last_updated">Ostatnio zaktualizowana</string>
+    <string name="tor_project">Projekt Tor</string>
+    <string name="about">Informacje</string>
+    <string name="about_description">Dowiedz się więcej o Tor VPN</string>
+    <string name="about_description_long">Tor VPN to eksperymentalna aplikacja VPN stworzona przez %1$s, twórców sieci Tor i przeglądarki Tor Browser — najsilniejszych na świecie narzędzi zapewniających prywatność i wolność w Internecie.</string>
+    <string name="no_internet">Brak internetu</string>
+    <string name="current_state">Bieżący stan:</string>
+    <string name="up_content_description">Prześlij</string>
+    <string name="down_content_description">Pobierz</string>
+    <string name="app_routing_show_apps">Pokaż aplikacje: %1$s</string>
+    <string name="app_routing_system_apps">Aplikacje systemowe</string>
+    <string name="app_routing_hide_apps">Ukryj aplikacje: %1$s</string>
+    <string name="exit_location_safest">Najbezpieczniejszy</string>
+    <string name="privacy_policy">Polityka prywatności</string>
+    <string name="connect_automatically">Połącz automatycznie</string>
+    <string name="connect_automatically_description">Połącz się z siecią Tor automatycznie po uruchomieniu</string>
+    <string name="advanced">Zaawansowane</string>
+    <string name="open_source_licenses">Licencje typu open source</string>
+    <string name="app_icon">Ikona aplikacji</string>
+    <string name="about_tor_vpn">Informacje o Tor VPN</string>
+    <string name="default_icon_and_name">Domyślna ikona i nazwa</string>
+    <string name="no_bridge">Bez używania mostków</string>
+    <string name="the_internet">Internet</string>
+    <string name="app_name_variant_1" translatable="false">Calculator</string>
+    <string name="app_name_variant_2" translatable="false">Flashlight</string>
+    <string name="obfs4" translatable="false">obfs4</string>
+    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="copied_clipboard">Skopiowano do schowka</string>
+    <string name="add_bridge">Dodaj mostki</string>
 </resources>

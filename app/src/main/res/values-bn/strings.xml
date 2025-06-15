@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guide_version_number" translatable="false">%1$s</string>
+    <string name="general">সাধারণ</string>
+    <string name="error_something_went_wrong">কিছু একটা ভুল হয়েছে</string>
+    <string name="connection">সংযোগ</string>
+    <string name="up">উপরে</string>
+    <string name="down">নিচে</string>
+    <string name="this_browser">এই ব্রাউজার</string>
+    <string name="guard">গার্ড</string>
+    <string name="guide_got_it">বুঝেছি</string>
+    <string name="use_a_bridge">সেতু ব্যবহার করো</string>
+    <string name="none">কোনটিই নয়</string>
+    <string name="appearance">উপস্থিতি</string>
+    <string name="telegram">Telegram</string>
+    <string name="web">ওয়েব</string>
+    <string name="help">সাহায্য</string>
+    <string name="qs_show_error">এরর দেখান</string>
+    <string name="qs_error">সংযোগে সমস্যা</string>
+    <string name="warnings">সর্তকতা</string>
+    <string name="action_save">সংরক্ষণ করুন</string>
+    <string name="action_configure">কনফিগার</string>
+    <string name="bridges">ব্রিজ</string>
+    <string name="snowflake">Snowflake</string>
+    <string name="apps">অ্যাপ</string>
+    <string name="tor_logs">টর লগ</string>
+    <string name="always_on_vpn">সর্বদা-চালু VPN</string>
+    <string name="action_connect">সংযোগ করুন</string>
+    <string name="action_cancel">বাতিল</string>
+    <string name="action_disconnect">সংযোগ বিচ্ছিন্ন করুন</string>
+    <string name="action_try_again">আবার চেষ্টা করুন</string>
+    <string name="state_connected">সংযুক্ত</string>
+    <string name="state_connecting">সংযোগ দেওয়া হচ্ছে…</string>
+    <string name="state_disconnected">সংযোগ বিচ্ছিন্ন</string>
+    <string name="debugging">Debugging</string>
+    <string name="unknown">অজানা</string>
+    <string name="contact_support">Contact support</string>
+    <string name="email">Email</string>
+    <string name="action_refresh">রিফ্রেশ</string>
+    <string name="report_bug">বাগ রিপোর্ট করুন</string>
+    <string name="change">পরিবর্তন</string>
+    <string name="use_a_bridge_info">ব্রিজগুলি যেখানে টরকে অবরুদ্ধ করা হয়েছে সেখানে টর নেটওয়ার্ক অ্যাক্সেস করতে আপনাকে সহায়তা করে। আপনি কোথায় আছেন তার উপর নির্ভর করে একটি সেতু অন্যের চেয়ে ভাল কাজ করতে পারে।</string>
+    <string name="about">সম্পর্কিত তথ্য</string>
+    <string name="version">সংস্করণ</string>
+    <string name="last_updated">সর্বশেষ আপডেট</string>
+    <string name="tor_project">টর প্রকল্প</string>
+    <string name="down_content_description">ডাউনলোড</string>
+    <string name="exit_location_safest">সবচেয়ে নিরাপদ</string>
+    <string name="up_content_description">আপলোড</string>
+    <string name="privacy_policy">গোপনীয়তা নীতি</string>
+    <string name="open_source_licenses">ওপেন সোর্স লাইসেন্স</string>
+    <string name="app_icon">অ্যাপের চিহ্ন</string>
+    <string name="advanced">অগ্রবর্তী</string>
+    <string name="stats_down" translatable="false">%1$s</string>
+    <string name="stats_up" translatable="false">%1$s</string>
+    <string name="app_name_variant_1" translatable="false">Calculator</string>
+    <string name="app_name_variant_2" translatable="false">Flashlight</string>
+    <string name="obfs4" translatable="false">obfs4</string>
+    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="app_routing_system_apps">সিস্টেম অ্যাপস</string>
+    <string name="tor_logs_description">টর লগ দর্শন ও অনুলিপি করো</string>
+    <string name="signal">সিগনাল</string>
+    <string name="whatsapp">হোয়াটসঅ্যাপ</string>
+    <string name="no_internet">ইন্টারনেট নেই</string>
+    <string name="bridge_settings">সেতু পছন্দসমূহ</string>
+</resources>

@@ -9,16 +9,16 @@
     <string name="connection_description">配置如何連接到 Tor</string>
     <string name="label_not_protected">無保護</string>
     <string name="action_refresh_circuits">重新整理線路</string>
-    <string name="exit_location_automatic">自動模式（最安全）</string>
+    <string name="exit_location_automatic">每個線路隨機</string>
     <string name="action_stop">停止VPN</string>
-    <string name="exit_location_description">自動模式從網路中的任何位置選擇退出中繼，無論位置為何。 這有助於防止您的活動被鏈接，從而保護您的匿名性。</string>
+    <string name="exit_location_description">使用 Tor 時，網站和應用程式會認為您是從與出口中繼相同的國家/地區進行連接的，這是每個 Tor 電路中的最後一跳。</string>
     <string name="apps_description_all_protected">已代理所有應用程式</string>
     <string name="kill_switch">緊急斷開</string>
     <string name="action_start">啟動VPN</string>
     <string name="always_on_vpn_description">開啟安卓系統設定</string>
     <string name="stats_delta">%1$s/s</string>
     <string name="exit_location">退出定位</string>
-    <string name="action_configure">組態</string>
+    <string name="action_configure">設定</string>
     <string name="notification_channel_name">TorVPN 通知</string>
     <string name="label_some_protected">一些受到保護</string>
     <string name="quickstart">自動連線</string>
@@ -30,10 +30,9 @@
     <string name="guide_bullet_head_2">但不要做任何有風險的事情</string>
     <string name="action_protect_this_app">保護這個應用程式</string>
     <string name="kill_switch_description">如果無法存取 Tor 網絡，則阻止應用程式連接到互聯網</string>
-    <string name="guide_bullet_head_1">您已準備好開始測試</string>
+    <string name="guide_bullet_head_1">回報臭蟲</string>
     <string name="action_disconnect">中斷連接</string>
-    <string name="title_guide">這個應用程式非常高
-\n實驗性的</string>
+    <string name="title_guide">這個應用程式非常高 \n實驗性的</string>
     <string name="notification_channel_description">顯示有關 TorVPN 的更新資訊。</string>
     <string name="app_name">Tor VPN</string>
     <string name="action_cancel">取消</string>
@@ -41,7 +40,7 @@
     <string name="apps">應用程式</string>
     <string name="tor_logs">Tor 歷程紀錄</string>
     <string name="state_disconnected">已斷線</string>
-    <string name="state_connecting">連線</string>
+    <string name="state_connecting">連線中…</string>
     <string name="state_connected">已連線</string>
     <string name="app_routing_other_apps">其他應用程式</string>
     <string name="error_something_went_wrong">出了點問題</string>
@@ -50,7 +49,7 @@
     <string name="action_try_again">再試一次</string>
     <string name="state_disconnecting">中斷連接中</string>
     <string name="app_routing_browsers">瀏覽器</string>
-    <string name="error_view_logs">檢視日誌</string>
+    <string name="error_view_logs">檢視 Tor 紀錄檔</string>
     <string name="action_copy_logs">複製日誌</string>
     <string name="connection">連線</string>
     <string name="reload_app_circuits_description">只為這個應用程式建立新的線路。 一些應用程式和網站可能無法識別您，並可能將您從其服務中登出。</string>
@@ -66,34 +65,34 @@
     <string name="circuits">線路</string>
     <string name="this_app">這個應用程式</string>
     <string name="reload_all_circuits_description">為您的所有應用程式將建立新的線路。 一些應用程式和網站可能無法識別您，並可能將您從其服務中登出。</string>
-    <string name="action_paste_bridges">將您的網橋位址貼到此處</string>
+    <string name="action_paste_bridges">在這裡貼上你的橋接節點位址</string>
     <string name="new_connection_hop">%1$s-&gt;%2$s: 跳 %3$d: %4$s (%5$s)</string>
     <string name="closed_connection">%1$s-&gt;%2$s: 關閉連接</string>
     <string name="telegram_bot_subtitle">訊息 %s</string>
-    <string name="add_new_bridge">新增橋接</string>
+    <string name="add_new_bridge">新增橋接點</string>
     <string name="obfs4_description">讓您的流量看起來像隨機數據</string>
     <string name="description_independent_tor_powered_app">該應用程式使用自己的 Tor 連接，獨立於 Tor VPN。 請改為在 %1$s 中檢視和設定其連線。</string>
     <string name="bridge_settings">橋接設定</string>
     <string name="tor_powered_app">基於 Tor 的應用程式</string>
     <string name="obfs4_built_in">obfs4（內建）</string>
     <plurals name="n_bridges">
-        <item quantity="other">%1$s 網橋被添加</item>
+        <item quantity="other">%1$s 橋接點已新增</item>
     </plurals>
     <string name="connect_direct_to_tor">直接連接到 Tor</string>
     <string name="remove_bridge">刪除橋地址</string>
-    <string name="bridge_address">輸入網橋位址</string>
-    <string name="ask_bridge_bot">詢問橋接機器人</string>
-    <string name="bridge_addresses">網橋位址</string>
+    <string name="bridge_address">輸入橋接點位址</string>
+    <string name="ask_bridge_bot">請求橋接器</string>
+    <string name="bridge_addresses">橋接點位址</string>
     <string name="circuit_app_description">%1$s 的線路</string>
-    <string name="bridge_address_description">添加由受信任的組織或您認識的人提供的橋接</string>
-    <string name="get_new_bridges">獲得新的橋樑</string>
+    <string name="bridge_address_description">貼上您已知的橋接器位址</string>
+    <string name="get_new_bridges">尋找更多橋接器</string>
     <string name="email_bot_subtitle">電子郵件 %s</string>
     <string name="new_connection">%1$s-&gt;%2$s：與 %3$s 的新連接（應用程式 %4$d）</string>
     <string name="bootstrap_at">引導於：%1$s</string>
-    <string name="snowflake_description">透過 Snowflake 代理路由您的連接，讓您看起來像是在進行視訊通話</string>
+    <string name="snowflake_description">讓您的流量看起來像是在進行視訊通話</string>
     <string name="action_reload_circuits">重載線路</string>
     <string name="web_bot_subtitle">訪問%s</string>
-    <string name="built_in_bridges">選擇內建橋</string>
+    <string name="built_in_bridges">您的橋接器</string>
     <string name="use_a_bridge_info">在 Tor 被封鎖的地區，橋接器可用來協助安全地訪問 Tor 網路。依使用者所在的地區來選配合適的橋接中繼。</string>
     <string name="web">網站</string>
     <string name="action_open_app">打開 %1$s</string>
@@ -116,7 +115,7 @@
     <string name="qs_error">連線錯誤</string>
     <string name="qs_show_error">顯示錯誤</string>
     <string name="appearance">外觀</string>
-    <string name="signal">信號</string>
+    <string name="signal">Signal</string>
     <string name="start_again">再次開始</string>
     <string name="report_bug">回報一個錯誤</string>
     <string name="contact_support">聯絡支援</string>
@@ -136,12 +135,43 @@
     <string name="bug_gitlab">在Gitlab上</string>
     <string name="help_description_wip">Tor VPN 正在進行中，有些功能可能無法正常運行。</string>
     <string name="help_description_bug_report">如果你遇到問題且並沒有在問與答當中被解答，請打開錯誤回報或聯繫支援。</string>
-    <string name="bug_tor_forum">在Tor Torum上</string>
+    <string name="bug_tor_forum">在 Tor 討論區上</string>
     <string name="bridge_bot">橋接器機器人</string>
     <string name="bot_msg_welcome">歡迎，疲憊的旅行者</string>
-    <string name="bot_msg_results">這是你的橋接器</string>
+    <string name="bot_msg_results">這是你的橋接器：</string>
     <string name="refresh_all_circuits">重新整理所有迴路？</string>
     <string name="change">變更</string>
     <string name="obfs4_bridge">obfs4 橋接器</string>
     <string name="action_refresh">重新整理</string>
+    <string name="about">關於</string>
+    <string name="about_description">進一步了解 Tor VPN</string>
+    <string name="version">版本</string>
+    <string name="last_updated">最近更新</string>
+    <string name="about_description_long">Tor VPN 是由 %1$s 開發的實驗性 VPN 應用程式，該團隊也是開發 Tor 和 Tor 瀏覽器的同一批人，這些都是全球最強大的線上隱私與自由工具。</string>
+    <string name="tor_project">Tor 專案</string>
+    <string name="no_internet">無網際網路</string>
+    <string name="app_routing_system_apps">系統應用程式</string>
+    <string name="exit_location_safest">最安全</string>
+    <string name="up_content_description">上傳</string>
+    <string name="down_content_description">下載</string>
+    <string name="app_routing_show_apps">顯示 %1$s 個應用</string>
+    <string name="current_state">目前狀態：</string>
+    <string name="app_routing_hide_apps">隱藏 %1$s 個應用</string>
+    <string name="privacy_policy">隱私權政策</string>
+    <string name="open_source_licenses">開放原始碼授權</string>
+    <string name="app_icon">程式圖示</string>
+    <string name="connect_automatically">自動連接</string>
+    <string name="connect_automatically_description">啟動時自動連接到 Tor 網路</string>
+    <string name="advanced">進階</string>
+    <string name="about_tor_vpn">關於 Tor VPN</string>
+    <string name="default_icon_and_name">預設圖示和名稱</string>
+    <string name="no_bridge">不使用網橋</string>
+    <string name="the_internet">internet</string>
+    <string name="stats_down" translatable="false">%1$s</string>
+    <string name="obfs4" translatable="false">obfs4</string>
+    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="stats_up" translatable="false">%1$s</string>
+    <string name="app_name_variant_1" translatable="false">Calculator</string>
+    <string name="app_name_variant_2" translatable="false">Flashlight</string>
+    <string name="copied_clipboard">已複製至剪貼簿</string>
 </resources>

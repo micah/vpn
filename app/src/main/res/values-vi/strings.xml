@@ -21,7 +21,7 @@
     <string name="action_protect_all_apps">Bảo vệ tất cả các app ứng dụng</string>
     <string name="action_configure">Định cấu hình</string>
     <string name="state_connected">Đã được kết nối</string>
-    <string name="state_connecting">Đang kết nối</string>
+    <string name="state_connecting">Đang kết nối…</string>
     <string name="state_disconnected">Đã ngắt kết nối</string>
     <string name="apps">Các app ứng dụng</string>
     <string name="apps_description_all_protected">Tất cả các app ứng dụng đã được bảo vệ</string>
@@ -36,8 +36,8 @@
     <string name="app_routing_tor_apps">Các app ứng dụng được Tor hỗ trợ vận hành</string>
     <string name="tor_logs">Nhật ký Log Tor</string>
     <string name="tor_logs_description">Xem và sao chép các nhật ký log Tor của bạn</string>
-    <string name="guide_version_number">%1$s</string>
-    <string name="error_view_logs">Xem nhật ký log</string>
+    <string name="guide_version_number" translatable="false">%1$s</string>
+    <string name="error_view_logs">Xem nhật ký log Tor</string>
     <string name="quickstart">Tự động kết nối</string>
     <string name="quickstart_description">Tự động kết nối tới mạng lưới Tor Network khi khởi chạy</string>
     <string name="exit_location_automatic">Tự động (an toàn nhất)</string>
@@ -53,7 +53,7 @@
     <string name="closed_connection">%1$s-&gt;%2$s: kết nối đã đóng lại</string>
     <string name="reload_app_circuits">Làm mới lại mạch nối circuit này chứ?</string>
     <string name="always_on_vpn">VPN luôn luôn bật</string>
-    <string name="guide_bullet_head_1">Bạn đã sẵn sàng để bắt đầu test thử nghiệm</string>
+    <string name="guide_bullet_head_1">Báo cáo lỗi Bug</string>
     <string name="guide_bullet_head_2">Nhưng đừng làm điều gì rủi ro cả</string>
     <string name="guide_bullet_text_1">Hãy đừng quên báo cáo bất kỳ lỗi bug nào mà bạn phát hiện được cho các lập trình viên của chúng tôi.</string>
     <string name="connection">Kết nối</string>
@@ -112,23 +112,22 @@
     <string name="whatsapp">Whatsapp</string>
     <string name="action_paste_bridges">Dán địa chỉ cầu Bridge mới của bạn tại đây</string>
     <string name="refresh_all_circuits">Làm mới lại tất cả các mạch nối circuit chứ?</string>
-    <string name="add_new_bridge">Thêm một cầu Bridge</string>
+    <string name="add_new_bridge">Thêm cầu Bridge mới</string>
     <string name="snowflake_description">Định tuyến kết nối của bạn thông qua proxy Snowflake để làm cho nó trông giống như là bạn đang thực hiện một cuộc gọi thoại video</string>
-    <string name="bridge_address_description">Thêm cầu Bridge được cung cấp bởi một tổ chức đáng tin cậy hoặc ai đó mà bạn biết</string>
+    <string name="bridge_address_description">Thêm một hoặc nhiều cầu Bridge được cung cấp bởi một tổ chức hoặc cá nhân đáng tin cậy.</string>
     <string name="name_and_icon">Tên và biểu tượng</string>
     <string name="circuit_app_description">Mạch nối circuit cho %1$s</string>
     <string name="bug_gitlab">Trên Gitlab</string>
     <string name="get_new_bridges">Lấy về cầu Bridge mới</string>
     <string name="apps_description">Lựa chọn các App để định tuyến thông qua Tor</string>
     <string name="general_description">Định cấu hình cài đặt chung</string>
-    <string name="title_guide">App này mang tính
-\nthử nghiệm cao</string>
+    <string name="title_guide">App này mang tính \nthử nghiệm cao</string>
     <string name="fetching_bridges">Đang lấy cầu Bridge mới của bạn về…</string>
     <string name="new_circuits_warnings">Các cảnh báo liên quan đến mạch nối circuit mới đây</string>
     <string name="new_circuits_warnings_description">Cảnh báo trước khi tải lại mạch nối circuit.</string>
     <string name="bridge_bot">Bot cung cấp cầu Bridge</string>
     <string name="bot_msg_welcome">Xin chào mừng, nhà lữ hành đầy sương gió</string>
-    <string name="bot_msg_results">Đây là các cầu Bridge của bạn</string>
+    <string name="bot_msg_results">Đây là các cầu Bridge của bạn:</string>
     <string name="label_not_protected">Chẳng có gì được bảo vệ</string>
     <string name="routed_over_country">Đã định tuyến thông qua %1$s</string>
     <string name="label_some_protected">Một số đã được bảo vệ</string>
@@ -144,4 +143,26 @@
     <string name="bug_tor_forum">Trên diễn đàn Tor</string>
     <string name="use_bridges">Sử dụng cầu Bridge</string>
     <string name="change">Thay đổi</string>
+    <string name="about">Về</string>
+    <string name="about_description">Tìm hiểu thêm về Tor VPN</string>
+    <string name="version">Phiên bản</string>
+    <string name="last_updated">Cập nhật gần đây nhất</string>
+    <string name="about_description_long">Tor VPN là một ứng dụng VPN đang trong quá trình thử nghiệm, được thực hiện bởi %1$s, các lập trình viên của Tor và trình duyệt Tor—những công cụ mạnh mẽ nhất trên thế giới cho bảo mật và tự do trực tuyến.</string>
+    <string name="tor_project">Dự án Tor Project</string>
+    <string name="app_routing_system_apps">Ứng dụng hệ thống</string>
+    <string name="exit_location_safest">An toàn nhất</string>
+    <string name="up_content_description">Tải lên</string>
+    <string name="down_content_description">Tải về</string>
+    <string name="connect_automatically">Tự động kết nối</string>
+    <string name="privacy_policy">Chính sách bảo mật</string>
+    <string name="open_source_licenses">Xem bản quyền nguồn</string>
+    <string name="connect_automatically_description">Tự động kết nối tới mạng lưới Tor Network khi khởi chạy</string>
+    <string name="advanced">Nâng cao</string>
+    <string name="app_icon">Biểu tượng ứng dụng</string>
+    <string name="stats_down" translatable="false">%1$s</string>
+    <string name="obfs4" translatable="false">obfs4</string>
+    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="stats_up" translatable="false">%1$s</string>
+    <string name="app_name_variant_1" translatable="false">Calculator</string>
+    <string name="app_name_variant_2" translatable="false">Flashlight</string>
 </resources>

@@ -17,7 +17,7 @@
     <string name="action_try_again">Riprova</string>
     <string name="action_copy_logs">Copia registri</string>
     <string name="action_start">Avvia VPN</string>
-    <string name="state_connecting">In connessione</string>
+    <string name="state_connecting">In connessione…</string>
     <string name="app_routing_tor_apps">App con Tor integrato</string>
     <string name="state_disconnecting">Disconnessione</string>
     <string name="app_routing_browsers">Browser</string>
@@ -28,11 +28,11 @@
     <string name="tor_logs_description">Vedi e copia i tuoi registri di Tor</string>
     <string name="this_browser">Questo browser</string>
     <string name="stats_combined">↓%2$s %1$s/s - ↑%4$s %3$s/s</string>
-    <string name="error_view_logs">Vedi registri</string>
+    <string name="error_view_logs">Vedi registri di Tor</string>
     <string name="tor_logs">Registri di Tor</string>
     <string name="connection_description">Configura come connetterti a Tor</string>
-    <string name="exit_location_automatic">Automatica (la più sicura)</string>
-    <string name="exit_location_description">La modalità automatica seleziona i relay di uscita da ovunque nella rete, indipendentemente dal luogo. Ciò protegge l\'anonimato impedendo la correlazione delle tue attività.</string>
+    <string name="exit_location_automatic">Casuale per circuito</string>
+    <string name="exit_location_description">Mentre Tor è in uso, i siti web e le app crederanno che ti stai connettendo dallo stesso Paese del tuo relay di uscita, che è il salto finale in ogni circuito di Tor.</string>
     <string name="apps_description_all_protected">Tutte le app sono protette</string>
     <string name="down">Download</string>
     <string name="always_on_vpn_description">Apri impostazioni di sistema di Android</string>
@@ -46,9 +46,8 @@
     <string name="guide_bullet_text_1">Non dimenticare di segnalare qualsiasi errore che trovi agli sviluppatori.</string>
     <string name="guide_bullet_head_2">Ma non fare niente di rischioso</string>
     <string name="kill_switch_description">Impedisci alle app di connettersi a internet se la rete Tor non è raggiungibile</string>
-    <string name="guide_bullet_head_1">Tutto pronto per iniziare la prova</string>
-    <string name="title_guide">Questa app è
-\nsperimentale</string>
+    <string name="guide_bullet_head_1">Segnala errori</string>
+    <string name="title_guide">Questa app è \nsperimentale</string>
     <string name="notification_channel_description">Mostra aggiornamenti riguardo TorVPN.</string>
     <string name="guide_bullet_text_2">Questa è una versione pre-release dell\'app e non è sicura da usare per attività sensibili.</string>
     <string name="apps">Applicazioni</string>
@@ -72,7 +71,7 @@
     <string name="new_connection_hop">%1$s-&gt;%2$s: salto %3$d: %4$s (%5$s)</string>
     <string name="closed_connection">%1$s-&gt;%2$s: connessione chiusa</string>
     <string name="telegram_bot_subtitle">Messaggio a %s</string>
-    <string name="add_new_bridge">Aggiungi un nuovo bridge</string>
+    <string name="add_new_bridge">Aggiungi nuovi bridge</string>
     <string name="obfs4_description">Fa apparire il tuo traffico come dati casuali</string>
     <string name="description_independent_tor_powered_app">Questa app usa la propria connessione a Tor, independente da Tor VPN. Vedi e configura la sua connessione in %1$s.</string>
     <string name="bridge_settings">Impostazioni bridge</string>
@@ -89,7 +88,7 @@
     <string name="current_bridge">Bridge attuale</string>
     <string name="ask_bridge_bot">Chiedi al bot dei bridge</string>
     <string name="bridge_addresses">Indirizzi bridge</string>
-    <string name="bridge_address_description">Aggiungi un bridge fornito da un\'organizzazione fidata o qualcuno che conosci</string>
+    <string name="bridge_address_description">Aggiungi uno o più bridge forniti da una persona o organizzazione fidata.</string>
     <string name="get_new_bridges">Ottieni nuovi bridge</string>
     <string name="email_bot_subtitle">Email a %s</string>
     <string name="new_connection">%1$s-&gt;%2$s: NUOVA connessione a %3$s (app %4$d)</string>
@@ -98,7 +97,7 @@
     <string name="action_reload_circuits">Ricarica circuiti</string>
     <string name="web_bot_subtitle">Visita %s</string>
     <string name="action_open_app">Apri %1$s</string>
-    <string name="built_in_bridges">Scegli un bridge integrato</string>
+    <string name="built_in_bridges">I vostri bridges</string>
     <string name="use_a_bridge_info">I bridge ti aiutano ad accedere in modo sicuro alla rete Tor nei luoghi in cui Tor è bloccato. A seconda del luogo in cui ti trovi, un bridge può funzionare meglio di un altro.</string>
     <string name="circuits">Circuiti</string>
     <string name="web">Web</string>
@@ -133,7 +132,7 @@
     <string name="new_bridges_result">Ecco i tuoi nuovi bridge:</string>
     <string name="bridge_bot">Bot dei bridge</string>
     <string name="bot_msg_welcome">Benvenuto, stanco viaggiatore</string>
-    <string name="bot_msg_results">Ecco i tuoi bridge</string>
+    <string name="bot_msg_results">Ecco i tuoi bridge:</string>
     <string name="use_bridges">Usa i bridge</string>
     <string name="whatsapp">Whatsapp</string>
     <string name="new_circuits_warnings">Nuovi avvisi sui circuiti</string>
@@ -146,4 +145,36 @@
     <string name="refresh_all_circuits">Aggiornare tutti i circuiti?</string>
     <string name="change">Cambia</string>
     <string name="obfs4_bridge">bridge obfs4</string>
+    <string name="about">Al riguardo</string>
+    <string name="version">Versione</string>
+    <string name="about_description">Scopri di più riguardo Tor VPN</string>
+    <string name="last_updated">Ultimo aggiornamento</string>
+    <string name="about_description_long">Tor VPN è un\'app sperimentale creata da %1$s, sviluppatori di Tor e di Tor Browser, i migliori strumenti del mondo per la privacy e la libertà in rete.</string>
+    <string name="tor_project">Tor Project</string>
+    <string name="no_internet">Internet assente</string>
+    <string name="current_state">Stato attuale:</string>
+    <string name="app_routing_hide_apps">Nascondi %1$s app</string>
+    <string name="exit_location_safest">Il più sicuro</string>
+    <string name="down_content_description">Download</string>
+    <string name="up_content_description">Upload</string>
+    <string name="app_routing_system_apps">Applicazioni di sistema</string>
+    <string name="app_routing_show_apps">Mostra %1$s app</string>
+    <string name="open_source_licenses">Licenze codice sorgente aperto</string>
+    <string name="app_icon">Icona app</string>
+    <string name="advanced">Avanzate</string>
+    <string name="privacy_policy">Poliza sulla privacy</string>
+    <string name="connect_automatically">Connetti automaticamente</string>
+    <string name="connect_automatically_description">Connetti alla rete Tor automaticamente all\'apertura</string>
+    <string name="stats_down" translatable="false">%1$s</string>
+    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="app_name_variant_1" translatable="false">Calculator</string>
+    <string name="obfs4" translatable="false">obfs4</string>
+    <string name="stats_up" translatable="false">%1$s</string>
+    <string name="app_name_variant_2" translatable="false">Flashlight</string>
+    <string name="default_icon_and_name">Nome e icona predefiniti</string>
+    <string name="the_internet">Internet</string>
+    <string name="no_bridge">Non utilizzando ponti</string>
+    <string name="about_tor_vpn">Informazioni su Tor VPN</string>
+    <string name="copied_clipboard">Copiato negli appunti</string>
+    <string name="add_bridge">Aggiungi ponti</string>
 </resources>

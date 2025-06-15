@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="stats_combined">↓%2$s %1$s/s - ↑%4$s %3$s/s</string>
-    <string name="guide_version_number">%1$s</string>
+    <string name="guide_version_number" translatable="false">%1$s</string>
     <string name="stats_delta">%1$s/s</string>
     <string name="app_name">Tor VPN</string>
     <string name="action_cancel">Cancelar</string>
     <string name="action_disconnect">Desconectar</string>
-    <string name="state_connecting">Conectando</string>
+    <string name="state_connecting">Conectando…</string>
     <string name="always_on_vpn">VPN siempre activa</string>
     <string name="kill_switch_description">Bloquear la conexión de aplicaciones a internet si la red Tor no puede ser conectada</string>
     <string name="error_detail_message">Tor VPN no se ha podido conectar a la red Tor.</string>
-    <string name="exit_location_description">El modo automático selecciona el relé de salida desde cualquier lugar de la red, independientemente de la ubicación. Esto ayuda a proteger tu anonimidad previniendo tus actividades de ser vinculadas.</string>
+    <string name="exit_location_description">Mientras usas Tor, los sitios web y las aplicaciones pensarán que te estás conectando desde el mismo país que tu relé de salida, que es el salto final en cada uno de tus circuitos Tor.</string>
     <string name="closed_connection">%1$s-&gt;%2$s: conexión cerrada</string>
     <string name="reload_all_circuits_description">Los nuevos circuitos serán establecidos para todas tus aplicaciones. Como resultado, algunas aplicaciones y páginas web puede que no te reconozcan y cierren la sesión de tus servicios.</string>
     <string name="guide_bullet_text_1">No olvides reportar cualquier fallo que encuentres a nuestros desarrolladores.</string>
@@ -38,17 +38,17 @@
     <string name="tor_logs_description">Ver y copiar tus registros de Tor</string>
     <string name="guide_bullet_head_2">Pero no hagas nada arriesgado</string>
     <string name="guide_bullet_text_2">Esta es una versión anterior al lanzamiento de la aplicación y no está lista para usarla para actividades sensibles.</string>
-    <string name="stats_down">%1$s</string>
-    <string name="stats_up">%1$s</string>
+    <string name="stats_down" translatable="false">%1$s</string>
+    <string name="stats_up" translatable="false">%1$s</string>
     <string name="error_something_went_wrong">Algo salió mal</string>
-    <string name="error_view_logs">Ver registros</string>
+    <string name="error_view_logs">Ver registros de Tor</string>
     <string name="connection">Conexión</string>
     <string name="connection_description">Configurar cómo conectar a Tor</string>
     <string name="kill_switch">Interruptor general</string>
     <string name="quickstart">Conexión automática</string>
     <string name="quickstart_description">Conectarse automáticamente a la red Tor cuando se inicia</string>
     <string name="exit_location">Localización de salida</string>
-    <string name="exit_location_automatic">Automático (el más seguro)</string>
+    <string name="exit_location_automatic">Aleatorio por circuito</string>
     <string name="up">Arriba</string>
     <string name="down">Abajo</string>
     <string name="this_browser">Este navegador</string>
@@ -65,12 +65,11 @@
     <string name="action_reload_circuits">Recargar circuitos</string>
     <string name="app_routing_tor_apps">Aplicaciones que funcionan con Tor</string>
     <string name="always_on_vpn_description">Abrir ajustes del sistema de Android</string>
-    <string name="guide_bullet_head_1">Estás listo para comenzar a probar</string>
-    <string name="title_guide">Este programa es
-\ntotalmente experimental</string>
+    <string name="guide_bullet_head_1">Informar de errores</string>
+    <string name="title_guide">Este programa es \ntotalmente experimental</string>
     <string name="routed_over_country">Enrutado a través de %1$s</string>
     <string name="guide_got_it">Entendido</string>
-    <string name="label_not_protected">Nada protegido</string>
+    <string name="label_not_protected">Ninguno protegido</string>
     <string name="unknown">Desconocido</string>
     <string name="connect_direct_to_tor">Conectar directamente a Tor</string>
     <string name="circuit_app_description">Circuito para %1$s</string>
@@ -81,7 +80,7 @@
     <string name="action_paste_bridges">Pega aquí tus direcciones de puente</string>
     <string name="none">Ninguno</string>
     <string name="bridges">Puentes</string>
-    <string name="add_new_bridge">Añadir un nuevo puente</string>
+    <string name="add_new_bridge">Añadir nuevos puentes</string>
     <string name="obfs4_description">Hace que tu tráfico parezca datos aleatorios</string>
     <string name="bridge_settings">Ajustes de puente</string>
     <string name="debugging">Depuración</string>
@@ -95,7 +94,7 @@
     <string name="current_bridge">Puente actual</string>
     <string name="snowflake">Snowflake</string>
     <string name="bridge_addresses">Direcciones de puente</string>
-    <string name="bridge_address_description">Añadir un puente proporcionado por una organización de confianza o alguien que conoces</string>
+    <string name="bridge_address_description">Añade uno o varios puentes proporcionados por una persona u organización de confianza.</string>
     <string name="action_save">Guardar</string>
     <string name="snowflake_description">Enruta tu conexión a través de proxies de Snowflake para que parezca que estás haciendo una video llamada</string>
     <string name="manual_bridge">Selección manual</string>
@@ -132,9 +131,9 @@
     <string name="new_bridges">Necesito nuevos puentes</string>
     <string name="new_bridges_result">Aquí están tus puentes nuevos:</string>
     <string name="bot_msg_welcome">Bienvenido, viajero cansado</string>
-    <string name="bot_msg_results">Aquí están tus puentes</string>
+    <string name="bot_msg_results">Aquí están tus puentes:</string>
     <string name="start_again">Comenzar de nuevo</string>
-    <string name="signal">Señal</string>
+    <string name="signal">Signal</string>
     <string name="report_bug">Informar de un error</string>
     <string name="contact_support">Contacto con soporte</string>
     <string name="email">Correo electrónico</string>
@@ -148,4 +147,31 @@
     <string name="refresh_all_circuits">¿Refrescar todos los circuitos?</string>
     <string name="obfs4_bridge">puente obfs4</string>
     <string name="change">Cambiar</string>
+    <string name="about">Acerca de</string>
+    <string name="about_description">Más información sobre la VPN de Tor</string>
+    <string name="tor_project">Proyecto Tor</string>
+    <string name="version">Versión</string>
+    <string name="last_updated">Última actualización</string>
+    <string name="about_description_long">La VPN de Tor es una aplicación experimental hecha por los %1$s, desarrolladores de Tor y el Navegador de Tor — las herramientas más fuertes del mundo para la privacidad y la libertad en línea.</string>
+    <string name="no_internet">No internet</string>
+    <string name="down_content_description">Descargar</string>
+    <string name="current_state">Estado actual:</string>
+    <string name="up_content_description">Cargar</string>
+    <string name="exit_location_safest">El más seguro</string>
+    <string name="app_routing_hide_apps">Ocultar %1$s aplicaciones</string>
+    <string name="app_routing_system_apps">Aplicaciones del sistema</string>
+    <string name="app_routing_show_apps">Mostrar %1$s aplicaciones</string>
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="open_source_licenses">Licencias de código abierto</string>
+    <string name="app_icon">Icono de la aplicación</string>
+    <string name="connect_automatically">Conectar automáticamente</string>
+    <string name="connect_automatically_description">Conectarse automáticamente a la red Tor cuando se inicia</string>
+    <string name="advanced">Avanzado</string>
+    <string name="default_icon_and_name">Icono y nombre predeterminados</string>
+    <string name="about_tor_vpn">Acerca de Tor VPN</string>
+    <string name="obfs4" translatable="false">obfs4</string>
+    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="app_name_variant_1" translatable="false">Calculator</string>
+    <string name="app_name_variant_2" translatable="false">Flashlight</string>
+    <string name="add_bridge">Añadir puentes</string>
 </resources>

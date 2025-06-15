@@ -7,7 +7,7 @@
     <string name="action_refresh_circuits">Devreleri yenile</string>
     <string name="action_copy_logs">Günlüğü kopyala</string>
     <string name="state_connected">Bağlantı kuruldu</string>
-    <string name="state_connecting">Bağlantı kuruluyor</string>
+    <string name="state_connecting">Bağlantı kuruluyor…</string>
     <string name="state_disconnecting">Bağlantı kesiliyor</string>
     <string name="app_routing_tor_apps">Tor kullanan uygulamalar</string>
     <string name="app_routing_browsers">Tarayıcılar</string>
@@ -16,16 +16,16 @@
     <string name="notification_channel_name">Tor VPN bildirimleri</string>
     <string name="guide_bullet_text_1">Karşılaşacağınız sorunları geliştiricilerimize bildirmeyi unutmayın.</string>
     <string name="stats_delta">%1$s/s</string>
-    <string name="error_view_logs">Günlüğü görüntüle</string>
+    <string name="error_view_logs">Tor günlüğünü görüntüle</string>
     <string name="kill_switch_description">Tor ağına ulaşılamıyorsa uygulamaların İnternet bağlantısı kurmasını engelleyin</string>
     <string name="quickstart">Otomatik bağlan</string>
     <string name="quickstart_description">Açılışta otomatik olarak Tor ağıyla bağlantı kurun</string>
     <string name="exit_location">Çıkış konumu</string>
-    <string name="exit_location_description">Otomatik kip, çıkış aktarıcılarını konumdan bağımsız olarak ağdaki herhangi bir yerden seçer. Böylece yaptığınız işlemlerin ilişkilendirilmesi engellenerek anonimliğinizin korunması sağlanır.</string>
-    <string name="exit_location_automatic">Otomatik (en güvenli)</string>
+    <string name="exit_location_description">Tor kullanırken siteler ve uygulamalar, Tor devrelerinizdeki son durak olan çıkış aktarıcınızla aynı ülkeden bağlandığınızı düşünür.</string>
+    <string name="exit_location_automatic">Her devre için rastgele</string>
     <string name="up">Giden</string>
     <string name="down">Gelen</string>
-    <string name="stats_up">%1$s</string>
+    <string name="stats_up" translatable="false">%1$s</string>
     <string name="this_browser">Bu tarayıcı</string>
     <string name="this_app">Bu uygulama</string>
     <string name="tor_powered_app">Tor kullanan uygulama</string>
@@ -39,13 +39,13 @@
     <string name="action_protect_all_apps">Tüm uygulamaları koru</string>
     <string name="apps_description_all_protected">Tüm uygulamalar korunuyor</string>
     <string name="tor_logs">Tor günlüğü</string>
-    <string name="guide_version_number">%1$s</string>
+    <string name="guide_version_number" translatable="false">%1$s</string>
     <string name="apps">Uygulamalar</string>
     <string name="tor_logs_description">Tor günlüklerinizi görüntüleyin ve kopyalayın</string>
     <string name="always_on_vpn">Her zaman açık VPN</string>
     <string name="always_on_vpn_description">Android sistem ayarlarını aç</string>
-    <string name="guide_bullet_head_1">Denemeye başlamaya hazırsınız</string>
-    <string name="stats_down">%1$s</string>
+    <string name="guide_bullet_head_1">Hataları bildir</string>
+    <string name="stats_down" translatable="false">%1$s</string>
     <string name="guide_bullet_head_2">Ancak riskli bir şey yapmayın</string>
     <string name="guide_bullet_text_2">Bu sürüm uygulamanın yayın öncesi sürümü ve önemli işlerde kullanmak için güvenli değil.</string>
     <string name="stats_combined">↓%2$s %1$s/s - ↑%4$s %3$s/s</string>
@@ -74,8 +74,7 @@
     <string name="unknown">Bilinmiyor</string>
     <string name="connect_direct_to_tor">Doğrudan Tor bağlantısı kur</string>
     <string name="circuit_app_description">%1$s devresi</string>
-    <string name="title_guide">Bu uygulama henüz
-\ndeneme aşamasında</string>
+    <string name="title_guide">Bu uygulama henüz \ndeneme aşamasında</string>
     <string name="description_independent_tor_powered_app">Bu uygulama, Tor VPN hizmetinden bağımsız olarak kendi Tor bağlantısını kullanıyor. Bağlantısını %1$s içinden görüntüleyip yapılandırabilirsiniz.</string>
     <string name="action_save">Kaydet</string>
     <string name="use_a_bridge_info">Köprüler, engellendiği yerlerde Tor ağına güvenli bir şekilde erişmenize yardımcı olur. Nerede bulunduğunuza bağlı olarak, bir köprü diğerinden daha iyi çalışabilir.</string>
@@ -89,7 +88,7 @@
     <string name="bridge_option_obfs4_built">obfs4 (hazır)</string>
     <string name="snowflake_built_in">Snowflake (hazır)</string>
     <string name="action_paste_bridges">Köprü adreslerinizi buraya yapıştırın</string>
-    <string name="add_new_bridge">Yeni köprü ekle</string>
+    <string name="add_new_bridge">Yeni köprüler ekle</string>
     <string name="obfs4_description">Trafiğinizin rastgele veriler gibi görünmesini sağlar</string>
     <string name="bridge_settings">Köprü ayarları</string>
     <string name="obfs4_built_in">obfs4 (hazır)</string>
@@ -99,14 +98,14 @@
     </plurals>
     <string name="bridge_address">Köprü adresini yazın</string>
     <string name="bridge_addresses">Köprü adresleri</string>
-    <string name="bridge_address_description">Güvenilir bir kuruluştan ya da tanıdığınız birinden aldığınız bir köprüyü ekleyin</string>
-    <string name="snowflake_description">Bağlantınızı Snowflake vekil sunucuları üzerinden yönlendirerek görüntülü arama yapıyormuşsunuz gibi görünmesini sağlar.</string>
-    <string name="built_in_bridges">Bir hazır köprü seçin</string>
+    <string name="bridge_address_description">Bildiğiniz köprü adreslerini yapıştırın</string>
+    <string name="snowflake_description">Trafiğinizin görüntülü görüşme gibi görünmesini sağlar</string>
+    <string name="built_in_bridges">Köprüleriniz</string>
     <string name="email_providers">Gmail ya da Riseup</string>
     <string name="get_new_bridges_description">Köprü adresleri herkese açık olarak yayınlanmadığından Tor Project üzerinden istemeniz gerekir.</string>
     <string name="telegram">Telegram</string>
     <string name="telegram_bot_subtitle">%s iletisi</string>
-    <string name="ask_bridge_bot">Bridge bot üzerinden isteyin</string>
+    <string name="ask_bridge_bot">Köprü isteyin</string>
     <string name="get_new_bridges">Yeni köprüler alın</string>
     <string name="email_bot_subtitle">%s e-posta adresi</string>
     <string name="web">Site</string>
@@ -128,11 +127,11 @@
     <string name="new_bridges_result">İşte yeni köprüleriniz:</string>
     <string name="bot_msg_welcome">Hoş geldin, yorgun gezgin</string>
     <string name="bot_msg_results">İşte köprüleriniz</string>
-    <string name="new_bridges">Yeni köprüler gerekli</string>
+    <string name="new_bridges">Yeni köprüler ver</string>
     <string name="fetching_bridges">Yeni köprüleriniz alınıyor…</string>
     <string name="bridge_bot">Köprü botu</string>
     <string name="start_again">Baştan başla</string>
-    <string name="use_bridges">Köprüleri kullan</string>
+    <string name="use_bridges">Köprüleri kaydet</string>
     <string name="signal">Signal</string>
     <string name="report_bug">Hata bildirin</string>
     <string name="contact_support">Destek ile görüşün</string>
@@ -147,4 +146,34 @@
     <string name="refresh_all_circuits">Tüm devreler yenilensin mi?</string>
     <string name="change">Değiştir</string>
     <string name="obfs4_bridge">obfs4 köprüsü</string>
+    <string name="about">Hakkında</string>
+    <string name="about_description">Tor VPN hakkında ayrıntılı bilgi alın</string>
+    <string name="version">Sürüm</string>
+    <string name="last_updated">Son güncellenme</string>
+    <string name="tor_project">Tor Project</string>
+    <string name="about_description_long">Tor VPN, çevrim içi gizlilik ve özgürlük için dünyanın en güçlü araçları Tor ağı ve Tor Browser geliştiricileri olan %1$s tarafından yapılan deneysel bir VPN uygulamasıdır.</string>
+    <string name="no_internet">İnternet yok</string>
+    <string name="up_content_description">Yükleme</string>
+    <string name="down_content_description">İndirme</string>
+    <string name="app_routing_system_apps">Sistem uygulamaları</string>
+    <string name="exit_location_safest">En güvenli</string>
+    <string name="app_routing_show_apps">%1$s uygulamalarını görüntüle</string>
+    <string name="app_routing_hide_apps">%1$s uygulamalarını gizle</string>
+    <string name="current_state">Geçerli durum:</string>
+    <string name="privacy_policy">Gizlilik ilkesi</string>
+    <string name="open_source_licenses">Açık kaynak lisansları</string>
+    <string name="app_icon">Uygulama simgesi</string>
+    <string name="connect_automatically">Otomatik bağlan</string>
+    <string name="connect_automatically_description">Başlangıçta otomatik olarak Tor ağıyla bağlantı kurulsun</string>
+    <string name="advanced">Gelişmiş</string>
+    <string name="about_tor_vpn">Tor VPN hakkında</string>
+    <string name="default_icon_and_name">Varsayılan simge ve ad</string>
+    <string name="no_bridge">Köprüler kullanılmıyor</string>
+    <string name="the_internet">İnternet</string>
+    <string name="obfs4" translatable="false">obfs4</string>
+    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="app_name_variant_1" translatable="false">Calculator</string>
+    <string name="app_name_variant_2" translatable="false">Flashlight</string>
+    <string name="copied_clipboard">Panoya kopyalandı</string>
+    <string name="add_bridge">Köprüler ekleyin</string>
 </resources>
