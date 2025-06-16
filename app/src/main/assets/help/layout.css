@@ -1,4 +1,11 @@
 body {
-  background-color: #1D0B41;
+  background-color: #160F43;
   color: #FFFFFF;
+  padding-right: 24px;
+  padding-left: 24px;
 }
+
+a {
+  color: #85BBF8;
+}
+
