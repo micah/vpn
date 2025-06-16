@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Build
@@ -79,11 +78,23 @@ class AppManager(context: Context) {
         val installedBrowserPackageNames = getInstalledBrowserPackages()
         val installedBrowsersApps = mutableListOf<AppItemModel>()
         val installedTorApps = mutableListOf<AppItemModel>()
-        val protectedApps = preferenceHelper.protectedApps?.toSet()
+        val protectedApps = preferenceHelper.protectedApps?.toMutableSet()
         val protectAllApps = preferenceHelper.protectAllApps
         var androidSystemUid = 0
         val installedOtherApps = mutableListOf<AppItemModel>()
         val systemApps = mutableListOf<AppItemModel>()
+
+        // on initial run, the list of protected apps is still empty. Hence after our first query we need
+        // to add all apps so we have a secure default of all apps being protected
+        if (protectedApps?.isEmpty() == true && preferenceHelper.protectAllApps) {
+            installedPackages.forEach { applicationInfo ->
+                applicationInfo?.packageName?.let { appId ->
+                    protectedApps.add(appId)
+                }
+            }
+            preferenceHelper.protectedApps = protectedApps
+        }
+
         try {
             val system = pm.getApplicationInfo("android", PackageManager.GET_META_DATA)
             androidSystemUid = system.uid
