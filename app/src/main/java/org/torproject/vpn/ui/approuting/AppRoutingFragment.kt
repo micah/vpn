@@ -1,13 +1,16 @@
 package org.torproject.vpn.ui.approuting
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 import org.torproject.onionmasq.OnionMasq
 import org.torproject.onionmasq.errors.ProxyStoppedException
 import org.torproject.vpn.R
@@ -17,12 +20,10 @@ import org.torproject.vpn.ui.approuting.data.TorAppsAdapter
 import org.torproject.vpn.ui.approuting.model.AppRoutingViewModel
 import org.torproject.vpn.ui.base.view.BaseDialogFragment
 import org.torproject.vpn.utils.PreferenceHelper
-import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
 import org.torproject.vpn.vpn.VpnStatusObservable
 
-class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPreferences.OnSharedPreferenceChangeListener {
+class AppRoutingFragment : Fragment(R.layout.fragment_app_routing) {
 
-    private val TAG = AppRoutingFragment::class.java.simpleName
     private lateinit var viewModel: AppRoutingViewModel
     private var appListAdapter: AppListAdapter? = null
     private lateinit var preferenceHelper: PreferenceHelper
@@ -34,7 +35,6 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
         val binding = FragmentAppRoutingBinding.bind(view)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        preferenceHelper.registerListener(this)
 
         // setup vertical list
         appListAdapter = AppListAdapter(
@@ -50,6 +50,16 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
         }
         viewModel.getObservableAppList().observe(viewLifecycleOwner) {
             appListAdapter?.update(it)
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.enableAllBridges.collect { enabled ->
+                        appListAdapter?.updateProtectAllAppsSwitch(enabled)
+                    }
+                }
+            }
         }
 
         binding.toolbar.setNavigationOnClickListener {
@@ -76,13 +86,6 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
         appListAdapter?.onItemModelChanged = null
         appListAdapter?.onProtectAllAppsChanged = null
         appListAdapter = null
-        preferenceHelper.unregisterListener(this)
-    }
-
-    override fun onSharedPreferenceChanged(prefs: SharedPreferences?, key: String?) {
-        if (key?.equals(PROTECTED_APPS) == true) {
-            viewModel.updateVPNSettings()
-        }
     }
 
 }

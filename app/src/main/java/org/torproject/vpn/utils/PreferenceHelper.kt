@@ -57,9 +57,15 @@ class PreferenceHelper(context: Context) {
         get() = sharedPreference.getBoolean(PROTECT_ALL_APPS, true)
         set(value) = sharedPreference.edit().putBoolean(PROTECT_ALL_APPS, value).apply()
 
-    var protectedApps
-        get() = sharedPreference.getStringSet(PROTECTED_APPS, mutableSetOf<String>())
-        set(value) = sharedPreference.edit().putStringSet(PROTECTED_APPS, value).apply()
+    var protectedApps: MutableSet<String>
+        get() = sharedPreference.getStringSet(PROTECTED_APPS, mutableSetOf<String>()).orEmpty().toMutableSet()
+        set(value) {
+            if (isRunningOnMainThread()) {
+                sharedPreference.edit().putStringSet(PROTECTED_APPS, value).apply()
+            } else {
+                sharedPreference.edit().putStringSet(PROTECTED_APPS, value).commit()
+            }
+        }
 
     // cached apps returns a json as string
     var cachedApps
@@ -108,9 +114,4 @@ class PreferenceHelper(context: Context) {
         sharedPreference.edit().clear().commit()
     }
 
-}
-
-fun PreferenceHelper.getConfigurableApps(): List<AppItemModel> {
-    val appItemModelListType: Type = object : TypeToken<ArrayList<AppItemModel?>?>() {}.type
-    return (Gson().fromJson<List<AppItemModel>>(cachedApps, appItemModelListType) ?: emptyList()).filter { it.viewType == CELL }
 }

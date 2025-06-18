@@ -1,15 +1,24 @@
 package org.torproject.vpn.ui.approuting.model
 
 import android.app.Application
+import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.CELL
 import org.torproject.vpn.ui.approuting.data.AppManager
+import org.torproject.vpn.utils.PreferenceHelper.Companion.CACHED_APPS
+import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
+import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
 
@@ -17,14 +26,51 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
     private val appList: MutableLiveData<List<AppItemModel>> = MutableLiveData<List<AppItemModel>>()
     private val isLoadingAppList = MutableLiveData<Boolean>()
 
-    private val appManager: AppManager
 
-    init {
-        appManager = AppManager(application)
-        loadApps()
+    private val appManager: AppManager = AppManager(application)
+
+    private val preferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+        when (key) {
+             PROTECTED_APPS -> {
+                 reloadApps()
+                 updateVPNSettings()
+             }
+            CACHED_APPS -> loadCachedApps()
+        }
     }
 
-    fun loadApps() {
+
+    val enableAllBridges = callbackFlow {
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, changedKey ->
+            if (PROTECT_ALL_APPS == changedKey) {
+                trySend(appManager.preferenceHelper.protectAllApps)
+            }
+        }
+        appManager.preferenceHelper.registerListener(listener)
+        awaitClose { appManager.preferenceHelper.unregisterListener(listener) }
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.Lazily,
+        appManager.preferenceHelper.protectAllApps
+    )
+
+
+    init {
+        loadApps()
+        appManager.preferenceHelper.registerListener(preferenceChangeListener)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        appManager.preferenceHelper.unregisterListener(preferenceChangeListener)
+    }
+
+    private fun loadCachedApps() {
+        val cachedViewModels = appManager.loadCachedApps()
+        appList.postValue(cachedViewModels)
+    }
+
+    private fun loadApps() {
         val cachedViewModels = appManager.loadCachedApps()
 
         appList.postValue(cachedViewModels)
@@ -49,35 +95,39 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun onItemModelChanged(pos: Int, model: AppItemModel) {
-        val mutableList = getAppList().toMutableList()
-        if (mutableList[pos].protectAllApps != model.protectAllApps) {
-            mutableList.forEach {
-                it.protectAllApps = model.protectAllApps
+    private fun reloadApps() {
+        viewModelScope.launch(Dispatchers.Default) {
+            val apps = appManager.queryInstalledApps()
+            withContext(Dispatchers.Main) {
+                appList.postValue(apps)
             }
         }
-        mutableList[pos] = model
-        persistProtectedApp(model)
+    }
+
+    fun onItemModelChanged(pos: Int, model: AppItemModel) {
+        val mutableList = getAppList().toMutableList()
+        mutableList[pos] = model.copy()
+        val protectedApps = persistProtectedApp(model)
         appManager.preferenceHelper.cachedApps = Gson().toJson(mutableList)
-        appManager.preferenceHelper.protectAllApps = model.protectAllApps == true
+        appManager.preferenceHelper.protectAllApps = mutableList.filter { it.viewType == CELL }.size == protectedApps.size
         appList.postValue(mutableList)
     }
 
-    private fun persistProtectedApp(model: AppItemModel) {
-        val protectedApps = appManager.preferenceHelper.protectedApps?.toMutableSet()
+    private fun persistProtectedApp(model: AppItemModel): MutableSet<String>{
+        val protectedApps = appManager.preferenceHelper.protectedApps
         if (model.isRoutingEnabled == true) {
-            protectedApps?.add(model.appId)
+            model.appId?.let { protectedApps.add(it) }
         } else {
-            protectedApps?.remove(model.appId)
+            protectedApps.remove(model.appId)
         }
         appManager.preferenceHelper.protectedApps = protectedApps
+        return protectedApps
     }
 
     fun onProtectAllAppsPrefsChanged(protectAllApps: Boolean) {
         val mutableList = getAppList().toMutableList()
         val protectedApps = emptySet<String>().toMutableSet()
         mutableList.onEach {
-            it.protectAllApps = protectAllApps
             it.isRoutingEnabled = protectAllApps
             if (protectAllApps) {
                 it.appId?.let { appId ->
@@ -91,7 +141,7 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
         appList.postValue(mutableList)
     }
 
-    fun updateVPNSettings() {
+    private fun updateVPNSettings() {
         if (VpnStatusObservable.isVPNActive()) {
             // update VpnService settings via restart
             VpnServiceCommand.startVpn(getApplication())
@@ -106,7 +156,7 @@ class AppRoutingViewModel(application: Application) : AndroidViewModel(applicati
         return isLoadingAppList
     }
 
-    fun getAppList(): List<AppItemModel> {
+    private fun getAppList(): List<AppItemModel> {
         appList.value?.also {
             return it
         }

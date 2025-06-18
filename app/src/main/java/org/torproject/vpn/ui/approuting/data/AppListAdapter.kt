@@ -2,7 +2,6 @@ package org.torproject.vpn.ui.approuting.data
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -10,8 +9,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.AppRoutingTableHeaderBinding
 import org.torproject.vpn.databinding.AppShowAppsViewBinding
@@ -23,8 +20,6 @@ import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.navigateSafe
-import java.lang.reflect.Type
-import kotlin.math.exp
 
 class AppListAdapter(
     list: List<AppItemModel> = emptyList(),
@@ -88,27 +83,35 @@ class AppListAdapter(
         return items[position].viewType
     }
 
-    fun update(list: List<AppItemModel>) {
-        val mutableList = list.toMutableList()
-        var protectAllAppsEntryChanged = false
-
-        val protectAllAppsValue = mutableList.firstOrNull { it.viewType == CELL }?.protectAllApps
-            ?: preferenceHelper.protectAllApps
-
-        mutableList.add(0, AppItemModel(TABLE_HEADER_VIEW, protectAllAppsValue))
-
-        // The following comparison depends on AppItemModels equals() implementation
-        // Hence, dataSetChanged remains false if protectAllApps of AppItemModel changed
-        // b/c protectAllApps is excluded from AppItemModel's equals() method
-        val dataSetChanged = mutableList != items
-        if (items.isNotEmpty()) {
-            protectAllAppsEntryChanged = items[0].protectAllApps != mutableList[0].protectAllApps
+    fun updateProtectAllAppsSwitch(protected: Boolean) {
+        if (items.size == 0) {
+            return
         }
-        items = ArrayList(mutableList.map { it.copy() })
-        if (dataSetChanged) {
+        val tableViewHeaderIndex = items.indexOfFirst { model -> model.viewType == TABLE_HEADER_VIEW }
+        if (tableViewHeaderIndex == -1) {
+            throw IllegalStateException("TableViewHeader is missing. This should never happen")
+        }
+        items[tableViewHeaderIndex].protectAllApps = protected
+        notifyItemChanged(0)
+    }
+
+    fun update(list: List<AppItemModel>) {
+        val mutableList = list
+            .map { it.copy() }
+            .toMutableList()
+        mutableList.add(0, AppItemModel(TABLE_HEADER_VIEW, preferenceHelper.protectAllApps))
+
+        if (items.isEmpty()) {
+            items = mutableList
             notifyDataSetChanged()
-        } else if (protectAllAppsEntryChanged) {
-            notifyItemChanged(0)
+            return
+        }
+
+        val changedPositions = getChangedItemRanges(items, mutableList)
+        items = mutableList
+
+        for (position in changedPositions) {
+            notifyItemRangeChanged(position.first, position.second)
         }
     }
 
@@ -183,18 +186,9 @@ class AppListAdapter(
             }
             binding.smItemSwitch.setOnCheckedChangeListener { switchBtn, isChecked ->
                 if (switchBtn.isPressed) {
-                    val appItemModelListType: Type = object : TypeToken<ArrayList<AppItemModel?>?>() {}.type
-                    val allConfigurableApps = (Gson().fromJson<List<AppItemModel>>(preferenceHelper.cachedApps, appItemModelListType) ?: emptyList()).filter { it.viewType == CELL }
                     val itemModel = items[pos]
                     itemModel.isRoutingEnabled = isChecked
                     binding.ivCircuit.isVisible = isChecked
-                    val protectedAppsSize = preferenceHelper.protectedApps?.size
-                    if (!isChecked) {
-                        itemModel.protectAllApps = false
-                    } else if (protectedAppsSize == allConfigurableApps.size - 1) {
-                        // isChecked == true and thus all apps will be protected now
-                        itemModel.protectAllApps = true
-                    }
                     // pos - 1: the first item is the header view, which is manually added only here in AppListAdapter
                     onItemModelChanged?.invoke(pos - 1, itemModel)
                 }

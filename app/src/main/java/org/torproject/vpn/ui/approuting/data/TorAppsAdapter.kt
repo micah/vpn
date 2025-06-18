@@ -1,6 +1,5 @@
 package org.torproject.vpn.ui.approuting.data
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -15,7 +14,7 @@ import org.torproject.vpn.utils.navigateSafe
 
 class TorAppsAdapter(list: List<AppItemModel> = emptyList()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var items: List<AppItemModel> = list
+    private var items: List<AppItemModel> = list
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AppListViewHolder(AppItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))

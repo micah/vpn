@@ -7,12 +7,15 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import android.net.Uri
-import android.os.Build
 import android.text.TextUtils
+import android.util.Log
 import androidx.annotation.WorkerThread
+import androidx.core.net.toUri
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.torproject.vpn.BuildConfig
 import org.torproject.vpn.R
 import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.CELL
@@ -24,10 +27,9 @@ import org.torproject.vpn.utils.PreferenceHelper
 import java.lang.reflect.Type
 
 
-class AppManager(context: Context) {
-    private val context: Context
-    val preferenceHelper: PreferenceHelper
-    private val pm: PackageManager
+class AppManager(private val context: Context) {
+    val preferenceHelper: PreferenceHelper = PreferenceHelper(context)
+    private val pm: PackageManager = context.packageManager
 
 
     companion object {
@@ -54,11 +56,6 @@ class AppManager(context: Context) {
             "org.torproject.torservices"
         )
     }
-    init {
-        this.context = context
-        this.preferenceHelper = PreferenceHelper(context)
-        this.pm = context.packageManager
-    }
 
     /**
      * Checks if the app is system app or not.
@@ -71,33 +68,47 @@ class AppManager(context: Context) {
     }
 
     @WorkerThread
-    fun queryInstalledApps() : List<AppItemModel> {
-        val installedPackages = pm.getInstalledPackages(PackageManager.GET_PERMISSIONS).filter {
-            it.requestedPermissions?.contains(INTERNET) == true
-        }.map { it.applicationInfo }
+    fun checkNewInstalledApps() {
+        val installedPackages = getInstalledPackages()
+        val cachedPackageNames = loadCachedApps()
+            .filter { appItemModel -> appItemModel.viewType == CELL }
+            .mapNotNull { appItemModel -> appItemModel.appId }
+            .toSet()
+        val installedPackageNames = installedPackages
+            .mapNotNull { applicationInfo -> applicationInfo?.packageName }
+            .toSet()
+        if (cachedPackageNames == installedPackageNames) {
+            return
+        }
+        val newRemovedPackageNames = cachedPackageNames.minus(installedPackageNames)
+        val newInstalledPackageNames = installedPackageNames
+            .minus(cachedPackageNames)
+            .minus(TOR_POWERED_APP_PACKAGE_NAMES.toSet())
+        val protectedApps = preferenceHelper.protectedApps
+
+        if (newInstalledPackageNames.isNotEmpty()) {
+            protectedApps.addAll(newInstalledPackageNames.toSet())
+        }
+        if (newRemovedPackageNames.isNotEmpty()) {
+            protectedApps.removeAll(newRemovedPackageNames.toSet())
+        }
+
+        queryInstalledApps(protectedApps)
+    }
+
+    @WorkerThread
+    @Synchronized
+    fun queryInstalledApps(protectedApps: MutableSet<String>) : List<AppItemModel> {
+        val installedPackages = getInstalledPackages()
         val installedBrowserPackageNames = getInstalledBrowserPackages()
         val installedBrowsersApps = mutableListOf<AppItemModel>()
         val installedTorApps = mutableListOf<AppItemModel>()
-        val protectedApps = preferenceHelper.protectedApps?.toMutableSet()
         val protectAllApps = preferenceHelper.protectAllApps
-        var androidSystemUid = 0
         val installedOtherApps = mutableListOf<AppItemModel>()
         val systemApps = mutableListOf<AppItemModel>()
 
-        // on initial run, the list of protected apps is still empty. Hence after our first query we need
-        // to add all apps so we have a secure default of all apps being protected
-        if (protectedApps?.isEmpty() == true && preferenceHelper.protectAllApps) {
-            installedPackages.forEach { applicationInfo ->
-                applicationInfo?.packageName?.let { appId ->
-                    protectedApps.add(appId)
-                }
-            }
-            preferenceHelper.protectedApps = protectedApps
-        }
-
         try {
             val system = pm.getApplicationInfo("android", PackageManager.GET_META_DATA)
-            androidSystemUid = system.uid
             createAppItemModel(system, protectedApps = protectedApps, protectAllApps = protectAllApps)?.also {
                 systemApps.add(it)
             }
@@ -105,15 +116,14 @@ class AppManager(context: Context) {
         }
 
         for (appInfo in installedPackages) {
-            // only add apps which are allowed to use internet
-            if (appInfo != null && appInfo.uid != androidSystemUid &&
+            if (appInfo != null &&
                 appInfo.packageName != BuildConfig.APPLICATION_ID) {
                 createAppItemModel(appInfo, installedBrowserPackageNames, TOR_POWERED_APP_PACKAGE_NAMES, protectedApps, protectAllApps)?.also {
                     if (it.hasTorSupport == true) {
                         installedTorApps.add(it)
                     } else if (it.isBrowserApp == true) {
                         installedBrowsersApps.add(it)
-                    } else if(isSystemApp(pm.getPackageInfo(appInfo.packageName, 0))) {
+                    } else if (isSystemApp(pm.getPackageInfo(appInfo.packageName, 0))) {
                         systemApps.add(it)
                     } else {
                         installedOtherApps.add(it)
@@ -141,9 +151,24 @@ class AppManager(context: Context) {
         resultList.add(AppItemModel(SHOW_APPS_VIEW, systemApps.size.toString()))
         resultList.addAll(systemApps.sorted())
 
+        preferenceHelper.protectAllApps = (sortedBrowsers.size + sortedOtherApps.size + systemApps.size) == protectedApps.size
         preferenceHelper.cachedApps = Gson().toJson(resultList)
+        preferenceHelper.protectedApps = protectedApps
+
         return resultList
     }
+
+    @WorkerThread
+    fun queryInstalledApps() : List<AppItemModel> {
+        val protectedApps = preferenceHelper.protectedApps
+        return queryInstalledApps(protectedApps)
+    }
+
+    private fun getInstalledPackages(): List<ApplicationInfo?> =
+        // only add apps which are allowed to use internet
+        pm.getInstalledPackages(PackageManager.GET_PERMISSIONS).filter {
+            it.requestedPermissions?.contains(INTERNET) == true
+        }.map { it.applicationInfo }
 
     private fun createAppItemModel(
         applicationInfo: ApplicationInfo,
@@ -168,30 +193,28 @@ class AppManager(context: Context) {
                 protectAllApps,
                 browserPackages.contains(packageName),
                 torPackages.contains(packageName))
+        } ?: run {
+            Log.d(TAG, "no app name found for ${applicationInfo.packageName}")
         }
 
         return null
     }
 
     private fun  getInstalledBrowserPackages() :  List<String> {
-            val queryBrowsersIntent = Intent()
-                .setAction(Intent.ACTION_VIEW)
-                .addCategory(Intent.CATEGORY_BROWSABLE)
-                .setData(Uri.parse("https://"))
+        val queryBrowsersIntent = Intent()
+            .setAction(Intent.ACTION_VIEW)
+            .addCategory(Intent.CATEGORY_BROWSABLE)
+            .setData("https://".toUri())
 
-            val installedBrowsers = mutableListOf<ResolveInfo>()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                installedBrowsers.addAll(
-                    pm.queryIntentActivities(
-                        queryBrowsersIntent,
-                        PackageManager.MATCH_ALL
-                    )
-                )
-            } else {
-                installedBrowsers.addAll(pm.queryIntentActivities(queryBrowsersIntent, PackageManager.MATCH_DEFAULT_ONLY))
-            }
+        val installedBrowsers = mutableListOf<ResolveInfo>()
+        installedBrowsers.addAll(
+            pm.queryIntentActivities(
+                queryBrowsersIntent,
+                PackageManager.MATCH_ALL
+            )
+        )
 
-            val browserPackageNames = mutableListOf<String>()
+        val browserPackageNames = mutableListOf<String>()
             for (browser in installedBrowsers) {
                 browserPackageNames.add(browser.activityInfo.packageName)
             }
@@ -256,5 +279,19 @@ class AppManager(context: Context) {
         resultList.addAll(sortedSystemApps)
 
         return resultList
+    }
+
+    fun onAppIdChanged(added: Boolean, packageName: String?) {
+        CoroutineScope(Dispatchers.IO).launch(Dispatchers.Default) {
+            packageName?.let { appId ->
+                val protectedAppsList = preferenceHelper.protectedApps
+                if (added && !protectedAppsList.contains(appId) && !TOR_POWERED_APP_PACKAGE_NAMES.contains(appId)) {
+                    protectedAppsList.add(appId)
+                } else if (!added) {
+                    protectedAppsList.remove(appId)
+                }
+                queryInstalledApps(protectedAppsList)
+            }
+        }
     }
 }

@@ -383,8 +383,7 @@ class TorVpnService : VpnService() {
             return
         }
 
-        val selectedApps: Set<String> = preferenceHelper.protectedApps ?:
-            HashSet<String>()
+        val selectedApps: Set<String> = preferenceHelper.protectedApps
         // filtering, allow a subset of installed apps
         if (selectedApps.isNotEmpty()) {
             for (appPackage in selectedApps) {

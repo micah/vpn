@@ -11,7 +11,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted.Companion.Eagerly
 import kotlinx.coroutines.flow.StateFlow
@@ -22,13 +21,12 @@ import kotlinx.coroutines.launch
 import org.torproject.onionmasq.OnionMasq
 import org.torproject.onionmasq.circuit.CircuitCountryCodes
 import org.torproject.vpn.R
+import org.torproject.vpn.ui.approuting.data.AppManager
 import org.torproject.vpn.utils.PreferenceHelper
-import org.torproject.vpn.utils.formatBits
-import org.torproject.vpn.utils.getConfigurableApps
-import org.torproject.vpn.utils.updateDataUsage
-import org.torproject.vpn.utils.formatBytes
-import org.torproject.vpn.utils.formatByteRateToBitRate
 import org.torproject.vpn.utils.formatBitRate
+import org.torproject.vpn.utils.formatBits
+import org.torproject.vpn.utils.formatByteRateToBitRate
+import org.torproject.vpn.utils.updateDataUsage
 import org.torproject.vpn.vpn.DataUsage
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
@@ -44,6 +42,7 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
     val isBrowser = MutableLiveData(false)
     val hasTorSupport = MutableLiveData(false)
     var packageManager: PackageManager? = application.packageManager
+    private val appManager = AppManager(application)
     private var _circuitList: MutableLiveData<List<CircuitCountryCodes>> = MutableLiveData(ArrayList())
     val circuitList: LiveData<List<CircuitCountryCodes>> = _circuitList
 
@@ -77,32 +76,13 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
     private val preferenceHelper = PreferenceHelper(getApplication())
 
     val protectThisApp: Boolean get() {
-        val apps = preferenceHelper.protectedApps?.toSet() ?: emptySet()
+        val apps = preferenceHelper.protectedApps
         return apps.contains(appId.value)
     }
     fun onProtectThisAppChanged(compoundButton: CompoundButton, isChecked: Boolean) {
-        val protectedApps = preferenceHelper.protectedApps?.toMutableSet() ?: emptySet<String>().toMutableSet()
-        val allConfigurableApps = preferenceHelper.getConfigurableApps()
-        var protectAllApps = false
-
-        if (isChecked) {
-            protectedApps.add(appId.value)
-            if (protectedApps.size == allConfigurableApps.size) {
-                // isChecked == true and thus all apps will be protected now
-                protectAllApps = true
-            }
-        } else {
-            protectedApps.remove(appId.value)
-            protectAllApps = false
-        }
-        allConfigurableApps.forEach {
-            it.protectAllApps = protectAllApps
-        }
-        preferenceHelper.protectAllApps = protectAllApps
-        preferenceHelper.protectedApps = protectedApps
-        preferenceHelper.cachedApps = Gson().toJson(allConfigurableApps)
-
+        appManager.onAppIdChanged(isChecked, appId.value)
     }
+
 
     private val timer: Timer by lazy {
         Timer()

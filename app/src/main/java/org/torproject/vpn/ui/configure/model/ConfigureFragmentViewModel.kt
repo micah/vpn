@@ -99,16 +99,16 @@ class ConfigureFragmentViewModel(application: Application) : AndroidViewModel(ap
     private val someAppsProtected: StateFlow<Boolean> = callbackFlow {
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, changedKey ->
             if (PreferenceHelper.PROTECTED_APPS == changedKey) {
-                trySend(!preferenceHelper.protectedApps.isNullOrEmpty())
+                trySend(preferenceHelper.protectedApps.isNotEmpty())
             }
         }
-        trySend(!preferenceHelper.protectedApps.isNullOrEmpty())
+        trySend(preferenceHelper.protectedApps.isNotEmpty())
         preferenceHelper.registerListener(listener)
         awaitClose { preferenceHelper.unregisterListener(listener) }
     }.stateIn(
         viewModelScope,
         SharingStarted.Lazily,
-        !preferenceHelper.protectedApps.isNullOrEmpty()
+        preferenceHelper.protectedApps.isNotEmpty()
     )
 
     fun onStartOnBootChanged(compoundButton: CompoundButton, isChecked: Boolean) {

@@ -291,16 +291,16 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
     private val someAppsProtected: StateFlow<Boolean> = callbackFlow {
         val listener = OnSharedPreferenceChangeListener { _, changedKey ->
             if (PROTECTED_APPS == changedKey) {
-                trySend(!preferenceHelper.protectedApps.isNullOrEmpty())
+                trySend(preferenceHelper.protectedApps.isNotEmpty())
             }
         }
-        trySend(!preferenceHelper.protectedApps.isNullOrEmpty())
+        trySend(preferenceHelper.protectedApps.isNotEmpty())
         preferenceHelper.registerListener(listener)
         awaitClose { preferenceHelper.unregisterListener(listener) }
     }.stateIn(
         viewModelScope,
         SharingStarted.Lazily,
-        !preferenceHelper.protectedApps.isNullOrEmpty()
+        preferenceHelper.protectedApps.isNotEmpty()
     )
 
     val appProtectionLabel: StateFlow<String> = allAppsProtected.combine(someAppsProtected) { allApps, someApps ->
@@ -318,7 +318,6 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
         val mutableList = loadCachedApps()
         val protectedApps = emptySet<String>().toMutableSet()
         mutableList.onEach {
-            it.protectAllApps = isChecked
             it.isRoutingEnabled = isChecked
             if (isChecked) {
                 it.appId?.let { appId ->
