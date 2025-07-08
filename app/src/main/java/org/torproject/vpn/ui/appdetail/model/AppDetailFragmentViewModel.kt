@@ -26,6 +26,9 @@ import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.formatBits
 import org.torproject.vpn.utils.getConfigurableApps
 import org.torproject.vpn.utils.updateDataUsage
+import org.torproject.vpn.utils.formatBytes
+import org.torproject.vpn.utils.formatByteRateToBitRate
+import org.torproject.vpn.utils.formatBitRate
 import org.torproject.vpn.vpn.DataUsage
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
@@ -54,6 +57,14 @@ class AppDetailFragmentViewModel(application: Application) : AndroidViewModel(ap
 
     private val _dataUsage: MutableStateFlow<DataUsage> = MutableStateFlow(DataUsage())
     val dataUsage: StateFlow<DataUsage> = _dataUsage
+
+    val dataUsageDownstreamRate: StateFlow<String> = dataUsage.map { data ->
+	return@map formatByteRateToBitRate(data.downstreamDataPerSec)
+    }.stateIn(viewModelScope, Eagerly, formatBitRate(0))
+    
+    val dataUsageUpstreamRate: StateFlow<String> = dataUsage.map { data ->
+        return@map formatByteRateToBitRate(data.upstreamDataPerSec)
+    }.stateIn(viewModelScope, Eagerly, formatBitRate(0))
 
     val dataUsageDownstream: StateFlow<String> = dataUsage.map { data ->
         return@map formatBits(data.downstreamData)

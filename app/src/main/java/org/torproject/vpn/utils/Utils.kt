@@ -185,12 +185,29 @@ fun updateDataUsage(dataUsage: StateFlow<DataUsage>, downstream: Long, upstream:
 
 fun formatBits(bits: Long): String {
    return if (bits < 1000000) {
-        String.format("%.2f kbit", bits / 1000.0)
+        String.format("%.2f Kbit", bits / 1000.0)
     } else if (bits < 1000000000) {
         String.format("%.2f Mbit", bits / 1000000.0)
     } else {
         String.format("%.2f Gbit", bits / 1000000000.0)
     }
+}
+
+fun formatBytes(bytes: Long): String = when {
+    bytes < 1_000_000 -> "%.1f KB".format(bytes / 1_000.0)
+    bytes < 1_000_000_000 -> "%.1f MB".format(bytes / 1_000_000.0)
+    else -> "%.1f GB".format(bytes / 1_000_000_000.0)
+}
+
+fun formatBitRate(bitsPerSec: Long): String = when {
+    bitsPerSec < 1_000 -> "$bitsPerSec bit/s"
+    bitsPerSec < 1_000_000 -> "%.1f Kbit/s".format(bitsPerSec / 1_000.0)
+    bitsPerSec < 1_000_000_000 -> "%.1f Mbit/s".format(bitsPerSec / 1_000_000.0)
+    else -> "%.1f Gbit/s".format(bitsPerSec / 1_000_000_000.0)
+}
+
+fun formatByteRateToBitRate(bytesPerSec: Long): String {
+    return formatBitRate(bytesPerSec * 8)
 }
 
 fun getDpInPx(context: Context, dp: Float): Int {

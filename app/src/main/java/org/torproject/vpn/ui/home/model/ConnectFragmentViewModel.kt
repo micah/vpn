@@ -48,6 +48,8 @@ import org.torproject.vpn.vpn.DataUsage
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
 import java.lang.reflect.Type
+import org.torproject.vpn.utils.formatBytes
+import org.torproject.vpn.utils.formatByteRateToBitRate
 
 /**
  * ViewModel for slider fragment, mostly place holder at this point
@@ -72,9 +74,9 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
             initialValue = DataUsage()
         )
 
+    // Total data
     val dataUsageDownstream: StateFlow<String> = dataUsage.map { data ->
-        val received = formatBits(data.downstreamData)
-        return@map application.getString(R.string.stats_down, received)
+	return@map application.getString(R.string.stats_down, formatBytes(data.downstreamData))
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
@@ -82,32 +84,37 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
     )
 
     val dataUsageUpstream: StateFlow<String> = dataUsage.map { data ->
-        val sent = formatBits(data.upstreamData)
-        return@map application.getString(R.string.stats_up, sent)
+	application.getString(R.string.stats_up, formatBytes(data.upstreamData))
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
         initialValue = ""
     )
 
-    val dataUsageDiffDownstream: StateFlow<String> = dataUsage.map { data ->
-        val receivedDiff = formatBits(data.downstreamDataPerSec)
-        return@map "+${application.getString(R.string.stats_delta, receivedDiff)}"
+    // Rate
+    val dataUsageDownstreamRate: StateFlow<String> = dataUsage.map { data ->
+      return@map "+${formatByteRateToBitRate(data.downstreamDataPerSec)}"
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
         initialValue = ""
     )
 
-    val dataUsageDiffUpstream: StateFlow<String> = dataUsage.map { data ->
-        val receivedDiff = formatBits(data.upstreamDataPerSec)
-        return@map "+${application.getString(R.string.stats_delta, receivedDiff)}"
+    val dataUsageUpstreamRate: StateFlow<String> = dataUsage.map { data ->
+      return@map "+${formatByteRateToBitRate(data.upstreamDataPerSec)}"
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
         initialValue = ""
     )
 
+   // bit silly, but the views contain these confusing names:
+   val dataUsageDiffUpstream: StateFlow<String>
+       get() = dataUsageUpstreamRate
+   
+   val dataUsageDiffDownstream: StateFlow<String>
+       get() = dataUsageDownstreamRate
+   
     val connectionState = VpnStatusObservable.statusLiveData
         .stateIn(
             scope = viewModelScope,
