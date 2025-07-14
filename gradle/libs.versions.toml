@@ -6,7 +6,7 @@ androidTest = "1.6.1"
 espressoVersion = "3.6.1"
 glide = "4.16.0"
 androidxJunit = "1.2.1"
-androidxLifecycle = "2.9.0"
+androidxLifecycle = "2.9.1"
 retrofit = "2.12.0"
 
 [plugins]
