@@ -55,7 +55,8 @@
                 android:text="@string/exit_location_description"
                 android:paddingVertical="@dimen/compact_padding"
                 android:textColor="@color/on_surface"
-                android:textAppearance="@style/body_medium" />
+                android:textAppearance="@style/body_medium"
+                app:lineHeight="20sp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
