@@ -1,6 +1,7 @@
 package org.torproject.vpn
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
@@ -18,6 +19,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import org.torproject.vpn.databinding.ActivityMainBinding
+import org.torproject.vpn.utils.applyInsetsToViewPadding
 import org.torproject.vpn.utils.navigateSafe
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
+        applyInsetsToViewPadding(navView, true, false, true, true)
 
         navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
@@ -129,11 +132,17 @@ class MainActivity : AppCompatActivity() {
     private fun hideBottomNavigationView(view: BottomNavigationView) {
         view.clearAnimation()
         view.animate().translationY(view.height.toFloat()).duration = 300
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isNavigationBarContrastEnforced = true
+        }
     }
 
     private fun showBottomNavigationView(view: BottomNavigationView) {
         view.clearAnimation()
         view.animate().translationY(0f).duration = 300
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isNavigationBarContrastEnforced = false
+        }
     }
 }
 

@@ -2,7 +2,6 @@ package org.torproject.vpn.ui.approuting
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -19,7 +18,6 @@ import org.torproject.vpn.ui.approuting.model.AppRoutingViewModel
 import org.torproject.vpn.ui.base.view.BaseDialogFragment
 import org.torproject.vpn.utils.PreferenceHelper
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
-import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
 import org.torproject.vpn.vpn.VpnStatusObservable
 
 class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPreferences.OnSharedPreferenceChangeListener {

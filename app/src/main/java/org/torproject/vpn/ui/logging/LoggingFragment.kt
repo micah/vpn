@@ -5,20 +5,17 @@ import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.google.android.material.snackbar.Snackbar
+import org.torproject.onionmasq.logging.LogObservable
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentLoggingBinding
 import org.torproject.vpn.ui.logging.data.LoggingListAdapter
-import org.torproject.onionmasq.logging.LogObservable
 
 class LoggingFragment : Fragment(R.layout.fragment_logging) {
 

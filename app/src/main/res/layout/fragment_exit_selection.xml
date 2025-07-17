@@ -12,41 +12,36 @@
         <import type="android.view.View" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/bottom_sheet_behavior">
+        android:fitsSystemWindows="true"
+        >
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:theme="@style/Theme.TorVPN.AppBarOverlay"
-            app:elevation="0dp"
-            app:liftOnScroll="false">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:title="@string/exit_location"
-                app:navigationIcon="?attr/homeAsUpIndicator"
-                app:popupTheme="@style/Theme.TorVPN.PopupOverlay"
-                app:titleTextAppearance="@style/title_large"
-                style="@style/collapsing_toolbar_style" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:title="@string/exit_location"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:popupTheme="@style/Theme.TorVPN.PopupOverlay"
+            app:titleTextAppearance="@style/title_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/collapsing_toolbar_style" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/default_padding"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+        >
 
             <TextView
                 android:id="@+id/tv_description"
@@ -130,5 +125,5 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/exitnode_item_view" />
         </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

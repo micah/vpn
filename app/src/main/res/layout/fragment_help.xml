@@ -18,7 +18,6 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
             app:liftOnScroll="false"
             app:elevation="0dp"
             android:theme="@style/Theme.TorVPN.AppBarOverlay">

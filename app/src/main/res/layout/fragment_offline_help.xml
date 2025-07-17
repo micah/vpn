@@ -14,7 +14,6 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
             android:background="@color/surface"
             android:theme="@style/Theme.TorVPN.AppBarOverlay"
             app:liftOnScroll="false"
@@ -34,7 +33,6 @@
             android:id="@+id/wv_help"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:background="@color/surface"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:context="org.torproject.vpn.ui.help.OfflineHelpFragment"/>

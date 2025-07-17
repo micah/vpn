@@ -13,14 +13,17 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup.MarginLayoutParams
 import android.view.animation.AccelerateInterpolator
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.Guideline
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.StateFlow
 import org.torproject.vpn.R
 import org.torproject.vpn.vpn.DataUsage
@@ -255,3 +258,59 @@ fun readAsset(context: Context, fileName: String): String {
         .bufferedReader()
         .use(BufferedReader::readText)
 }
+
+fun applyInsetsToGuideLineBottom(view: Guideline) {
+    ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+        val params = v.layoutParams as ConstraintLayout.LayoutParams
+        params.guideEnd += insets.bottom
+        v.layoutParams = params
+        return@setOnApplyWindowInsetsListener WindowInsetsCompat.CONSUMED
+    }
+}
+
+fun applyInsetsToViewPadding(
+    view: View,
+    left: Boolean,
+    top: Boolean,
+    right: Boolean,
+    bottom: Boolean
+) {
+    ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+        if (left) {
+            v.setPadding(
+                insets.left,
+                v.paddingTop,
+                v.paddingRight,
+                v.paddingBottom
+            )
+        }
+        if (right) {
+            v.setPadding(
+                v.paddingLeft,
+                v.paddingTop,
+                insets.right,
+                v.paddingBottom
+            )
+        }
+        if (bottom) {
+            v.setPadding(
+                v.paddingLeft,
+                v.paddingTop,
+                v.paddingRight,
+                insets.bottom
+            )
+        }
+        if (top) {
+            v.setPadding(
+                v.paddingLeft,
+                insets.top,
+                v.paddingRight,
+                v.paddingBottom
+            )
+        }
+        return@setOnApplyWindowInsetsListener WindowInsetsCompat.CONSUMED
+    }
+}
+

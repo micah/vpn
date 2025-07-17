@@ -39,6 +39,8 @@ import org.torproject.vpn.ui.home.model.ACTION_LOGS
 import org.torproject.vpn.ui.home.model.ACTION_REQUEST_NOTIFICATION_PERMISSION
 import org.torproject.vpn.ui.home.model.ConnectFragmentViewModel
 import org.torproject.vpn.utils.PreferenceHelper
+import org.torproject.vpn.utils.applyInsetsToGuideLineBottom
+import org.torproject.vpn.utils.applyInsetsToViewPadding
 import org.torproject.vpn.utils.getDpInPx
 import org.torproject.vpn.utils.navigateSafe
 import org.torproject.vpn.utils.startVectorAnimationWithEndCallback
@@ -105,6 +107,9 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         preferenceHelper.registerListener(this)
         connectFragmentViewModel = ViewModelProvider(this)[ConnectFragmentViewModel::class.java]
         _binding = FragmentConnectBinding.inflate(inflater, container, false)
+        applyInsetsToViewPadding(binding.toolbar, true, true, true, false)
+        applyInsetsToGuideLineBottom(binding.upperGuidelineActionBtns)
+        applyInsetsToGuideLineBottom(binding.lowerGuidelineActionBtns)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = connectFragmentViewModel
         initStateFabSpacing = getDpInPx(requireContext(), 0f).toFloat()
