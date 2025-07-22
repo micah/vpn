@@ -105,9 +105,7 @@ class TorVpnService : VpnService() {
 
         val notification: Notification = notificationManager.buildForegroundServiceNotification()
         val action = if (intent != null) intent.action else ""
-        if (action != ACTION_STOP_VPN) {
-            ServiceCompat.startForeground(this, VpnNotificationManager.NOTIFICATION_ID, notification, FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED)
-        }
+        ServiceCompat.startForeground(this, VpnNotificationManager.NOTIFICATION_ID, notification, FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED)
 
         val isAlwaysOn =  (intent == null || intent.component == null || intent.component!!.packageName != packageName) && Build.VERSION.SDK_INT >= ALWAYS_ON_MIN_API_LEVEL
         if (isAlwaysOn) {
