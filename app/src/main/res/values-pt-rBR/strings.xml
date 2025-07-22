@@ -169,12 +169,9 @@
     <string name="no_bridge">Não usar pontes</string>
     <string name="app_routing_hide_apps">Ocultar %1$s app(s)</string>
     <string name="the_internet">A Internet</string>
-    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
     <string name="stats_down" translatable="false">%1$s</string>
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="stats_up" translatable="false">%1$s</string>
-    <string name="app_name_variant_1" translatable="false">Calculator</string>
-    <string name="app_name_variant_2" translatable="false">Flashlight</string>
     <string name="add_bridge">Adicionar pontes</string>
     <string name="copied_clipboard">Copiado para a área de transferência</string>
 </resources>

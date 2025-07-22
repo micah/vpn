@@ -1,4 +1,4 @@
-package org.torproject.vpn.ui.generalsettings.model
+package org.torproject.vpn.ui.iconsetting.model
 
 import android.app.Application
 import android.content.ComponentName
@@ -10,7 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.torproject.vpn.utils.PreferenceHelper
 
-class GeneralSettingsFragmentViewModel(private val application: Application) : AndroidViewModel(application) {
+class IconSettingFragmentViewModel(private val application: Application) : AndroidViewModel(application) {
     val preferenceHelper = PreferenceHelper(application)
 
     private val _launcherList = MutableLiveData<List<LauncherModel>>(mutableListOf())

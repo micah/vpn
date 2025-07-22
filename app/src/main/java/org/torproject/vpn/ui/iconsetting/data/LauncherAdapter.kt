@@ -1,14 +1,12 @@
-package org.torproject.vpn.ui.generalsettings.data
+package org.torproject.vpn.ui.iconsetting.data
 
 import android.view.LayoutInflater
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.AppItemViewBinding
-import org.torproject.vpn.ui.generalsettings.model.LauncherModel
+import org.torproject.vpn.ui.iconsetting.model.LauncherModel
 
 class LauncherAdapter(
     private var list: List<LauncherModel>,

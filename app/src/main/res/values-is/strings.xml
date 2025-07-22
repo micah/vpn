@@ -170,9 +170,6 @@
     <string name="app_routing_hide_apps">Fela %1$s forrit</string>
     <string name="the_internet">Internetið</string>
     <string name="app_routing_show_apps">Birta %1$s forrit</string>
-    <string name="app_name_variant_2" translatable="false">Flashlight</string>
     <string name="obfs4" translatable="false">obfs4</string>
-    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
-    <string name="app_name_variant_1" translatable="false">Calculator</string>
     <string name="copied_clipboard">Afritað á klippiborð</string>
 </resources>

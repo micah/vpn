@@ -15,7 +15,7 @@
             app:destination="@id/appRoutingFragment" />
         <action
             android:id="@+id/action_configureFragment_to_appearanceFragment"
-            app:destination="@id/generalFragment" />
+            app:destination="@id/iconSettingsFragment" />
         <action
             android:id="@+id/action_configureFragment_to_aboutFragment"
             app:destination="@+id/aboutFragment" />
@@ -86,10 +86,10 @@
         tools:layout="@layout/fragment_about">
     </fragment>
     <fragment
-        android:id="@+id/generalFragment"
-        android:label="GeneralFragment"
-        android:name="org.torproject.vpn.ui.generalsettings.GeneralSettingsFragment"
-        tools:layout="@layout/fragment_generalsettings"/>
+        android:id="@+id/iconSettingsFragment"
+        android:label="IconSettingsFragment"
+        android:name="org.torproject.vpn.ui.iconsetting.IconSettingFragment"
+        tools:layout="@layout/fragment_iconsetting"/>
     <fragment
         android:id="@+id/loggingFragment"
         android:name="org.torproject.vpn.ui.logging.LoggingFragment"

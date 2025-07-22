@@ -7,7 +7,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.CELL
 import org.torproject.vpn.ui.approuting.model.AppItemModel
-import org.torproject.vpn.ui.generalsettings.model.LauncherDefault
+import org.torproject.vpn.ui.iconsetting.model.LauncherDefault
 import java.lang.reflect.Type
 
 private const val TOR_VPN_SP: String = "tor-vpn"

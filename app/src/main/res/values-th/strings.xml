@@ -62,12 +62,9 @@
     <string name="open_source_licenses">ใบอนุญาตโอเพ่นซอร์ส</string>
     <string name="app_icon">ไอคอนแอป</string>
     <string name="tor_logs_description">ดูและคัดลอก Tor ไฟล์บันทึก</string>
-    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
-    <string name="app_name_variant_1" translatable="false">Calculator</string>
     <string name="stats_down" translatable="false">%1$s</string>
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="stats_up" translatable="false">%1$s</string>
-    <string name="app_name_variant_2" translatable="false">Flashlight</string>
     <string name="quickstart_description">เชื่อมต่อกับเครือข่าย Tor โดยอัตโนมัติเมื่อเปิดใช้งาน</string>
     <string name="error_view_logs">ดู Tor Logs</string>
     <string name="app_name">Tor VPN</string>

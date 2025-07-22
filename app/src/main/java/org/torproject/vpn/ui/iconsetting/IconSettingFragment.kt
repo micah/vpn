@@ -1,4 +1,4 @@
-package org.torproject.vpn.ui.generalsettings
+package org.torproject.vpn.ui.iconsetting
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -7,26 +7,25 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import org.torproject.vpn.R
-import org.torproject.vpn.databinding.FragmentGeneralsettingsBinding
-import org.torproject.vpn.ui.generalsettings.data.LauncherAdapter
-import org.torproject.vpn.ui.generalsettings.model.GeneralSettingsFragmentViewModel
+import org.torproject.vpn.databinding.FragmentIconsettingBinding
+import org.torproject.vpn.ui.iconsetting.data.LauncherAdapter
+import org.torproject.vpn.ui.iconsetting.model.IconSettingFragmentViewModel
 
-// TODO: Rename to `IconSettingFragment` and remove warning section
-class GeneralSettingsFragment: Fragment(R.layout.fragment_generalsettings),
+class IconSettingFragment: Fragment(R.layout.fragment_iconsetting),
     SharedPreferences.OnSharedPreferenceChangeListener, ClickHandler {
-    private lateinit var viewModel: GeneralSettingsFragmentViewModel
-    private var _binding: FragmentGeneralsettingsBinding? = null
+    private lateinit var viewModel: IconSettingFragmentViewModel
+    private var _binding: FragmentIconsettingBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[GeneralSettingsFragmentViewModel::class.java]
+        viewModel = ViewModelProvider(this)[IconSettingFragmentViewModel::class.java]
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentGeneralsettingsBinding.bind(view)
+        _binding = FragmentIconsettingBinding.bind(view)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.handler = this

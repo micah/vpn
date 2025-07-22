@@ -6,12 +6,12 @@
     <data>
         <variable
             name="viewModel"
-            type="org.torproject.vpn.ui.generalsettings.model.GeneralSettingsFragmentViewModel" />
+            type="org.torproject.vpn.ui.iconsetting.model.IconSettingFragmentViewModel" />
 
         <import type="android.view.View" />
         <variable
             name="handler"
-            type="org.torproject.vpn.ui.generalsettings.ClickHandler" />
+            type="org.torproject.vpn.ui.iconsetting.ClickHandler" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

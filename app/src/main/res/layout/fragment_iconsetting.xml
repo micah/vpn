@@ -6,12 +6,12 @@
     <data>
         <variable
             name="viewModel"
-            type="org.torproject.vpn.ui.generalsettings.model.GeneralSettingsFragmentViewModel" />
+            type="org.torproject.vpn.ui.iconsetting.model.IconSettingFragmentViewModel" />
 
         <import type="android.view.View" />
         <variable
             name="handler"
-            type="org.torproject.vpn.ui.generalsettings.ClickHandler" />
+            type="org.torproject.vpn.ui.iconsetting.ClickHandler" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -73,8 +73,7 @@
                     android:text="@string/appearance"/>
 
                 <include android:id="@+id/layout_app_icons"
-                    layout="@layout/horizontal_recycler_view_item"
-                    />
+                    layout="@layout/horizontal_recycler_view_item" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -82,8 +81,7 @@
                     android:paddingVertical="@dimen/default_padding"
                     android:paddingHorizontal="@dimen/activity_vertical_margin"
                     style="@style/text_body_small"
-                    android:text="@string/launcher_hint"
-                    />
+                    android:text="@string/launcher_hint" />
 
                 <!--TODO: Remove section-->
                 <androidx.appcompat.widget.AppCompatTextView

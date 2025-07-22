@@ -1,4 +1,4 @@
-package org.torproject.vpn.ui.generalsettings.model
+package org.torproject.vpn.ui.iconsetting.model
 
 data class LauncherModel(
     val launcherClass: String,

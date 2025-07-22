@@ -168,12 +168,9 @@
     <string name="default_icon_and_name">Standardsymbol und Name</string>
     <string name="no_bridge">Keine Brücken benutzen</string>
     <string name="the_internet">Das Internet</string>
-    <string name="app_name_variant_2" translatable="false">Flashlight</string>
     <string name="stats_down" translatable="false">%1$s</string>
     <string name="obfs4" translatable="false">obfs4</string>
-    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
     <string name="stats_up" translatable="false">%1$s</string>
-    <string name="app_name_variant_1" translatable="false">Calculator</string>
     <string name="copied_clipboard">In Zwischenablage kopiert</string>
     <string name="add_bridge">Brücken hinzufügen</string>
 </resources>

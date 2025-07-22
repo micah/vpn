@@ -166,9 +166,9 @@
 
 
     <!-- alternative app namesare not translated until we know which app names we actually want -->
-    <string name="app_name_variant_1" translatable="false">Calculator</string>
-    <string name="app_name_variant_2" translatable="false">Flashlight</string>
-    <string name="app_name_variant_3" translatable="false">Ping Pong</string>
+    <string name="app_name_garden">Garden</string>
+    <string name="app_name_weather">Weather</string>
+    <string name="app_name_pingpong">Ping Pong</string>
     <string name="warnings">Warnings</string>
     <string name="new_circuits_warnings">New circuits warnings</string>
     <string name="new_circuits_warnings_description">Warn before reloading circuits.</string>
