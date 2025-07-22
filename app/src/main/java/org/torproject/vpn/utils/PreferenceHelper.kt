@@ -70,10 +70,6 @@ class PreferenceHelper(context: Context) {
         get() = sharedPreference.getBoolean(START_ON_BOOT, false)
         set(value) = sharedPreference.edit().putBoolean(START_ON_BOOT, value).apply()
 
-    var warningsEnabled
-        get() = sharedPreference.getBoolean(WARNINGS_ENABLED, true)
-        set(value) = sharedPreference.edit().putBoolean(WARNINGS_ENABLED, value).apply()
-
     var useBridge
         get() = sharedPreference.getBoolean(USE_BRIDGE, false)
         set(value) = sharedPreference.edit().putBoolean(USE_BRIDGE, value).apply()

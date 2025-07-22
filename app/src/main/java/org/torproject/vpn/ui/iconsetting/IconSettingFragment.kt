@@ -11,8 +11,7 @@ import org.torproject.vpn.databinding.FragmentIconsettingBinding
 import org.torproject.vpn.ui.iconsetting.data.LauncherAdapter
 import org.torproject.vpn.ui.iconsetting.model.IconSettingFragmentViewModel
 
-class IconSettingFragment: Fragment(R.layout.fragment_iconsetting),
-    SharedPreferences.OnSharedPreferenceChangeListener, ClickHandler {
+class IconSettingFragment: Fragment(R.layout.fragment_iconsetting) {
     private lateinit var viewModel: IconSettingFragmentViewModel
     private var _binding: FragmentIconsettingBinding? = null
     private val binding get() = _binding!!
@@ -28,7 +27,6 @@ class IconSettingFragment: Fragment(R.layout.fragment_iconsetting),
         _binding = FragmentIconsettingBinding.bind(view)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.handler = this
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
@@ -39,17 +37,11 @@ class IconSettingFragment: Fragment(R.layout.fragment_iconsetting),
             adapter.update(it)
         }
 
-        binding.warningsSettingsEntry.isChecked = viewModel.warningEnabled
-        binding.warningsSettingsEntry.setOnCheckedChangeListener(viewModel::onWarningsSettingsChanged)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding.layoutAppIcons.rvHorizontalAppIcons.adapter = null
         _binding = null
-    }
-
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        TODO("Not yet implemented")
     }
 }

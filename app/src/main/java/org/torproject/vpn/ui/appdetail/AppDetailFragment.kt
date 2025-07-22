@@ -76,17 +76,8 @@ class AppDetailFragment : Fragment(R.layout.fragment_app_detail) , SharedPrefere
                 when (item.itemId) {
                     R.id.refresh_circuits -> {
                         viewModel.appUID.value?.let { appUID ->
-                            if (preferenceHelper.warningsEnabled) {
-                                val dialog = BaseDialogFragment.createRefreshCircuitsForAppDialog(appUID)
-                                dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
-                            } else {
-                                try {
-                                    OnionMasq.refreshCircuitsForApp(appUID.toLong())
-                                } catch (e: ProxyStoppedException) {
-                                    e.printStackTrace()
-                                }
-                            }
-
+                            val dialog = BaseDialogFragment.createRefreshCircuitsForAppDialog(appUID)
+                            dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
                             return@setOnMenuItemClickListener true
                         }
                         return@setOnMenuItemClickListener false

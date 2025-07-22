@@ -60,17 +60,8 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing), SharedPrefer
             binding.toolbar.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.refresh_circuits -> {
-                        if (preferenceHelper.warningsEnabled) {
-                            val dialog = BaseDialogFragment.createRefreshAllCircuitsDialog()
-                            dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
-                        } else {
-                            try {
-                                OnionMasq.refreshCircuits()
-                            } catch (e: ProxyStoppedException) {
-                                e.printStackTrace()
-                            }
-                        }
-
+                        val dialog = BaseDialogFragment.createRefreshAllCircuitsDialog()
+                        dialog.show(parentFragmentManager, "REFRESH_CIRCUITS_DIALOG")
                         return@setOnMenuItemClickListener true
                     }
                     else -> return@setOnMenuItemClickListener false

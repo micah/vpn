@@ -16,14 +16,9 @@ class IconSettingFragmentViewModel(private val application: Application) : Andro
     private val _launcherList = MutableLiveData<List<LauncherModel>>(mutableListOf())
     val launcherList: LiveData<List<LauncherModel>> = _launcherList
 
-    val warningEnabled: Boolean get() = preferenceHelper.warningsEnabled
 
     init {
         loadLauncherList()
-    }
-
-    fun onWarningsSettingsChanged(compoundButton: CompoundButton, isChecked: Boolean) {
-        preferenceHelper.warningsEnabled = isChecked
     }
 
     private fun loadLauncherList() {
