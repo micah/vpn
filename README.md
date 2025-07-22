@@ -109,9 +109,15 @@ into your console.
 # In your language
 
 Check this out on how to contribute: https://gitlab.torproject.org/tpo/community/l10n/-/wikis/home 
+
+# Before releasing
+
 For devs: before publishing a new version, try the ./scripts/get-l10n.py You need to have
 https://gitlab.torproject.org/tpo/translation checked out and switched to the tor-vpn
 branch. Make sure to adapt paths when necessary. It's a bit crude, but should work.
+
+Moreover you should always fetch the latest default bridge lines provided in the tor-browser repository.
+You can do that by running `./scripts/fetch_default_bridges.sh`
 
 # License
 
