@@ -68,9 +68,22 @@ publish:
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)
 debugTests:
-  image : "containers.torproject.org/tpo/applications/vpn:main"
+  image: "containers.torproject.org/tpo/applications/vpn:main"
   interruptible: true
   stage: test
   when: always
   script:
     - ./gradlew -Pci --console=plain :app:testDebug
+
+debugIntegrationTests:
+  image: "containers.torproject.org/tpo/applications/vpn:main"
+  interruptible: true
+  stage: test
+  script:
+    - ./scripts/run_browserstack.sh
+  artifacts:
+    paths:
+      - reports/
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web"  # This checks if the job is manually triggered
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH   # This checks if the current branch is the main branch

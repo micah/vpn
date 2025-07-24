@@ -14,7 +14,7 @@ RUN install -d $ANDROID_HOME && \
     apt-get clean && \
     apt-get --quiet update --yes && \
     DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata && \
-    apt-get --quiet install --yes apt-utils wget tar unzip lib32stdc++6 lib32z1 build-essential curl git pkg-config libssl-dev openjdk-17-jdk
+    apt-get --quiet install --yes apt-utils wget jq tar unzip lib32stdc++6 lib32z1 build-essential curl git pkg-config libssl-dev openjdk-17-jdk
 
 #Java
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
