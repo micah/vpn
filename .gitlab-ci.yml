@@ -8,6 +8,12 @@ variables:
   # When using dind, it's wise to use the overlayfs driver for
   # improved performance.
   DOCKER_DRIVER: overlay
+  GITLAB_ADVANCED_SAST_ENABLED: 'true'
+  DS_GRADLE_RESOLUTION_POLICY: 'none'
+
+include:
+  - template: Jobs/Dependency-Scanning.gitlab-ci.yml
+  - template: Jobs/SAST.gitlab-ci.yml
 
 build-docker-image:
   variables:
@@ -28,7 +34,7 @@ build-docker-image:
 # Basic android and gradle stuff
 # Check linting
 lintDebug:
-  image : "containers.torproject.org/tpo/applications/vpn:main"
+  image: "containers.torproject.org/tpo/applications/vpn:main"
   interruptible: true
   stage: test
   script:
@@ -40,7 +46,7 @@ lintDebug:
 
 # Make Project
 assembleDebug:
-  image : "containers.torproject.org/tpo/applications/vpn:main"
+  image: "containers.torproject.org/tpo/applications/vpn:main"
   interruptible: true
   stage: build
   script:
@@ -79,7 +85,7 @@ publish:
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)
 debugTests:
-  image : "containers.torproject.org/tpo/applications/vpn:main"
+  image: "containers.torproject.org/tpo/applications/vpn:main"
   interruptible: true
   stage: test
   script:
