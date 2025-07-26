@@ -1,4 +1,4 @@
-FROM containers.torproject.org/tpo/tpa/base-images:bookworm@sha256:5d09cdc15df1d1415835a3d26b7ffd329d23afb8ed58b4ae3f6cba6c88316840
+FROM containers.torproject.org/tpo/tpa/base-images:bookworm
 
 ENV ANDROID_HOME="${PWD}/android-home" \
     ANDROID_COMPILE_SDK="35" \

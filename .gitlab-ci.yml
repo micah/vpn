@@ -20,7 +20,10 @@ build-docker-image:
     - podman login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - podman build -t ${CI_REGISTRY_IMAGE}:${TAG} .
     - podman push ${CI_REGISTRY_IMAGE}:${TAG}
-  when: manual
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: always
+    - when: never
 
 # Basic android and gradle stuff
 # Check linting
@@ -28,9 +31,12 @@ lintDebug:
   image : "containers.torproject.org/tpo/applications/vpn:main"
   interruptible: true
   stage: test
-  when: always
   script:
     - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - when: always
 
 # Make Project
 assembleDebug:
@@ -40,23 +46,28 @@ assembleDebug:
   script:
     - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
     - ./gradlew clean assembleDebug --stacktrace
-  when: always
   artifacts:
     paths:
       - app/build/outputs/
       - build.log
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - when: always
 
 # Publish apk
 publish:
   image: "containers.torproject.org/tpo/applications/vpn:main"
   stage: publish
-  # Only run this stage if one of the following rules is true
   rules:
-    # Run this job when a tag is created
+    # Skip this job in scheduled pipelines
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    # Run when a tag is created
     - if: $CI_COMMIT_TAG
       variables:
         TAG: "${CI_COMMIT_TAG}"
-    # Run this job when commits are pushed or merged to the default branch
+    # Run when commits are pushed or merged to the default branch
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       variables:
         TAG: "main"
@@ -71,6 +82,9 @@ debugTests:
   image : "containers.torproject.org/tpo/applications/vpn:main"
   interruptible: true
   stage: test
-  when: always
   script:
     - ./gradlew -Pci --console=plain :app:testDebug
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - when: always
