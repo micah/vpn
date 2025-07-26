@@ -1,4 +1,4 @@
-FROM containers.torproject.org/tpo/tpa/base-images:bookworm
+FROM containers.torproject.org/tpo/tpa/base-images/debian:bookworm
 
 ENV ANDROID_HOME="${PWD}/android-home" \
     ANDROID_COMPILE_SDK="35" \
