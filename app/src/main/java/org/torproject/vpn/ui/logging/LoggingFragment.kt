@@ -30,7 +30,7 @@ class LoggingFragment : Fragment(R.layout.fragment_logging) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.rvLogList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        logObservable.logListData.observe(viewLifecycleOwner, loggingListAdapter::update)
+        logObservable.liveData.observe(viewLifecycleOwner, loggingListAdapter::update)
 
         loggingListAdapter.registerAdapterDataObserver(object : AdapterDataObserver() {
             override fun onChanged() {

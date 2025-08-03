@@ -13,7 +13,7 @@ import java.util.*
 
 class LoggingListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var items: MutableList<LogItem> = (LogObservable.getInstance().logListData.value ?: listOf()).toMutableList()
+    var items: MutableList<LogItem> = LogObservable.getInstance().logList.toMutableList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = LogItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LogListItemViewHolder(binding)
