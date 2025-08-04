@@ -12,22 +12,52 @@
         tools:layout="@layout/fragment_configure">
         <action
             android:id="@+id/action_configureFragment_to_appRoutingFragment"
-            app:destination="@id/appRoutingFragment" />
+            app:destination="@id/appRoutingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_configureFragment_to_appearanceFragment"
-            app:destination="@id/iconSettingsFragment" />
+            app:destination="@id/iconSettingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_configureFragment_to_aboutFragment"
-            app:destination="@+id/aboutFragment" />
+            app:destination="@+id/aboutFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_configureFragment_to_LoggingFragment"
-            app:destination="@id/loggingFragment" />
+            app:destination="@id/loggingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_configureFragment_to_bridgeSettingsFragment"
-            app:destination="@id/bridgeSettingsFragment" />
+            app:destination="@id/bridgeSettingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_configureFragment_to_ExitNodeSelection"
-            app:destination="@id/exitNodeFragment" />
+            app:destination="@id/exitNodeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <fragment
@@ -37,16 +67,36 @@
         tools:layout="@layout/fragment_connect">
         <action
             android:id="@+id/action_navigation_connect_to_loggingFragment"
-            app:destination="@id/loggingFragment" />
+            app:destination="@id/loggingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_navigation_connect_to_appRoutingFragment"
-            app:destination="@id/appRoutingFragment" />
+            app:destination="@id/appRoutingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_navigation_connect_to_BridgesSettingsFragment"
-            app:destination="@id/bridgeSettingsFragment" />
+            app:destination="@id/bridgeSettingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_navigation_appRouting_to_ExitNodeSelection"
-            app:destination="@id/exitNodeFragment" />
+            app:destination="@id/exitNodeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <fragment
@@ -56,7 +106,12 @@
         >
         <action
             android:id="@+id/action_helpFragment_to_offlineHelpFragment"
-            app:destination="@+id/offlineHelpFragment" />
+            app:destination="@+id/offlineHelpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
 
     </fragment>
     <fragment
@@ -67,6 +122,10 @@
         <action
             android:id="@+id/action_navigation_appRouting_to_appDetailFragment"
             app:destination="@+id/appDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             />
     </fragment>
     <fragment
@@ -77,6 +136,10 @@
         <action
             android:id="@+id/action_navigation_appRouting_to_ExitNodeSelection"
             app:destination="@+id/appDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             />
     </fragment>
     <fragment
@@ -125,6 +188,10 @@
         <action
             android:id="@+id/action_navigation_appDetails_to_bridgeSettings"
             app:destination="@+id/bridgeSettingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             />
     </fragment>
 
@@ -144,10 +211,18 @@
         <action
             android:id="@+id/action_navigation_bridgeSettings_to_bridgeBot"
             app:destination="@+id/bridgeBotFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             />
         <action
             android:id="@+id/action_navigation_bridgeSettings_to_bridgeLines"
             app:destination="@+id/bridgelinesFragment"
+            app:enterAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out"
             />
     </fragment>
 
