@@ -91,11 +91,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (!granted) {
-            Toast.makeText(
-                requireContext(),
-                "TODO: SHOW PROPER HINT HOW TO ALLOW AGAIN NOTIFICATION PERMISSION",
-                Toast.LENGTH_LONG
-            ).show()
+            Log.w(TAG, "Notification request for tor-vpn was not granted!")
         }
         connectFragmentViewModel.onNotificationPermissionResult()
     }
