@@ -91,7 +91,7 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (!granted) {
-            Log.w(TAG, "Notification request for tor-vpn was not granted!")
+            Log.w(TAG, "Notification request for Tor VPN was not granted!")
         }
         connectFragmentViewModel.onNotificationPermissionResult()
     }
