@@ -99,7 +99,9 @@
             app:layout_constraintBottom_toTopOf="@+id/upper_guideline_action_btns"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:importantForAccessibility="no"
+            >
             <include
                 android:id="@+id/include_stats"
                 layout="@layout/include_connection_stats"
