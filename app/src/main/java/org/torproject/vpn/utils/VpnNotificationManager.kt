@@ -21,8 +21,8 @@ import org.torproject.vpn.vpn.TorVpnService.Companion.ACTION_STOP_VPN
 class VpnNotificationManager(val context: Context) {
 
     companion object {
-        val NOTIFICATION_ID = 1533082945
-        private val NOTIFICATION_CHANNEL_NEWSTATUS_ID = "TORVPN_NOTIFICATION_CHANNEL_NEWSTATUS_ID"
+        const val NOTIFICATION_ID = 1533082945
+        private const val NOTIFICATION_CHANNEL_NEWSTATUS_ID = "TORVPN_NOTIFICATION_CHANNEL_NEWSTATUS_ID"
     }
 
     private val notificationManager: NotificationManager
@@ -130,10 +130,8 @@ class VpnNotificationManager(val context: Context) {
     }
 
     private fun getDefaultFlags(): Int {
-        var flag = PendingIntent.FLAG_CANCEL_CURRENT
-        if (Build.VERSION.SDK_INT >= 23) {
-            flag = flag or PendingIntent.FLAG_IMMUTABLE
-        }
+        var flag = PendingIntent.FLAG_UPDATE_CURRENT
+        flag = flag or PendingIntent.FLAG_IMMUTABLE
         return flag
     }
 
