@@ -274,13 +274,17 @@ fun applyInsetsToViewPadding(
     left: Boolean,
     top: Boolean,
     right: Boolean,
-    bottom: Boolean
+    bottom: Boolean,
+    defaultLeftDP: Float = 0.0f,
+    defaultTopDP: Float = 0.0f,
+    defaultRightDP: Float = 0.0f,
+    defaultBottomDP: Float = 0.0f,
 ) {
     ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
         val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
         if (left) {
             v.setPadding(
-                insets.left,
+                insets.left + getDpInPx(v.context, defaultLeftDP),
                 v.paddingTop,
                 v.paddingRight,
                 v.paddingBottom
@@ -290,7 +294,7 @@ fun applyInsetsToViewPadding(
             v.setPadding(
                 v.paddingLeft,
                 v.paddingTop,
-                insets.right,
+                insets.right + getDpInPx(v.context, defaultRightDP),
                 v.paddingBottom
             )
         }
@@ -299,13 +303,13 @@ fun applyInsetsToViewPadding(
                 v.paddingLeft,
                 v.paddingTop,
                 v.paddingRight,
-                insets.bottom
+                insets.bottom + getDpInPx(v.context, defaultBottomDP),
             )
         }
         if (top) {
             v.setPadding(
                 v.paddingLeft,
-                insets.top,
+                insets.top + getDpInPx(v.context, defaultTopDP),
                 v.paddingRight,
                 v.paddingBottom
             )

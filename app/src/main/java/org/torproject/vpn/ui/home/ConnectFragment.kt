@@ -107,7 +107,9 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         preferenceHelper.registerListener(this)
         connectFragmentViewModel = ViewModelProvider(this)[ConnectFragmentViewModel::class.java]
         _binding = FragmentConnectBinding.inflate(inflater, container, false)
-        applyInsetsToViewPadding(binding.toolbar, true, true, true, false)
+        applyInsetsToViewPadding(binding.toolbar,
+            left = true, top = true, right = true, bottom = false,
+            defaultLeftDP = 8.0f, defaultTopDP = 16.0f, defaultRightDP = 8.0f, defaultBottomDP = 16.0f)
         applyInsetsToGuideLineBottom(binding.upperGuidelineActionBtns)
         applyInsetsToGuideLineBottom(binding.lowerGuidelineActionBtns)
         binding.lifecycleOwner = viewLifecycleOwner
