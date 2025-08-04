@@ -31,6 +31,7 @@
             android:paddingVertical="@dimen/stat_card_padding_vertical"
             android:layout_marginTop="@dimen/stat_top_margin"
             android:background="@drawable/round_down_stat_bg"
+            android:contentDescription="@string/up_content_description"
             android:visibility="@{viewModel.connectionState == ConnectionState.CONNECTED ? View.VISIBLE: View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
