@@ -282,7 +282,7 @@ class AppManager(private val context: Context) {
     }
 
     fun onAppIdChanged(added: Boolean, packageName: String?) {
-        CoroutineScope(Dispatchers.IO).launch(Dispatchers.Default) {
+        CoroutineScope(Dispatchers.IO).launch {
             packageName?.let { appId ->
                 val protectedAppsList = preferenceHelper.protectedApps
                 if (added && !protectedAppsList.contains(appId) && !TOR_POWERED_APP_PACKAGE_NAMES.contains(appId)) {
