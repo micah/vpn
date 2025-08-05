@@ -107,18 +107,20 @@ class TorVpnService : VpnService() {
         val action = if (intent != null) intent.action else ""
         ServiceCompat.startForeground(this, VpnNotificationManager.NOTIFICATION_ID, notification, FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED)
 
-        val isAlwaysOn =  (intent == null || intent.component == null || intent.component!!.packageName != packageName) && Build.VERSION.SDK_INT >= ALWAYS_ON_MIN_API_LEVEL
-        if (isAlwaysOn) {
-            VpnStatusObservable.isAlwaysOnBooting.set(true)
-            establishVpn()
-        } else if (action == ACTION_START_VPN) {
-            VpnStatusObservable.isAlwaysOnBooting.set(false)
-            establishVpn()
-        } else if (action == ACTION_STOP_VPN) {
-            Log.d(TAG, "service: stopping vpn...")
-            stop(false)
-        } else {
-            Log.d(TAG, "service unknown action: $action" );
+        coroutineScope.launch {
+            val isAlwaysOn =  (intent == null || intent.component == null || intent.component!!.packageName != packageName)
+            if (isAlwaysOn) {
+                VpnStatusObservable.isAlwaysOnBooting.set(true)
+                establishVpn()
+            } else if (action == ACTION_START_VPN) {
+                VpnStatusObservable.isAlwaysOnBooting.set(false)
+                establishVpn()
+            } else if (action == ACTION_STOP_VPN) {
+                Log.d(TAG, "service: stopping vpn...")
+                stop(false)
+            } else {
+                Log.d(TAG, "service unknown action: $action" );
+            }
         }
         return START_STICKY
     }
