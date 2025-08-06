@@ -212,5 +212,16 @@
     <string name="down_content_description">Download</string>
     <string name="current_state">Current state: </string>
     <string name="advanced">Advanced</string>
+    <string name="beta_intro">Welcome to the beta. Before you get started, there are some things you should know:</string>
+    <string name="beta_test_thoroughly">Test thoroughly</string>
+    <string name="beta_test_description">This is an early access release intended for testing and feedback.</string>
+    <string name="beta_risks">Know the risks</string>
+    <string name="beta_risks_description">Beta releases may leak information and should not be used for sensitive activities.</string>
+    <string name="how_to_report_bugs">How to report bugs</string>
+    <string name="external_link">External link</string>
+    <string name="start_testing">Start testing</string>
+    <string name="learn_more">Learn more</string>
+    <string name="beta_report_bugs">Report bugs</string>
+    <string name="beta_report_bugs_description">You can help by reporting any bugs you find back to our developers.</string>
 
 </resources>

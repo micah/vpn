@@ -7,6 +7,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
@@ -35,7 +36,8 @@ import org.torproject.vpn.utils.PreferenceHelper.Companion.BridgeType
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECTED_APPS
 import org.torproject.vpn.utils.PreferenceHelper.Companion.PROTECT_ALL_APPS
 import org.torproject.vpn.utils.PreferenceHelper.Companion.SHOULD_SHOW_GUIDE
-import org.torproject.vpn.utils.formatBits
+import org.torproject.vpn.utils.formatByteRateToBitRate
+import org.torproject.vpn.utils.formatBytes
 import org.torproject.vpn.utils.getFlagByCountryCode
 import org.torproject.vpn.vpn.ConnectionState
 import org.torproject.vpn.vpn.ConnectionState.CONNECTED
@@ -48,8 +50,6 @@ import org.torproject.vpn.vpn.DataUsage
 import org.torproject.vpn.vpn.VpnServiceCommand
 import org.torproject.vpn.vpn.VpnStatusObservable
 import java.lang.reflect.Type
-import org.torproject.vpn.utils.formatBytes
-import org.torproject.vpn.utils.formatByteRateToBitRate
 
 /**
  * ViewModel for slider fragment, mostly place holder at this point
@@ -203,23 +203,19 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
     }.stateIn(
         viewModelScope,
         SharingStarted.Lazily,
-        true
+        preferenceHelper.shouldShowGuide
     )
 
-    val appCardVisibility = combine(
-        guideScreenVisibility,
-        connectionState
-    ) { guideScreenVisibility, connectionState -> !guideScreenVisibility && (connectionState == INIT || connectionState == CONNECTED) }
+    val appCardVisibility: StateFlow <Boolean> = connectionState.map { connectionState ->
+        connectionState == INIT || connectionState == CONNECTED }
         .stateIn(
             viewModelScope,
             SharingStarted.Lazily,
             false
         )
 
-    val connectionCardVisibility = combine(
-        guideScreenVisibility,
-        connectionState
-    ) { guideScreenVisibility, connectionState -> !guideScreenVisibility && (connectionState == INIT) }
+    val connectionCardVisibility: StateFlow <Boolean> = connectionState.map { connectionState ->
+        connectionState == INIT }
         .stateIn(
             viewModelScope,
             SharingStarted.Lazily,
@@ -233,10 +229,6 @@ class ConnectFragmentViewModel(private val application: Application) : AndroidVi
         SharingStarted.Lazily,
         View.GONE
     )
-
-    fun setGuideInvisible() {
-        preferenceHelper.shouldShowGuide = false
-    }
 
     fun connectStateButtonClicked() {
         when (VpnStatusObservable.statusLiveData.value as ConnectionState) {

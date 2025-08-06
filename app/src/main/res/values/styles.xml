@@ -333,6 +333,23 @@
         <item name="android:letterSpacing">0</item>
     </style>
 
+    <style name="rounded_image_view">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
 
+    <style name="material_button" parent="Widget.Material3.Button">
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="backgroundTint">@color/primary</item>
+        <item name="rippleColor">@color/on_primary</item>
+    </style>
+
+    <style name="outlined_material_button" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/on_surface_variant</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="strokeColor">@color/outline_variant</item>
+        <item name="strokeWidth">2dp</item>
+    </style>
 
 </resources>

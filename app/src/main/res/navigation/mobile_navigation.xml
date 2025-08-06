@@ -65,6 +65,11 @@
         android:name="org.torproject.vpn.ui.home.ConnectFragment"
         android:label="@string/action_connect"
         tools:layout="@layout/fragment_connect">
+        <!-- TODO: add enter and exit animation -->
+        <action
+            android:id="@+id/action_navigation_connect_to_BetaInfoFragment"
+            app:destination="@id/betaInfoFragment"
+            />
         <action
             android:id="@+id/action_navigation_connect_to_loggingFragment"
             app:destination="@id/loggingFragment"
@@ -236,7 +241,26 @@
     <fragment
         android:id="@+id/offlineHelpFragment"
         android:name="org.torproject.vpn.ui.help.OfflineHelpFragment"
-        android:label="HelpFragment"
-        tools:layout="@layout/fragment_offline_help"
-        />
+        android:label="OfflineHelpFragment"
+        tools:layout="@layout/fragment_offline_help">
+        <argument
+            android:name="argHelpPageID"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/betaInfoFragment"
+        android:name="org.torproject.vpn.ui.betainfo.BetaInfoFragment"
+        android:label="BetaInfoFragment"
+        tools:layout="@layout/fragment_beta_info">
+        <!-- TODO: add enter and exit animation -->
+        <action
+            android:id="@+id/action_navigation_betaInfo_to_OfflineHelpFragment"
+            app:destination="@+id/offlineHelpFragment"
+            app:popUpTo="@id/navigation_connect"
+            />
+    </fragment>
+
 </navigation>

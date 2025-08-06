@@ -152,9 +152,13 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
                 }
 
                 launch {
+                    setUIState(currentVpnState, connectFragmentViewModel.internetConnectivity.value)
+                }
+
+                launch {
                     connectFragmentViewModel.guideScreenVisibility.collect { isVisible ->
-                        if (!isVisible) {
-                            setUIState(currentVpnState, connectFragmentViewModel.internetConnectivity.value)
+                        if (isVisible) {
+                            findNavController().navigateSafe(R.id.action_navigation_connect_to_BetaInfoFragment)
                         }
                     }
                 }
