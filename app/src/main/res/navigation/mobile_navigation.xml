@@ -251,6 +251,16 @@
     </fragment>
 
     <fragment
+        android:label="OfflineHelpFragment"
+        tools:layout="@layout/fragment_offline_help">
+        <argument
+            android:name="argHelpPageID"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
+    </fragment>
+
+    <fragment
         android:id="@+id/betaInfoFragment"
         android:name="org.torproject.vpn.ui.betainfo.BetaInfoFragment"
         android:label="BetaInfoFragment"
