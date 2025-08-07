@@ -56,6 +56,9 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
     )
     fun onUseBridgeChanged(compoundButton: CompoundButton, isChecked: Boolean) {
         preferenceHelper.useBridge = isChecked
+        if (isChecked && preferenceHelper.bridgeType == BridgeType.None) {
+            preferenceHelper.bridgeType = BridgeType.Obfs4
+        }
         updateVPNSettings()
     }
 
