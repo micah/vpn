@@ -22,6 +22,8 @@
     <dimen name="connection_button_bottom_padding">84dp</dimen>
     <dimen name="connection_button_upper_guideline">170dp</dimen>
     <dimen name="connection_button_lower_guideline">82dp</dimen>
+    <dimen name="connection_status_bar_horizontal_padding">8dp</dimen>
+    <dimen name="connection_status_bar_vertical_padding">16dp</dimen>
     <dimen name="design_bottom_navigation_height" tools:override="true">62dp</dimen>
     <dimen name="title_top_padding">56dp</dimen>
     <dimen name="list_item_spacing">16dp</dimen>

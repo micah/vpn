@@ -54,11 +54,10 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/connection_status_bar_horizontal_padding"
+            android:paddingVertical="@dimen/connection_status_bar_vertical_padding"
+
             android:background="@color/surface"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
