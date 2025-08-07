@@ -160,9 +160,9 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
         if (bridgeLineSet.isEmpty()) {
             preferenceHelper.bridgeType = PreferenceHelper.Companion.BridgeType.None
         } else {
+            preferenceHelper.useBridge = true
             preferenceHelper.bridgeType = PreferenceHelper.Companion.BridgeType.Manual
         }
-        preferenceHelper.useBridge = true
         _botState.postValue(BotState.SAVED_BRIDGES)
     }
 }
