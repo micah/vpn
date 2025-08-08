@@ -40,7 +40,7 @@ class LauncherAdapter(
                 onAppIconSelected?.invoke(launcherModel)
             }
             binding.tvAppTitle.text = binding.root.context.getText(launcherModel.appNameResId)
-            val textColor = if (launcherModel.selected) R.color.secondary else R.color.on_surface
+            val textColor = if (launcherModel.selected) R.color.tertiary else R.color.on_surface
             binding.tvAppTitle.setTextColor(ContextCompat.getColor(binding.root.context, textColor))
         }
     }

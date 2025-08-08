@@ -162,7 +162,7 @@
     <!-- appearance screen -->
     <string name="appearance">Appearance</string>
     <string name="name_and_icon">Name and icon</string>
-    <string name="launcher_hint">Choose an icon and name for your home screen and app drawer. The default Tor VPN icon and name will still be used in notifications.</string>
+    <string name="launcher_hint">Choose an icon and name to be displayed on your home screen, app drawer and notifications.</string>
 
 
     <!-- alternative app namesare not translated until we know which app names we actually want -->

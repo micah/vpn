@@ -51,27 +51,18 @@
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:weightSum="1"
                 android:orientation="vertical">
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/paragraph_title"
-                    android:paddingHorizontal="@dimen/activity_vertical_margin"
-                    android:paddingTop="@dimen/default_padding"
-                    android:paddingBottom="@dimen/default_padding"
-                    android:layout_marginBottom="12dp"
-                    android:text="@string/appearance"/>
+                    android:paddingVertical="@dimen/compact_padding"
+                    android:paddingHorizontal="@dimen/default_padding"
+                    style="@style/text_body_small"
+                    android:text="@string/launcher_hint"
+                    />
 
                 <include android:id="@+id/layout_app_icons"
                     layout="@layout/horizontal_recycler_view_item"
-                    />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/default_padding"
-                    android:paddingHorizontal="@dimen/activity_vertical_margin"
-                    style="@style/text_body_small"
-                    android:text="@string/launcher_hint"
                     />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
