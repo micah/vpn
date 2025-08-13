@@ -196,6 +196,9 @@
     <string name="version">Version</string>
     <string name="last_updated">Last updated</string>
     <string name="about_description_long">Tor VPN is an experimental VPN app made by the %1$s, developers of Tor and Tor Browser—the world’s strongest tools for privacy and freedom online.</string>
+    <string name="about_support_title">Made by a nonprofit</string>
+    <string name="about_support_description">We rely on supporters like you to help us keep Tor robust and secure for millions of people worldwide.</string>
+    <string name="about_support_action">Donate now</string>
     <string name="tor_project">Tor Project</string>
     <string name="no_internet">No internet</string>
     <plurals name="n_bridges">

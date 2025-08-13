@@ -1,7 +1,9 @@
 package org.torproject.vpn.ui.about.model
 
 import android.app.Application
+import android.content.Intent
 import android.content.pm.PackageManager
+import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
@@ -37,4 +39,9 @@ class AboutFragmentViewModel(application: Application) : AndroidViewModel(applic
         return@map sdf.format(Date(info.lastUpdateTime))
     }.stateIn(viewModelScope, Lazily, application.getString(R.string.unknown))
 
+    fun getDonateIntent(): Intent {
+        return Intent(Intent.ACTION_VIEW).apply {
+            data = "https://donate.torproject.org/".toUri()
+        }
+    }
 }

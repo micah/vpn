@@ -34,5 +34,6 @@
     <dimen name="stat_card_height">70dp</dimen>
     <dimen name="stat_card_padding_vertical">20dp</dimen>
     <dimen name="stat_switch_height">78dp</dimen>
+    <dimen name="support_image_height">205dp</dimen>
 
 </resources>

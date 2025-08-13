@@ -1,5 +1,7 @@
 package org.torproject.vpn.ui.about
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.TextPaint
@@ -19,9 +21,10 @@ import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentAboutBinding
 import org.torproject.vpn.ui.about.model.AboutFragmentViewModel
 import org.torproject.vpn.ui.glide.ApplicationInfoModel
+import androidx.core.net.toUri
 
 
-class AboutFragment : Fragment(R.layout.fragment_about) {
+class AboutFragment : Fragment(R.layout.fragment_about),ClickHandler {
 
     private lateinit var viewModel: AboutFragmentViewModel
 
@@ -36,6 +39,7 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.handler=this
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
@@ -74,5 +78,10 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
         }
 
         return SpannableString(s)
+    }
+
+    override fun onDonateClicked(v: View) {
+        val intent = viewModel.getDonateIntent()
+        startActivity(intent)
     }
 }
