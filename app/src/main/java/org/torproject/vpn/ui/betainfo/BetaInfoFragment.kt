@@ -54,24 +54,14 @@ class BetaInfoFragment : Fragment(R.layout.fragment_beta_info), ClickHandler, Sh
     }
 
     override fun onReportBugsClicked() {
-        if (onPreferencesChanged == null) {
-            onPreferencesChanged = {
-                // FIXME: why aren't OfflineHelpFragmentDirections working here?
-                val bundle = Bundle()
-                bundle.putInt("argHelpPageID", OfflineHelpFragment.HELP_PAGE_BUG_REPORT)
-                findNavController().navigateSafe(R.id.action_navigation_betaInfo_to_OfflineHelpFragment, bundle)
-            }
-        }
-        preferenceHelper?.shouldShowGuide = false
+        // FIXME: why aren't OfflineHelpFragmentDirections working here?
+        val bundle = Bundle()
+        bundle.putInt("argHelpPageID", OfflineHelpFragment.HELP_PAGE_BUG_REPORT)
+        findNavController().navigateSafe(R.id.action_navigation_betaInfo_to_OfflineHelpFragment, bundle)
     }
 
     override fun onLearnMoreClicked(v: View) {
-        if (onPreferencesChanged == null) {
-            onPreferencesChanged = {
-                findNavController().navigateSafe(R.id.action_navigation_betaInfo_to_OfflineHelpFragment)
-            }
-        }
-        preferenceHelper?.shouldShowGuide = false
+        findNavController().navigateSafe(R.id.action_navigation_betaInfo_to_OfflineHelpFragment)
     }
 
     override fun onStartTestingClicked(v: View) {

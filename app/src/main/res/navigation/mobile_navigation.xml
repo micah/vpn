@@ -259,7 +259,6 @@
         <action
             android:id="@+id/action_navigation_betaInfo_to_OfflineHelpFragment"
             app:destination="@+id/offlineHelpFragment"
-            app:popUpTo="@id/navigation_connect"
             />
     </fragment>
 
