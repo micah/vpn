@@ -1,12 +1,12 @@
 [versions]
-androidGradlePlugin = "8.10.1"
-kotlinGradlePlugin = "2.1.21"
+androidGradlePlugin = "8.12.0"
+kotlinGradlePlugin = "2.2.0"
 constraintlayout = "2.2.1"
-androidTest = "1.6.1"
-espressoVersion = "3.6.1"
+androidTest = "1.7.0"
+espressoVersion = "3.7.0"
 glide = "4.16.0"
-androidxJunit = "1.2.1"
-androidxLifecycle = "2.9.1"
+androidxJunit = "1.3.0"
+androidxLifecycle = "2.9.2"
 retrofit = "2.12.0"
 
 [plugins]
@@ -49,17 +49,17 @@ espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref =
 espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espressoVersion" }
 
 # Android Test
-androidx-test-runner = { module = "androidx.test:runner", version = "1.6.2" }
+androidx-test-runner = { module = "androidx.test:runner", version = "1.7.0" }
 androidx-test-uiautomator = { module = "androidx.test.uiautomator:uiautomator", version = "2.3.0" }
 androidx-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espressoVersion" }
 screengrab = { module = "tools.fastlane:screengrab", version = "2.1.1" }
 
 # Test
 junit = { module = "junit:junit", version = "4.13.2" }
-androidx-test-truth = { module = "androidx.test.ext:truth", version = "1.6.0" }
+androidx-test-truth = { module = "androidx.test.ext:truth", version = "1.7.0" }
 
 # Debug
-leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version = "3.0-alpha-1" }
+leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version = "3.0-alpha-8" }
 
 # OnionMasq
 onionmasq-release = { module = "org.torproject:onionmasq", version = "0.9.1-local-release" }
