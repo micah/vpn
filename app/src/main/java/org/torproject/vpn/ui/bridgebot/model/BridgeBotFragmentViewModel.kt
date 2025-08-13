@@ -1,6 +1,7 @@
 package org.torproject.vpn.ui.bridgebot.model
 
 import android.app.Application
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.widget.Toast
@@ -62,15 +63,15 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
         initialValue = ContextCompat.getColor(application, R.color.on_primary)
     )
 
-    val bridgeButtonBackgroundColor: StateFlow<Drawable?> = botState.asFlow().map { data ->
+    val bridgeButtonBackgroundColor: StateFlow<Int> = botState.asFlow().map { data ->
         return@map when (data) {
-            BotState.INIT -> ContextCompat.getDrawable(application, R.drawable.bg_primary_round_btn)
-            else -> ContextCompat.getDrawable(application, R.drawable.bg_surface_round_btn)
+            BotState.INIT -> ContextCompat.getColor(application, R.color.primary)
+            else -> ContextCompat.getColor(application, R.color.surface_container)
         }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
-        initialValue = ContextCompat.getDrawable(application, R.drawable.bg_surface_round_btn)
+        initialValue = ContextCompat.getColor(application, R.color.surface_container)
     )
 
     val isFetching: StateFlow<Boolean> = botState.asFlow().map { data ->
