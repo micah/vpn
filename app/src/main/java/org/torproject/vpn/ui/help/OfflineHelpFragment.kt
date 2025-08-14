@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
+import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
@@ -14,6 +15,7 @@ import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentOfflineHelpBinding
+import org.torproject.vpn.utils.applyInsetsToViewPadding
 
 
 class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
@@ -21,6 +23,7 @@ class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
         val TAG: String = OfflineHelpFragment::class.java.simpleName
         const val HELP_PAGE_BUG_REPORT = 1
         const val LICENSES = 2;
+        const val PRIVACY_POLICY = 3;
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,13 +35,27 @@ class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
         }
 
         var fileName = "index.html"
+        var title = view.context.resources.getString(R.string.help)
         arguments?.let {
             val arguments = OfflineHelpFragmentArgs.fromBundle(it)
-            fileName = when (arguments.argHelpPageID) {
-                HELP_PAGE_BUG_REPORT -> "hp_bug_report.html"
-                LICENSES -> "OPEN_SOURCE_LICENSES.md.html"
-                else -> {"index.html"}
+            when (arguments.argHelpPageID) {
+                HELP_PAGE_BUG_REPORT -> {
+                    fileName = "hp_bug_report.html"
+                }
+                LICENSES -> {
+                    fileName = "OPEN_SOURCE_LICENSES.md.html"
+                    title = view.context.resources.getString(R.string.open_source_licenses)
+
+                }
+                PRIVACY_POLICY -> {
+                    fileName = "PRIVACY_POLICY.md.html"
+                    title = view.context.resources.getString(R.string.privacy_policy)
+                }
+                else -> {
+                    // defaults are already set
+                }
             }
+            binding.toolbar.title = title
         }
 
         val assetLoader = WebViewAssetLoader.Builder()
@@ -46,7 +63,7 @@ class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
             .addPathHandler("/assets/", WebViewAssetLoader.AssetsPathHandler(view.context))
             .build()
         binding.wvHelp.webViewClient = LocalContentWebViewClient(assetLoader)
-        binding.wvHelp.loadUrl("https://localhost/assets/help/$fileName")
+        binding.wvHelp.loadUrl("file:///android_asset/help/$fileName")
         binding.wvHelp.setBackgroundColor(ResourcesCompat.getColor(view.resources, R.color.surface, null))
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {

@@ -3,7 +3,6 @@ package org.torproject.vpn.ui.configure
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -52,11 +51,11 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
     }
 
     override fun onPrivacyPolicyClicked(v: View) {
-        // TODO("Not yet implemented")
+        findNavController().navigateSafe(R.id.action_configureFragment_to_PrivacyPolicy)
     }
 
     override fun onLicencesClicked(v: View) {
-        findNavController().navigateSafe(R.id.action_configureFragment_to_OfflineHelp)
+        findNavController().navigateSafe(R.id.action_configureFragment_to_Licenses)
     }
 
     override fun onTorLogsClicked(v: View) {

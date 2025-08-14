@@ -59,12 +59,31 @@
             app:popExitAnim="@anim/slide_out_right"
             />
         <action
-            android:id="@+id/action_configureFragment_to_OfflineHelp"
-            app:destination="@id/offlineHelpFragment">
+            android:id="@+id/action_configureFragment_to_Licenses"
+            app:destination="@id/offlineHelpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            >
             <argument
                 android:name="argHelpPageID"
                 app:argType="integer"
                 android:defaultValue="2"
+                />
+        </action>
+        <action
+            android:id="@+id/action_configureFragment_to_PrivacyPolicy"
+            app:destination="@id/offlineHelpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            >
+            <argument
+                android:name="argHelpPageID"
+                app:argType="integer"
+                android:defaultValue="3"
                 />
         </action>
     </fragment>
@@ -250,16 +269,6 @@
     <fragment
         android:id="@+id/offlineHelpFragment"
         android:name="org.torproject.vpn.ui.help.OfflineHelpFragment"
-        android:label="OfflineHelpFragment"
-        tools:layout="@layout/fragment_offline_help">
-        <argument
-            android:name="argHelpPageID"
-            app:argType="integer"
-            android:defaultValue="0"
-            />
-    </fragment>
-
-    <fragment
         android:label="OfflineHelpFragment"
         tools:layout="@layout/fragment_offline_help">
         <argument
