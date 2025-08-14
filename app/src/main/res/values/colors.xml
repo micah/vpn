@@ -40,6 +40,31 @@
     <color name="surface_container_low">#21185C</color>
     <color name="surface_container_lowest">#120C38</color>
 
+    <!-- Error button interactive states -->
+    <color name="error_state_overlay_hovered">#1A742027</color> <!-- on_error at 10% opacity -->
+    <color name="error_state_overlay_focused">#1F742027</color> <!-- on_error at 12% opacity -->
+    <color name="error_state_overlay_pressed">#1F742027</color> <!-- on_error at 12% opacity -->
+    <color name="error_ripple">#1F742027</color> <!-- on_error at 12% opacity for ripple -->
+
+    <!-- Primary button interactive states -->
+    <color name="primary_pressed">#A357D3</color>
+    <color name="primary_state_overlay_hovered">#1A18242F</color> <!-- on_primary at 10% opacity -->
+    <color name="primary_state_overlay_focused">#1F18242F</color> <!-- on_primary at 12% opacity -->
+    <color name="primary_state_overlay_pressed">#1F18242F</color> <!-- on_primary at 12% opacity -->
+    <color name="primary_ripple">#1F18242F</color> <!-- on_primary at 12% opacity for ripple -->
+
+    <!-- Secondary button interactive states -->
+    <color name="secondary_state_overlay_hovered">#1A18242F</color> <!-- on_secondary at 10% opacity -->
+    <color name="secondary_state_overlay_focused">#1F18242F</color> <!-- on_secondary at 12% opacity -->
+    <color name="secondary_state_overlay_pressed">#1F18242F</color> <!-- on_secondary at 12% opacity -->
+    <color name="secondary_ripple">#1F18242F</color> <!-- on_secondary at 12% opacity for ripple -->
+
+    <!-- Surface container button interactive states -->
+    <color name="surface_state_overlay_hovered">#1AFFFFFF</color> <!-- on_surface at 10% opacity -->
+    <color name="surface_state_overlay_focused">#1FFFFFFF</color> <!-- on_surface at 12% opacity -->
+    <color name="surface_state_overlay_pressed">#1FFFFFFF</color> <!-- on_surface at 12% opacity -->
+    <color name="surface_ripple">#1FFFFFFF</color> <!-- on_surface at 12% opacity for ripple -->
+
     <color name="inverse_surface">#C4C8FF</color>
     <color name="inverse_on_surface">#18242F</color>
 

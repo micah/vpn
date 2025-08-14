@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/primary_ripple">
+
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp" />
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
+
+    <item>
+        <selector>
+            <!-- Pressed state -->
+            <item android:state_pressed="true">
+                <layer-list>
+                    <item android:drawable="@drawable/bg_btn_connect" />
+                    <!-- State overlay for pressed -->
+                    <item>
+                        <vector android:width="143dp"
+                            android:height="88dp"
+                            android:viewportWidth="143"
+                            android:viewportHeight="88">
+                            <path
+                                android:fillColor="@color/primary_state_overlay_pressed"
+                                android:pathData="M28,0L115,0A28,28 0,0 1,143 28L143,60A28,28 0,0 1,115 88L28,88A28,28 0,0 1,0 60L0,28A28,28 0,0 1,28 0z" />
+                        </vector>
+                    </item>
+                </layer-list>
+            </item>
+
+            <!-- Focused state -->
+            <item android:state_focused="true">
+                <layer-list>
+                    <item android:drawable="@drawable/bg_btn_connect" />
+                    <!-- State overlay for focused -->
+                    <item>
+                        <vector android:width="143dp"
+                            android:height="88dp"
+                            android:viewportWidth="143"
+                            android:viewportHeight="88">
+                            <path
+                                android:fillColor="@color/primary_state_overlay_focused"
+                                android:pathData="M28,0L115,0A28,28 0,0 1,143 28L143,60A28,28 0,0 1,115 88L28,88A28,28 0,0 1,0 60L0,28A28,28 0,0 1,28 0z" />
+                        </vector>
+                    </item>
+                </layer-list>
+            </item>
+
+            <!-- Hovered state -->
+            <item android:state_hovered="true">
+                <layer-list>
+                    <item android:drawable="@drawable/bg_btn_connect" />
+                    <!-- State overlay for hovered -->
+                    <item>
+                        <vector android:width="143dp"
+                            android:height="88dp"
+                            android:viewportWidth="143"
+                            android:viewportHeight="88">
+                            <path
+                                android:fillColor="@color/primary_state_overlay_hovered"
+                                android:pathData="M28,0L115,0A28,28 0,0 1,143 28L143,60A28,28 0,0 1,115 88L28,88A28,28 0,0 1,0 60L0,28A28,28 0,0 1,28 0z" />
+                        </vector>
+                    </item>
+                </layer-list>
+            </item>
+
+            <!-- Default state -->
+            <item android:drawable="@drawable/bg_btn_connect" />
+        </selector>
+    </item>
+</ripple>
