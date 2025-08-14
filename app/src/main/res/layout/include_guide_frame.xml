@@ -142,7 +142,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_guide_info" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/bt_got_it"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"

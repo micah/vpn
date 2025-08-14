@@ -37,7 +37,9 @@
             android:text="@{viewModel.independentTorAppDescriptionText}"
             android:textAppearance="@style/info_text" />
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.TextButton"
+            android:textColor="@color/tertiary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
