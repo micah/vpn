@@ -58,6 +58,15 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_configureFragment_to_OfflineHelp"
+            app:destination="@id/offlineHelpFragment">
+            <argument
+                android:name="argHelpPageID"
+                app:argType="integer"
+                android:defaultValue="2"
+                />
+        </action>
     </fragment>
 
     <fragment

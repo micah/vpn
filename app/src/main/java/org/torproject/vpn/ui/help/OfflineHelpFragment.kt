@@ -1,5 +1,6 @@
 package org.torproject.vpn.ui.help
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebResourceRequest
@@ -13,13 +14,13 @@ import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentOfflineHelpBinding
-import org.torproject.vpn.ui.appdetail.AppDetailFragmentArgs
 
 
 class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
     companion object {
         val TAG: String = OfflineHelpFragment::class.java.simpleName
         const val HELP_PAGE_BUG_REPORT = 1
+        const val LICENSES = 2;
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,6 +36,7 @@ class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
             val arguments = OfflineHelpFragmentArgs.fromBundle(it)
             fileName = when (arguments.argHelpPageID) {
                 HELP_PAGE_BUG_REPORT -> "hp_bug_report.html"
+                LICENSES -> "OPEN_SOURCE_LICENSES.md.html"
                 else -> {"index.html"}
             }
         }
@@ -56,7 +58,20 @@ class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
     }
 
 
-    private class LocalContentWebViewClient(private val assetLoader: WebViewAssetLoader) : WebViewClientCompat() {
+    private inner class LocalContentWebViewClient(private val assetLoader: WebViewAssetLoader) : WebViewClientCompat() {
+        override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
+            val url = request.url.toString()
+            // Check if the URL is external, open in separate browser
+            return if (!url.startsWith("https://localhost/assets/help")) {
+                val intent = Intent(Intent.ACTION_VIEW, request.url)
+                startActivity(intent)
+                true
+            } else {
+                // Allow loading of internal pages
+                false
+            }
+        }
+
         override fun shouldInterceptRequest(
             view: WebView,
             request: WebResourceRequest

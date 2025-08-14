@@ -56,7 +56,7 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
     }
 
     override fun onLicencesClicked(v: View) {
-        // TODO("Not yet implemented")
+        findNavController().navigateSafe(R.id.action_configureFragment_to_OfflineHelp)
     }
 
     override fun onTorLogsClicked(v: View) {
