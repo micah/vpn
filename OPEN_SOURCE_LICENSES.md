@@ -1,6 +1,6 @@
 # Open Source Licenses
 
-This app, **TorVPN**, is licensed under the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause).
+This app, **Tor VPN**, is licensed under the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause).
 
 Below is a list of third-party open source libraries and assets used in the app, along with their associated licenses and attributions.
 
