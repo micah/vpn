@@ -122,3 +122,5 @@ You can do that by running `./scripts/fetch_default_bridges.sh`
 # License
 
 This code is licensed under the [3-clause BSD license](https://opensource.org/license/bsd-3-clause/)
+
+See [doc/OPEN_SOURCE_LICENSES.md](doc/OPEN_SOURCE_LICENSES.md) for third-party license notices.
