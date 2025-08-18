@@ -41,7 +41,11 @@ class BridgeSettingsFragment : Fragment(R.layout.fragment_bridgesettings), Click
         binding.lifecycleOwner = viewLifecycleOwner
         binding.handler = this
         viewModel.preferenceHelper.registerListener(this)
-        binding.rgBridgeOptions.check(viewModel.getSelectedBridgeTypeId())
+        
+        // Set up radio button custom views
+        setupRadioButtonViews()
+        updateSelectedRadioButton()
+        
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
@@ -66,7 +70,7 @@ class BridgeSettingsFragment : Fragment(R.layout.fragment_bridgesettings), Click
 
     override fun onResume() {
         super.onResume()
-        binding.rgBridgeOptions.check(viewModel.getSelectedBridgeTypeId())
+        updateSelectedRadioButton()
     }
 
 
@@ -108,7 +112,48 @@ class BridgeSettingsFragment : Fragment(R.layout.fragment_bridgesettings), Click
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key?.equals(PreferenceHelper.BRIDGE_TYPE) == true) {
-            binding.rgBridgeOptions.check(viewModel.getSelectedBridgeTypeId())
+            updateSelectedRadioButton()
+        }
+    }
+
+    private fun setupRadioButtonViews() {
+        // Set up click listeners for custom radio button views
+        binding.radioObfs4.setOnRadioButtonClickListener {
+            clearAllRadioButtons()
+            binding.radioObfs4.isChecked = true
+            viewModel.selectBuiltInObfs4()
+        }
+
+        binding.radioSnowflake.setOnRadioButtonClickListener {
+            clearAllRadioButtons()
+            binding.radioSnowflake.isChecked = true
+            viewModel.selectBuiltInSnowflake()
+        }
+
+        binding.radioManual.setOnRadioButtonClickListener {
+            clearAllRadioButtons()
+            binding.radioManual.isChecked = true
+            viewModel.selectManualBridge()
+        }
+
+        // Set up edit icon click listener for manual bridge
+        binding.radioManual.setOnEditIconClickListener {
+            onManualBridgeSelectionClicked(binding.radioManual)
+        }
+    }
+
+    private fun clearAllRadioButtons() {
+        binding.radioObfs4.isChecked = false
+        binding.radioSnowflake.isChecked = false
+        binding.radioManual.isChecked = false
+    }
+
+    private fun updateSelectedRadioButton() {
+        clearAllRadioButtons()
+        when (viewModel.getSelectedBridgeTypeId()) {
+            R.id.radio_obfs4 -> binding.radioObfs4.isChecked = true
+            R.id.radio_snowflake -> binding.radioSnowflake.isChecked = true
+            R.id.radio_manual -> binding.radioManual.isChecked = true
         }
     }
 
