@@ -229,6 +229,7 @@
                             android:layout_height="0dp"
                             android:layout_gravity="end"
                             android:layout_weight="1"
+                            android:background="@drawable/bg_config_item_transparent"
                             android:contentDescription="@{viewModel.obfs4AccessibilityDescription}"
                             android:onClick="@{() -> viewModel.selectBuiltInObfs4()}"
                             android:textAlignment="textEnd" />
@@ -239,6 +240,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
+                            android:background="@drawable/bg_config_item_transparent"
                             android:contentDescription="@{viewModel.snowflakeAccessibilityDescription}"
                             android:onClick="@{() -> viewModel.selectBuiltInSnowflake()}"
                             android:textAlignment="textStart" />
@@ -249,6 +251,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
+                            android:background="@drawable/bg_config_item_transparent"
                             android:contentDescription="@{viewModel.manualAccessibilityDescription}"
                             android:textAlignment="textStart"
                             android:visibility="@{viewModel.manualSelectionVisibility}" />
