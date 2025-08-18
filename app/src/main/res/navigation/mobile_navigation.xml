@@ -93,10 +93,11 @@
         android:name="org.torproject.vpn.ui.home.ConnectFragment"
         android:label="@string/action_connect"
         tools:layout="@layout/fragment_connect">
-        <!-- TODO: add enter and exit animation -->
         <action
             android:id="@+id/action_navigation_connect_to_BetaInfoFragment"
             app:destination="@id/betaInfoFragment"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out"
             />
         <action
             android:id="@+id/action_navigation_connect_to_loggingFragment"
@@ -283,10 +284,13 @@
         android:name="org.torproject.vpn.ui.betainfo.BetaInfoFragment"
         android:label="BetaInfoFragment"
         tools:layout="@layout/fragment_beta_info">
-        <!-- TODO: add enter and exit animation -->
         <action
             android:id="@+id/action_navigation_betaInfo_to_OfflineHelpFragment"
             app:destination="@+id/offlineHelpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             />
     </fragment>
 
