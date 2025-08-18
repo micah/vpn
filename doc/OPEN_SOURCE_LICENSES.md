@@ -122,7 +122,7 @@ To apply the Apache License to your work, attach the following boilerplate notic
 - `com.github.bumptech.glide/*` — Copyright © Google Inc. (project: Glide). [(github.com/bumptech/glide)](https://github.com/bumptech/glide)
 - `org.torproject/onionmasq` — Copyright © The Tor Project, Inc. [(torproject.org)](https://www.torproject.org/)
 
-> Note: `org.torproject/onionmasq` is dual-licensed under BSD 3-Clause and Apache 2.0. It is used here under the BSD 3-Clause license.
+> Note: `org.torproject/onionmasq` is dual-licensed under Apache 2.0 and MIT. It is used here under the MIT license, which is fully compatible with Tor VPN's BSD 3-Clause license.
 > Note: `org.torproject/onionmasq` includes dependencies that are detailed separately at the bottom of this file under the section `Onionmasq dependencies`
 
 <details><summary>Full license text</summary>
@@ -289,7 +289,7 @@ THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
 
 # Onionmasq dependencies
 
-**Onionmasq** is licensed under the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause).
+**Onionmasq** is dual licensed under both [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html) and [MIT](https://spdx.org/licenses/MIT.html)
 
 Below is a list of third-party libraries bundled in this app, grouped by license.
 
