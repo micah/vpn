@@ -53,14 +53,18 @@ class RadioButtonItemView : ConstraintLayout {
         a.recycle()
         
         // Set click listener for the entire view to toggle radio button
-        setOnClickListener {
+        binding.root.setOnClickListener {
             if (!binding.radioButton.isChecked) {
+                binding.radioButton.isChecked = true
                 onRadioButtonClickListener?.invoke()
             }
         }
         
         // Also handle direct radio button clicks
         binding.radioButton.setOnClickListener {
+            if (!binding.radioButton.isChecked) {
+                binding.radioButton.isChecked = true
+            }
             onRadioButtonClickListener?.invoke()
         }
         

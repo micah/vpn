@@ -5,7 +5,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_config_item_transparent"
+        android:paddingHorizontal="@dimen/default_padding"
+        android:background="@drawable/bg_config_item"
         android:clickable="true"
         android:focusable="true">
 

@@ -151,6 +151,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
+                    android:paddingHorizontal="@dimen/default_padding"
                     android:onClick="@{handler::onManualBridgeSelectionClicked}"
                     android:visibility="@{viewModel.addManualSelectionVisibility}"
                     app:drawable="@drawable/plus"

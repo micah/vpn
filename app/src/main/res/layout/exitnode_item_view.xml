@@ -11,7 +11,7 @@
        android:focusable="true"
        android:clickable="true"
        android:id="@+id/item_container"
-       >
+       android:background="@drawable/bg_config_item">
 
 
          <androidx.appcompat.widget.AppCompatImageView
@@ -23,8 +23,7 @@
              android:layout_width="30dp"
              android:layout_height="30dp"
              android:scaleType="fitXY"
-             tools:src="@drawable/flag_1f1e6_1f1e8"
-             />
+             tools:src="@drawable/flag_1f1e6_1f1e8" />
 
       <androidx.appcompat.widget.AppCompatTextView
           android:id="@+id/tvTitle"
@@ -42,8 +41,7 @@
           android:singleLine="true"
           android:ellipsize="end"
           android:labelFor="@+id/rbSelected"
-          tools:text="a long test that should not touch the divider letsee"
-          />
+          tools:text="a long test that should not touch the divider letsee" />
 
       <com.google.android.material.radiobutton.MaterialRadioButton
           android:id="@+id/rbSelected"
@@ -53,7 +51,6 @@
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintBottom_toBottomOf="parent"
           style="@style/radio_button"
-          android:clickable="false"
-          />
+          android:clickable="false" />
    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
