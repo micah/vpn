@@ -38,7 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/bottom_nav_height">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/paragraph_title"
@@ -80,6 +81,8 @@
                     android:layout_height="wrap_content"
                     app:hideDrawable="true"
                     app:hideSwitch="false"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:secondaryText="@string/connect_automatically_description"
                     app:checked="@{viewModel.startOnBoot}"
                     app:text="@string/connect_automatically" />
@@ -160,6 +163,7 @@
                     android:paddingHorizontal="@dimen/activity_horizontal_margin"
                     android:paddingVertical="@dimen/default_padding"
                     android:text="@string/about_tor_vpn"
+                    android:background="@drawable/bg_config_item"
                     android:onClick="@{handler::onAboutClicked}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -169,10 +173,12 @@
                     android:paddingHorizontal="@dimen/activity_horizontal_margin"
                     android:paddingVertical="@dimen/default_padding"
                     android:text="@string/privacy_policy"
+                    android:background="@drawable/bg_config_item"
                     android:onClick="@{handler::onPrivacyPolicyClicked}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/list_item_style_medium"
+                    android:background="@drawable/bg_config_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/activity_horizontal_margin"
