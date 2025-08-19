@@ -7,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import org.torproject.vpn.MainActivityViewModel
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentConfigureBinding
 import org.torproject.vpn.ui.configure.model.ConfigureFragmentViewModel
@@ -26,6 +27,7 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val activityViewModel = ViewModelProvider(requireActivity())[MainActivityViewModel::class.java]
         val binding = FragmentConfigureBinding.bind(view)
         binding.viewModel = configureFragmentViewModel
         binding.handler = this
@@ -36,6 +38,13 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
 
         binding.exitLocation.subtitle = configureFragmentViewModel.exitNodeCountry
         binding.bridges.subtitle = configureFragmentViewModel.selectedBridgeType
+
+        binding.spacer.post {
+            val params = binding.spacer.layoutParams
+            val height = (activityViewModel.bottomNavBarHeight.value ?: params.height)
+            params.height = height
+            binding.spacer.layoutParams = params
+        }
     }
 
     override fun onAppsClicked(v: View) {

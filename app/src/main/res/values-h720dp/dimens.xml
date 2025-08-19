@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="connect_state_button_height">183dp</dimen>
     <dimen name="connect_state_button_width">124dp</dimen>
-    <dimen name="bottom_nav_height">180dp</dimen>
     <dimen name="connection_button_upper_guideline">184dp</dimen>
     <dimen name="connection_button_lower_guideline">96dp</dimen>
     <dimen name="bottom_nav_padding">3dp</dimen>

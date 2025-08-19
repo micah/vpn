@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
-import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
@@ -15,7 +14,6 @@ import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentOfflineHelpBinding
-import org.torproject.vpn.utils.applyInsetsToViewPadding
 
 
 class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {

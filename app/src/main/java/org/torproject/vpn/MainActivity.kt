@@ -23,17 +23,19 @@ import org.torproject.vpn.utils.applyInsetsToViewPadding
 import org.torproject.vpn.utils.navigateSafe
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var viewModel: MainActivityViewModel
     lateinit var navController: NavController
     companion object {
-        val KEY_ACTION = "ACTION"
+        const val KEY_ACTION = "ACTION"
         val ACTION_REQUEST_VPN_PERMISSON = MainActivity::class.java.simpleName + ".ACTION_REQUEST_VPN_PERMISSON"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val mainActivityVM = ViewModelProvider(this)[MainActivityViewModel::class.java]
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
@@ -64,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    mainActivityVM.guideScreenVisibility.collect { visible ->
+                    viewModel.guideScreenVisibility.collect { visible ->
 
                         navView.post {
                             if (visible && appBarConfiguration.topLevelDestinations.contains(navController.currentDestination?.id)) {
@@ -77,6 +79,13 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.navView.post {
+            viewModel.setHeight(binding.navView.height)
         }
     }
 
@@ -143,6 +152,11 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             window.isNavigationBarContrastEnforced = false
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
 

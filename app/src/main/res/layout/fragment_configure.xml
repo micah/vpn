@@ -16,7 +16,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        >
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/Theme.TorVPN.AppBarOverlay"
             app:liftOnScroll="false"
+            android:fitsSystemWindows="true"
             app:elevation="0dp">
 
             <include layout="@layout/include_configure_toolbar"/>
@@ -32,11 +33,11 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/bottom_nav_height"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
                 android:orientation="vertical" >
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -178,6 +179,13 @@
                     android:paddingVertical="@dimen/default_padding"
                     android:text="@string/open_source_licenses"
                     android:onClick="@{handler::onLicencesClicked}" />
+                <View
+                    android:id="@+id/spacer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0px"
+                    android:focusable="false"
+                    android:importantForAccessibility="no"
+                    />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
