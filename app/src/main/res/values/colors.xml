@@ -75,4 +75,18 @@
 
     <color name="inverse_primary">#701498</color>
 
+    <!-- For interactive card states -->
+    <color name="card_overlay_pressed">#1F000000</color> <!-- 12% black -->
+    <color name="card_overlay_hovered">#0A000000</color> <!-- 4% black -->
+    <color name="card_overlay_focused">#1F000000</color> <!-- 12% black, same as pressed for simplicity, can be different -->
+
+    <!-- Checked states: Base is @color/primary (#C272FF) -->
+    <color name="super_toggle_checked_pressed_color">#CF7FFF</color> <!-- @color/primary + 12% overlay of @color/primary -->
+    <color name="super_toggle_checked_focused_color">#CF7FFF</color> <!-- @color/primary + 12% overlay of @color/primary -->
+    <color name="super_toggle_checked_hovered_color">#CC7BFF</color>  <!-- @color/primary + 8% overlay of @color/primary -->
+
+    <!-- Unchecked states: Base is @color/surface_container (#281C70) -->
+    <color name="super_toggle_unchecked_pressed_color">#423781</color> <!-- @color/surface_container + 12% overlay of @color/on_surface -->
+    <color name="super_toggle_unchecked_focused_color">#423781</color> <!-- @color/surface_container + 12% overlay of @color/on_surface -->
+    <color name="super_toggle_unchecked_hovered_color">#392E7B</color>  <!-- @color/surface_container + 8% overlay of @color/on_surface -->
 </resources>
