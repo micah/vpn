@@ -265,7 +265,7 @@ fun applyInsetsToGuideLineBottom(view: Guideline) {
         val params = v.layoutParams as ConstraintLayout.LayoutParams
         params.guideEnd += insets.bottom
         v.layoutParams = params
-        return@setOnApplyWindowInsetsListener WindowInsetsCompat.CONSUMED
+        return@setOnApplyWindowInsetsListener windowInsets
     }
 }
 
@@ -314,7 +314,7 @@ fun applyInsetsToViewPadding(
                 v.paddingBottom
             )
         }
-        return@setOnApplyWindowInsetsListener WindowInsetsCompat.CONSUMED
+        return@setOnApplyWindowInsetsListener windowInsets
     }
 }
 
