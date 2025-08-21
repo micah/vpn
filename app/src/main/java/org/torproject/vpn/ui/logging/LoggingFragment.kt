@@ -7,6 +7,8 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,9 +42,15 @@ class LoggingFragment : Fragment(R.layout.fragment_logging) {
         loggingListAdapter.registerAdapterDataObserver(object : AdapterDataObserver() {
             override fun onChanged() {
                 binding.rvLogList.scrollToPosition(loggingListAdapter.itemCount.minus(1))
-
             }
         })
+
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            loggingListAdapter.setBottomInset(insets.bottom)
+            return@setOnApplyWindowInsetsListener windowInsets
+        }
+
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
