@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
                 app:title="@string/help"
+                app:contentScrim="@color/surface_container"
                 app:toolbarId="@+id/toolbar">
 
                 <com.google.android.material.appbar.MaterialToolbar
@@ -41,6 +42,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/portrait_help_scroll_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
