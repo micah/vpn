@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
     app:title="@string/action_configure"
+    app:contentScrim="@color/surface_container"
     app:toolbarId="@+id/toolbar">
 
     <com.google.android.material.appbar.MaterialToolbar
