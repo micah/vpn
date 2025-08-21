@@ -214,7 +214,7 @@
     <style name="collapsing_toolbar_style" parent="Widget.Material3.CollapsingToolbar.Large">
         <item name="expandedTitleTextColor">@color/on_surface</item>
         <item name="collapsedTitleTextColor">@color/on_surface</item>
-        <item name="contentScrim">?attr/colorPrimary</item>
+        <item name="contentScrim">@color/surface_container</item>
         <item name="android:background">?attr/colorPrimary</item>
         <item name="layout_scrollFlags">scroll|exitUntilCollapsed</item>
         <item name="android:fitsSystemWindows">true</item>
