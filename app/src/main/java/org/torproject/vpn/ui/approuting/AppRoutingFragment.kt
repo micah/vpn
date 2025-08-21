@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -11,8 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
-import org.torproject.onionmasq.OnionMasq
-import org.torproject.onionmasq.errors.ProxyStoppedException
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentAppRoutingBinding
 import org.torproject.vpn.ui.approuting.data.AppListAdapter
@@ -44,6 +44,17 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing) {
         appListAdapter?.onItemModelChanged = viewModel::onItemModelChanged
         appListAdapter?.onProtectAllAppsChanged = viewModel::onProtectAllAppsPrefsChanged
         binding.rvAppList.adapter = appListAdapter
+
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            binding.rvAppList.setPadding(
+                binding.rvAppList.paddingLeft,
+                binding.rvAppList.paddingTop,
+                binding.rvAppList.paddingRight,
+                binding.rvAppList.paddingBottom + insets.bottom
+            )
+            return@setOnApplyWindowInsetsListener windowInsets
+        }
 
         viewModel.getObservableProgress().observe(viewLifecycleOwner) { isLoading ->
             binding.progressIndicator.visibility = if (isLoading) VISIBLE else GONE
