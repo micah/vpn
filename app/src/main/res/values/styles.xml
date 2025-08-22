@@ -207,7 +207,7 @@
         <item name="android:textColor">@color/on_surface</item>
     </style>
 
-    <style name="toolbar_theme" parent="Widget.MaterialComponents.Toolbar">
+    <style name="toolbar_theme" parent="Widget.Material3.Toolbar">
         <item name="titleTextColor">@color/on_surface</item>
     </style>
 
