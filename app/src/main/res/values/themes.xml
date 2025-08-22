@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.TorVPN" parent="Theme.Material3.DayNight.NoActionBar">
 
+        <!-- set material design 3 default color attributes our custom color scheme -->
         <item name="colorPrimary">@color/surface</item>
         <item name="colorOnPrimary">@color/on_surface</item>
         <item name="colorSurface">@color/surface</item>
@@ -13,6 +14,20 @@
         <item name="colorSurfaceContainerHighest">@color/surface_container_highest</item>
         <item name="colorSurfaceContainerLow">@color/surface_container_low</item>
         <item name="colorSurfaceContainerLowest">@color/surface_container_lowest</item>
+
+        <!-- set material design 3 default text attributes our custom text styles -->
+        <item name="textAppearanceTitleLarge">@style/title_large</item>
+        <item name="textAppearanceTitleMedium">@style/title_medium</item>
+        <item name="textAppearanceTitleSmall">@style/title_small</item>
+        <item name="textAppearanceBodyLarge">@style/body_large</item>
+        <item name="textAppearanceBodyMedium">@style/body_medium</item>
+        <item name="textAppearanceBodySmall">@style/body_small</item>
+        <item name="textAppearanceHeadlineLarge">@style/headline_small</item>
+        <item name="textAppearanceHeadlineMedium">@style/headline_medium</item>
+        <item name="textAppearanceHeadlineSmall">@style/headline_small</item>
+        <item name="textAppearanceLabelLarge">@style/label_large</item>
+        <item name="textAppearanceLabelMedium">@style/label_medium</item>
+        <item name="textAppearanceLabelSmall">@style/label_small</item>
 
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>

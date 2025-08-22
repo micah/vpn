@@ -61,8 +61,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:title="@string/bridge_bot"
-                app:titleTextAppearance="@style/connection_toolbar_title"
-                app:titleTextColor="@color/on_surface"
                 app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
         </com.google.android.material.appbar.AppBarLayout>
 
