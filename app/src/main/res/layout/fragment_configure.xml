@@ -38,8 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
-                android:orientation="vertical"
-                android:layout_marginBottom="@dimen/bottom_nav_height">
+                android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/paragraph_title"
