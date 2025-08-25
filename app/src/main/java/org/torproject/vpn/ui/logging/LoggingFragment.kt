@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.google.android.material.snackbar.Snackbar
+import org.torproject.onionmasq.logging.LogItem
 import org.torproject.onionmasq.logging.LogObservable
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentLoggingBinding
@@ -30,7 +31,11 @@ class LoggingFragment : Fragment(R.layout.fragment_logging) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.rvLogList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        logObservable.liveData.observe(viewLifecycleOwner, loggingListAdapter::update)
+        logObservable.liveData.observe(viewLifecycleOwner) { _ ->
+            loggingListAdapter.update(
+                logObservable.logList
+            )
+        }
 
         loggingListAdapter.registerAdapterDataObserver(object : AdapterDataObserver() {
             override fun onChanged() {
