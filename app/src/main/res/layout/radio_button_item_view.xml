@@ -5,8 +5,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_config_item_square"
         android:paddingHorizontal="@dimen/default_padding"
-        android:background="@drawable/bg_config_item"
         android:clickable="true"
         android:focusable="true">
 
@@ -15,8 +15,6 @@
             style="@style/radio_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:textAlignment="textEnd"
             android:duplicateParentState="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

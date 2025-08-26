@@ -83,8 +83,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/default_padding">
+                    android:layout_height="wrap_content">
 
                     <RadioGroup
                         android:id="@+id/rg_bridge_options"
@@ -142,6 +141,7 @@
                     android:focusable="true"
                     android:onClick="@{handler::onManualBridgeSelectionClicked}"
                     android:visibility="@{viewModel.addManualSelectionVisibility}"
+                    android:background="@drawable/bg_config_item_square"
                     app:drawable="@drawable/plus"
                     app:secondaryText="@string/bridge_address_description"
                     app:text="@string/add_new_bridge" />
@@ -163,7 +163,6 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/default_padding"
                     android:layout_marginTop="4dp"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/default_padding">
@@ -173,6 +172,8 @@
                         android:layout_height="wrap_content"
                         android:onClick="@{handler::onTorBridgeBotClicked}"
                         android:visibility="visible"
+                        android:background="@drawable/bg_config_item_square"
+                        android:paddingHorizontal="@dimen/default_padding"
                         app:drawable="@drawable/bridge_bot_icon"
                         app:external="false"
                         app:secondaryText="@string/ask_bridge_bot"
@@ -185,6 +186,8 @@
                         app:drawable="@{viewModel.emailDrawable}"
                         app:secondaryText="@{viewModel.formattedEmailBotSubtitle}"
                         app:text="@string/email_providers"
+                        android:background="@drawable/bg_config_item_square"
+                        android:paddingHorizontal="@dimen/default_padding"
                         tools:drawable="@drawable/ic_dummy_app"
                         tools:secondaryText="Email bridges@torproject.org" />
 
@@ -194,6 +197,8 @@
                         android:onClick="@{handler::onWebBridgeBotClicked}"
                         app:drawable="@{viewModel.webbrowserDrawable}"
                         app:secondaryText="@{viewModel.formattedWebBotSubtitle}"
+                        android:background="@drawable/bg_config_item_square"
+                        android:paddingHorizontal="@dimen/default_padding"
                         app:text="@string/web"
                         tools:drawable="@drawable/ic_dummy_app"
                         tools:secondaryText="Visit bridges.torproject.org" />
@@ -205,6 +210,8 @@
                         android:visibility="@{viewModel.telegramVisibility}"
                         app:drawable="@{viewModel.telegramDrawable}"
                         app:secondaryText="@{viewModel.formattedTelegramBotSubtitle}"
+                        android:background="@drawable/bg_config_item_square"
+                        android:paddingHorizontal="@dimen/default_padding"
                         app:text="@string/telegram"
                         tools:drawable="@drawable/ic_dummy_app"
                         tools:secondaryText="@{viewModel.formattedTelegramBotSubtitle" />

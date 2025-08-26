@@ -55,6 +55,7 @@
                     app:hideDrawable="true"
                     app:secondaryText="@{viewModel.appProtectionLabel}"
                     app:text="@string/apps"
+                    android:background="@drawable/bg_config_item_square"
                     android:onClick="@{handler::onAppsClicked}" />
 
                 <org.torproject.vpn.ui.base.view.IconTextEntryView
@@ -64,6 +65,7 @@
                     app:hideDrawable="true"
                     app:secondaryText="@string/default_icon_and_name"
                     app:text="@string/app_icon"
+                    android:background="@drawable/bg_config_item_square"
                     android:onClick="@{handler::onAppIconClicked}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -84,6 +86,7 @@
                     android:focusable="true"
                     app:secondaryText="@string/connect_automatically_description"
                     app:checked="@{viewModel.startOnBoot}"
+                    android:background="@drawable/bg_config_item_square"
                     app:text="@string/connect_automatically" />
 
                 <org.torproject.vpn.ui.base.view.IconTextEntryView
@@ -93,6 +96,7 @@
                     app:hideDrawable="true"
                     app:secondaryText="@string/bridge_addresses"
                     app:text="@string/bridges"
+                    android:background="@drawable/bg_config_item_square"
                     android:onClick="@{handler::onBridgeSettingsClicked}" />
 
                 <org.torproject.vpn.ui.base.view.IconTextEntryView
@@ -102,6 +106,7 @@
                     app:hideDrawable="true"
                     app:secondaryText="@string/exit_location_automatic"
                     app:text="@string/exit_location"
+                    android:background="@drawable/bg_config_item_square"
                     android:visibility="@{viewModel.exitNodeSelectionVisibility}"
                     android:onClick="@{handler::onExitLocationClicked}" />
 
@@ -120,6 +125,7 @@
                     app:hideDrawable="true"
                     app:secondaryText="@string/tor_logs_description"
                     app:text="@string/tor_logs"
+                    android:background="@drawable/bg_config_item_square"
                     android:onClick="@{handler::onTorLogsClicked}" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -136,6 +142,7 @@
                         app:hideDrawable="true"
                         app:secondaryText="@string/kill_switch_description"
                         app:text="@string/kill_switch"
+                        android:background="@drawable/bg_config_item_square"
                         android:onClick="@{handler::onAlwaysOnClicked}" />
                     <ImageView
                         android:layout_width="wrap_content"
@@ -162,7 +169,7 @@
                     android:paddingHorizontal="@dimen/activity_horizontal_margin"
                     android:paddingVertical="@dimen/default_padding"
                     android:text="@string/about_tor_vpn"
-                    android:background="@drawable/bg_config_item"
+                    android:background="@drawable/bg_config_item_square"
                     android:onClick="@{handler::onAboutClicked}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -172,12 +179,12 @@
                     android:paddingHorizontal="@dimen/activity_horizontal_margin"
                     android:paddingVertical="@dimen/default_padding"
                     android:text="@string/privacy_policy"
-                    android:background="@drawable/bg_config_item"
+                    android:background="@drawable/bg_config_item_square"
                     android:onClick="@{handler::onPrivacyPolicyClicked}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/list_item_style_medium"
-                    android:background="@drawable/bg_config_item"
+                    android:background="@drawable/bg_config_item_square"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/activity_horizontal_margin"
