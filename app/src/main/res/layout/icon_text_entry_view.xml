@@ -13,12 +13,13 @@
             android:id="@+id/ivIcon"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_marginHorizontal="6dp"
             android:src="@drawable/ic_dummy_app"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:visibility="gone"
-            />
+            tools:visibility="gone" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTitle"
             style="@style/list_item_style_medium"
@@ -30,13 +31,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tvSubtitle"
             app:layout_constraintEnd_toStartOf="@+id/smItemSwitch"
-            android:paddingStart="28dp"
+            android:paddingStart="20dp"
             android:paddingEnd="@dimen/compact_padding"
             android:singleLine="true"
             android:ellipsize="end"
             tools:text="a long test that should not touch the divider letsee"
-            tools:textColor="#000000"
-            />
+            tools:textColor="#000000" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSubtitle"
@@ -49,7 +49,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/smItemSwitch"
-            android:paddingStart="28dp"
+            android:paddingStart="20dp"
             android:paddingEnd="@dimen/compact_padding"
             android:maxLines="2"
             android:ellipsize="end"

@@ -6,8 +6,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/default_padding"
+            android:paddingHorizontal="@dimen/default_padding"
             style="@style/paragraph_title"
             tools:text="testapp"
-            tools:textColor="#000000"
-            />
+            tools:textColor="#000000" />
 </layout>

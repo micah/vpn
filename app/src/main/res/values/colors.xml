@@ -39,6 +39,8 @@
     <color name="surface_container">#281C70</color>
     <color name="surface_container_low">#21185C</color>
     <color name="surface_container_lowest">#120C38</color>
+    <color name="surface_container_alpha_60">#66281C70</color>
+    <color name="surface_container_low_alpha_60">#6621185C</color>
 
     <!-- Error button interactive states -->
     <color name="error_state_overlay_hovered">#1A742027</color> <!-- on_error at 10% opacity -->

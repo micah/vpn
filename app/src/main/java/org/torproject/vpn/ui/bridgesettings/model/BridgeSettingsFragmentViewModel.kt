@@ -198,9 +198,9 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
     }
     fun getSelectedBridgeTypeId(): Int {
         return when(preferenceHelper.bridgeType) {
-            BridgeType.Obfs4 -> R.id.rb_obfs4
-            BridgeType.Snowflake -> R.id.rb_snowflake
-            BridgeType.Manual -> R.id.rb_manual
+            BridgeType.Obfs4 -> R.id.radio_obfs4
+            BridgeType.Snowflake -> R.id.radio_snowflake
+            BridgeType.Manual -> R.id.radio_manual
             else -> R.id.rb_none
         }
     }
@@ -212,6 +212,11 @@ class BridgeSettingsFragmentViewModel(application: Application) : AndroidViewMod
 
     fun selectBuiltInSnowflake() {
         preferenceHelper.bridgeType = BridgeType.Snowflake
+        updateVPNSettings()
+    }
+
+    fun selectManualBridge() {
+        preferenceHelper.bridgeType = BridgeType.Manual
         updateVPNSettings()
     }
 
