@@ -83,172 +83,53 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/default_padding">
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintGuide_end="36dp"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_obfs4_title"
-                        style="@style/radio_button_title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="48dp"
-                        android:importantForAccessibility="no"
-                        android:paddingTop="@dimen/default_padding"
-                        android:text="@string/obfs4_built_in"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_obfs4_subtitle"
-                        style="@style/radio_button_subtitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="48dp"
-                        android:importantForAccessibility="no"
-                        android:paddingBottom="@dimen/default_padding"
-                        android:text="@string/obfs4_description"
-                        app:layout_constraintEnd_toEndOf="@id/guideline_vertical"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_obfs4_title" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_snowflake_title"
-                        style="@style/radio_button_title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="48dp"
-                        android:importantForAccessibility="no"
-                        android:paddingTop="@dimen/default_padding"
-                        android:text="@string/snowflake"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_obfs4_subtitle" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_snowflake_title_subtitle"
-                        style="@style/radio_button_subtitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="48dp"
-                        android:importantForAccessibility="no"
-                        android:paddingBottom="@dimen/default_padding"
-                        android:text="@string/snowflake_description"
-                        app:layout_constraintEnd_toStartOf="@id/guideline_vertical"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_snowflake_title" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_manual_title"
-                        style="@style/radio_button_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="48dp"
-                        android:importantForAccessibility="no"
-                        android:paddingTop="@dimen/default_padding"
-                        android:text="@string/manual_bridge"
-                        android:visibility="@{viewModel.manualSelectionVisibility}"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_snowflake_title_subtitle" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_manual_title_subtitle"
-                        style="@style/radio_button_subtitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="48dp"
-                        android:importantForAccessibility="no"
-                        android:paddingBottom="@dimen/default_padding"
-                        android:text="@{viewModel.manualAccessibilityDescription}"
-                        android:visibility="@{viewModel.manualSelectionVisibility}"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/guideline_vertical"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_manual_title" />
-
-                    <View
-                        android:id="@+id/view2"
-                        android:layout_width="2dp"
-                        android:layout_height="28dp"
-                        android:layout_marginEnd="12dp"
-                        android:background="@color/outline"
-                        android:visibility="@{viewModel.manualSelectionVisibility}"
-                        app:layout_constraintTop_toTopOf="@id/tv_manual_title"
-                        app:layout_constraintBottom_toBottomOf="@id/tv_manual_title_subtitle"
-                        app:layout_constraintEnd_toStartOf="@id/iv_manual_edit"/>
+                    android:layout_height="wrap_content">
 
                     <RadioGroup
                         android:id="@+id/rg_bridge_options"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:gravity="end"
-                        android:orientation="vertical"
-                        android:weightSum="@{viewModel.bridgeWeightSum}"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <com.google.android.material.radiobutton.MaterialRadioButton
-                            android:id="@+id/rb_obfs4"
-                            style="@style/radio_button"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_gravity="end"
-                            android:layout_weight="1"
-                            android:contentDescription="@{viewModel.obfs4AccessibilityDescription}"
-                            android:onClick="@{() -> viewModel.selectBuiltInObfs4()}"
-                            android:textAlignment="textEnd" />
-
-                        <com.google.android.material.radiobutton.MaterialRadioButton
-                            android:id="@+id/rb_snowflake"
-                            style="@style/radio_button"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@{viewModel.snowflakeAccessibilityDescription}"
-                            android:onClick="@{() -> viewModel.selectBuiltInSnowflake()}"
-                            android:textAlignment="textStart" />
-
-                        <com.google.android.material.radiobutton.MaterialRadioButton
-                            android:id="@+id/rb_manual"
-                            style="@style/radio_button"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@{viewModel.manualAccessibilityDescription}"
-                            android:textAlignment="textStart"
-                            android:visibility="@{viewModel.manualSelectionVisibility}" />
-                    </RadioGroup>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/iv_manual_edit"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/pencil"
-                        android:visibility="@{viewModel.manualSelectionVisibility}"
-                        android:onClick="@{handler::onManualBridgeSelectionClicked}"
-                        app:layout_constraintTop_toTopOf="@id/tv_manual_title"
-                        app:layout_constraintBottom_toBottomOf="@id/tv_manual_title_subtitle"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginHorizontal="@dimen/default_padding" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/rb_none"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:visibility="gone" />
+
+                        <org.torproject.vpn.ui.base.view.RadioButtonItemView
+                            android:id="@+id/radio_obfs4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@{viewModel.obfs4AccessibilityDescription}"
+                            app:title="@string/obfs4_built_in"
+                            app:subtitle="@string/obfs4_description"
+                            app:showEditIcon="false" />
+
+                        <org.torproject.vpn.ui.base.view.RadioButtonItemView
+                            android:id="@+id/radio_snowflake"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@{viewModel.snowflakeAccessibilityDescription}"
+                            app:title="@string/snowflake"
+                            app:subtitle="@string/snowflake_description"
+                            app:showEditIcon="false" />
+
+                        <org.torproject.vpn.ui.base.view.RadioButtonItemView
+                            android:id="@+id/radio_manual"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@{viewModel.manualAccessibilityDescription}"
+                            android:visibility="@{viewModel.manualSelectionVisibility}"
+                            app:title="@string/manual_bridge"
+                            app:subtitle="@{viewModel.manualAccessibilityDescription}"
+                            app:showEditIcon="true" />
+
+                    </RadioGroup>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -260,6 +141,7 @@
                     android:focusable="true"
                     android:onClick="@{handler::onManualBridgeSelectionClicked}"
                     android:visibility="@{viewModel.addManualSelectionVisibility}"
+                    android:background="@drawable/bg_config_item_square"
                     app:drawable="@drawable/plus"
                     app:secondaryText="@string/bridge_address_description"
                     app:text="@string/add_new_bridge" />
@@ -281,7 +163,6 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/default_padding"
                     android:layout_marginTop="4dp"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/default_padding">
@@ -291,6 +172,8 @@
                         android:layout_height="wrap_content"
                         android:onClick="@{handler::onTorBridgeBotClicked}"
                         android:visibility="visible"
+                        android:background="@drawable/bg_config_item_square"
+                        android:paddingHorizontal="@dimen/default_padding"
                         app:drawable="@drawable/bridge_bot_icon"
                         app:external="false"
                         app:secondaryText="@string/ask_bridge_bot"
@@ -303,6 +186,8 @@
                         app:drawable="@{viewModel.emailDrawable}"
                         app:secondaryText="@{viewModel.formattedEmailBotSubtitle}"
                         app:text="@string/email_providers"
+                        android:background="@drawable/bg_config_item_square"
+                        android:paddingHorizontal="@dimen/default_padding"
                         tools:drawable="@drawable/ic_dummy_app"
                         tools:secondaryText="Email bridges@torproject.org" />
 
@@ -312,6 +197,8 @@
                         android:onClick="@{handler::onWebBridgeBotClicked}"
                         app:drawable="@{viewModel.webbrowserDrawable}"
                         app:secondaryText="@{viewModel.formattedWebBotSubtitle}"
+                        android:background="@drawable/bg_config_item_square"
+                        android:paddingHorizontal="@dimen/default_padding"
                         app:text="@string/web"
                         tools:drawable="@drawable/ic_dummy_app"
                         tools:secondaryText="Visit bridges.torproject.org" />
@@ -323,6 +210,8 @@
                         android:visibility="@{viewModel.telegramVisibility}"
                         app:drawable="@{viewModel.telegramDrawable}"
                         app:secondaryText="@{viewModel.formattedTelegramBotSubtitle}"
+                        android:background="@drawable/bg_config_item_square"
+                        android:paddingHorizontal="@dimen/default_padding"
                         app:text="@string/telegram"
                         tools:drawable="@drawable/ic_dummy_app"
                         tools:secondaryText="@{viewModel.formattedTelegramBotSubtitle" />

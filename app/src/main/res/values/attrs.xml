@@ -6,6 +6,9 @@
     <attr name="hideSwitch" format="boolean" />
     <attr name="external" format="boolean" />
     <attr name="checked" format="boolean" />
+    <attr name="title" format="string" />
+    <attr name="subtitle" format="string" />
+    <attr name="showEditIcon" format="boolean" />
 
     <declare-styleable name="AppItemView">
         <attr name="text"/>
@@ -26,5 +29,12 @@
         <attr name="secondaryText"/>
         <attr name="drawable"/>
         <attr name="external"/>
+    </declare-styleable>
+
+    <declare-styleable name="RadioButtonItemView">
+        <attr name="title"/>
+        <attr name="subtitle"/>
+        <attr name="checked"/>
+        <attr name="showEditIcon"/>
     </declare-styleable>
 </resources>
