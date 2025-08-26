@@ -58,7 +58,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="64dp"
                         android:orientation="horizontal"
-                        android:background="@drawable/bg_config_item"
+                        android:background="@drawable/bg_config_item_top_curve"
                         android:weightSum="1"
                         android:clickable="true"
                         android:focusable="true"
@@ -80,6 +80,12 @@
                             android:layout_gravity="center_vertical"
                             android:paddingHorizontal="@dimen/activity_horizontal_margin"
                             />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_up_right"
+                            android:layout_gravity="center_vertical"
+                            />
                     </androidx.appcompat.widget.LinearLayoutCompat>
                     <View
                         android:layout_width="match_parent"
@@ -91,7 +97,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="64dp"
                         android:orientation="horizontal"
-                        android:background="@drawable/bg_config_item"
+                        android:background="@drawable/bg_config_item_square"
                         android:weightSum="1"
                         android:clickable="true"
                         android:focusable="true"
@@ -125,7 +131,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="64dp"
                         android:orientation="horizontal"
-                        android:background="@drawable/bg_config_item"
+                        android:background="@drawable/bg_config_item_bottom_curve"
                         android:weightSum="1"
                         android:clickable="true"
                         android:focusable="true"
