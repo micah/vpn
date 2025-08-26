@@ -165,5 +165,7 @@ python3 scripts/get-l10n.py deps/translation
 # So should be done and commited pre each release
 ./scripts/fetch_default_bridges.sh
 ./gradlew :clean
-./gradlew assembleRelease
-./gradlew bundleRelease
+
+# ensure we're using the local maven repository to fetch the onionmasq artifacts while compiling tor-vpn
+ENFORCE_LOCAL_MAVEN=1 ./gradlew assembleRelease
+ENFORCE_LOCAL_MAVEN=1 ./gradlew bundleRelease

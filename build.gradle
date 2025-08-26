@@ -32,7 +32,7 @@ allprojects {
     }
 
     repositories {
-        if(properties.getProperty('gitLabPrivateToken') == null) {
+        if(properties.getProperty('gitLabPrivateToken') == null || System.getenv('ENFORCE_LOCAL_MAVEN') == '1') {
             mavenLocal()
         }
         maven {
