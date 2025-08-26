@@ -80,6 +80,12 @@
                             android:layout_gravity="center_vertical"
                             android:paddingHorizontal="@dimen/activity_horizontal_margin"
                             />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_up_right"
+                            android:layout_gravity="center_vertical"
+                            />
                     </androidx.appcompat.widget.LinearLayoutCompat>
                     <View
                         android:layout_width="match_parent"

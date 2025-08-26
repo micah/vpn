@@ -5,6 +5,7 @@ import android.content.Intent.ACTION_VIEW
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import org.torproject.vpn.R
@@ -25,7 +26,11 @@ class HelpFragment : Fragment(R.layout.fragment_help), ClickHandler {
 
 
     override fun onOfflineHelpClicked(v: View) {
-        findNavController().navigateSafe(R.id.action_helpFragment_to_offlineHelpFragment)
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = "https://support.torproject.org/tor-vpn".toUri()
+        }
+        startActivity(intent)
+        //findNavController().navigateSafe(R.id.action_helpFragment_to_offlineHelpFragment)
     }
 
     override fun onReportBugClicked(v: View) {

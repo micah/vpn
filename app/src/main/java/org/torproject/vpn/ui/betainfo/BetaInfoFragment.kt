@@ -1,9 +1,11 @@
 package org.torproject.vpn.ui.betainfo
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import org.torproject.vpn.R
@@ -54,14 +56,24 @@ class BetaInfoFragment : Fragment(R.layout.fragment_beta_info), ClickHandler, Sh
     }
 
     override fun onReportBugsClicked() {
-        // FIXME: why aren't OfflineHelpFragmentDirections working here?
-        val bundle = Bundle()
-        bundle.putInt("argHelpPageID", OfflineHelpFragment.HELP_PAGE_BUG_REPORT)
-        findNavController().navigateSafe(R.id.action_navigation_betaInfo_to_OfflineHelpFragment, bundle)
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = "https://support.torproject.org/tor-vpn/#tor-vpn_support".toUri()
+        }
+        startActivity(intent)
+
+        // TODO: revert to offline help!
+        // val bundle = Bundle()
+        // bundle.putInt("argHelpPageID", OfflineHelpFragment.HELP_PAGE_BUG_REPORT)
+        // findNavController().navigateSafe(R.id.action_navigation_betaInfo_to_OfflineHelpFragment, bundle)
     }
 
     override fun onLearnMoreClicked(v: View) {
-        findNavController().navigateSafe(R.id.action_navigation_betaInfo_to_OfflineHelpFragment)
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = "https://support.torproject.org/tor-vpn".toUri()
+        }
+        startActivity(intent)
+        // TODO: revert to offline help!
+        // findNavController().navigateSafe(R.id.action_navigation_betaInfo_to_OfflineHelpFragment)
     }
 
     override fun onStartTestingClicked(v: View) {
