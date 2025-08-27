@@ -6,8 +6,11 @@ import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
+import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.webkit.WebViewAssetLoader
@@ -70,6 +73,13 @@ class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
                 }
             }
         })
+
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val params = binding.wvHelp.layoutParams as (FrameLayout.LayoutParams)
+            params.bottomMargin = insets.bottom
+            return@setOnApplyWindowInsetsListener windowInsets
+        }
     }
 
 

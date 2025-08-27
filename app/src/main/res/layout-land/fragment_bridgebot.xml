@@ -44,7 +44,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:theme="@style/Theme.TorVPN.AppBarOverlay"
-            app:liftOnScroll="false"
+            app:liftOnScroll="true"
             app:elevation="0dp">
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
@@ -64,7 +64,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:title="@string/bridge_bot"
                 app:titleCentered="true"
-                app:titleTextAppearance="@style/connection_toolbar_title"
                 app:titleTextColor="@color/on_surface"
                 app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
         </com.google.android.material.appbar.AppBarLayout>
