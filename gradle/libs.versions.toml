@@ -62,7 +62,7 @@ androidx-test-truth = { module = "androidx.test.ext:truth", version = "1.7.0" }
 leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version = "3.0-alpha-8" }
 
 # OnionMasq
-onionmasq-release = { module = "org.torproject:onionmasq", version = "0.9.1-local-release" }
+onionmasq-release = { module = "org.torproject:onionmasq", version = "1.0.0Beta-local-release" }
 onionmasq-debug = { module = "org.torproject:onionmasq", version = "main-branch-debug" }
 
 [bundles]
