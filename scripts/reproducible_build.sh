@@ -7,7 +7,7 @@ cd $(dirname "$0")
 cd ..
 
 ONIONMASQ_HASH=1.0.0Beta
-TRANSLATION_HASH=ecaefbbafd55e9c83c6b8826c25f6e98efc0f518
+TRANSLATION_HASH=bf2b2bde7276b6a9d329df2e00e282f4372b8d93
 
 UNZIP=$(whereis unzip | wc | awk '{print $2}')
 if [ $UNZIP -eq 1 ]; then
