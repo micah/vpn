@@ -179,7 +179,7 @@
     <string name="help_description_wip">Tor VPN is a work in progress, and some features may not work as expected.</string>
     <string name="help_description_bug_report">If you encounter an issue that’s not answered by our FAQ, please open a bug report or contact support.</string>
     <string name="bug_tor_forum">On the Tor Forum</string>
-    <string name="bug_gitlab">On Gitlab</string>
+    <string name="bug_gitlab">On GitLab</string>
     <string name="email">Email</string>
 
     <!-- Bridge Bot -->
