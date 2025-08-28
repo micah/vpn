@@ -34,7 +34,7 @@
     <string name="app_routing_hide_apps">Hide %1$s apps</string>
 
     <string name="notification_channel_description">Shows updates about TorVPN.</string>
-    <string name="notification_channel_name">TorVPN notifications</string>
+    <string name="notification_channel_name">Tor VPN notifications</string>
 
     <!-- configuration screen -->
     <string name="apps">Apps</string>
