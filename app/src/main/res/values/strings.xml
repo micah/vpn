@@ -148,7 +148,7 @@
     <string name="ask_bridge_bot">Request bridges</string>
     <string name="telegram">Telegram</string>
     <string name="signal">Signal</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="web">Web</string>
     <string name="email_providers">Gmail or Riseup</string>
     <string name="telegram_bot_subtitle">Message %s</string>
