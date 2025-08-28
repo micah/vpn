@@ -33,7 +33,7 @@
     <string name="app_routing_show_apps">Show %1$s apps</string>
     <string name="app_routing_hide_apps">Hide %1$s apps</string>
 
-    <string name="notification_channel_description">Shows updates about TorVPN.</string>
+    <string name="notification_channel_description">Shows updates about Tor VPN.</string>
     <string name="notification_channel_name">Tor VPN notifications</string>
 
     <!-- configuration screen -->
