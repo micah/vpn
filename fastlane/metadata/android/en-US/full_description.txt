@@ -1,1 +1,13 @@
-Tor VPN Beta is a VPN application for Android that utilizes the Tor network to route traffic. It is currently a work in progress.
+Tor VPN Beta is a VPN application for Android that utilizes the Tor network to route traffic.
+
+Welcome to the beta. Before you get started, there are some things you should know:
+
+Know the risks
+
+This is an early access release intended for testing and feedback.
+Beta releases may leak information and should not be used for sensitive activities.
+
+Start testing
+
+You can help by reporting any bugs you find back to our developers.
+We rely on supporters like you to help us keep Tor robust and secure for millions of people worldwide.
