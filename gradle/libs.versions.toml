@@ -25,7 +25,7 @@ glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = 
 # UI
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.7.1" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
-androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.16.0" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.17.0" }
 androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version = "2.2.0" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidxLifecycle" }
