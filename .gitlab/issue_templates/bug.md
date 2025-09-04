@@ -26,9 +26,10 @@
 Please fill in the following information in bug reports, removing the comments like this one in brackets.
 -->
 
-- Version: e.g. 0.10, output of --version (without backslashes)
-- Operating system: Debian GNU/Linux 9.1 (stretch), Windows 7, Ubuntu Xenial, etc
-- Install method: distribution package, from source tarball, from git, etc
+- Version: e.g. 0.10
+- Android version
+- Phone model (Info in Settings -> About phone)
+- Install method: google play, f-droid, apk, etc
 - etc...
 
 ### Relevant logs and/or screenshots:
