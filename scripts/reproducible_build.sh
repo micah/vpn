@@ -113,11 +113,10 @@ mkdir -p deps
 cd deps
 
 if [ ! -d "translation" ]; then
-  git clone https://gitlab.torproject.org/tpo/translation.git
+  git clone https://gitlab.torproject.org/tpo/translation.git --branch tor-vpn  --single-branch
 fi
 
 cd translation
-git checkout tor-vpn
 git pull
 git checkout $TRANSLATION_HASH
 cd ../..
