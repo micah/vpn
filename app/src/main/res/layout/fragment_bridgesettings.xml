@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/surface"
-        android:fitsSystemWindows="true">
+        >
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
@@ -29,25 +29,16 @@
             android:layout_height="wrap_content"
             android:theme="@style/Theme.TorVPN.AppBarOverlay"
             app:elevation="0dp"
-            app:liftOnScroll="false">
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/toolbar_layout"
-                style="@style/collapsing_toolbar_style"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
-                app:title="@string/bridges"
-                app:toolbarId="@+id/toolbar">
-
+            android:fitsSystemWindows="true"
+            app:liftOnScroll="true">
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
+                    app:title="@string/bridges"
                     app:navigationIcon="?attr/homeAsUpIndicator"
                     app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -56,6 +47,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_content_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
