@@ -14,7 +14,6 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         android:background="@color/surface"
         tools:context="org.torproject.vpn.ui.approuting.AppRoutingFragment">
 
@@ -23,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:elevation="0dp"
+            android:fitsSystemWindows="true"
             android:theme="@style/Theme.TorVPN.AppBarOverlay">
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
