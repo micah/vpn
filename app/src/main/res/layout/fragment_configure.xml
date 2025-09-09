@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/Theme.TorVPN.AppBarOverlay"
-            app:liftOnScroll="false"
+            app:liftOnScroll="true"
             android:fitsSystemWindows="true"
             app:elevation="0dp">
 
@@ -37,7 +37,6 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatTextView
