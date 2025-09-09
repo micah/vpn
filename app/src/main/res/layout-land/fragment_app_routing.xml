@@ -15,7 +15,6 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         tools:context="org.torproject.vpn.ui.approuting.AppRoutingFragment">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -33,39 +32,33 @@
                 app:navigationIcon="?attr/homeAsUpIndicator"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/surface"
+                app:layout_scrollFlags="noScroll"
                 app:title="@string/apps"
                 app:popupTheme="@style/Theme.TorVPN.PopupOverlay" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <RelativeLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAppList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingHorizontal="@dimen/default_padding"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/app_switch_item_view" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvAppList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/app_switch_item_view" />
-
-            <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/progress_indicator"
-                app:indicatorColor="@color/on_surface_variant"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminate="true"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:layout_centerInParent="true"
-                />
-        </RelativeLayout>
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progress_indicator"
+            app:indicatorColor="@color/on_surface_variant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_centerInParent="true"
+            />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
