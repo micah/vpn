@@ -51,7 +51,7 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing) {
                 binding.rvAppList.paddingLeft,
                 binding.rvAppList.paddingTop,
                 binding.rvAppList.paddingRight,
-                binding.rvAppList.paddingBottom + insets.bottom
+                insets.bottom
             )
             return@setOnApplyWindowInsetsListener windowInsets
         }
