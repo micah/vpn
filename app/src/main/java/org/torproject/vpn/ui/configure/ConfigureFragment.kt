@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -39,11 +41,12 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
         binding.exitLocation.subtitle = configureFragmentViewModel.exitNodeCountry
         binding.bridges.subtitle = configureFragmentViewModel.selectedBridgeType
 
-        binding.spacer.post {
-            val params = binding.spacer.layoutParams
-            val height = (activityViewModel.bottomNavBarHeight.value ?: params.height)
-            params.height = height
-            binding.spacer.layoutParams = params
+        activityViewModel.bottomNavBarHeight.observe(viewLifecycleOwner) { height ->
+            binding.spacer.post {
+                val params = binding.spacer.layoutParams
+                params.height = height
+                binding.spacer.layoutParams = params
+            }
         }
     }
 
