@@ -34,7 +34,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         false
     )
 
-    fun setHeight(value: Int) {
+    fun setNavigationBarHeight(value: Int) {
         _bottomNavBarHeight.postValue(value)
     }
 }

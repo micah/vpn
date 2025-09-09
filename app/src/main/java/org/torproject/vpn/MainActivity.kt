@@ -63,29 +63,12 @@ class MainActivity : AppCompatActivity() {
 
         handleIntentAction()
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.guideScreenVisibility.collect { visible ->
-
-                        navView.post {
-                            if (visible && appBarConfiguration.topLevelDestinations.contains(navController.currentDestination?.id)) {
-                                showBottomNavigationView(navView)
-                            } else {
-                                hideBottomNavigationView(navView)
-                            }
-                        }
-                    }
-                }
-
+            binding.navView.addOnLayoutChangeListener { view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+            viewModel.setNavigationBarHeight(bottom - top)
+            // in case the bottom navigation bar should be hidden, make sure that the bottom navigation bar is always moved completely out of the screen after rotation
+            if (!appBarConfiguration.topLevelDestinations.contains(navController.currentDestination?.id)) {
+                hideBottomNavigationView(view as BottomNavigationView, false)
             }
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        binding.navView.post {
-            viewModel.setHeight(binding.navView.height)
         }
     }
 
@@ -138,17 +121,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun hideBottomNavigationView(view: BottomNavigationView) {
+    private fun hideBottomNavigationView(view: BottomNavigationView, animate: Boolean = true) {
         view.clearAnimation()
-        view.animate().translationY(view.height.toFloat()).duration = 300
+        val duration = if (animate) 300L else 0L
+        view.animate().translationY(view.height.toFloat()).duration = duration
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             window.isNavigationBarContrastEnforced = true
         }
     }
 
-    private fun showBottomNavigationView(view: BottomNavigationView) {
+    private fun showBottomNavigationView(view: BottomNavigationView, animate: Boolean = true) {
         view.clearAnimation()
-        view.animate().translationY(0f).duration = 300
+        val duration = if (animate) 300L else 0L
+        view.animate().translationY(0f).duration = duration
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             window.isNavigationBarContrastEnforced = false
         }
