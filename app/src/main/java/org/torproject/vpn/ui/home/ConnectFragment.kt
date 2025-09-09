@@ -106,12 +106,12 @@ class ConnectFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         val c = binding.root.context
         applyInsetsToViewPadding(binding.toolbar,
             left = true, top = true, right = true, bottom = false,
-            defaultLeftDP = c.resources.getDimension(R.dimen.connection_status_bar_horizontal_padding),
-            defaultTopDP = c.resources.getDimension(R.dimen.connection_status_bar_vertical_padding),
-            defaultRightDP = c.resources.getDimension(R.dimen.connection_status_bar_horizontal_padding),
-            defaultBottomDP = c.resources.getDimension(R.dimen.connection_status_bar_vertical_padding))
-        applyInsetsToGuideLineBottom(binding.upperGuidelineActionBtns)
-        applyInsetsToGuideLineBottom(binding.lowerGuidelineActionBtns)
+            defaultLeft = c.resources.getDimension(R.dimen.connection_status_bar_horizontal_padding),
+            defaultTop = c.resources.getDimension(R.dimen.connection_status_bar_vertical_padding),
+            defaultRight = c.resources.getDimension(R.dimen.connection_status_bar_horizontal_padding),
+            defaultBottom = c.resources.getDimension(R.dimen.connection_status_bar_vertical_padding))
+        applyInsetsToGuideLineBottom(binding.upperGuidelineActionBtns, requireContext().resources.getDimension(R.dimen.connection_button_upper_guideline))
+        applyInsetsToGuideLineBottom(binding.lowerGuidelineActionBtns, requireContext().resources.getDimension(R.dimen.connection_button_lower_guideline))
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = connectFragmentViewModel
         initStateFabSpacing = getDpInPx(requireContext(), 0f).toFloat()

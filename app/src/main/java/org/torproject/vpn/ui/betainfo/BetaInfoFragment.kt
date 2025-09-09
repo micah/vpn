@@ -35,7 +35,7 @@ class BetaInfoFragment : Fragment(R.layout.fragment_beta_info), ClickHandler, Sh
 
         applyInsetsToViewPadding(binding.contentContainer,
             left = true, top = true, right = true, bottom = false,
-            defaultTopDP = resources.getDimension(R.dimen.compact_padding))
+            defaultTop = resources.getDimension(R.dimen.compact_padding))
         applyInsetsToGuideLineBottom(binding.guidelineButtons)
 
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {

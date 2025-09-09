@@ -259,11 +259,13 @@ fun readAsset(context: Context, fileName: String): String {
         .use(BufferedReader::readText)
 }
 
-fun applyInsetsToGuideLineBottom(view: Guideline) {
+fun applyInsetsToGuideLineBottom(
+    view: Guideline,
+    defaultBottomPixels: Float = 0.0f) {
     ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
         val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
         val params = v.layoutParams as ConstraintLayout.LayoutParams
-        params.guideEnd += insets.bottom
+        params.guideEnd = insets.bottom + defaultBottomPixels.toInt()
         v.layoutParams = params
         return@setOnApplyWindowInsetsListener windowInsets
     }
@@ -275,16 +277,16 @@ fun applyInsetsToViewPadding(
     top: Boolean,
     right: Boolean,
     bottom: Boolean,
-    defaultLeftDP: Float = 0.0f,
-    defaultTopDP: Float = 0.0f,
-    defaultRightDP: Float = 0.0f,
-    defaultBottomDP: Float = 0.0f,
+    defaultLeft: Float = 0.0f,
+    defaultTop: Float = 0.0f,
+    defaultRight: Float = 0.0f,
+    defaultBottom: Float = 0.0f,
 ) {
     ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
         val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
         if (left) {
             v.setPadding(
-                insets.left + getDpInPx(v.context, defaultLeftDP),
+                insets.left + defaultLeft.toInt(),
                 v.paddingTop,
                 v.paddingRight,
                 v.paddingBottom
@@ -294,7 +296,7 @@ fun applyInsetsToViewPadding(
             v.setPadding(
                 v.paddingLeft,
                 v.paddingTop,
-                insets.right + getDpInPx(v.context, defaultRightDP),
+                insets.right + defaultRight.toInt(),
                 v.paddingBottom
             )
         }
@@ -303,13 +305,13 @@ fun applyInsetsToViewPadding(
                 v.paddingLeft,
                 v.paddingTop,
                 v.paddingRight,
-                insets.bottom + getDpInPx(v.context, defaultBottomDP),
+                insets.bottom + defaultBottom.toInt(),
             )
         }
         if (top) {
             v.setPadding(
                 v.paddingLeft,
-                insets.top + getDpInPx(v.context, defaultTopDP),
+                insets.top + defaultTop.toInt(),
                 v.paddingRight,
                 v.paddingBottom
             )
