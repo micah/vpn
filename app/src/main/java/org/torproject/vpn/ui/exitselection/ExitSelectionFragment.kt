@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
@@ -61,6 +63,19 @@ class ExitSelectionFragment : Fragment() {
 
         binding.rvExitNodes.adapter = adapter
         binding.rvExitNodes.addItemDecoration(dividerItemDecoration)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val cutoutInsets = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
+            binding.rvExitNodes.setPadding(
+                cutoutInsets.left,
+                0,
+                cutoutInsets.right,
+                insets.bottom
+            )
+            return@setOnApplyWindowInsetsListener windowInsets
+        }
+
         viewModel.requestExitNodes()
         return binding.root
     }
