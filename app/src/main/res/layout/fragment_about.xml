@@ -19,15 +19,15 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         tools:context="org.torproject.vpn.ui.appdetail.AppDetailFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:liftOnScroll="false"
+            app:liftOnScroll="true"
             app:elevation="0dp"
+            android:fitsSystemWindows="true"
             android:background="?attr/colorPrimary">
 
             <com.google.android.material.appbar.MaterialToolbar
