@@ -47,10 +47,11 @@ class AppRoutingFragment : Fragment(R.layout.fragment_app_routing) {
 
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val cutoutInsets = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
             binding.rvAppList.setPadding(
-                binding.rvAppList.paddingLeft,
-                binding.rvAppList.paddingTop,
-                binding.rvAppList.paddingRight,
+                cutoutInsets.left,
+                0,
+                cutoutInsets.right,
                 insets.bottom
             )
             return@setOnApplyWindowInsetsListener windowInsets

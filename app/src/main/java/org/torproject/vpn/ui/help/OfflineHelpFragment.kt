@@ -77,9 +77,17 @@ class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
         })
 
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val systemBarInsets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val cutoutInsets = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
             val params = binding.wvHelp.layoutParams as (FrameLayout.LayoutParams)
-            params.bottomMargin = insets.bottom
+            params.bottomMargin = systemBarInsets.bottom
+
+            binding.wvHelpContainer.setPadding(
+                cutoutInsets.left,
+                0,
+                cutoutInsets.right,
+        0
+            )
             return@setOnApplyWindowInsetsListener windowInsets
         }
     }

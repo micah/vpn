@@ -48,6 +48,17 @@ class ConfigureFragment : Fragment(R.layout.fragment_configure), ClickHandler {
                 binding.spacer.layoutParams = params
             }
         }
+
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+            val cutoutInsets = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
+            binding.llContentContainer.setPadding(
+                cutoutInsets.left,
+                0,
+                cutoutInsets.right,
+                0
+            )
+            return@setOnApplyWindowInsetsListener windowInsets
+        }
     }
 
     override fun onAppsClicked(v: View) {

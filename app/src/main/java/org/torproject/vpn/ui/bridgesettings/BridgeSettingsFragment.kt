@@ -4,6 +4,8 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -65,6 +67,17 @@ class BridgeSettingsFragment : Fragment(R.layout.fragment_bridgesettings), Click
                     }
                     .show()
             }
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+            val cutoutInsets = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
+            binding.llContentContainer.setPadding(
+                cutoutInsets.left,
+                0,
+                cutoutInsets.right,
+                0
+            )
+            return@setOnApplyWindowInsetsListener windowInsets
         }
     }
 

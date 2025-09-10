@@ -4,26 +4,32 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import org.torproject.onionmasq.logging.LogItem
+import org.torproject.onionmasq.logging.LogObservable
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.LogItemBinding
 import org.torproject.vpn.utils.getFormattedDate
-import org.torproject.onionmasq.logging.LogItem
-import org.torproject.onionmasq.logging.LogObservable
-import java.util.*
+import java.util.Locale
 
 class LoggingListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var items: MutableList<LogItem> = LogObservable.getInstance().logList.toMutableList()
     private var bottomInset = 0
-    private var bottomCompactPadding = 0
+    private var leftInset = 0;
+    private var rightInset = 0;
+    private var compactPadding = 0
+    private var defaultPadding = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        bottomCompactPadding = parent.context.resources.getDimension(R.dimen.compact_padding).toInt()
+        compactPadding = parent.context.resources.getDimension(R.dimen.compact_padding).toInt()
+        defaultPadding =  parent.context.resources.getDimension(R.dimen.default_padding).toInt()
         val binding = LogItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LogListItemViewHolder(binding)
     }
 
-    fun setBottomInset(insetBottom: Int) {
-        bottomInset = insetBottom
+    fun setInsets(cutoutInsets: androidx.core.graphics.Insets, systemBarInsets: androidx.core.graphics.Insets) {
+        bottomInset = systemBarInsets.bottom
+        leftInset = cutoutInsets.left
+        rightInset = cutoutInsets.right
     }
 
     override fun getItemCount(): Int {
@@ -43,19 +49,27 @@ class LoggingListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(item: LogItem, position: Int) {
             if (position == 0) {
                 binding.container.background = ContextCompat.getDrawable(binding.root.context, R.drawable.log_item_top_background)
-                binding.container.setPadding(binding.container.paddingLeft, binding.container.paddingTop, binding.container.paddingRight, bottomCompactPadding)
+                binding.container.setPadding(
+                    defaultPadding + leftInset,
+                    compactPadding,
+                    defaultPadding + rightInset,
+                    compactPadding)
             } else if (position == (items.size - 1)) {
                 binding.container.background = ContextCompat.getDrawable(binding.root.context, R.drawable.log_item_bottom_background)
                 // set extra-padding to the last item
                 binding.container.setPadding(
-                    binding.container.paddingLeft,
-                    binding.container.paddingTop,
-                    binding.container.paddingRight,
-                    bottomCompactPadding + bottomInset)
+                    defaultPadding + leftInset,
+                    compactPadding,
+                    defaultPadding + rightInset,
+                    compactPadding + bottomInset)
             } else {
                 binding.container.background = null
                 binding.container.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.surface_container_low))
-                binding.container.setPadding(binding.container.paddingLeft, binding.container.paddingTop, binding.container.paddingRight, bottomCompactPadding)
+                binding.container.setPadding(
+                    defaultPadding + leftInset,
+                    compactPadding,
+                    defaultPadding + rightInset,
+                    compactPadding)
             }
             binding.tvTimestamp.text = getFormattedDate(item.timestamp, Locale.getDefault())
             binding.tvLog.text = item.content

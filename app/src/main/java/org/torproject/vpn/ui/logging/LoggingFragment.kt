@@ -47,7 +47,8 @@ class LoggingFragment : Fragment(R.layout.fragment_logging) {
 
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            loggingListAdapter.setBottomInset(insets.bottom)
+            val cutoutInsets = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
+            loggingListAdapter.setInsets(cutoutInsets, insets)
             return@setOnApplyWindowInsetsListener windowInsets
         }
 
