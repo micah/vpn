@@ -7,14 +7,16 @@ ENV ANDROID_HOME="${PWD}/android-home" \
     ANDROID_NDK_VERSION="25.2.9519653" \
     ANDROID_NDK_SHA256="769ee342ea75f80619d985c2da990c48b3d8eaf45f48783a2d48870d04b46108" \
     ANDROID_CLT_SHA256="7ec965280a073311c339e571cd5de778b9975026cfcbe79f2b1cdcb1e15317ee" \
-    ANDROID_NDK_RELNAME="r25c"
+    ANDROID_NDK_RELNAME="r25c" \
+    RUST_VERSION="1.87"
 
 RUN install -d $ANDROID_HOME && \
     mkdir -p /usr/share/man/man1 \
     apt-get clean && \
     apt-get --quiet update --yes && \
     DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata && \
-    apt-get --quiet install --yes apt-utils wget tar unzip lib32stdc++6 lib32z1 build-essential curl git pkg-config libssl-dev openjdk-17-jdk
+    apt-get --quiet install --yes apt-utils wget tar unzip lib32stdc++6 lib32z1 \
+    build-essential curl git pkg-config libssl-dev openjdk-17-jdk python3 jq
 
 #Java
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
@@ -28,10 +30,13 @@ RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
 
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-RUN rustup install "stable" \
-    && rustup default stable \
+RUN rustup install $RUST_VERSION \
+    && rustup default $RUST_VERSION \
     && rustup target add armv7-linux-androideabi aarch64-linux-android i686-linux-android x86_64-linux-android \
     && rustup show
+
+RUN cargo install bindgen-cli@0.71.1 --locked \
+    && cargo install cargo-ndk@3.5.4 --locked
 
 # Get Android ndk
 RUN cd $ANDROID_HOME \
