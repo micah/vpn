@@ -1,5 +1,8 @@
 [versions]
-androidGradlePlugin = "8.12.0"
+# pinning to AGP 8.11.1 until AGP fixes it's AAPT2 dep from using SSE3 and SSE4.1
+# https://gitlab.com/fdroid/admin/-/issues/593
+# https://issuetracker.google.com/issues/438515318
+androidGradlePlugin = "8.11.1"
 kotlinGradlePlugin = "2.2.0"
 constraintlayout = "2.2.1"
 androidTest = "1.7.0"
