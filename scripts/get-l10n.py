@@ -25,12 +25,18 @@ source_dir = sys.argv[1]
 
 line_threshold = 150  # Change this to your desired minimum
 
+# cd to repo root
+os.chdir(os.path.dirname(sys.argv[0]))
+if (os.path.basename(os.getcwd()) == "scripts"):
+  os.chdir("..")
+ 
+
 # Loop through subdirectories
 for root, _, files in os.walk(source_dir):
   for filename in files:
     if filename == "strings.xml":
       # Construct destination directory with same name as source
-      dst_dir = os.path.join("../app/src/main/res/", os.path.basename(root))
+      dst_dir = os.path.join("app/src/main/res/", os.path.basename(root))
       copy_directory(root, dst_dir, line_threshold)
       break  # Only need to check one strings.xml per directory
 
