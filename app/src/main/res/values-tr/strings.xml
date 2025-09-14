@@ -117,7 +117,7 @@
     <string name="qs_show_error">Hatayı görüntüle</string>
     <string name="general">Genel</string>
     <string name="appearance">Görünüm</string>
-    <string name="launcher_hint">Açılış ekranınız ve uygulama çekmeceniz için bir simge ve ad seçin. Bildirimlerde varsayılan Tor VPN simgesinin ve adının kullanılması sürdürülür.</string>
+    <string name="launcher_hint">Ana ekranınızda, uygulama çekmecenizde ve bildirimlerinizde görüntülenecek bir simge ve ad seçin.</string>
     <string name="warnings">Uyarılar</string>
     <string name="new_circuits_warnings">Yeni devre uyarıları</string>
     <string name="new_circuits_warnings_description">Devreler yeniden yüklenmeden önce uyarılsın.</string>
@@ -173,4 +173,22 @@
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="copied_clipboard">Panoya kopyalandı</string>
     <string name="add_bridge">Köprüler ekleyin</string>
+    <string name="app_name_garden">Bahçe</string>
+    <string name="app_name_weather">Hava</string>
+    <string name="app_name_pingpong">Masa Tenisi</string>
+    <string name="view_support_docs">Destek belgelerini görüntüle</string>
+    <string name="about_support_title">Kar amacı gütmeyen bir kuruluş tarafından yapılmıştır</string>
+    <string name="about_support_description">Tor\'u dünya çapında milyonlarca kullanıcı için kararlı ve güvenli tutmak için sizin gibi destekçilere güveniyoruz.</string>
+    <string name="about_support_action">Şimdi bağış yapın</string>
+    <string name="beta_intro">Beta sürümüne hoş geldiniz. Başlamadan önce bilmeniz gereken bazı şeyler var:</string>
+    <string name="beta_test_thoroughly">Kapsamlı bir şekilde test edin</string>
+    <string name="beta_test_description">Bu test ve geri bildirim amaçlı bir erken erişim sürümüdür.</string>
+    <string name="beta_risks">Riskleri bilin</string>
+    <string name="beta_risks_description">Beta sürümleri bilgi sızıntısına neden olabilir ve hassas bilgiler içeren faaliyetler için kullanılmamalıdır.</string>
+    <string name="how_to_report_bugs">Hataları nasıl bildirebilirsiniz</string>
+    <string name="external_link">Harici bağlantı</string>
+    <string name="start_testing">İncelemeye başlayın</string>
+    <string name="learn_more">Daha fazla bilgi edinin</string>
+    <string name="beta_report_bugs">Hataları bildirin</string>
+    <string name="beta_report_bugs_description">Bulduğunuz hataları geliştiricilerimize bildirerek yardımcı olabilirsiniz.</string>
 </resources>

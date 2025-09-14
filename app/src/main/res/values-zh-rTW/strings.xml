@@ -123,13 +123,13 @@
     <string name="apps_description">選擇要透過 Tor 路由的應用程式</string>
     <string name="general_description">設置一般設定</string>
     <string name="name_and_icon">名稱和圖標</string>
-    <string name="launcher_hint">為您的主螢幕和應用程式欄選擇一個圖示和名稱。預設的 Tor VPN 圖示和名稱仍會在通知中使用。</string>
+    <string name="launcher_hint">選擇要在主螢幕、應用抽屜和通知中顯示的圖示和名稱。</string>
     <string name="new_circuits_warnings">新迴路警告</string>
     <string name="new_circuits_warnings_description">重新加載迴路之前發出警告。</string>
-    <string name="new_bridges">我需要新的橋接器</string>
+    <string name="new_bridges">給我新的橋接器</string>
     <string name="fetching_bridges">正在獲取您的新橋樑…</string>
     <string name="new_bridges_result">這是您的新橋接：</string>
-    <string name="use_bridges">使用橋接器</string>
+    <string name="use_bridges">保存橋接器</string>
     <string name="whatsapp">Whatsapp</string>
     <string name="view_faq">查看我們的問與答</string>
     <string name="bug_gitlab">在Gitlab上</string>
@@ -138,7 +138,7 @@
     <string name="bug_tor_forum">在 Tor 討論區上</string>
     <string name="bridge_bot">橋接器機器人</string>
     <string name="bot_msg_welcome">歡迎，疲憊的旅行者</string>
-    <string name="bot_msg_results">這是你的橋接器：</string>
+    <string name="bot_msg_results">這是您的橋接器</string>
     <string name="refresh_all_circuits">重新整理所有迴路？</string>
     <string name="change">變更</string>
     <string name="obfs4_bridge">obfs4 橋接器</string>
@@ -171,4 +171,23 @@
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="stats_up" translatable="false">%1$s</string>
     <string name="copied_clipboard">已複製至剪貼簿</string>
+    <string name="add_bridge">新增橋接器</string>
+    <string name="view_support_docs">查看支援文檔</string>
+    <string name="app_name_garden">Garden</string>
+    <string name="app_name_weather">Weather</string>
+    <string name="app_name_pingpong">Ping Pong</string>
+    <string name="about_support_title">由非營利組織開發</string>
+    <string name="about_support_description">我們依靠像您這樣的支持者來幫助我們保持 Tor 的穩健和安全，以服務全球數百萬使用者。</string>
+    <string name="about_support_action">立即捐款</string>
+    <string name="beta_intro">歡迎使用測試版。開始使用之前，您需要了解一些事項：</string>
+    <string name="beta_test_thoroughly">全面測試</string>
+    <string name="beta_test_description">這是一個早期訪問版本，旨在進行測試和反饋。</string>
+    <string name="beta_risks">了解其風險</string>
+    <string name="beta_risks_description">測試版可能會洩露資訊，請勿用於敏感活動。</string>
+    <string name="how_to_report_bugs">如何提報錯誤</string>
+    <string name="external_link">外部連結</string>
+    <string name="start_testing">開始測試</string>
+    <string name="learn_more">了解更多</string>
+    <string name="beta_report_bugs">報告錯誤</string>
+    <string name="beta_report_bugs_description">您可以協助向開發者報告您發現的任何錯誤。</string>
 </resources>

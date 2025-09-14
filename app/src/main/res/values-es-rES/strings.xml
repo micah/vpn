@@ -8,7 +8,7 @@
     <string name="action_disconnect">Desconectar</string>
     <string name="state_connecting">Conectando…</string>
     <string name="always_on_vpn">VPN siempre activa</string>
-    <string name="kill_switch_description">Bloquear la conexión de aplicaciones a internet si la red Tor no puede ser conectada</string>
+    <string name="kill_switch_description">Bloquear la conexión de aplicaciones a internet si no se puede conectar a la red Tor</string>
     <string name="error_detail_message">Tor VPN no se ha podido conectar a la red Tor.</string>
     <string name="exit_location_description">Mientras usas Tor, los sitios web y las aplicaciones pensarán que te estás conectando desde el mismo país que tu relé de salida, que es el salto final en cada uno de tus circuitos Tor.</string>
     <string name="closed_connection">%1$s-&gt;%2$s: conexión cerrada</string>
@@ -23,7 +23,7 @@
     <string name="action_protect_this_app">Proteger esta aplicación</string>
     <string name="action_start">Iniciar VPN</string>
     <string name="action_stop">Parar VPN</string>
-    <string name="action_refresh_circuits">Refrescar circuitos</string>
+    <string name="action_refresh_circuits">Renovar circuitos</string>
     <string name="action_copy_logs">Copiar registros</string>
     <string name="state_connected">Conectado</string>
     <string name="state_disconnecting">Desconectando</string>
@@ -37,7 +37,7 @@
     <string name="tor_logs">Registros de Tor</string>
     <string name="tor_logs_description">Ver y copiar tus registros de Tor</string>
     <string name="guide_bullet_head_2">Pero no hagas nada arriesgado</string>
-    <string name="guide_bullet_text_2">Esta es una versión anterior al lanzamiento de la aplicación y no está lista para usarla para actividades sensibles.</string>
+    <string name="guide_bullet_text_2">Esta es una versión anterior al lanzamiento de la aplicación y no está lista para usarla para actividades sensitivas.</string>
     <string name="stats_down" translatable="false">%1$s</string>
     <string name="stats_up" translatable="false">%1$s</string>
     <string name="error_something_went_wrong">Algo salió mal</string>
@@ -46,7 +46,7 @@
     <string name="connection_description">Configurar cómo conectar a Tor</string>
     <string name="kill_switch">Interruptor general</string>
     <string name="quickstart">Conexión automática</string>
-    <string name="quickstart_description">Conectarse automáticamente a la red Tor cuando se inicia</string>
+    <string name="quickstart_description">Conectarse automáticamente a la red Tor al iniciar</string>
     <string name="exit_location">Localización de salida</string>
     <string name="exit_location_automatic">Aleatorio por circuito</string>
     <string name="up">Arriba</string>
@@ -61,7 +61,7 @@
     <string name="failed_connection">%1$s-&gt;%2$s: conexión FALLIDA a %3$s: %4$s (aplicación %5$d)</string>
     <string name="failed_connection_closed">%1$s-&gt;%2$s: FALLIDA: %3$s</string>
     <string name="new_connection_hop">%1$s-&gt;%2$s: salto %3$d: %4$s (%5$s)</string>
-    <string name="reload_app_circuits">¿Refrescar este circuito?</string>
+    <string name="reload_app_circuits">¿Renovar este circuito?</string>
     <string name="action_reload_circuits">Recargar circuitos</string>
     <string name="app_routing_tor_apps">Aplicaciones que funcionan con Tor</string>
     <string name="always_on_vpn_description">Abrir ajustes del sistema de Android</string>
@@ -94,11 +94,11 @@
     <string name="current_bridge">Puente actual</string>
     <string name="snowflake">Snowflake</string>
     <string name="bridge_addresses">Direcciones de puente</string>
-    <string name="bridge_address_description">Añade uno o varios puentes proporcionados por una persona u organización de confianza.</string>
+    <string name="bridge_address_description">Copia direcciones de puentes que ya conozcas</string>
     <string name="action_save">Guardar</string>
-    <string name="snowflake_description">Enruta tu conexión a través de proxies de Snowflake para que parezca que estás haciendo una video llamada</string>
+    <string name="snowflake_description">Hace que tu tráfico parezca una video llamada</string>
     <string name="manual_bridge">Selección manual</string>
-    <string name="built_in_bridges">Elegir un puente integrado</string>
+    <string name="built_in_bridges">Tus puentes</string>
     <string name="bridge_option_obfs4_built">obfs4 (incorporado)</string>
     <string name="description_independent_tor_powered_app">Esta aplicación utiliza su propia conexión Tor, independiente de la VPN Tor. Mira y configura tu conexión en %1$s.</string>
     <string name="obfs4_built_in">obfs4 (incorporado)</string>
@@ -107,12 +107,12 @@
     <string name="get_new_bridges_description">Como las direcciones puente no son públicas, tendrás que solicitar una al Proyecto Tor.</string>
     <string name="telegram">Telegram</string>
     <string name="telegram_bot_subtitle">Mensaje %s</string>
-    <string name="ask_bridge_bot">Pregunta al bot del puente</string>
-    <string name="get_new_bridges">Obtener nuevos puentes</string>
+    <string name="ask_bridge_bot">Pedir puentes</string>
+    <string name="get_new_bridges">Conseguir puentes nuevos</string>
     <string name="email_bot_subtitle">Correo electrónico %s</string>
     <string name="web">Web</string>
     <string name="label_some_protected">Algunos protegidos</string>
-    <string name="remove_bridge">Eliminar la dirección del puente</string>
+    <string name="remove_bridge">Eliminar la dirección de puente</string>
     <string name="help">Ayuda</string>
     <string name="qs_error">Error en la conexión</string>
     <string name="qs_show_error">Mostrar error</string>
@@ -122,28 +122,28 @@
     <string name="general_description">Configurar los ajustes generales</string>
     <string name="appearance">Apariencia</string>
     <string name="name_and_icon">Nombre e icono</string>
-    <string name="launcher_hint">Elija un ícono y un nombre para su pantalla de inicio y cajón de aplicaciones. El icono y el nombre predeterminados de Tor VPN se seguirán utilizando en las notificaciones.</string>
+    <string name="launcher_hint">Elige un ícono y un nombre para tu pantalla de inicio, cajón de aplicaciones y notificaciones.</string>
     <string name="warnings">Avisos</string>
     <string name="new_circuits_warnings_description">Avisar antes de recargar los circuitos.</string>
-    <string name="fetching_bridges">Buscando tus nuevos puentes…</string>
+    <string name="fetching_bridges">Buscando tus puentes nuevos…</string>
     <string name="bridge_bot">Bot del puente</string>
-    <string name="use_bridges">Utilizar los puentes</string>
-    <string name="new_bridges">Necesito nuevos puentes</string>
+    <string name="use_bridges">Guardar puentes</string>
+    <string name="new_bridges">Dame puentes nuevos</string>
     <string name="new_bridges_result">Aquí están tus puentes nuevos:</string>
     <string name="bot_msg_welcome">Bienvenido, viajero cansado</string>
-    <string name="bot_msg_results">Aquí están tus puentes:</string>
+    <string name="bot_msg_results">Aquí están tus puentes</string>
     <string name="start_again">Comenzar de nuevo</string>
     <string name="signal">Signal</string>
     <string name="report_bug">Informar de un error</string>
-    <string name="contact_support">Contacto con soporte</string>
+    <string name="contact_support">Contacta con el equipo de ayuda</string>
     <string name="email">Correo electrónico</string>
     <string name="whatsapp">Whatsapp</string>
     <string name="view_faq">Lee nuestras preguntas frecuentes</string>
-    <string name="help_description_wip">La VPN de Tor es un trabajo en progreso, y algunas características pueden no funcionar como se esperaba.</string>
+    <string name="help_description_wip">La VPN de Tor es experimental, y algunas características pueden no funcionar bien.</string>
     <string name="bug_tor_forum">En el Foro de Tor</string>
     <string name="bug_gitlab">En Gitlab</string>
-    <string name="help_description_bug_report">Si te encuentras con un problema que no ha sido respondido en nuestras preguntas frecuentes, por favor abre un informe de error o contacta con el soporte técnico.</string>
-    <string name="action_refresh">Refrescar</string>
+    <string name="help_description_bug_report">Si encuentras un problema que no tiene respuesta en nuestras preguntas frecuentes, por favor abre un informe de error o contacta con el soporte técnico.</string>
+    <string name="action_refresh">Actualizar</string>
     <string name="refresh_all_circuits">¿Refrescar todos los circuitos?</string>
     <string name="obfs4_bridge">puente obfs4</string>
     <string name="change">Cambiar</string>
@@ -156,7 +156,7 @@
     <string name="no_internet">No internet</string>
     <string name="down_content_description">Descargar</string>
     <string name="current_state">Estado actual:</string>
-    <string name="up_content_description">Cargar</string>
+    <string name="up_content_description">Subir</string>
     <string name="exit_location_safest">El más seguro</string>
     <string name="app_routing_hide_apps">Ocultar %1$s aplicaciones</string>
     <string name="app_routing_system_apps">Aplicaciones del sistema</string>
@@ -171,4 +171,22 @@
     <string name="about_tor_vpn">Acerca de Tor VPN</string>
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="add_bridge">Añadir puentes</string>
+    <string name="copied_clipboard">Copiado al portapapeles</string>
+    <string name="no_bridge">No se están usando puentes</string>
+    <string name="view_support_docs">Ver la documentación</string>
+    <string name="the_internet">La red interna</string>
+    <string name="about_support_title">Realizado por una organización sin ánimo de lucro</string>
+    <string name="about_support_description">Dependemos en colaboradores como usted para ayudarnos a mantener Tor fuerte y seguro para millones de personas en todo el mundo.</string>
+    <string name="about_support_action">Donar ahora</string>
+    <string name="beta_intro">Bienvenido a la Beta. Antes de empezar, hay algunas cosas que debes saber:</string>
+    <string name="beta_test_thoroughly">Realice pruebas exhaustivas</string>
+    <string name="beta_test_description">Esta se trata de una versión de acceso anticipado destinada a pruebas y comentarios.</string>
+    <string name="beta_risks">Conozca los riesgos</string>
+    <string name="beta_risks_description">Las versiones beta pueden filtrar información y no deben utilizarse para actividades sensibles.</string>
+    <string name="how_to_report_bugs">Cómo informar de errores</string>
+    <string name="external_link">Enlace externo</string>
+    <string name="start_testing">Empezar a probar</string>
+    <string name="learn_more">Aprenda más</string>
+    <string name="beta_report_bugs">Informar de errores</string>
+    <string name="beta_report_bugs_description">Puedes ayudar informando a nuestros desarrolladores de cualquier error que encuentres.</string>
 </resources>

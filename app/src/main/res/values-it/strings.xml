@@ -72,7 +72,7 @@
     <string name="closed_connection">%1$s-&gt;%2$s: connessione chiusa</string>
     <string name="telegram_bot_subtitle">Messaggio a %s</string>
     <string name="add_new_bridge">Aggiungi nuovi bridge</string>
-    <string name="obfs4_description">Fa apparire il tuo traffico come dati casuali</string>
+    <string name="obfs4_description">Camuffa il tuo traffico come dati casuali</string>
     <string name="description_independent_tor_powered_app">Questa app usa la propria connessione a Tor, independente da Tor VPN. Vedi e configura la sua connessione in %1$s.</string>
     <string name="bridge_settings">Impostazioni bridge</string>
     <string name="tor_powered_app">App con Tor integrato</string>
@@ -86,14 +86,14 @@
     <string name="remove_bridge">Rimuovi indirizzo bridge</string>
     <string name="bridge_address">Inserisci l\'indirizzo del bridge</string>
     <string name="current_bridge">Bridge attuale</string>
-    <string name="ask_bridge_bot">Chiedi al bot dei bridge</string>
+    <string name="ask_bridge_bot">Richiesta di bridge</string>
     <string name="bridge_addresses">Indirizzi bridge</string>
-    <string name="bridge_address_description">Aggiungi uno o più bridge forniti da una persona o organizzazione fidata.</string>
-    <string name="get_new_bridges">Ottieni nuovi bridge</string>
+    <string name="bridge_address_description">Incollare gli indirizzi dei bridge che già si conoscono</string>
+    <string name="get_new_bridges">Trova altri bridge</string>
     <string name="email_bot_subtitle">Email a %s</string>
     <string name="new_connection">%1$s-&gt;%2$s: NUOVA connessione a %3$s (app %4$d)</string>
     <string name="bootstrap_at">Bootstrap in: %1$s</string>
-    <string name="snowflake_description">Instrada la tua connessione attraverso i proxy Snowflake per far sembrare che si sia in videochiamata</string>
+    <string name="snowflake_description">Camuffa il tuo traffico come una videochiamata</string>
     <string name="action_reload_circuits">Ricarica circuiti</string>
     <string name="web_bot_subtitle">Visita %s</string>
     <string name="action_open_app">Apri %1$s</string>
@@ -127,13 +127,13 @@
     <string name="name_and_icon">Nome e icona</string>
     <string name="new_circuits_warnings_description">Avvisa prima di ricaricare circuiti.</string>
     <string name="launcher_hint">Scegli un\'icona e un nome per la tua schermata principale e il selettore di app. L\'icona e nome predefiniti di Tor VPN verranno usati nelle notifiche.</string>
-    <string name="new_bridges">Mi servono nuovi bridge</string>
+    <string name="new_bridges">Dammi nuovi bridge</string>
     <string name="fetching_bridges">Recupero dei nuovi bridge…</string>
     <string name="new_bridges_result">Ecco i tuoi nuovi bridge:</string>
     <string name="bridge_bot">Bot dei bridge</string>
     <string name="bot_msg_welcome">Benvenuto, stanco viaggiatore</string>
     <string name="bot_msg_results">Ecco i tuoi bridge:</string>
-    <string name="use_bridges">Usa i bridge</string>
+    <string name="use_bridges">Salva i bridge</string>
     <string name="whatsapp">Whatsapp</string>
     <string name="new_circuits_warnings">Nuovi avvisi sui circuiti</string>
     <string name="view_faq">Vedi le nostre FAQ</string>
@@ -169,9 +169,12 @@
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="stats_up" translatable="false">%1$s</string>
     <string name="default_icon_and_name">Nome e icona predefiniti</string>
-    <string name="the_internet">Internet</string>
+    <string name="the_internet">L\'Internet</string>
     <string name="no_bridge">Non utilizzando ponti</string>
     <string name="about_tor_vpn">Informazioni su Tor VPN</string>
     <string name="copied_clipboard">Copiato negli appunti</string>
     <string name="add_bridge">Aggiungi ponti</string>
+    <string name="app_name_weather">Meteo</string>
+    <string name="app_name_pingpong">Ping Pong</string>
+    <string name="view_support_docs">Visualizza la documentazione di supporto</string>
 </resources>

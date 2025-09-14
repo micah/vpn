@@ -97,10 +97,10 @@
     <string name="always_on_vpn">VPN “Përherë në punë”</string>
     <string name="app_name">VPN Tor-i</string>
     <string name="state_disconnecting">Po shkëputet</string>
-    <string name="built_in_bridges">Zgjidhni një urë të brendshme</string>
+    <string name="built_in_bridges">Urat tuaja</string>
     <string name="guide_bullet_text_2">Ky është një version paraprak i aplikacionit dhe jo i sigurt për t’u përdorur për veprimtari me spec.</string>
-    <string name="get_new_bridges">Merrni ura të reja</string>
-    <string name="ask_bridge_bot">Kërkojini robotit të urave</string>
+    <string name="get_new_bridges">Gjeni më tepër ura</string>
+    <string name="ask_bridge_bot">Kërkoni ura</string>
     <string name="web_bot_subtitle">Vizitoni %s</string>
     <string name="email_bot_subtitle">Email %s</string>
     <string name="remove_bridge">Hiq adresë ure</string>
@@ -172,4 +172,5 @@
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="stats_up" translatable="false">%1$s</string>
     <string name="add_bridge">Shtoni ura</string>
+    <string name="copied_clipboard">U kopjua në të papastër</string>
 </resources>

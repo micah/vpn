@@ -33,8 +33,8 @@
     <string name="app_routing_show_apps">Show %1$s apps</string>
     <string name="app_routing_hide_apps">Hide %1$s apps</string>
 
-    <string name="notification_channel_description">Shows updates about Tor VPN.</string>
-    <string name="notification_channel_name">Tor VPN notifications</string>
+    <string name="notification_channel_description">Shows updates about TorVPN.</string>
+    <string name="notification_channel_name">TorVPN notifications</string>
 
     <!-- configuration screen -->
     <string name="apps">Apps</string>
@@ -148,7 +148,7 @@
     <string name="ask_bridge_bot">Request bridges</string>
     <string name="telegram">Telegram</string>
     <string name="signal">Signal</string>
-    <string name="whatsapp">WhatsApp</string>
+    <string name="whatsapp">Whatsapp</string>
     <string name="web">Web</string>
     <string name="email_providers">Gmail or Riseup</string>
     <string name="telegram_bot_subtitle">Message %s</string>
@@ -179,7 +179,7 @@
     <string name="help_description_wip">Tor VPN is a work in progress, and some features may not work as expected.</string>
     <string name="help_description_bug_report">If you encounter an issue that’s not answered by our FAQ, please open a bug report or contact support.</string>
     <string name="bug_tor_forum">On the Tor Forum</string>
-    <string name="bug_gitlab">On GitLab</string>
+    <string name="bug_gitlab">On Gitlab</string>
     <string name="email">Email</string>
 
     <!-- Bridge Bot -->

@@ -80,7 +80,7 @@
     <string name="none">なし</string>
     <string name="bridges">ブリッジ</string>
     <string name="add_new_bridge">新しいブリッジを追加する</string>
-    <string name="obfs4_description">トラフィックをランダムなデータに偽装します</string>
+    <string name="obfs4_description">トラフィックをランダムなデータにカモフラージュします</string>
     <string name="description_independent_tor_powered_app">このアプリは Tor VPN とは独立した独自の Tor 接続を使用します。代わりに %1$s で接続を表示および設定してください。</string>
     <string name="bridge_settings">ブリッジの設定</string>
     <string name="obfs4_built_in">obfs4 (内蔵)</string>
@@ -95,7 +95,7 @@
     <string name="bridge_addresses">ブリッジアドレス</string>
     <string name="bridge_address_description">すでに知っているブリッジアドレスを入力する</string>
     <string name="action_save">保存</string>
-    <string name="snowflake_description">トラフィックをビデオ通話に偽装します</string>
+    <string name="snowflake_description">トラフィックをビデオ通話にカモフラージュします</string>
     <string name="manual_bridge">手動選択</string>
     <string name="built_in_bridges">あなたのブリッジ</string>
     <string name="email_providers">Gmail または Riseup</string>
@@ -116,7 +116,7 @@
     <string name="general">一般</string>
     <string name="general_description">一般的な設定をする</string>
     <string name="name_and_icon">名前とアイコン</string>
-    <string name="launcher_hint">ホーム画面とアプリドロワーのアイコンと名前を選んでください。デフォルトの Tor VPN アイコンと名前は、通知で引き続き使用されます。</string>
+    <string name="launcher_hint">ホーム画面、アプリドロワー、通知で表示されるアイコンと名前を選択します。</string>
     <string name="new_circuits_warnings">新しい回線の警告</string>
     <string name="new_circuits_warnings_description">回線を再読み込みする前に警告します。</string>
     <string name="appearance">外観</string>
@@ -172,4 +172,22 @@
     <string name="stats_up" translatable="false">%1$s</string>
     <string name="copied_clipboard">クリップボードにコピーしました</string>
     <string name="add_bridge">ブリッジを追加</string>
+    <string name="view_support_docs">サポートドキュメントを表示</string>
+    <string name="app_name_garden">庭園</string>
+    <string name="app_name_weather">天気</string>
+    <string name="app_name_pingpong">卓球</string>
+    <string name="about_support_title">非営利団体による開発</string>
+    <string name="about_support_description">私たちは、世界中の何百万人もの人々にとって Tor を堅牢かつ安全なものに保つために、皆様の支援に支えられています。</string>
+    <string name="about_support_action">今すぐ寄付する</string>
+    <string name="beta_intro">ベータ版へようこそ。始める前に、以下の点をご確認ください:</string>
+    <string name="beta_test_thoroughly">徹底的にテストする</string>
+    <string name="beta_test_description">これは、テストとフィードバックを目的とした早期アクセスリリースです。</string>
+    <string name="beta_risks">リスクを理解する</string>
+    <string name="beta_risks_description">ベータリリースは情報を漏洩する可能性があるため、機密性の高いアクティビティには使用しないでください。</string>
+    <string name="how_to_report_bugs">バグを報告する方法</string>
+    <string name="external_link">外部リンク</string>
+    <string name="start_testing">テストを開始する</string>
+    <string name="learn_more">詳細情報</string>
+    <string name="beta_report_bugs">バグを報告する</string>
+    <string name="beta_report_bugs_description">バグを発見した場合は、開発者まで報告してください。</string>
 </resources>

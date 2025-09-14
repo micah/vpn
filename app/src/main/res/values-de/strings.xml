@@ -118,7 +118,7 @@
     <string name="general_description">Konfiguriere allgemeine Einstellungen</string>
     <string name="apps_description">Wähle Apps, die durch Tor geleitet werden sollen</string>
     <string name="name_and_icon">Name und Symbol</string>
-    <string name="launcher_hint">Wähle ein Symbol und einen Namen für deinen Startbildschirm und die App-Schublade. Das standardmäßige Tor-VPN-Symbol und der Name werden weiterhin für Benachrichtigungen verwendet.</string>
+    <string name="launcher_hint">Wähle ein Symbol und einen Namen für deinen Startbildschirm, die App-Schublade und die Benachrichtigungen.</string>
     <string name="warnings">Warnungen</string>
     <string name="new_circuits_warnings">Neue Warnungen zu Kanälen</string>
     <string name="new_circuits_warnings_description">Warne vor dem Neuladen von Kanälen.</string>
@@ -173,4 +173,22 @@
     <string name="stats_up" translatable="false">%1$s</string>
     <string name="copied_clipboard">In Zwischenablage kopiert</string>
     <string name="add_bridge">Brücken hinzufügen</string>
+    <string name="view_support_docs">Support-Dokumente anzeigen</string>
+    <string name="app_name_garden">Garten</string>
+    <string name="app_name_weather">Wetter</string>
+    <string name="app_name_pingpong">Ping Pong</string>
+    <string name="about_support_title">Hergestellt von einer gemeinnützigen Organisation</string>
+    <string name="about_support_description">Wir sind auf Unterstützer wie dich angewiesen, um Tor stabil und sicher für Millionen von Menschen weltweit zu halten.</string>
+    <string name="beta_intro">Willkommen bei der Beta. Bevor du loslegst, solltest du einige Dinge wissen:</string>
+    <string name="beta_test_thoroughly">Gründlich testen</string>
+    <string name="beta_test_description">Dies ist eine Vorabversion, die zum Testen und für Feedback gedacht ist.</string>
+    <string name="beta_risks">Kenne die Risiken</string>
+    <string name="beta_risks_description">Beta-Versionen können Informationen preisgeben und sollten nicht für sensible Aktivitäten verwendet werden.</string>
+    <string name="how_to_report_bugs">Wie man Fehler meldet</string>
+    <string name="start_testing">Start der Tests</string>
+    <string name="beta_report_bugs_description">Du kannst uns helfen, indem du alle Fehler, die du findest, an unsere Entwickler meldest.</string>
+    <string name="about_support_action">Jetzt spenden</string>
+    <string name="external_link">Externer Link</string>
+    <string name="learn_more">Mehr erfahren</string>
+    <string name="beta_report_bugs">Fehler melden</string>
 </resources>

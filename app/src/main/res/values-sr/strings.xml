@@ -67,9 +67,9 @@
     <string name="use_a_bridge">Користите мост</string>
     <string name="bridge_settings">Подешавања моста</string>
     <string name="add_new_bridge">Додајте нове мостове</string>
-    <string name="bot_msg_results">Овде су ваши мостови:</string>
-    <string name="get_new_bridges">Набавите нове мостове</string>
-    <string name="ask_bridge_bot">Питајте бота за мостове</string>
+    <string name="bot_msg_results">Овде су ваши мостови</string>
+    <string name="get_new_bridges">Пронађите још мостова</string>
+    <string name="ask_bridge_bot">Затражите мостове</string>
     <plurals name="n_bridges">
         <item quantity="one">%1$s мост додат</item>
         <item quantity="few">%1$s моста додата</item>
@@ -77,10 +77,10 @@
     </plurals>
     <string name="failed_connection_closed">%1$s-&gt;%2$s: НЕУСПЕШНО: %3$s</string>
     <string name="circuits">Кругови</string>
-    <string name="built_in_bridges">Изаберите уграђен мост</string>
+    <string name="built_in_bridges">Ваши мостови</string>
     <string name="snowflake_built_in">Snowflake (уграђен)</string>
-    <string name="obfs4_description">Чини да ваш саобраћај изгледа као насумични подаци</string>
-    <string name="snowflake_description">Рутира вашу везу кроз Snowflake проксије како би изгледало као да обављате видео позив</string>
+    <string name="obfs4_description">Прерушава ваш саобраћај као насумичне податке</string>
+    <string name="snowflake_description">Прерушава ваш саобраћај као видео позив</string>
     <string name="bridge_address">Унесите адресу моста</string>
     <string name="action_paste_bridges">Налепите ваше адресе мостова овде</string>
     <string name="email_providers">Gmail или Riseup</string>
@@ -116,11 +116,11 @@
     <string name="notification_channel_name">ТорВПН обавештења</string>
     <string name="always_on_vpn_description">Отвори Android системска подешавања</string>
     <string name="quickstart_description">Повежи се на Тор мрежу аутоматски када се покрене</string>
-    <string name="bridge_address_description">Додајте један или више мостова које вам је обезбедила поуздана особа или организација.</string>
+    <string name="bridge_address_description">Унесите адресе мостова које већ знате</string>
     <string name="get_new_bridges_description">Пошто адресе мостова нису јавне, мораћете да затражите једну од Тор пројекта.</string>
     <string name="web_bot_subtitle">Посетите %s</string>
     <string name="new_circuits_warnings_description">Упозори пре поновног учитавања кругова.</string>
-    <string name="new_bridges">Потребни су ми нови мостови</string>
+    <string name="new_bridges">Дај ми нове мостове</string>
     <string name="action_refresh_circuits">Освежи кругове</string>
     <string name="kill_switch">Прекидач</string>
     <string name="exit_location">Локација излаза</string>
@@ -144,7 +144,7 @@
     <string name="kill_switch_description">Блокирај апликације да се повезују на интернет ако Тор мрежа не може да се досегне</string>
     <string name="bridge_addresses">Адресе мостова</string>
     <string name="fetching_bridges">Преузимање ваших нових мостова…</string>
-    <string name="use_bridges">Користите мостове</string>
+    <string name="use_bridges">Сачувај мостове</string>
     <string name="help_description_wip">Тор ВПН је у фази развоја, и неке функције можда неће радити како се очекује.</string>
     <string name="obfs4_bridge">obfs4 мост</string>
     <string name="bug_gitlab">На Gitlab-у</string>
@@ -168,4 +168,14 @@
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="stats_up" translatable="false">%1$s</string>
     <string name="add_bridge">Додајте мостове</string>
+    <string name="copied_clipboard">Копирано у привремену меморију</string>
+    <string name="about_tor_vpn">О Tor VPN</string>
+    <string name="default_icon_and_name">Подразумевана икона и име</string>
+    <string name="no_bridge">Без коришћења мостова</string>
+    <string name="connect_automatically">Повежи аутоматски</string>
+    <string name="app_name_garden">Башта</string>
+    <string name="app_name_weather">Временске прилике</string>
+    <string name="app_name_pingpong">Пинг понг</string>
+    <string name="view_support_docs">Погледајте документацију за подршку</string>
+    <string name="the_internet">Интернет</string>
 </resources>

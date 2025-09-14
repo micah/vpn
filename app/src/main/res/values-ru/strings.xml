@@ -52,7 +52,7 @@
     <string name="this_app">Это приложение</string>
     <string name="tor_powered_app">Приложение на базе Tor</string>
     <string name="guard">Сторожевой</string>
-    <string name="bootstrap_at">Начальная загрузка по адресу: %1$s</string>
+    <string name="bootstrap_at">Начальная загрузка на: %1$s</string>
     <string name="new_connection">%1$s-&gt;%2$s: НОВОЕ подключение к %3$s (приложение %4$d)</string>
     <string name="action_reload_circuits">Перезагрузить цепочки</string>
     <string name="new_connection_hop">%1$s-&gt;%2$s: прыжок %3$d: %4$s (%5$s)</string>
@@ -105,7 +105,7 @@
     <string name="description_independent_tor_powered_app">Это приложение использует собственное подключение к Tor, независимое от Tor VPN. Вместо этого просмотрите и настройте его соединение в %1$s.</string>
     <string name="telegram">Telegram</string>
     <string name="get_new_bridges">Найти другие мосты</string>
-    <string name="get_new_bridges_description">Поскольку адреса мостов не являются общедоступными, нужно будет запросить адрес у Tor Project.</string>
+    <string name="get_new_bridges_description">Поскольку адрес моста не являются общедоступными, нужно будет запросить его у Проекта Tor.</string>
     <string name="ask_bridge_bot">Запросить мосты</string>
     <string name="web_bot_subtitle">Посетите %s</string>
     <string name="remove_bridge">Удалить адреса мостов</string>
@@ -123,7 +123,7 @@
     <string name="general">Общие</string>
     <string name="warnings">Предупреждения</string>
     <string name="start_again">Запустить снова</string>
-    <string name="signal">Сигнал</string>
+    <string name="signal">Signal</string>
     <string name="report_bug">Сообщить об ошибке</string>
     <string name="contact_support">Связаться с поддержкой</string>
     <string name="email">Email</string>
@@ -132,11 +132,11 @@
     <string name="new_bridges_result">Ваши новые мосты:</string>
     <string name="bug_gitlab">Через Gitlab</string>
     <string name="bot_msg_welcome">Добро пожаловать, усталый путник</string>
-    <string name="bot_msg_results">Вот ваши мосты:</string>
+    <string name="bot_msg_results">Вот ваши мосты</string>
     <string name="new_circuits_warnings">Предупреждения о новых цепочках</string>
     <string name="action_refresh">Обновить</string>
     <string name="fetching_bridges">Получение новых мостов…</string>
-    <string name="launcher_hint">Выберите иконку и название для главного экрана и для списка всех приложений. Стандартная иконка и название по прежнему будут использоваться в уведомлениях.</string>
+    <string name="launcher_hint">Выберите иконку и название для главного экрана и для списка всех приложений. Стандартная иконка и название Tor VPN по-прежнему будут использоваться в уведомлениях.</string>
     <string name="bridge_bot">Бот мостов</string>
     <string name="help_description_bug_report">Если вы столкнулись с проблемой, которая не описана в FAQ, создайте отчёт об ошибке или свяжитесь с поддержкой.</string>
     <string name="name_and_icon">Название и иконка</string>
@@ -146,7 +146,7 @@
     <string name="bug_tor_forum">На форуме Tor</string>
     <string name="change">Изменить</string>
     <string name="use_bridges">Сохранить мосты</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="obfs4_bridge">мост obfs4</string>
     <string name="about">О приложении</string>
     <string name="version">Версия</string>
@@ -159,7 +159,7 @@
     <string name="exit_location_safest">Высший</string>
     <string name="up_content_description">Загрузить</string>
     <string name="down_content_description">Скачать</string>
-    <string name="advanced">Дополнения</string>
+    <string name="advanced">Дополнительные</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
     <string name="open_source_licenses">Лицензии с открытым исходным кодом</string>
     <string name="app_icon">Значок приложения</string>
@@ -175,4 +175,8 @@
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="copied_clipboard">Скопировано в буфер обмена</string>
     <string name="add_bridge">Добавить мосты</string>
+    <string name="view_support_docs">Просмотр документов службы поддержки</string>
+    <string name="app_name_garden">Сад</string>
+    <string name="app_name_weather">Погода</string>
+    <string name="app_name_pingpong">Пинг Понг</string>
 </resources>

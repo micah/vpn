@@ -114,7 +114,7 @@
     <string name="email">Tölvupóstur</string>
     <string name="help_description_wip">Tor VPN er alltaf í vinnslu og mögulega eru einhverjir eiginleikar sem virka ekki eins og búist má við.</string>
     <string name="get_new_bridges_description">Þar sem vistföng brúa eru ekki opinber, þarft þú að biðja um slíkt frá Tor-verkefninu.</string>
-    <string name="bot_msg_results">Hér eru brýrnar þínar:</string>
+    <string name="bot_msg_results">Hér eru brýrnar þínar</string>
     <string name="start_again">Byrja aftur</string>
     <string name="get_new_bridges">Finna fleiri brýr</string>
     <string name="new_circuits_warnings">Aðvaranir nýrra rása</string>
@@ -172,4 +172,5 @@
     <string name="app_routing_show_apps">Birta %1$s forrit</string>
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="copied_clipboard">Afritað á klippiborð</string>
+    <string name="add_bridge">Bæta við brúm</string>
 </resources>

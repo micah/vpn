@@ -9,12 +9,12 @@
     <string name="app_routing_tor_apps">Aplikacje obsługiwane przez Tor</string>
     <string name="app_routing_browsers">Przeglądarki</string>
     <string name="app_routing_other_apps">Inne aplikacje</string>
-    <string name="notification_channel_description">Pokazuje aktualizacje dotyczące TorVPN.</string>
-    <string name="notification_channel_name">Powiadomienia TorVPN</string>
+    <string name="notification_channel_description">Pokazuje aktualizacje dotyczące Tor VPN.</string>
+    <string name="notification_channel_name">Powiadomienia Tor VPN</string>
     <string name="apps">Aplikacje</string>
     <string name="apps_description_all_protected">Wszystkie aplikacje chronione</string>
     <string name="tor_logs">Dzienniki Tor</string>
-    <string name="tor_logs_description">Przeglądaj i skopiuj swoje dzienniki Tor</string>
+    <string name="tor_logs_description">Przeglądaj i kopiuj dzienniki Tor</string>
     <string name="always_on_vpn">Zawsze włączona VPN</string>
     <string name="always_on_vpn_description">Otwórz ustawienia systemu Android</string>
     <string name="guide_bullet_text_2">To jest robocza wersja aplikacji i nie jest bezpieczna pod względem wrażliwych działań.</string>
@@ -59,7 +59,7 @@
     <string name="guide_bullet_text_1">Nie zapomnij zgłosić wszelkich znalezionych błędów naszym programistom.</string>
     <string name="stats_down" translatable="false">%1$s</string>
     <string name="stats_up" translatable="false">%1$s</string>
-    <string name="connection_description">Skonfiguruj sposób łączenia się z Tor</string>
+    <string name="connection_description">Skonfiguruj sposób łączenia się z siecią Tor</string>
     <string name="stats_delta">%1$s/s</string>
     <string name="error_something_went_wrong">Coś poszło nie tak</string>
     <string name="kill_switch">Wyłącznik awaryjny</string>
@@ -104,10 +104,10 @@
     <string name="built_in_bridges">Twoje mostki</string>
     <string name="description_independent_tor_powered_app">Ta aplikacja korzysta z własnego połączenia Tor, niezależnego od Tor VPN. Zamiast tego wyświetl i skonfiguruj połączenie w %1$s.</string>
     <string name="email_providers">Gmail lub Riseup</string>
-    <string name="get_new_bridges_description">Ponieważ adresy mostków nie są publiczne, należy zażądać takiego adresu z Tor Project.</string>
+    <string name="get_new_bridges_description">Ponieważ adresy mostków nie są publiczne, należy zwrócić się o ich przydzielenie do Tor Project.</string>
     <string name="telegram">Telegram</string>
     <string name="telegram_bot_subtitle">Wiadomość %s</string>
-    <string name="ask_bridge_bot">Poproś o mostki</string>
+    <string name="ask_bridge_bot">Poproś o mostki</string>
     <string name="get_new_bridges">Znajdź więcej mostków</string>
     <string name="email_bot_subtitle">E-mail %s</string>
     <string name="web">Web</string>
@@ -120,7 +120,7 @@
     <string name="general_description">Skonfiguruj ustawienia ogólne</string>
     <string name="appearance">Wygląd</string>
     <string name="name_and_icon">Nazwa i ikona</string>
-    <string name="launcher_hint">Wybierz ikonę i nazwę ekranu głównego i szuflady aplikacji. Domyślna ikona i nazwa Tor VPN będą nadal używane w powiadomieniach.</string>
+    <string name="launcher_hint">Wybierz ikonę i nazwę, które będą wyświetlane na ekranie głównym, w szufladzie aplikacji i powiadomieniach.</string>
     <string name="new_circuits_warnings">Ostrzeżenia o nowych obwodach</string>
     <string name="new_circuits_warnings_description">Ostrzegaj przed ponownym załadowaniem obwodów.</string>
     <string name="apps_description">Wybierz aplikacje, które będą trasowane przez sieć Tor</string>
@@ -137,20 +137,20 @@
     <string name="signal">Signal</string>
     <string name="whatsapp">WhatsApp</string>
     <string name="help_description_wip">Prace nad Tor VPN są w toku, a niektóre funkcje mogą nie działać zgodnie z oczekiwaniami.</string>
-    <string name="help_description_bug_report">Jeśli napotkasz problem, na który nie ma odpowiedzi w naszym FAQ, otwórz raport o błędzie lub skontaktuj się z pomocą techniczną.</string>
+    <string name="help_description_bug_report">Jeśli napotkasz problem, na który nie ma odpowiedzi w naszym FAQ, zgłoś błąd lub skontaktuj się z pomocą techniczną.</string>
     <string name="view_faq">Zobacz nasze FAQ</string>
     <string name="bug_tor_forum">Na forum Tor</string>
     <string name="bug_gitlab">W serwisie GitLab</string>
     <string name="report_bug">Zgłoś błąd</string>
     <string name="contact_support">Skontaktuj się z pomocą techniczną</string>
-    <string name="email">Email</string>
+    <string name="email">E-mail</string>
     <string name="action_refresh">Odśwież</string>
     <string name="refresh_all_circuits">Odświeżyć wszystkie obwody?</string>
     <string name="change">Zmień</string>
-    <string name="obfs4_bridge">mostek obfs4</string>
+    <string name="obfs4_bridge">Mostek obfs4</string>
     <string name="version">Wersja</string>
     <string name="last_updated">Ostatnio zaktualizowana</string>
-    <string name="tor_project">Projekt Tor</string>
+    <string name="tor_project">Tor Project</string>
     <string name="about">Informacje</string>
     <string name="about_description">Dowiedz się więcej o Tor VPN</string>
     <string name="about_description_long">Tor VPN to eksperymentalna aplikacja VPN stworzona przez %1$s, twórców sieci Tor i przeglądarki Tor Browser — najsilniejszych na świecie narzędzi zapewniających prywatność i wolność w Internecie.</string>
@@ -175,4 +175,22 @@
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="copied_clipboard">Skopiowano do schowka</string>
     <string name="add_bridge">Dodaj mostki</string>
+    <string name="view_support_docs">Wyświetl dokumenty pomocy technicznej</string>
+    <string name="app_name_garden">Ogród</string>
+    <string name="app_name_weather">Pogoda</string>
+    <string name="app_name_pingpong">Ping-pong</string>
+    <string name="beta_risks">Poznaj ryzyko</string>
+    <string name="about_support_title">Stworzona przez organizację non-profit</string>
+    <string name="about_support_description">Polegamy na wsparciu takich osób jak Ty, które nam pomagają dbać o to, aby sieć Tor pozostała niezawodna i bezpieczna dla milionów ludzi na całym świecie.</string>
+    <string name="about_support_action">Wpłać teraz</string>
+    <string name="beta_intro">Witamy w wersji beta. Zanim zaczniesz, jest kilka rzeczy, o których należy wiedzieć:</string>
+    <string name="beta_test_thoroughly">Dokładnie przetestuj</string>
+    <string name="beta_test_description">Jest to wydanie wersji wczesnej, przeznaczone do testowania i przesyłania opinii.</string>
+    <string name="beta_risks_description">Wersje beta mogą powodować wycieki informacji, dlatego nie należy ich używać do działań o charakterze poufnym.</string>
+    <string name="how_to_report_bugs">Jak zgłaszać błędy</string>
+    <string name="external_link">Link zewnętrzny</string>
+    <string name="start_testing">Rozpocznij testowanie</string>
+    <string name="learn_more">Dowiedz się więcej</string>
+    <string name="beta_report_bugs">Zgłoś błędy</string>
+    <string name="beta_report_bugs_description">Możesz pomóc, zgłaszając wszelkie znalezione błędy naszym programistom.</string>
 </resources>

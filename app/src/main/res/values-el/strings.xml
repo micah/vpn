@@ -132,7 +132,7 @@
     <string name="general_description">Επιλογή γενικών ρυθμίσεων</string>
     <string name="refresh_all_circuits">Ανανέωση όλων των κυκλωμάτων;</string>
     <string name="name_and_icon">Όνομα και εικονίδιο</string>
-    <string name="new_bridges">Χρειάζομαι νέες γέφυρες</string>
+    <string name="new_bridges">Δώσε μου νέες γέφυρες</string>
     <string name="fetching_bridges">Έλεγχος νέων γεφυρών…</string>
     <string name="new_bridges_result">Δείτε τις νέες γέφυρες σας:</string>
     <string name="launcher_hint">Επιλέξτε ένα εικονίδιο και ένα όνομα για την αρχική οθόνη και το συρτάρι εφαρμογών. Το προεπιλεγμένο εικονίδιο και όνομα του Tor VPN θα χρησιμοποιείται στις ειδοποιήσεις.</string>
@@ -142,7 +142,7 @@
     <string name="help_description_bug_report">Εάν αντιμετωπίσετε κάποιο πρόβλημα που δεν έχει απαντηθεί στο FAQ, παρακαλούμε κάντε ένα Bug report ή επικοινωνήστε με την Υποστήριξη.</string>
     <string name="bug_gitlab">Στο Gitlab</string>
     <string name="bot_msg_welcome">Καλωσόρισες, κουρασμένε ταξιδιώτη</string>
-    <string name="bot_msg_results">Εδώ είναι οι γέφυρες σας:</string>
+    <string name="bot_msg_results">Εδώ είναι οι γέφυρες σας</string>
     <string name="use_bridges">Χρησιμοποιήστε γέφυρες</string>
     <string name="new_circuits_warnings">Προειδοποιήσεις νέων κυκλωμάτων</string>
     <string name="bridge_bot">Bot παροχής γεφυρών</string>
@@ -171,4 +171,7 @@
     <string name="about_tor_vpn">Σχετικά με το Tor VPN</string>
     <string name="default_icon_and_name">Προεπιλεγμένο εικονίδιο και όνομα</string>
     <string name="no_bridge">Μη χρήση γεφυρών</string>
+    <string name="copied_clipboard">Αντιγράφηκε στο πρόχειρο</string>
+    <string name="add_bridge">Πρόσθεση γεφυρών</string>
+    <string name="view_support_docs">Προβολή τεκμηρίωσης υποστήριξης</string>
 </resources>

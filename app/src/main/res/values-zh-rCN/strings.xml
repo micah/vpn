@@ -69,7 +69,7 @@
     <string name="snowflake_built_in">Snowflake（内置）</string>
     <string name="idle_toolbar_title">Tor VPN</string>
     <string name="circuits">线路</string>
-    <string name="guide_got_it">知道了</string>
+    <string name="guide_got_it">好的</string>
     <string name="unknown">未知</string>
     <string name="reload_all_circuits_description">为您的所有应用程序将建立新的线路。一些应用程序和网站可能无法识别您，并可能将您从其服务中登出。</string>
     <string name="action_paste_bridges">在此处粘贴您的网桥地址</string>
@@ -95,7 +95,7 @@
     <string name="ask_bridge_bot">请求网桥</string>
     <string name="bridge_addresses">网桥地址</string>
     <string name="circuit_app_description">%1$s 的线路</string>
-    <string name="bridge_address_description">粘贴您已经知道的网桥地址</string>
+    <string name="bridge_address_description">粘贴已知的网桥地址</string>
     <string name="get_new_bridges">查找更多网桥</string>
     <string name="email_bot_subtitle">发送邮件至 %s</string>
     <string name="action_save">保存</string>
@@ -125,14 +125,14 @@
     <string name="action_refresh">刷新</string>
     <string name="refresh_all_circuits">刷新所有线路？</string>
     <string name="name_and_icon">名称和图标</string>
-    <string name="launcher_hint">为您的主屏幕和应用抽屉选择图标和名称。默认的 Tor VPN 图标和名称仍在通知中使用。</string>
+    <string name="launcher_hint">选择要在主屏幕、应用抽屉和通知中显示的图标和名称。</string>
     <string name="general_description">配置常规设置</string>
     <string name="apps_description">选择要通过 Tor 路由的应用</string>
     <string name="whatsapp">Whatsapp</string>
     <string name="new_bridges">给我新网桥</string>
     <string name="fetching_bridges">正在获取您的新网桥…</string>
     <string name="new_bridges_result">这是您的新网桥：</string>
-    <string name="new_circuits_warnings">新线路警告</string>
+    <string name="new_circuits_warnings">新建线路警告</string>
     <string name="new_circuits_warnings_description">重新加载线路之前发出警告。</string>
     <string name="change">更改</string>
     <string name="use_bridges">保存网桥</string>
@@ -172,4 +172,22 @@
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="copied_clipboard">已复制到剪贴板</string>
     <string name="add_bridge">添加网桥</string>
+    <string name="view_support_docs">查看支持文档</string>
+    <string name="app_name_garden">Garden</string>
+    <string name="app_name_weather">Weather</string>
+    <string name="app_name_pingpong">Ping Pong</string>
+    <string name="about_support_title">由非营利组织开发</string>
+    <string name="about_support_description">我们依靠像您这样的支持者来帮助我们保持 Tor 的稳健和安全，以服务全球数百万用户。</string>
+    <string name="about_support_action">立即捐赠</string>
+    <string name="beta_intro">欢迎使用测试版。开始使用之前，您需要了解一些事项：</string>
+    <string name="beta_test_thoroughly">全面测试</string>
+    <string name="beta_test_description">这是一个早期访问版本，旨在进行测试和反馈。</string>
+    <string name="beta_risks">了解风险</string>
+    <string name="beta_risks_description">测试版可能会泄露信息，请勿用于敏感活动。</string>
+    <string name="how_to_report_bugs">如何报告错误</string>
+    <string name="external_link">外部链接</string>
+    <string name="start_testing">开始测试</string>
+    <string name="learn_more">了解更多</string>
+    <string name="beta_report_bugs">报告错误</string>
+    <string name="beta_report_bugs_description">您可以通过向我们的开发者报告您发现的任何错误来提供帮助。</string>
 </resources>

@@ -35,7 +35,7 @@
     <string name="state_disconnected">გათიშულია</string>
     <string name="state_connected">მიერთებულია</string>
     <string name="state_connecting">მიმდინარეობს მიერთება…</string>
-    <string name="contact_support">მხარდაჭერა</string>
+    <string name="contact_support">მომართვა მხარდაჭერისთვის</string>
     <string name="email">იმეილი</string>
     <string name="action_refresh">განახლება</string>
     <string name="change">შეცვლა</string>
@@ -49,7 +49,7 @@
     <string name="manual_bridge">ხელით არჩევა</string>
     <string name="use_a_bridge_info">გადამცემი ხიდებით უსაფრთხოდ შეგიძლიათ დაუკავშირდეთ Tor-ქსელს იქ, სადაც Tor იზღუდება. ადგილსამყოფლის მიხედვით ზოგი ხიდი სხვაზე უკეთ იმუშავებს.</string>
     <string name="report_bug">შეცდომის პატაკი</string>
-    <string name="exit_location_safest">სრულიად დაცული</string>
+    <string name="exit_location_safest">სრულად დაცული</string>
     <string name="up_content_description">ატვირთვა</string>
     <string name="down_content_description">გადმოწერა</string>
     <string name="app_name">Tor VPN</string>
@@ -132,7 +132,7 @@
     <string name="stats_combined">↓%2$s %1$s/წმ - ↑%4$s %3$s/წმ</string>
     <string name="error_view_logs">Tor-აღრიცხვების ნახვა</string>
     <string name="connection_description">გამართეთ, როგორ დაუკავშირდეს Tor</string>
-    <string name="launcher_hint">აირჩიეთ ხატულა და სახელი მთავარი ეკრანისა და პროგრამების ასარჩევისთვის. ნაგულისხმევი ხატულა და სახელი, რომელსაც Tor VPN იყენებს, კვლავ შენარჩუნდება შეტყობინებებისთვის.</string>
+    <string name="launcher_hint">აირჩიეთ ხატულა და სახელი მთავარი ეკრანზე, პროგრამების არესა თუ შეტყობინებებში გამოსაჩენად.</string>
     <string name="general_description">საერთო პარამეტრების გამართვა</string>
     <string name="default_icon_and_name">ნაგულისხმევი ხატულა და სახელი</string>
     <string name="new_connection_hop">%1$s-&gt;%2$s: მონაკვეთი %3$d: %4$s (%5$s)</string>
@@ -173,4 +173,22 @@
     <string name="guide_bullet_text_2">ესაა პროგრამის წინასწარი გამოშვება, არ გამოდგება საფრთხილო საქმიანობისთვის.</string>
     <string name="copied_clipboard">ასლი აღებულია</string>
     <string name="add_bridge">ხიდების დამატება</string>
+    <string name="view_support_docs">გაეცანით მხარდაჭერის მასალებს</string>
+    <string name="app_name_garden">ბაღი</string>
+    <string name="app_name_weather">ამინდი</string>
+    <string name="app_name_pingpong">პინგ-პონგი</string>
+    <string name="about_support_title">შექმნილი არამომგებიანი დაწესებულების მიერ</string>
+    <string name="about_support_description">ჩვენ თქვენნაირ მხარდამჭერებზე ვართ დამოკიდებული, რომლებიც გვეხმარებიან, შევინარჩუნოთ Tor დაცული და საიმედო მილიონობით ადამიანისთვის მთელ მსოფლიოში.</string>
+    <string name="about_support_action">შეგვეწიეთ ახლავე</string>
+    <string name="beta_intro">მოგესალმებათ საცდელი Beta. დაწყებამდე რამდენიმე რამ უნდა იცოდეთ:</string>
+    <string name="beta_test_description">ესაა ადრეული სახის გამოშვება, განკუთვნილი შემოწმებისა და გამოხმაურებისთვის.</string>
+    <string name="beta_risks">გაითავისეთ საფრთხეები</string>
+    <string name="beta_test_thoroughly">გამოცადეთ საგულდაგულოდ</string>
+    <string name="beta_risks_description">Beta-გამოშვებებით შეიძლება გამჟღავნდეს ინფორმაცია და არ უნდა გამოიყენებოდეს საფრთხილო საქმიანობისთვის.</string>
+    <string name="how_to_report_bugs">ხარვეზების შესახებ მოხსენება</string>
+    <string name="external_link">გარეშე ბმული</string>
+    <string name="start_testing">შემოწმების დაწყება</string>
+    <string name="learn_more">ვრცლად</string>
+    <string name="beta_report_bugs">ხარვეზების მოხსენება</string>
+    <string name="beta_report_bugs_description">შეგიძლიათ დაგვეხმაროთ ნებისმიერი ხარვეზის მოხსენებით, რომელსაც წააწყდებით.</string>
 </resources>
