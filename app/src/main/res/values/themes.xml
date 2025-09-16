@@ -28,6 +28,7 @@
         <item name="textAppearanceLabelLarge">@style/label_large</item>
         <item name="textAppearanceLabelMedium">@style/label_medium</item>
         <item name="textAppearanceLabelSmall">@style/label_small</item>
+        <item name="textAppearanceButton">@style/label_large</item>
 
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
