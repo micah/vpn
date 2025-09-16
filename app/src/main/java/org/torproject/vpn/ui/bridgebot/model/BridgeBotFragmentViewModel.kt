@@ -54,7 +54,7 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
 
     val bridgeButtonTextColor: StateFlow<Int> = botState.asFlow().map { data ->
         return@map when (data) {
-            BotState.FETCHING,BotState.SHOW_RESULT -> ContextCompat.getColor(application, R.color.on_surface)
+            BotState.FETCHING, BotState.SHOW_RESULT -> ContextCompat.getColor(application, R.color.on_surface)
             else -> ContextCompat.getColor(application, R.color.on_primary)
         }
     }.stateIn(
@@ -65,7 +65,7 @@ class BridgeBotFragmentViewModel(application: Application) : AndroidViewModel(ap
 
     val bridgeButtonBackgroundColor: StateFlow<Int> = botState.asFlow().map { data ->
         return@map when (data) {
-            BotState.INIT -> ContextCompat.getColor(application, R.color.primary)
+            BotState.INIT, BotState.SAVED_BRIDGES -> ContextCompat.getColor(application, R.color.primary)
             else -> ContextCompat.getColor(application, R.color.surface_container)
         }
     }.stateIn(
