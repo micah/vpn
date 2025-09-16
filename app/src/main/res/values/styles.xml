@@ -175,7 +175,6 @@
     </style>
 
     <style name="button_text" parent="label_large">
-        <item name="android:textStyle">bold</item>
        <item name="android:textColor">@color/on_surface</item>
     </style>
 

@@ -157,19 +157,17 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/tv_action_use_bridges"
-                style="@style/Widget.Material3.Button"
+                style="@style/material_button"
+                android:textAppearance="@style/button_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:text="@string/use_bridges"
-                android:textColor="@color/inverse_on_surface"
                 android:clickable="true"
                 android:focusable="true"
-                android:backgroundTint="@color/primary"
                 android:onClick="@{handler::onSaveBridgesClicked}"
                 android:paddingHorizontal="@dimen/default_padding"
                 android:paddingVertical="16dp"
-                app:rippleColor="@color/primary_container"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sv_bridgeLines"/>
@@ -179,7 +177,8 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/tv_action_btn"
-            style="@style/Widget.Material3.Button"
+            style="@style/material_button"
+            android:textAppearance="@style/button_text"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
@@ -190,7 +189,6 @@
             android:text="@{viewModel.bridgeButtonText}"
             android:onClick="@{handler::onBridgeButtonClicked}"
             android:enabled="@{!viewModel.isFetching}"
-            android:textAppearance="@style/button_text"
             android:textColor="@{viewModel.bridgeButtonTextColor}"
             app:cornerRadius="26dp"
             app:layout_constraintBottom_toBottomOf="parent"
