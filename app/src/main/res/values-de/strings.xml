@@ -18,8 +18,8 @@
     <string name="state_connecting">Wird verbunden …</string>
     <string name="state_disconnecting">Verbindung wird getrennt</string>
     <string name="app_routing_other_apps">Andere Apps</string>
-    <string name="notification_channel_description">Updates über TorVPN anzeigen.</string>
-    <string name="notification_channel_name">TorVPN-Benachrichtigungen</string>
+    <string name="notification_channel_description">Updates über Tor VPN anzeigen.</string>
+    <string name="notification_channel_name">Tor VPN-Benachrichtigungen</string>
     <string name="apps">Apps</string>
     <string name="apps_description_all_protected">Alle Anwendungen verschlüsselt</string>
     <string name="tor_logs">Tor-Logs</string>

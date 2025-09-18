@@ -54,7 +54,7 @@
     <string name="stats_delta">%1$s/s</string>
     <string name="exit_location">Útgangsstaður</string>
     <string name="connect_direct_to_tor">Tengjast beint við Tor</string>
-    <string name="notification_channel_name">Tilkynningar TorVPN</string>
+    <string name="notification_channel_name">Tilkynningar Tor VPN</string>
     <string name="quickstart">Sjálfvirk-tenging</string>
     <string name="quickstart_description">Tengjast sjálfkrafa við Tor-netið við ræsingu</string>
     <string name="error_detail_message">Tor VPN gat ekki tengst við Tor-netið.</string>
@@ -69,7 +69,7 @@
     <string name="stats_up" translatable="false">%1$s</string>
     <string name="action_reload_circuits">Endurlesa rásir</string>
     <string name="title_guide">Þetta forrit er á \nmiklu tilraunastigi</string>
-    <string name="notification_channel_description">Sýnir uppfærslur á TorVPN.</string>
+    <string name="notification_channel_description">Sýnir uppfærslur á Tor VPN.</string>
     <string name="always_on_vpn">Alltaf á VPN</string>
     <string name="app_routing_browsers">Vafrar</string>
     <string name="action_open_app">Opna %1$s</string>
@@ -141,7 +141,7 @@
     <string name="bot_msg_welcome">Velkominn, lúni ferðalangur</string>
     <string name="launcher_hint">Veldu táknmynd og heiti fyrir heimaskjáinn þinn og forritabakkann. Sjálfgefin táknmynd og nafn Tor VPN verða áfram notuð í tilkynningum.</string>
     <string name="label_some_protected">Sum varin</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="action_refresh">Endurlesa</string>
     <string name="change">Breyta</string>
     <string name="use_bridges">Nota brýr</string>
@@ -173,4 +173,6 @@
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="copied_clipboard">Afritað á klippiborð</string>
     <string name="add_bridge">Bæta við brúm</string>
+    <string name="about_support_action">Styrkja núna</string>
+    <string name="learn_more">Fræðast frekar</string>
 </resources>

@@ -129,7 +129,7 @@
     <string name="action_refresh">تازه‌سازی</string>
     <string name="signal">سیگنال</string>
     <string name="change">تغییر</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="view_faq">مشاهدهٔ پرسش‌های متداول ما</string>
     <string name="obfs4_bridge">پل obfs4</string>
     <string name="help_description_wip">Tor VPN یک کار درحال توسعه است و ممکن است برخی قابلیت‌ها مطابق با انتظار کار نکنند.</string>
@@ -142,7 +142,7 @@
     <string name="fetching_bridges">درحال واکشیدن پل‌های جدیدتان…</string>
     <string name="new_bridges_result">این هم از پل‌های جدیدتان:</string>
     <string name="help_description_bug_report">اگر به مشکلی برخوردید که در پرسش‌های متداول پاسخ داده نشده است، لطفاً یک گزارش اشکال باز کردن یا با پشتیبانی تماس بگیرید.</string>
-    <string name="bug_gitlab">روی Gitlab</string>
+    <string name="bug_gitlab">روی GitLab</string>
     <string name="use_bridges">ذخیرهٔ پل‌ها</string>
     <string name="about_description">دربارهٔ Tor VPN بیشتر بدانید</string>
     <string name="version">نسخه</string>
@@ -176,4 +176,6 @@
     <string name="view_support_docs">مشاهدهٔ مستندات پشتیبانی</string>
     <string name="app_name_garden">گردشگری</string>
     <string name="app_name_weather">هواشناسی</string>
+    <string name="about_support_action">هم‌اکنون حمایت کنید</string>
+    <string name="learn_more">بیشتر بیاموزید</string>
 </resources>

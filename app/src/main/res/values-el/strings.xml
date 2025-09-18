@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_routing_tor_apps">Εφαρμογές υποστηριζόμενες από το Tor</string>
-    <string name="notification_channel_description">Εμφάνιση ενημερώσεων για το TorVPN.</string>
+    <string name="notification_channel_description">Εμφάνιση ενημερώσεων για το Tor VPN.</string>
     <string name="always_on_vpn_description">Άνοιγμα ρυθμίσεων συστήματος Android</string>
     <string name="guide_bullet_head_2">Αλλά μην κάνετε τίποτα επικίνδυνο</string>
     <string name="action_disconnect">Αποσύνδεση</string>
@@ -27,7 +27,7 @@
     <string name="state_disconnected">Αποσυνδεδεμένο</string>
     <string name="app_routing_browsers">Φυλλομετρητές</string>
     <string name="app_routing_other_apps">Άλλες εφαρμογές</string>
-    <string name="notification_channel_name">Ειδοποιήσεις TorVPN</string>
+    <string name="notification_channel_name">Ειδοποιήσεις Tor VPN</string>
     <string name="apps">Εφαρμογές</string>
     <string name="apps_description_all_protected">Όλες οι εφαρμογές προστατεύονται</string>
     <string name="tor_logs">Αρχεία καταγραφών Tor</string>
@@ -122,7 +122,7 @@
     <string name="general">Γενικά</string>
     <string name="email">Email</string>
     <string name="action_refresh">Ανανέωση</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="change">Αλλαγή</string>
     <string name="version">Έκδοση</string>
     <string name="last_updated">Τελευταία ενημέρωση</string>
@@ -140,7 +140,7 @@
     <string name="view_faq">Δείτε το FAQ</string>
     <string name="help_description_wip">Το Tor VPN ακόμα αναπτύσσεται ενεργά, και κάποιες λειτουργίες μπορεί να μην δουλεύουν ακόμα όπως πρέπει.</string>
     <string name="help_description_bug_report">Εάν αντιμετωπίσετε κάποιο πρόβλημα που δεν έχει απαντηθεί στο FAQ, παρακαλούμε κάντε ένα Bug report ή επικοινωνήστε με την Υποστήριξη.</string>
-    <string name="bug_gitlab">Στο Gitlab</string>
+    <string name="bug_gitlab">Στο GitLab</string>
     <string name="bot_msg_welcome">Καλωσόρισες, κουρασμένε ταξιδιώτη</string>
     <string name="bot_msg_results">Εδώ είναι οι γέφυρες σας</string>
     <string name="use_bridges">Χρησιμοποιήστε γέφυρες</string>
@@ -174,4 +174,6 @@
     <string name="copied_clipboard">Αντιγράφηκε στο πρόχειρο</string>
     <string name="add_bridge">Πρόσθεση γεφυρών</string>
     <string name="view_support_docs">Προβολή τεκμηρίωσης υποστήριξης</string>
+    <string name="about_support_action">Δώρισε τώρα</string>
+    <string name="learn_more">Μάθετε περισσότερα</string>
 </resources>

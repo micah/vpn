@@ -15,7 +15,7 @@
     <string name="general">Общ</string>
     <string name="error_something_went_wrong">Нещо се обърка</string>
     <string name="connection">Връзка</string>
-    <string name="kill_switch">Превключвател за изключване</string>
+    <string name="kill_switch">Шалтер</string>
     <string name="up">Нагоре</string>
     <string name="down">Надолу</string>
     <string name="this_browser">Този браузър</string>
@@ -89,7 +89,7 @@
     <string name="web_bot_subtitle">Посещение %s</string>
     <string name="name_and_icon">Име и икона</string>
     <string name="launcher_hint">Изберете икона и име за вашия начален екран и чекмедже за приложения. Иконата и името на Тор ВЧМ по подразбиране все още ще се използват в известията.</string>
-    <string name="bug_gitlab">На Gitlab</string>
+    <string name="bug_gitlab">На GitLab</string>
     <string name="obfs4_bridge">obfs4 мост</string>
     <string name="get_new_bridges">Намиране на още мостове</string>
     <string name="ask_bridge_bot">Поискайте мостове</string>
@@ -131,7 +131,7 @@
     <string name="bridge_address">Добави адрес на моста</string>
     <string name="bridge_address_description">Въведете адресите на мостове, които вече знаете</string>
     <string name="action_paste_bridges">Поставете вашите мостови адреси тук</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="reload_all_circuits_description">Ще бъдат установени нови вериги за всички ваши приложения. В резултат на това някои приложения и уебсайтове може да не ви разпознаят и да излезете от техните услуги.</string>
     <string name="remove_bridge">Премахване на мостов адрес</string>
     <string name="help_description_wip">Тор ВЧМ е в процес на разработка и някои функции може да не работят според очакванията.</string>
@@ -143,7 +143,7 @@
     <string name="label_some_protected">Някои са защитени</string>
     <string name="action_stop">Спри ВЧМ</string>
     <string name="action_refresh_circuits">Опресни веригите за свързване</string>
-    <string name="notification_channel_name">Съобщения от ТорВЧМ</string>
+    <string name="notification_channel_name">Съобщения от Тор ВЧМ</string>
     <string name="apps_description_all_protected">Всички приложения са защитени</string>
     <string name="about_description">Научете повече за Тор ВЧМ</string>
     <string name="about_description_long">Тор ВЧМ е експериментално приложение за Виртуални Частни Мрежи, създадено от %1$s, разработчици на Тор и Тор Браузър – най-силните инструменти в света за поверителност и свобода онлайн.</string>
@@ -177,4 +177,6 @@
     <string name="no_bridge">Не се използват мостове</string>
     <string name="view_support_docs">Преглед на документацията</string>
     <string name="the_internet">Интернет</string>
+    <string name="about_support_action">Направете дарение</string>
+    <string name="learn_more">Научете повече</string>
 </resources>

@@ -173,4 +173,6 @@
     <string name="add_bridge">பாலங்களைச் சேர்</string>
     <string name="app_routing_hide_apps">%1$s பயன்பாடுகளை மறைக்கவும்</string>
     <string name="the_internet">இணையம்</string>
+    <string name="about_support_action">இப்போது நன்கொடை</string>
+    <string name="learn_more">மேலும் அறிய</string>
 </resources>

@@ -25,9 +25,9 @@
     <string name="app_routing_other_apps">Altres aplicacions</string>
     <string name="state_disconnecting">S\'està desconnectant</string>
     <string name="apps_description_all_protected">Totes les aplicacions estan protegides</string>
-    <string name="notification_channel_name">Notificacions de TorVPN</string>
+    <string name="notification_channel_name">Notificacions de Tor VPN</string>
     <string name="app_routing_tor_apps">Aplicacions amb tecnologia Tor</string>
-    <string name="notification_channel_description">Mostra les actualitzacions de TorVPN.</string>
+    <string name="notification_channel_description">Mostra les actualitzacions de Tor VPN.</string>
     <string name="app_routing_browsers">Navegadors</string>
     <string name="tor_logs_description">Veure i copiar els registres de Tor</string>
     <string name="stats_combined">↓%2$s %1$s/s - ↑%4$s %3$s/s</string>
@@ -103,7 +103,7 @@
     <string name="bridge_address">Introduïu l\'adreça del pont</string>
     <string name="ask_bridge_bot">Demaneu al bot de ponts</string>
     <string name="bridge_addresses">Adreces de pont</string>
-    <string name="bridge_address_description">Afegiu un o més ponts proporcionats per una persona o organització de confiança.</string>
+    <string name="bridge_address_description">Introduïu adreces pont que ja coneixeu</string>
     <string name="get_new_bridges">Obtenir nous ponts</string>
     <string name="email_bot_subtitle">Correu electrònic %s</string>
     <string name="snowflake_description">Encamina la vostra connexió a través dels servidors intermediaris de Snowflake perquè sembli que esteu fent una videotrucada</string>
@@ -132,7 +132,7 @@
     <string name="tor_project">Projecte Tor</string>
     <string name="refresh_all_circuits">Voleu recarregar tots els circuits?</string>
     <string name="view_faq">Consulta les PMF</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="contact_support">Contacte d\'assistència</string>
     <string name="new_bridges">Necessito ponts nous</string>
     <string name="fetching_bridges">S\'estan buscant nous ponts…</string>
@@ -140,13 +140,13 @@
     <string name="help_description_wip">Tor VPN encara es troba en desenvolupament i algunes característiques podrien no funcionar correctament.</string>
     <string name="help_description_bug_report">Si trobeu cap incidència no inclosa en la nostres preguntes freqüents, si us plau obriu un informe d\'error o poseu-vos en contacte amb el suport tècnic.</string>
     <string name="bug_tor_forum">Al fòrum de Tor</string>
-    <string name="bug_gitlab">Al Gitlab</string>
+    <string name="bug_gitlab">Al GitLab</string>
     <string name="bridge_bot">Bot de pont</string>
     <string name="about">Sobre</string>
     <string name="version">Versió</string>
     <string name="last_updated">Última actualització</string>
     <string name="bot_msg_welcome">Benvingut, viatger cansat</string>
-    <string name="bot_msg_results">Aquí teniu els vostres ponts:</string>
+    <string name="bot_msg_results">Aquí teniu els vostres ponts</string>
     <string name="use_bridges">Utilitza ponts</string>
     <string name="obfs4_bridge">pont obfs4</string>
     <string name="about_description">Més informació sobre la VPN de Tor</string>
@@ -165,4 +165,6 @@
     <string name="stats_down" translatable="false">%1$s</string>
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="stats_up" translatable="false">%1$s</string>
+    <string name="add_bridge">Afegeix ponts</string>
+    <string name="learn_more">Més informació</string>
 </resources>

@@ -70,7 +70,7 @@
         <item quantity="other">U shtuan %1$s ura</item>
     </plurals>
     <string name="connect_direct_to_tor">Lidhu drejt e me Tor-in</string>
-    <string name="notification_channel_name">Njoftime TorVPN</string>
+    <string name="notification_channel_name">Njoftime Tor VPN</string>
     <string name="action_reconnect">Rilidhu</string>
     <string name="bridge_address">Jepni adresë ure</string>
     <string name="current_bridge">Urë e tanishme</string>
@@ -93,7 +93,7 @@
     <string name="guide_bullet_head_1">Njoftoni të Meta</string>
     <string name="action_reload_circuits">Ringarko qarqet</string>
     <string name="title_guide">Ky aplikacion është \ntejet eksperimental</string>
-    <string name="notification_channel_description">Shfaq përditësime rreth TorVPN-së.</string>
+    <string name="notification_channel_description">Shfaq përditësime rreth Tor VPN-së.</string>
     <string name="always_on_vpn">VPN “Përherë në punë”</string>
     <string name="app_name">VPN Tor-i</string>
     <string name="state_disconnecting">Po shkëputet</string>
@@ -132,11 +132,11 @@
     <string name="bridge_bot">Robot Urash</string>
     <string name="contact_support">Lidhuni me asistencën</string>
     <string name="signal">Signal</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="view_faq">Shihni PBR tonat</string>
     <string name="help_description_wip">Tor VPN është një punë në vazhdim e sipër dhe disa veçori mund të mos punojnë ashtu siç pritet.</string>
     <string name="bug_tor_forum">Në Forumin e Tor-it</string>
-    <string name="bug_gitlab">Në itLab</string>
+    <string name="bug_gitlab">Në GitLab</string>
     <string name="start_again">Fillojani sërish</string>
     <string name="use_bridges">Përdorni ura</string>
     <string name="help_description_bug_report">Nëse hasni një problem që s’gjen përgjigje te PBR tona, ju lutemi, hapni një njoftim të mete, ose lidhuni me asistencën.</string>
@@ -173,4 +173,6 @@
     <string name="stats_up" translatable="false">%1$s</string>
     <string name="add_bridge">Shtoni ura</string>
     <string name="copied_clipboard">U kopjua në të papastër</string>
+    <string name="about_support_action">Dhuroni që tani</string>
+    <string name="learn_more">Mësoni më tepër</string>
 </resources>

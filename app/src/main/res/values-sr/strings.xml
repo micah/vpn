@@ -113,7 +113,7 @@
     <string name="stats_combined">↓%2$s %1$s/s - ↑%4$s %3$s/s</string>
     <string name="title_guide">Ова апликација је веома\nекспериментална</string>
     <string name="idle_toolbar_title">Тор ВПН</string>
-    <string name="notification_channel_name">ТорВПН обавештења</string>
+    <string name="notification_channel_name">Тор VPN обавештења</string>
     <string name="always_on_vpn_description">Отвори Android системска подешавања</string>
     <string name="quickstart_description">Повежи се на Тор мрежу аутоматски када се покрене</string>
     <string name="bridge_address_description">Унесите адресе мостова које већ знате</string>
@@ -132,7 +132,7 @@
     <string name="closed_connection">%1$s-&gt;%2$s: затворена веза</string>
     <string name="reload_all_circuits_description">Нови кругови ће бити успостављени за све твоје апликације. Неке апликације и веб-сајтови можда те неће препознати као резултат, и могли би те одјавити из својих услуга.</string>
     <string name="action_copy_logs">Копирај логове</string>
-    <string name="notification_channel_description">Приказује ажурирања о ТорВПН-у.</string>
+    <string name="notification_channel_description">Приказује ажурирања о Тор VPN-у.</string>
     <string name="apps_description_all_protected">Све апликације заштићене</string>
     <string name="quickstart">Аутоматско повезивање</string>
     <string name="new_connection_hop">%1$s-&gt;%2$s: скок %3$d: %4$s (%5$s)</string>
@@ -147,7 +147,7 @@
     <string name="use_bridges">Сачувај мостове</string>
     <string name="help_description_wip">Тор ВПН је у фази развоја, и неке функције можда неће радити како се очекује.</string>
     <string name="obfs4_bridge">obfs4 мост</string>
-    <string name="bug_gitlab">На Gitlab-у</string>
+    <string name="bug_gitlab">На GitLab-у</string>
     <string name="help_description_bug_report">Ако наиђете на проблем који није одговорен у нашем FAQ-у, молимо вас да отворите извештај о грешци или контактирате подршку.</string>
     <string name="bug_tor_forum">На Тор форуму</string>
     <string name="view_faq">Погледајте наш FAQ</string>
@@ -178,4 +178,18 @@
     <string name="app_name_pingpong">Пинг понг</string>
     <string name="view_support_docs">Погледајте документацију за подршку</string>
     <string name="the_internet">Интернет</string>
+    <string name="learn_more">Сазнај више</string>
+    <string name="about_support_title">Направила непрофитна организација</string>
+    <string name="about_support_description">Ослањамо се на присталице попут вас да нам помогну да Тор буде робустан и безбедан за милионе људи широм света.</string>
+    <string name="about_support_action">Донирајте сада</string>
+    <string name="beta_intro">Добродошли у бета верзију. Пре него што почнете, постоје неке ствари које би требало да знате:</string>
+    <string name="beta_test_thoroughly">Пажљиво тестирајте</string>
+    <string name="beta_test_description">Ово је издање са раним приступом намењено за тестирање и повратне информације.</string>
+    <string name="beta_risks">Знајте ризике</string>
+    <string name="beta_risks_description">Бета издања могу процурити информације и не би требало да се користе за осетљиве активности.</string>
+    <string name="how_to_report_bugs">Како пријавити грешке</string>
+    <string name="external_link">Спољни линк</string>
+    <string name="start_testing">Почни тестирање</string>
+    <string name="beta_report_bugs">Пријавите грешке</string>
+    <string name="beta_report_bugs_description">Можете помоћи тако што ћете пријавити све грешке које пронађете нашим програмерима.</string>
 </resources>

@@ -48,7 +48,7 @@
     <string name="bridge_addresses">Endereços de ponte</string>
     <string name="email_providers">Gmail ou Riseup</string>
     <string name="web">Web</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="about">Sobre</string>
     <string name="version">Versão</string>
     <string name="last_updated">Última atualização</string>
@@ -90,7 +90,7 @@
     <string name="new_bridges_result">Aqui estão as suas novas pontes:</string>
     <string name="new_connection">%1$s-&gt;%2$s: NOVA ligação para %3$s (aplicação %4$d)</string>
     <string name="stats_delta">%1$s/s</string>
-    <string name="notification_channel_description">Mostrar atualizações sobre o TorVPN.</string>
+    <string name="notification_channel_description">Mostrar atualizações sobre o Tor VPN.</string>
     <string name="start_again">Começar novamente</string>
     <string name="always_on_vpn">VPN Sempre Ligada</string>
     <string name="name_and_icon">Nome e ícone</string>
@@ -141,12 +141,12 @@
         <item quantity="many">%1$s pontes adicionadas</item>
         <item quantity="other">%1$s pontes adicionadas</item>
     </plurals>
-    <string name="bug_gitlab">No Gitlab</string>
+    <string name="bug_gitlab">No GitLab</string>
     <string name="connect_direct_to_tor">Ligar diretamente ao Tor</string>
     <string name="view_faq">Ver as nossas FAQs</string>
     <string name="remove_bridge">Remover endereço de ponte</string>
     <string name="bridge_address">Inserir endereço da ponte</string>
-    <string name="notification_channel_name">Notificações do TorVPN</string>
+    <string name="notification_channel_name">Notificações do Tor VPN</string>
     <string name="quickstart_description">Ligar à rede Tor automaticamente quando iniciada</string>
     <string name="ask_bridge_bot">Solicitar pontes</string>
     <string name="bot_msg_welcome">Bem-vindo, viajante cansado</string>
@@ -178,4 +178,5 @@
     <string name="app_name_weather">Tempo</string>
     <string name="app_name_garden">Jardim</string>
     <string name="app_name_pingpong">Ping pong</string>
+    <string name="learn_more">Saiba mais</string>
 </resources>

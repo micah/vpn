@@ -19,7 +19,7 @@
     <string name="stats_delta">%1$s/s</string>
     <string name="exit_location">退出定位</string>
     <string name="action_configure">設定</string>
-    <string name="notification_channel_name">TorVPN 通知</string>
+    <string name="notification_channel_name">Tor VPN 通知</string>
     <string name="label_some_protected">一些受到保護</string>
     <string name="quickstart">自動連線</string>
     <string name="quickstart_description">啟動時自動連接到 Tor 網路</string>
@@ -33,7 +33,7 @@
     <string name="guide_bullet_head_1">回報臭蟲</string>
     <string name="action_disconnect">中斷連接</string>
     <string name="title_guide">這個應用程式非常高 \n實驗性的</string>
-    <string name="notification_channel_description">顯示有關 TorVPN 的更新資訊。</string>
+    <string name="notification_channel_description">顯示有關 Tor VPN 的更新資訊。</string>
     <string name="app_name">Tor VPN</string>
     <string name="action_cancel">取消</string>
     <string name="guide_bullet_text_2">這是該應用程式的預發布版本，用於敏感活動並不安全。</string>
@@ -130,9 +130,9 @@
     <string name="fetching_bridges">正在獲取您的新橋樑…</string>
     <string name="new_bridges_result">這是您的新橋接：</string>
     <string name="use_bridges">保存橋接器</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="view_faq">查看我們的問與答</string>
-    <string name="bug_gitlab">在Gitlab上</string>
+    <string name="bug_gitlab">在GitLab上</string>
     <string name="help_description_wip">Tor VPN 正在進行中，有些功能可能無法正常運行。</string>
     <string name="help_description_bug_report">如果你遇到問題且並沒有在問與答當中被解答，請打開錯誤回報或聯繫支援。</string>
     <string name="bug_tor_forum">在 Tor 討論區上</string>

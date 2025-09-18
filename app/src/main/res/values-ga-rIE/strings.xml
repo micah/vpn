@@ -34,14 +34,14 @@
     <string name="about">Faoi</string>
     <string name="tor_project">Tionscadal Tor</string>
     <string name="signal">Comhartha</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="guide_got_it">Fuair sé</string>
     <string name="app_name">Tor VPN</string>
     <string name="app_routing_tor_apps">Aipeanna faoi thiomáint Tor</string>
     <string name="app_routing_browsers">Brabhsálaithe</string>
     <string name="app_routing_other_apps">Aipeanna eile</string>
-    <string name="notification_channel_description">Taispeáin nuashonruithe faoi TorVPN.</string>
-    <string name="notification_channel_name">Fógraí TorVPN</string>
+    <string name="notification_channel_description">Taispeáin nuashonruithe faoi Tor VPN.</string>
+    <string name="notification_channel_name">Fógraí Tor VPN</string>
     <string name="apps_description">Roghnaigh aipeanna chun bealach a dhéanamh trí Tor</string>
     <string name="apps_description_all_protected">Gach apps cosanta</string>
     <string name="tor_logs_description">Féach ar agus cóipeáil do logaí Tor</string>
@@ -64,7 +64,7 @@
     <string name="built_in_bridges">Roghnaigh droichead tógtha</string>
     <string name="snowflake_description">Seol do nasc trí sheachvótálaithe gcáithnínísneachta le go mbeidh cuma air go bhfuil físghlao á chur agat</string>
     <string name="add_new_bridge">Cuir droichid nua leis</string>
-    <string name="bridge_address_description">Cuir droichead amháin nó níos mó a sholáthraíonn duine nó eagraíocht iontaofa leis.</string>
+    <string name="bridge_address_description">Greamaigh seoltaí droichid atá ar eolas agat cheana féin</string>
     <string name="bridge_addresses">Seoltaí droichead</string>
     <string name="action_paste_bridges">Greamaigh do sheoltaí droichead anseo</string>
     <string name="email_providers">Gmail nó Riseup</string>
@@ -79,7 +79,7 @@
     <string name="help_description_wip">Is obair idir lámha é Tor VPN, agus seans nach n-oibreoidh roinnt gnéithe mar a bhíothas ag súil leis.</string>
     <string name="help_description_bug_report">Má thagann tú trasna ar shaincheist nach dtugann ár gCeisteanna Coitianta freagra uirthi, oscail tuairisc fhabht nó tacaíocht teagmhála.</string>
     <string name="bug_tor_forum">Ar Fhóram Tor</string>
-    <string name="bot_msg_results">Seo do dhroichid:</string>
+    <string name="bot_msg_results">Seo iad do dhroichid</string>
     <string name="start_again">Tosaigh arís</string>
     <string name="use_bridges">Bain úsáid as droichid</string>
     <string name="obfs4_bridge">droichead obfs4</string>
@@ -114,7 +114,7 @@
     <string name="reload_all_circuits_description">Bunófar ciorcaid nua do d’aipeanna ar fad. Seans nach n-aithníonn roinnt aipeanna agus suíomhanna Gréasáin thú dá bharr, agus d’fhéadfaidís tú a logáil amach as a gcuid seirbhísí.</string>
     <string name="circuits">Ciorcaid</string>
     <string name="get_new_bridges_description">Toisc nach bhfuil seoltaí droichid poiblí, beidh ort ceann a iarraidh ó Thionscadal Tor.</string>
-    <string name="launcher_hint">Roghnaigh deilbhín agus ainm do do scáileán baile agus tarraiceán aipeanna. Úsáidfear an deilbhín agus an t-ainm réamhshocraithe Tor VPN fós i bhfógraí.</string>
+    <string name="launcher_hint">Roghnaigh deilbhín agus ainm le taispeáint ar do scáileán baile, ar tharraiceán na n-aipeanna agus ar fhógraí.</string>
     <string name="new_circuits_warnings">Rabhadh ciorcaid nua</string>
     <string name="about_description_long">Is feidhmchlár turgnamhach VPN é Tor VPN a rinne na %1$s, forbróirí Tor agus Brabhsálaí Tor - na huirlisí is láidre ar domhan maidir le príobháideacht agus saoirse ar líne.</string>
     <string name="qs_error">Earráid ceangail</string>
@@ -139,7 +139,7 @@
     <string name="action_reload_circuits">Ciorcaid a athlódáil</string>
     <string name="label_some_protected">Roinnt cosanta</string>
     <string name="action_start">Tosaigh VPN</string>
-    <string name="guide_bullet_head_1">Tuairiscigh fabhtanna</string>
+    <string name="guide_bullet_head_1">Tuairiscigh Fabhtanna</string>
     <string name="guide_bullet_head_2">Ach ná déan aon rud contúirteach</string>
     <string name="connection_description">Cumraigh conas ceangal le Tor</string>
     <string name="kill_switch">Kill lasc</string>
@@ -150,7 +150,7 @@
     <string name="about_description">Faigh tuilleadh eolais faoi Tor VPN</string>
     <string name="version">Leagan</string>
     <string name="last_updated">Nuashonraithe is déanaí</string>
-    <string name="bug_gitlab">Ar Gitlab</string>
+    <string name="bug_gitlab">Ar GitLab</string>
     <string name="bridge_bot">Cluiche Droichead Bot</string>
     <string name="bot_msg_welcome">Fáilte romhat, a thaistealaí tuirseach</string>
     <string name="no_internet">Gan idirlíon</string>
@@ -174,4 +174,24 @@
     <string name="stats_down" translatable="false">%1$s</string>
     <string name="obfs4" translatable="false">obfs4</string>
     <string name="stats_up" translatable="false">%1$s</string>
+    <string name="add_bridge">Cuir droichid</string>
+    <string name="learn_more">Tuilleadh eolais</string>
+    <string name="copied_clipboard">Cóipeáilte chuig an ghearrthaisce</string>
+    <string name="app_name_garden">Gairdín</string>
+    <string name="app_name_weather">Aimsir</string>
+    <string name="app_name_pingpong">Leadóg Bheaga</string>
+    <string name="view_support_docs">Féach ar dhoiciméid tacaíochta</string>
+    <string name="about_support_title">Déanta ag eagraíocht neamhbhrabúis</string>
+    <string name="about_support_description">Táimid ag brath ar lucht tacaíochta cosúil leatsa chun cabhrú linn Tor a choinneáil láidir agus slán do na milliúin daoine ar fud an domhain.</string>
+    <string name="about_support_action">Tabhair síntiús anois</string>
+    <string name="beta_intro">Fáilte go dtí an béite. Sula dtosaíonn tú, tá roinnt rudaí ba chóir duit a bheith ar an eolas fúthu:</string>
+    <string name="beta_test_thoroughly">Déan tástáil críochnúil</string>
+    <string name="beta_test_description">Is scaoileadh luathrochtana é seo atá beartaithe le haghaidh tástála agus aiseolais.</string>
+    <string name="beta_risks">Bíodh a fhios agat na rioscaí</string>
+    <string name="beta_risks_description">D’fhéadfadh faisnéis a sceitheadh ó eisiúintí béite agus níor cheart iad a úsáid le haghaidh gníomhaíochtaí íogaire.</string>
+    <string name="how_to_report_bugs">Conas fabhtanna a thuairisciú</string>
+    <string name="external_link">Nasc seachtrach</string>
+    <string name="start_testing">Tosaigh ag tástáil</string>
+    <string name="beta_report_bugs">Tuairiscigh fabhtanna</string>
+    <string name="beta_report_bugs_description">Is féidir leat cabhrú trí aon fhabhtanna a aimsíonn tú a thuairisciú ar ais dár bhforbróirí.</string>
 </resources>

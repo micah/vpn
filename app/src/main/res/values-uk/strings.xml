@@ -28,8 +28,8 @@
     <string name="app_routing_tor_apps">Застосунки на основі Tor</string>
     <string name="app_routing_browsers">Браузери</string>
     <string name="app_routing_other_apps">Інші застосунки</string>
-    <string name="notification_channel_description">Показує оновлення про TorVPN.</string>
-    <string name="notification_channel_name">Сповіщення TorVPN</string>
+    <string name="notification_channel_description">Показує оновлення про Tor VPN.</string>
+    <string name="notification_channel_name">Сповіщення Tor VPN</string>
     <string name="tor_logs">Журнали Tor</string>
     <string name="tor_logs_description">Переглянути та копіювати журнали Tor</string>
     <string name="always_on_vpn">Постійна VPN</string>
@@ -73,7 +73,7 @@
     <string name="stats_up" translatable="false">%1$s</string>
     <string name="action_reload_circuits">Перезавантажити схеми</string>
     <string name="title_guide">Цей застосунок \nекспериментальний</string>
-    <string name="guide_bullet_text_2">Це попередня передвипускова версія застосунку, тому її небезпечно використовувати для конфіденційних дій.</string>
+    <string name="guide_bullet_text_2">Це попередня перед випускова версія застосунку, тому її небезпечно використовувати для конфіденційних дій.</string>
     <string name="guide_version_number" translatable="false">%1$s</string>
     <string name="use_a_bridge_info">Мости допомагають безпечно отримати доступ до мережі Tor в місцях, де Tor заблоковано. Залежно від того, де ви перебуваєте, один міст може працювати краще, ніж інший.</string>
     <string name="bridge_option_obfs4_built">obfs4 (вбудований)</string>
@@ -126,7 +126,7 @@
     <string name="report_bug">Повідомити про помилку</string>
     <string name="email">Пошта</string>
     <string name="contact_support">Звернутися до служби підтримки</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="action_refresh">Оновити</string>
     <string name="change">Змінити</string>
     <string name="obfs4_bridge">Міст obfs4</string>
@@ -151,8 +151,8 @@
     <string name="new_circuits_warnings_description">Попереджати перед перезавантаженням ланцюгів.</string>
     <string name="help_description_wip">Робота над Tor VPN триває, тому деякі функції можуть не працювати належним чином.</string>
     <string name="bug_tor_forum">На форумі Tor</string>
-    <string name="bug_gitlab">На Gitlab</string>
-    <string name="bridge_bot">Містовий бот</string>
+    <string name="bug_gitlab">На GitLab</string>
+    <string name="bridge_bot">Бот мостів</string>
     <string name="bot_msg_welcome">Ласкаво просимо, втомлений подорожній</string>
     <string name="bot_msg_results">Ось ваші мости</string>
     <string name="down_content_description">Завантажити</string>

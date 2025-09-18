@@ -38,7 +38,7 @@
     <string name="always_on_vpn_description">Apri impostazioni di sistema di Android</string>
     <string name="stats_delta">%1$s/s</string>
     <string name="exit_location">Luogo di uscita</string>
-    <string name="notification_channel_name">Notifiche di TorVPN</string>
+    <string name="notification_channel_name">Notifiche di Tor VPN</string>
     <string name="quickstart">Connessione automatica</string>
     <string name="quickstart_description">Connetti alla rete Tor automaticamente all\'apertura</string>
     <string name="error_detail_message">Tor VPN non è riuscito a connettersi alla rete Tor.</string>
@@ -48,7 +48,7 @@
     <string name="kill_switch_description">Impedisci alle app di connettersi a internet se la rete Tor non è raggiungibile</string>
     <string name="guide_bullet_head_1">Segnala errori</string>
     <string name="title_guide">Questa app è \nsperimentale</string>
-    <string name="notification_channel_description">Mostra aggiornamenti riguardo TorVPN.</string>
+    <string name="notification_channel_description">Mostra aggiornamenti riguardo Tor VPN.</string>
     <string name="guide_bullet_text_2">Questa è una versione pre-release dell\'app e non è sicura da usare per attività sensibili.</string>
     <string name="apps">Applicazioni</string>
     <string name="this_app">Questa app</string>
@@ -134,13 +134,13 @@
     <string name="bot_msg_welcome">Benvenuto, stanco viaggiatore</string>
     <string name="bot_msg_results">Ecco i tuoi bridge:</string>
     <string name="use_bridges">Salva i bridge</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="new_circuits_warnings">Nuovi avvisi sui circuiti</string>
     <string name="view_faq">Vedi le nostre FAQ</string>
     <string name="help_description_wip">Tor VPN è in fase di sviluppo, alcune funzioni potrebbero non funzionare come previsto.</string>
     <string name="help_description_bug_report">Se riscontri un problema non trattato nelle nostre FAQ, apri una segnalazione di errore o contatta il supporto.</string>
     <string name="bug_tor_forum">Sul forum di Tor</string>
-    <string name="bug_gitlab">Su Gitlab</string>
+    <string name="bug_gitlab">Su GitLab</string>
     <string name="action_refresh">Aggiorna</string>
     <string name="refresh_all_circuits">Aggiornare tutti i circuiti?</string>
     <string name="change">Cambia</string>
@@ -177,4 +177,5 @@
     <string name="app_name_weather">Meteo</string>
     <string name="app_name_pingpong">Ping Pong</string>
     <string name="view_support_docs">Visualizza la documentazione di supporto</string>
+    <string name="learn_more">Maggiori informazioni</string>
 </resources>

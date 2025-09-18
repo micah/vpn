@@ -53,7 +53,7 @@
     <string name="up_content_description">ატვირთვა</string>
     <string name="down_content_description">გადმოწერა</string>
     <string name="app_name">Tor VPN</string>
-    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp">WhatsApp</string>
     <string name="current_state">მიმდინარე მდგომარეობა:</string>
     <string name="idle_toolbar_title">Tor VPN</string>
     <string name="app_icon">აპლიკაციის ხატულა</string>
@@ -103,7 +103,7 @@
     <string name="bridge_settings">ხიდის პარამეტრები</string>
     <string name="exit_location">გამსვლელი მდებარეობა</string>
     <string name="connect_direct_to_tor">კავშირი პირდაპირ Tor-თან</string>
-    <string name="notification_channel_name">TorVPN – შეტყობინებები</string>
+    <string name="notification_channel_name">Tor VPN – შეტყობინებები</string>
     <string name="quickstart">თვითდაკავშირება</string>
     <string name="quickstart_description">Tor-ქსელთან მიერთება გაშვებისას</string>
     <string name="bridge_address">ხიდის მისამართის შეყვანა</string>
@@ -113,7 +113,7 @@
     <string name="get_new_bridges">სხვა ხიდების მოძიება</string>
     <string name="app_routing_system_apps">სისტემური პროგრამები</string>
     <string name="action_reload_circuits">წრედების კვლავ ჩატვირთვა</string>
-    <string name="notification_channel_description">რა განახლებებითაა TorVPN.</string>
+    <string name="notification_channel_description">რა განახლებებითაა Tor VPN.</string>
     <string name="always_on_vpn">ყოველთვის ჩართ. VPN</string>
     <string name="app_routing_hide_apps">დაიმალოს %1$s პროგრამა</string>
     <string name="action_open_app">გაიხსნას %1$s</string>
@@ -147,7 +147,7 @@
     </plurals>
     <string name="view_faq">იხილეთ ჩვენი ᲮᲓᲙ</string>
     <string name="help_description_wip">Tor VPN ჯერ კიდევ მუშავდება და ზოგიერთმა შესაძლებლობამ შეიძლება სათანადოდ ვერ იმუშაოს.</string>
-    <string name="bug_gitlab">Gitlab-ზე</string>
+    <string name="bug_gitlab">GitLab-ზე</string>
     <string name="use_bridges">ხიდების შენახვა</string>
     <string name="obfs4_bridge">obfs4-ხიდი</string>
     <string name="no_bridge">არ იყენებს ხიდებს</string>
