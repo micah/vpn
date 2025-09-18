@@ -24,6 +24,7 @@ import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.SECTION_HE
 import org.torproject.vpn.ui.approuting.data.AppListAdapter.Companion.SHOW_APPS_VIEW
 import org.torproject.vpn.ui.approuting.model.AppItemModel
 import org.torproject.vpn.utils.PreferenceHelper
+import java.lang.Exception
 import java.lang.reflect.Type
 
 
@@ -118,16 +119,20 @@ class AppManager(private val context: Context) {
         for (appInfo in installedPackages) {
             if (appInfo != null &&
                 appInfo.packageName != BuildConfig.APPLICATION_ID) {
-                createAppItemModel(appInfo, installedBrowserPackageNames, TOR_POWERED_APP_PACKAGE_NAMES, protectedApps, protectAllApps)?.also {
-                    if (it.hasTorSupport == true) {
-                        installedTorApps.add(it)
-                    } else if (it.isBrowserApp == true) {
-                        installedBrowsersApps.add(it)
-                    } else if (isSystemApp(pm.getPackageInfo(appInfo.packageName, 0))) {
-                        systemApps.add(it)
-                    } else {
-                        installedOtherApps.add(it)
+                try {
+                    createAppItemModel(appInfo, installedBrowserPackageNames, TOR_POWERED_APP_PACKAGE_NAMES, protectedApps, protectAllApps)?.also {
+                        if (it.hasTorSupport == true) {
+                            installedTorApps.add(it)
+                        } else if (it.isBrowserApp == true) {
+                            installedBrowsersApps.add(it)
+                        } else if (isSystemApp(pm.getPackageInfo(appInfo.packageName, 0))) {
+                            systemApps.add(it)
+                        } else {
+                            installedOtherApps.add(it)
+                        }
                     }
+                } catch (e: PackageManager.NameNotFoundException){
+                    Log.e(TAG, "app not found ${appInfo.packageName}",e)
                 }
             }
         }
