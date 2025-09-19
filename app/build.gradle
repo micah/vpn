@@ -71,6 +71,7 @@ dependencies {
     implementation libs.bundles.retrofit
     implementation libs.bundles.ui
     implementation libs.bundles.kotlin
+    implementation libs.androidx.work.runtime.ktx
     kapt libs.bundles.tooling
 
     // Testing

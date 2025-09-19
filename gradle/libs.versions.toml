@@ -11,6 +11,7 @@ glide = "4.16.0"
 androidxJunit = "1.3.0"
 androidxLifecycle = "2.9.2"
 retrofit = "2.12.0"
+workRuntimeKtx = "2.10.4"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
@@ -67,6 +68,7 @@ leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", ve
 # OnionMasq
 onionmasq-release = { module = "org.torproject:onionmasq", version = "1.0.0Beta-local-release" }
 onionmasq-debug = { module = "org.torproject:onionmasq", version = "main-branch-debug" }
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtx" }
 
 [bundles]
 

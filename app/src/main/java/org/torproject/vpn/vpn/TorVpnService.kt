@@ -17,7 +17,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -30,7 +29,6 @@ import org.torproject.onionmasq.events.FailedConnectionEvent
 import org.torproject.onionmasq.events.NewConnectionEvent
 import org.torproject.onionmasq.events.NewDirectoryEvent
 import org.torproject.onionmasq.events.OnionmasqEvent
-import org.torproject.onionmasq.events.VPNetworkLostEvent
 import org.torproject.onionmasq.logging.LogHelper
 import org.torproject.onionmasq.logging.LogObservable
 import org.torproject.vpn.BuildConfig
@@ -53,6 +51,11 @@ class TorVpnService : VpnService() {
         val ACTION_START_VPN = "$TAG.start"
         val ACTION_STOP_VPN = "$TAG.stop"
     }
+
+    fun interface ForegroundServiceCallback {
+        fun onServiceForegroundCalled()
+    }
+    var foregroundServiceCallback: ForegroundServiceCallback? = null
 
     private lateinit var notificationManager: VpnNotificationManager
     private lateinit var logHelper: LogHelper
@@ -88,6 +91,11 @@ class TorVpnService : VpnService() {
         return binder
     }
 
+    override fun onUnbind(intent: Intent?): Boolean {
+        Log.d(TAG, "service: onUnbind")
+        return super.onUnbind(intent)
+    }
+
     override fun onCreate() {
         super.onCreate()
         Log.d(TAG, "service: onCreate")
@@ -104,9 +112,11 @@ class TorVpnService : VpnService() {
         Log.d(TAG, "service: onStartCommand")
 
         val notification: Notification = notificationManager.buildForegroundServiceNotification()
-        val action = if (intent != null) intent.action else ""
         ServiceCompat.startForeground(this, VpnNotificationManager.NOTIFICATION_ID, notification, FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED)
+        foregroundServiceCallback?.onServiceForegroundCalled()
+        foregroundServiceCallback = null
 
+        val action = if (intent != null) intent.action else ""
         coroutineScope.launch {
             val isAlwaysOn =  (intent == null || intent.component == null || intent.component!!.packageName != packageName)
             if (isAlwaysOn) {
