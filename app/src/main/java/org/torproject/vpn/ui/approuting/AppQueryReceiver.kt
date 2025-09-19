@@ -28,7 +28,9 @@ class AppQueryReceiver : BroadcastReceiver() {
                 }
 
                 Intent.ACTION_PACKAGE_REMOVED -> {
-                    appManager.onAppIdChanged(false, packageName)
+                    if (!intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) {
+                        appManager.onAppIdChanged(false, packageName)
+                    }
                 }
 
                 else -> {}
