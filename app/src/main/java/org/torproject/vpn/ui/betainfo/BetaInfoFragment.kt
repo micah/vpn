@@ -56,24 +56,13 @@ class BetaInfoFragment : Fragment(R.layout.fragment_beta_info), ClickHandler, Sh
     }
 
     override fun onReportBugsClicked() {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = "https://support.torproject.org/tor-vpn/#tor-vpn_support".toUri()
-        }
-        startActivity(intent)
-
-        // TODO: revert to offline help!
-        // val bundle = Bundle()
-        // bundle.putInt("argHelpPageID", OfflineHelpFragment.HELP_PAGE_BUG_REPORT)
-        // findNavController().navigateSafe(R.id.action_navigation_betaInfo_to_OfflineHelpFragment, bundle)
+        val bundle = Bundle()
+        bundle.putInt("argHelpPageID", OfflineHelpFragment.HELP_PAGE_BUG_REPORT)
+        findNavController().navigateSafe(R.id.action_navigation_betaInfo_to_OfflineHelpFragment, bundle)
     }
 
     override fun onLearnMoreClicked(v: View) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = "https://support.torproject.org/tor-vpn".toUri()
-        }
-        startActivity(intent)
-        // TODO: revert to offline help!
-        // findNavController().navigateSafe(R.id.action_navigation_betaInfo_to_OfflineHelpFragment)
+        findNavController().navigateSafe(R.id.action_navigation_betaInfo_to_OfflineHelpFragment)
     }
 
     override fun onStartTestingClicked(v: View) {

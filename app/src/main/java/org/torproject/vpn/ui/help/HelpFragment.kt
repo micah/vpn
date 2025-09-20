@@ -26,11 +26,7 @@ class HelpFragment : Fragment(R.layout.fragment_help), ClickHandler {
 
 
     override fun onOfflineHelpClicked(v: View) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = "https://support.torproject.org/tor-vpn".toUri()
-        }
-        startActivity(intent)
-        //findNavController().navigateSafe(R.id.action_helpFragment_to_offlineHelpFragment)
+        findNavController().navigateSafe(R.id.action_helpFragment_to_offlineHelpFragment)
     }
 
     override fun onReportBugClicked(v: View) {
