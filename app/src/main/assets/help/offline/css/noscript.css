@@ -1,0 +1,11 @@
+[data-controller="tabs"] .toggler + .toggled.toggle-d-block {
+  display: block !important;
+}
+
+[data-controller="tabs"] .toggler + .toggled {
+  visibility: visible;
+}
+
+.noscript-hide {
+  display: none !important;
+}
