@@ -1,6 +1,7 @@
 package org.torproject.vpn.ui.help
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebResourceRequest
@@ -14,6 +15,7 @@ import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
 import org.torproject.vpn.R
 import org.torproject.vpn.databinding.FragmentOfflineHelpBinding
+import java.io.ByteArrayInputStream
 
 
 class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
@@ -32,13 +34,13 @@ class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
             findNavController().popBackStack()
         }
 
-        var fileName = "index.html"
+        var fileName = "offline/tor-vpn/index.html"
         var title = view.context.resources.getString(R.string.help)
         arguments?.let {
             val arguments = OfflineHelpFragmentArgs.fromBundle(it)
             when (arguments.argHelpPageID) {
                 HELP_PAGE_BUG_REPORT -> {
-                    fileName = "hp_bug_report.html"
+                    fileName = "offline/tor-vpn/encountering-issues/feedback-and-support/index.html"
                 }
                 LICENSES -> {
                     fileName = "OPEN_SOURCE_LICENSES.md.html"
@@ -77,7 +79,7 @@ class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
         override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
             val url = request.url.toString()
             // Check if the URL is external, open in separate browser
-            return if (!url.startsWith("https://localhost/assets/help")) {
+            return if (!url.startsWith("file:///android_asset/help/") && url.startsWith("https://")) {
                 val intent = Intent(Intent.ACTION_VIEW, request.url)
                 startActivity(intent)
                 true
@@ -91,7 +93,45 @@ class OfflineHelpFragment : Fragment(R.layout.fragment_offline_help) {
             view: WebView,
             request: WebResourceRequest
         ): WebResourceResponse? {
-            return assetLoader.shouldInterceptRequest(request.url)
+            val originalUri = request.url
+            val fixedUri = appendIndexIfDirectory(originalUri)
+
+            if (request.isForMainFrame && fixedUri.path != originalUri.path) {
+                view.post { view.loadUrl(fixedUri.toString()) }
+                val empty = WebResourceResponse(
+                    "text/html",
+                    "utf-8",
+                    ByteArrayInputStream("".toByteArray())
+                )
+                return empty
+            }
+            return assetLoader.shouldInterceptRequest(fixedUri)
+        }
+
+        // The offline help pages contain references to directories instead of index.html files.
+        // This method appends "index.html" in case the uri seems to be a directory so that linked
+        // pages are loaded correctly.
+        private fun appendIndexIfDirectory(uri: Uri): Uri {
+            val path = uri.path ?: return uri
+            val normalized = path.trimEnd('/')
+
+            if (normalized.endsWith("index.html", ignoreCase = true)) {
+                return uri
+            }
+
+            // Determine if the last path segment looks like a file (contains a dot)
+            val lastSegment = uri.lastPathSegment
+            val looksLikeFile = lastSegment?.contains('.') == true
+
+            // If it looks like a file, don't append index.html
+            if (looksLikeFile) {
+                return uri
+            }
+
+            // Build new path by ensuring exactly one slash between normalized and index.html
+            val newPath = "$normalized/index.html"
+
+            return uri.buildUpon().path(newPath).build()
         }
     }
 }
