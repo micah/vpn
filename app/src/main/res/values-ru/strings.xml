@@ -180,4 +180,17 @@
     <string name="app_name_weather">Погода</string>
     <string name="app_name_pingpong">Пинг Понг</string>
     <string name="learn_more">Узнать больше</string>
+    <string name="about_support_title">Сделано некоммерческой организацией</string>
+    <string name="about_support_description">Мы полагаемся на таких сторонников, как вы, которые помогают нам поддерживать надежность и безопасность Tor для миллионов людей по всему миру.</string>
+    <string name="about_support_action">Сделать пожертвование</string>
+    <string name="beta_intro">Добро пожаловать в бета-версию. Прежде чем начать, вам следует знать несколько вещей:</string>
+    <string name="beta_test_thoroughly">Тщательно протестируйте</string>
+    <string name="beta_test_description">Это версия раннего доступа, предназначенная для тестирования и получения отзывов.</string>
+    <string name="beta_risks">Знайте о рисках</string>
+    <string name="beta_risks_description">Бета-версии могут привести к утечке информации и не должны использоваться для конфиденциальных действий.</string>
+    <string name="how_to_report_bugs">Как сообщать об ошибках</string>
+    <string name="external_link">Внешняя ссылка</string>
+    <string name="start_testing">Начать тестирование</string>
+    <string name="beta_report_bugs">Сообщать об ошибках</string>
+    <string name="beta_report_bugs_description">Вы можете помочь, сообщив о любых обнаруженных ошибках нашим разработчикам.</string>
 </resources>
