@@ -1,6 +1,37 @@
 CHANGELOG
 =========
 
+1.2.0Beta
+---------
+* support material design lift-on-scroll effect
+* improve edge-to-edge design by handling cut-out areas
+* new offline help
+* updated translations
+* reproducible builds from a within a container
+* fix: always bind VPNService before starting it as foreground service in order to avoid security exceptions
+* fix: keep apps protected after they got updated
+* fix: crash due to PackageManager$NameNotFoundException in AppManager.queryInstalledApps
+* fix: two buttons to "Refresh all circuits" in Apps view
+
+
+1.0.0Beta
+---------
+* new onboarding screen
+* first iteration on reproducible builds support
+* implement card interaction states
+* improve defaults for bridge settings
+* track app installations and removals to keep secure defaults for app routing via tor
+* add licenses screen
+* add privacy policy screen
+* remove setting to disable refresh circuit dialog
+* improve accessibility
+* updated translations
+* fix: app crash in logging screen
+* fix: ANR when stopping / restarting the VPN
+* fix: foreground exception raised while sending a stop command to the TorVpnService
+* fix: flickering notifications
+
+
 0.9.0 Pre-Alpha
 ----------------
 * update color scheme
